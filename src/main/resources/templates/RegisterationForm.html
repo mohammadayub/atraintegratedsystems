@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: page_head}">
+    <meta charset="utf-8">
+</head>
+<body>
+<nav th:replace="~{layout :: page_navbar}">
+
+</nav>
+<div class="container" style="height:50%;overflow: auto;">
+    <div class="alert alert-secondary" role="alert">
+        <h1 style="color:darkgoldenrod;;text-align:center;">License Registeration Form</h1>
+    </div>
+    <form class="mt-3 mb-4" style="width:80%;height:50%;">
+        <div class="input-group flex-nowrap">
+            <span class="input-group-text" id="addon-wrapping">User Name</span>
+            <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping">
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <span class="input-group-text">Father Name</span>
+            <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping">
+        </div>
+
+    </form>
+</div>
+<footer th:replace="~{layout :: page_footer}"></footer>>
+</body>
+</html>
