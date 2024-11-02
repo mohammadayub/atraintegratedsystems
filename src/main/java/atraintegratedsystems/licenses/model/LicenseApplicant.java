@@ -9,7 +9,6 @@ import java.time.LocalDate;
 @Table(name = "license_applicants")
 @Data
 public class LicenseApplicant {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -20,7 +19,6 @@ public class LicenseApplicant {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "req_date", nullable = false)
     private LocalDate reqDate;
-
     @ManyToOne
     @JoinColumn(name = "license_type_id")
     private LicenseType licenseType; // Link to LicenseType entity
