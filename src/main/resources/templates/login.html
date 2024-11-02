@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{layout :: page_head}">
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>UTech Login</title>
+    <title>ATRA Integrated Financial Systems</title>
     <style>
         body {
           margin: 0;
@@ -96,10 +96,10 @@
     </style>
 </head>
 <body>
-<nav th:replace="~{layout :: page_navbar}"></nav>
+<nav></nav>
 <div class="container">
     <div class="left">
-        <form th:action="@{/login}" method="post"></form>
+        <form th:action="@{/login}" method="post">
         <h1>Welcome to UTech</h1>
         <p>Sign into your account</p>
         <input type="email" name="email" id="email" placeholder="Your Email"/>
@@ -115,6 +115,6 @@
         </div>
     </div>
 </div>
-<footer th:replace="~{layout :: page_footer}"></footer>
+<footer></footer>
 </body>
 </html>

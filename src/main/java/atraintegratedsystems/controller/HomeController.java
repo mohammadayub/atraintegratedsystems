@@ -14,4 +14,9 @@ public class HomeController {
         model.addAttribute("title", "Home Page");
         return "Licenses/licenseapplications";
     }
+
+    @GetMapping("/index")
+    public String getIndex(){
+        return "index";
+    }
 }
