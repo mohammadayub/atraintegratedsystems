@@ -41,13 +41,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/login")
                 .successHandler(customAuthenticationSuccessHandler)
                 .permitAll()
-                .failureUrl("/login?error=true")
+                .failureUrl("/login?error=true&lang=" + "{lang}") // Include language in failure URL
                 .usernameParameter("email")
                 .passwordParameter("password")
                 .and()
                 .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .logoutSuccessUrl("/login")
+                .logoutSuccessUrl("/login?lang=" + "{lang}") // Include language in logout success URL
                 .invalidateHttpSession(true)
                 .deleteCookies("JSESSIONID")
                 .and()

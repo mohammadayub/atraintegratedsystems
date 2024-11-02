@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html  xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head th:replace="~{layout :: page_head}">
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -8,64 +8,6 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
     <title>ATRA Enterprise Planning Project</title>
 
-    <style>
-        .card {
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-            transition: 0.3s;
-            border-radius: 10px;
-            margin: 20px;
-            overflow: hidden;
-        }
-
-        .card img {
-            border-top-left-radius: 10px;
-            border-top-right-radius: 10px;
-            width: 100%;
-            height: 240px;
-            object-fit: cover;
-        }
-
-        .card-body {
-            text-align: center;
-            padding: 20px;
-        }
-
-        .card-title a {
-            color: #333;
-            text-decoration: none;
-            font-size: 1.25rem;
-            font-weight: bold;
-        }
-
-        .card-title a:hover {
-            color: #007bff;
-        }
-
-        .card:hover {
-            box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-        }
-
-        .navbar-brand {
-            font-weight: bold;
-            font-size: 1.5rem;
-        }
-
-        .nav-link {
-            font-size: 1rem;
-        }
-
-        #footer {
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-            height: 60px;
-            background: rgba(0, 0, 0, 0.05);
-            text-align: center;
-            line-height: 60px;
-            font-size: 0.9rem;
-            color: #333;
-        }
-    </style>
 </head>
 <body>
 <nav th:replace="~{layout :: page_navbar}">
