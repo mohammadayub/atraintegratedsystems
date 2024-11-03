@@ -47,7 +47,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .logoutSuccessUrl("/login?lang=" + "{lang}") // Include language in logout success URL
+                .logoutSuccessUrl("/login") // Include language in logout success URL
                 .invalidateHttpSession(true)
                 .deleteCookies("JSESSIONID")
                 .and()

@@ -13,11 +13,11 @@
             const lang = urlParams.get('lang');
 
             // Set the body direction based on the "lang" parameter
-            if (lang === 'ps') {
-                document.body.setAttribute('dir', 'rtl');
-            }
             if (lang === 'en') {
                 document.body.setAttribute('dir', 'ltr');
+            }
+            else if (lang === 'ps' || lang === 'prs') {
+                document.body.setAttribute('dir', 'rtl');
             }
             else {
                 document.body.setAttribute('dir', 'ltr');
@@ -28,16 +28,16 @@
         /* Adjustments for RTL layout */
         [dir="rtl"] .navbar-nav.ms-auto {
             margin-left: 0;
-            margin-right: 65%;
+            margin-right: auto;
         }
         [dir="rtl"] .form-select {
             text-align: right;
         }
 
-          /* Adjustments for RTL layout */
+        /* Adjustments for LTR layout */
         [dir="ltr"] .navbar-nav.ms-auto {
-            margin-left: 60%;
-            margin-right: 0%;
+            margin-left: auto;
+            margin-right: 0;
         }
         [dir="ltr"] .form-select {
             text-align: left;
@@ -45,10 +45,10 @@
     </style>
 </head>
 <body>
-<!--Start Navbar-->
-<nav class="navbar navbar-expand-lg navbar-light border-bottom" th:fragment="page_navbar" style="opacity:1;" >
+<!-- Start Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light border-bottom" th:fragment="page_navbar" style="opacity:1;">
     <div class="container-fluid">
-        <a class="navbar-brand"><img th:src="@{/images/favicon.png}" alt="Image Not Dispaly" style="height:60px;"></a>
+        <a class="navbar-brand"><img th:src="@{/images/favicon.png}" alt="Image Not Displayed" style="height:60px;"></a>
         <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -61,23 +61,26 @@
                     <option selected value="#">Lang</option>
                     <option value="?lang=en">English</option>
                     <option value="?lang=ps">Pashto</option>
+                    <option value="?lang=prs">Persian</option>
                 </select>
-                <a class="nav-link" th:href="@{/logout}" href="#"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z"/>
-                                <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z"/>
-                            </svg>&nbsp;Logout</a>
+                <a class="nav-link" th:href="@{/logout}" href="#">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z"/>
+                        <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z"/>
+                    </svg>&nbsp;Logout
+                </a>
             </div>
         </div>
     </div>
 </nav>
-<!--End Of Navbar-->
-<!--Statup of Footer Section-->
+<!-- End of Navbar -->
+<!-- Start of Footer Section -->
 <footer class="border-top bg-light text-muted text-center" th:fragment="page_footer">
     <div class="container pb-5">
         &copy; [[${#dates.format(#dates.createNow(),'yyyy')}]] &nbsp;&nbsp;&nbsp;&nbsp; Powered by : Ministry of Communication & Information Technology (MCIT)
     </div>
 </footer>
-<!--End of Footer Section-->
+<!-- End of Footer Section -->
 <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
 </body>
 </html>
