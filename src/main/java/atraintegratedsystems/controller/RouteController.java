@@ -2,7 +2,6 @@ package atraintegratedsystems.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-
 @Controller
 public class RouteController {
     @GetMapping("/main")
@@ -17,6 +16,10 @@ public class RouteController {
     @GetMapping("/index")
     public String getIndex(){
         return "index";
+    }
+    @GetMapping("/licenses/license/home")
+    public String getHome(){
+        return "licenses/license/home";
     }
 
 }
