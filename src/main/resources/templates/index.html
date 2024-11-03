@@ -1,54 +1,76 @@
 <!doctype html>
-<html  xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head th:replace="~{layout :: page_head}">
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css">
     <title>ATRA Enterprise Planning Project</title>
+    <style>
+        /* Styling for circular card containers */
+        .circular-card-container {
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            background-color: #f8f9fa;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+            margin: auto;
+        }
+        .circular-card-container:hover {
+            transform: scale(1.07);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Icon styling */
+        .card-icon {
+            font-size: 4em;
+            color: #007bff;
+        }
+
+        /* Card title styling */
+        .card-title {
+            font-size: 1.3em;
+            font-weight: 700;
+            margin-top: 15px;
+            color: #343a40;
+        }
+
+        /* Card container styling */
+        .card-section {
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
-<nav th:replace="~{layout :: page_navbar}">
-</nav>
+<nav th:replace="~{layout :: page_navbar}"></nav>
 
 <div class="container mt-5">
-    <div class="row">
-        <div class="col-md-6">
-            <div class="card" sec:authorize="hasRole('ROLE_CODE_FINANCE')">
-                <img class="card-img-top" th:src="@{/images/financesection.png}" alt="Finance Section">
-                <div class="card-body">
-                    <h5 class="card-title"><a th:href="@{/Codes/Finance/FinanceSection}" href="#">Finance Section</a></h5>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="card" sec:authorize="hasRole('ROLE_STANDARD')">
-                <img class="card-img-top" th:src="@{/images/code.png}" alt="Standard Section">
-                <div class="card-body">
-                    <h5 class="card-title"><a th:href="@{/Codes/Standard/StandardSection}" href="#">Standard Section</a></h5>
-                </div>
-            </div>
-        </div>
-    </div>
+    <div class="row justify-content-center">
 
-    <div class="row">
-        <div class="col-md-6">
-            <div class="card">
-                <img class="card-img-top" th:src="@{/images/license.png}" alt="License Project">
-                <div class="card-body">
-                    <h5 class="card-title"><a th:href="@{/Licenses/License/Registration}" href="#">License Project</a></h5>
-                </div>
+        <!-- Finance Revenue Management System Card -->
+        <div class="col-md-4 card-section">
+            <div class="circular-card-container">
+                <a th:href="@{/Codes/Finance/FinanceSection}" href="#" aria-label="Finance Revenue Management System">
+                    <i class="bi bi-cash-coin card-icon"></i>
+                </a>
             </div>
+            <h5 class="card-title">Finance Revenue Management System</h5>
         </div>
-        <div class="col-md-6">
-            <div class="card">
-                <img class="card-img-top" th:src="@{/images/codeproject.png}" alt="Codes Project">
-                <div class="card-body">
-                    <h5 class="card-title"><a th:href="@{/Codes/Finance}" href="#">Codes Project</a></h5>
-                </div>
+
+        <!-- License Management System Card -->
+        <div class="col-md-4 card-section">
+            <div class="circular-card-container">
+                <a th:href="@{/Licenses/License/Registration}" href="#" aria-label="License Management System">
+                    <i class="bi bi-card-checklist card-icon"></i>
+                </a>
             </div>
+            <h5 class="card-title">License Management System</h5>
         </div>
+
     </div>
 </div>
 
