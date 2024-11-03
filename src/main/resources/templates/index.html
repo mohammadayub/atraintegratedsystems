@@ -10,23 +10,24 @@
 
     <style>
         .custom-card {
-            width: 170px; /* Increased width for more space */
+            width: 170px; /* Fixed width for each card */
             text-align: center;
             border: none;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            border-radius: 50%;
-            padding: 25px; /* Increased padding */
+            border-radius: 15px; /* Slightly rounded corners */
+            padding: 20px;
             background-color: #f8f9fa; /* Light background */
+            margin: 10px; /* Margin for space between cards */
         }
         .custom-card img {
-            width: 60px; /* Slightly larger icon */
+            width: 60px; /* Icon size */
             height: 60px;
             margin-bottom: 10px;
         }
-        .card-container {
-            display: flex;
-            gap: 30px; /* Increased gap for more spacing */
-            justify-content: center;
+        .custom-card p {
+            margin-top: 10px;
+            font-size: 16px;
+            color: #333;
         }
     </style>
 </head>
@@ -34,16 +35,29 @@
 <nav th:replace="~{layout :: page_navbar}"></nav>
 
 <div class="container mt-5">
-    <div class="card-container">
-        <div class="custom-card text-center">
-            <img src="https://img.icons8.com/color/48/000000/google-logo.png" alt="Google Icon">
-            <p class="mt-2">Inbox</p>
-        </div>
-        <div class="custom-card text-center">
-            <img src="https://img.icons8.com/fluency/48/000000/dashboard.png" alt="Dashboard Icon">
-            <p class="mt-2">Dashboard</p>
-        </div>
-    </div>
+    <table class="table table-borderless">
+        <tr>
+            <td class="text-center">
+                <div class="custom-card">
+                    <img th:src="@{/images/licensing.png}" alt="License Management System">
+                    <h4 class="license-link" th:text="#{lms}" ></h4>
+                </div>
+            </td>
+            <td class="text-center">
+                <div class="custom-card">
+                    <img th:src="@{/images/finance.png}" alt="Finance Revenue Management System">
+                    <h4  class="license-link" th:text="#{frms}" ></h4>
+                </div>
+            </td>
+
+            <td class="text-center">
+                <div class="custom-card">
+                    <img th:src="@{/images/codes.png}" alt="Codes Management System">
+                    <h4  class="license-link" th:text="#{cms}" ></h4>
+                </div>
+            </td>
+        </tr>
+    </table>
 </div>
 
 <footer th:replace="~{layout :: page_footer}"></footer>
