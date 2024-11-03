@@ -3,7 +3,7 @@
 <head th:fragment="page_head">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>My Layout</title>
+    <title>AFIS</title>
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
     <script>
         window.addEventListener('DOMContentLoaded', (event) => {
@@ -15,6 +15,9 @@
             // Set the body direction based on the "lang" parameter
             if (lang === 'ps') {
                 document.body.setAttribute('dir', 'rtl');
+            }
+            if (lang === 'en') {
+                document.body.setAttribute('dir', 'ltr');
             }
             else {
                 document.body.setAttribute('dir', 'ltr');

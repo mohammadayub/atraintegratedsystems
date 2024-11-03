@@ -18,4 +18,5 @@ public class RouteController {
     public String getIndex(){
         return "index";
     }
+
 }
