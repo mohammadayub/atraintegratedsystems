@@ -81,10 +81,10 @@
             </div>
             <div class="navbar-nav ms-auto">
                 <select class="form-select btn btn-outline-secondary" onchange="location = this.value;" style="background-color:darkgoldenrod;color:white;">
-                    <option selected value="#">Lang</option>
-                    <option value="?lang=en">English</option>
-                    <option value="?lang=ps">Pashto</option>
-                    <option value="?lang=prs">Persian</option>
+                    <option selected value="#" th:text="#{lang}">Lang</option>
+                    <option value="?lang=en" th:text="#{english}">English</option>
+                    <option value="?lang=ps" th:text="#{pashto}">Pashto</option>
+                    <option value="?lang=prs" th:text="#{dari}">Persian</option>
                 </select>
                 <a class="nav-link" th:href="@{/logout}" href="#" style="color:white;">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">

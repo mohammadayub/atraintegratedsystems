@@ -21,5 +21,13 @@ public class RouteController {
     public String getHome(){
         return "licenses/license/home";
     }
+    @GetMapping("/licenses/finance/home")
+    public String getfinanceHome(){
+        return "licenses/finance/home";
+    }
+    @GetMapping("/licenses/new-applicant")
+    public String getlicense_applicant(){
+        return "licenses/license/license_new_applicant";
+    }
 
 }
