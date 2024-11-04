@@ -1,0 +1,193 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head th:replace="~{layout :: page_head}">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <div th:replace="styles :: data-tables-styles"></div>
+  <!-- Additional styles -->
+  <div th:replace="styles :: persian-datepicker-styles"></div>
+  <div th:replace="styles :: select2-styles"></div>
+  <title>ATRA Enterprise Planning Project</title>
+</head>
+<body onload="setApplicationFees()">
+<nav th:replace="~{layout :: page_navbar}"></nav>
+<h2 class="text-center" th:text="#{license_applicant_header}" style="color:darkgoldenrod; margin-top:10px; font-weight:bold;"></h2>
+<div class="container-fluid mt-4">
+  <div class="form-container">
+    <div th:if="${successMessage}" class="alert alert-success" role="alert" th:text="${successMessage}"></div>
+    <div th:if="${errorMessage}" class="alert alert-danger" role="alert" th:text="${errorMessage}"></div>
+    <form th:action="@{/licenses/license/registration/license_new_applicant}" th:object="${profile}" method="post" enctype="multipart/form-data">
+      <!-- Row 1: Request Date, License Type, Currency Type, Finance Type -->
+      <div class="row">
+        <div class="col-md-3 form-group">
+          <label for="reqDate">Request Date:</label>
+          <input type="text" id="reqDate" th:field="*{reqDate}" class="form-control hijrishamsi" required>
+        </div>
+        <div class="col-md-3 form-group">
+          <label for="licenseTypeId">License Type:</label>
+          <select id="licenseTypeId" th:field="*{licenseTypeId}" class="form-control" required onchange="setApplicationFees()">
+            <option th:each="licenseType : ${licenseTypes}" th:value="${licenseType.id}" th:text="${licenseType.name}"></option>
+          </select>
+        </div>
+        <div class="col-md-3 form-group">
+          <label for="currencyType">Currency Type:</label>
+          <select id="currencyType" th:field="*{currencyType}" class="form-control" required>
+            <option value="AFN">AFN</option>
+            <option value="USD">USD</option>
+          </select>
+        </div>
+        <div class="col-md-3 form-group">
+          <label for="financeType">Finance Type:</label>
+          <select id="financeType" th:field="*{financeType}" class="form-control" required>
+            <option value="ATRA">ATRA</option>
+            <option value="MCIT">MCIT</option>
+          </select>
+        </div>
+      </div>
+      <!-- Row 2: Application Fees, Expected Investment, Cash -->
+      <div class="row">
+        <div class="col-md-2 form-group">
+          <label for="applicationFees">Application Fees:</label>
+          <input type="text" id="applicationFees" th:field="*{applicationFees}" class="form-control" required>
+        </div>
+        <div class="col-md-2 form-group">
+          <label for="expectedInvestment">Expected Investment:</label>
+          <input type="text" id="expectedInvestment" th:field="*{expectedInvestment}" class="form-control" required>
+        </div>
+        <div class="col-md-2 form-group">
+          <label for="cash">Cash:</label>
+          <input type="text" id="cash" th:field="*{cash}" class="form-control" required>
+        </div>
+        <div class="col-md-2 form-group">
+          <label for="companyLicenseName">Company license Name:</label>
+          <input type="text" id="companyLicenseName" th:field="*{companyLicenseName}" class="form-control" required>
+        </div>
+        <div class="col-md-2 form-group">
+          <label for="licenseNo">License No:</label>
+          <input type="text" id="licenseNo" th:field="*{licenseNo}" class="form-control" required>
+        </div>
+        <div class="col-md-2 form-group">
+          <label for="licenseUpload">License Upload:</label>
+          <input type="file" id="licenseUpload" th:field="*{licenseUpload}" class="form-control-file" accept=".pdf,.jpg,.jpeg,.png" required>
+        </div>
+      </div>
+      <!-- Row 3: TIN Upload, Bank Statement Upload, Year of Establishment, Expiry Date -->
+      <div class="row">
+        <div class="col-md-2 form-group">
+          <label for="tinNo">Tin Number:</label>
+          <input type="text" id="tinNo" th:field="*{tinNo}" class="form-control" required>
+        </div>
+        <div class="col-md-2 form-group">
+          <label for="tinUpload">TIN Upload:</label>
+          <input type="file" id="tinUpload" th:field="*{tinUpload}" class="form-control-file" accept=".pdf,.jpg,.jpeg,.png" required>
+        </div>
+        <div class="col-md-2 form-group">
+          <label for="bankStatementUpload">Bank Statement Upload:</label>
+          <input type="file" id="bankStatementUpload" th:field="*{bankStatementUpload}" class="form-control-file" accept=".pdf,.jpg,.jpeg,.png" required>
+        </div>
+        <div class="col-md-2 form-group">
+          <label for="yearOfEstablishment">Year of Establishment:</label>
+          <input type="text" id="yearOfEstablishment" th:field="*{yearOfEstablishment}" class="form-control hijrishamsi" required>
+        </div>
+        <div class="col-md-2 form-group">
+          <label for="expiryDate">Expiry Date:</label>
+          <input type="text" id="expiryDate" th:field="*{expiryDate}" class="form-control hijrishamsi" required>
+        </div>
+      </div>
+      <!-- Row 4: Employees, Planned Activities, Other Licenses -->
+      <div class="row">
+        <div class="col-md-2 form-group">
+          <label for="totalNationalEmployees">Total National Employees:</label>
+          <input type="number" id="totalNationalEmployees" th:field="*{totalNationalEmployees}" class="form-control" required>
+        </div>
+        <div class="col-md-2 form-group">
+          <label for="totalInternationalEmployees">Total International Employees:</label>
+          <input type="number" id="totalInternationalEmployees" th:field="*{totalInternationalEmployees}" class="form-control" required>
+        </div>
+        <div class="col-md-4 form-group">
+          <label for="plannedActivitiesAndServices">Planned Activities and Services:</label>
+          <textarea id="plannedActivitiesAndServices" th:field="*{plannedActivitiesAndServices}" class="form-control" required></textarea>
+        </div>
+        <div class="col-md-4 form-group">
+          <label for="otherLicenseTaken">Other License Taken:</label>
+          <input type="text" id="otherLicenseTaken" th:field="*{otherLicenseTaken}" class="form-control" required>
+        </div>
+      </div>
+      <!-- Row 5: Company Info, Post Address, Contact Info -->
+      <div class="row">
+        <div class="col-md-3 form-group">
+          <label for="companyAddress">Company Address:</label>
+          <textarea id="companyAddress" th:field="*{companyAddress}" class="form-control" required></textarea>
+        </div>
+        <div class="col-md-3 form-group">
+          <label for="postAddress">Post Address:</label>
+          <textarea id="postAddress" th:field="*{postAddress}" class="form-control" required></textarea>
+        </div>
+        <div class="col-md-2 form-group">
+          <label for="contactNo">Contact No:</label>
+          <input type="text" id="contactNo" th:field="*{contactNo}" class="form-control" required>
+        </div>
+        <div class="col-md-2 form-group">
+          <label for="email">Email:</label>
+          <input type="email" id="email" th:field="*{email}" class="form-control" required>
+        </div>
+        <div class="col-md-2 form-group">
+          <label for="website">Website:</label>
+          <input type="website" id="website" th:field="*{website}" class="form-control" required>
+        </div>
+      </div>
+
+      <!-- Submit/Reset Buttons -->
+      <div class="btn-group" style="margin-top: 15px;">
+        <button type="submit" class="btn btn-primary btn-sm" style="padding: 4px 8px; margin-right: 5px;">
+          <i class="fas fa-check" style="margin-right: 5px;"></i>Submit
+        </button>
+        <button type="reset" class="btn btn-warning btn-sm" style="padding: 4px 8px; margin-right: 5px;">
+          <i class="fas fa-redo" style="margin-right: 5px;"></i>Reset
+        </button>
+        <a th:href="@{/Licenses/License/Registration/LicenseApplicationProfile}" class="btn btn-secondary btn-sm" style="padding: 4px 8px;">
+          <i class="fas fa-arrow-left" style="margin-right: 5px;"></i>Back
+        </a>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Common scripts -->
+<div th:replace="scripts :: common-scripts"></div>
+
+<!-- Persian DatePicker scripts -->
+<div th:replace="scripts :: persian-datepicker-scripts"></div>
+
+<div th:replace="scripts :: data-tables-scripts"></div>
+
+<script>
+  $('.hijrishamsi').persianDatepicker({
+        format: 'YYYY-MM-DD',
+        autoClose: true,
+        calendar: {
+            persian: {
+                locale: 'en'
+            }
+        }
+    });
+    function setApplicationFees() {
+    const licenseType = document.getElementById("licenseTypeId").value;
+    const applicationFeesField = document.getElementById("applicationFees");
+
+    if (licenseType === "1") {
+        applicationFeesField.value = 5000;
+    } else if (licenseType === "2") {
+        applicationFeesField.value = 3000;
+    } else {
+        applicationFeesField.value = ""; // Clear if no valid option is selected
+    }
+}
+
+</script>
+
+<footer th:replace="~{layout :: page_footer}"></footer>
+
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

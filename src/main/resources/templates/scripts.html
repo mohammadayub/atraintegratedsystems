@@ -1,0 +1,26 @@
+<!-- templates/scripts.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="common-scripts">
+    <script th:src="@{/js/jquery.min.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/popper.min.js}" crossorigin="anonymous"></script>
+</div>
+
+<div th:fragment="data-tables-scripts">
+    <script th:src="@{/js/dataTables.js}"></script>
+</div>
+
+<div th:fragment="persian-datepicker-scripts">
+    <script th:src="@{/js/persian-date.js}"></script>
+    <script th:src="@{/js/persian-datepicker.js}"></script>
+</div>
+
+
+
+<div th:fragment="select2-scripts">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+</div>
+</body>
+</html>

@@ -1,0 +1,150 @@
+<!-- templates/styles.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="common-styles">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+</div>
+
+<div th:fragment="data-tables-styles">
+    <link rel="stylesheet" th:href="@{/css/dataTables.dataTables.css}">
+</div>
+
+<div th:fragment="persian-datepicker-styles">
+    <link rel="stylesheet" th:href="@{/css/persian-datepicker.css}">
+</div>
+
+<div th:fragment="select2-styles">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
+</div>
+
+<div th:fragment="header">
+    <style>
+        body {
+          background-image: url('@{/images/background.jpg}');
+          background-size: cover;
+          background-position: center;
+          background-repeat: no-repeat;
+          font-family: Arial, sans-serif;
+      }
+      .navbar {
+          background-color: #f8f9fa;
+          box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+      }
+      .navbar-brand {
+          font-weight: bold;
+          font-size: 1.5rem;
+          color: #343a40 !important;
+      }
+      .navbar-brand img {
+          height: 50px;
+          margin-right: 10px;
+      }
+      .navbar-nav .nav-link {
+          color: #343a40 !important;
+          font-weight: 500;
+          font-size: 1rem;
+      }
+      .h-custom {
+          height: calc(100% - 56px);
+      }
+      .form-outline {
+          position: relative;
+      }
+      .form-label {
+          position: absolute;
+          top: 10px;
+          left: 15px;
+          color: #6c757d;
+      }
+      .form-control-lg {
+          padding: 10px 15px;
+      }
+      .btn-primary {
+          background-color: #007bff;
+          border-color: #007bff;
+          font-size: 1rem;
+      }
+      #footer {
+          position: fixed;
+          bottom: 0;
+          width: 100%;
+          height: 50px;
+          background: rgba(0, 0, 0, 0.05);
+          text-align: center;
+          line-height: 50px;
+          color: black;
+      }
+      .login-container {
+          background-color: rgba(255, 255, 255, 0.9);
+          padding: 30px;
+          border-radius: 8px;
+          box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+      }
+    </style>
+</div>
+
+<div th:fragment="footer">
+    <style>
+        .footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            height: 50px;
+            background: rgba(0, 0, 0, 0.05);
+            text-align: center;
+            line-height: 50px;
+            color: black;
+        }
+    </style>
+</div>
+
+<!-- Additional custom styles -->
+<div th:fragment="custom-styles">
+    <style>
+
+        .toast {
+           position: fixed;
+           top: 20px;
+           right: 20px;
+           z-index: 10000;
+           min-width: 300px;
+       }
+
+       .toast-header {
+           background-color: #28a745;
+           color: white;
+       }
+
+       .table th, .table td {
+           vertical-align: middle;
+       }
+   .datepicker {
+            direction: rtl;
+                }
+     .hijrishamsi{
+       display: block;
+       width: 100%;
+       height: calc(1.5em + .75rem + 2px);
+       padding: .375rem .75rem;
+       font-size: 1rem;
+       font-weight: 400;
+       line-height: 1.5;
+       color: #495057;
+       background-color: #fff;
+       background-clip: padding-box;
+       border: 1px solid #ced4da;
+       border-radius: .25rem;
+       transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+       }
+
+
+   @media (max-width: 767px) {
+       .footer {
+           background-color: #e9ecef;
+       }
+   }
+    </style>
+</div>
+</body>
+</html>
