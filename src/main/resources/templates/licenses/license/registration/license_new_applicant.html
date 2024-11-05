@@ -1,13 +1,20 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head th:replace="~{layout :: page_head}">
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <div th:replace="styles :: data-tables-styles"></div>
   <!-- Additional styles -->
   <div th:replace="styles :: persian-datepicker-styles"></div>
   <div th:replace="styles :: select2-styles"></div>
   <title>ATRA Enterprise Planning Project</title>
+<style>
+  label{
+  color:darkgoldenrod;
+  font-weight:bolder;
+  border:1px solid gray;
+  width:100%;
+  direction:rtl;
+  }
+</style>
 </head>
 <body onload="setApplicationFees()">
 <nav th:replace="~{layout :: page_navbar}"></nav>
@@ -20,7 +27,7 @@
       <!-- Row 1: Request Date, License Type, Currency Type, Finance Type -->
       <div class="row">
         <div class="col-md-3 form-group">
-          <label for="reqDate" th:text="#{applicant_request_date}"></label>
+          <label th:text="#{applicant_request_date}"></label>
           <input type="text" id="reqDate" th:field="*{reqDate}" class="form-control hijrishamsi" required>
         </div>
         <div class="col-md-3 form-group">
