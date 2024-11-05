@@ -7,13 +7,21 @@
   <div th:replace="styles :: select2-styles"></div>
   <title>ATRA Enterprise Planning Project</title>
 <style>
-  label{
-  color:darkgoldenrod;
-  font-weight:bolder;
-  border:1px solid gray;
-  width:100%;
-  direction:rtl;
+  .label-rtl {
+      color: darkgoldenrod !important;
+      font-weight: bolder !important;
+      width: 100% !important;
+      direction: rtl !important;
+      text-align: right; /* Ensures text alignment in RTL */
   }
+  .label-ltr {
+      color: darkgoldenrod !important;
+      font-weight: bolder !important;
+      width: 100% !important;
+      direction: ltr !important;
+      text-align: left;
+  }
+
 </style>
 </head>
 <body onload="setApplicationFees()">
@@ -27,9 +35,13 @@
       <!-- Row 1: Request Date, License Type, Currency Type, Finance Type -->
       <div class="row">
         <div class="col-md-3 form-group">
-          <label th:text="#{applicant_request_date}"></label>
+          <label
+                  th:text="#{applicant_request_date}"
+                  th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+          </label>
           <input type="text" id="reqDate" th:field="*{reqDate}" class="form-control hijrishamsi" required>
         </div>
+
         <div class="col-md-3 form-group">
           <label for="licenseTypeId" th:text="#{applicant_license_type}"></label>
           <select id="licenseTypeId" th:field="*{licenseTypeId}" class="form-control" required onchange="setApplicationFees()">
