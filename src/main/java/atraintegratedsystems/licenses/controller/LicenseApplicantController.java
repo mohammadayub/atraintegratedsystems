@@ -27,12 +27,12 @@ public class LicenseApplicantController {
     @Autowired
     private LicenseTypeService licenseTypeService;
 
-    @GetMapping("/Licenses/License/Registration/LicenseApplicationProfile")
+    @GetMapping("/licenses/license/registration/license_applicants_profile")
     public String showApplicationProfile(Model model) {
         List<LicenseApplicant> profiles = licenseService.getAllApplicants();
         model.addAttribute("profiles", profiles);
         model.addAttribute("licenseTypes", licenseTypeService.findAll());
-        return "Licenses/License/Registration/LicenseApplicationProfile";
+        return "licenses/license/registration/license_applicants_profile";
     }
 
 
@@ -59,7 +59,7 @@ public class LicenseApplicantController {
     }
 
 
-    @GetMapping("/Licenses/License/Registration/license/{id}")
+    @GetMapping("/licenses/license/registration/licenseDownload/{id}")
     public ResponseEntity<ByteArrayResource> downloadFile(@PathVariable Long id) {
         Optional<LicenseApplicant> profileOpt = licenseService.getApplicantById(id);
         if (!profileOpt.isPresent()) {
@@ -80,6 +80,52 @@ public class LicenseApplicantController {
                 .contentLength(fileData.length)
                 .body(resource);
     }
+
+    @GetMapping("/licenses/license/registration/tinDownload/{id}")
+    public ResponseEntity<ByteArrayResource> downloadTinFile(@PathVariable Long id) {
+        Optional<LicenseApplicant> profileOpt = licenseService.getApplicantById(id);
+        if (!profileOpt.isPresent()) {
+            return ResponseEntity.notFound().build();
+        }
+        LicenseApplicant profile = profileOpt.get();
+        byte[] fileData = profile.getTinUpload();
+        String fileName =  getFileExtension(profile.getTinUpload());
+        String mimeType = getMimeType(fileData); // Get the correct MIME type
+        HttpHeaders headers = new HttpHeaders();
+        headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileName + "\"");
+        headers.add(HttpHeaders.CONTENT_TYPE, mimeType);
+
+        ByteArrayResource resource = new ByteArrayResource(fileData);
+
+        return ResponseEntity.ok()
+                .headers(headers)
+                .contentLength(fileData.length)
+                .body(resource);
+    }
+
+
+    @GetMapping("/licenses/license/registration/bankDownload/{id}")
+    public ResponseEntity<ByteArrayResource> downloadBank(@PathVariable Long id) {
+        Optional<LicenseApplicant> profileOpt = licenseService.getApplicantById(id);
+        if (!profileOpt.isPresent()) {
+            return ResponseEntity.notFound().build();
+        }
+        LicenseApplicant profile = profileOpt.get();
+        byte[] fileData = profile.getBankStatementUpload();
+        String fileName =  getFileExtension(profile.getBankStatementUpload());
+        String mimeType = getMimeType(fileData); // Get the correct MIME type
+        HttpHeaders headers = new HttpHeaders();
+        headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileName + "\"");
+        headers.add(HttpHeaders.CONTENT_TYPE, mimeType);
+
+        ByteArrayResource resource = new ByteArrayResource(fileData);
+
+        return ResponseEntity.ok()
+                .headers(headers)
+                .contentLength(fileData.length)
+                .body(resource);
+    }
+
 
 
     private String getFileExtension(byte[] fileData) {

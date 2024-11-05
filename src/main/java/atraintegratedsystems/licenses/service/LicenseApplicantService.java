@@ -109,6 +109,12 @@ public class LicenseApplicantService {
         profile.setWebsite(dto.getWebsite());
         profile.setPostAddress(dto.getPostAddress());
 
+        LocalDate entryVoucherDate = dateConverter.jalaliToGregorian(dto.getEntryVoucherDate().getYear(), dto.getEntryVoucherDate().getMonthValue(), dto.getEntryVoucherDate().getDayOfMonth());
+        profile.setEntryVoucherDate(entryVoucherDate);
+
+        profile.setBankVoucher(dto.getBankVoucher());
+        profile.setPaymentStatus(dto.getPaymentStatus());
+
         return repository.save(profile);
     }
     private String generateRequestId() {

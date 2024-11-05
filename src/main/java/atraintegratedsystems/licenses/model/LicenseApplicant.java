@@ -92,6 +92,13 @@ public class LicenseApplicant {
 
     @Column(name = "post_address")
     private String postAddress;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column(name="entry_voucher_date")
+    private LocalDate entryVoucherDate;
+    @Column(name="bank_voucher")
+    private String bankVoucher;
+    @Column(name="payment_status")
+    private String paymentStatus;
 
 
 
@@ -121,5 +128,18 @@ public class LicenseApplicant {
         JalaliDate jalaliExpiryDate= dateConverter.gregorianToJalali(expiryDate.getYear(),expiryDate.getMonthValue(),expiryDate.getDayOfMonth()) ;
         return jalaliExpiryDate;
     }
+
+
+    public JalaliDate getEntryVoucherDate(){
+        if (entryVoucherDate == null) {
+            return null; // Return null if issueLicenseDate is null
+        }
+        DateConverter dateConverter= new DateConverter();
+        JalaliDate jalaliExpiryDate= dateConverter.gregorianToJalali(entryVoucherDate.getYear(),entryVoucherDate.getMonthValue(),entryVoucherDate.getDayOfMonth()) ;
+        return jalaliExpiryDate;
+    }
+
+
+
 }
 

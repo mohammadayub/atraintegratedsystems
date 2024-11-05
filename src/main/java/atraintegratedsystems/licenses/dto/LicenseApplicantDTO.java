@@ -37,5 +37,9 @@ public class LicenseApplicantDTO {
     private String email;
     private String website;
     private String postAddress;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate entryVoucherDate;
+    private String bankVoucher;
+    private String paymentStatus;
 
 }
