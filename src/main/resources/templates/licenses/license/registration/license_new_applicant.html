@@ -43,20 +43,20 @@
         </div>
 
         <div class="col-md-3 form-group">
-          <label for="licenseTypeId" th:text="#{applicant_license_type}"></label>
+          <label for="licenseTypeId" th:text="#{applicant_license_type}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
           <select id="licenseTypeId" th:field="*{licenseTypeId}" class="form-control" required onchange="setApplicationFees()">
             <option th:each="licenseType : ${licenseTypes}" th:value="${licenseType.id}" th:text="${licenseType.name}"></option>
           </select>
         </div>
         <div class="col-md-3 form-group">
-          <label for="currencyType" th:text="#{applicant_license_currency}"></label>
+          <label for="currencyType" th:text="#{applicant_license_currency}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
           <select id="currencyType" th:field="*{currencyType}" class="form-control" required>
             <option value="AFN">AFN</option>
             <option value="USD">USD</option>
           </select>
         </div>
         <div class="col-md-3 form-group">
-          <label for="financeType" th:text="#{applicant_license_finance_type}"></label>
+          <label for="financeType" th:text="#{applicant_license_finance_type}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
           <select id="financeType" th:field="*{financeType}" class="form-control" required>
             <option value="ATRA" th:text="#{applicant_license_finance_atra}">ATRA</option>
             <option value="MCIT" th:text="#{applicant_license_finance_mcit}">MCIT</option>
@@ -66,92 +66,92 @@
       <!-- Row 2: Application Fees, Expected Investment, Cash -->
       <div class="row">
         <div class="col-md-2 form-group">
-          <label for="applicationFees" th:text="#{license_application_fee}"></label>
+          <label for="applicationFees" th:text="#{license_application_fee}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
           <input type="text" id="applicationFees" th:field="*{applicationFees}" class="form-control" required>
         </div>
         <div class="col-md-2 form-group">
-          <label for="expectedInvestment" th:text="#{license_application_expected_investment}"></label>
+          <label for="expectedInvestment" th:text="#{license_application_expected_investment}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
           <input type="text" id="expectedInvestment" th:field="*{expectedInvestment}" class="form-control" required>
         </div>
         <div class="col-md-2 form-group">
-          <label for="cash" th:text="#{license_application_cash}"></label>
+          <label for="cash" th:text="#{license_application_cash}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
           <input type="text" id="cash" th:field="*{cash}" class="form-control" required>
         </div>
         <div class="col-md-2 form-group">
-          <label for="companyLicenseName" th:text="#{license_application_company_license_name}">Company license Name:</label>
+          <label for="companyLicenseName" th:text="#{license_application_company_license_name}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
           <input type="text" id="companyLicenseName" th:field="*{companyLicenseName}" class="form-control" required>
         </div>
         <div class="col-md-2 form-group">
-          <label for="licenseNo" th:text="#{license_application_license_no}"></label>
+          <label for="licenseNo" th:text="#{license_application_license_no}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
           <input type="text" id="licenseNo" th:field="*{licenseNo}" class="form-control" required>
         </div>
         <div class="col-md-2 form-group">
-          <label for="licenseUpload" th:text="#{license_application_upload}"></label>
+          <label for="licenseUpload" th:text="#{license_application_upload}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
           <input type="file" id="licenseUpload" th:field="*{licenseUpload}" class="form-control-file" accept=".pdf,.jpg,.jpeg,.png" required>
         </div>
       </div>
       <!-- Row 3: TIN Upload, Bank Statement Upload, Year of Establishment, Expiry Date -->
       <div class="row">
         <div class="col-md-2 form-group">
-          <label for="tinNo" th:text="#{license_application_tin}">Tin Number:</label>
+          <label for="tinNo" th:text="#{license_application_tin}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
           <input type="text" id="tinNo" th:field="*{tinNo}" class="form-control" required>
         </div>
         <div class="col-md-2 form-group">
-          <label for="tinUpload" th:text="#{license_application_tin_upload}"></label>
+          <label for="tinUpload" th:text="#{license_application_tin_upload}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
           <input type="file" id="tinUpload" th:field="*{tinUpload}" class="form-control-file" accept=".pdf,.jpg,.jpeg,.png" required>
         </div>
         <div class="col-md-2 form-group">
-          <label for="bankStatementUpload" th:text="#{license_application_bank_statement_file}"></label>
+          <label for="bankStatementUpload" th:text="#{license_application_bank_statement_file}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
           <input type="file" id="bankStatementUpload" th:field="*{bankStatementUpload}" class="form-control-file" accept=".pdf,.jpg,.jpeg,.png" required>
         </div>
         <div class="col-md-2 form-group">
-          <label for="yearOfEstablishment" th:text="#{license_application_year_establishment}"></label>
+          <label for="yearOfEstablishment" th:text="#{license_application_year_establishment}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
           <input type="text" id="yearOfEstablishment" th:field="*{yearOfEstablishment}" class="form-control hijrishamsi" required>
         </div>
         <div class="col-md-2 form-group">
-          <label for="expiryDate" th:text="#{license_application_expiry_date}"></label>
+          <label for="expiryDate" th:text="#{license_application_expiry_date}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
           <input type="text" id="expiryDate" th:field="*{expiryDate}" class="form-control hijrishamsi" required>
         </div>
       </div>
       <!-- Row 4: Employees, Planned Activities, Other Licenses -->
       <div class="row">
         <div class="col-md-2 form-group">
-          <label for="totalNationalEmployees" th:text="#{license_application_national_employee}"></label>
+          <label for="totalNationalEmployees" th:text="#{license_application_national_employee}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
           <input type="number" id="totalNationalEmployees" th:field="*{totalNationalEmployees}" class="form-control" required>
         </div>
         <div class="col-md-2 form-group">
-          <label for="totalInternationalEmployees" th:text="#{license_application_international_employee}"></label>
+          <label for="totalInternationalEmployees" th:text="#{license_application_international_employee}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
           <input type="number" id="totalInternationalEmployees" th:field="*{totalInternationalEmployees}" class="form-control" required>
         </div>
         <div class="col-md-4 form-group">
-          <label for="plannedActivitiesAndServices" th:text="#{license_application_plan_active_Service}"></label>
+          <label for="plannedActivitiesAndServices" th:text="#{license_application_plan_active_Service}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
           <textarea id="plannedActivitiesAndServices" th:field="*{plannedActivitiesAndServices}" class="form-control" required></textarea>
         </div>
         <div class="col-md-4 form-group">
-          <label for="otherLicenseTaken" th:text="#{license_application_other_license}"></label>
+          <label for="otherLicenseTaken" th:text="#{license_application_other_license}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
           <input type="text" id="otherLicenseTaken" th:field="*{otherLicenseTaken}" class="form-control" required>
         </div>
       </div>
       <!-- Row 5: Company Info, Post Address, Contact Info -->
       <div class="row">
         <div class="col-md-3 form-group">
-          <label for="companyAddress" th:text="#{license_application_company_address}"></label>
+          <label for="companyAddress" th:text="#{license_application_company_address}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
           <textarea id="companyAddress" th:field="*{companyAddress}" class="form-control" required></textarea>
         </div>
         <div class="col-md-3 form-group">
-          <label for="postAddress" th:text="#{license_application_post_address}"></label>
+          <label for="postAddress" th:text="#{license_application_post_address}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
           <textarea id="postAddress" th:field="*{postAddress}" class="form-control" required></textarea>
         </div>
         <div class="col-md-2 form-group">
-          <label for="contactNo" th:text="#{license_application_contact_no}"></label>
+          <label for="contactNo" th:text="#{license_application_contact_no}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
           <input type="text" id="contactNo" th:field="*{contactNo}" class="form-control" required>
         </div>
         <div class="col-md-2 form-group">
-          <label for="email" th:text="#{license_application_email}"></label>
+          <label for="email" th:text="#{license_application_email}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
           <input type="email" id="email" th:field="*{email}" class="form-control" required>
         </div>
         <div class="col-md-2 form-group">
-          <label th:text="#{license_application_website}"></label>
+          <label th:text="#{license_application_website}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
           <input type="website" id="website" th:field="*{website}" class="form-control" required>
         </div>
       </div>
