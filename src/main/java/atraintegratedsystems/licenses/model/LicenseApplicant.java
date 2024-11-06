@@ -4,6 +4,7 @@ import atraintegratedsystems.utils.JalaliDate;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
+import javax.validation.constraints.Null;
 import java.time.LocalDate;
 @Entity
 @Table(name = "license_applicants")
@@ -93,7 +94,8 @@ public class LicenseApplicant {
     @Column(name = "post_address")
     private String postAddress;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @Column(name="entry_voucher_date")
+
+    @Column(name="entry_voucher_date" , nullable = true)
     private LocalDate entryVoucherDate;
     @Column(name="bank_voucher")
     private String bankVoucher;
@@ -135,8 +137,8 @@ public class LicenseApplicant {
             return null; // Return null if issueLicenseDate is null
         }
         DateConverter dateConverter= new DateConverter();
-        JalaliDate jalaliExpiryDate= dateConverter.gregorianToJalali(entryVoucherDate.getYear(),entryVoucherDate.getMonthValue(),entryVoucherDate.getDayOfMonth()) ;
-        return jalaliExpiryDate;
+        JalaliDate jalaliEntryVoucherDate= dateConverter.gregorianToJalali(entryVoucherDate.getYear(),entryVoucherDate.getMonthValue(),entryVoucherDate.getDayOfMonth()) ;
+        return jalaliEntryVoucherDate;
     }
 
 

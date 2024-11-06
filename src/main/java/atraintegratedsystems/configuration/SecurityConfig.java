@@ -41,7 +41,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/login")
                 .successHandler(customAuthenticationSuccessHandler)
                 .permitAll()
-                .failureUrl("/login?error=true&lang=" + "{lang}") // Include language in failure URL
+                .failureUrl("/login") // Include language in failure URL
                 .usernameParameter("email")
                 .passwordParameter("password")
                 .and()
