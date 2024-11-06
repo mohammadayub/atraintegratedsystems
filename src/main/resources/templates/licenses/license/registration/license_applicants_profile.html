@@ -65,28 +65,29 @@
         <table class="table table-bordered" id="profileTable">
             <thead>
             <tr>
-                <th>Lrid</th>
-                <th>Request Date</th>
-                <th>LicenseType Name</th>
-                <th>CType</th>
-                <th>Finance Type</th>
-                <th>Company License Name</th>
-                <th>License No</th>
-                <th>License Attach</th>
-                <th>TIN No</th>
-                <th>TIN Attach</th>
-                <th>Bank Attach</th>
-                <th>Year of Establishment</th>
-                <th>Expiry Date</th>
-                <th>Application Fees</th>
-                <th>Planned Act & Services</th>
-                <th>Total National Employees</th>
-                <th>Total Inter Employees</th>
-                <th>Other License Taken</th>
-                <th>Company Add</th>
-                <th>Contact No</th>
-                <th>Email</th>
-                <th>Payment Status</th>
+                <th th:text="#{license_request_id}">Lrid</th>
+                <th th:text="#{applicant_request_date}"></th>
+                <th th:text="#{applicant_license_type}"></th>
+                <th th:text="#{applicant_license_currency}"></th>
+                <th th:text="#{applicant_license_finance_type}"></th>
+                <th th:text="#{license_application_company_license_name}">Company License Name</th>
+                <th th:text="#{license_application_license_no}">License No</th>
+                <th th:text="#{license_application_upload}">License Attach</th>
+                <th th:text="#{license_application_tin}">TIN No</th>
+                <th th:text="#{license_application_tin_upload}">TIN Attach</th>
+                <th th:text="#{license_application_bank_statement_file}">Bank Attach</th>
+                <th th:text="#{license_application_year_establishment}">Year of Establishment</th>
+                <th th:text="#{license_application_expiry_date}">Expiry Date</th>
+                <th th:text="#{license_application_fee}">Application Fees</th>
+                <th th:text="#{license_application_plan_active_Service}">Planned Act & Services</th>
+                <th th:text="#{license_application_national_employee}">Total National Employees</th>
+                <th th:text="#{license_application_international_employee}">Total Inter Employees</th>
+                <th th:text="#{license_application_other_license}">Other License Taken</th>
+                <th th:text="#{license_application_company_address}">Company Add</th>
+                <th th:text="#{license_application_contact_no}">Contact No</th>
+                <th th:text="#{license_application_email}">Email</th>
+                <th th:text="#{license_application_website}">Web Site</th>
+                <th th:text="#{license_payment_status}">Payment Status</th>
             </tr>
             </thead>
             <tbody>
@@ -130,6 +131,7 @@
                 <td th:text="${profile.companyAddress}">companyAddress</td>
                 <td th:text="${profile.contactNo}">contactNo</td>
                 <td th:text="${profile.email}">email</td>
+                <td th:text="${profile.website}">WebSite</td>
                 <td th:text="${profile.paymentStatus}">paymentStatus</td>
             </tr>
             </tbody>

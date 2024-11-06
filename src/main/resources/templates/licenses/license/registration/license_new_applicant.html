@@ -28,7 +28,7 @@
 <nav th:replace="~{layout :: page_navbar}"></nav>
 <h2 class="text-center" th:text="#{license_applicant_header}" style="color:darkgoldenrod; margin-top:10px; font-weight:bold;"></h2>
 <div class="container-fluid mt-4">
-  <div class="form-container">
+  <div>
     <div th:if="${successMessage}" class="alert alert-success" role="alert" th:text="${successMessage}"></div>
     <div th:if="${errorMessage}" class="alert alert-danger" role="alert" th:text="${errorMessage}"></div>
     <form th:action="@{/licenses/license/registration/license_new_applicant}" th:object="${profile}" method="post" enctype="multipart/form-data">
@@ -71,18 +71,15 @@
             <option value="22">Sim Card Distributor</option>
           </select>
         </div>
-        <div class="col-md-3 form-group">
-          <label for="currencyType" th:text="#{applicant_license_currency}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
-          <select id="currencyType" th:field="*{currencyType}" class="form-control" required>
-            <option value="AFN">AFN</option>
-            <option value="USD">USD</option>
-          </select>
-        </div>
+          <div class="col-md-2 form-group">
+              <label for="companyLicenseName" th:text="#{license_application_company_license_name}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
+              <input type="text" id="companyLicenseName" th:field="*{companyLicenseName}" class="form-control" required>
+          </div>
         <div class="col-md-3 form-group">
           <label for="financeType" th:text="#{applicant_license_finance_type}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
           <select id="financeType" th:field="*{financeType}" class="form-control" required>
-            <option value="ATRA" th:text="#{applicant_license_finance_atra}">ATRA</option>
-            <option value="MCIT" th:text="#{applicant_license_finance_mcit}">MCIT</option>
+            <option value="ATRA">ATRA</option>
+            <option value="MCIT">MCIT</option>
           </select>
         </div>
       </div>
@@ -92,6 +89,10 @@
           <label for="applicationFees" th:text="#{license_application_fee}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
           <input type="text" id="applicationFees" th:field="*{applicationFees}" class="form-control" required>
         </div>
+          <div class="col-md-2 form-group" style="width:90px">
+              <label for="currencyType" th:text="#{applicant_license_currency}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
+              <input type="text" id="currencyType" th:field="*{currencyType}" class="form-control" readonly="readonly">
+          </div>
         <div class="col-md-2 form-group">
           <label for="expectedInvestment" th:text="#{license_application_expected_investment}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
           <input type="text" id="expectedInvestment" th:field="*{expectedInvestment}" class="form-control" required>
@@ -99,10 +100,6 @@
         <div class="col-md-2 form-group">
           <label for="cash" th:text="#{license_application_cash}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
           <input type="text" id="cash" th:field="*{cash}" class="form-control" required>
-        </div>
-        <div class="col-md-2 form-group">
-          <label for="companyLicenseName" th:text="#{license_application_company_license_name}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
-          <input type="text" id="companyLicenseName" th:field="*{companyLicenseName}" class="form-control" required>
         </div>
         <div class="col-md-2 form-group">
           <label for="licenseNo" th:text="#{license_application_license_no}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
@@ -180,7 +177,7 @@
       </div>
 
       <!-- Submit/Reset Buttons -->
-      <div class="btn-group d-flex justify-content-center" style="margin-top: 15px;">
+      <div class="btn-group d-flex justify-content-center" style="margin-top: 15px;margin-bottom:80px;">
         <button type="submit" class="btn btn-primary btn-sm" style="width: 60px; height: 40px; margin-right: 5px;">
           <i class="fas fa-check" style="margin-right: 5px;"></i>Submit
         </button>
@@ -218,9 +215,14 @@
     function setApplicationFees() {
     const licenseType = document.getElementById("licenseTypeId").value;
     const applicationFeesField = document.getElementById("applicationFees");
-
+    const currencyType = document.getElementById("currencyType");
+    //Currency Section
+    if (licenseType === "6" || licenseType === "7" || licenseType === "8") {currencyType.value="$";}
+    else{currencyType.value="AFN";}
+    // End Of Currency Section
     if (licenseType === "1") {
         applicationFeesField.value = 195000000;
+
     } else if (licenseType === "2") {
         applicationFeesField.value = 0;
     }
