@@ -71,32 +71,31 @@
 <!--            <option value="22">Sim Card Distributor</option>-->
           </select>
         </div>
-          <div class="col-md-2 form-group">
-              <label for="companyLicenseName" th:text="#{license_application_company_license_name}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
-              <input type="text" id="companyLicenseName" th:field="*{companyLicenseName}" class="form-control" required>
-          </div>
-        <div class="col-md-3 form-group">
-          <label for="financeType" th:text="#{applicant_license_finance_type}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
-          <select id="financeType" th:field="*{financeType}" class="form-control" required>
-            <option value="ATRA">ATRA</option>
-            <option value="MCIT">MCIT</option>
-          </select>
-        </div>
-      </div>
-      <!-- Row 2: Application Fees, Expected Investment, Cash -->
-      <div class="row">
         <div class="col-md-2 form-group">
           <label for="applicationFees" th:text="#{license_application_fee}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
           <input type="text" id="applicationFees" th:field="*{applicationFees}" class="form-control" required readonly="readonly">
         </div>
-          <div class="col-md-2 form-group" style="width:90px">
-              <label for="currencyType" th:text="#{applicant_license_currency}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
-              <input type="text" id="currencyType" th:field="*{currencyType}" class="form-control" readonly="readonly">
-          </div>
-          <div class="col-md-2 form-group">
-              <label for="validity" th:text="#{license_application_validity}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
-              <input type="text" id="validity" th:field="*{validity}" class="form-control" required readonly="readonly">
-          </div>
+        <div class="col-md-2 form-group" style="width:90px">
+          <label for="currencyType" th:text="#{applicant_license_currency}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
+          <input type="text" id="currencyType" th:field="*{currencyType}" class="form-control" readonly="readonly">
+        </div>
+        <div class="col-md-1 form-group">
+          <label for="validity" th:text="#{license_application_validity}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
+          <input type="text" id="validity" th:field="*{validity}" class="form-control" required readonly="readonly">
+        </div>
+
+      </div>
+      <!-- Row 2: Application Fees, Expected Investment, Cash -->
+      <div class="row">
+        <div class="col-md-2 form-group">
+          <label for="companyLicenseName" th:text="#{license_application_company_license_name}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
+          <input type="text" id="companyLicenseName" th:field="*{companyLicenseName}" class="form-control" required>
+        </div>
+        <div class="col-md-1 form-group">
+          <label for="financeType" th:text="#{applicant_license_finance_type}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
+          <input type="text" id="financeType" class="form-control" required value="ATRA" readonly="readonly">
+
+        </div>
         <div class="col-md-2 form-group">
           <label for="expectedInvestment" th:text="#{license_application_expected_investment}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
           <input type="text" id="expectedInvestment" th:field="*{expectedInvestment}" class="form-control" required>
@@ -151,7 +150,7 @@
           <label for="plannedActivitiesAndServices" th:text="#{license_application_plan_active_Service}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
           <textarea id="plannedActivitiesAndServices" th:field="*{plannedActivitiesAndServices}" class="form-control" required></textarea>
         </div>
-        <div class="col-md-4 form-group">
+        <div class="col-md-2 form-group">
           <label for="otherLicenseTaken" th:text="#{license_application_other_license}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
           <input type="text" id="otherLicenseTaken" th:field="*{otherLicenseTaken}" class="form-control" required>
         </div>
@@ -181,14 +180,14 @@
       </div>
 
       <!-- Submit/Reset Buttons -->
-      <div class="btn-group d-flex justify-content-center" style="margin-top: 15px;margin-bottom:80px;">
+      <div class="col-md-4 btn-group d-flex justify-content-center" style="margin-top: 15px;margin-bottom:80px; margin:0 auto;">
         <button type="submit" class="btn btn-primary btn-sm" style="width: 60px; height: 40px; margin-right: 5px;">
           <i class="fas fa-check" style="margin-right: 5px;"></i>Submit
         </button>
         <button type="reset" class="btn btn-warning btn-sm" style="width: 60px; height: 40px; margin-right: 5px;">
           <i class="fas fa-redo" style="margin-right: 5px;"></i>Reset
         </button>
-        <a th:href="@{/Licenses/License/Registration/LicenseApplicationProfile}" class="btn btn-secondary btn-sm"
+        <a th:href="@{/licenses/license/home}" class="btn btn-secondary btn-sm pt-2"
            style="width: 40px; height: 40px;margin-right: 5px;">
           <i class="fas fa-arrow-left" style="margin-right: 5px;margin-top:5px;"></i>Back
         </a>
