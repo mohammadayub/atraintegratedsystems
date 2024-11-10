@@ -36,14 +36,14 @@ public class LicenseApplicant {
     private String licenseNo;
 
     @Lob
-    @Column(name = "license_upload")
+    @Column(name = "license_upload" , nullable = true)
     private byte[] licenseUpload;
 
     @Column(name = "tin_no")
     private String tinNo;
 
     @Lob
-    @Column(name = "tin_upload")
+    @Column(name = "tin_upload", nullable = true)
     private byte[] tinUpload;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -76,7 +76,7 @@ public class LicenseApplicant {
     private Double cash;
 
     @Lob
-    @Column(name = "bank_statement_upload")
+    @Column(name = "bank_statement_upload" , nullable = true)
     private byte[] bankStatementUpload;
 
     @Column(name = "other_license_taken")

@@ -63,16 +63,20 @@ public class LicenseApplicantService {
         profile.setCompanyLicenseName(dto.getCompanyLicenseName());
         profile.setLicenseNo(dto.getLicenseNo());
 
-        MultipartFile licenseUpload=dto.getLicenseUpload();
-        if(licenseUpload != null && !licenseUpload.isEmpty()){
-            String contentType=licenseUpload.getContentType();
-            if(!VALID_FILE_TYPES.contains(contentType)){
-                throw new IllegalArgumentException("Invalid File Type" +contentType);
+        MultipartFile licenseUpload = dto.getLicenseUpload();
+
+        if (licenseUpload != null && !licenseUpload.isEmpty()) {
+            String contentType = licenseUpload.getContentType();
+
+            if (!VALID_FILE_TYPES.contains(contentType)) {
+                throw new IllegalArgumentException("Invalid File Type: " + contentType);
             }
+
             profile.setLicenseUpload(licenseUpload.getBytes());
         }
 
         profile.setTinNo(dto.getTinNo());
+
         MultipartFile tinUpload=dto.getTinUpload();
         if(tinUpload != null && !tinUpload.isEmpty()){
             String contentType=tinUpload.getContentType();
@@ -81,7 +85,6 @@ public class LicenseApplicantService {
             }
             profile.setTinUpload(tinUpload.getBytes());
         }
-
         LocalDate yearofEstablishmentDate = dateConverter.jalaliToGregorian(dto.getYearOfEstablishment().getYear(), dto.getYearOfEstablishment().getMonthValue(), dto.getYearOfEstablishment().getDayOfMonth());
         profile.setYearOfEstablishment(yearofEstablishmentDate);
         LocalDate expiryDate = dateConverter.jalaliToGregorian(dto.getExpiryDate().getYear(), dto.getExpiryDate().getMonthValue(), dto.getExpiryDate().getDayOfMonth());
