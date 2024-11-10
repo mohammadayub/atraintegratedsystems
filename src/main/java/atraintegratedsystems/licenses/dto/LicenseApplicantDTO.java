@@ -25,6 +25,7 @@ public class LicenseApplicantDTO {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate expiryDate;
     private Double applicationFees;
+    private int validity;
     private String plannedActivitiesAndServices;
     private Integer totalNationalEmployees;
     private Integer totalInternationalEmployees;
@@ -41,5 +42,6 @@ public class LicenseApplicantDTO {
     private LocalDate entryVoucherDate;
     private String bankVoucher;
     private String paymentStatus;
+
 
 }

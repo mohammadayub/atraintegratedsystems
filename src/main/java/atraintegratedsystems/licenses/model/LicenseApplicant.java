@@ -57,6 +57,9 @@ public class LicenseApplicant {
     @Column(name = "application_fees")
     private Double applicationFees;
 
+    @Column(name="validity", nullable = true)
+    private Integer validity;
+
     @Column(name = "planned_activities_services")
     private String plannedActivitiesAndServices;
 
@@ -101,6 +104,8 @@ public class LicenseApplicant {
     private String bankVoucher;
     @Column(name="payment_status")
     private String paymentStatus;
+
+
 
 
 

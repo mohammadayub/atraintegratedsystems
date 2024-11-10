@@ -5,17 +5,17 @@
   <!-- Additional styles -->
   <div th:replace="styles :: persian-datepicker-styles"></div>
   <div th:replace="styles :: select2-styles"></div>
-  <title>ATRA Enterprise Planning Project</title>
+  <title>ATRA Financial Integrated Systems</title>
 <style>
   .label-rtl {
-      color: darkgoldenrod !important;
+      color: black !important;
       font-weight: bolder !important;
       width: 100% !important;
       direction: rtl !important;
       text-align: right; /* Ensures text alignment in RTL */
   }
   .label-ltr {
-      color: darkgoldenrod !important;
+      color: black !important;
       font-weight: bolder !important;
       width: 100% !important;
       direction: ltr !important;
@@ -26,7 +26,7 @@
 </head>
 <body onload="setApplicationFees()">
 <nav th:replace="~{layout :: page_navbar}"></nav>
-<h2 class="text-center" th:text="#{license_applicant_header}" style="color:darkgoldenrod; margin-top:10px; font-weight:bold;"></h2>
+<h2 class="text-center" th:text="#{license_applicant_header}" style="color:black; margin-top:10px; font-weight:bold;"></h2>
 <div class="container-fluid mt-4">
   <div>
     <div th:if="${successMessage}" class="alert alert-success" role="alert" th:text="${successMessage}"></div>
@@ -45,30 +45,30 @@
         <div class="col-md-3 form-group">
           <label for="licenseTypeId" th:text="#{applicant_license_type}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
           <select id="licenseTypeId" th:field="*{licenseTypeId}" class="form-control" required onchange="setApplicationFees()">
-<!--            <option th:each="licenseType : ${licenseTypes}" th:value="${licenseType.id}" th:text="${licenseType.name}"></option>-->
-            <option value="" disabled selected>Select License Type</option>
-            <option value="1">MTS/3G</option>
-            <option value="2">Unified</option>
-            <option value="3">CDMA</option>
-            <option value="4">National Fiber</option>
-            <option value="5">Regional Fiber</option>
-            <option value="6">Metropolitan First Category :For Kabul City Optical Fiber Cable License</option>
-            <option value="7">Metropolitan  Second Category : For Herat,Balkh,Kandakhar,Jalalabad,,Khost, and Kundos Optical Fiber License</option>
-            <option value="8">Metropolitan Third Category : For Other Cities Optical Fiber License</option>
-            <option value="9">National ISP</option>
-            <option value="10">Provincial ISP</option>
-            <option value="11">WIMAX</option>
-            <option value="12">Digital TV</option>
-            <option value="13">VAS (SMS,USSD,IVR)</option>
-            <option value="14">IVR</option>
-            <option value="15">SMS</option>
-            <option value="16">USSD</option>
-            <option value="17">TTSP - A</option>
-            <option value="18">TTSP-B</option>
-            <option value="19">TTSP-C</option>
-            <option value="20">TTSP-D</option>
-            <option value="21">Telecom Equipment Import (Service Provider "SP")</option>
-            <option value="22">Sim Card Distributor</option>
+            <option th:each="licenseType : ${licenseTypes}" th:value="${licenseType.id}" th:text="${licenseType.name}"></option>
+<!--            <option value="" disabled selected>Select License Type</option>-->
+<!--            <option value="1">MTS/3G</option>-->
+<!--            <option value="2">Unified</option>-->
+<!--            <option value="3">CDMA</option>-->
+<!--            <option value="4">National Fiber</option>-->
+<!--            <option value="5">Regional Fiber</option>-->
+<!--            <option value="6">Metropolitan First Category :For Kabul City Optical Fiber Cable License</option>-->
+<!--            <option value="7">Metropolitan  Second Category : For Herat,Balkh,Kandakhar,Jalalabad,,Khost, and Kundos Optical Fiber License</option>-->
+<!--            <option value="8">Metropolitan Third Category : For Other Cities Optical Fiber License</option>-->
+<!--            <option value="9">National ISP</option>-->
+<!--            <option value="10">Provincial ISP</option>-->
+<!--            <option value="11">WIMAX</option>-->
+<!--            <option value="12">Digital TV</option>-->
+<!--            <option value="13">VAS (SMS,USSD,IVR)</option>-->
+<!--            <option value="14">IVR</option>-->
+<!--            <option value="15">SMS</option>-->
+<!--            <option value="16">USSD</option>-->
+<!--            <option value="17">TTSP - A</option>-->
+<!--            <option value="18">TTSP-B</option>-->
+<!--            <option value="19">TTSP-C</option>-->
+<!--            <option value="20">TTSP-D</option>-->
+<!--            <option value="21">Telecom Equipment Import (Service Provider "SP")</option>-->
+<!--            <option value="22">Sim Card Distributor</option>-->
           </select>
         </div>
           <div class="col-md-2 form-group">
@@ -87,11 +87,15 @@
       <div class="row">
         <div class="col-md-2 form-group">
           <label for="applicationFees" th:text="#{license_application_fee}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
-          <input type="text" id="applicationFees" th:field="*{applicationFees}" class="form-control" required>
+          <input type="text" id="applicationFees" th:field="*{applicationFees}" class="form-control" required readonly="readonly">
         </div>
           <div class="col-md-2 form-group" style="width:90px">
               <label for="currencyType" th:text="#{applicant_license_currency}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
               <input type="text" id="currencyType" th:field="*{currencyType}" class="form-control" readonly="readonly">
+          </div>
+          <div class="col-md-2 form-group">
+              <label for="validity" th:text="#{license_application_validity}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
+              <input type="text" id="validity" th:field="*{validity}" class="form-control" required readonly="readonly">
           </div>
         <div class="col-md-2 form-group">
           <label for="expectedInvestment" th:text="#{license_application_expected_investment}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
@@ -185,11 +189,10 @@
           <i class="fas fa-redo" style="margin-right: 5px;"></i>Reset
         </button>
         <a th:href="@{/Licenses/License/Registration/LicenseApplicationProfile}" class="btn btn-secondary btn-sm"
-           style="width: 60px; height: 40px;margin-right: 5px;">
+           style="width: 40px; height: 40px;margin-right: 5px;">
           <i class="fas fa-arrow-left" style="margin-right: 5px;margin-top:5px;"></i>Back
         </a>
       </div>
-
     </form>
   </div>
 </div>
@@ -222,6 +225,7 @@
     // End Of Currency Section
     if (licenseType === "1") {
         applicationFeesField.value = 195000000;
+        validity.value=5;
 
     } else if (licenseType === "2") {
         applicationFeesField.value = 0;

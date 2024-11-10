@@ -75,22 +75,9 @@
                 <th th:text="#{applicant_license_finance_type}"></th>
                 <th th:text="#{license_application_company_license_name}"></th>
                 <th th:text="#{license_application_license_no}"></th>
-                <th th:text="#{license_application_upload}"></th>
-                <th th:text="#{license_application_tin}"></th>
-                <th th:text="#{license_application_tin_upload}"></th>
-                <th th:text="#{license_application_bank_statement_file}"></th>
                 <th th:text="#{license_application_year_establishment}"></th>
                 <th th:text="#{license_application_expiry_date}"></th>
                 <th th:text="#{license_application_fee}"></th>
-                <th th:text="#{license_application_validity}"></th>
-                <th th:text="#{license_application_plan_active_Service}"></th>
-                <th th:text="#{license_application_national_employee}"></th>
-                <th th:text="#{license_application_international_employee}"></th>
-                <th th:text="#{license_application_other_license}"></th>
-                <th th:text="#{license_application_company_address}"></th>
-                <th th:text="#{license_application_contact_no}"></th>
-                <th th:text="#{license_application_email}"></th>
-                <th th:text="#{license_application_website}"></th>
                 <th th:text="#{license_payment_status}"></th>
             </tr>
             </thead>
@@ -103,74 +90,19 @@
                 <td th:text="${profile.financeType}">financeType</td>
                 <td th:text="${profile.companyLicenseName}">companyLicenseName</td>
                 <td th:text="${profile.licenseNo}">licenseNo</td>
-                <td>
-                    <a th:href="@{/licenses/license/registration/licenseDownload/{id}(id=${profile.id})}" class="btn btn-primary">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-download icon-small" viewBox="0 0 16 16">
-                            <path d="M8 0a.5.5 0 0 1 .5.5V8.707l2.854-2.854a.5.5 0 0 1 .707.707L8.5 9.207 5.939 6.646a.5.5 0 0 1 .707-.707L8 8.707V.5A.5.5 0 0 1 8 0zM2 14a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v.5a.5.5 0 0 1-.5.5H2.5a.5.5 0 0 1-.5-.5V14z"/>
-                        </svg>
-                    </a>
-                </td>
-                <td th:text="${profile.tinNo}">tinNo</td>
-                <td>
-                    <a th:href="@{/licenses/license/registration/tinDownload/{id}(id=${profile.id})}" class="btn btn-primary">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-download icon-small" viewBox="0 0 16 16">
-                            <path d="M8 0a.5.5 0 0 1 .5.5V8.707l2.854-2.854a.5.5 0 0 1 .707.707L8.5 9.207 5.939 6.646a.5.5 0 0 1 .707-.707L8 8.707V.5A.5.5 0 0 1 8 0zM2 14a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v.5a.5.5 0 0 1-.5.5H2.5a.5.5 0 0 1-.5-.5V14z"/>
-                        </svg>
-                    </a>
-                </td>
-                <td>
-                    <a th:href="@{/licenses/license/registration/bankDownload/{id}(id=${profile.id})}" class="btn btn-primary">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-download icon-small" viewBox="0 0 16 16">
-                            <path d="M8 0a.5.5 0 0 1 .5.5V8.707l2.854-2.854a.5.5 0 0 1 .707.707L8.5 9.207 5.939 6.646a.5.5 0 0 1 .707-.707L8 8.707V.5A.5.5 0 0 1 8 0zM2 14a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v.5a.5.5 0 0 1-.5.5H2.5a.5.5 0 0 1-.5-.5V14z"/>
-                        </svg>
-                    </a>
-                </td>
                 <td th:text="${profile.getyearofEstablishment()}">yearOfEstablishment</td>
                 <td th:text="${profile.expiryDate}">expiryDate</td>
                 <td th:text="${profile.applicationFees}">applicationFees</td>
-                <td th:text="${profile.validity}">validity</td>
-                <td th:text="${profile.plannedActivitiesAndServices}">plannedActivitiesAndServices</td>
-                <td th:text="${profile.totalNationalEmployees}">totalNationalEmployees</td>
-                <td th:text="${profile.totalInternationalEmployees}">totalInternationalEmployees</td>
-                <td th:text="${profile.otherLicenseTaken}">otherLicenseTaken</td>
-                <td th:text="${profile.companyAddress}">companyAddress</td>
-                <td th:text="${profile.contactNo}">contactNo</td>
-                <td th:text="${profile.email}">email</td>
-                <td th:text="${profile.website}">WebSite</td>
                 <td th:text="${profile.paymentStatus}">paymentStatus</td>
             </tr>
             </tbody>
         </table>
     </div>
 </div>
-
 <!-- Common scripts -->
 <div th:replace="scripts :: common-scripts"></div>
 <div th:replace="scripts :: persian-datepicker-scripts"></div>
 <div th:replace="scripts :: data-tables-scripts"></div>
-
-<!--<script>-->
-<!--    $(document).ready(function () {-->
-<!--        // Initialize DataTable with individual column search-->
-<!--        let table = $('#profileTable').DataTable({-->
-<!--            initComplete: function () {-->
-<!--                this.api().columns().every(function () {-->
-<!--                    var column = this;-->
-<!--                    var input = $('<input type="text" placeholder="Search" style="width: 100%;"/>')-->
-<!--                        .appendTo($(column.header()).empty())-->
-<!--                        .on('keyup change clear', function () {-->
-<!--                            if (column.search() !== this.value) {-->
-<!--                                column-->
-<!--                                    .search(this.value)-->
-<!--                                    .draw();-->
-<!--                            }-->
-<!--                        });-->
-<!--                });-->
-<!--            }-->
-<!--        });-->
-<!--    });-->
-<!--</script>-->
-
 <script>
     $(document).ready(function () {
         // Initialize DataTable with individual column search
