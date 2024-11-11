@@ -28,7 +28,7 @@
         }
 
         #profileTable thead th {
-            background-color: #C40C0C;
+            background-color: darkblue;
             color: white;
             font-size: 0.85em; /* Slightly larger font for headers */
         }
@@ -58,6 +58,37 @@
         }
         #profileTable th {
         white-space: nowrap;
+
+
+           .slip {
+           width: 100%;
+           border-collapse: collapse;
+           margin-bottom: 20px;
+       }
+
+       .slip td, .slip th {
+           padding: 10px;
+           border: 1px solid #ccc;
+           text-align: left;
+       }
+
+       .slip th {
+           background-color: #f2f2f2;
+       }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
     </style>
 </head>
@@ -65,7 +96,7 @@
 <nav th:replace="~{layout :: page_navbar}"></nav>
 <div class="container-fluid">
     <div class="table-container">
-        <table class="table table-bordered" id="profileTable">
+        <table class="slip" id="profileTable">
             <thead>
             <tr>
                 <th th:text="#{license_request_id}"></th>
@@ -79,6 +110,7 @@
                 <th th:text="#{license_application_expiry_date}"></th>
                 <th th:text="#{license_application_fee}"></th>
                 <th th:text="#{license_payment_status}"></th>
+                <th th:text="#{license_application_tariff_print}"></th>
             </tr>
             </thead>
             <tbody>
@@ -94,6 +126,12 @@
                 <td th:text="${profile.expiryDate}">expiryDate</td>
                 <td th:text="${profile.applicationFees}">applicationFees</td>
                 <td th:text="${profile.paymentStatus}">paymentStatus</td>
+                <td >
+                    <button class="btn-primary" onclick="printSelectedRow()" ><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-printer" viewBox="0 0 16 16">
+                        <path d="M2.5 8a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1"/>
+                        <path d="M5 1a2 2 0 0 0-2 2v2H2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1v1a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1V3a2 2 0 0 0-2-2zM4 3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2H4zm1 5a2 2 0 0 0-2 2v1H2a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v-1a2 2 0 0 0-2-2zm7 2v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1"/>
+                    </svg></button>
+                </td>
             </tr>
             </tbody>
         </table>
@@ -128,6 +166,61 @@
             }
         });
     });
+
+    //Print Tariffa for New Application Fees
+
+    function printSelectedRow() {
+    var printWindow = window.open('', '_blank');
+    printWindow.document.write('<html><head><style>');
+    printWindow.document.write('body { font-family: Arial, sans-serif; text-align: center; padding: 20px; font-size: 12px; }');
+    printWindow.document.write('.slip { width: 100%; border: 1px solid #ccc; border-collapse: collapse; }');
+    printWindow.document.write('.slip td, .slip th { padding: 8px; border: 1px solid #ccc; text-align: left; font-size: 10px; }');
+    printWindow.document.write('.slip th { background-color: #f2f2f2; }');
+    printWindow.document.write('.btn { display: none; }'); // Hide the button in the printed version
+    printWindow.document.write('.hide-last-two { display: none; }'); // Hide the last two columns
+    printWindow.document.write('table th:nth-last-child(-n+2) { display: none; }'); // Hide last two th elements
+    printWindow.document.write('</style><title>Bank Slip</title></head><body>');
+    printWindow.document.write('<h2>Bank Payment Slip</h2>'); // Print the heading
+
+    // Create a clone of the header row and remove input elements from it
+    var headerRow = document.querySelector('.slip tr').cloneNode(true);
+    headerRow.querySelectorAll('input').forEach(input => input.remove()); // Remove all input elements from the header row
+    printWindow.document.write('<table class="slip">');
+    printWindow.document.write(headerRow.outerHTML); // Print header row without inputs
+
+    // Print the selected data row
+    var selectedRow = document.querySelectorAll('.slip tr')[1]; // Selecting the second row
+    printWindow.document.write('<tr>');
+
+    // Loop through each cell in the selected row to print data cells only
+    for (var i = 0; i < selectedRow.cells.length; i++) {
+        if (i < selectedRow.cells.length - 2) { // Exclude the last two columns if needed
+            printWindow.document.write(selectedRow.cells[i].outerHTML);
+        }
+    }
+    printWindow.document.write('</tr>'); // End data row
+    printWindow.document.write('</table>');
+
+    printWindow.document.write('<br><br>');
+    printWindow.document.write('<h4 style="text-align:right;">Finance Head Signature</h4>'); // Signature line
+    printWindow.document.write('</body></html>');
+    printWindow.document.close();
+    printWindow.print();
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </script>
 
 

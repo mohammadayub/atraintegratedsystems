@@ -10,7 +10,7 @@
 	</parent>
 	<packaging>war</packaging>
 	<groupId>atraintegratedsystems</groupId>
-	<artifactId>atraintegratedsystems</artifactId>
+	<artifactId>afis</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>atra</name>
 	<description>ATRA Integrated Systems</description>
