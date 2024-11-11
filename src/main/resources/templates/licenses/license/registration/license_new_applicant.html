@@ -75,7 +75,7 @@
           <label for="applicationFees" th:text="#{license_application_fee}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
           <input type="text" id="applicationFees" th:field="*{applicationFees}" class="form-control" required readonly="readonly">
         </div>
-        <div class="col-md-2 form-group" style="width:90px">
+        <div class="col-md-1 form-group" style="width:90px">
           <label for="currencyType" th:text="#{applicant_license_currency}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
           <input type="text" id="currencyType" th:field="*{currencyType}" class="form-control" readonly="readonly">
         </div>
@@ -157,11 +157,11 @@
       </div>
       <!-- Row 5: Company Info, Post Address, Contact Info -->
       <div class="row">
-        <div class="col-md-3 form-group">
+        <div class="col-md-2 form-group">
           <label for="companyAddress" th:text="#{license_application_company_address}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
           <textarea id="companyAddress" th:field="*{companyAddress}" class="form-control" required></textarea>
         </div>
-        <div class="col-md-3 form-group">
+        <div class="col-md-2 form-group">
           <label for="postAddress" th:text="#{license_application_post_address}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
           <textarea id="postAddress" th:field="*{postAddress}" class="form-control" required></textarea>
         </div>
