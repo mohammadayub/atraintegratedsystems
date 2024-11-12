@@ -1,5 +1,6 @@
 package atraintegratedsystems.licenses.controller;
 
+import atraintegratedsystems.licenses.dto.LicenseApplicantDTO;
 import atraintegratedsystems.licenses.model.LicenseApplicant;
 import atraintegratedsystems.licenses.service.LicenseApplicantFinanceService;
 import atraintegratedsystems.licenses.service.LicenseApplicantService;
@@ -7,9 +8,16 @@ import atraintegratedsystems.licenses.service.LicenseTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.validation.Valid;
+import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class LicenseApplicantFinanceController {
@@ -22,9 +30,58 @@ public class LicenseApplicantFinanceController {
 
     @GetMapping("/licenses/finance/application/license_application_fee_list")
     public String showApplicationProfile(Model model) {
+
+        model.addAttribute("licenseTypes", licenseTypeService.findAll());
         List<LicenseApplicant> profiles = licenseApplicantFinanceService.getAllUnpaid();
         model.addAttribute("profiles", profiles);
-        model.addAttribute("licenseTypes", licenseTypeService.findAll());
         return "licenses/finance/application/license_application_fee_list";
     }
+
+    @GetMapping("/licenses/finance/application/license_application_payment_confirmation")
+    public String addTelecomShortCode(Model model){
+        model.addAttribute("licenseApplicantDTO",new LicenseApplicantDTO());
+//        model.addAttribute("codes", codeService.getAllCodes());
+        model.addAttribute("licenseTypes", licenseTypeService.findAll());
+        return "licenses/finance/application/license_application_payment_confirmation";
+    }
+
+
+    @PostMapping("/licenses/finance/application/license_application_payment_confirmation")
+    public String updateBankVoucherNoAndPaymentStatus(@Valid @ModelAttribute("licenseApplicantDTO") LicenseApplicantDTO licenseApplicantDTO, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            return "licenses/finance/application/license_application_payment_confirmation";
+        }
+        LicenseApplicant licenseApplicant = licenseApplicantFinanceService.getApplicantId(licenseApplicantDTO.getId()).orElseThrow(() -> new IllegalArgumentException("Invalid code ID: " + licenseApplicantDTO.getId()));
+        // Update only the editable fields
+        licenseApplicant.setEntryVoucherDate(licenseApplicantDTO.getEntryVoucherDate());
+        licenseApplicant.setBankVoucher(licenseApplicantDTO.getBankVoucher());
+        licenseApplicant.setPaymentStatus(licenseApplicant.getPaymentStatus());
+        licenseApplicantFinanceService.PaymentSave(licenseApplicant);
+        return "redirect:/licenses/finance/application/license_application_fee_list";
+    }
+
+    @GetMapping("/licenses/finance/application/license_application_payment_confirmation/update/{id}")
+    public String updateApplicantGet(@PathVariable Long id, Model model){
+        LicenseApplicant licenseApplicant= licenseApplicantFinanceService.getApplicantId(id).get();
+        LicenseApplicantDTO licenseApplicantDTO= new LicenseApplicantDTO();
+        licenseApplicantDTO.setId(licenseApplicant.getId());
+        licenseApplicant.setReqDate(licenseApplicantDTO.getReqDate());
+        licenseApplicant.setLicenseType(licenseTypeService.getByLicenseTypeId(licenseApplicantDTO.getLicenseTypeId()).get());
+        licenseApplicant.setCurrencyType(licenseApplicantDTO.getCurrencyType());
+        licenseApplicant.setFinanceType(licenseApplicantDTO.getFinanceType());
+        licenseApplicant.setCompanyLicenseName(licenseApplicantDTO.getCompanyLicenseName());
+        licenseApplicant.setLicenseNo(licenseApplicantDTO.getLicenseNo());
+        licenseApplicant.setYearOfEstablishment(licenseApplicantDTO.getYearOfEstablishment());
+        licenseApplicant.setExpiryDate(licenseApplicantDTO.getExpiryDate());
+        licenseApplicant.setApplicationFees(licenseApplicantDTO.getApplicationFees());
+        licenseApplicant.setEntryVoucherDate(licenseApplicantDTO.getEntryVoucherDate());
+        licenseApplicant.setBankVoucher(licenseApplicantDTO.getBankVoucher());
+        licenseApplicant.setPaymentStatus(licenseApplicantDTO.getPaymentStatus());
+        model.addAttribute("licenseTypes", licenseTypeService.findAll());
+        model.addAttribute("licenseApplicantDTO",licenseApplicantDTO);
+        return "licenses/finance/application/license_application_payment_confirmation";
+    }
+
+
+
 }

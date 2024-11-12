@@ -18,7 +18,7 @@ public class LicenseTypeService {
         return repository.findAll();
     }
 
-    public Optional<LicenseType> findById(Long id) {
+    public Optional<LicenseType> getByLicenseTypeId(Long id) {
         return repository.findById(id);
     }
 
