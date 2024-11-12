@@ -41,9 +41,9 @@
     <tr>
       <td class="text-center">
         <div class="custom-card">
-          <img th:src="@{/images/licensing.png}" alt="License Management System">
+          <img th:src="@{/images/license_finance.png}" alt="License Management System">
           <h4 class="license-link" style="margin-top: 12px;">
-            <a href="#" th:text="#{license_finance}"></a>
+            <a th:href="@{/licenses/finance/application/license_application_fee_list}" th:text="#{license_finance}"></a>
           </h4>
         </div>
       </td>
@@ -51,7 +51,7 @@
         <div class="custom-card">
           <img th:src="@{/images/finance.png}" alt="Finance Revenue Management System">
           <h4 class="license-link" style="margin-top: 12px;">
-            <a href="/licenses/finance/application/license_application_fee_list" th:text="#{frms}"></a>
+            <a th:href="@{/licenses/finance/application/license_application_fee_list}" th:text="#{frms}"></a>
           </h4>
 
         </div>
