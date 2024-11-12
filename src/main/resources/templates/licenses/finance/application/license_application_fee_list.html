@@ -168,16 +168,27 @@
     //Print Tariffa for New Application Fees
 
     function printSelectedRow() {
+    // Check if the lang parameter is 'ps' to set direction
+    function getQueryParam(param) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(param);
+    }
+
+    const language = getQueryParam('lang');
+    const direction = (language === 'ps' || language === 'prs') ? 'rtl' : 'ltr';
+
     var printWindow = window.open('', '_blank');
     printWindow.document.write('<html><head><style>');
-    printWindow.document.write('body { font-family: Arial, sans-serif; text-align: center; padding: 20px; font-size: 12px; }');
+    printWindow.document.write(`body { font-family: Arial, sans-serif; text-align: center; padding: 20px; font-size: 12px; direction: ${direction}; }`);
     printWindow.document.write('.slip { width: 100%; border: 1px solid #ccc; border-collapse: collapse; }');
     printWindow.document.write('.slip td, .slip th { padding: 8px; border: 1px solid #ccc; text-align: left; font-size: 10px; }');
     printWindow.document.write('.slip th { background-color: #f2f2f2; }');
     printWindow.document.write('.btn { display: none; }'); // Hide the button in the printed version
     printWindow.document.write('.hide-last-two { display: none; }'); // Hide the last two columns
     printWindow.document.write('table th:nth-last-child(-n+2) { display: none; }'); // Hide last two th elements
-    printWindow.document.write('</style><title>Bank Slip</title></head><body>');
+    printWindow.document.write('</style><title>Bank Slip</title></head>');
+    printWindow.document.write(`<body dir="${direction}">`); // Set the body direction
+
     printWindow.document.write('<h2>Bank Payment Slip</h2>'); // Print the heading
 
     // Create a clone of the header row and remove input elements from it
@@ -205,6 +216,7 @@
     printWindow.document.close();
     printWindow.print();
 }
+
 
 
 
