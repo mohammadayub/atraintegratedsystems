@@ -62,7 +62,7 @@
 
            .slip {
            width: 100%;
-           border-collapse: collapse;
+           height:100%;
            margin-bottom: 20px;
        }
 
@@ -109,7 +109,6 @@
                 <th th:text="#{license_application_year_establishment}"></th>
                 <th th:text="#{license_application_expiry_date}"></th>
                 <th th:text="#{license_application_fee}"></th>
-                <th th:text="#{license_payment_status}"></th>
                 <th th:text="#{license_application_tariff_print}"></th>
             </tr>
             </thead>
@@ -125,7 +124,6 @@
                 <td th:text="${profile.getyearofEstablishment()}">yearOfEstablishment</td>
                 <td th:text="${profile.expiryDate}">expiryDate</td>
                 <td th:text="${profile.applicationFees}">applicationFees</td>
-                <td th:text="${profile.paymentStatus}">paymentStatus</td>
                 <td >
                     <button class="btn-primary" onclick="printSelectedRow()" ><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-printer" viewBox="0 0 16 16">
                         <path d="M2.5 8a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1"/>
