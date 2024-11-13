@@ -5,109 +5,133 @@
     <div th:replace="styles :: persian-datepicker-styles"></div>
     <div th:replace="styles :: select2-styles"></div>
     <title>ATRA Financial Integrated System</title>
-
 </head>
 <body>
 <nav th:replace="~{layout :: page_navbar}"></nav>
 <div class="container-fluid">
-    <form th:action="@{/licenses/finance/application/license_application_payment_confirmation" th:object="${licenseApplicantDTO}" method="post" enctype="multipart/form-data">
-        <!-- Row 1: Request Date, License Type, Currency Type, Finance Type -->
-
+    <form th:action="@{/licenses/finance/application/license_application_fee_list/add}" th:object="${licenseApplicantDTO}" method="post">
         <div class="row">
-            <input type="hidden" class="form-control" name="id" th:field="*{id}">
+            <!-- Hidden ID Field -->
+            <input type="hidden" th:field="*{id}">
+
+            <!-- Request Date -->
             <div class="col-md-3 form-group">
-                <label
-                        th:text="#{applicant_request_date}"
-                        th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+                <label th:text="#{applicant_request_date}"
+                       th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
                 </label>
-                <input type="text" id="reqDate" th:field="*{reqDate}" class="form-control hijrishamsi" required>
+                <input type="text" th:field="*{reqDate}" class="form-control hijrishamsi" required>
             </div>
 
+            <!-- License Type -->
             <div class="col-md-3 form-group">
-                <label for="licenseTypeId" th:text="#{applicant_license_type}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
-                <select id="licenseTypeId" th:field="*{licenseTypeId}" class="form-control" required onchange="setApplicationFees()">
-                    <option th:each="licenseType : ${licenseTypes}" th:value="${licenseType.id}" th:text="${licenseType.name}"></option>
-                </select>
-            </div>
-            <div class="col-md-2 form-group">
-                <label for="applicationFees" th:text="#{license_application_fee}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
-                <input type="text" id="applicationFees" th:field="*{applicationFees}" class="form-control" required readonly="readonly">
-            </div>
-            <div class="col-md-1 form-group" style="width:90px">
-                <label for="currencyType" th:text="#{applicant_license_currency}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
-                <input type="text" id="currencyType" th:field="*{currencyType}" class="form-control" readonly="readonly">
-            </div>
-            <div class="col-md-1 form-group">
-                <label for="validity" th:text="#{license_application_validity}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
-                <input type="text" id="validity" th:field="*{validity}" class="form-control" required readonly="readonly">
+                <label th:text="#{license_type}"
+                       th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+                </label>
+                <input type="text" th:field="*{licenseTypeId}" class="form-control" required>
             </div>
 
+            <!-- Currency Type -->
+            <div class="col-md-3 form-group">
+                <label th:text="#{currency_type}"
+                       th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+                </label>
+                <input type="text" th:field="*{currencyType}" class="form-control" required>
+            </div>
+
+            <!-- Finance Type -->
+            <div class="col-md-3 form-group">
+                <label th:text="#{finance_type}"
+                       th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+                </label>
+                <input type="text" th:field="*{financeType}" class="form-control" required>
+            </div>
         </div>
-        <!-- Row 2: Application Fees, Expected Investment, Cash -->
+
         <div class="row">
-            <div class="col-md-2 form-group">
-                <label for="companyLicenseName" th:text="#{license_application_company_license_name}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
-                <input type="text" id="companyLicenseName" th:field="*{companyLicenseName}" class="form-control" required>
+            <!-- Company License Name -->
+            <div class="col-md-3 form-group">
+                <label th:text="#{company_license_name}"
+                       th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+                </label>
+                <input type="text" th:field="*{companyLicenseName}" class="form-control" required>
             </div>
-            <div class="col-md-1 form-group">
-                <label for="financeType" th:text="#{applicant_license_finance_type}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
-                <input type="text" id="financeType" class="form-control" required value="ATRA" readonly="readonly">
 
+            <!-- License Number -->
+            <div class="col-md-3 form-group">
+                <label th:text="#{license_no}"
+                       th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+                </label>
+                <input type="text" th:field="*{licenseNo}" class="form-control" required>
             </div>
-            <div class="col-md-2 form-group">
-                <label for="expectedInvestment" th:text="#{license_application_expected_investment}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
-                <input type="text" id="expectedInvestment" th:field="*{expectedInvestment}" class="form-control" required>
+
+            <!-- Year of Establishment -->
+            <div class="col-md-3 form-group">
+                <label th:text="#{year_of_establishment}"
+                       th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+                </label>
+                <input type="text" th:field="*{yearOfEstablishment}" class="form-control hijrishamsi" required>
             </div>
-            <div class="col-md-2 form-group">
-                <label for="cash" th:text="#{license_application_cash}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
-                <input type="text" id="cash" th:field="*{cash}" class="form-control" required>
-            </div>
-            <div class="col-md-2 form-group">
-                <label for="licenseNo" th:text="#{license_application_license_no}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
-                <input type="text" id="licenseNo" th:field="*{licenseNo}" class="form-control" required>
-            </div>
-            <div class="col-md-2 form-group">
-                <label for="licenseUpload" th:text="#{license_application_upload}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
-                <input type="file" id="licenseUpload" th:field="*{licenseUpload}" class="form-control-file" accept=".pdf,.jpg,.jpeg,.png" required>
+
+            <!-- Expiry Date -->
+            <div class="col-md-3 form-group">
+                <label th:text="#{expiry_date}"
+                       th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+                </label>
+                <input type="text" th:field="*{expiryDate}" class="form-control hijrishamsi" required>
             </div>
         </div>
-        <!-- Row 3: TIN Upload, Bank Statement Upload, Year of Establishment, Expiry Date -->
+
         <div class="row">
-            <div class="col-md-2 form-group">
-                <label for="tinNo" th:text="#{license_application_tin}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
-                <input type="text" id="tinNo" th:field="*{tinNo}" class="form-control" required>
+            <!-- Application Fees -->
+            <div class="col-md-3 form-group">
+                <label th:text="#{application_fees}"
+                       th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+                </label>
+                <input type="number" step="0.01" th:field="*{applicationFees}" class="form-control" required>
             </div>
-            <div class="col-md-2 form-group">
-                <label for="tinUpload" th:text="#{license_application_tin_upload}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
-                <input type="file" id="tinUpload" th:field="*{tinUpload}" class="form-control-file" accept=".pdf,.jpg,.jpeg,.png" required>
+
+            <!-- Bank Voucher -->
+            <div class="col-md-3 form-group">
+                <label th:text="#{bank_voucher}"
+                       th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+                </label>
+                <input type="text" th:field="*{bankVoucher}" class="form-control" required>
             </div>
-            <div class="col-md-2 form-group">
-                <label for="bankStatementUpload" th:text="#{license_application_bank_statement_file}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
-                <input type="file" id="bankStatementUpload" th:field="*{bankStatementUpload}" class="form-control-file" accept=".pdf,.jpg,.jpeg,.png" required>
-            </div>
-            <div class="col-md-2 form-group">
-                <label for="yearOfEstablishment" th:text="#{license_application_year_establishment}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
-                <input type="text" id="yearOfEstablishment" th:field="*{yearOfEstablishment}" class="form-control hijrishamsi" required>
-            </div>
-            <div class="col-md-2 form-group">
-                <label for="expiryDate" th:text="#{license_application_expiry_date}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
-                <input type="text" id="expiryDate" th:field="*{expiryDate}" class="form-control hijrishamsi" required>
+
+            <!-- Payment Status -->
+            <div class="col-md-3 form-group">
+                <label th:text="#{payment_status}"
+                       th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+                </label>
+                <input type="text" th:field="*{paymentStatus}" class="form-control" required>
             </div>
         </div>
-
 
         <!-- Submit/Reset Buttons -->
-        <div class="col-md-4 btn-group d-flex justify-content-center" style="margin-top: 15px;margin-bottom:80px; margin:0 auto;">
-            <button type="submit" class="btn btn-primary btn-sm" style="width: 60px; height: 40px; margin-right: 5px;">
-                <a class="fas fa-check" style="margin-right: 5px;" th:href="@{/licenses/finance/application/license_application_fee_list}"></a>Confirm Payment
+        <div class="col-md-4 btn-group d-flex justify-content-center" style="margin-top: 15px; margin-bottom:80px;">
+            <button type="submit" class="btn btn-primary btn-sm" style="width: 100px;">
+                <span class="fas fa-check"></span> Confirm Payment
             </button>
         </div>
     </form>
 </div>
+
 <!-- Common scripts -->
 <div th:replace="scripts :: common-scripts"></div>
 <div th:replace="scripts :: persian-datepicker-scripts"></div>
 <div th:replace="scripts :: data-tables-scripts"></div>
+
+<script>
+    $('.hijrishamsi').persianDatepicker({
+      format: 'YYYY-MM-DD',
+      autoClose: true,
+      calendar: {
+          persian: {
+              locale: 'en'
+          }
+      }
+  });
+</script>
 <footer th:replace="~{layout :: page_footer}"></footer>
 <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
 </body>

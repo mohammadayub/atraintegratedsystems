@@ -4,7 +4,6 @@ import atraintegratedsystems.utils.JalaliDate;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
-import javax.validation.constraints.Null;
 import java.time.LocalDate;
 @Entity
 @Table(name = "license_applicants")
@@ -114,16 +113,18 @@ public class LicenseApplicant {
         return jalaliRequestDate;
     }
 
-    public JalaliDate getyearofEstablishment(){
+    public JalaliDate getEstablishmentYear() {
         if (yearOfEstablishment == null) {
-            return null; // Return null if issueLicenseDate is null
+            return null;
         }
         DateConverter dateConverter= new DateConverter();
         JalaliDate jalaliYearofEstablishment=dateConverter.gregorianToJalali(yearOfEstablishment.getYear(),yearOfEstablishment.getMonthValue(),yearOfEstablishment.getDayOfMonth());
         return jalaliYearofEstablishment;
     }
 
-    public JalaliDate getExpiryDate(){
+
+
+    public JalaliDate getExpDate(){
         if (expiryDate == null) {
             return null; // Return null if issueLicenseDate is null
         }
@@ -141,6 +142,10 @@ public class LicenseApplicant {
         JalaliDate jalaliEntryVoucherDate= dateConverter.gregorianToJalali(entryVoucherDate.getYear(),entryVoucherDate.getMonthValue(),entryVoucherDate.getDayOfMonth()) ;
         return jalaliEntryVoucherDate;
     }
+
+
+
+
 
 
 
