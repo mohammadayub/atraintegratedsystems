@@ -84,9 +84,9 @@
 
             <!-- Bank Voucher -->
             <div class="col-md-3 form-group">
-                <label th:text="#{license_application_bank_statement_file}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
+                <label th:text="#{bank_voucher}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
 
-                <input type="file" th:field="*{bankVoucher}" class="form-control" required>
+                <input type="text" th:field="*{bankVoucher}" class="form-control" required>
             </div>
 
             <!-- Payment Status -->
