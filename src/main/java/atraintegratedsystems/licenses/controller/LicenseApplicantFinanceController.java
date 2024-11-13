@@ -77,6 +77,7 @@ public class LicenseApplicantFinanceController {
         licenseApplicantDTO.setYearOfEstablishment(licenseApplicant.getYearOfEstablishment());
         licenseApplicantDTO.setExpiryDate(licenseApplicant.getExpiryDate());
         licenseApplicantDTO.setApplicationFees(licenseApplicant.getApplicationFees());
+        licenseApplicantDTO.setEntryVoucherDate(licenseApplicant.getEntryVoucherDate());
         licenseApplicantDTO.setBankVoucher(licenseApplicant.getBankVoucher());
         licenseApplicantDTO.setPaymentStatus(licenseApplicant.getPaymentStatus());
         model.addAttribute("licenseTypes", licenseTypeService.findAll());

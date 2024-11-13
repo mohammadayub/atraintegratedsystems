@@ -134,7 +134,7 @@ public class LicenseApplicant {
     }
 
 
-    public JalaliDate getEntryVoucherDate(){
+    public JalaliDate getEntVocherDate(){
         if (entryVoucherDate == null) {
             return null; // Return null if issueLicenseDate is null
         }

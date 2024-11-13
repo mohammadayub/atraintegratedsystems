@@ -46,29 +46,6 @@
           <label for="licenseTypeId" th:text="#{applicant_license_type}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
           <select id="licenseTypeId" th:field="*{licenseTypeId}" class="form-control" required onchange="setApplicationFees()">
             <option th:each="licenseType : ${licenseTypes}" th:value="${licenseType.id}" th:text="${licenseType.name}"></option>
-<!--            <option value="" disabled selected>Select License Type</option>-->
-<!--            <option value="1">MTS/3G</option>-->
-<!--            <option value="2">Unified</option>-->
-<!--            <option value="3">CDMA</option>-->
-<!--            <option value="4">National Fiber</option>-->
-<!--            <option value="5">Regional Fiber</option>-->
-<!--            <option value="6">Metropolitan First Category :For Kabul City Optical Fiber Cable License</option>-->
-<!--            <option value="7">Metropolitan  Second Category : For Herat,Balkh,Kandakhar,Jalalabad,,Khost, and Kundos Optical Fiber License</option>-->
-<!--            <option value="8">Metropolitan Third Category : For Other Cities Optical Fiber License</option>-->
-<!--            <option value="9">National ISP</option>-->
-<!--            <option value="10">Provincial ISP</option>-->
-<!--            <option value="11">WIMAX</option>-->
-<!--            <option value="12">Digital TV</option>-->
-<!--            <option value="13">VAS (SMS,USSD,IVR)</option>-->
-<!--            <option value="14">IVR</option>-->
-<!--            <option value="15">SMS</option>-->
-<!--            <option value="16">USSD</option>-->
-<!--            <option value="17">TTSP - A</option>-->
-<!--            <option value="18">TTSP-B</option>-->
-<!--            <option value="19">TTSP-C</option>-->
-<!--            <option value="20">TTSP-D</option>-->
-<!--            <option value="21">Telecom Equipment Import (Service Provider "SP")</option>-->
-<!--            <option value="22">Sim Card Distributor</option>-->
           </select>
         </div>
         <div class="col-md-2 form-group">

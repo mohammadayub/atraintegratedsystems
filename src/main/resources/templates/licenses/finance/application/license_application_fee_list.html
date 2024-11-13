@@ -8,45 +8,43 @@
     <style>
         /* Basic Table Styling */
         .table-container {
-            max-height: 400px; /* Set a maximum height for the table container */
+            max-height: 800px; /* Set a maximum height for the table container */
             overflow-y: auto;   /* Enable vertical scrolling */
-            border: 1px solid #ddd; /* Optional: Add a border around the table */
+            border: 1px solid #CCC; /* Optional: Add a border around the table */
         }
         #profileTable {
             width: 100%; /* Full width for the table */
-            border-collapse: collapse;
             font-size: 0.9em; /* General smaller font for the table */
-            padding:0px;
-            margin:0px;
+            padding: 0px;
+            margin: 0px;
+            border-collapse: collapse; /* Collapse borders for seamless borders */
         }
         #profileTable th, #profileTable td {
             padding: 6px;
             text-align: center;
             vertical-align: middle;
             font-size: 0.8em; /* Small font size for headers and cells */
+            border: 1px solid #CCC; /* Border for each cell */
         }
         #profileTable thead th {
             background-color: darkblue;
             color: white;
             font-size: 0.85em; /* Slightly larger font for headers */
         }
-
         #profileTable tbody tr:nth-child(even) {
             background-color: #f2f2f2; /* Zebra stripes for rows */
         }
-
         #profileTable td a.btn-primary {
             display: inline-flex;
             align-items: center;
             justify-content: center;
             padding: 4px;
+            border: 1px solid;
         }
-
         #profileTable .icon-small {
             width: 16px;
             height: 16px;
         }
-
         /* Optional: Add some responsiveness */
         @media (max-width: 768px) {
             #profileTable th, #profileTable td {
@@ -55,39 +53,8 @@
             }
         }
         #profileTable th {
-        white-space: nowrap;
-
-
-           .slip {
-           width: 100%;
-           height:100%;
-           margin-bottom: 20px;
-       }
-
-       .slip td, .slip th {
-           padding: 10px;
-           border: 1px solid #ccc;
-           text-align: left;
-       }
-
-       .slip th {
-           background-color: #f2f2f2;
-       }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    }
+            white-space: nowrap;
+        }
     </style>
 </head>
 <body>
@@ -125,20 +92,27 @@
                 <td th:text="${profile.getEstablishmentYear()}">yearOfEstablishment</td>
                 <td th:text="${profile.getExpDate()}">expiryDate</td>
                 <td th:text="${profile.applicationFees}">applicationFees</td>
-                <td >
-                    <button class="btn-primary" onclick="printSelectedRow()" ><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-printer" viewBox="0 0 16 16">
-                        <path d="M2.5 8a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1"/>
-                        <path d="M5 1a2 2 0 0 0-2 2v2H2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1v1a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1V3a2 2 0 0 0-2-2zM4 3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2H4zm1 5a2 2 0 0 0-2 2v1H2a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v-1a2 2 0 0 0-2-2zm7 2v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1"/>
-                    </svg></button>
+                <td>
+                    <button class="btn-primary" onclick="printSelectedRow()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-printer" viewBox="0 0 16 16">
+                            <path d="M2.5 8a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1"/>
+                            <path d="M5 1a2 2 0 0 0-2 2v2H2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1v1a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1V3a2 2 0 0 0-2-2zM4 3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2H4zm1 5a2 2 0 0 0-2 2v1H2a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v-1a2 2 0 0 0-2-2zm7 2v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1"/>
+                        </svg>
+                    </button>
                 </td>
-                <td class="hide-print"><a href="" th:href="@{/licenses/finance/application/license_application_fee_list/update/{id}(id=${profile.id})}" class="btn btn-warning"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bank" viewBox="0 0 16 16">
-                    <path d="m8 0 6.61 3h.89a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5H15v7a.5.5 0 0 1 .485.38l.5 2a.498.498 0 0 1-.485.62H.5a.498.498 0 0 1-.485-.62l.5-2A.5.5 0 0 1 1 13V6H.5a.5.5 0 0 1-.5-.5v-2A.5.5 0 0 1 .5 3h.89zM3.777 3h8.447L8 1zM2 6v7h1V6zm2 0v7h2.5V6zm3.5 0v7h1V6zm2 0v7H12V6zM13 6v7h1V6zm2-1V4H1v1zm-.39 9H1.39l-.25 1h13.72z"/>
-                </svg></a></td>
+                <td class="hide-print">
+                    <a href="" th:href="@{/licenses/finance/application/license_application_fee_list/update/{id}(id=${profile.id})}" class="btn btn-warning">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bank" viewBox="0 0 16 16">
+                            <path d="m8 0 6.61 3h.89a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5H15v7a.5.5 0 0 1 .485.38l.5 2a.498.498 0 0 1-.485.62H.5a.498.498 0 0 1-.485-.62l.5-2A.5.5 0 0 1 1 13V6H.5a.5.5 0 0 1-.5-.5v-2A.5.5 0 0 1 .5 3h.89zM3.777 3h8.447L8 1zM2 6v7h1V6zm2 0v7h2.5V6zm3.5 0v7h1V6zm2 0v7H12V6zM13 6v7h1V6zm2-1V4H1v1zm-.39 9H1.39l-.25 1h13.72z"/>
+                        </svg>
+                    </a>
+                </td>
             </tr>
             </tbody>
         </table>
     </div>
 </div>
+
 <!-- Common scripts -->
 <div th:replace="scripts :: common-scripts"></div>
 <div th:replace="scripts :: persian-datepicker-scripts"></div>
@@ -151,80 +125,21 @@
                 this.api().columns().every(function () {
                     var column = this;
                     var header = $(column.header());
-                    var columnText = header.text(); // Get the existing header text
-                    header.empty().append('<div>' + columnText + '</div>'); // Keep the header text and add a wrapper
+                    var columnText = header.text();
+                    header.empty().append('<div>' + columnText + '</div>');
 
-                    // Append the search input below the header text
-                    $('<input type="text" placeholder="Search" style="width: 100%; margin-top: 5px;"/>')
-                        .appendTo(header)
+                    $('<input type="text" placeholder="Search ' + columnText + '" class="form-control form-control-sm mb-2" />')
+                        .appendTo(header.find('div'))
                         .on('keyup change clear', function () {
                             if (column.search() !== this.value) {
-                                column
-                                    .search(this.value)
-                                    .draw();
+                                column.search(this.value).draw();
                             }
                         });
                 });
             }
         });
     });
-
-
-    //Print Tariffa for New Application Fees
-    function printSelectedRow() {
-    // Check if the lang parameter is 'ps' to set direction
-    function getQueryParam(param) {
-        const urlParams = new URLSearchParams(window.location.search);
-        return urlParams.get(param);
-    }
-
-    const language = getQueryParam('lang');
-    const direction = (language === 'ps' || language === 'prs') ? 'rtl' : 'ltr';
-
-    var printWindow = window.open('', '_blank');
-    printWindow.document.write('<html><head><style>');
-    printWindow.document.write(`body { font-family: Arial, sans-serif; text-align: center; padding: 20px; font-size: 12px; direction: ${direction}; }`);
-    printWindow.document.write('.slip { width: 100%; border: 1px solid #ccc; border-collapse: collapse; }');
-    printWindow.document.write('.slip td, .slip th { padding: 8px; border: 1px solid #ccc; text-align: left; font-size: 10px; }');
-    printWindow.document.write('.slip th { background-color: #f2f2f2; }');
-    printWindow.document.write('.btn { display: none; }'); // Hide the button in the printed version
-    printWindow.document.write('.hide-last-two { display: none; }'); // Hide the last two columns
-    printWindow.document.write('table th:nth-last-child(-n+2) { display: none; }'); // Hide last two th elements
-    printWindow.document.write('</style><title>Bank Slip</title></head>');
-    printWindow.document.write(`<body dir="${direction}">`); // Set the body direction
-
-    printWindow.document.write('<h2>Bank Payment Slip</h2>'); // Print the heading
-
-    // Create a clone of the header row and remove input elements from it
-    var headerRow = document.querySelector('.slip tr').cloneNode(true);
-    headerRow.querySelectorAll('input').forEach(input => input.remove()); // Remove all input elements from the header row
-    printWindow.document.write('<table class="slip">');
-    printWindow.document.write(headerRow.outerHTML); // Print header row without inputs
-
-    // Print the selected data row
-    var selectedRow = document.querySelectorAll('.slip tr')[1]; // Selecting the second row
-    printWindow.document.write('<tr>');
-
-    // Loop through each cell in the selected row to print data cells only
-    for (var i = 0; i < selectedRow.cells.length; i++) {
-        if (i < selectedRow.cells.length - 2) { // Exclude the last two columns if needed
-            printWindow.document.write(selectedRow.cells[i].outerHTML);
-        }
-    }
-    printWindow.document.write('</tr>'); // End data row
-    printWindow.document.write('</table>');
-
-    printWindow.document.write('<br><br>');
-    printWindow.document.write('<h4 style="text-align:right;">Finance Head Signature</h4>'); // Signature line
-    printWindow.document.write('</body></html>');
-    printWindow.document.close();
-    printWindow.print();
-}
-
-
 </script>
-
-
 <footer th:replace="~{layout :: page_footer}"></footer>
 <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
 </body>
