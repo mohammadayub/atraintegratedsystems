@@ -8,7 +8,8 @@
 </head>
 <body>
 <nav th:replace="~{layout :: page_navbar}"></nav>
-<div class="container-fluid">
+<h3 style="text-align:center;margin-top:30px;font-weight:bolder;" th:text="#{license_application_confirmation}">License Application Confirmation</h3>
+<div class="container-fluid" style="margin-top:40px;">
     <form th:action="@{/licenses/finance/application/license_application_fee_list/add}" th:object="${licenseApplicantDTO}" method="post">
         <div class="row">
             <!-- Hidden ID Field -->
@@ -24,25 +25,21 @@
 
             <!-- License Type -->
             <div class="col-md-3 form-group">
-                <label th:text="#{license_type}"
-                       th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
-                </label>
+                <label th:text="#{applicant_license_type}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
                 <input type="text" th:field="*{licenseTypeId}" class="form-control" required>
             </div>
 
             <!-- Currency Type -->
             <div class="col-md-3 form-group">
-                <label th:text="#{currency_type}"
-                       th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
-                </label>
+                <label th:text="#{applicant_license_currency}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
+
                 <input type="text" th:field="*{currencyType}" class="form-control" required>
             </div>
 
             <!-- Finance Type -->
             <div class="col-md-3 form-group">
-                <label th:text="#{finance_type}"
-                       th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
-                </label>
+                <label th:text="#{applicant_license_finance_type}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
+
                 <input type="text" th:field="*{financeType}" class="form-control" required>
             </div>
         </div>
@@ -50,33 +47,29 @@
         <div class="row">
             <!-- Company License Name -->
             <div class="col-md-3 form-group">
-                <label th:text="#{company_license_name}"
-                       th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
-                </label>
+                <label th:text="#{license_application_company_license_name}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
+
                 <input type="text" th:field="*{companyLicenseName}" class="form-control" required>
             </div>
 
             <!-- License Number -->
             <div class="col-md-3 form-group">
-                <label th:text="#{license_no}"
-                       th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
-                </label>
+                <label th:text="#{license_application_license_no}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
+
                 <input type="text" th:field="*{licenseNo}" class="form-control" required>
             </div>
 
             <!-- Year of Establishment -->
             <div class="col-md-3 form-group">
-                <label th:text="#{year_of_establishment}"
-                       th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
-                </label>
+                <label th:text="#{license_application_year_establishment}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
+
                 <input type="text" th:field="*{yearOfEstablishment}" class="form-control hijrishamsi" required>
             </div>
 
             <!-- Expiry Date -->
             <div class="col-md-3 form-group">
-                <label th:text="#{expiry_date}"
-                       th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
-                </label>
+                <label th:text="#{license_application_expiry_date}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
+
                 <input type="text" th:field="*{expiryDate}" class="form-control hijrishamsi" required>
             </div>
         </div>
@@ -84,18 +77,16 @@
         <div class="row">
             <!-- Application Fees -->
             <div class="col-md-3 form-group">
-                <label th:text="#{application_fees}"
-                       th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
-                </label>
+                <label th:text="#{license_application_fee}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
+
                 <input type="number" step="0.01" th:field="*{applicationFees}" class="form-control" required>
             </div>
 
             <!-- Bank Voucher -->
             <div class="col-md-3 form-group">
-                <label th:text="#{bank_voucher}"
-                       th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
-                </label>
-                <input type="text" th:field="*{bankVoucher}" class="form-control" required>
+                <label th:text="#{license_application_bank_statement_file}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
+
+                <input type="file" th:field="*{bankVoucher}" class="form-control" required>
             </div>
 
             <!-- Payment Status -->
@@ -109,7 +100,7 @@
 
         <!-- Submit/Reset Buttons -->
         <div class="col-md-4 btn-group d-flex justify-content-center" style="margin-top: 15px; margin-bottom:80px;">
-            <button type="submit" class="btn btn-primary btn-sm" style="width: 100px;">
+            <button type="submit" class="btn btn-primary btn-sm" style="width: 100px;" th:text="#{confirmation_payment}">
                 <span class="fas fa-check"></span> Confirm Payment
             </button>
         </div>
