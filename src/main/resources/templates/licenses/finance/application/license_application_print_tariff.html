@@ -6,6 +6,69 @@
   <div th:replace="styles :: persian-datepicker-styles"></div>
   <div th:replace="styles :: select2-styles"></div>
   <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0; /* Remove default margin */
+    }
+
+    .container {
+      display: flex;
+      justify-content: center;
+      padding-top: 30px; /* Increased padding for more space */
+      width: 100%; /* Ensure container takes full width */
+    }
+
+    table {
+      width: 100%;
+      max-width: 1500px; /* Increased table width */
+      border-collapse: collapse;
+      margin: 0 auto;
+    }
+
+    table th, table td {
+      text-align: center;
+      padding: 12px; /* Increased padding for better spacing */
+      font-size: 14px; /* Decreased font size for headers */
+    }
+
+    table th {
+      background-color: #f4f4f4;
+    }
+
+    table td input {
+      width: 100%;
+      padding: 14px; /* Increased padding for larger input fields */
+      font-size: 14px; /* Decreased font size for input fields */
+      text-align: center;
+      box-sizing: border-box; /* Ensures padding does not overflow */
+    }
+
+    table tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    .signature-section {
+      text-align: center;
+      font-style: italic;
+      padding-top: 20px; /* Increased padding for signature section */
+      font-size: 16px; /* Increased font size */
+    }
+
+    @media (max-width: 768px) {
+      table th, table td {
+        font-size: 12px; /* Adjusted font size for smaller screens */
+      }
+
+      table td input {
+        font-size: 12px; /* Adjusted input font size for smaller screens */
+        padding: 10px; /* Adjusted padding for smaller screens */
+      }
+
+      .btn {
+        font-size: 14px; /* Adjusted button font size for smaller screens */
+        padding: 10px; /* Adjusted button padding for smaller screens */
+      }
+    }
   </style>
 </head>
 <body>
@@ -28,18 +91,16 @@
       <th th:text="#{license_application_license_no}"></th>
       <th th:text="#{license_application_fee}"></th>
       <th th:text="#{applicant_license_currency}"></th>
-      <th th:text="#{applicant_license_finance_type}"></th>
       <th th:text="#{license_application_year_establishment}"></th>
       <th th:text="#{license_application_expiry_date}"></th>
     </tr>
     <tr>
       <td><input type="text" th:field="${licenseApplicantDTO.reqId}" disabled> </td>
-      <td ><input type="text" class="hijrishamsi"  th:field="${licenseApplicantDTO.reqDate}" disabled> </td>
+      <td><input type="text" class="hijrishamsi" th:field="${licenseApplicantDTO.reqDate}" disabled> </td>
       <td><input type="text" th:field="${licenseApplicantDTO.companyLicenseName}" disabled></td>
       <td><input type="text" th:field="${licenseApplicantDTO.licenseNo}" disabled></td>
       <td><input type="text" th:field="${licenseApplicantDTO.applicationFees}" disabled></td>
       <td><input type="text" th:field="${licenseApplicantDTO.currencyType}" disabled></td>
-      <td><input type="text" th:field="${licenseApplicantDTO.financeType}" disabled></td>
       <td><input type="text" class="hijrishamsi" th:field="${licenseApplicantDTO.yearOfEstablishment}" disabled></td>
       <td><input type="text" class="hijrishamsi" th:field="${licenseApplicantDTO.expiryDate}" disabled></td>
     </tr>
