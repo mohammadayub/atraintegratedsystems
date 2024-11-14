@@ -3,98 +3,18 @@
 <head th:replace="~{layout :: page_head}">
   <meta charset="utf-8">
 
-  <div th:replace="styles :: data-tables-styles"></div>
   <div th:replace="styles :: persian-datepicker-styles"></div>
   <div th:replace="styles :: select2-styles"></div>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 20px;
-    }
-
-    th, td {
-      padding: 10px;
-      text-align: center;
-      border: 1px solid #ddd;
-    }
-
-    th {
-      background-color: #f2f2f2;
-      color: #333;
-      font-weight: bold;
-    }
-
-    tr:nth-child(even) {
-      background-color: #f9f9f9;
-    }
-
-    tr:hover {
-      background-color: #f1f1f1;
-    }
-
-    img {
-      max-width: 100px;
-      height: auto;
-    }
-
-    h3 {
-      font-family: 'Noto Nastaliq Urdu', serif;
-      font-weight: bolder;
-    }
-
-    .table-header {
-      background-color: #4CAF50;
-      color: white;
-      text-align: center;
-      font-size: 18px;
-    }
-
-    .signature-section {
-      text-align: center;
-      padding-top: 30px;
-      font-style: italic;
-    }
-
-    .no-print {
-      display: none;
-    }
-
-    @media print {
-      body {
-        font-family: Arial, sans-serif;
-      }
-
-      #pagnav, #pagfooter, #prn {
-        display: none;
-      }
-
-      .table th, .table td {
-        padding: 15px;
-      }
-
-      .signature-section {
-        padding-top: 40px;
-      }
-
-      .table {
-        border: 1px solid #000;
-      }
-    }
   </style>
 </head>
 <body>
 <nav th:replace="~{layout :: page_navbar}" id="pagnav"></nav>
 
-<div class="container-fluid" style="height:50%;overflow: auto;">
-  <input type="hidden" th:field="*{reqId}">
+<div class="container">
   <table class="table table-hover mt-4">
-    <tr class="table-header">
-      <th colspan="9">
+    <tr>
+      <th colspan="9" style="text-align:center;">
         <img th:src="@{/images/tariff_pic.png}" alt="Image Not Displayed">
         <br><h3 th:text="#{atra}">ATRA</h3>
         <h3 th:text="#{islamic_emarat}"></h3>
@@ -113,22 +33,22 @@
       <th th:text="#{license_application_expiry_date}"></th>
     </tr>
     <tr>
-      <td th:text="${licenseApplicantDTO.reqId}"></td>
-      <td th:text="${licenseApplicantDTO.reqDate}"></td>
-      <td th:text="${licenseApplicantDTO.companyLicenseName}"></td>
-      <td th:text="${licenseApplicantDTO.licenseNo}"></td>
-      <td th:text="${licenseApplicantDTO.applicationFees}"></td>
-      <td th:text="${licenseApplicantDTO.currencyType}"></td>
-      <td th:text="${licenseApplicantDTO.financeType}"></td>
-      <td th:text="${licenseApplicantDTO.yearOfEstablishment}"></td>
-      <td class="hijrishamsi" th:text="${licenseApplicantDTO.expiryDate}" ></td>
+      <td><input type="text" th:field="${licenseApplicantDTO.reqId}" disabled> </td>
+      <td ><input type="text" class="hijrishamsi"  th:field="${licenseApplicantDTO.reqDate}" disabled> </td>
+      <td><input type="text" th:field="${licenseApplicantDTO.companyLicenseName}" disabled></td>
+      <td><input type="text" th:field="${licenseApplicantDTO.licenseNo}" disabled></td>
+      <td><input type="text" th:field="${licenseApplicantDTO.applicationFees}" disabled></td>
+      <td><input type="text" th:field="${licenseApplicantDTO.currencyType}" disabled></td>
+      <td><input type="text" th:field="${licenseApplicantDTO.financeType}" disabled></td>
+      <td><input type="text" class="hijrishamsi" th:field="${licenseApplicantDTO.yearOfEstablishment}" disabled></td>
+      <td><input type="text" class="hijrishamsi" th:field="${licenseApplicantDTO.expiryDate}" disabled></td>
     </tr>
     <tr>
       <td colspan="9" class="signature-section" th:text="#{signature}"></td>
     </tr>
     <tr>
       <td colspan="9">
-        <button class="btn btn-primary" onclick="doPrint();" id="prn" th:text="#{print}" style="width:100%;"></button>
+        <button class="btn btn-primary" onclick="doPrint();" id="prn" th:text="#{print}"></button>
       </td>
     </tr>
   </table>
