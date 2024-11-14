@@ -16,7 +16,7 @@ public class LicenseApplicantFinanceService {
     private LicenseApplicantRepository licenseApplicantRepository;
     @Transactional
     public List<LicenseApplicant> getAllUnpaid(){
-        return licenseApplicantRepository.findByPaymentStatusIsNull();
+        return licenseApplicantRepository.findAllApplicantsWithNullPaymentStatus();
     }
 
     @Transactional
@@ -24,8 +24,14 @@ public class LicenseApplicantFinanceService {
         return licenseApplicantRepository.findById(id);
     }
 
+    @Transactional
     public void PaymentSave(LicenseApplicant licenseApplicant){
         licenseApplicantRepository.save(licenseApplicant);
+    }
+
+    @Transactional
+    public Optional<LicenseApplicant> getApplicantByReqId(String reqId){
+        return licenseApplicantRepository.findByReqId(reqId);
     }
 
 }

@@ -13,7 +13,7 @@
     <form th:action="@{/licenses/finance/application/license_application_fee_list/add}" th:object="${licenseApplicantDTO}" method="post">
         <div class="row">
             <!-- Hidden ID Field -->
-            <input type="hidden" th:field="*{id}">
+            <input type="hidden" th:field="*{reqId}">
 
             <!-- Request Date -->
             <div class="col-md-3 form-group">
@@ -65,7 +65,7 @@
             <div class="col-md-3 form-group">
                 <label th:text="#{license_application_year_establishment}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
 
-                <input type="text" th:field="*{yearOfEstablishment}" class="form-control hijrishamsi"  readonly="readonly">
+                <input type="text" th:field="*{yearOfEstablishment}" class="form-control hijrishamsi"  disabled>
             </div>
 
             <!-- Expiry Date -->
@@ -84,6 +84,12 @@
                 <input type="number" step="0.01" th:field="*{applicationFees}" class="form-control"  readonly="readonly">
             </div>
 
+            <div class="col-md-3 form-group">
+                <label th:text="#{license_application_expiry_date}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
+
+                <input type="text" th:field="*{entryVoucherDate}" class="form-control hijrishamsi" >
+            </div>
+
             <!-- Bank Voucher -->
             <div class="col-md-3 form-group">
                 <label th:text="#{bank_voucher}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
@@ -96,7 +102,9 @@
                 <label th:text="#{payment_status}"
                        th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
                 </label>
-                <input type="text" th:field="*{paymentStatus}" class="form-control" required>
+                <!-- Checkbox to indicate Paid status -->
+                <input type="checkbox" th:field="*{paymentStatus}" class="form-check-input" value="Paid">
+                <label class="form-check-label" th:text="#{payment_paid}">Paid</label>
             </div>
         </div>
 

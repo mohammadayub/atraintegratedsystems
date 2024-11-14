@@ -29,7 +29,7 @@ public class RouteController {
     public String getlicense_applicant(){
         return "licenses/license/license_new_applicant";
     }
-    @GetMapping("license/application/tariff")
+    @GetMapping("licenses/finance/application/license_application_print_tariffs")
     public String licenseApplicationPrintTariff()
     {
         return "licenses/finance/application/license_application_print_tariffs";

@@ -3,10 +3,8 @@ package atraintegratedsystems.licenses.controller;
 import atraintegratedsystems.licenses.dto.LicenseApplicantDTO;
 import atraintegratedsystems.licenses.model.LicenseApplicant;
 import atraintegratedsystems.licenses.service.LicenseApplicantFinanceService;
-import atraintegratedsystems.licenses.service.LicenseApplicantService;
 import atraintegratedsystems.licenses.service.LicenseTypeService;
 import atraintegratedsystems.utils.DateConverter;
-import atraintegratedsystems.utils.JalaliDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,10 +15,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
-import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 public class LicenseApplicantFinanceController {
@@ -52,22 +48,68 @@ public class LicenseApplicantFinanceController {
         if (bindingResult.hasErrors()) {
             return "licenses/finance/application/license_application_payment_confirmation";
         }
-        LicenseApplicant licenseApplicant = licenseApplicantFinanceService.getApplicantId(licenseApplicantDTO.getId()).orElseThrow(() -> new IllegalArgumentException("Invalid code ID: " + licenseApplicantDTO.getId()));
+        LicenseApplicant licenseApplicant = licenseApplicantFinanceService.getApplicantByReqId(licenseApplicantDTO.getReqId()).orElseThrow(() -> new IllegalArgumentException("Invalid code ID: " + licenseApplicantDTO.getReqId()));
         // Update only the editable fields
-        licenseApplicant.setEntryVoucherDate(licenseApplicantDTO.getEntryVoucherDate());
+        DateConverter dateConverter = new DateConverter();
+        // Convert Jalali date to Gregorian
+        LocalDate entryDate = dateConverter.jalaliToGregorian(licenseApplicantDTO.getEntryVoucherDate().getYear(), licenseApplicantDTO.getEntryVoucherDate().getMonthValue(), licenseApplicantDTO.getEntryVoucherDate().getDayOfMonth());
+        licenseApplicant.setEntryVoucherDate(entryDate);
         licenseApplicant.setBankVoucher(licenseApplicantDTO.getBankVoucher());
-        licenseApplicant.setPaymentStatus(licenseApplicant.getPaymentStatus());
+        licenseApplicant.setPaymentStatus(licenseApplicantDTO.getPaymentStatus());
         licenseApplicantFinanceService.PaymentSave(licenseApplicant);
-        return "redirect:/licenses/finance/application/license_application_payment_confirmation";
+        return "redirect:/licenses/finance/application/license_application_fee_list";
     }
 
-    @GetMapping("/licenses/finance/application/license_application_fee_list/update/{id}")
-    public String updateApplicantGet(@PathVariable Long id, Model model){
-        LicenseApplicant licenseApplicant = licenseApplicantFinanceService.getApplicantId(id)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid applicant ID: " + id));
+//    @PostMapping("/licenses/finance/application/license_application_fee_list/add")
+//    public String updateBankVoucherNoAndPaymentStatus(@Valid @ModelAttribute("licenseApplicantDTO") LicenseApplicantDTO licenseApplicantDTO, BindingResult bindingResult, Model model) {
+//        if (bindingResult.hasErrors()) {
+//            return "licenses/finance/application/license_application_payment_confirmation";
+//        }
+//        LicenseApplicant licenseApplicant = licenseApplicantFinanceService.getApplicantId(licenseApplicantDTO.getId()).orElseThrow(() -> new IllegalArgumentException("Invalid code ID: " + licenseApplicantDTO.getId()));
+//        // Update only the editable fields
+//        DateConverter dateConverter = new DateConverter();
+//        // Convert Jalali date to Gregorian
+//        LocalDate entryDate = dateConverter.jalaliToGregorian(licenseApplicantDTO.getEntryVoucherDate().getYear(), licenseApplicantDTO.getEntryVoucherDate().getMonthValue(), licenseApplicantDTO.getEntryVoucherDate().getDayOfMonth());
+//        licenseApplicant.setEntryVoucherDate(entryDate);
+//        licenseApplicant.setBankVoucher(licenseApplicantDTO.getBankVoucher());
+//        licenseApplicant.setPaymentStatus(licenseApplicantDTO.getPaymentStatus());
+//        licenseApplicantFinanceService.PaymentSave(licenseApplicant);
+//        return "redirect:/licenses/finance/application/license_application_fee_list";
+//    }
+
+//    @GetMapping("/licenses/finance/application/license_application_fee_list/update/{id}")
+//    public String updateApplicantGet(@PathVariable Long id, Model model){
+//        LicenseApplicant licenseApplicant = licenseApplicantFinanceService.getApplicantId(id)
+//                .orElseThrow(() -> new IllegalArgumentException("Invalid applicant ID: " + id));
+//        LicenseApplicantDTO licenseApplicantDTO = new LicenseApplicantDTO();
+//        // Map fields from licenseApplicant to licenseApplicantDTO
+//        licenseApplicantDTO.setId(licenseApplicant.getId());
+//        licenseApplicantDTO.setReqDate(licenseApplicant.getReqDate());
+//        licenseApplicantDTO.setLicenseTypeId(licenseApplicant.getLicenseType().getId());
+//        licenseApplicantDTO.setCurrencyType(licenseApplicant.getCurrencyType());
+//        licenseApplicantDTO.setFinanceType(licenseApplicant.getFinanceType());
+//        licenseApplicantDTO.setCompanyLicenseName(licenseApplicant.getCompanyLicenseName());
+//        licenseApplicantDTO.setLicenseNo(licenseApplicant.getLicenseNo());
+//        licenseApplicantDTO.setYearOfEstablishment(licenseApplicant.getYearOfEstablishment());
+//        licenseApplicantDTO.setExpiryDate(licenseApplicant.getExpiryDate());
+//        licenseApplicantDTO.setApplicationFees(licenseApplicant.getApplicationFees());
+//        licenseApplicantDTO.setEntryVoucherDate(licenseApplicant.getEntryVoucherDate());
+//        licenseApplicantDTO.setBankVoucher(licenseApplicant.getBankVoucher());
+//        licenseApplicantDTO.setPaymentStatus(licenseApplicant.getPaymentStatus());
+//        model.addAttribute("licenseTypes", licenseTypeService.findAll());
+//        model.addAttribute("licenseApplicantDTO", licenseApplicantDTO);
+//        return "licenses/finance/application/license_application_payment_confirmation";
+//    }
+
+
+    @GetMapping("/licenses/finance/application/license_application_fee_list/update/{reqId}")
+    public String updateApplicantGet(@PathVariable String reqId, Model model){
+        LicenseApplicant licenseApplicant = licenseApplicantFinanceService.getApplicantByReqId(reqId)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid applicant ID: " + reqId));
         LicenseApplicantDTO licenseApplicantDTO = new LicenseApplicantDTO();
         // Map fields from licenseApplicant to licenseApplicantDTO
         licenseApplicantDTO.setId(licenseApplicant.getId());
+        licenseApplicantDTO.setReqId(licenseApplicant.getReqId());
         licenseApplicantDTO.setReqDate(licenseApplicant.getReqDate());
         licenseApplicantDTO.setLicenseTypeId(licenseApplicant.getLicenseType().getId());
         licenseApplicantDTO.setCurrencyType(licenseApplicant.getCurrencyType());
