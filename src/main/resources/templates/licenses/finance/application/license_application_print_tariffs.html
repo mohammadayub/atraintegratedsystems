@@ -2,126 +2,71 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{layout :: page_head}">
   <meta charset="utf-8">
+  <style>
+    span {
+        font-weight: bolder;
+        font-family: 'Noto Nastaliq Urdu', serif;
+
+    }
+  </style>
 </head>
 <body>
 <nav th:replace="~{layout :: page_navbar}">
 </nav>
-<div class="container" style="height:50%;overflow: auto;">
-  <table class="table table-hover table-bordered mt-3">
-    <thead>
-    <tr>
-      <th scope="col">ID#</th>
-      <th scope="col">Firs Name</th>
-      <th scope="col">Last Name</th>
-      <th scope="col">Handle</th>
+<div class="container-fluid" style="height:50%;overflow: auto;">
+
+  <table class="table table-hover mt-4">
+    <tr style="border:1px solid gray;">
+      <th colspan="9" style="text-align:center;">
+        <img th:src="@{/images/tariff_pic.png}" alt="Image Not Displayed">
+        <br><h3 th:text="#{atra}">ATRA</h3>
+        <h3 th:text="#{islamic_emarat}"></h3>
+        <h3 th:text="#{license_directorate}"></h3>
+      </th>
     </tr>
-    </thead>
-    <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
+    <tr style="border:1px solid gray;">
+      <th style="border:1px solid gray;" th:text="#{license_request_id}"></th>
+      <th style="border:1px solid gray;" th:text="#{applicant_request_date}"></th>
+      <th style="border:1px solid gray;" th:text="#{license_application_company_license_name}"></th>
+      <th style="border:1px solid gray;" th:text="#{license_application_license_no}"></th>
+      <th style="border:1px solid gray;" th:text="#{license_application_fee}"></th>
+      <th style="border:1px solid gray;" th:text="#{applicant_license_currency}"></th>
+      <th style="border:1px solid gray;" th:text="#{applicant_license_finance_type}"></th>
+      <th style="border:1px solid gray;" th:text="#{license_application_year_establishment}"></th>
+      <th style="border:1px solid gray;" th:text="#{license_application_expiry_date}"></th>
     </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
+    <tr style="border:1px solid gray;">
+      <td style="border:1px solid gray;">A0001</td>
+      <td style="border:1px solid gray;">1403/08/23</td>
+      <td style="border:1px solid gray;">National Fiber</td>
+      <td style="border:1px solid gray;">LN-787</td>
+      <td style="border:1px solid gray;">19888000</td>
+      <td style="border:1px solid gray;">AFN</td>
+      <td style="border:1px solid gray;">ATRA</td>
+      <td style="border:1px solid gray;">1402/01/12</td>
+      <td style="border:1px solid gray;">1412/12/30</td>
     </tr>
     <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
+      <td style="padding-bottom:20px;padding-bottom:20px;" th:text="#{signature}"></td>
     </tr>
     <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
+    <td><button class="btn btn-primary" onclick="doPrint();" id="prn" th:text="#{print}" style="width:100%;"></button></td>
     </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    </tbody>
   </table>
 </div>
+<script>
+  function doPrint()
+  {
+  document.getElementById("pagnav").style.display="none";
+  document.getElementById("pagfooter").style.display="none";
+  document.getElementById("prn").style.display="none";
+
+  window.print();
+  document.getElementById("pagnav").style.display="block";
+  document.getElementById("pagfooter").style.display="inline-block";
+  document.getElementById("prn").style.display="inline-block";
+  }
+</script>
 <footer th:replace="~{layout :: page_footer}"></footer>
 </body>
 </html>
