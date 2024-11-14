@@ -2,13 +2,13 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head th:replace="~{layout :: page_head}">
   <div th:replace="styles :: data-tables-styles"></div>
-  <!-- Additional styles -->
   <div th:replace="styles :: persian-datepicker-styles"></div>
   <div th:replace="styles :: select2-styles"></div>
   <title>ATRA Financial Integrated Systems</title>
 <style>
   .label-rtl {
       color: black !important;
+      margin-right:10%;
       font-weight: bolder !important;
       width: 100% !important;
       direction: rtl !important;
@@ -16,6 +16,7 @@
   }
   .label-ltr {
       color: black !important;
+      margin-left:10%;
       font-weight: bolder !important;
       width: 100% !important;
       direction: ltr !important;
@@ -27,7 +28,7 @@
 <body onload="setApplicationFees()">
 <nav th:replace="~{layout :: page_navbar}"></nav>
 <h2 class="text-center" th:text="#{license_applicant_header}" style="color:black; margin-top:10px; font-weight:bold;"></h2>
-<div class="mt-4" style="margin-left:7%;margin-right:-5%;">
+<div class="container-fluid mt-4" >
   <div>
     <div th:if="${successMessage}" class="alert alert-success" role="alert" th:text="${successMessage}"></div>
     <div th:if="${errorMessage}" class="alert alert-danger" role="alert" th:text="${errorMessage}"></div>
@@ -294,6 +295,7 @@
         applicationFeesField.value = ""; // Clear if no valid option is selected
     }
 }
+
 
 </script>
 <footer th:replace="~{layout :: page_footer}"></footer>

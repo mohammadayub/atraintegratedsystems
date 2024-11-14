@@ -8,20 +8,17 @@
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
     <script>
         window.addEventListener('DOMContentLoaded', (event) => {
-            // Get the URL parameters
-            const urlParams = new URLSearchParams(window.location.search);
-            // Get the value of the "lang" parameter
-            const lang = urlParams.get('lang');
+            // Get the lang cookie
+            const langCookie = document.cookie.split('; ').find(row => row.startsWith('langCookie='));
 
-            // Set the body direction based on the "lang" parameter
-            if (lang === 'en') {
-                document.body.setAttribute('dir', 'ltr');
-            }
-            else if (lang === 'ps' || lang === 'prs') {
-                document.body.setAttribute('dir', 'rtl');
-            }
-            else {
-                document.body.setAttribute('dir', 'ltr');
+            // Extract the value of langCookie (e.g., 'en', 'ps', 'prs')
+            const lang = langCookie ? langCookie.split('=')[1] : null;
+
+            // Set the body direction based on the langCookie value
+            if (lang === 'ps' || lang === 'prs') {
+                document.body.setAttribute('dir', 'rtl'); // RTL direction for Pashto and Persian
+            } else {
+                document.body.setAttribute('dir', 'ltr'); // LTR direction for English
             }
         });
     </script>
@@ -30,14 +27,14 @@
             font-family: Arial, sans-serif;
             background-color: #f5f5f5;
         }
-       .navbar {
+        .navbar {
             background-color: #f8f9fa; /* Light gray background */
             padding: 10px 20px;
             opacity: 0.9; /* Slight transparency */
             border-radius: 8px; /* Smooth rounded corners */
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
             transition: background-color 0.3s ease; /* Smooth color transition */
-           }
+        }
         .navbar-brand img {
             height: 50px;
             margin-right: 10px;
@@ -67,9 +64,6 @@
             margin-left: auto;
             margin-right: 0;
         }
-<!--        [dir="ltr"] .form-select {-->
-<!--            text-align: left;-->
-<!--        }-->
     </style>
 </head>
 <body>
