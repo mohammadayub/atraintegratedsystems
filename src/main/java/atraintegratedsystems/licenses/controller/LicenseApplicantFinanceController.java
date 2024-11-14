@@ -127,5 +127,30 @@ public class LicenseApplicantFinanceController {
         return "licenses/finance/application/license_application_payment_confirmation";
     }
 
+    @GetMapping("/licenses/finance/application/license_application_fee_list/print/{reqId}")
+    public String GetTariff(@PathVariable String reqId, Model model){
+        LicenseApplicant licenseApplicant = licenseApplicantFinanceService.getApplicantByReqId(reqId)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid applicant ID: " + reqId));
+        LicenseApplicantDTO licenseApplicantDTO = new LicenseApplicantDTO();
+        // Map fields from licenseApplicant to licenseApplicantDTO
+        licenseApplicantDTO.setId(licenseApplicant.getId());
+        licenseApplicantDTO.setReqId(licenseApplicant.getReqId());
+        licenseApplicantDTO.setReqDate(licenseApplicant.getReqDate());
+        licenseApplicantDTO.setLicenseTypeId(licenseApplicant.getLicenseType().getId());
+        licenseApplicantDTO.setCurrencyType(licenseApplicant.getCurrencyType());
+        licenseApplicantDTO.setFinanceType(licenseApplicant.getFinanceType());
+        licenseApplicantDTO.setCompanyLicenseName(licenseApplicant.getCompanyLicenseName());
+        licenseApplicantDTO.setLicenseNo(licenseApplicant.getLicenseNo());
+        licenseApplicantDTO.setYearOfEstablishment(licenseApplicant.getYearOfEstablishment());
+        licenseApplicantDTO.setExpiryDate(licenseApplicant.getExpiryDate());
+        licenseApplicantDTO.setApplicationFees(licenseApplicant.getApplicationFees());
+        licenseApplicantDTO.setEntryVoucherDate(licenseApplicant.getEntryVoucherDate());
+        licenseApplicantDTO.setBankVoucher(licenseApplicant.getBankVoucher());
+        licenseApplicantDTO.setPaymentStatus(licenseApplicant.getPaymentStatus());
+        model.addAttribute("licenseTypes", licenseTypeService.findAll());
+        model.addAttribute("licenseApplicantDTO", licenseApplicantDTO);
+        return "licenses/finance/application/license_application_print_tariff";
+    }
+
 
 }
