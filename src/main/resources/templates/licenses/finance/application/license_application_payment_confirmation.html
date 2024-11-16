@@ -91,23 +91,48 @@
             </div>
 
             <!-- Bank Voucher -->
+<!--            <div class="col-md-3 form-group">-->
+<!--                <label th:text="#{bank_voucher}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>-->
+
+<!--                <input type="text" th:field="*{bankVoucher}" class="form-control" required>-->
+<!--            </div>-->
+<!--            &lt;!&ndash; Payment Status &ndash;&gt;-->
+<!--            <div class="col-md-3 form-group">-->
+<!--                <input type="checkbox" class="form-check-input" value="Paid">-->
+<!--                <label class="form-check-label" th:text="#{payment_status}">Paid</label>-->
+<!--            </div>-->
             <div class="col-md-3 form-group">
                 <label th:text="#{bank_voucher}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
 
                 <input type="text" th:field="*{bankVoucher}" class="form-control" required>
             </div>
+
             <!-- Payment Status -->
-            <div class="col-md-3 form-group mt-7">
-
-                <!-- Checkbox to indicate Paid status -->
-
-                <input type="checkbox" class="form-check-input" value="Paid">
-                <label class="form-check-label" th:text="#{payment_status}">Paid</label>
+            <div class="col-md-3 form-group align-items-center" style="margin-top: 38px; display: flex; align-items: center;">
+                <input
+                        type="checkbox"
+                        value="Paid"
+                        style="
+            width: 20px;
+            height: 20px;
+            accent-color: #007bff;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+        ">
+                &nbsp;&nbsp;
+                <label
+                        class="form-check-label me-2"
+                        style="cursor: pointer;"
+                        th:text="#{payment_status}">
+                    Paid
+                </label>
             </div>
+
         </div>
 
         <!-- Submit/Reset Buttons -->
-        <div class="col-md-4 btn-group d-flex justify-content-center" style="margin-top: 15px; margin-bottom:80px;">
+        <div class="col-md-4 btn-group d-flex justify-content-center" style="margin-top: 15px; margin-bottom:80px; margin:0 auto;">
             <button type="submit" class="btn btn-primary btn-sm" style="width: 100px;" th:text="#{confirmation_payment}">
                 <span class="fas fa-check"></span> Confirm Payment
             </button>

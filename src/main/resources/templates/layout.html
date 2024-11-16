@@ -96,13 +96,18 @@
     </div>
 </nav>
 <!-- End of Navbar -->
+
 <!-- Start of Footer Section -->
+<div class="row">
+    <div class="col-12">
 <footer class="border-top bg-light text-muted text-center" th:fragment="page_footer"
-        style="position: fixed; bottom: 0; width: 100%; background-color: #f8f9fa; padding-top: 10px; padding-bottom: 10px; " id="pagfooter">
+        style="position:fixed;bottom: 0; width: 100%; background-color: #f8f9fa; padding-top: 10px;padding-bottom:10px; margin-top:10px; " id="pagfooter">
     <div class="container" style="color:black;">
         &copy; [[${#dates.format(#dates.createNow(),'yyyy')}]] &nbsp;&nbsp;&nbsp;&nbsp; Powered by: Ministry of Communication & Information Technology (MCIT)
     </div>
 </footer>
+</div>
+</div>
 <!-- End of Footer Section -->
 <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
 </body>
