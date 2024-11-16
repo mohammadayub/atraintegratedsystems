@@ -6,6 +6,7 @@ import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Data
@@ -26,7 +27,7 @@ public class LicenseApplicantDTO {
     private LocalDate yearOfEstablishment;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate expiryDate;
-    private Double applicationFees;
+    private BigDecimal applicationFees;
     private int validity;
     private String plannedActivitiesAndServices;
     private Integer totalNationalEmployees;

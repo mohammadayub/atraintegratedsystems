@@ -85,9 +85,9 @@
             </div>
 
             <div class="col-md-3 form-group">
-                <label th:text="#{license_application_expiry_date}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
+                <label th:text="#{license_application_entry_voucher_date}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
 
-                <input type="text" th:field="*{entryVoucherDate}" class="form-control hijrishamsi" disabled>
+                <input type="text" th:field="*{entryVoucherDate}" class="form-control hijrishamsi"  required>
             </div>
 
             <!-- Bank Voucher -->
@@ -111,7 +111,9 @@
             <div class="col-md-3 form-group align-items-center" style="margin-top: 38px; display: flex; align-items: center;">
                 <input
                         type="checkbox"
+                        name="paymentStatus"
                         value="Paid"
+                        id="paymentStatus"
                         style="
             width: 20px;
             height: 20px;
@@ -119,15 +121,17 @@
             border: 2px solid #ddd;
             border-radius: 4px;
             cursor: pointer;
-        ">
+             ">
                 &nbsp;&nbsp;
                 <label
+                        for="paymentStatus"
                         class="form-check-label me-2"
                         style="cursor: pointer;"
                         th:text="#{payment_status}">
                     Paid
                 </label>
             </div>
+
 
         </div>
 

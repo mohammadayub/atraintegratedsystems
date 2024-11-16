@@ -52,6 +52,8 @@ public class LicenseApplicantController {
             model.addAttribute("errorMessage", "An error occurred while saving the profile. Please try again.");
         } catch (IllegalArgumentException e) {
             model.addAttribute("errorMessage", e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
         model.addAttribute("profile", new LicenseApplicantDTO());
         model.addAttribute("licenseTypes", licenseTypeService.findAll());

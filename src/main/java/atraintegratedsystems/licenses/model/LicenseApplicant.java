@@ -4,6 +4,7 @@ import atraintegratedsystems.utils.JalaliDate;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 @Entity
 @Table(name = "license_applicants")
@@ -54,7 +55,7 @@ public class LicenseApplicant {
     private LocalDate expiryDate;
 
     @Column(name = "application_fees")
-    private Double applicationFees;
+    private BigDecimal applicationFees;
 
     @Column(name="validity", nullable = true)
     private Integer validity;

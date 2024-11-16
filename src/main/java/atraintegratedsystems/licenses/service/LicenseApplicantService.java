@@ -6,17 +6,16 @@ import atraintegratedsystems.licenses.model.LicenseType;
 import atraintegratedsystems.licenses.repository.LicenseApplicantRepository;
 import atraintegratedsystems.licenses.repository.LicenseTypeRepository;
 import atraintegratedsystems.utils.DateConverter;
-import org.hibernate.annotations.NaturalId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class LicenseApplicantService {
@@ -32,7 +31,7 @@ public class LicenseApplicantService {
 
     @Transactional
     public List<LicenseApplicant> getAllApplicants() {
-        return repository.findAll();
+      return repository.findAll();
     }
 
     @Transactional(readOnly = true)
@@ -41,7 +40,7 @@ public class LicenseApplicantService {
     }
 
     @Transactional
-    public LicenseApplicant saveProfile(LicenseApplicantDTO dto) throws IOException {
+    public LicenseApplicant saveProfile(LicenseApplicantDTO dto) throws Exception {
         LicenseApplicant profile = new LicenseApplicant();
         profile.setReqId(generateRequestId());
         DateConverter dateConverter = new DateConverter();
@@ -96,7 +95,6 @@ public class LicenseApplicantService {
         profile.setTotalInternationalEmployees(dto.getTotalInternationalEmployees());
         profile.setExpectedInvestment(dto.getExpectedInvestment());
         profile.setCash(dto.getCash());
-
         MultipartFile bankStatementUpload=dto.getBankStatementUpload();
         if(bankStatementUpload != null && !bankStatementUpload.isEmpty()){
             String contentType=bankStatementUpload.getContentType();
@@ -105,7 +103,6 @@ public class LicenseApplicantService {
             }
             profile.setBankStatementUpload(bankStatementUpload.getBytes());
         }
-
         profile.setOtherLicenseTaken(dto.getOtherLicenseTaken());
         profile.setCompanyAddress(dto.getCompanyAddress());
         profile.setContactNo(dto.getContactNo());
@@ -122,16 +119,13 @@ public class LicenseApplicantService {
             );
         }
         profile.setEntryVoucherDate(entryVoucherDate);
-
-
         profile.setBankVoucher(dto.getBankVoucher());
         profile.setPaymentStatus(dto.getPaymentStatus());
-
         return repository.save(profile);
     }
     private String generateRequestId() {
         Long maxId = repository.findMaxId();
-        String prefix = "ATRA-";
+        String prefix = "ATRA-REQ-";
         if (maxId == null) {
             return prefix + "0001";
         }

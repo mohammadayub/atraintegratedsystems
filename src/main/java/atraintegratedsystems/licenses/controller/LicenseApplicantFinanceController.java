@@ -103,7 +103,7 @@ public class LicenseApplicantFinanceController {
 
 
     @GetMapping("/licenses/finance/application/license_application_fee_list/update/{reqId}")
-    public String updateApplicantGet(@PathVariable String reqId, Model model){
+    public String updateApplicantGet(@PathVariable String reqId, Model model) throws Exception {
         LicenseApplicant licenseApplicant = licenseApplicantFinanceService.getApplicantByReqId(reqId)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid applicant ID: " + reqId));
         LicenseApplicantDTO licenseApplicantDTO = new LicenseApplicantDTO();
