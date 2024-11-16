@@ -16,6 +16,9 @@ public interface LicenseApplicantRepository extends JpaRepository<LicenseApplica
     @Query(value = "SELECT * FROM license_applicants WHERE payment_status IS NULL", nativeQuery = true)
     List<LicenseApplicant> findAllApplicantsWithNullPaymentStatus();
 
+    @Query(value = "SELECT * FROM license_applicants WHERE license_status IS NULL", nativeQuery = true)
+    List<LicenseApplicant> findAllApplicantsNotApproved();
+
     @Query(value = "SELECT * FROM license_applicants WHERE req_id = ?1", nativeQuery = true)
     Optional<LicenseApplicant> findByReqId(String reqId);
 

@@ -105,6 +105,7 @@ public class LicenseApplicant {
     @Column(name="payment_status")
     private String paymentStatus;
 
+
     public JalaliDate getRegDate() {
         if (reqDate == null) {
             return null; // Return null if issueLicenseDate is null
