@@ -35,4 +35,10 @@ public class RouteController {
         return "licenses/finance/application/license_application_print_tariffs";
     }
 
+    @GetMapping("/licenses/license/approval/license_applicants_approval")
+    public String licenseApplicantsApproval()
+    {
+        return "licenses/license/approval/license_applicants_approval";
+    }
+
 }
