@@ -22,9 +22,14 @@ public class LicenseApplicantApprovalController {
 
     @GetMapping("/licenses/license/approval/license_applicants_approval_list")
     public String showApprovalProfile(Model model) {
+        // Add all license types to the model
         model.addAttribute("licenseTypes", licenseTypeService.findAll());
-        List<LicenseApproval> profiles = licenseApprovalService.getAllApplicantsforApproval();
+
+        // Fetch applicant details using the native query and add them to the model
+        List<Object[]> profiles = licenseApprovalService.getAllApplicantDetails();
         model.addAttribute("profiles", profiles);
+
+        // Return the view name
         return "licenses/license/approval/license_applicants_approval_list";
     }
 

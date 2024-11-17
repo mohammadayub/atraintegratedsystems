@@ -21,6 +21,8 @@ public class LicenseApproval {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "approval_date", nullable = false)
     private LocalDate approvalDate;
+    @Column(name="approval_status")
+    private String approvalStatus;
     @ManyToOne
     @JoinColumn(name = "license_type_id")
     private LicenseType licenseType; // Link to LicenseType entity

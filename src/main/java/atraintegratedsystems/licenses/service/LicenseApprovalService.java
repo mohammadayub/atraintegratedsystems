@@ -18,7 +18,7 @@ public class LicenseApprovalService {
     private LicenseApprovalRepository licenseApprovalRepository;
 
     @Transactional
-    public List<LicenseApproval> getAllApplicantsforApproval(){
-        return licenseApprovalRepository.findAll();
+    public List<Object[]> getAllApplicantDetails() {
+        return licenseApprovalRepository.findAllApplicantDetails();
     }
 }
