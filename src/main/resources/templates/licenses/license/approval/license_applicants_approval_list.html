@@ -96,16 +96,9 @@
     </div>
 </div>
 
-<div class="container">
+<div class="container-fluid">
     <form method="post" style="margin-top:30px;">
         <div class="row">
-            <div class="col-md-3 form-group">
-                <label
-                        th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
-                Approval ID
-                </label>
-                <input type="text" id="reqDate" class="form-control" required>
-            </div>
             <div class="col-md-3 form-group">
                 <label
                         th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
@@ -123,7 +116,7 @@
             <div class="col-md-3 form-group">
                 <label
                         th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
-                    License Type ID
+                    License Types
                 </label>
                 <input type="text" class="form-control" required>
             </div>
