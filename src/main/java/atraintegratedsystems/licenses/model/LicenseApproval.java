@@ -25,9 +25,22 @@ public class LicenseApproval {
     @JoinColumn(name = "license_type_id")
     private LicenseType licenseType; // Link to LicenseType entity
     private String currencyType;
-    private String financeType;
     @Column(name="license_fees")
     private BigDecimal licenseFees;
+    @Column(name="license_payment_office")
+    private String licensePaymentOffice;
+    @Column(name="adminstrative_yearly_fees")
+    private BigDecimal administrativeYearlyFees;
+    @Column(name="administrative_yearly_fees_payment_office")
+    private String adminstrivateYearlyFeesPaymentOffice;
+    @Column(name="guarantee_fees")
+    private BigDecimal guaranteeFees;
+    @Column(name="gurantee_fees_payment_office")
+    private String guaranteeFeesPaymentOffice;
+    @Column(name="database_yearly_maintainance_fees")
+    private BigDecimal databaseYearlyMaintainanceFees;
+    @Column(name="database_yearly_maintainance_fees_payment_office")
+    private String databaseYearlyMaintainanceFeesPaymentOffice;
 
     @OneToOne
     @JoinColumn(name = "license_applicant_id", nullable = false)
