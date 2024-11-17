@@ -59,6 +59,17 @@
         #profileTable th {
         white-space: nowrap;
     }
+        fieldset {
+          border: 1px solid black; /* Add a border */
+          border-top:1px;
+          padding: 1.5rem;         /* Add padding inside the fieldset */
+          border-radius: 0.375rem; /* Optional: Add rounded corners */
+        }
+
+        legend {
+          font-size: 1.25rem;      /* Optional: Customize legend font size */
+          font-weight: bold;       /* Optional: Make the legend bold */
+        }
     </style>
 </head>
 <body>
@@ -98,6 +109,8 @@
 
 <div class="container-fluid">
     <form method="post" style="margin-top:70px;">
+        <fieldset>
+            <legend>License Approval</legend>
         <div class="row">
             <div class="col-md-3 form-group">
                 <label
@@ -213,6 +226,7 @@
             <button type="submit" class="btn btn-primary">Approved</button>
 
         </div>
+        </fieldset>
     </form>
 </div>
 <!-- Common scripts -->
