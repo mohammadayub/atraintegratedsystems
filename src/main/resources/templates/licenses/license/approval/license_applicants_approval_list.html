@@ -95,6 +95,125 @@
         </table>
     </div>
 </div>
+
+<div class="container">
+    <form method="post" style="margin-top:30px;">
+        <div class="row">
+            <div class="col-md-3 form-group">
+                <label
+                        th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+                Approval ID
+                </label>
+                <input type="text" id="reqDate" class="form-control" required>
+            </div>
+            <div class="col-md-3 form-group">
+                <label
+                        th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+                    Approval Date
+                </label>
+                <input type="text" class="form-control hijrishamsi" required>
+            </div>
+            <div class="col-md-3 form-group">
+                <label
+                        th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+                    Approval Status
+                </label>
+                <input type="text" class="form-control" required>
+            </div>
+            <div class="col-md-3 form-group">
+                <label
+                        th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+                    License Type ID
+                </label>
+                <input type="text" class="form-control" required>
+            </div>
+        </div>
+<!--        Second Row -->
+        <div class="row">
+            <div class="col-md-3 form-group">
+                <label
+                        th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+                    Currency Type
+                </label>
+                <input type="text" class="form-control" required>
+            </div>
+            <div class="col-md-3 form-group">
+                <label
+                        th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+                    License Fees
+                </label>
+                <input type="text" class="form-control" required>
+            </div>
+            <div class="col-md-3 form-group">
+                <label
+                        th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+                    License Payment Office
+                </label>
+                <input type="text" class="form-control" required>
+            </div>
+            <div class="col-md-3 form-group">
+                <label
+                        th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+                    Administrative Yearly Fees
+                </label>
+                <input type="text" class="form-control" required>
+            </div>
+        </div>
+<!--        Third Row -->
+        <div class="row">
+            <div class="col-md-3 form-group">
+                <label
+                        th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+                    Adminstrivate Yearly Fees Payment Office
+                </label>
+                <input type="text" class="form-control" required>
+            </div>
+            <div class="col-md-3 form-group">
+                <label
+                        th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+                    Guarantee Fees
+                </label>
+                <input type="text" class="form-control" required>
+            </div>
+            <div class="col-md-3 form-group">
+                <label
+                        th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+                    Guarantee Fees Payment Office
+                </label>
+                <input type="text" class="form-control" required>
+            </div>
+            <div class="col-md-3 form-group">
+                <label
+                        th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+                    Database Yearly Maintainance Fees
+                </label>
+                <input type="text" class="form-control" required>
+            </div>
+        </div>
+<!--        Row Fourth-->
+        <div class="row">
+            <div class="col-md-3 form-group">
+                <label
+                        th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+                    Database Yearly Maintainance Fees Payment Office
+                </label>
+                <input type="text" class="form-control" required>
+            </div>
+            <div class="col-md-3 form-group">
+                <label
+                        th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+                    License Applicant ID
+                </label>
+                <input type="text" class="form-control" required>
+            </div>
+        </div>
+<!--        Fiveth Row-->
+        <div class="row">
+            <button type="submit" class="btn btn-primary">Approved</button>
+
+        </div>
+    </form>
+</div>
 <!-- Common scripts -->
 <div th:replace="scripts :: common-scripts"></div>
 <div th:replace="scripts :: persian-datepicker-scripts"></div>
