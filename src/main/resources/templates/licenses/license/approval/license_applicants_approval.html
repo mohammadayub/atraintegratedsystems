@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head th:replace="~{layout :: page_head}">
+    <div th:replace="styles :: data-tables-styles"></div>
+    <div th:replace="styles :: persian-datepicker-styles"></div>
+    <div th:replace="styles :: select2-styles"></div>
+    <title>ATRA Financial Integrated System</title>
+</head>
+<body>
+<nav th:replace="~{layout :: page_navbar}"></nav>
+<div class="container-fluid">
+    <form th:action="@{/licenses/license/approval/license_applicants_approval_list/add}" th:object="${licenseApplicantDTO}" method="post">
+        <div class="row">
+            <!-- Hidden ID Field -->
+            <input type="hidden" th:field="*{id}">
+            <!-- License Type -->
+            <div class="col-md-3 form-group">
+                <label for="licenseTypeId" th:text="#{applicant_license_type}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
+                <select id="licenseTypeId" th:field="*{licenseTypeId}" class="form-control" required onchange="setApplicationFees()" disabled>
+                    <option th:each="licenseType : ${licenseTypes}" th:value="${licenseType.id}" th:text="${licenseType.name}"></option>
+                </select>
+            </div>
+        </div>
+        <!-- Submit/Reset Buttons -->
+        <div class="col-md-4 btn-group d-flex justify-content-center" style="margin-top: 15px; margin-bottom:80px; margin:0 auto;">
+            <button type="submit" class="btn btn-primary btn-sm" style="width: 100px;" th:text="#{confirmation_payment}">
+                <span class="fas fa-check"></span> Confirm Approval
+            </button>
+        </div>
+    </form>
+
+    <a href="/licenses/license/approval/license_applicants_approval_list">Back to Approval List</a>
+</div>
+
+<div th:replace="scripts :: common-scripts"></div>
+<div th:replace="scripts :: persian-datepicker-scripts"></div>
+<div th:replace="scripts :: data-tables-scripts"></div>
+
+<footer th:replace="~{layout :: page_footer}"></footer>
+</body>
+</html>

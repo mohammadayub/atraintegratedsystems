@@ -22,4 +22,13 @@ public interface LicenseApplicantRepository extends JpaRepository<LicenseApplica
     @Query(value = "SELECT * FROM license_applicants WHERE req_id = ?1", nativeQuery = true)
     Optional<LicenseApplicant> findByReqId(String reqId);
 
+    @Query(value = "SELECT * FROM license_applicants WHERE payment_status='Paid'", nativeQuery = true)
+    List<LicenseApplicant> findAllApplicantsWithPaid();
+
+
+
+
+
+
+
 }

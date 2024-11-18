@@ -60,46 +60,6 @@ public class LicenseApplicantFinanceController {
         return "redirect:/licenses/finance/application/license_application_fee_list";
     }
 
-//    @PostMapping("/licenses/finance/application/license_application_fee_list/add")
-//    public String updateBankVoucherNoAndPaymentStatus(@Valid @ModelAttribute("licenseApplicantDTO") LicenseApplicantDTO licenseApplicantDTO, BindingResult bindingResult, Model model) {
-//        if (bindingResult.hasErrors()) {
-//            return "licenses/finance/application/license_application_payment_confirmation";
-//        }
-//        LicenseApplicant licenseApplicant = licenseApplicantFinanceService.getApplicantId(licenseApplicantDTO.getId()).orElseThrow(() -> new IllegalArgumentException("Invalid code ID: " + licenseApplicantDTO.getId()));
-//        // Update only the editable fields
-//        DateConverter dateConverter = new DateConverter();
-//        // Convert Jalali date to Gregorian
-//        LocalDate entryDate = dateConverter.jalaliToGregorian(licenseApplicantDTO.getEntryVoucherDate().getYear(), licenseApplicantDTO.getEntryVoucherDate().getMonthValue(), licenseApplicantDTO.getEntryVoucherDate().getDayOfMonth());
-//        licenseApplicant.setEntryVoucherDate(entryDate);
-//        licenseApplicant.setBankVoucher(licenseApplicantDTO.getBankVoucher());
-//        licenseApplicant.setPaymentStatus(licenseApplicantDTO.getPaymentStatus());
-//        licenseApplicantFinanceService.PaymentSave(licenseApplicant);
-//        return "redirect:/licenses/finance/application/license_application_fee_list";
-//    }
-
-//    @GetMapping("/licenses/finance/application/license_application_fee_list/update/{id}")
-//    public String updateApplicantGet(@PathVariable Long id, Model model){
-//        LicenseApplicant licenseApplicant = licenseApplicantFinanceService.getApplicantId(id)
-//                .orElseThrow(() -> new IllegalArgumentException("Invalid applicant ID: " + id));
-//        LicenseApplicantDTO licenseApplicantDTO = new LicenseApplicantDTO();
-//        // Map fields from licenseApplicant to licenseApplicantDTO
-//        licenseApplicantDTO.setId(licenseApplicant.getId());
-//        licenseApplicantDTO.setReqDate(licenseApplicant.getReqDate());
-//        licenseApplicantDTO.setLicenseTypeId(licenseApplicant.getLicenseType().getId());
-//        licenseApplicantDTO.setCurrencyType(licenseApplicant.getCurrencyType());
-//        licenseApplicantDTO.setFinanceType(licenseApplicant.getFinanceType());
-//        licenseApplicantDTO.setCompanyLicenseName(licenseApplicant.getCompanyLicenseName());
-//        licenseApplicantDTO.setLicenseNo(licenseApplicant.getLicenseNo());
-//        licenseApplicantDTO.setYearOfEstablishment(licenseApplicant.getYearOfEstablishment());
-//        licenseApplicantDTO.setExpiryDate(licenseApplicant.getExpiryDate());
-//        licenseApplicantDTO.setApplicationFees(licenseApplicant.getApplicationFees());
-//        licenseApplicantDTO.setEntryVoucherDate(licenseApplicant.getEntryVoucherDate());
-//        licenseApplicantDTO.setBankVoucher(licenseApplicant.getBankVoucher());
-//        licenseApplicantDTO.setPaymentStatus(licenseApplicant.getPaymentStatus());
-//        model.addAttribute("licenseTypes", licenseTypeService.findAll());
-//        model.addAttribute("licenseApplicantDTO", licenseApplicantDTO);
-//        return "licenses/finance/application/license_application_payment_confirmation";
-//    }
 
 
     @GetMapping("/licenses/finance/application/license_application_fee_list/update/{reqId}")
