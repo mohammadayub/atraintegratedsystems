@@ -4,6 +4,7 @@ import atraintegratedsystems.licenses.model.LicenseType;
 import atraintegratedsystems.licenses.repository.LicenseTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -29,4 +30,5 @@ public class LicenseTypeService {
     public void deleteById(Long id) {
         repository.deleteById(id);
     }
+
 }

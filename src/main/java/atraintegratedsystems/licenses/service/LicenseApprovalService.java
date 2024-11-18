@@ -17,8 +17,13 @@ public class LicenseApprovalService {
     @Autowired
     private LicenseApprovalRepository licenseApprovalRepository;
 
+    @Autowired
+    private LicenseApplicantRepository licenseApplicantRepository;
+
     @Transactional
-    public List<Object[]> getAllApplicantDetails() {
-        return licenseApprovalRepository.findAllApplicantDetails();
+    public List<LicenseApplicant> getAllApplicants(){
+        return licenseApplicantRepository.findAll();
     }
+
+
 }
