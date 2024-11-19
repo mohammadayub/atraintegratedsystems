@@ -16,8 +16,8 @@
             <!-- Hidden Fields -->
             <input type="hidden" th:field="*{id}">
             <div class="col-md-3 form-group">
-                <label for="licenseApplicantId">Applicant License Name:</label>
-                <select id="licenseApplicantId" name="licenseApplicantId" th:field="*{licenseApplicantId}">
+                <label for="licenseApplicantId" th:text="#{approval_applicant_license_name}">Applicant License Name</label>
+                <select id="licenseApplicantId" name="licenseApplicantId" th:field="*{licenseApplicantId}" class="form-control">
                     <option th:each="applicant : ${licenseApplicants}" th:value="${applicant.id}" th:text="${applicant.companyLicenseName}"></option>
                 </select>
             </div>
@@ -25,7 +25,7 @@
             <!-- License Type -->
             <div class="col-md-3 form-group">
                 <label for="licenseTypeId">License Type:</label>
-                <select id="licenseTypeId" name="licenseTypeId" th:field="*{licenseTypeId}">
+                <select id="licenseTypeId" name="licenseTypeId" th:field="*{licenseTypeId}" class="form-control">
                     <option th:each="type : ${licenseTypes}" th:value="${type.id}" th:text="${type.name}"></option>
                 </select>
             </div>
@@ -46,13 +46,7 @@
                 <input type="text" id="approvalStatus" th:field="*{approvalStatus}" class="form-control" required>
             </div>
 
-            <!-- Currency Type -->
-            <div class="col-md-3 form-group">
-                <label for="currencyType"
-                       th:text="#{currency_type}"
-                       th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
-                <input type="text" id="currencyType" th:field="*{currencyType}" class="form-control" required>
-            </div>
+
         </div>
 
         <div class="row">
@@ -122,6 +116,16 @@
                 <input type="text" id="databaseMaintenanceFeesPaymentOffice" th:field="*{databaseYearlyMaintainanceFeesPaymentOffice}" class="form-control" required>
             </div>
         </div>
+        <div class="row">
+            <!-- Currency Type -->
+            <div class="col-md-3 form-group">
+                <label for="currencyType"
+                       th:text="#{currency_type}"
+                       th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
+                <input type="text" id="currencyType" th:field="*{currencyType}" class="form-control" required>
+            </div>
+        </div>
+
 
         <!-- Submit Button -->
         <div class="col-md-4 btn-group d-flex justify-content-center">
