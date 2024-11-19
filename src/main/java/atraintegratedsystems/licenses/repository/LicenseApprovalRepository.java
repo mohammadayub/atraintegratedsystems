@@ -20,4 +20,6 @@ public interface LicenseApprovalRepository extends JpaRepository<LicenseApproval
             "WHERE applicants.id = :applicantId", nativeQuery = true)
     Object[] findApplicantApprovalDetailsById(@Param("applicantId") Long applicantId);
 
+    Optional<LicenseApproval> findByLicenseApplicantId(Long applicantId);
+
 }

@@ -28,6 +28,10 @@ public class LicenseApprovalService {
         return licenseApplicantRepository.findAllApplicantsWithPaid();
     }
 
+    public Optional<LicenseApproval> getByApplicantId(Long applicantId) {
+        return licenseApprovalRepository.findByLicenseApplicantId(applicantId);
+    }
+
     @Transactional
     public Optional<LicenseApplicant> getApplicantId(Long id){
         return licenseApplicantRepository.findById(id);
