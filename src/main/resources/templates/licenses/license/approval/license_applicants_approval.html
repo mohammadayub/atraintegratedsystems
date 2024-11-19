@@ -6,27 +6,27 @@
     <div th:replace="styles :: select2-styles"></div>
     <title>ATRA Financial Integrated System</title>
 </head>
-<body>
+<body  onload="setApplicationFees()">
 <nav th:replace="~{layout :: page_navbar}"></nav>
 <div class="container-fluid">
     <!-- Form for License Approval -->
-    <form th:action="@{/licenses/license/approval/license_applicants_approval_list/update}"
+    <form th:action="@{/licenses/license/approval/license_applicants_approval}"
           th:object="${licenseApprovalDTO}" method="post">
         <div class="row">
             <!-- Hidden Fields -->
             <input type="hidden" th:field="*{id}">
-            <input type="hidden" th:field="*{licenseApplicantId}">
+            <div class="col-md-3 form-group">
+                <label for="licenseApplicantId">Applicant License Name:</label>
+                <select id="licenseApplicantId" name="licenseApplicantId" th:field="*{licenseApplicantId}">
+                    <option th:each="applicant : ${licenseApplicants}" th:value="${applicant.id}" th:text="${applicant.companyLicenseName}"></option>
+                </select>
+            </div>
 
             <!-- License Type -->
             <div class="col-md-3 form-group">
-                <label for="licenseTypeId"
-                       th:text="#{applicant_license_type}"
-                       th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
-                <select id="licenseTypeId" th:field="*{licenseTypeId}" class="form-control" disabled onload="setApplicationFees()">
-                    <option th:each="licenseType : ${licenseTypes}"
-                            th:value="${licenseType.id}"
-                            th:text="${licenseType.name}">
-                    </option>
+                <label for="licenseTypeId">License Type:</label>
+                <select id="licenseTypeId" name="licenseTypeId" th:field="*{licenseTypeId}">
+                    <option th:each="type : ${licenseTypes}" th:value="${type.id}" th:text="${type.name}"></option>
                 </select>
             </div>
 
@@ -141,125 +141,51 @@
 <div th:replace="scripts :: persian-datepicker-scripts"></div>
 <div th:replace="scripts :: data-tables-scripts"></div>
 <script>
-    function setApplicationFees() {
-    const licenseType = document.getElementById("licenseTypeId").value;
-    const applicationFeesField = document.getElementById("applicationFees");
-    const validity = document.getElementById("validity")
-    const currencyType = document.getElementById("currencyType");
+    $('.hijrishamsi').persianDatepicker({
+      format: 'YYYY-MM-DD',
+      autoClose: true,
+      calendar: {
+          persian: {
+              locale: 'en'
+          }
+      }
+  });
+  function setApplicationFees() {
+  const licenseType = document.getElementById("licenseTypeId").value;
+  const applicationFeesField = document.getElementById("applicationFees");
+  const validity = document.getElementById("validity")
+  const currencyType = document.getElementById("currencyType");
 <!--    -->
-    const adminFees= document.getElementById("adminFees");
-    const licenseFees= document.getElementById("licenseFees");
-    const guaranteeFees= document.getElementById("guaranteeFees");
-    const databaseMaintenanceFees= document.getElementById("databaseMaintenanceFees");
+  const adminFees= document.getElementById("adminFees");
+  const licenseFees= document.getElementById("licenseFees");
+  const guaranteeFees= document.getElementById("guaranteeFees");
+  const databaseMaintenanceFees= document.getElementById("databaseMaintenanceFees");
 
-    //Currency Section
-    if (licenseType === "6" || licenseType === "7" || licenseType === "8") {currencyType.value="USD";}
-    else{currencyType.value="AFN";}
-    // End Of Currency Section
-    if (licenseType === "1") {
-        adminFees.value = 37000000;
-        licenseFees.value = 1950000000;
-        guaranteeFees.value = 1000000;
-        databaseMaintenanceFees.value = 350000;
-        validity.value=15;
+  //Currency Section
+  if (licenseType === "6" || licenseType === "7" || licenseType === "8") {currencyType.value="USD";}
+  else{currencyType.value="AFN";}
+  // End Of Currency Section
+  if (licenseType === "1") {
+      adminFees.value = 37000000;
+      licenseFees.value = 1950000000;
+      guaranteeFees.value = 1000000;
+      databaseMaintenanceFees.value = 350000;
+      validity.value=15;
 
 
-    } else if (licenseType === "2") {
-        licenseFees.value = 0;
-        adminFees.value = 30000000;
-        databaseMaintenanceFees.value = 350000;
-        guaranteeFees.value = 0;
+  } else if (licenseType === "2") {
+      licenseFees.value = 0;
+      adminFees.value = 30000000;
+      databaseMaintenanceFees.value = 350000;
+      guaranteeFees.value = 0;
 
-        validity.value=15;
-    }
-    else if (licenseType === "3") {
-        licenseFees.value = 78000000;
-        adminFees.value = 10000000;
-        databaseMaintenanceFees.value = 100000;
-        guaranteeFees.value = 100000;
-        validity.value=15;
-    }
-    else if (licenseType === "4") {
-               adminFees.value = 0;
-        licenseFees.value = 0;
-        guaranteeFees.value = 0;
-        databaseMaintenanceFees.value = 0;
-        validity.value=15;
-    }
-    else if (licenseType === "5") {
-               adminFees.value = 0;
-        licenseFees.value = 0;
-        guaranteeFees.value = 0;
-        databaseMaintenanceFees.value = 0;
-        validity.value=15;
-    }
-    else if (licenseType === "6") {
-               adminFees.value = 0;
-        licenseFees.value = 0;
-        guaranteeFees.value = 0;
-        databaseMaintenanceFees.value = 0;
-        validity.value=15;
-    }
-    else if (licenseType === "7") {
-        adminFees.value = 0;
-        licenseFees.value = 0;
-        guaranteeFees.value = 0;
-        databaseMaintenanceFees.value = 0;
-        validity.value=15;
-    }
-    else if (licenseType === "8") {
-        adminFees.value = 0;
-        licenseFees.value = 0;
-        guaranteeFees.value = 0;
-        databaseMaintenanceFees.value = 0;
-        validity.value=15;
-    }
-    else if (licenseType === "9") {
-        validity.value=10;
-    }
-    else if (licenseType === "10") {
-        validity.value=10;
-    }
-    else if (licenseType === "11") {
-        validity.value=15;
-    }
-    else if (licenseType === "12") {
-        validity.value=15;
-    }
-    else if (licenseType === "13") {
-        validity.value=10;
-    }
-    else if (licenseType === "14") {
-        validity.value=10;
-    }
-    else if (licenseType === "15") {
-        validity.value=10;
-    }
-    else if (licenseType === "16") {
-        validity.value=10;
-    }
-    else if (licenseType === "17") {
-        validity.value=5;
-    }
-    else if (licenseType === "18") {
-        validity.value=5;
-    }
-    else if (licenseType === "19") {
-        validity.value=5;
-    }
-    else if (licenseType === "20") {
-        validity.value=5;
-    }
-    else if (licenseType === "21") {
-        validity.value=5;
-    }
-    else if (licenseType === "22") {
-        validity.value=5;
-    }
+      validity.value=15;
+  }
 
-    else {
-        applicationFeesField.value = ""; // Clear if no valid option is selected
-    }
+
+  else {
+      applicationFeesField.value = ""; // Clear if no valid option is selected
+  }
 }
 </script>
 <footer th:replace="~{layout :: page_footer}"></footer>
