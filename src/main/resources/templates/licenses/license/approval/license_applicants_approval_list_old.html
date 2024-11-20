@@ -62,44 +62,45 @@
 <nav th:replace="~{layout :: page_navbar}"></nav>
 <div class="container-fluid">
     <div class="table-container">
-        <table  class="slip" id="profileTable">
+        <table class="slip" id="profileTable">
             <thead>
             <tr>
-                <th>Applicant ID</th>
-                <th>Request ID</th>
-                <th>Request Date</th>
-                <th>License Type Name</th>
-                <th>Currency Type</th>
-                <th>Finance Type</th>
-                <th>Company License Name</th>
-                <th>License No</th>
-                <th>Application Fees</th>
-                <th>Validity</th>
-                <th>Entry Voucher Date</th>
-                <th>Bank Voucher</th>
+                <th th:text="#{license_request_id}"></th>
+                <th th:text="#{applicant_request_date}"></th>
+                <th th:text="#{applicant_license_type}"></th>
+                <th th:text="#{license_application_validity}"></th>
+                <th th:text="#{applicant_license_currency}"></th>
+                <th th:text="#{applicant_license_finance_type}"></th>
+                <th th:text="#{license_application_company_license_name}"></th>
+                <th th:text="#{license_application_license_no}"></th>
+                <th th:text="#{license_application_year_establishment}"></th>
+                <th th:text="#{license_application_expiry_date}"></th>
+                <th th:text="#{license_application_fee}"></th>
+                <th>Bank Voucher Entry Date </th>
+                <th>Voucher Number</th>
                 <th>Payment Status</th>
-                <th>Approval Status</th>
-                <th>Approving</th>
+                <th th:text="#{license_application_payment_confirmation}">Payment Confirmation</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="item : ${profiles}">
-                <td th:text="${item.id}"></td>
-                <td th:text="${item.reqId}"></td>
-                <td th:text="${item.reqDate}"></td>
-                <td th:text="${item.licenseTypeName}"></td>
-                <td th:text="${item.currencyType}"></td>
-                <td th:text="${item.financeType}"></td>
-                <td th:text="${item.companyLicenseName}"></td>
-                <td th:text="${item.licenseNo}"></td>
-                <td th:text="${item.applicationFees}"></td>
-                <td th:text="${item.validity}"></td>
-                <td th:text="${item.entryVoucherDate}"></td>
-                <td th:text="${item.bankVoucher}"></td>
-                <td th:text="${item.paymentStatus}"></td>
-                <td th:text="${item.approvalStatus}"></td>
+            <tr th:each="profile : ${profiles}">
+                <td th:text="${profile.reqId}">reqId</td>
+                <td th:text="${profile.getRegDate()}">reqDate</td>
+                <td th:text="${profile.licenseType.name}">name</td>
+                <td th:text="${profile.validity}">validity</td>
+                <td th:text="${profile.currencyType}">currencyType</td>
+                <td th:text="${profile.financeType}">financeType</td>
+                <td th:text="${profile.companyLicenseName}">companyLicenseName</td>
+                <td th:text="${profile.licenseNo}">licenseNo</td>
+                <td th:text="${profile.getEstablishmentYear()}">yearOfEstablishment</td>
+                <td th:text="${profile.getExpDate()}">expiryDate</td>
+                <td th:text="${profile.applicationFees}">applicationFees</td>
+                <td th:text="${profile.getEntVocherDate()}">Entry Date</td>
+                <td th:text="${profile.bankVoucher}">applicationFees</td>
+                <td th:text="${profile.paymentStatus}">applicationFees</td>
+
                 <td class="hide-print">
-                    <a href="" th:href="@{/licenses/license/approval/license_applicants_approval_list/update/{id}(id=${item.id})}" class="btn btn-warning">
+                    <a href="" th:href="@{/licenses/license/approval/license_applicants_approval_list/update/{id}(id=${profile.id})}" class="btn btn-warning">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bank" viewBox="0 0 16 16">
                             <path d="m8 0 6.61 3h.89a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5H15v7a.5.5 0 0 1 .485.38l.5 2a.498.498 0 0 1-.485.62H.5a.498.498 0 0 1-.485-.62l.5-2A.5.5 0 0 1 1 13V6H.5a.5.5 0 0 1-.5-.5v-2A.5.5 0 0 1 .5 3h.89zM3.777 3h8.447L8 1zM2 6v7h1V6zm2 0v7h2.5V6zm3.5 0v7h1V6zm2 0v7H12V6zM13 6v7h1V6zm2-1V4H1v1zm-.39 9H1.39l-.25 1h13.72z"/>
                         </svg>

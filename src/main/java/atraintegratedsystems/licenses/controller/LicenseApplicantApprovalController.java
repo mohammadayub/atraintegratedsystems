@@ -1,6 +1,7 @@
 
 
 package atraintegratedsystems.licenses.controller;
+import atraintegratedsystems.licenses.dto.LicenseApplicantApprovalDTO;
 import atraintegratedsystems.licenses.dto.LicenseApplicantDTO;
 import atraintegratedsystems.licenses.dto.LicenseApprovalDTO;
 import atraintegratedsystems.licenses.model.LicenseApplicant;
@@ -36,7 +37,7 @@ public class LicenseApplicantApprovalController {
      */
     @GetMapping("/license_applicants_approval_list")
     public String showApplicationProfile(Model model) {
-        List<LicenseApplicant> profiles = licenseApprovalService.getAllpaid();
+        List<LicenseApplicantApprovalDTO> profiles = licenseApplicantService.getAllLicenseApplicantApprovalDetails();
         model.addAttribute("profiles", profiles);
         model.addAttribute("licenseTypes", licenseTypeService.findAll());
         return "licenses/license/approval/license_applicants_approval_list";

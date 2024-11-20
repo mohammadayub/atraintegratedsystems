@@ -23,6 +23,8 @@ public class LicenseApproval {
     private LocalDate approvalDate;
     @Column(name="approval_status")
     private String approvalStatus;
+    @Column(name="remarks")
+    private String remarks;
     @ManyToOne
     @JoinColumn(name = "license_type_id")
     private LicenseType licenseType; // Link to LicenseType entity
@@ -47,9 +49,6 @@ public class LicenseApproval {
     @OneToOne
     @JoinColumn(name = "license_applicant_id", nullable = false)
     private LicenseApplicant licenseApplicant;
-
-    @Column(name = "approved_by", nullable = true)
-    private String approvedBy;
 
     public JalaliDate getAppDate() {
         if (approvalDate == null) {

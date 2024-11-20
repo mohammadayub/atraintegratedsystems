@@ -12,14 +12,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
-
-
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
+
 
 @Service
 @Slf4j
@@ -37,6 +34,7 @@ public class LicenseApprovalService {
     public List<LicenseApplicant> getAllpaid(){
         return licenseApplicantRepository.findAllApplicantsWithPaid();
     }
+
 
     public Optional<LicenseApproval> getByApplicantId(Long applicantId) {
         return licenseApprovalRepository.findByLicenseApplicantId(applicantId);
@@ -77,6 +75,10 @@ public class LicenseApprovalService {
         profile.setApprovalStatus(dto.getApprovalStatus());
         log.info("Approval Status: {}", dto.getApprovalStatus());
 
+        profile.setRemarks(dto.getRemarks());
+        log.info("Approval Status: {}", dto.getRemarks());
+
+
         if (dto.getLicenseTypeId() != null) {
             LicenseType licenseType = licenseTypeRepository.findById(dto.getLicenseTypeId())
                     .orElseThrow(() -> new IllegalArgumentException("Invalid License Type ID: " + dto.getLicenseTypeId()));
@@ -116,11 +118,15 @@ public class LicenseApprovalService {
         return savedProfile;
     }
 
-
     private String generateApprovalId() {
-        return "APP-" + UUID.randomUUID().toString();
+        Long maxId = licenseApprovalRepository.findMaxId();
+        String prefix = "ATRA-APP-";
+        if (maxId == null) {
+            return prefix + "0001";
+        }
+        Long nextId = maxId + 1;
+        return prefix + String.format("%04d", nextId);
     }
-
 
 
 }

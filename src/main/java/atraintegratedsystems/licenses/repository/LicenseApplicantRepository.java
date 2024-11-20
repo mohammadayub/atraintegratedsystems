@@ -1,5 +1,6 @@
 package atraintegratedsystems.licenses.repository;
 
+import atraintegratedsystems.licenses.dto.LicenseApplicantApprovalDTO;
 import atraintegratedsystems.licenses.model.LicenseApplicant;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -24,6 +25,17 @@ public interface LicenseApplicantRepository extends JpaRepository<LicenseApplica
 
     @Query(value = "SELECT * FROM license_applicants WHERE payment_status='Paid'", nativeQuery = true)
     List<LicenseApplicant> findAllApplicantsWithPaid();
+
+
+    @Query("SELECT new atraintegratedsystems.licenses.dto.LicenseApplicantApprovalDTO(" +
+            "applicants.id, applicants.reqId, applicants.reqDate, applicants.licenseType.name, approvals.currencyType, " +
+            "applicants.financeType, applicants.companyLicenseName, applicants.licenseNo, applicants.applicationFees, " +
+            "applicants.validity, applicants.entryVoucherDate, applicants.bankVoucher, applicants.paymentStatus, approvals.approvalStatus) " +
+            "FROM LicenseApplicant applicants " +
+            "LEFT JOIN LicenseApproval approvals ON applicants.id = approvals.licenseApplicant.id " +
+            "WHERE approvals.approvalStatus NOT IN ('Approve', 'Reject') OR approvals.approvalStatus IS NULL")
+    List<LicenseApplicantApprovalDTO> findAllLicenseApplicantApprovalDetails();
+
 
 
 

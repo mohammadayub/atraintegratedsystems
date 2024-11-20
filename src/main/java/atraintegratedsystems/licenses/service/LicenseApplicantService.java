@@ -1,5 +1,6 @@
 package atraintegratedsystems.licenses.service;
 
+import atraintegratedsystems.licenses.dto.LicenseApplicantApprovalDTO;
 import atraintegratedsystems.licenses.dto.LicenseApplicantDTO;
 import atraintegratedsystems.licenses.model.LicenseApplicant;
 import atraintegratedsystems.licenses.model.LicenseType;
@@ -38,6 +39,11 @@ public class LicenseApplicantService {
     public Optional<LicenseApplicant> getApplicantById(Long id) {
         return repository.findById(id);
     }
+
+    public List<LicenseApplicantApprovalDTO> getAllLicenseApplicantApprovalDetails() {
+        return repository.findAllLicenseApplicantApprovalDetails();
+    }
+
 
     @Transactional
     public LicenseApplicant saveProfile(LicenseApplicantDTO dto) throws Exception {
