@@ -5,35 +5,18 @@
     <div th:replace="styles :: persian-datepicker-styles"></div>
     <div th:replace="styles :: select2-styles"></div>
     <title>ATRA Financial Integrated System</title>
-    <style>
-        .label-rtl {
-            color: black !important;
-            font-weight: bolder !important;
-            width: 100% !important;
-            direction: rtl !important;
-            text-align: right; /* Ensures text alignment in RTL */
-        }
-        .label-ltr {
-            color: black !important;
-            font-weight: bolder !important;
-            width: 100% !important;
-            direction: ltr !important;
-            text-align: left;
-        }
-
-    </style>
 </head>
 <body  onload="setApplicationFees()">
 <nav th:replace="~{layout :: page_navbar}"></nav>
 <div class="container-fluid">
     <!-- Form for License Approval -->
     <form th:action="@{/licenses/license/approval/license_applicants_approval}"
-          th:object="${licenseApprovalDTO}" method="post" style="margin-top:5%;padding-left:5%;padding-right:5%;">
+          th:object="${licenseApprovalDTO}" method="post">
         <div class="row">
             <!-- Hidden Fields -->
             <input type="hidden" th:field="*{id}">
             <div class="col-md-3 form-group">
-                <label for="licenseApplicantId" th:text="#{approval_applicant_license_name}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">Applicant License Name</label>
+                <label for="licenseApplicantId" th:text="#{approval_applicant_license_name}">Applicant License Name</label>
                 <select id="licenseApplicantId" name="licenseApplicantId" th:field="*{licenseApplicantId}" class="form-control">
                     <option th:each="applicant : ${licenseApplicants}" th:value="${applicant.id}" th:text="${applicant.companyLicenseName}"></option>
                 </select>
@@ -41,7 +24,7 @@
 
             <!-- License Type -->
             <div class="col-md-3 form-group">
-                <label for="licenseTypeId" th:text="#{approval_license_approval_type}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">License Type:</label>
+                <label for="licenseTypeId">License Type:</label>
                 <select id="licenseTypeId" name="licenseTypeId" th:field="*{licenseTypeId}" class="form-control">
                     <option th:each="type : ${licenseTypes}" th:value="${type.id}" th:text="${type.name}"></option>
                 </select>
@@ -49,7 +32,8 @@
 
             <!-- Approval Date -->
             <div class="col-md-3 form-group">
-                <label for="approvalDate" th:text="#{approval_license_date}"
+                <label for="approvalDate"
+                       th:text="#{approval_date}"
                        th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
                 <input type="text" id="approvalDate" th:field="*{approvalDate}" class="form-control hijrishamsi" required>
             </div>
@@ -57,11 +41,10 @@
             <!-- Approval Status -->
             <div class="col-md-3 form-group">
                 <label for="approvalStatus"
-                       th:text="#{license_approval_status}"
+                       th:text="#{approval_status}"
                        th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
                 <input type="text" id="approvalStatus" th:field="*{approvalStatus}" class="form-control" required>
             </div>
-
 
         </div>
 
@@ -69,7 +52,7 @@
             <!-- License Fees -->
             <div class="col-md-3 form-group">
                 <label for="licenseFees"
-                       th:text="#{license_approval_license_fees}"
+                       th:text="#{license_fees}"
                        th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
                 <input type="text" id="licenseFees" th:field="*{licenseFees}" class="form-control" required>
             </div>
@@ -77,7 +60,7 @@
             <!-- License Payment Office -->
             <div class="col-md-3 form-group">
                 <label for="licensePaymentOffice"
-                       th:text="#{license_approval_payment_office}"
+                       th:text="#{license_payment_office}"
                        th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
                 <input type="text" id="licensePaymentOffice" th:field="*{licensePaymentOffice}" class="form-control" required>
             </div>
@@ -85,7 +68,7 @@
             <!-- Administrative Yearly Fees -->
             <div class="col-md-3 form-group">
                 <label for="adminFees"
-                       th:text="#{license_approval_admin_yearly_fees}"
+                       th:text="#{admin_yearly_fees}"
                        th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
                 <input type="text" id="adminFees" th:field="*{administrativeYearlyFees}" class="form-control" required>
             </div>
@@ -93,7 +76,7 @@
             <!-- Administrative Yearly Fees Payment Office -->
             <div class="col-md-3 form-group">
                 <label for="adminFeesPaymentOffice"
-                       th:text="#{license_approval_admin_fees_payment_office}"
+                       th:text="#{admin_fees_payment_office}"
                        th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
                 <input type="text" id="adminFeesPaymentOffice" th:field="*{adminstrivateYearlyFeesPaymentOffice}" class="form-control" required>
             </div>
@@ -103,7 +86,7 @@
             <!-- Guarantee Fees -->
             <div class="col-md-3 form-group">
                 <label for="guaranteeFees"
-                       th:text="#{license_approval_guarantee_fees}"
+                       th:text="#{guarantee_fees}"
                        th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
                 <input type="text" id="guaranteeFees" th:field="*{guaranteeFees}" class="form-control" required>
             </div>
@@ -111,7 +94,7 @@
             <!-- Guarantee Fees Payment Office -->
             <div class="col-md-3 form-group">
                 <label for="guaranteeFeesPaymentOffice"
-                       th:text="#{license_approval_guarantee_fees_payment_office}"
+                       th:text="#{guarantee_fees_payment_office}"
                        th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
                 <input type="text" id="guaranteeFeesPaymentOffice" th:field="*{guaranteeFeesPaymentOffice}" class="form-control" required>
             </div>
@@ -119,7 +102,7 @@
             <!-- Database Yearly Maintenance Fees -->
             <div class="col-md-3 form-group">
                 <label for="databaseMaintenanceFees"
-                       th:text="#{license_approval_database_yearly_maintenance_fees}"
+                       th:text="#{database_yearly_maintenance_fees}"
                        th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
                 <input type="text" id="databaseMaintenanceFees" th:field="*{databaseYearlyMaintainanceFees}" class="form-control" required>
             </div>
@@ -127,7 +110,7 @@
             <!-- Database Maintenance Fees Payment Office -->
             <div class="col-md-3 form-group">
                 <label for="databaseMaintenanceFeesPaymentOffice"
-                       th:text="#{license_approval_database_fees_payment_office}"
+                       th:text="#{database_fees_payment_office}"
                        th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
                 <input type="text" id="databaseMaintenanceFeesPaymentOffice" th:field="*{databaseYearlyMaintainanceFeesPaymentOffice}" class="form-control" required>
             </div>
@@ -136,7 +119,7 @@
             <!-- Currency Type -->
             <div class="col-md-3 form-group">
                 <label for="currencyType"
-                       th:text="#{license_approval_currency_type}"
+                       th:text="#{currency_type}"
                        th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
                 <input type="text" id="currencyType" th:field="*{currencyType}" class="form-control" required>
             </div>
@@ -145,18 +128,16 @@
 
         <!-- Submit Button -->
         <div class="col-md-4 btn-group d-flex justify-content-center">
-            <button type="submit" class="btn btn-primary btn-sm" style="width: 100px;margin-left:-13px;">
+            <button type="submit" class="btn btn-primary btn-sm" style="width: 100px;">
                 <span class="fas fa-check"></span>
-                <span th:text="#{license_approval_confirm}"></span>
+                <span th:text="#{confirm_approval}"></span>
             </button>
         </div>
-        <br>
-        <a th:href="@{/licenses/license/approval/license_applicants_approval_list}"
-           th:text="#{license_approval_back_to_list}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></a>
     </form>
+
     <!-- Back Link -->
-
-
+    <a th:href="@{/licenses/license/approval/license_applicants_approval_list}"
+       th:text="#{back_to_list}"></a>
 </div>
 
 <div th:replace="scripts :: common-scripts"></div>
