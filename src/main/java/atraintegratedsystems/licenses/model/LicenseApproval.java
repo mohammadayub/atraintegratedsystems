@@ -46,7 +46,7 @@ public class LicenseApproval {
     @Column(name="database_yearly_maintainance_fees_payment_office")
     private String databaseYearlyMaintainanceFeesPaymentOffice;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "license_applicant_id", nullable = false)
     private LicenseApplicant licenseApplicant;
 
