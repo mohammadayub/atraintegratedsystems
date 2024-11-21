@@ -159,6 +159,12 @@
           <input type="website" id="website" th:field="*{website}" class="form-control" required>
         </div>
       </div>
+      <div class="row">
+        <div class="col-md-3 form-group">
+          <label th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">Other Licenses</label>
+          <textarea id="other_licenses" th:field="*{otherLicenseTaken}" class="form-control" required></textarea>
+        </div>
+      </div>
 
       <!-- Submit/Reset Buttons -->
       <div class="row">
