@@ -28,26 +28,27 @@
 <div class="container-fluid">
     <!-- Form for License Approval -->
     <form th:action="@{/licenses/license/registration/license_applicants_send_board}"
-          th:object="${licenseApplicant}" method="post">
+          th:object="${licenseApplicant}" method="post" style="margin-top:5%;margin-left:5%;margin-right:5%;">
         <div class="row">
             <!-- Hidden Fields -->
             <input type="hidden" th:field="*{id}">
             <div class="col-md-3 form-group">
-                <label for="reqId"
+                <label for="reqId" th:text="#{approval_request_id}"
                        th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
                 <input type="text" id="reqId" th:field="*{reqId}" class="form-control" required readonly>
             </div>
 
             <div class="col-md-3 form-group">
-                <label for="referToBoardDate" th:text="#{license_application_expiry_date}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
+                <label for="referToBoardDate" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" th:text="#{refer_to_board_date}">Refer To BoardDate</label>
                 <input type="text" id="referToBoardDate" th:field="*{referToBoardDate}" class="form-control hijrishamsi" required>
             </div>
-
-            <label for="isSend">Is Send:</label>
-            <select th:field="*{isSend}" id="isSend">
+            <div class="col-md-3 form-group">
+            <label for="isSend" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" th:text="#{is_send}"></label>
+            <select th:field="*{isSend}" id="isSend" class="form-control">
                 <option value="Yes" th:text="#{Yes}">Yes</option>
                 <option value="No" th:text="#{No}">No</option>
             </select>
+            </div>
 
 
         </div>
@@ -59,11 +60,11 @@
         <!-- Submit Button -->
         <div class="row btn-center">
             <!-- Buttons -->
-            <button type="submit" class="btn btn-primary btn-sm" style="width: 100px; margin: 10px;">
+            <button type="submit" class="btn btn-primary btn-sm" style="margin: 10px;">
                 <span class="fas fa-check"></span>
                 <span th:text="#{license_approval_confirm}"></span>
             </button>
-            <a th:href="@{/licenses/license/approval/license_applicants_approval_list}" class="btn btn-secondary btn-sm" style="width: 100px; margin: 10px;">
+            <a th:href="@{/licenses/license/approval/license_applicants_approval_list}" class="btn btn-secondary btn-sm" style="margin: 10px;">
                 <span class="fas fa-arrow-left"></span>
                 <span th:text="#{license_approval_back_to_list}"></span>
             </a>
