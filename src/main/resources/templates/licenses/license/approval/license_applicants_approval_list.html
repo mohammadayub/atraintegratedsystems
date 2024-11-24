@@ -86,7 +86,7 @@
             <tr th:each="item : ${profiles}">
                 <td th:text="${item.id}"></td>
                 <td th:text="${item.reqId}"></td>
-                <td th:text="${item.reqDate}"></td>
+                <td th:text="${item.getRegDate()}"></td>
                 <td th:text="${item.licenseTypeName}"></td>
                 <td th:text="${item.currencyType}"></td>
                 <td th:text="${item.financeType}"></td>
@@ -94,7 +94,7 @@
                 <td th:text="${item.licenseNo}"></td>
                 <td th:text="${item.applicationFees}"></td>
                 <td th:text="${item.validity}"></td>
-                <td th:text="${item.entryVoucherDate}"></td>
+                <td th:text="${item.getEntVocherDate()}"></td>
                 <td th:text="${item.bankVoucher}"></td>
                 <td th:text="${item.paymentStatus}"></td>
                 <td th:text="${item.approvalStatus}"></td>

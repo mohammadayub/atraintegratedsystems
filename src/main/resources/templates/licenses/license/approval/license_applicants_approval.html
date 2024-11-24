@@ -141,10 +141,16 @@
             </div>
 
             <div class="col-md-3 form-group">
-                <label for="remarks"
-                       th:text="#{license_approval_remarks}"
+                <label for="boardDecisionNumber" th:text="#{boardDecisionNumber}"
                        th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
-                <textarea type="text" id="remarks" th:field="*{remarks}" class="form-control" required />
+                <input type="text" id="boardDecisionNumber" th:field="*{boardDecisionNumber}" class="form-control" required>
+            </div>
+
+            <div class="col-md-3 form-group">
+                <label for="boardDecisions"
+                       th:text="#{license_approval_boardDecisions}"
+                       th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
+                <textarea type="text" id="boardDecisions" th:field="*{boardDecisions}" class="form-control" required />
             </div>
         </div>
 

@@ -9,10 +9,13 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import javax.validation.Valid;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
@@ -176,4 +179,75 @@ public class LicenseApplicantController {
         }
         return "application/octet-stream"; // Default to binary stream
     }
+
+    //Refer to Board for Approval
+
+    @GetMapping("/licenses/license/registration/license_applicants_send_board/{id}")
+    public String referToBoard(@PathVariable Long id, Model model) {
+        Optional<LicenseApplicant> profileOpt = licenseService.getApplicantById(id);
+
+        if (profileOpt.isPresent()) {
+            LicenseApplicant profile = profileOpt.get();
+            LicenseApplicantDTO licenseApplicantDTO = new LicenseApplicantDTO();
+            licenseApplicantDTO.setId(profile.getId());
+            licenseApplicantDTO.setReqId(profile.getReqId());
+
+            // Add the DTO to the model for the form
+            model.addAttribute("licenseApplicant", licenseApplicantDTO);
+        } else {
+            // Handle case where applicant is not found
+            model.addAttribute("error", "Applicant not found");
+            return "error-page";
+        }
+
+        return "licenses/license/registration/license_applicants_send_board";
+    }
+
+
+    @PostMapping("/licenses/license/registration/license_applicants_send_board")
+    public String updateProfile(
+            @ModelAttribute("licenseApplicant") @Valid LicenseApplicantDTO dto,
+            BindingResult bindingResult,
+            Model model) {
+
+        if (bindingResult.hasErrors()) {
+            return "licenses/license/registration/license_applicants_send_board"; // View for re-editing
+        }
+
+        try {
+            LicenseApplicant updatedProfile = licenseService.updateProfile(dto.getId(), dto);
+
+            // Add success message
+            model.addAttribute("message", "Profile updated successfully.");
+
+            // Redirect to a success page
+            return "redirect:/licenses/license/registration/license_applicants_profile";
+
+        } catch (IllegalArgumentException ex) {
+            // Handle errors
+            model.addAttribute("error", ex.getMessage());
+            return "licenses/license/registration/license_applicants_send_board";
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

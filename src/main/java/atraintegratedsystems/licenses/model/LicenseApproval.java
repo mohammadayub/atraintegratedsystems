@@ -23,8 +23,9 @@ public class LicenseApproval {
     private LocalDate approvalDate;
     @Column(name="approval_status")
     private String approvalStatus;
-    @Column(name="remarks")
-    private String remarks;
+    @Column(name="board_decisions")
+    private String boardDecisions;
+    private String boardDecisionNumber;
     @ManyToOne
     @JoinColumn(name = "license_type_id")
     private LicenseType licenseType; // Link to LicenseType entity
@@ -45,11 +46,9 @@ public class LicenseApproval {
     private BigDecimal databaseYearlyMaintainanceFees;
     @Column(name="database_yearly_maintainance_fees_payment_office")
     private String databaseYearlyMaintainanceFeesPaymentOffice;
-
     @ManyToOne
     @JoinColumn(name = "license_applicant_id", nullable = false)
     private LicenseApplicant licenseApplicant;
-
     public JalaliDate getAppDate() {
         if (approvalDate == null) {
             return null; // Return null if issueLicenseDate is null

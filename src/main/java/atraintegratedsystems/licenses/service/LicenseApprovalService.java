@@ -75,8 +75,10 @@ public class LicenseApprovalService {
         profile.setApprovalStatus(dto.getApprovalStatus());
         log.info("Approval Status: {}", dto.getApprovalStatus());
 
-        profile.setRemarks(dto.getRemarks());
-        log.info("Approval Status: {}", dto.getRemarks());
+        profile.setBoardDecisionNumber(dto.getBoardDecisionNumber());
+        log.info("Board Decision Number: {}",dto.getBoardDecisionNumber());
+        profile.setBoardDecisions(dto.getBoardDecisions());
+        log.info("Approval Status: {}", dto.getBoardDecisions());
 
 
         if (dto.getLicenseTypeId() != null) {

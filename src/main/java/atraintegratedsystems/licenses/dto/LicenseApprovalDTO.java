@@ -11,7 +11,8 @@ public class LicenseApprovalDTO {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate approvalDate;
     private String approvalStatus;
-    private String remarks;
+    private String boardDecisions;
+    private String boardDecisionNumber;
     private Long licenseTypeId; // Reference to LicenseType by ID
     private String currencyType;
     private BigDecimal licenseFees;

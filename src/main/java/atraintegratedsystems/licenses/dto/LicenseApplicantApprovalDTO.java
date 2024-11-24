@@ -1,5 +1,7 @@
 package atraintegratedsystems.licenses.dto;
 
+import atraintegratedsystems.utils.DateConverter;
+import atraintegratedsystems.utils.JalaliDate;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 import java.math.BigDecimal;
@@ -44,5 +46,27 @@ public class LicenseApplicantApprovalDTO {
         this.paymentStatus = paymentStatus;
         this.approvalStatus = approvalStatus;
     }
+
+    public JalaliDate getRegDate() {
+        if (reqDate == null) {
+            return null; // Return null if issueLicenseDate is null
+        }
+        DateConverter dateConverter= new DateConverter();
+        JalaliDate jalaliRequestDate=dateConverter.gregorianToJalali(reqDate.getYear(),reqDate.getMonthValue(),reqDate.getDayOfMonth());
+        return jalaliRequestDate;
+    }
+
+    public JalaliDate getEntVocherDate(){
+        if (entryVoucherDate == null) {
+            return null; // Return null if issueLicenseDate is null
+        }
+        DateConverter dateConverter= new DateConverter();
+        JalaliDate jalaliEntryVoucherDate= dateConverter.gregorianToJalali(entryVoucherDate.getYear(),entryVoucherDate.getMonthValue(),entryVoucherDate.getDayOfMonth()) ;
+        return jalaliEntryVoucherDate;
+    }
+
+
+
+
 }
 

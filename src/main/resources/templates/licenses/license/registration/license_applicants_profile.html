@@ -92,17 +92,20 @@
                 <th th:text="#{license_application_email}"></th>
                 <th th:text="#{license_application_website}"></th>
                 <th th:text="#{license_payment_status}"></th>
+                <th>Refer To Board Date</th>
+                <th>Refer Status</th>
+                <th>Refer to Board</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="profile : ${profiles}">
-                <td th:text="${profile.reqId}">reqId</td>
-                <td th:text="${profile.getRegDate()}">reqDate</td>
-                <td th:text="${profile.licenseType.name}">name</td>
-                <td th:text="${profile.currencyType}">currencyType</td>
-                <td th:text="${profile.financeType}">financeType</td>
-                <td th:text="${profile.companyLicenseName}">companyLicenseName</td>
-                <td th:text="${profile.licenseNo}">licenseNo</td>
+                <td th:text="${profile.reqId}"></td>
+                <td th:text="${profile.getRegDate()}"></td>
+                <td th:text="${profile.licenseType.name}"></td>
+                <td th:text="${profile.currencyType}"></td>
+                <td th:text="${profile.financeType}"></td>
+                <td th:text="${profile.companyLicenseName}"></td>
+                <td th:text="${profile.licenseNo}"></td>
                 <td>
                     <a th:href="@{/licenses/license/registration/licenseDownload/{id}(id=${profile.id})}" class="btn btn-primary">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-download icon-small" viewBox="0 0 16 16">
@@ -110,7 +113,7 @@
                         </svg>
                     </a>
                 </td>
-                <td th:text="${profile.tinNo}">tinNo</td>
+                <td th:text="${profile.tinNo}"></td>
                 <td>
                     <a th:href="@{/licenses/license/registration/tinDownload/{id}(id=${profile.id})}" class="btn btn-primary">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-download icon-small" viewBox="0 0 16 16">
@@ -125,21 +128,35 @@
                         </svg>
                     </a>
                 </td>
-                <td th:text="${profile.getEstablishmentYear()}">yearOfEstablishment</td>
-                <td th:text="${profile.expiryDate}">expiryDate</td>
-                <td th:text="${profile.applicationFees}">applicationFees</td>
-                <td th:text="${profile.validity}">validity</td>
-                <td th:text="${profile.plannedActivitiesAndServices}">plannedActivitiesAndServices</td>
-                <td th:text="${profile.totalNationalEmployees}">totalNationalEmployees</td>
-                <td th:text="${profile.totalInternationalEmployees}">totalInternationalEmployees</td>
-                <td th:text="${profile.otherLicenseTaken}">otherLicenseTaken</td>
-                <td th:text="${profile.companyAddress}">companyAddress</td>
-                <td th:text="${profile.contactNo}">contactNo</td>
-                <td th:text="${profile.email}">email</td>
-                <td th:text="${profile.website}">WebSite</td>
-                <td th:text="${profile.paymentStatus}">paymentStatus</td>
+                <td th:text="${profile.getEstablishmentYear()}"></td>
+                <td th:text="${profile.expiryDate}"></td>
+                <td th:text="${profile.applicationFees}"></td>
+                <td th:text="${profile.validity}"></td>
+                <td th:text="${profile.plannedActivitiesAndServices}"></td>
+                <td th:text="${profile.totalNationalEmployees}"></td>
+                <td th:text="${profile.totalInternationalEmployees}"></td>
+                <td th:text="${profile.otherLicenseTaken}"></td>
+                <td th:text="${profile.companyAddress}"></td>
+                <td th:text="${profile.contactNo}"></td>
+                <td th:text="${profile.email}"></td>
+                <td th:text="${profile.website}"></td>
+                <td th:text="${profile.paymentStatus}"></td>
+                <td th:text="${profile.getRefToBoardDate()}"></td>
+                <td th:text="${profile.isSend != null ? profile.isSend : 'No'}"></td> <!-- Handle null as 'No' -->
+                <td class="hide-print">
+                    <a th:href="@{/licenses/license/registration/license_applicants_send_board/{id}(id=${profile.id})}"
+                       class="btn btn-warning"
+                       th:classappend="${profile.isSend != null && profile.isSend == 'Yes' ? ' disabled' : ''}"
+                       th:attr="aria-disabled=${profile.isSend != null && profile.isSend == 'Yes'}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bank" viewBox="0 0 16 16">
+                            <path d="m8 0 6.61 3h.89a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5H15v7a.5.5 0 0 1 .485.38l.5 2a.498.498 0 0 1-.485.62H.5a.498.498 0 0 1-.485-.62l.5-2A.5.5 0 0 1 1 13V6H.5a.5.5 0 0 1-.5-.5v-2A.5.5 0 0 1 .5 3h.89zM3.777 3h8.447L8 1zM2 6v7h1V6zm2 0v7h2.5V6zm3.5 0v7h1V6zm2 0v7H12V6zM13 6v7h1V6zm2-1V4H1v1zm-.39 9H1.39l-.25 1h13.72z"/>
+                        </svg>
+                    </a>
+                </td>
             </tr>
             </tbody>
+
+
         </table>
     </div>
 </div>
@@ -149,27 +166,6 @@
 <div th:replace="scripts :: persian-datepicker-scripts"></div>
 <div th:replace="scripts :: data-tables-scripts"></div>
 
-<!--<script>-->
-<!--    $(document).ready(function () {-->
-<!--        // Initialize DataTable with individual column search-->
-<!--        let table = $('#profileTable').DataTable({-->
-<!--            initComplete: function () {-->
-<!--                this.api().columns().every(function () {-->
-<!--                    var column = this;-->
-<!--                    var input = $('<input type="text" placeholder="Search" style="width: 100%;"/>')-->
-<!--                        .appendTo($(column.header()).empty())-->
-<!--                        .on('keyup change clear', function () {-->
-<!--                            if (column.search() !== this.value) {-->
-<!--                                column-->
-<!--                                    .search(this.value)-->
-<!--                                    .draw();-->
-<!--                            }-->
-<!--                        });-->
-<!--                });-->
-<!--            }-->
-<!--        });-->
-<!--    });-->
-<!--</script>-->
 
 <script>
     $(document).ready(function () {

@@ -54,7 +54,6 @@ public class LicenseApplicantApprovalController {
         model.addAttribute("licenseApplicants", licenseApplicantService.getAllApplicants());
         return "licenses/license/approval/license_applicants_approval";
     }
-
     /**
      * Handles saving a license approval.
      */
@@ -70,11 +69,6 @@ public class LicenseApplicantApprovalController {
         }
         return "redirect:/licenses/license/approval/license_applicants_approval_list";
     }
-
-
-
-
-
     /**
      * Displays the update form for an applicant's approval.
      */

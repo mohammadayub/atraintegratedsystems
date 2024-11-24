@@ -1,7 +1,4 @@
 package atraintegratedsystems.licenses.dto;
-
-import atraintegratedsystems.utils.DateConverter;
-import atraintegratedsystems.utils.JalaliDate;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
@@ -45,7 +42,8 @@ public class LicenseApplicantDTO {
     private LocalDate entryVoucherDate;
     private String bankVoucher;
     private String paymentStatus;
-
-
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate referToBoardDate;
+    private String isSend;
 
 }

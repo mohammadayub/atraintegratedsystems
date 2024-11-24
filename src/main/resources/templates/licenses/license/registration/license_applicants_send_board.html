@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head th:replace="~{layout :: page_head}">
+    <div th:replace="styles :: data-tables-styles"></div>
+    <div th:replace="styles :: persian-datepicker-styles"></div>
+    <div th:replace="styles :: select2-styles"></div>
+    <title>ATRA Financial Integrated System</title>
+    <style>
+        .label-rtl {
+            color: black !important;
+            font-weight: bolder !important;
+            width: 100% !important;
+            direction: rtl !important;
+            text-align: right; /* Ensures text alignment in RTL */
+        }
+        .label-ltr {
+            color: black !important;
+            font-weight: bolder !important;
+            width: 100% !important;
+            direction: ltr !important;
+            text-align: left;
+        }
+
+    </style>
+</head>
+<body  onload="setApplicationFees()">
+<nav th:replace="~{layout :: page_navbar}"></nav>
+<div class="container-fluid">
+    <!-- Form for License Approval -->
+    <form th:action="@{/licenses/license/registration/license_applicants_send_board}"
+          th:object="${licenseApplicant}" method="post">
+        <div class="row">
+            <!-- Hidden Fields -->
+            <input type="hidden" th:field="*{id}">
+            <div class="col-md-3 form-group">
+                <label for="reqId"
+                       th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
+                <input type="text" id="reqId" th:field="*{reqId}" class="form-control" required readonly>
+            </div>
+
+            <div class="col-md-3 form-group">
+                <label for="referToBoardDate" th:text="#{license_application_expiry_date}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
+                <input type="text" id="referToBoardDate" th:field="*{referToBoardDate}" class="form-control hijrishamsi" required>
+            </div>
+
+            <label for="isSend">Is Send:</label>
+            <select th:field="*{isSend}" id="isSend">
+                <option value="Yes" th:text="#{Yes}">Yes</option>
+                <option value="No" th:text="#{No}">No</option>
+            </select>
+
+
+        </div>
+
+
+
+
+
+        <!-- Submit Button -->
+        <div class="row btn-center">
+            <!-- Buttons -->
+            <button type="submit" class="btn btn-primary btn-sm" style="width: 100px; margin: 10px;">
+                <span class="fas fa-check"></span>
+                <span th:text="#{license_approval_confirm}"></span>
+            </button>
+            <a th:href="@{/licenses/license/approval/license_applicants_approval_list}" class="btn btn-secondary btn-sm" style="width: 100px; margin: 10px;">
+                <span class="fas fa-arrow-left"></span>
+                <span th:text="#{license_approval_back_to_list}"></span>
+            </a>
+        </div>
+    <!-- Back Link -->
+
+    </form>
+</div>
+
+<div th:replace="scripts :: common-scripts"></div>
+<div th:replace="scripts :: persian-datepicker-scripts"></div>
+<div th:replace="scripts :: data-tables-scripts"></div>
+<script>
+    $('.hijrishamsi').persianDatepicker({
+      format: 'YYYY-MM-DD',
+      autoClose: true,
+      calendar: {
+          persian: {
+              locale: 'en'
+          }
+      }
+  });
+function setApplicationFees() {
+    const licenseType = document.getElementById("licenseTypeId").value;
+    const guaranteeFees = document.getElementById("guaranteeFees");
+    const guaranteeFeesPaymentOffice = document.getElementById("guaranteeFeesPaymentOffice");
+    const validity = document.getElementById("validity");
+    const currencyType = document.getElementById("currencyType");
+    const adminFees = document.getElementById("adminFees");
+    const licenseFees = document.getElementById("licenseFees");
+    const databaseMaintenanceFees = document.getElementById("databaseMaintenanceFees");
+
+    // Ensure these elements exist in your HTML
+    const licensePaymentOffice = document.getElementById("licensePaymentOffice");
+    const adminFeesPaymentOffice = document.getElementById("adminFeesPaymentOffice");
+    const licenseApprovalDatabaseFeesPaymentOffice = document.getElementById("licenseApprovalDatabaseFeesPaymentOffice");
+    const databaseMaintenanceFeesPaymentOffice = document.getElementById("databaseMaintenanceFeesPaymentOffice");
+
+
+    // Currency Section
+    if (licenseType === "6" || licenseType === "7" || licenseType === "8") {
+        currencyType.value = "USD";
+    } else {
+        currencyType.value = "AFN";
+    }
+    // End Of Currency Section
+
+    if (licenseType === "1") {
+        licenseFees.value = 1950000000;
+        guaranteeFees.value = 1000000;
+        guaranteeFeesPaymentOffice.value = "ATRA";
+        licensePaymentOffice.value = "MCIT";
+        adminFees.value = 37000000;
+        adminFeesPaymentOffice.value = "ATRA";
+        databaseMaintenanceFees.value = 350000;
+        databaseMaintenanceFeesPaymentOffice.value = "ATRA"
+        licenseApprovalDatabaseFeesPaymentOffice.value = "ATRA";
+
+    } else {
+        // Clear fields if no valid license type
+        licenseFees.value = "";
+        guaranteeFees.value = "";
+        guaranteeFeesPaymentOffice.value = "";
+        adminFees.value = "";
+        databaseMaintenanceFees.value = "";
+        guaranteeFees.value = "";
+        licensePaymentOffice.value = "";
+        adminFeesPaymentOffice.value = "";
+        databaseMaintenanceFeesPaymentOffice.value = "";
+        licenseApprovalDatabaseFeesPaymentOffice.value = "";
+    }
+}
+
+</script>
+<footer th:replace="~{layout :: page_footer}"></footer>
+</body>
+</html>

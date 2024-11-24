@@ -140,4 +140,35 @@ public class LicenseApplicantService {
     }
 
 
+    @Transactional
+    public LicenseApplicant updateProfile(Long licenseId, LicenseApplicantDTO dto) {
+        LicenseApplicant profile = repository.findById(licenseId)
+                .orElseThrow(() -> new IllegalArgumentException("Profile not found with ID: " + licenseId));
+        DateConverter dateConverter = new DateConverter();
+        // Convert Jalali date to Gregorian
+        LocalDate referToBoardDate = dateConverter.jalaliToGregorian(dto.getReferToBoardDate().getYear(), dto.getReferToBoardDate().getMonthValue(), dto.getReferToBoardDate().getDayOfMonth());
+        profile.setReferToBoardDate(referToBoardDate);
+        profile.setIsSend(dto.getIsSend());
+        return repository.save(profile);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
