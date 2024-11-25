@@ -31,4 +31,5 @@ public class LicenseTypeService {
         repository.deleteById(id);
     }
 
+
 }

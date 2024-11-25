@@ -14,7 +14,6 @@ public class LicenseApplicantApprovalDTO {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate reqDate;
     private String licenseTypeName; // Foreign key reference
-    private String currencyType;
     private String financeType;
     private String companyLicenseName;
     private String licenseNo;
@@ -24,16 +23,43 @@ public class LicenseApplicantApprovalDTO {
     private LocalDate entryVoucherDate;
     private String bankVoucher;
     private String paymentStatus;
+
+
+    // LicenseApproval Model
+    private Long appId;
+    private String approvalId;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate approvalDate;
     private String approvalStatus;
+    private String boardDecisions;
+    private String boardDecisionNumber;
+    private Long licenseTypeId; // Reference to LicenseType by ID
+    private String currencyType;
+    private BigDecimal licenseFees;
+    private String licensePaymentOffice;
+    private BigDecimal administrativeYearlyFees;
+    private String adminstrivateYearlyFeesPaymentOffice;
+    private BigDecimal guaranteeFees;
+    private String guaranteeFeesPaymentOffice;
+    private BigDecimal databaseYearlyMaintainanceFees;
+    private String databaseYearlyMaintainanceFeesPaymentOffice;
+    private Long licenseApplicantId;
+
+
+    public LicenseApplicantApprovalDTO()
+    {
+
+    }
 
     // Constructor matching the query's selected fields
-    public LicenseApplicantApprovalDTO(Long id, String reqId, LocalDate reqDate, String licenseTypeName, String currencyType,
+    public LicenseApplicantApprovalDTO(Long id, String reqId, LocalDate reqDate, Long licenseTypeId, String licenseTypeName, String currencyType,
                                        String financeType, String companyLicenseName, String licenseNo,
                                        BigDecimal applicationFees, int validity, LocalDate entryVoucherDate,
                                        String bankVoucher, String paymentStatus, String approvalStatus) {
         this.id = id;
         this.reqId = reqId;
         this.reqDate = reqDate;
+        this.licenseTypeId=licenseTypeId;
         this.licenseTypeName = licenseTypeName;
         this.currencyType = currencyType;
         this.financeType = financeType;

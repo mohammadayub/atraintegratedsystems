@@ -13,6 +13,7 @@ public class LicenseApplicantDTO {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate reqDate;
     private Long licenseTypeId; // Foreign key reference
+    private String licenseTypeName;
     private String currencyType;
     private String financeType;
     private String companyLicenseName;

@@ -1,11 +1,11 @@
-
-
 package atraintegratedsystems.licenses.controller;
+
 import atraintegratedsystems.licenses.dto.LicenseApplicantApprovalDTO;
 import atraintegratedsystems.licenses.dto.LicenseApplicantDTO;
 import atraintegratedsystems.licenses.dto.LicenseApprovalDTO;
 import atraintegratedsystems.licenses.model.LicenseApplicant;
 import atraintegratedsystems.licenses.model.LicenseApproval;
+import atraintegratedsystems.licenses.model.LicenseType;
 import atraintegratedsystems.licenses.service.LicenseApplicantService;
 import atraintegratedsystems.licenses.service.LicenseApprovalService;
 import atraintegratedsystems.licenses.service.LicenseTypeService;
@@ -16,7 +16,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/licenses/license/approval")
@@ -54,6 +56,7 @@ public class LicenseApplicantApprovalController {
         model.addAttribute("licenseApplicants", licenseApplicantService.getAllApplicants());
         return "licenses/license/approval/license_applicants_approval";
     }
+
     /**
      * Handles saving a license approval.
      */
@@ -69,6 +72,7 @@ public class LicenseApplicantApprovalController {
         }
         return "redirect:/licenses/license/approval/license_applicants_approval_list";
     }
+
     /**
      * Displays the update form for an applicant's approval.
      */
@@ -80,40 +84,24 @@ public class LicenseApplicantApprovalController {
                     .orElseThrow(() -> new IllegalArgumentException("Invalid applicant ID: " + id));
 
             // Map LicenseApplicant to DTO
-            LicenseApplicantDTO licenseApplicantDTO = new LicenseApplicantDTO();
-            licenseApplicantDTO.setId(licenseApplicant.getId());
-            licenseApplicantDTO.setLicenseTypeId(licenseApplicant.getLicenseType().getId());
-            licenseApplicantDTO.setCompanyLicenseName(licenseApplicant.getCompanyLicenseName());
+             LicenseApplicantApprovalDTO licenseApplicantDTO= new LicenseApplicantApprovalDTO();
+             licenseApplicantDTO.setId(licenseApplicant.getId());
+             licenseApplicantDTO.setLicenseTypeId(licenseApplicant.getLicenseType().getId());
+             licenseApplicantDTO.setCompanyLicenseName(licenseApplicant.getCompanyLicenseName());
 
-            // Fetch associated LicenseApproval if it exists
-            LicenseApproval licenseApproval = licenseApprovalService.getByApplicantId(licenseApplicant.getId())
-                    .orElse(null);
+             //License Approval Section
+             LicenseApproval licenseApproval = new LicenseApproval();
+             licenseApplicantDTO.setAppId(licenseApproval.getId());
+             licenseApplicantDTO.setApprovalId(licenseApproval.getApprovalId());
 
-            // Map LicenseApproval to DTO (if found)
-            LicenseApprovalDTO licenseApprovalDTO = new LicenseApprovalDTO();
-            if (licenseApproval != null) {
-                licenseApprovalDTO.setId(licenseApproval.getId());
-                licenseApprovalDTO.setApprovalId(licenseApproval.getApprovalId());
-                licenseApprovalDTO.setApprovalDate(licenseApproval.getApprovalDate());
-                licenseApprovalDTO.setApprovalStatus(licenseApproval.getApprovalStatus());
-                licenseApprovalDTO.setLicenseTypeId(licenseApproval.getLicenseType().getId());
-                licenseApprovalDTO.setCurrencyType(licenseApproval.getCurrencyType());
-                licenseApprovalDTO.setLicenseFees(licenseApproval.getLicenseFees());
-                licenseApprovalDTO.setLicensePaymentOffice(licenseApproval.getLicensePaymentOffice());
-                licenseApprovalDTO.setAdministrativeYearlyFees(licenseApproval.getAdministrativeYearlyFees());
-                licenseApprovalDTO.setAdminstrivateYearlyFeesPaymentOffice(licenseApproval.getAdminstrivateYearlyFeesPaymentOffice());
-                licenseApprovalDTO.setGuaranteeFees(licenseApproval.getGuaranteeFees());
-                licenseApprovalDTO.setGuaranteeFeesPaymentOffice(licenseApproval.getGuaranteeFeesPaymentOffice());
-                licenseApprovalDTO.setDatabaseYearlyMaintainanceFees(licenseApproval.getDatabaseYearlyMaintainanceFees());
-                licenseApprovalDTO.setDatabaseYearlyMaintainanceFeesPaymentOffice(licenseApproval.getDatabaseYearlyMaintainanceFeesPaymentOffice());
-                licenseApprovalDTO.setLicenseApplicantId(licenseApproval.getLicenseApplicant().getId());
-            }
+
+
 
             // Add DTOs and other data to the model
             model.addAttribute("licenseApplicantDTO", licenseApplicantDTO);
-            model.addAttribute("licenseApprovalDTO", licenseApprovalDTO);
             model.addAttribute("licenseTypes", licenseTypeService.findAll());
             model.addAttribute("licenseApplicants", licenseApplicantService.getAllApplicants());
+            model.addAttribute("licenseTypeId", licenseApplicantDTO.getLicenseTypeId());
 
         } catch (IllegalArgumentException e) {
             model.addAttribute("errorMessage", e.getMessage());
@@ -123,8 +111,3 @@ public class LicenseApplicantApprovalController {
         return "licenses/license/approval/license_applicants_approval";
     }
 }
-
-
-
-
-
