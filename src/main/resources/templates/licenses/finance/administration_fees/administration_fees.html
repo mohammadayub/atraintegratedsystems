@@ -1,0 +1,125 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head th:replace="~{layout :: page_head}">
+    <div th:replace="styles :: data-tables-styles"></div>
+    <div th:replace="styles :: persian-datepicker-styles"></div>
+    <div th:replace="styles :: select2-styles"></div>
+    <title>ATRA Financial Integrated System</title>
+    <style>
+        /* Basic Table Styling */
+        .table-container {
+            max-height: 800px; /* Set a maximum height for the table container */
+            overflow-y: auto;   /* Enable vertical scrolling */
+            border: 1px solid #CCC; /* Optional: Add a border around the table */
+        }
+        #profileTable {
+            width: 100%; /* Full width for the table */
+            font-size: 0.9em; /* General smaller font for the table */
+            padding: 0px;
+            margin: 0px;
+            border-collapse: collapse; /* Collapse borders for seamless borders */
+        }
+        #profileTable th, #profileTable td {
+            padding: 6px;
+            text-align: center;
+            vertical-align: middle;
+            font-size: 0.8em; /* Small font size for headers and cells */
+            border: 1px solid #CCC; /* Border for each cell */
+        }
+        #profileTable thead th {
+            background-color: darkblue;
+            color: white;
+            font-size: 0.85em; /* Slightly larger font for headers */
+        }
+        #profileTable tbody tr:nth-child(even) {
+            background-color: #f2f2f2; /* Zebra stripes for rows */
+        }
+        #profileTable td a.btn-primary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4px;
+            border: 1px solid;
+        }
+        #profileTable .icon-small {
+            width: 16px;
+            height: 16px;
+        }
+        /* Optional: Add some responsiveness */
+        @media (max-width: 768px) {
+            #profileTable th, #profileTable td {
+                font-size: 0.7em; /* Smaller font size for mobile view */
+                padding: 4px;
+            }
+        }
+        #profileTable th {
+            white-space: nowrap;
+        }
+    </style>
+</head>
+<body>
+<nav th:replace="~{layout :: page_navbar}"></nav>
+<div class="container-fluid">
+    <div class="table-container">
+        <table class="slip" id="profileTable">
+            <thead>
+            <tr>
+                <th>License Request ID</th>
+                <th>ًRequest Date</th>
+                <th>License Type</th>
+                <th>License Currency</th>
+                <th>Finance Type</th>
+                <th>Company License Name</th>
+                <th>License No#</th>
+                <th>Expiry Date</th>
+                <th>Administration Fee</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>License Request ID</td>
+                <td>ًRequest Date</td>
+                <td>License Type</td>
+                <td>License Currency</td>
+                <td>Finance Type</td>
+                <td>Company License Name</td>
+                <td>License No#</td>
+                <td>Expiry Date</td>
+                <td>Administration Fee</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Common scripts -->
+<div th:replace="scripts :: common-scripts"></div>
+<div th:replace="scripts :: persian-datepicker-scripts"></div>
+<div th:replace="scripts :: data-tables-scripts"></div>
+<script>
+    $(document).ready(function () {
+        // Initialize DataTable with individual column search
+        let table = $('#profileTable').DataTable({
+            initComplete: function () {
+                this.api().columns().every(function () {
+                    var column = this;
+                    var header = $(column.header());
+                    var columnText = header.text();
+                    header.empty().append('<div>' + columnText + '</div>');
+
+                    $('<input type="text" placeholder="Search ' + columnText + '" class="form-control form-control-sm mb-2" />')
+                        .appendTo(header.find('div'))
+                        .on('keyup change clear', function () {
+                            if (column.search() !== this.value) {
+                                column.search(this.value).draw();
+                            }
+                        });
+                });
+            }
+        });
+    });
+</script>
+<footer th:replace="~{layout :: page_footer}"></footer>
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>
