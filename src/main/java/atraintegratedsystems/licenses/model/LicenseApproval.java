@@ -38,6 +38,8 @@ public class LicenseApproval {
     private BigDecimal administrativeYearlyFees;
     @Column(name="administrative_yearly_fees_payment_office")
     private String adminstrivateYearlyFeesPaymentOffice;
+    @Column(name="guarantee_fees_type")
+    private String guaranteeFeesType;
     @Column(name="guarantee_fees")
     private BigDecimal guaranteeFees;
     @Column(name="gurantee_fees_payment_office")

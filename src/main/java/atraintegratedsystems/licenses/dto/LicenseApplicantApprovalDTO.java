@@ -39,6 +39,7 @@ public class LicenseApplicantApprovalDTO {
     private String licensePaymentOffice;
     private BigDecimal administrativeYearlyFees;
     private String adminstrivateYearlyFeesPaymentOffice;
+    private String guaranteeFeesType;
     private BigDecimal guaranteeFees;
     private String guaranteeFeesPaymentOffice;
     private BigDecimal databaseYearlyMaintainanceFees;

@@ -35,8 +35,7 @@ public class LicenseApprovalService {
         return licenseApplicantRepository.findAllApplicantsWithPaid();
     }
 
-
-    public Optional<LicenseApproval> getByApplicantId(Long applicantId) {
+    public Optional<LicenseApproval> getApprovalByApplicantId(Long applicantId) {
         return licenseApprovalRepository.findByLicenseApplicantId(applicantId);
     }
 
@@ -116,7 +115,6 @@ public class LicenseApprovalService {
         // Save to Database
         LicenseApproval savedProfile = licenseApprovalRepository.save(profile);
         log.info("License Approval saved with ID: {}", savedProfile.getId());
-
         return savedProfile;
     }
 
