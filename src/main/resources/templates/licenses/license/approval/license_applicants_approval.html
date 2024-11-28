@@ -53,6 +53,12 @@
                             th:selected="${type.id == licenseTypeId}"></option>
                 </select>
             </div>
+            <div class="col-md-3 form-group">
+                <label for="currencyType"
+                       th:text="#{license_approval_currency_type}"
+                       th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
+                <input type="text" id="currencyType" th:field="*{currencyType}" class="form-control" required readonly>
+            </div>
 
             <div class="col-md-3 form-group">
                 <label for="licenseFees"
@@ -61,16 +67,17 @@
                 <input type="text" id="licenseFees" th:field="*{licenseFees}" class="form-control" required >
             </div>
 
+
+
+        </div>
+
+        <div class="row">
             <div class="col-md-3 form-group">
                 <label for="licensePaymentOffice"
                        th:text="#{license_approval_payment_office}"
                        th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
                 <input type="text" id="licensePaymentOffice" th:field="*{licensePaymentOffice}" class="form-control" required  readonly>
             </div>
-
-        </div>
-
-        <div class="row">
 
 
             <!-- Administrative Yearly Fees -->
@@ -95,15 +102,22 @@
                        th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
                 <input type="text" id="guaranteeFees" th:field="*{guaranteeFees}" class="form-control" required  readonly>
             </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-md-3 form-group">
+                <label for="guaranteeFees"
+                       th:text="#{license_approval_guarantee_fees_currency}"
+                       th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
+                <input type="text" id="license_approval_guarantee_fees_currency" th:field="*{guaranteeFeesType}" value="USD" class="form-control" required  readonly>
+            </div>
             <div class="col-md-3 form-group">
                 <label for="guaranteeFeesPaymentOffice"
                        th:text="#{license_approval_guarantee_fees_payment_office}"
                        th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
                 <input type="text" id="guaranteeFeesPaymentOffice" th:field="*{guaranteeFeesPaymentOffice}" class="form-control" required   readonly>
             </div>
-        </div>
-
-        <div class="row">
             <!-- Database Yearly Maintenance Fees -->
             <div class="col-md-3 form-group">
                 <label for="databaseMaintenanceFees"
@@ -119,12 +133,7 @@
                        th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
                 <input type="text" id="databaseMaintenanceFeesPaymentOffice" th:field="*{databaseYearlyMaintainanceFeesPaymentOffice}" class="form-control" required  readonly>
             </div>
-            <div class="col-md-3 form-group">
-                <label for="currencyType"
-                       th:text="#{license_approval_currency_type}"
-                       th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
-                <input type="text" id="currencyType" th:field="*{currencyType}" class="form-control" required readonly>
-            </div>
+
         </div>
         <div class="row">
             <!-- Approval Date -->
@@ -172,7 +181,7 @@
                 <span th:text="#{license_approval_back_to_list}"></span>
             </a>
         </div>
-    <!-- Back Link -->
+        <!-- Back Link -->
 
 
 </div>
@@ -221,7 +230,7 @@ function setApplicationFees() {
         databaseMaintenanceFees.value = 350000;
         guaranteeFees.value = 1000000;
 
-        licenseApprovalDatabaseFeesPaymentOffice.value = "ATRA";
+        licensePaymentOffice.value = "ATRA";
         adminFeesPaymentOffice.value = "ATRA";
         databaseMaintenanceFeesPaymentOffice.value = "ATRA";
         guaranteeFeesPaymentOffice.value = "ATRA";
@@ -233,7 +242,7 @@ function setApplicationFees() {
         databaseMaintenanceFees.value = 350000;
         guaranteeFees.value = 0;
 
-        licenseApprovalDatabaseFeesPaymentOffice.value = "ATRA";
+        licensePaymentOffice.value = "ATRA";
         adminFeesPaymentOffice.value = "ATRA";
         databaseMaintenanceFeesPaymentOffice.value = "ATRA";
         guaranteeFeesPaymentOffice.value = "ATRA";
@@ -245,7 +254,7 @@ function setApplicationFees() {
         databaseMaintenanceFees.value = 100000;
         guaranteeFees.value = 100000;
 
-        licenseApprovalDatabaseFeesPaymentOffice.value = "ATRA";
+        licensePaymentOffice.value = "ATRA";
         adminFeesPaymentOffice.value = "ATRA";
         databaseMaintenanceFeesPaymentOffice.value = "ATRA";
         guaranteeFeesPaymentOffice.value = "ATRA";
@@ -257,7 +266,7 @@ function setApplicationFees() {
         databaseMaintenanceFees.value = 100000;
         guaranteeFees.value = 200000;
 
-        licenseApprovalDatabaseFeesPaymentOffice.value = "ATRA";
+        licensePaymentOffice.value = "ATRA";
         adminFeesPaymentOffice.value = "ATRA";
         databaseMaintenanceFeesPaymentOffice.value = "ATRA";
         guaranteeFeesPaymentOffice.value = "ATRA";
@@ -269,7 +278,7 @@ function setApplicationFees() {
         databaseMaintenanceFees.value = 13650;
         guaranteeFees.value = 0;
 
-        licenseApprovalDatabaseFeesPaymentOffice.value = "ATRA";
+        licensePaymentOffice.value = "ATRA";
         adminFeesPaymentOffice.value = "ATRA";
         databaseMaintenanceFeesPaymentOffice.value = "ATRA";
         guaranteeFeesPaymentOffice.value = "ATRA";
@@ -281,7 +290,7 @@ function setApplicationFees() {
         databaseMaintenanceFees.value = 200;
         guaranteeFees.value = 17000;
 
-        licenseApprovalDatabaseFeesPaymentOffice.value = "ATRA";
+        licensePaymentOffice.value = "ATRA";
         adminFeesPaymentOffice.value = "ATRA";
         databaseMaintenanceFeesPaymentOffice.value = "ATRA";
         guaranteeFeesPaymentOffice.value = "ATRA";
@@ -293,7 +302,7 @@ function setApplicationFees() {
         databaseMaintenanceFees.value = 150;
         guaranteeFees.value = 17000;
 
-        licenseApprovalDatabaseFeesPaymentOffice.value = "ATRA";
+        licensePaymentOffice.value = "ATRA";
         adminFeesPaymentOffice.value = "ATRA";
         databaseMaintenanceFeesPaymentOffice.value = "ATRA";
         guaranteeFeesPaymentOffice.value = "ATRA";
@@ -305,7 +314,7 @@ function setApplicationFees() {
         databaseMaintenanceFees.value = 100;
         guaranteeFees.value = 17000;
 
-        licenseApprovalDatabaseFeesPaymentOffice.value = "ATRA";
+        licensePaymentOffice.value = "ATRA";
         adminFeesPaymentOffice.value = "ATRA";
         databaseMaintenanceFeesPaymentOffice.value = "ATRA";
         guaranteeFeesPaymentOffice.value = "ATRA";
@@ -317,7 +326,7 @@ function setApplicationFees() {
         databaseMaintenanceFees.value = 7200;
         guaranteeFees.value = 2000000;
 
-        licenseApprovalDatabaseFeesPaymentOffice.value = "ATRA";
+        licensePaymentOffice.value = "ATRA";
         adminFeesPaymentOffice.value = "ATRA";
         databaseMaintenanceFeesPaymentOffice.value = "ATRA";
         guaranteeFeesPaymentOffice.value = "ATRA";
@@ -329,7 +338,7 @@ function setApplicationFees() {
         databaseMaintenanceFees.value = 2400;
         guaranteeFees.value = 750000;
 
-        licenseApprovalDatabaseFeesPaymentOffice.value = "ATRA";
+        licensePaymentOffice.value = "ATRA";
         adminFeesPaymentOffice.value = "ATRA";
         databaseMaintenanceFeesPaymentOffice.value = "ATRA";
         guaranteeFeesPaymentOffice.value = "ATRA";
@@ -341,7 +350,7 @@ function setApplicationFees() {
         databaseMaintenanceFees.value = 30800;
         guaranteeFees.value = 50000;
 
-        licenseApprovalDatabaseFeesPaymentOffice.value = "ATRA";
+        licensePaymentOffice.value = "ATRA";
         adminFeesPaymentOffice.value = "ATRA";
         databaseMaintenanceFeesPaymentOffice.value = "ATRA";
         guaranteeFeesPaymentOffice.value = "ATRA";
@@ -353,7 +362,7 @@ function setApplicationFees() {
         databaseMaintenanceFees.value = 37500;
         guaranteeFees.value = 50000000;
 
-        licenseApprovalDatabaseFeesPaymentOffice.value = "ATRA";
+        licensePaymentOffice.value = "ATRA";
         adminFeesPaymentOffice.value = "ATRA";
         databaseMaintenanceFeesPaymentOffice.value = "ATRA";
         guaranteeFeesPaymentOffice.value = "ATRA";
@@ -365,7 +374,7 @@ function setApplicationFees() {
         databaseMaintenanceFees.value = 3450;
         guaranteeFees.value = 300000;
 
-        licenseApprovalDatabaseFeesPaymentOffice.value = "ATRA";
+        licensePaymentOffice.value = "ATRA";
         adminFeesPaymentOffice.value = "ATRA";
         databaseMaintenanceFeesPaymentOffice.value = "ATRA";
         guaranteeFeesPaymentOffice.value = "ATRA";
@@ -377,7 +386,7 @@ function setApplicationFees() {
         databaseMaintenanceFees.value = 1150;
         guaranteeFees.value = 116150;
 
-        licenseApprovalDatabaseFeesPaymentOffice.value = "ATRA";
+        licensePaymentOffice.value = "ATRA";
         adminFeesPaymentOffice.value = "ATRA";
         databaseMaintenanceFeesPaymentOffice.value = "ATRA";
         guaranteeFeesPaymentOffice.value = "ATRA";
@@ -389,7 +398,7 @@ function setApplicationFees() {
         databaseMaintenanceFees.value = 1150;
         guaranteeFees.value = 116150;
 
-        licenseApprovalDatabaseFeesPaymentOffice.value = "ATRA";
+        licensePaymentOffice.value = "ATRA";
         adminFeesPaymentOffice.value = "ATRA";
         databaseMaintenanceFeesPaymentOffice.value = "ATRA";
         guaranteeFeesPaymentOffice.value = "ATRA";
@@ -401,7 +410,7 @@ function setApplicationFees() {
         databaseMaintenanceFees.value = 1150;
         guaranteeFees.value = 116150;
 
-        licenseApprovalDatabaseFeesPaymentOffice.value = "ATRA";
+        licensePaymentOffice.value = "ATRA";
         adminFeesPaymentOffice.value = "ATRA";
         databaseMaintenanceFeesPaymentOffice.value = "ATRA";
         guaranteeFeesPaymentOffice.value = "ATRA";
@@ -413,7 +422,7 @@ function setApplicationFees() {
         databaseMaintenanceFees.value = 8750;
         guaranteeFees.value = 1000000;
 
-        licenseApprovalDatabaseFeesPaymentOffice.value = "ATRA";
+        licensePaymentOffice.value = "ATRA";
         adminFeesPaymentOffice.value = "ATRA";
         databaseMaintenanceFeesPaymentOffice.value = "ATRA";
         guaranteeFeesPaymentOffice.value = "ATRA";
@@ -425,7 +434,7 @@ function setApplicationFees() {
         databaseMaintenanceFees.value = 5750;
         guaranteeFees.value = 500000;
 
-        licenseApprovalDatabaseFeesPaymentOffice.value = "ATRA";
+        licensePaymentOffice.value = "ATRA";
         adminFeesPaymentOffice.value = "ATRA";
         databaseMaintenanceFeesPaymentOffice.value = "ATRA";
         guaranteeFeesPaymentOffice.value = "ATRA";
@@ -437,7 +446,7 @@ function setApplicationFees() {
         databaseMaintenanceFees.value = 2300;
         guaranteeFees.value = 200000;
 
-        licenseApprovalDatabaseFeesPaymentOffice.value = "ATRA";
+        licensePaymentOffice.value = "ATRA";
         adminFeesPaymentOffice.value = "ATRA";
         databaseMaintenanceFeesPaymentOffice.value = "ATRA";
         guaranteeFeesPaymentOffice.value = "ATRA";
@@ -449,7 +458,7 @@ function setApplicationFees() {
         databaseMaintenanceFees.value = 1350;
         guaranteeFees.value = 200000;
 
-        licenseApprovalDatabaseFeesPaymentOffice.value = "ATRA";
+        licensePaymentOffice.value = "ATRA";
         adminFeesPaymentOffice.value = "ATRA";
         databaseMaintenanceFeesPaymentOffice.value = "ATRA";
         guaranteeFeesPaymentOffice.value = "ATRA";
@@ -461,7 +470,7 @@ function setApplicationFees() {
         databaseMaintenanceFees.value = 575;
         guaranteeFees.value = 100000;
 
-        licenseApprovalDatabaseFeesPaymentOffice.value = "ATRA";
+        licensePaymentOffice.value = "ATRA";
         adminFeesPaymentOffice.value = "ATRA";
         databaseMaintenanceFeesPaymentOffice.value = "ATRA";
         guaranteeFeesPaymentOffice.value = "ATRA";
@@ -473,7 +482,7 @@ function setApplicationFees() {
         databaseMaintenanceFees.value = 5750;
         guaranteeFees.value = 650000;
 
-        licenseApprovalDatabaseFeesPaymentOffice.value = "ATRA";
+        licensePaymentOffice.value = "ATRA";
         adminFeesPaymentOffice.value = "ATRA";
         databaseMaintenanceFeesPaymentOffice.value = "ATRA";
         guaranteeFeesPaymentOffice.value = "ATRA";
