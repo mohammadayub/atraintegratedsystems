@@ -19,7 +19,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Controller
-public class LicenseApplicantFinanceController {
+public class LicenseApplicationFeesFinanceController {
 
     @Autowired
     private LicenseApplicantFinanceService licenseApplicantFinanceService;
