@@ -82,11 +82,16 @@ public class LicenseApplicantApprovalController {
     @GetMapping("/license_applicants_approval_list/update/{id}")
     public String updateApplicantGet(@PathVariable Long id, Model model) {
         try {
-            // Fetch LicenseApplicant and validate ID
+            // Fetch LicenseApplicant by ID
             LicenseApplicant licenseApplicant = licenseApplicantService.getApplicantById(id)
-                    .orElseThrow(() -> new IllegalArgumentException("Invalid applicant ID: " + id));
+                    .orElseThrow(() -> new IllegalArgumentException("No License Applicant found with ID: " + id));
 
-            // Map LicenseApplicant to DTO
+            // Ensure the LicenseApplicant has a valid ID
+            if (licenseApplicant.getId() == null) {
+                throw new IllegalArgumentException("License Applicant ID is required but not found.");
+            }
+
+            // Map LicenseApplicant to LicenseApplicantApprovalDTO
             LicenseApplicantApprovalDTO licenseApplicantDTO = new LicenseApplicantApprovalDTO();
             licenseApplicantDTO.setId(licenseApplicant.getId());
             licenseApplicantDTO.setReqId(licenseApplicant.getReqId());
@@ -106,10 +111,11 @@ public class LicenseApplicantApprovalController {
             licenseApplicantDTO.setBankVoucher(licenseApplicant.getBankVoucher());
             licenseApplicantDTO.setPaymentStatus(licenseApplicant.getPaymentStatus());
 
-            // Fetch and map LicenseApproval
+            // Fetch LicenseApproval by applicant ID using LEFT OUTER JOIN
             LicenseApproval licenseApproval = licenseApprovalService.getApprovalByApplicantId(id)
-                    .orElse(new LicenseApproval()); // Use empty object if not found
+                    .orElse(new LicenseApproval()); // Use empty object if no approval is found
 
+            // Map LicenseApproval data
             licenseApplicantDTO.setAppId(licenseApproval.getId());
             licenseApplicantDTO.setApprovalId(licenseApproval.getApprovalId());
             licenseApplicantDTO.setApprovalDate(licenseApproval.getApprovalDate());
@@ -126,11 +132,11 @@ public class LicenseApplicantApprovalController {
             licenseApplicantDTO.setGuaranteeFeesPaymentOffice(licenseApproval.getGuaranteeFeesPaymentOffice());
             licenseApplicantDTO.setDatabaseYearlyMaintainanceFees(licenseApproval.getDatabaseYearlyMaintainanceFees());
             licenseApplicantDTO.setDatabaseYearlyMaintainanceFeesPaymentOffice(licenseApproval.getDatabaseYearlyMaintainanceFeesPaymentOffice());
-            licenseApplicantDTO.setLicenseApplicantId(
-                    licenseApproval.getLicenseApplicant() != null ? licenseApproval.getLicenseApplicant().getId() : null
-            );
 
-            // Add DTOs and other data to the model
+            // Set LicenseApplicant ID (from LicenseApplicant directly)
+            licenseApplicantDTO.setLicenseApplicantId(licenseApplicant.getId());  // <-- Ensure the ID is set here
+
+            // Add DTO and other data to the model
             model.addAttribute("licenseApplicantDTO", licenseApplicantDTO);
             model.addAttribute("licenseTypes", licenseTypeService.findAll());
             model.addAttribute("licenseApplicants", licenseApplicantService.getAllApplicants());
@@ -143,6 +149,8 @@ public class LicenseApplicantApprovalController {
 
         return "licenses/license/approval/license_applicants_approval";
     }
+
+
 
 
 }

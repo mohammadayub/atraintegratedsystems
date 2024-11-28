@@ -17,7 +17,6 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
-
 @Service
 @Slf4j
 public class LicenseApprovalService {
@@ -43,6 +42,10 @@ public class LicenseApprovalService {
     public Optional<LicenseApplicant> getApplicantId(Long id){
         return licenseApplicantRepository.findById(id);
     }
+
+
+
+
 
     @Transactional
     public LicenseApproval saveApproval(LicenseApprovalDTO dto) throws Exception {

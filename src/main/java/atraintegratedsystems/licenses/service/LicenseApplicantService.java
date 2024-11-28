@@ -3,6 +3,7 @@ package atraintegratedsystems.licenses.service;
 import atraintegratedsystems.licenses.dto.LicenseApplicantApprovalDTO;
 import atraintegratedsystems.licenses.dto.LicenseApplicantDTO;
 import atraintegratedsystems.licenses.model.LicenseApplicant;
+import atraintegratedsystems.licenses.model.LicenseApproval;
 import atraintegratedsystems.licenses.model.LicenseType;
 import atraintegratedsystems.licenses.repository.LicenseApplicantRepository;
 import atraintegratedsystems.licenses.repository.LicenseTypeRepository;
@@ -43,6 +44,8 @@ public class LicenseApplicantService {
     public List<LicenseApplicantApprovalDTO> getAllLicenseApplicantApprovalDetails() {
         return repository.findAllLicenseApplicantApprovalDetails();
     }
+
+
 
 
     @Transactional

@@ -32,17 +32,17 @@
         <div class="row">
             <!-- Hidden Fields -->
             <input type="hidden" th:field="*{id}">
+            <input type="hidden" th:field="*{licenseApplicantId}">
             <div class="col-md-3 form-group">
-                <label for="id" th:text="#{approval_license_approval_type}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">License Type:</label>
-                <select id="id" name="licenseApplicantId" th:field="*{id}" class="form-control">
+                <label for="licenseType" th:text="#{approval_license_approval_type}"
+                       th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">License Type:</label>
+                <select id="licenseType" name="licenseApplicantId" th:field="*{id}" class="form-control" onchange="updateLicenseApplicantId()">
                     <option th:each="type : ${licenseApplicants}"
                             th:value="${type.id}"
                             th:text="${type.companyLicenseName}"
                             th:selected="${type.id == id}"></option>
                 </select>
             </div>
-
-
             <!-- License Type -->
             <div class="col-md-3 form-group">
                 <label for="licenseTypeId" th:text="#{approval_license_approval_type}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">License Type:</label>
@@ -104,8 +104,6 @@
         </div>
 
         <div class="row">
-
-
             <!-- Database Yearly Maintenance Fees -->
             <div class="col-md-3 form-group">
                 <label for="databaseMaintenanceFees"
@@ -241,9 +239,32 @@ function setApplicationFees() {
         databaseMaintenanceFeesPaymentOffice.value = "";
         licenseApprovalDatabaseFeesPaymentOffice.value = "";
     }
+
+
+
+
+
+
+
+
+
+
+
+   function updateLicenseApplicantId() {
+        var selectedValue = document.getElementById('licenseType').value;
+        document.getElementById('applicantId').value = selectedValue;
+    }
+
+    // Ensure the value is set on page load
+    window.onload = function() {
+        updateLicenseApplicantId();
+    };
+
+
 }
 
 </script>
+
 <footer th:replace="~{layout :: page_footer}"></footer>
 </body>
 </html>
