@@ -10,7 +10,7 @@
 <nav th:replace="~{layout :: page_navbar}"></nav>
 <h3 style="text-align:center;margin-top:30px;font-weight:bolder;" th:text="#{license_application_confirmation}">License Application Confirmation</h3>
 <div class="container-fluid" style="margin-top:40px;">
-    <form th:action="@{/licenses/finance/application/license_application_fee_list/add}" th:object="${licenseApplicantDTO}" method="post">
+    <form th:action="@{/licenses/finance/application_fees/license_application_fee_list/add}" th:object="${licenseApplicantDTO}" method="post">
         <div class="row">
             <!-- Hidden ID Field -->
             <input type="hidden" th:field="*{reqId}">
