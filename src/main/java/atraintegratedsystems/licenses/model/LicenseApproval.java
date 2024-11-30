@@ -51,6 +51,39 @@ public class LicenseApproval {
     @ManyToOne
     @JoinColumn(name = "license_applicant_id", nullable = false)
     private LicenseApplicant licenseApplicant;
+
+    @Column(name="license_fee_entry_voucher_date")
+    private LocalDate licenseFeeEntryVoucherDate;
+    @Column(name="license_fee_bank_voucher_No")
+    private String licenseFeeBankVoucherNo;
+    @Column(name="license_fee_payment_status")
+    private String licenseFeePaymentStatus;
+
+
+
+
+
+
+
+
+
+    public JalaliDate getLicenseFeeEntryVoucherDate() {
+        if (licenseFeeEntryVoucherDate == null) {
+            return null; // Return null if issueLicenseDate is null
+        }
+        DateConverter dateConverter= new DateConverter();
+        JalaliDate jalaliLicenseFeeEntryVoucherDate=dateConverter.gregorianToJalali(licenseFeeEntryVoucherDate.getYear(),licenseFeeEntryVoucherDate.getMonthValue(),licenseFeeEntryVoucherDate.getDayOfMonth());
+        return jalaliLicenseFeeEntryVoucherDate;
+    }
+
+
+
+
+
+
+
+
+
     public JalaliDate getAppDate() {
         if (approvalDate == null) {
             return null; // Return null if issueLicenseDate is null

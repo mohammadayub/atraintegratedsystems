@@ -15,6 +15,10 @@ public interface LicenseApprovalRepository extends JpaRepository<LicenseApproval
     Long findMaxId();
 
     Optional<LicenseApproval> findByLicenseApplicantId(Long applicantId);
-
+    @Query(value = "SELECT * FROM License_Approvals " +
+            "WHERE approval_status = 'Approve' " +
+            "AND (license_fee_payment_status != 'Paid' OR license_fee_payment_status IS NULL)",
+            nativeQuery = true)
+    List<LicenseApproval> findUnpaidApprovedLicenses();
 
 }

@@ -27,14 +27,18 @@ public interface LicenseApplicantRepository extends JpaRepository<LicenseApplica
     List<LicenseApplicant> findAllApplicantsWithPaid();
 
 
+
     @Query("SELECT new atraintegratedsystems.licenses.dto.LicenseApplicantApprovalDTO(" +
-            "applicants.id, applicants.reqId, applicants.reqDate, applicants.licenseType.id, applicants.licenseType.name, approvals.currencyType, " +
+            "applicants.id, applicants.reqId, applicants.reqDate, applicants.licenseType.id, applicants.licenseType.name, applicants.currencyType, " +
             "applicants.financeType, applicants.companyLicenseName, applicants.licenseNo, applicants.applicationFees, " +
             "applicants.validity, applicants.entryVoucherDate, applicants.bankVoucher, applicants.paymentStatus, approvals.approvalStatus) " +
             "FROM LicenseApplicant applicants " +
             "LEFT JOIN LicenseApproval approvals ON applicants.id = approvals.licenseApplicant.id " +
             "WHERE applicants.isSend = 'Yes' AND (approvals.approvalStatus IS NULL OR approvals.approvalStatus != 'Approve')")
     List<LicenseApplicantApprovalDTO> findAllLicenseApplicantApprovalDetails();
+
+
+
 
 
 

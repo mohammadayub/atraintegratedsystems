@@ -61,7 +61,7 @@
 <nav th:replace="~{layout :: page_navbar}"></nav>
 <div class="container-fluid">
     <div class="table-container">
-        <table class="slip" id="profileTable" class="table table-responsive">
+        <table class="slip" id="profileTable" >
             <thead>
             <tr>
                 <th th:text="#{license_request_id}"></th>
@@ -112,7 +112,6 @@
         </table>
     </div>
 </div>
-
 <!-- Common scripts -->
 <div th:replace="scripts :: common-scripts"></div>
 <div th:replace="scripts :: persian-datepicker-scripts"></div>

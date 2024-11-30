@@ -27,12 +27,12 @@ public class LicenseApplicationFeesFinanceController {
     @Autowired
     private LicenseTypeService licenseTypeService;
 
-    @GetMapping("/licenses/finance/application/license_application_fee_list")
+    @GetMapping("/licenses/finance/application_fees/license_application_fee_list")
     public String showApplicationProfile(Model model) {
         model.addAttribute("licenseTypes", licenseTypeService.findAll());
         List<LicenseApplicant> profiles = licenseApplicantFinanceService.getAllUnpaid();
         model.addAttribute("profiles", profiles);
-        return "licenses/finance/application/license_application_fee_list";
+        return "licenses/finance/application_fees/license_application_fee_list";
     }
 
     @GetMapping("/licenses/finance/application/license_application_fee_list/add")
@@ -43,10 +43,10 @@ public class LicenseApplicationFeesFinanceController {
     }
 
 
-    @PostMapping("/licenses/finance/application/license_application_fee_list/add")
+    @PostMapping("/licenses/finance/application_fees/license_application_fee_list/add")
     public String updateBankVoucherNoAndPaymentStatus(@Valid @ModelAttribute("licenseApplicantDTO") LicenseApplicantDTO licenseApplicantDTO, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
-            return "licenses/finance/application/license_application_payment_confirmation";
+            return "licenses/finance/application_fees/license_application_payment_confirmation";
         }
         LicenseApplicant licenseApplicant = licenseApplicantFinanceService.getApplicantByReqId(licenseApplicantDTO.getReqId()).orElseThrow(() -> new IllegalArgumentException("Invalid code ID: " + licenseApplicantDTO.getReqId()));
         // Update only the editable fields
@@ -57,12 +57,12 @@ public class LicenseApplicationFeesFinanceController {
         licenseApplicant.setBankVoucher(licenseApplicantDTO.getBankVoucher());
         licenseApplicant.setPaymentStatus(licenseApplicantDTO.getPaymentStatus());
         licenseApplicantFinanceService.PaymentSave(licenseApplicant);
-        return "redirect:/licenses/finance/application/license_application_fee_list";
+        return "redirect:/licenses/finance/application_fees/license_application_fee_list";
     }
 
 
 
-    @GetMapping("/licenses/finance/application/license_application_fee_list/update/{reqId}")
+    @GetMapping("/licenses/finance/application_fees/license_application_fee_list/update/{reqId}")
     public String updateApplicantGet(@PathVariable String reqId, Model model) throws Exception {
         LicenseApplicant licenseApplicant = licenseApplicantFinanceService.getApplicantByReqId(reqId)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid applicant ID: " + reqId));
@@ -84,10 +84,10 @@ public class LicenseApplicationFeesFinanceController {
         licenseApplicantDTO.setPaymentStatus(licenseApplicant.getPaymentStatus());
         model.addAttribute("licenseTypes", licenseTypeService.findAll());
         model.addAttribute("licenseApplicantDTO", licenseApplicantDTO);
-        return "licenses/finance/application/license_application_payment_confirmation";
+        return "licenses/finance/application_fees/license_application_payment_confirmation";
     }
 
-    @GetMapping("/licenses/finance/application/license_application_fee_list/print/{reqId}")
+    @GetMapping("/licenses/finance/application_fees/license_application_fee_list/print/{reqId}")
     public String GetTariff(@PathVariable String reqId, Model model){
         LicenseApplicant licenseApplicant = licenseApplicantFinanceService.getApplicantByReqId(reqId)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid applicant ID: " + reqId));
@@ -109,7 +109,7 @@ public class LicenseApplicationFeesFinanceController {
         licenseApplicantDTO.setPaymentStatus(licenseApplicant.getPaymentStatus());
         model.addAttribute("licenseTypes", licenseTypeService.findAll());
         model.addAttribute("licenseApplicantDTO", licenseApplicantDTO);
-        return "licenses/finance/application/license_application_print_tariff";
+        return "licenses/finance/application_fees/license_application_print_tariff";
     }
 
 

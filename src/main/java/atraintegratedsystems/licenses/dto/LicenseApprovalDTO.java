@@ -1,6 +1,8 @@
 package atraintegratedsystems.licenses.dto;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.persistence.Column;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -25,4 +27,7 @@ public class LicenseApprovalDTO {
     private BigDecimal databaseYearlyMaintainanceFees;
     private String databaseYearlyMaintainanceFeesPaymentOffice;
     private Long licenseApplicantId;
+    private LocalDate licenseFeeEntryVoucherDate;
+    private String licenseFeeBankVoucherNo;
+    private String licenseFeePaymentStatus;
 }

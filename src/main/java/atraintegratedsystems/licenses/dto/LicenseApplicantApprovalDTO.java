@@ -23,8 +23,6 @@ public class LicenseApplicantApprovalDTO {
     private LocalDate entryVoucherDate;
     private String bankVoucher;
     private String paymentStatus;
-
-
     // LicenseApproval Model
     private Long appId;
     private String approvalId;
