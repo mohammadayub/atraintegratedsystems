@@ -60,7 +60,7 @@ public class LicenseApplicantController {
         }
         model.addAttribute("profile", new LicenseApplicantDTO());
         model.addAttribute("licenseTypes", licenseTypeService.findAll());
-        return "licenses/license/registration/license_new_applicant";
+        return "redirect:/licenses/license/registration/license_applicants_profile";
     }
 
 
