@@ -64,15 +64,15 @@
         <table class="slip" id="profileTable" >
             <thead>
             <tr>
-                 <th>Approval Id</th>
-                 <th>Company License Name</th>
-                 <th>License Type</th>
-                 <th>Approval Date</th>
-                <th>Board Decision Number</th>
-                 <th>Approval Status</th>
-                <th>License Fee</th>
-                <th>Print Tariff</th>
-                <th>Confirm Payment</th>
+                 <th th:text="#{mcit_license_approval_id}"></th>
+                 <th th:text="#{mcit_compmay_license_Name}"></th>
+                 <th th:text="#{mcit_license_Type}"></th>
+                 <th th:text="#{mcit_license_approval_date}"></th>
+                <th  th:text="#{mcit_license_board_descision_no}"></th>
+                 <th th:text="#{mcit_license_approval_status}"></th>
+                <th  th:text="#{mcit_license_fee}"></th>
+                <th  th:text="#{mcit_license_prints_tariff}"></th>
+                <th th:text="#{mcit_license_confirmation_payment}"></th>
             </tr>
             </thead>
             <tbody>
@@ -103,6 +103,11 @@
             </tbody>
         </table>
     </div>
+    <a th:href="@{/licenses/finance/home}" class="btn btn-primary" style="margin-top:20px;">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6" style="width:20px;height:20px;">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
+        </svg>
+        Back to Page</a>
 </div>
 <!-- Common scripts -->
 <div th:replace="scripts :: common-scripts"></div>
