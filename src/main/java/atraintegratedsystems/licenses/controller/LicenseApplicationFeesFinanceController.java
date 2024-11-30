@@ -35,11 +35,11 @@ public class LicenseApplicationFeesFinanceController {
         return "licenses/finance/application_fees/license_application_fee_list";
     }
 
-    @GetMapping("/licenses/finance/application/license_application_fee_list/add")
+    @GetMapping("/licenses/finance/application_fees/license_application_fee_list/add")
     public String PaymentConfirmationAdd(Model model){
         model.addAttribute("licenseApplicantDTO",new LicenseApplicantDTO());
         model.addAttribute("licenseTypes", licenseTypeService.findAll());
-        return "licenses/finance/application/license_application_payment_confirmation";
+        return "licenses/finance/application_fees/license_application_payment_confirmation";
     }
 
 
