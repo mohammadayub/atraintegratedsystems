@@ -20,12 +20,15 @@
         direction: ltr !important;
         text-align: left;
     }
+    input[type="text"],input[type="number"],input[type="file"],input[type="website"],input[type="email"] {
+    border-left: 2px solid red;
+    }
 
   </style>
 </head>
 <body onload="setApplicationFees()">
 <nav th:replace="~{layout :: page_navbar}"></nav>
-<h2 class="text-center" th:text="#{license_applicant_header}" style="color:black; margin-top:10px; font-weight:bold;"></h2>
+<h2 class="text-center" th:text="#{license_applicant_header}" style="color:white; margin-top:10px;background-color:#5e331a"></h2>
 <div class="container-fluid mt-4" >
   <div>
     <div th:if="${successMessage}" class="alert alert-success" role="alert" th:text="${successMessage}"></div>
@@ -43,7 +46,7 @@
 
         <div class="col-md-3 form-group">
           <label for="licenseTypeId" th:text="#{applicant_license_type}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
-          <select id="licenseTypeId" th:field="*{licenseTypeId}" class="form-control" required onchange="setApplicationFees()">
+          <select id="licenseTypeId" th:field="*{licenseTypeId}" class="form-control" required onchange="setApplicationFees()" style="border-left: 2px solid red;">
             <option th:each="licenseType : ${licenseTypes}" th:value="${licenseType.id}" th:text="${licenseType.name}"></option>
           </select>
         </div>
@@ -91,7 +94,7 @@
         </div>
         <div class="col-md-3 form-group">
           <label for="licenseUpload" th:text="#{license_application_upload}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
-          <input type="file" id="licenseUpload" th:field="*{licenseUpload}" class="form-control-file" accept=".pdf,.jpg,.jpeg,.png" required>
+          <input type="file" id="licenseUpload" th:field="*{licenseUpload}" class="form-control-file" accept=".pdf,.jpg,.jpeg,.png" required />
         </div>
         <div class="col-md-3 form-group">
           <label for="tinNo" th:text="#{license_application_tin}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
@@ -103,11 +106,11 @@
 
         <div class="col-md-3 form-group">
           <label for="tinUpload" th:text="#{license_application_tin_upload}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
-          <input type="file" id="tinUpload" th:field="*{tinUpload}" class="form-control-file" accept=".pdf,.jpg,.jpeg,.png" required>
+          <input type="file" id="tinUpload" th:field="*{tinUpload}" class="form-control-file" accept=".pdf,.jpg,.jpeg,.png" required />
         </div>
         <div class="col-md-3 form-group">
           <label for="bankStatementUpload" th:text="#{license_application_bank_statement_file}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
-          <input type="file" id="bankStatementUpload" th:field="*{bankStatementUpload}" class="form-control-file" accept=".pdf,.jpg,.jpeg,.png" required>
+          <input type="file" id="bankStatementUpload" th:field="*{bankStatementUpload}" class="form-control-file" accept=".pdf,.jpg,.jpeg,.png" required />
         </div>
         <div class="col-md-3 form-group">
           <label for="yearOfEstablishment" th:text="#{license_application_year_establishment}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
@@ -131,12 +134,12 @@
         </div>
         <div class="col-md-3 form-group">
           <label for="plannedActivitiesAndServices" th:text="#{license_application_plan_active_Service}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
-          <textarea id="plannedActivitiesAndServices" th:field="*{plannedActivitiesAndServices}" class="form-control" required></textarea>
+          <textarea id="plannedActivitiesAndServices" th:field="*{plannedActivitiesAndServices}" class="form-control" required style="border-left: 2px solid red;"></textarea>
         </div>
 
         <div class="col-md-3 form-group">
           <label for="companyAddress" th:text="#{license_application_company_address}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
-          <textarea id="companyAddress" th:field="*{companyAddress}" class="form-control" required></textarea>
+          <textarea id="companyAddress" th:field="*{companyAddress}" class="form-control" required style="border-left: 2px solid red;"></textarea>
         </div>
       </div>
       <!-- Row 6 -->
@@ -144,7 +147,7 @@
 
         <div class="col-md-3 form-group">
           <label for="postAddress" th:text="#{license_application_post_address}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
-          <textarea id="postAddress" th:field="*{postAddress}" class="form-control" required></textarea>
+          <textarea id="postAddress" th:field="*{postAddress}" class="form-control" required style="border-left: 2px solid red;"></textarea>
         </div>
         <div class="col-md-3 form-group">
           <label for="contactNo" th:text="#{license_application_contact_no}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
@@ -162,7 +165,7 @@
       <div class="row">
         <div class="col-md-3 form-group">
           <label th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">Other Licenses</label>
-          <textarea id="other_licenses" th:field="*{otherLicenseTaken}" class="form-control" required></textarea>
+          <textarea id="other_licenses" th:field="*{otherLicenseTaken}" class="form-control" required style="border-left: 2px solid red;"></textarea>
         </div>
       </div>
 
