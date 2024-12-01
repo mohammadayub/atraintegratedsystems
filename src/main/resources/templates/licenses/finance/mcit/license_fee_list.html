@@ -70,9 +70,11 @@
                  <th th:text="#{mcit_license_approval_date}"></th>
                 <th  th:text="#{mcit_license_board_descision_no}"></th>
                  <th th:text="#{mcit_license_approval_status}"></th>
+                <th>Currency Type</th>
                 <th  th:text="#{mcit_license_fee}"></th>
                 <th  th:text="#{mcit_license_prints_tariff}"></th>
                 <th th:text="#{mcit_license_confirmation_payment}"></th>
+
             </tr>
             </thead>
             <tbody>
@@ -83,6 +85,7 @@
                 <th th:text="${profile.getAppDate()}"></th>
                 <th th:text="${profile.boardDecisionNumber}"></th>
                 <td th:text="${profile.approvalStatus}">approvalStatus</td>
+                <td th:text="${profile.licenseApplicant.currencyType}"></td>
                 <td th:text="${profile.licenseFees}"></td>
                 <td>
                     <a href=""  class="btn btn-warning">
