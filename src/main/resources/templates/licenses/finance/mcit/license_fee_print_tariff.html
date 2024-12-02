@@ -100,21 +100,26 @@
       <td><input type="text" th:field="${licenseApprovalDTO.approvalId}" disabled></td>
       <td><input type="text" th:field="${licenseApprovalDTO.applicantLicenseCompanyName}" disabled></td>
       <td><input type="text" th:field="${licenseApprovalDTO.licenseTypeName}" disabled></td>
-      <td><input type="text" class="hijrishamsi" th:field="${licenseApprovalDTO.approvalDate}" disable></td>
-      <td><input type="text"  th:field="${licenseApprovalDTO.boardDecisionNumber}" disable></td>
-      <td><input type="text"  th:field="${licenseApprovalDTO.approvalStatus}" disable></td>
-      <td><input type="text"  th:field="${licenseApprovalDTO.currencyType}" disable></td>
-      <td><input type="text"  th:field="${licenseApprovalDTO.licenseFees}" disable></td>
+      <td><input type="text" class="hijrishamsi" th:field="${licenseApprovalDTO.approvalDate}" disabled></td>
+      <td><input type="text"  th:field="${licenseApprovalDTO.boardDecisionNumber}" disabled></td>
+      <td><input type="text"  th:field="${licenseApprovalDTO.approvalStatus}" disabled></td>
+      <td><input type="text"  th:field="${licenseApprovalDTO.currencyType}" disabled></td>
+      <td><input type="text"  th:field="${licenseApprovalDTO.licenseFees}" disabled></td>
     </tr>
     <tr>
       <td colspan="9" class="signature-section" th:text="#{signature}"></td>
     </tr>
     <tr>
       <td colspan="9">
-        <button class="btn btn-primary" onclick="doPrint();" id="prn" th:text="#{print}"></button>
+        <button class="btn" onclick="doPrint();" id="prn" th:text="#{print}" cstyle="background-color:#5e331a;color:white;"></button>
       </td>
     </tr>
   </table>
+  <a th:href="@{/licenses/finance/mcit/license_fee_list}" class="btn" style="margin-top:20px;background-color:#5e331a;color:white;">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6" style="width:20px;height:20px;">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
+    </svg>
+    Back to Page</a>
 </div>
 
 <script>
