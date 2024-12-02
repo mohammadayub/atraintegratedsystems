@@ -86,23 +86,25 @@
     </tr>
     <tr>
       <th th:text="#{license_request_id}"></th>
-      <th th:text="#{applicant_request_date}"></th>
+      <th>Approval Id</th>
       <th th:text="#{license_application_company_license_name}"></th>
-      <th th:text="#{license_application_license_no}"></th>
-      <th th:text="#{license_application_fee}"></th>
-      <th th:text="#{applicant_license_currency}"></th>
-      <th th:text="#{license_application_year_establishment}"></th>
-      <th th:text="#{license_application_expiry_date}"></th>
+      <th>License Type Name</th>
+      <th>License Approval Date</th>
+      <th>Board Decision Number</th>
+      <th>Approval Status</th>
+      <th>Currency Type</th>
+      <th>License Fees</th>
     </tr>
     <tr>
-      <td><input type="text" th:field="${licenseApplicantDTO.reqId}" disabled> </td>
-      <td><input type="text" class="hijrishamsi" th:field="${licenseApplicantDTO.reqDate}" disabled> </td>
-      <td><input type="text" th:field="${licenseApplicantDTO.companyLicenseName}" disabled></td>
-      <td><input type="text" th:field="${licenseApplicantDTO.licenseNo}" disabled></td>
-      <td><input type="text" th:field="${licenseApplicantDTO.applicationFees}" disabled></td>
-      <td><input type="text" th:field="${licenseApplicantDTO.currencyType}" disabled></td>
-      <td><input type="text" class="hijrishamsi" th:field="${licenseApplicantDTO.yearOfEstablishment}" disabled></td>
-      <td><input type="text" class="hijrishamsi" th:field="${licenseApplicantDTO.expiryDate}" disabled></td>
+      <td><input type="text" th:field="${licenseApprovalDTO.id}" disabled> </td>
+      <td><input type="text" th:field="${licenseApprovalDTO.approvalId}" disabled></td>
+      <td><input type="text" th:field="${licenseApprovalDTO.applicantLicenseCompanyName}" disabled></td>
+      <td><input type="text" th:field="${licenseApprovalDTO.licenseTypeName}" disabled></td>
+      <td><input type="text" class="hijrishamsi" th:field="${licenseApprovalDTO.approvalDate}" disable></td>
+      <td><input type="text"  th:field="${licenseApprovalDTO.boardDecisionNumber}" disable></td>
+      <td><input type="text"  th:field="${licenseApprovalDTO.approvalStatus}" disable></td>
+      <td><input type="text"  th:field="${licenseApprovalDTO.currencyType}" disable></td>
+      <td><input type="text"  th:field="${licenseApprovalDTO.licenseFees}" disable></td>
     </tr>
     <tr>
       <td colspan="9" class="signature-section" th:text="#{signature}"></td>

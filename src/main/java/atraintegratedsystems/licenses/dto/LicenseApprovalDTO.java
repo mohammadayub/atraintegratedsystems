@@ -1,4 +1,7 @@
 package atraintegratedsystems.licenses.dto;
+import atraintegratedsystems.licenses.model.LicenseApplicant;
+import atraintegratedsystems.utils.DateConverter;
+import atraintegratedsystems.utils.JalaliDate;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -16,6 +19,7 @@ public class LicenseApprovalDTO {
     private String boardDecisions;
     private String boardDecisionNumber;
     private Long licenseTypeId; // Reference to LicenseType by ID
+    private String licenseTypeName;
     private String currencyType;
     private BigDecimal licenseFees;
     private String licensePaymentOffice;
@@ -27,7 +31,15 @@ public class LicenseApprovalDTO {
     private BigDecimal databaseYearlyMaintainanceFees;
     private String databaseYearlyMaintainanceFeesPaymentOffice;
     private Long licenseApplicantId;
+    private String applicantLicenseCompanyName;
     private LocalDate licenseFeeEntryVoucherDate;
     private String licenseFeeBankVoucherNo;
     private String licenseFeePaymentStatus;
+
+
+
+
+
+
+
 }
