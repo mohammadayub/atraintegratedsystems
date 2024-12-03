@@ -1,5 +1,5 @@
 <!doctype html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html xmlns:th="http://www.thymeleaf.org" th:lang="${session.lang}" th:attr="dir=${session.dir}">
 <head th:replace="~{layout :: page_head}">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -39,29 +39,65 @@
         <tr>
             <td class="text-center">
                 <div class="custom-card">
-                    <a th:href="@{/licenses/license/home}">
-                    <img th:src="@{/images/licensing.png}" alt="License Management System"></a>
+                    <a th:href="@{/licenses/finance/application_fees/license_application_fee_list}">
+                    <img th:src="@{/images/license_finance.png}" alt="License Management System"></a>
                     <h4 class="license-link" style="margin-top: 12px;">
-                        <a th:href="@{/licenses/license/home}" th:text="#{lms}"></a>
+                        <a th:href="@{/licenses/finance/application_fees/license_application_fee_list}" th:text="#{license_finance}"></a>
                     </h4>
                 </div>
             </td>
             <td class="text-center">
                 <div class="custom-card">
-                    <a th:href="@{/licenses/finance/home}">
+                    <a th:href="@{/licenses/finance/application_fees/license_application_fee_list}">
                     <img th:src="@{/images/finance.png}" alt="Finance Revenue Management System"></a>
                     <h4 class="license-link" style="margin-top: 12px;">
-                        <a th:href="@{/licenses/finance/home}" th:text="#{frms}"></a>
+                        <a th:href="@{/licenses/finance/application_fees/license_application_fee_list}" th:text="#{frms}"></a>
                     </h4>
+
+                </div>
+            </td>
+            <td class="text-center">
+                <div class="custom-card">
+                    <a th:href="@{/licenses/finance/mcit/license_fee_list}">
+                        <img th:src="@{/images/mcit.png}" alt="MCIT"></a>
+                    <h4 class="license-link" style="margin-top: 12px;">
+                        <a th:href="@{/licenses/finance/mcit/license_fee_list}">MCIT</a>
+                    </h4>
+
+                </div>
+            </td>
+
+            <hr>
+        </tr>
+
+        <!--   This is Today changes  -->
+        <tr>
+            <td class="text-center">
+                <div class="custom-card">
+                    <a th:href="@{#}">
+                        <img th:src="@{/images/AdministrationFees.png}" alt="License Management System"></a>
+                    <h4 class="license-link" style="margin-top: 12px;">
+                        <a href="#">Administration Fees</a>
+                    </h4>
+                </div>
+            </td>
+            <td class="text-center">
+                <div class="custom-card">
+                    <a th:href="@{#}">
+                        <img th:src="@{/images/database_maintainence_fees.png}"></a>
+                    <h4 class="license-link" style="margin-top: 12px;">
+                        <a href="#">DataBase Maintainence Fees</a>
+                    </h4>
+
                 </div>
             </td>
 
             <td class="text-center">
                 <div class="custom-card">
                     <a th:href="@{#}">
-                    <img th:src="@{/images/binary-code.png}" alt="Codes Management System"></a>
+                        <img th:src="@{/images/guarantee_fees.png}" alt="Guarantee"></a>
                     <h4 class="license-link" style="margin-top: 12px;">
-                        <a href="#" th:text="#{cms}"></a>
+                        <a href="#">Guarantee Fees</a>
                     </h4>
 
                 </div>

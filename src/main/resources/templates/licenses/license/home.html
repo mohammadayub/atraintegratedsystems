@@ -38,7 +38,8 @@
     <tr>
       <td class="text-center">
         <div class="custom-card">
-          <img th:src="@{/images/license_new_applicant.png}" alt="License Management System">
+          <a th:href="@{/licenses/license/registration/license_new_applicant}">
+          <img th:src="@{/images/license_new_applicant.png}" alt="License Management System"></a>
           <h4 class="license-link" style="margin-top: 12px;">
             <a th:href="@{/licenses/license/registration/license_new_applicant}" th:text="#{license_applicant}"></a>
           </h4>
@@ -46,7 +47,8 @@
       </td>
       <td class="text-center">
         <div class="custom-card">
-          <img th:src="@{/images/applicant.png}" alt="Finance Revenue Management System">
+          <a th:href="@{/licenses/license/registration/license_applicants_profile}">
+          <img th:src="@{/images/applicant.png}" alt="Finance Revenue Management System"></a>
           <h4 class="license-link" style="margin-top: 12px;">
             <a th:href="@{/licenses/license/registration/license_applicants_profile}" th:text="#{applicant_list}"></a>
           </h4>
@@ -55,7 +57,8 @@
 
       <td class="text-center">
         <div class="custom-card">
-          <img th:src="@{/images/licenseapproval.png}" alt="Codes Management System">
+          <a th:href="@{/licenses/license/approval/license_applicants_approval_list}">
+          <img th:src="@{/images/licenseapproval.png}" alt="Codes Management System"></a>
           <h4 class="license-link" style="margin-top: 12px;">
             <a th:href="@{/licenses/license/approval/license_applicants_approval_list}" th:text="#{license_approval}"></a>
           </h4>
@@ -66,7 +69,8 @@
     <tr>
       <td class="text-center">
         <div class="custom-card">
-          <img th:src="@{/images/application_edit_profile.png}" alt="Codes Management System">
+          <a th:href="@{#}">
+          <img th:src="@{/images/application_edit_profile.png}" alt="Codes Management System"></a>
           <h4 class="license-link" style="margin-top: 12px;">
             <a href="#" th:text="#{license_application_edit_profile}"></a>
           </h4>

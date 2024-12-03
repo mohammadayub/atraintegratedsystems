@@ -32,21 +32,21 @@ public class LicenseApplicationFeesFinanceController {
         model.addAttribute("licenseTypes", licenseTypeService.findAll());
         List<LicenseApplicant> profiles = licenseApplicantFinanceService.getAllUnpaid();
         model.addAttribute("profiles", profiles);
-        return "licenses/finance/application_fees/license_application_fee_list";
+        return "licenses/finance/license_finance/application_fees/license_application_fee_list";
     }
 
     @GetMapping("/licenses/finance/application_fees/license_application_fee_list/add")
     public String PaymentConfirmationAdd(Model model){
         model.addAttribute("licenseApplicantDTO",new LicenseApplicantDTO());
         model.addAttribute("licenseTypes", licenseTypeService.findAll());
-        return "licenses/finance/application_fees/license_application_payment_confirmation";
+        return "licenses/finance/license_finance/application_fees/license_application_payment_confirmation";
     }
 
 
     @PostMapping("/licenses/finance/application_fees/license_application_fee_list/add")
     public String updateBankVoucherNoAndPaymentStatus(@Valid @ModelAttribute("licenseApplicantDTO") LicenseApplicantDTO licenseApplicantDTO, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
-            return "licenses/finance/application_fees/license_application_payment_confirmation";
+            return "licenses/finance/license_finance/application_fees/license_application_payment_confirmation";
         }
         LicenseApplicant licenseApplicant = licenseApplicantFinanceService.getApplicantByReqId(licenseApplicantDTO.getReqId()).orElseThrow(() -> new IllegalArgumentException("Invalid code ID: " + licenseApplicantDTO.getReqId()));
         // Update only the editable fields
@@ -57,7 +57,7 @@ public class LicenseApplicationFeesFinanceController {
         licenseApplicant.setBankVoucher(licenseApplicantDTO.getBankVoucher());
         licenseApplicant.setPaymentStatus(licenseApplicantDTO.getPaymentStatus());
         licenseApplicantFinanceService.PaymentSave(licenseApplicant);
-        return "redirect:/licenses/finance/application_fees/license_application_fee_list";
+        return "redirect:/licenses/finance/license_finance/application_fees/license_application_fee_list";
     }
 
 
@@ -84,7 +84,7 @@ public class LicenseApplicationFeesFinanceController {
         licenseApplicantDTO.setPaymentStatus(licenseApplicant.getPaymentStatus());
         model.addAttribute("licenseTypes", licenseTypeService.findAll());
         model.addAttribute("licenseApplicantDTO", licenseApplicantDTO);
-        return "licenses/finance/application_fees/license_application_payment_confirmation";
+        return "licenses/finance/license_finance/application_fees/license_application_payment_confirmation";
     }
 
     @GetMapping("/licenses/finance/application_fees/license_application_fee_list/print/{reqId}")
@@ -109,7 +109,7 @@ public class LicenseApplicationFeesFinanceController {
         licenseApplicantDTO.setPaymentStatus(licenseApplicant.getPaymentStatus());
         model.addAttribute("licenseTypes", licenseTypeService.findAll());
         model.addAttribute("licenseApplicantDTO", licenseApplicantDTO);
-        return "licenses/finance/application_fees/license_application_print_tariff";
+        return "licenses/finance/license_finance/application_fees/license_application_print_tariff";
     }
 
 

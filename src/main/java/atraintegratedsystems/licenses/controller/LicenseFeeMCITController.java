@@ -30,7 +30,7 @@ public class LicenseFeeMCITController {
     public String showApplicationProfile(Model model) {
         List<LicenseApproval> profiles = licenseFeeMCITService.getAllApprovalApplicants();
         model.addAttribute("profiles", profiles);
-        return "licenses/finance/mcit/license_fee_list";
+        return "licenses/finance/license_finance/mcit/license_fee_list";
     }
 
     @GetMapping("/licenses/finance/mcit/license_fee_list/print/{id}")
@@ -50,7 +50,7 @@ public class LicenseFeeMCITController {
         licenseApprovalDTO.setLicenseFees(licenseApproval.getLicenseFees());
         model.addAttribute("licenseTypes", licenseTypeService.findAll());
         model.addAttribute("licenseApprovalDTO", licenseApprovalDTO);
-        return "licenses/finance/mcit/license_fee_print_tariff";
+        return "licenses/finance/license_finance/mcit/license_fee_print_tariff";
     }
 
 
