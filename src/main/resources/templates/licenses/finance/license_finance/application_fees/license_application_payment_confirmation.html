@@ -1,0 +1,176 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" th:lang="${session.lang}" th:attr="dir=${session.dir}">
+<head th:replace="~{layout :: page_head}">
+    <div th:replace="styles :: data-tables-styles"></div>
+    <div th:replace="styles :: persian-datepicker-styles"></div>
+    <div th:replace="styles :: select2-styles"></div>
+    <title>ATRA Financial Integrated System</title>
+</head>
+<style>
+    input[type="text"],input[type="number"],input[type="file"],input[type="website"],input[type="email"] {
+    border-left: 2px solid red;
+    }
+</style>
+<body>
+<nav th:replace="~{layout :: page_navbar}"></nav>
+<h3 style="text-align:center;margin-top:10px;font-weight:bolder;color:white;background-color:#5e331a;" th:text="#{license_application_confirmation}">License Application Confirmation</h3>
+<div class="container-fluid" style="margin-top:40px;">
+    <form th:action="@{/licenses/finance/application_fees/license_application_fee_list/add}" th:object="${licenseApplicantDTO}" method="post">
+        <div class="row">
+            <!-- Hidden ID Field -->
+            <input type="hidden" th:field="*{reqId}">
+
+            <!-- Request Date -->
+            <div class="col-md-3 form-group">
+                <label th:text="#{applicant_request_date}"
+                       th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+                </label>
+                <input type="text" th:field="*{reqDate}" class="form-control hijrishamsi" disabled>
+            </div>
+
+            <!-- License Type -->
+            <div class="col-md-3 form-group">
+                <label for="licenseTypeId" th:text="#{applicant_license_type}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
+                <select id="licenseTypeId" th:field="*{licenseTypeId}" class="form-control" required onchange="setApplicationFees()" disabled style="border-left: 2px solid red;">
+                    <option th:each="licenseType : ${licenseTypes}" th:value="${licenseType.id}" th:text="${licenseType.name}"></option>
+                </select>
+            </div>
+
+            <!-- Currency Type -->
+            <div class="col-md-3 form-group">
+                <label th:text="#{applicant_license_currency}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
+
+                <input type="text" th:field="*{currencyType}" class="form-control"  disabled>
+            </div>
+
+            <!-- Finance Type -->
+            <div class="col-md-3 form-group">
+                <label th:text="#{applicant_license_finance_type}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
+
+                <input type="text" th:field="*{financeType}" class="form-control"  disabled>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Company License Name -->
+            <div class="col-md-3 form-group">
+                <label th:text="#{license_application_company_license_name}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
+
+                <input type="text" th:field="*{companyLicenseName}" class="form-control"  disabled>
+            </div>
+
+            <!-- License Number -->
+            <div class="col-md-3 form-group">
+                <label th:text="#{license_application_license_no}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
+
+                <input type="text" th:field="*{licenseNo}" class="form-control"  disabled>
+            </div>
+
+            <!-- Year of Establishment -->
+            <div class="col-md-3 form-group">
+                <label th:text="#{license_application_year_establishment}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
+
+                <input type="text" th:field="*{yearOfEstablishment}" class="form-control hijrishamsi"  disabled>
+            </div>
+
+            <!-- Expiry Date -->
+            <div class="col-md-3 form-group">
+                <label th:text="#{license_application_expiry_date}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
+
+                <input type="text" th:field="*{expiryDate}" class="form-control hijrishamsi"  disabled>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Application Fees -->
+            <div class="col-md-3 form-group">
+                <label th:text="#{license_application_fee}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
+
+                <input type="number" step="0.01" th:field="*{applicationFees}" class="form-control"  disabled>
+            </div>
+
+            <div class="col-md-3 form-group">
+                <label th:text="#{license_application_entry_voucher_date}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
+
+                <input type="text" th:field="*{entryVoucherDate}" class="form-control hijrishamsi"  required>
+            </div>
+
+            <!-- Bank Voucher -->
+<!--            <div class="col-md-3 form-group">-->
+<!--                <label th:text="#{bank_voucher}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>-->
+
+<!--                <input type="text" th:field="*{bankVoucher}" class="form-control" required>-->
+<!--            </div>-->
+<!--            &lt;!&ndash; Payment Status &ndash;&gt;-->
+<!--            <div class="col-md-3 form-group">-->
+<!--                <input type="checkbox" class="form-check-input" value="Paid">-->
+<!--                <label class="form-check-label" th:text="#{payment_status}">Paid</label>-->
+<!--            </div>-->
+            <div class="col-md-3 form-group">
+                <label th:text="#{bank_voucher}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
+
+                <input type="text" th:field="*{bankVoucher}" class="form-control" required>
+            </div>
+
+            <!-- Payment Status -->
+            <div class="col-md-3 form-group align-items-center" style="margin-top: 38px; display: flex; align-items: center;">
+                <input
+                        type="checkbox"
+                        name="paymentStatus"
+                        value="Paid"
+                        id="paymentStatus"
+                        style="
+            width: 20px;
+            height: 20px;
+            accent-color: #007bff;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+             ">
+                &nbsp;&nbsp;
+                <label
+                        for="paymentStatus"
+                        class="form-check-label me-2"
+                        style="cursor: pointer;"
+                        th:text="#{payment_status}">
+                    Paid
+                </label>
+            </div>
+
+
+        </div>
+
+        <!-- Submit/Reset Buttons -->
+        <div class="col-md-4 btn-group d-flex justify-content-center" style="margin-top: 15px; margin-bottom:80px; margin:0 auto;">
+            <button type="submit" class="btn" style="color:white;background-color:#5e331a;" th:text="#{confirmation_payment}">
+                <span class="fas fa-check"></span> Confirm Payment
+            </button>
+        </div>
+    </form>
+    <a th:href="@{/licenses/finance/application_fees/license_application_fee_list}" class="btn" style="margin-top:20px;color:white;background-color:#5e331a;">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6" style="width:20px;height:20px;">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
+        </svg>
+        Back to Page</a>
+</div>
+
+<!-- Common scripts -->
+<div th:replace="scripts :: common-scripts"></div>
+<div th:replace="scripts :: persian-datepicker-scripts"></div>
+<div th:replace="scripts :: data-tables-scripts"></div>
+
+<script>
+    $('.hijrishamsi').persianDatepicker({
+      format: 'YYYY-MM-DD',
+      autoClose: true,
+      calendar: {
+          persian: {
+              locale: 'en'
+          }
+      }
+  });
+</script>
+<footer th:replace="~{layout :: page_footer}"></footer>
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>
