@@ -1,22 +1,14 @@
 package atraintegratedsystems.licenses.controller;
-
-import atraintegratedsystems.licenses.dto.LicenseApplicantDTO;
 import atraintegratedsystems.licenses.dto.LicenseApprovalDTO;
-import atraintegratedsystems.licenses.model.LicenseApplicant;
 import atraintegratedsystems.licenses.model.LicenseApproval;
 import atraintegratedsystems.licenses.service.LicenseFeeMCITService;
 import atraintegratedsystems.licenses.service.LicenseTypeService;
-import atraintegratedsystems.utils.DateConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-
-import java.time.LocalDate;
 import java.util.List;
-
 @Controller
 public class LicenseFeeMCITController {
 
@@ -32,7 +24,6 @@ public class LicenseFeeMCITController {
         model.addAttribute("profiles", profiles);
         return "licenses/finance/license_finance/mcit/license_fee_list";
     }
-
     @GetMapping("/licenses/finance/mcit/license_fee_list/print/{id}")
     public String GetTariff(@PathVariable Long id, Model model){
         LicenseApproval licenseApproval = licenseFeeMCITService.getLicenseApprovalId(id)
@@ -52,7 +43,4 @@ public class LicenseFeeMCITController {
         model.addAttribute("licenseApprovalDTO", licenseApprovalDTO);
         return "licenses/finance/license_finance/mcit/license_fee_print_tariff";
     }
-
-
-
 }
