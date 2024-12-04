@@ -27,7 +27,7 @@ public class LicenseApplicationFeesFinanceController {
     @Autowired
     private LicenseTypeService licenseTypeService;
 
-    @GetMapping("/licenses/finance/application_fees/license_application_fee_list")
+    @GetMapping("/licenses/finance/license_finance/application_fees/license_application_fee_list")
     public String showApplicationProfile(Model model) {
         model.addAttribute("licenseTypes", licenseTypeService.findAll());
         List<LicenseApplicant> profiles = licenseApplicantFinanceService.getAllUnpaid();
