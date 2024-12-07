@@ -58,10 +58,26 @@ public class LicenseApproval {
     private String licenseFeeBankVoucherNo;
     @Column(name="license_fee_payment_status")
     private String licenseFeePaymentStatus;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column(name="license_fee_expiry_date")
+    private LocalDate licenseFeeExpiryDate;
 
 
 
 
+
+
+
+
+
+    public JalaliDate getLicenseFeeExpiryDate() {
+        if (licenseFeeExpiryDate == null) {
+            return null; // Return null if issueLicenseDate is null
+        }
+        DateConverter dateConverter= new DateConverter();
+        JalaliDate jalaliLicenseFeeExpiryDate=dateConverter.gregorianToJalali(licenseFeeExpiryDate.getYear(),licenseFeeExpiryDate.getMonthValue(),licenseFeeExpiryDate.getDayOfMonth());
+        return jalaliLicenseFeeExpiryDate;
+    }
 
 
 

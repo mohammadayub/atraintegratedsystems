@@ -5,7 +5,6 @@ import atraintegratedsystems.licenses.dto.LicenseApplicantDTO;
 import atraintegratedsystems.licenses.dto.LicenseApprovalDTO;
 import atraintegratedsystems.licenses.model.LicenseApplicant;
 import atraintegratedsystems.licenses.model.LicenseApproval;
-import atraintegratedsystems.licenses.model.LicenseType;
 import atraintegratedsystems.licenses.service.LicenseApplicantService;
 import atraintegratedsystems.licenses.service.LicenseApprovalService;
 import atraintegratedsystems.licenses.service.LicenseTypeService;
@@ -15,10 +14,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import javax.persistence.EntityNotFoundException;
 import java.util.List;
-import java.util.Optional;
+
 
 @Controller
 @RequestMapping("/licenses/license/approval")
@@ -45,9 +42,6 @@ public class LicenseApplicantApprovalController {
         return "licenses/license/approval/license_applicants_approval_list";
     }
 
-    /**
-     * Displays the add approval form.
-     */
     @GetMapping("/license_applicants_approval_list/add")
     public String paymentConfirmationAdd(Model model) {
         model.addAttribute("licenseApplicantDTO", new LicenseApplicantDTO());
@@ -57,9 +51,6 @@ public class LicenseApplicantApprovalController {
         return "licenses/license/approval/license_applicants_approval";
     }
 
-    /**
-     * Handles saving a license approval.
-     */
     @PostMapping("/license_applicants_approval")
     public String saveApproval(@ModelAttribute("licenseApprovalDTO") LicenseApprovalDTO dto, RedirectAttributes redirectAttributes) {
         log.info("LicenseApprovalDTO: {}", dto);  // Check the entire DTO to ensure ID is present
@@ -72,13 +63,6 @@ public class LicenseApplicantApprovalController {
         }
         return "redirect:/licenses/license/approval/license_applicants_approval_list";
     }
-
-    /**
-     * Displays the update form for an applicant's approval.
-     */
-    /**
-     * Displays the update form for an applicant's approval.
-     */
     @GetMapping("/license_applicants_approval_list/update/{id}")
     public String updateApplicantGet(@PathVariable Long id, Model model) {
         try {

@@ -98,11 +98,16 @@ public class LicenseApplicant {
     private String postAddress;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name="entry_voucher_date" , nullable = true)
-    private LocalDate entryVoucherDate;
+    private LocalDate entryApplicationFeeVoucherDate;
     @Column(name="bank_voucher")
     private String bankVoucher;
     @Column(name="payment_status")
     private String paymentStatus;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column(name="application_fee_expiry_date")
+    private LocalDate applicationFeeExpiryDate;
+
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name="refer_to_board_date",nullable = true)
     private LocalDate referToBoardDate;
@@ -141,11 +146,11 @@ public class LicenseApplicant {
 
 
     public JalaliDate getEntVocherDate(){
-        if (entryVoucherDate == null) {
+        if (entryApplicationFeeVoucherDate == null) {
             return null; // Return null if issueLicenseDate is null
         }
         DateConverter dateConverter= new DateConverter();
-        JalaliDate jalaliEntryVoucherDate= dateConverter.gregorianToJalali(entryVoucherDate.getYear(),entryVoucherDate.getMonthValue(),entryVoucherDate.getDayOfMonth()) ;
+        JalaliDate jalaliEntryVoucherDate= dateConverter.gregorianToJalali(entryApplicationFeeVoucherDate.getYear(),entryApplicationFeeVoucherDate.getMonthValue(),entryApplicationFeeVoucherDate.getDayOfMonth()) ;
         return jalaliEntryVoucherDate;
     }
 
@@ -157,6 +162,16 @@ public class LicenseApplicant {
         DateConverter dateConverter= new DateConverter();
         JalaliDate jalalireferToBoardDate= dateConverter.gregorianToJalali(referToBoardDate.getYear(),referToBoardDate.getMonthValue(),referToBoardDate.getDayOfMonth()) ;
         return jalalireferToBoardDate;
+    }
+
+
+    public JalaliDate getApplicationFeeExpiryDate(){
+        if (applicationFeeExpiryDate == null) {
+            return null; // Return null if issueLicenseDate is null
+        }
+        DateConverter dateConverter= new DateConverter();
+        JalaliDate jalaliApplicationFeeExpiry= dateConverter.gregorianToJalali(applicationFeeExpiryDate.getYear(),applicationFeeExpiryDate.getMonthValue(),applicationFeeExpiryDate.getDayOfMonth()) ;
+        return jalaliApplicationFeeExpiry;
     }
 
 

@@ -40,9 +40,11 @@ public class LicenseApplicantDTO {
     private String website;
     private String postAddress;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate entryVoucherDate;
+    private LocalDate entryApplicationFeeVoucherDate;
     private String bankVoucher;
     private String paymentStatus;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate applicationFeeExpiryDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate referToBoardDate;
     private String isSend;

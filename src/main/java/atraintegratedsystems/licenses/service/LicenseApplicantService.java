@@ -45,9 +45,6 @@ public class LicenseApplicantService {
         return repository.findAllLicenseApplicantApprovalDetails();
     }
 
-
-
-
     @Transactional
     public LicenseApplicant saveProfile(LicenseApplicantDTO dto) throws Exception {
         LicenseApplicant profile = new LicenseApplicant();
@@ -120,14 +117,14 @@ public class LicenseApplicantService {
         profile.setPostAddress(dto.getPostAddress());
 
         LocalDate entryVoucherDate = null;
-        if (dto.getEntryVoucherDate() != null) {
+        if (dto.getEntryApplicationFeeVoucherDate() != null) {
             entryVoucherDate = dateConverter.jalaliToGregorian(
-                    dto.getEntryVoucherDate().getYear(),
-                    dto.getEntryVoucherDate().getMonthValue(),
-                    dto.getEntryVoucherDate().getDayOfMonth()
+                    dto.getEntryApplicationFeeVoucherDate().getYear(),
+                    dto.getEntryApplicationFeeVoucherDate().getMonthValue(),
+                    dto.getEntryApplicationFeeVoucherDate().getDayOfMonth()
             );
         }
-        profile.setEntryVoucherDate(entryVoucherDate);
+        profile.setEntryApplicationFeeVoucherDate(entryVoucherDate);
         profile.setBankVoucher(dto.getBankVoucher());
         profile.setPaymentStatus(dto.getPaymentStatus());
         return repository.save(profile);
