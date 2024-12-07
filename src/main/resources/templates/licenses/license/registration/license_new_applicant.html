@@ -104,9 +104,14 @@
       <!-- Row 4: Employees, Planned Activities, Other Licenses -->
       <div class="row">
 
+
         <div class="col-md-3 form-group">
+          <div class="row">
+            <div class="col-md-6">
           <label for="tinUpload" th:text="#{license_application_tin_upload}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
-          <input type="file" id="tinUpload" th:field="*{tinUpload}" class="form-control-file" accept=".pdf,.jpg,.jpeg,.png" required />
+          <input type="file" id="tinUpload" th:field="*{tinUpload}" class="form-control-file" accept=".pdf,.jpg,.jpeg,.png" style="border:0px;" required />
+        </div>
+        </div>
         </div>
         <div class="col-md-3 form-group">
           <label for="bankStatementUpload" th:text="#{license_application_bank_statement_file}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>

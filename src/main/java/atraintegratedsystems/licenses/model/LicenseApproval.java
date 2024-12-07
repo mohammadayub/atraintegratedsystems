@@ -62,6 +62,16 @@ public class LicenseApproval {
     @Column(name="license_fee_expiry_date")
     private LocalDate licenseFeeExpiryDate;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column(name="database_maintainence_fee_expiry_date")
+    private LocalDate databaseMaintianenceFeeExpiryDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column(name="administration_fee_expiry_date")
+    private LocalDate administrationFeeExpiryDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column(name="guarantee_fee_expiry_date")
+    private LocalDate guaranteeFeeExpiryDate;
+
 
 
 
@@ -78,6 +88,35 @@ public class LicenseApproval {
         JalaliDate jalaliLicenseFeeExpiryDate=dateConverter.gregorianToJalali(licenseFeeExpiryDate.getYear(),licenseFeeExpiryDate.getMonthValue(),licenseFeeExpiryDate.getDayOfMonth());
         return jalaliLicenseFeeExpiryDate;
     }
+
+//    Start My Code
+    public JalaliDate getdatabaseMaintainenceFeeExpiryDate() {
+        if (databaseMaintianenceFeeExpiryDate == null) {
+            return null; // Return null if issueLicenseDate is null
+        }
+        DateConverter dateConverter= new DateConverter();
+        JalaliDate jalalidatabaseMaintianenceFeeExpiryDate=dateConverter.gregorianToJalali(databaseMaintianenceFeeExpiryDate.getYear(),databaseMaintianenceFeeExpiryDate.getMonthValue(),databaseMaintianenceFeeExpiryDate.getDayOfMonth());
+        return jalalidatabaseMaintianenceFeeExpiryDate;
+    }
+
+    public JalaliDate getadministrationFeeExpiryDate() {
+        if (administrationFeeExpiryDate == null) {
+            return null; // Return null if issueLicenseDate is null
+        }
+        DateConverter dateConverter= new DateConverter();
+        JalaliDate jalaliadministrationFeeExpiryDate=dateConverter.gregorianToJalali(administrationFeeExpiryDate.getYear(),administrationFeeExpiryDate.getMonthValue(),administrationFeeExpiryDate.getDayOfMonth());
+        return jalaliadministrationFeeExpiryDate;
+    }
+    public JalaliDate getguaranteeFeeExpiryDate() {
+        if (guaranteeFeeExpiryDate == null) {
+            return null; // Return null if issueLicenseDate is null
+        }
+        DateConverter dateConverter= new DateConverter();
+        JalaliDate jalaliguaranteeFeeExpiryDate=dateConverter.gregorianToJalali(guaranteeFeeExpiryDate.getYear(),guaranteeFeeExpiryDate.getMonthValue(),guaranteeFeeExpiryDate.getDayOfMonth());
+        return jalaliguaranteeFeeExpiryDate;
+    }
+
+//    End of My Code
 
 
 
