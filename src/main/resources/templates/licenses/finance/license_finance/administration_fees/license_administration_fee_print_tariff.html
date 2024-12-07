@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: page_head}">
+  <meta charset="utf-8">
+
+  <div th:replace="styles :: persian-datepicker-styles"></div>
+  <div th:replace="styles :: select2-styles"></div>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0; /* Remove default margin */
+    }
+
+    .container {
+      display: flex;
+      justify-content: center;
+      padding-top: 30px; /* Increased padding for more space */
+      width: 100%; /* Ensure container takes full width */
+    }
+
+    table {
+      width: 100%;
+      max-width: 1500px; /* Increased table width */
+      border-collapse: collapse;
+      margin: 0 auto;
+    }
+
+    table th, table td {
+      text-align: center;
+      padding: 12px; /* Increased padding for better spacing */
+      font-size: 14px; /* Decreased font size for headers */
+    }
+
+    table th {
+      background-color: #f4f4f4;
+    }
+
+    table td input {
+      width: 100%;
+      padding: 14px; /* Increased padding for larger input fields */
+      font-size: 14px; /* Decreased font size for input fields */
+      text-align: center;
+      box-sizing: border-box; /* Ensures padding does not overflow */
+    }
+
+    table tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    .signature-section {
+      text-align: center;
+      font-style: italic;
+      padding-top: 20px; /* Increased padding for signature section */
+      font-size: 16px; /* Increased font size */
+    }
+
+    @media (max-width: 768px) {
+      table th, table td {
+        font-size: 12px; /* Adjusted font size for smaller screens */
+      }
+
+      table td input {
+        font-size: 12px; /* Adjusted input font size for smaller screens */
+        padding: 10px; /* Adjusted padding for smaller screens */
+      }
+
+      .btn {
+        font-size: 14px; /* Adjusted button font size for smaller screens */
+        padding: 10px; /* Adjusted button padding for smaller screens */
+      }
+    }
+  </style>
+</head>
+<body>
+<nav th:replace="~{layout :: page_navbar}" id="pagnav"></nav>
+
+<div class="container-fluid">
+  <table class="table table-hover mt-4">
+    <tr>
+      <th colspan="9" style="text-align:center;">
+        <img th:src="@{/images/tariff_pic.png}" alt="Image Not Displayed">
+        <br><h3 th:text="#{atra}">ATRA</h3>
+        <h3 th:text="#{islamic_emarat}"></h3>
+        <h3 th:text="#{license_directorate}"></h3>
+      </th>
+    </tr>
+    <tr>
+      <th th:text="#{license_request_id}"></th>
+      <th>Approval Id</th>
+      <th th:text="#{license_application_company_license_name}"></th>
+      <th>License Type Name</th>
+      <th>License Approval Date</th>
+      <th>Board Decision Number</th>
+      <th>Approval Status</th>
+      <th>Currency Type</th>
+      <th>License Fees</th>
+    </tr>
+    <tr>
+      <td><input type="text" th:field="${licenseApprovalDTO.id}" disabled> </td>
+      <td><input type="text" th:field="${licenseApprovalDTO.approvalId}" disabled></td>
+      <td><input type="text" th:field="${licenseApprovalDTO.applicantLicenseCompanyName}" disabled></td>
+      <td><input type="text" th:field="${licenseApprovalDTO.licenseTypeName}" disabled></td>
+      <td><input type="text" class="hijrishamsi" th:field="${licenseApprovalDTO.approvalDate}" disabled></td>
+      <td><input type="text"  th:field="${licenseApprovalDTO.boardDecisionNumber}" disabled></td>
+      <td><input type="text"  th:field="${licenseApprovalDTO.approvalStatus}" disabled></td>
+      <td><input type="text"  th:field="${licenseApprovalDTO.currencyType}" disabled></td>
+      <td><input type="text"  th:field="${licenseApprovalDTO.administrativeYearlyFees}" disabled></td>
+    </tr>
+    <tr>
+      <td colspan="9" class="signature-section" th:text="#{signature}"></td>
+    </tr>
+    <tr>
+      <td colspan="9">
+        <button class="btn" onclick="doPrint();" id="prn" th:text="#{print}" style="background-color:#5e331a;color:white;"></button>
+      </td>
+    </tr>
+  </table>
+  <a th:href="@{/licenses/finance/mcit/license_fee_list}" id="backtopage" class="btn" style="margin-top:20px;background-color:#5e331a;color:white;">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6" style="width:20px;height:20px;">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
+    </svg>
+    Back to Page</a>
+</div>
+
+<script>
+  function doPrint() {
+    document.getElementById("pagnav").style.display = "none";
+    document.getElementById("pagfooter").style.display = "none";
+    document.getElementById("prn").style.display = "none";
+    document.getElementById("backtopage").style.display = "none";
+
+
+    window.print();
+
+    document.getElementById("pagnav").style.display = "block";
+    document.getElementById("pagfooter").style.display = "inline-block";
+    document.getElementById("prn").style.display = "inline-block";
+    document.getElementById("backtopage").style.display = "inline-block";
+
+
+  }
+</script>
+
+<!-- Common scripts -->
+<div th:replace="scripts :: common-scripts"></div>
+<div th:replace="scripts :: persian-datepicker-scripts"></div>
+<div th:replace="scripts :: data-tables-scripts"></div>
+
+<script>
+  $('.hijrishamsi').persianDatepicker({
+    format: 'YYYY-MM-DD',
+    autoClose: true,
+    calendar: {
+        persian: {
+            locale: 'en'
+        }
+    }
+});
+</script>
+
+<footer th:replace="~{layout :: page_footer}" id="pagfooter"></footer>
+
+</body>
+</html>
