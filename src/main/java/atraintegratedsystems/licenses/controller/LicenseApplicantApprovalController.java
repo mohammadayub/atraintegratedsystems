@@ -91,7 +91,7 @@ public class LicenseApplicantApprovalController {
             licenseApplicantDTO.setLicenseNo(licenseApplicant.getLicenseNo());
             licenseApplicantDTO.setApplicationFees(licenseApplicant.getApplicationFees());
             licenseApplicantDTO.setValidity(licenseApplicant.getValidity());
-            licenseApplicantDTO.setEntryVoucherDate(licenseApplicant.getEntryVoucherDate());
+            licenseApplicantDTO.setEntryVoucherDate(licenseApplicant.getEntryApplicationFeeVoucherDate());
             licenseApplicantDTO.setBankVoucher(licenseApplicant.getBankVoucher());
             licenseApplicantDTO.setPaymentStatus(licenseApplicant.getPaymentStatus());
 

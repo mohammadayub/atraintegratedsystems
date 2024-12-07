@@ -72,14 +72,6 @@ public class LicenseApproval {
     @Column(name="guarantee_fee_expiry_date")
     private LocalDate guaranteeFeeExpiryDate;
 
-
-
-
-
-
-
-
-
     public JalaliDate getLicenseFeeExpiryDate() {
         if (licenseFeeExpiryDate == null) {
             return null; // Return null if issueLicenseDate is null
@@ -117,9 +109,6 @@ public class LicenseApproval {
     }
 
 //    End of My Code
-
-
-
 
 
     public JalaliDate getLicenseFeeEntryVoucherDate() {

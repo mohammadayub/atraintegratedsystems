@@ -50,8 +50,8 @@ public class LicenseDatabaseMaintainenceFeesController {
         // Update only the editable fields
         DateConverter dateConverter = new DateConverter();
         // Convert Jalali date to Gregorian
-        LocalDate entryDate = dateConverter.jalaliToGregorian(licenseApplicantDTO.getEntryVoucherDate().getYear(), licenseApplicantDTO.getEntryVoucherDate().getMonthValue(), licenseApplicantDTO.getEntryVoucherDate().getDayOfMonth());
-        licenseApplicant.setEntryVoucherDate(entryDate);
+        LocalDate entryDate = dateConverter.jalaliToGregorian(licenseApplicantDTO.getEntryApplicationFeeVoucherDate().getYear(), licenseApplicantDTO.getApplicationFeeExpiryDate().getMonthValue(), licenseApplicantDTO.getEntryApplicationFeeVoucherDate().getDayOfMonth());
+        licenseApplicant.setEntryApplicationFeeVoucherDate(entryDate);
         licenseApplicant.setBankVoucher(licenseApplicantDTO.getBankVoucher());
         licenseApplicant.setPaymentStatus(licenseApplicantDTO.getPaymentStatus());
         licenseApplicantFinanceService.PaymentSave(licenseApplicant);
@@ -77,7 +77,7 @@ public class LicenseDatabaseMaintainenceFeesController {
         licenseApplicantDTO.setYearOfEstablishment(licenseApplicant.getYearOfEstablishment());
         licenseApplicantDTO.setExpiryDate(licenseApplicant.getExpiryDate());
         licenseApplicantDTO.setApplicationFees(licenseApplicant.getApplicationFees());
-        licenseApplicantDTO.setEntryVoucherDate(licenseApplicant.getEntryVoucherDate());
+        licenseApplicantDTO.setEntryApplicationFeeVoucherDate(licenseApplicant.getEntryApplicationFeeVoucherDate());
         licenseApplicantDTO.setBankVoucher(licenseApplicant.getBankVoucher());
         licenseApplicantDTO.setPaymentStatus(licenseApplicant.getPaymentStatus());
         model.addAttribute("licenseTypes", licenseTypeService.findAll());
@@ -102,7 +102,7 @@ public class LicenseDatabaseMaintainenceFeesController {
         licenseApplicantDTO.setYearOfEstablishment(licenseApplicant.getYearOfEstablishment());
         licenseApplicantDTO.setExpiryDate(licenseApplicant.getExpiryDate());
         licenseApplicantDTO.setApplicationFees(licenseApplicant.getApplicationFees());
-        licenseApplicantDTO.setEntryVoucherDate(licenseApplicant.getEntryVoucherDate());
+        licenseApplicantDTO.setEntryApplicationFeeVoucherDate(licenseApplicant.getEntryApplicationFeeVoucherDate());
         licenseApplicantDTO.setBankVoucher(licenseApplicant.getBankVoucher());
         licenseApplicantDTO.setPaymentStatus(licenseApplicant.getPaymentStatus());
         model.addAttribute("licenseTypes", licenseTypeService.findAll());

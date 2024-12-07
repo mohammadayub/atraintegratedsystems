@@ -1,5 +1,4 @@
 package atraintegratedsystems.licenses.controller;
-import atraintegratedsystems.licenses.dto.LicenseApplicantDTO;
 import atraintegratedsystems.licenses.dto.LicenseApprovalDTO;
 import atraintegratedsystems.licenses.model.LicenseApproval;
 import atraintegratedsystems.licenses.service.LicenseFeeMCITService;
@@ -90,4 +89,6 @@ public class LicenseFeeMCITController {
         model.addAttribute("licenseApprovalDTO", licenseApprovalDTO);
         return "licenses/finance/license_finance/mcit/license_fee_print_tariff";
     }
+
+
 }
