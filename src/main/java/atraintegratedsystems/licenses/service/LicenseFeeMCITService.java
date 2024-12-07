@@ -19,19 +19,13 @@ public class LicenseFeeMCITService {
         return licenseApprovalRepository.findAll();
     }
 
-    public Optional<LicenseApproval> getLicenseApprovalId(Long id){
-        return licenseApprovalRepository.findById(id);
+    public LicenseApproval findById(Long id) {
+        return licenseApprovalRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("LicenseApproval not found with id: " + id));
     }
 
-    public void updateLicenseApprovalFields(Long id, LicenseApprovalDTO dto) {
-        LicenseApproval licenseApproval = licenseApprovalRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("LicenseApproval not found with id " + id));
-
-        // Update only the last three fields
-        licenseApproval.setLicenseFeeEntryVoucherDate(dto.getLicenseFeeEntryVoucherDate());
-        licenseApproval.setLicenseFeeBankVoucherNo(dto.getLicenseFeeBankVoucherNo());
-        licenseApproval.setLicenseFeePaymentStatus(dto.getLicenseFeePaymentStatus());
-
+    public void save(LicenseApproval licenseApproval) {
         licenseApprovalRepository.save(licenseApproval);
     }
+
 }
