@@ -27,7 +27,7 @@ public class LicenseAdministrationFeeController {
 
     @GetMapping("/licenses/finance/license_finance/administration_fees/license_administration_fee_list")
     public String showApplicationProfile(Model model) {
-        List<LicenseApproval> profiles = licenseAdministrationFeeService.getAllApprovalApplicants();
+        List<LicenseApproval> profiles = licenseAdministrationFeeService.getAllApprovalApplicantsNotPaidAdministrationFee();
         model.addAttribute("profiles", profiles);
         return "licenses/finance/license_finance/administration_fees/license_administration_fee_list";
     }
@@ -40,19 +40,19 @@ public class LicenseAdministrationFeeController {
     }
 
 
-    @PostMapping("/licenses/finance/mcit/license_fee_list/add")
+    @PostMapping("/licenses/finance/license_finance/administration_fees/license_administration_fee_list/add")
     public String updateLicenseApproval(@ModelAttribute LicenseApprovalDTO licenseApprovalDTO) {
         // Fetch the existing entity from the database
         LicenseApproval existingLicenseApproval = licenseAdministrationFeeService.findById(licenseApprovalDTO.getId());
 
         // Update only the required fields
-        existingLicenseApproval.setLicenseFeeBankVoucherNo(licenseApprovalDTO.getLicenseFeeBankVoucherNo());
-        existingLicenseApproval.setLicenseFeePaymentStatus(licenseApprovalDTO.getLicenseFeePaymentStatus());
+        existingLicenseApproval.setAdministrationFeeEntryVoucherDate(licenseApprovalDTO.getAdministrationFeeEntryVoucherDate());
+        existingLicenseApproval.setAdministrationFeeBankVoucherNo(licenseApprovalDTO.getAdministrationFeeBankVoucherNo());
+        existingLicenseApproval.setAdministrationFeePaymentStatus(licenseApprovalDTO.getAdministrationFeePaymentStatus());
 
         // Save the updated entity
         licenseAdministrationFeeService.save(existingLicenseApproval);
-
-        return "redirect:/licenses/finance/mcit/license_fee_list";
+        return "redirect:/licenses/finance/license_finance/administration_fees/license_administration_fee_list";
     }
 
 
@@ -70,9 +70,12 @@ public class LicenseAdministrationFeeController {
         licenseApprovalDTO.setApprovalStatus(licenseApproval.getApprovalStatus());
         licenseApprovalDTO.setCurrencyType(licenseApproval.getCurrencyType());
         licenseApprovalDTO.setAdministrativeYearlyFees(licenseApproval.getAdministrativeYearlyFees());
+        licenseApprovalDTO.setAdministrationFeeEntryVoucherDate(licenseApproval.getAdministrationFeeEntryVoucherDate());
+        licenseApprovalDTO.setAdministrationFeeBankVoucherNo(licenseApproval.getAdministrationFeeBankVoucherNo());
+        licenseApprovalDTO.setAdministrationFeePaymentStatus(licenseApproval.getAdministrationFeePaymentStatus());
         model.addAttribute("licenseTypes", licenseTypeService.findAll());
         model.addAttribute("licenseApprovalDTO", licenseApprovalDTO);
-        return "licenses/finance/license_finance/administration_fees/license_administration_fee_payment_confirmation";
+        return "licenses/finance/license_finance/administration_fees/license_adminstration_fee_payment_confirmation";
     }
 
     @GetMapping("/licenses/finance/license_finance/administration_fees/license_administration_fee_list/print/{id}")

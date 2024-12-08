@@ -36,6 +36,8 @@ public class LicenseApprovalDTO {
     private LocalDate licenseFeeEntryVoucherDate;
     private String licenseFeeBankVoucherNo;
     private String licenseFeePaymentStatus;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate licenseFeeExpiryDate;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate databaseMaintianenceFeeEntryVoucherDate;

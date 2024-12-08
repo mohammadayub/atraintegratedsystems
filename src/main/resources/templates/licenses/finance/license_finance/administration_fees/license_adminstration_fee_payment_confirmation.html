@@ -19,21 +19,21 @@
                 <input type="text" th:field="*{approvalId}" class="form-control" disabled>
             </div>
             <div class="col-md-3 form-group">
-               <lable>License Fee Entry Voucher Date</lable>
-                <input type="text" th:field="*{licenseFeeEntryVoucherDate}" class="form-control hijrishamsi">
+               <lable>Administration Fee Entry Voucher Date</lable>
+                <input type="text" th:field="*{administrationFeeEntryVoucherDate}" class="form-control hijrishamsi">
             </div>
             <!-- Currency Type -->
             <div class="col-md-3 form-group">
-                <label>License Fee Bank Voucher No</label>
-                <input type="text" th:field="*{licenseFeeBankVoucherNo}" class="form-control" >
+                <label>Administration Fee Bank Voucher No</label>
+                <input type="text" th:field="*{administrationFeeBankVoucherNo}" class="form-control" >
             </div>
             <!-- Payment Status -->
             <div class="col-md-3 form-group align-items-center" style="margin-top: 38px; display: flex; align-items: center;">
                 <input
                         type="checkbox"
-                        th:field="*{licenseFeePaymentStatus}"
+                        th:field="*{administrationFeePaymentStatus}"
                         value="Paid"
-                        id="licenseFeePaymentStatus"
+                        id="administrationFeePaymentStatus"
                         style="
             width: 20px;
             height: 20px;
@@ -44,7 +44,7 @@
         ">
                 &nbsp;&nbsp;
                 <label
-                        for="licenseFeePaymentStatus"
+                        for="administrationFeePaymentStatus"
                         class="form-check-label me-2"
                         style="cursor: pointer;">
                     Paid

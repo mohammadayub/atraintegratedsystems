@@ -27,27 +27,22 @@ public class LicenseFeeMCITController {
         model.addAttribute("profiles", profiles);
         return "licenses/finance/license_finance/mcit/license_fee_list";
     }
-
     @GetMapping("/licenses/finance/mcit/license_fee_list/add")
     public String PaymentConfirmationAdd(Model model){
         model.addAttribute("licenseApprovalDTO",new LicenseApprovalDTO());
         model.addAttribute("licenseTypes", licenseTypeService.findAll());
         return "licenses/finance/mcit/license_fee_payment_confirmation";
     }
-
     @PostMapping("/licenses/finance/mcit/license_fee_list/add")
     public String updateLicenseApproval(@ModelAttribute LicenseApprovalDTO licenseApprovalDTO) {
         // Fetch the existing entity from the database
         LicenseApproval existingLicenseApproval = licenseFeeMCITService.findById(licenseApprovalDTO.getId());
-
         // Update only the required fields
         existingLicenseApproval.setLicenseFeeEntryVoucherDate(licenseApprovalDTO.getLicenseFeeEntryVoucherDate());
         existingLicenseApproval.setLicenseFeeBankVoucherNo(licenseApprovalDTO.getLicenseFeeBankVoucherNo());
         existingLicenseApproval.setLicenseFeePaymentStatus(licenseApprovalDTO.getLicenseFeePaymentStatus());
-
         // Save the updated entity
         licenseFeeMCITService.save(existingLicenseApproval);
-
         return "redirect:/licenses/finance/mcit/license_fee_list";
     }
 

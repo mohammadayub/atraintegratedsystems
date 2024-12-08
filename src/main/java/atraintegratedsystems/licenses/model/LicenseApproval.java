@@ -52,14 +52,14 @@ public class LicenseApproval {
     @JoinColumn(name = "license_applicant_id", nullable = false)
     private LicenseApplicant licenseApplicant;
 
-    @Column(name="license_fee_entry_voucher_date")
+    @Column(name="license_fee_mcit_entry_voucher_date")
     private LocalDate licenseFeeEntryVoucherDate;
-    @Column(name="license_fee_bank_voucher_No")
+    @Column(name="license_fee_mcit_bank_voucher_No")
     private String licenseFeeBankVoucherNo;
-    @Column(name="license_fee_payment_status")
+    @Column(name="license_fee_mcit_payment_status")
     private String licenseFeePaymentStatus;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @Column(name="license_fee_expiry_date")
+    @Column(name="license_fee_mcit_expiry_date")
     private LocalDate licenseFeeExpiryDate;
 
     @Column(name="databaseMaintianence_fee_entry_voucher_date")

@@ -21,4 +21,13 @@ public interface LicenseApprovalRepository extends JpaRepository<LicenseApproval
             nativeQuery = true)
     List<LicenseApproval> findUnpaidApprovedLicenses();
 
+
+
+
+    @Query(value = "SELECT * FROM License_Approvals " +
+            "WHERE approval_status = 'Approve' " +
+            "AND (administration_fee_payment_status != 'Paid' OR administration_fee_payment_status IS NULL)",
+            nativeQuery = true)
+    List<LicenseApproval> findUnpaidAdministrationFees();
+
 }
