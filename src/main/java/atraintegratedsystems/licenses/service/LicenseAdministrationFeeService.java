@@ -14,10 +14,12 @@ public class LicenseAdministrationFeeService {
     @Autowired
     private LicenseApprovalRepository licenseApprovalRepository;
 
+
     @Transactional
     public List<LicenseApproval> getAllApprovalApplicantsNotPaidAdministrationFee() {
         return licenseApprovalRepository.findUnpaidAdministrationFees();
     }
+
 
     @Transactional
     public LicenseApproval findById(Long id) {

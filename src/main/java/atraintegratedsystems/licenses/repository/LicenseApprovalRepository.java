@@ -17,11 +17,9 @@ public interface LicenseApprovalRepository extends JpaRepository<LicenseApproval
     Optional<LicenseApproval> findByLicenseApplicantId(Long applicantId);
     @Query(value = "SELECT * FROM License_Approvals " +
             "WHERE approval_status = 'Approve' " +
-            "AND (license_fee_payment_status != 'Paid' OR license_fee_payment_status IS NULL)",
+            "AND (license_fee_mcit_payment_status != 'Paid' OR license_fee_mcit_payment_status IS NULL)",
             nativeQuery = true)
     List<LicenseApproval> findUnpaidApprovedLicenses();
-
-
 
 
     @Query(value = "SELECT * FROM License_Approvals " +
@@ -29,5 +27,11 @@ public interface LicenseApprovalRepository extends JpaRepository<LicenseApproval
             "AND (administration_fee_payment_status != 'Paid' OR administration_fee_payment_status IS NULL)",
             nativeQuery = true)
     List<LicenseApproval> findUnpaidAdministrationFees();
+
+    @Query(value = "SELECT * FROM License_Approvals " +
+            "WHERE approval_status = 'Approve' " +
+            "AND (database_maintainance_fee_payment_status != 'Paid' OR database_maintainance_fee_payment_status IS NULL)",
+            nativeQuery = true)
+    List<LicenseApproval> findUnpaidDatabaseFees();
 
 }

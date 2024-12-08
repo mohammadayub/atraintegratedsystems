@@ -62,14 +62,14 @@ public class LicenseApproval {
     @Column(name="license_fee_mcit_expiry_date")
     private LocalDate licenseFeeExpiryDate;
 
-    @Column(name="databaseMaintianence_fee_entry_voucher_date")
+    @Column(name="database_maintainance_fee_entry_voucher_date")
     private LocalDate databaseMaintianenceFeeEntryVoucherDate;
-    @Column(name="databaseMaintianence_fee_bank_voucher_No")
+    @Column(name="database_maintainance_fee_bank_voucher_no")
     private String databaseMaintianenceFeeBankVoucherNo;
-    @Column(name="databaseMaintianence_fee_payment_status")
+    @Column(name="database_maintainance_fee_payment_status")
     private String databaseMaintianenceFeePaymentStatus;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @Column(name="databaseMaintianence_fee_expiry_date")
+    @Column(name="database_maintainance_fee_expiry_date")
     private LocalDate databaseMaintianenceFeeExpiryDate;
 
 
