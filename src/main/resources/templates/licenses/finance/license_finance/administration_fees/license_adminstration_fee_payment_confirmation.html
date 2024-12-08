@@ -4,7 +4,7 @@
     <div th:replace="styles :: data-tables-styles"></div>
     <div th:replace="styles :: persian-datepicker-styles"></div>
     <div th:replace="styles :: select2-styles"></div>
-    <title>ATRA Financial Integrated System</title>
+    <title>ATRA Revenue Integrated System</title>
 </head>
 <body>
 <nav th:replace="~{layout :: page_navbar}"></nav>
@@ -18,20 +18,16 @@
                 <lable>Approval Id</lable>
                 <input type="text" th:field="*{approvalId}" class="form-control" disabled>
             </div>
-
             <div class="col-md-3 form-group">
                <lable>License Fee Entry Voucher Date</lable>
                 <input type="text" th:field="*{licenseFeeEntryVoucherDate}" class="form-control hijrishamsi">
             </div>
-
             <!-- Currency Type -->
             <div class="col-md-3 form-group">
                 <label>License Fee Bank Voucher No</label>
                 <input type="text" th:field="*{licenseFeeBankVoucherNo}" class="form-control" >
             </div>
-
             <!-- Payment Status -->
-
             <div class="col-md-3 form-group align-items-center" style="margin-top: 38px; display: flex; align-items: center;">
                 <input
                         type="checkbox"
@@ -55,8 +51,6 @@
                 </label>
             </div>
 
-
-
         </div>
 
         <!-- Submit/Reset Buttons -->
@@ -67,12 +61,10 @@
         </div>
     </form>
 </div>
-
 <!-- Common scripts -->
 <div th:replace="scripts :: common-scripts"></div>
 <div th:replace="scripts :: persian-datepicker-scripts"></div>
 <div th:replace="scripts :: data-tables-scripts"></div>
-
 <script>
     $('.hijrishamsi').persianDatepicker({
       format: 'YYYY-MM-DD',

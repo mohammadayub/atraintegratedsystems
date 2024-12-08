@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
@@ -38,6 +40,22 @@ public class LicenseAdministrationFeeController {
     }
 
 
+    @PostMapping("/licenses/finance/mcit/license_fee_list/add")
+    public String updateLicenseApproval(@ModelAttribute LicenseApprovalDTO licenseApprovalDTO) {
+        // Fetch the existing entity from the database
+        LicenseApproval existingLicenseApproval = licenseAdministrationFeeService.findById(licenseApprovalDTO.getId());
+
+        // Update only the required fields
+        existingLicenseApproval.setLicenseFeeBankVoucherNo(licenseApprovalDTO.getLicenseFeeBankVoucherNo());
+        existingLicenseApproval.setLicenseFeePaymentStatus(licenseApprovalDTO.getLicenseFeePaymentStatus());
+
+        // Save the updated entity
+        licenseAdministrationFeeService.save(existingLicenseApproval);
+
+        return "redirect:/licenses/finance/mcit/license_fee_list";
+    }
+
+
     @GetMapping("/licenses/finance/license_finance/administration_fees/license_administration_fee_list/update/{id}")
     public String UpdateMcitFee(@PathVariable Long id, Model model){
         LicenseApproval licenseApproval = licenseAdministrationFeeService.findById(id);
@@ -55,9 +73,7 @@ public class LicenseAdministrationFeeController {
         model.addAttribute("licenseTypes", licenseTypeService.findAll());
         model.addAttribute("licenseApprovalDTO", licenseApprovalDTO);
         return "licenses/finance/license_finance/administration_fees/license_administration_fee_payment_confirmation";
-
     }
-
 
     @GetMapping("/licenses/finance/license_finance/administration_fees/license_administration_fee_list/print/{id}")
     public String GetTariff(@PathVariable Long id, Model model){
