@@ -62,15 +62,38 @@ public class LicenseApproval {
     @Column(name="license_fee_expiry_date")
     private LocalDate licenseFeeExpiryDate;
 
+    @Column(name="databaseMaintianence_fee_entry_voucher_date")
+    private LocalDate databaseMaintianenceFeeEntryVoucherDate;
+    @Column(name="databaseMaintianence_fee_bank_voucher_No")
+    private String databaseMaintianenceFeeBankVoucherNo;
+    @Column(name="databaseMaintianence_fee_payment_status")
+    private String databaseMaintianenceFeePaymentStatus;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @Column(name="database_maintainence_fee_expiry_date")
+    @Column(name="databaseMaintianence_fee_expiry_date")
     private LocalDate databaseMaintianenceFeeExpiryDate;
+
+
+    @Column(name="administration_fee_entry_voucher_date")
+    private LocalDate administrationFeeEntryVoucherDate;
+    @Column(name="administration_fee_bank_voucher_No")
+    private String administrationFeeBankVoucherNo;
+    @Column(name="administration_fee_payment_status")
+    private String administrationFeePaymentStatus;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name="administration_fee_expiry_date")
     private LocalDate administrationFeeExpiryDate;
+
+    @Column(name="guarantee_fee_entry_voucher_date")
+    private LocalDate guaranteeFeeEntryVoucherDate;
+    @Column(name="guarantee_fee_bank_voucher_No")
+    private String guaranteeFeeBankVoucherNo;
+    @Column(name="guarantee_fee_payment_status")
+    private String guaranteeFeePaymentStatus;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name="guarantee_fee_expiry_date")
     private LocalDate guaranteeFeeExpiryDate;
+
+
 
     public JalaliDate getLicenseFeeExpiryDate() {
         if (licenseFeeExpiryDate == null) {
@@ -82,7 +105,7 @@ public class LicenseApproval {
     }
 
 //    Start My Code
-    public JalaliDate getdatabaseMaintainenceFeeExpiryDate() {
+    public JalaliDate getdatabaseMaintianenceFeeExpiryDate() {
         if (databaseMaintianenceFeeExpiryDate == null) {
             return null; // Return null if issueLicenseDate is null
         }
@@ -90,6 +113,7 @@ public class LicenseApproval {
         JalaliDate jalalidatabaseMaintianenceFeeExpiryDate=dateConverter.gregorianToJalali(databaseMaintianenceFeeExpiryDate.getYear(),databaseMaintianenceFeeExpiryDate.getMonthValue(),databaseMaintianenceFeeExpiryDate.getDayOfMonth());
         return jalalidatabaseMaintianenceFeeExpiryDate;
     }
+
 
     public JalaliDate getadministrationFeeExpiryDate() {
         if (administrationFeeExpiryDate == null) {
@@ -99,6 +123,7 @@ public class LicenseApproval {
         JalaliDate jalaliadministrationFeeExpiryDate=dateConverter.gregorianToJalali(administrationFeeExpiryDate.getYear(),administrationFeeExpiryDate.getMonthValue(),administrationFeeExpiryDate.getDayOfMonth());
         return jalaliadministrationFeeExpiryDate;
     }
+
     public JalaliDate getguaranteeFeeExpiryDate() {
         if (guaranteeFeeExpiryDate == null) {
             return null; // Return null if issueLicenseDate is null

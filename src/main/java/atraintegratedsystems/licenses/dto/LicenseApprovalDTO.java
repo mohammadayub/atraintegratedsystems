@@ -36,10 +36,25 @@ public class LicenseApprovalDTO {
     private LocalDate licenseFeeEntryVoucherDate;
     private String licenseFeeBankVoucherNo;
     private String licenseFeePaymentStatus;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate databaseMaintianenceFeeEntryVoucherDate;
+    private String databaseMaintianenceFeeBankVoucherNo;
+    private String databaseMaintianenceFeePaymentStatus;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate databaseMaintianenceFeeExpiryDate;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate administrationFeeEntryVoucherDate;
+    private String administrationFeeBankVoucherNo;
+    private String administrationFeePaymentStatus;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate administrationFeeExpiryDate;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate guaranteeFeeEntryVoucherDate;
+    private String guaranteeFeeBankVoucherNo;
+    private String guaranteeFeePaymentStatus;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate guaranteeFeeExpiryDate;
 
