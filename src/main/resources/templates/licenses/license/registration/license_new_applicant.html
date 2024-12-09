@@ -93,9 +93,13 @@
           <input type="text" id="licenseNo" th:field="*{licenseNo}" class="form-control" required>
         </div>
         <div class="col-md-3 form-group">
+          <div class="row">
+            <div class="col-md-6">
           <label for="licenseUpload" th:text="#{license_application_upload}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
           <input type="file" id="licenseUpload" th:field="*{licenseUpload}" class="form-control-file" accept=".pdf,.jpg,.jpeg,.png" required />
         </div>
+            </div>
+          </div>
         <div class="col-md-3 form-group">
           <label for="tinNo" th:text="#{license_application_tin}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
           <input type="text" id="tinNo" th:field="*{tinNo}" class="form-control" required>
@@ -114,8 +118,12 @@
         </div>
         </div>
         <div class="col-md-3 form-group">
+          <div class="row">
+            <div class="col-md-6">
           <label for="bankStatementUpload" th:text="#{license_application_bank_statement_file}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
           <input type="file" id="bankStatementUpload" th:field="*{bankStatementUpload}" class="form-control-file" accept=".pdf,.jpg,.jpeg,.png" required />
+        </div>
+          </div>
         </div>
         <div class="col-md-3 form-group">
           <label for="yearOfEstablishment" th:text="#{license_application_year_establishment}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
