@@ -68,6 +68,20 @@ public class LicenseApprovalService {
                     dto.getApprovalDate().getDayOfMonth()
             );
             profile.setApprovalDate(approvalDate);
+
+            // Expiry Date
+
+            // Fetch the LicenseApplicant from the repository
+            LicenseApplicant licenseApplicant = licenseApplicantRepository.findById(dto.getId())
+                    .orElseThrow(() -> new IllegalArgumentException("LicenseApplicant not found with ID: " + dto.getId()));
+
+            int licenseValidityYear=licenseApplicant.getValidity();
+
+            profile.setDatabaseMaintianenceFeeExpiryDate(approvalDate.plusYears(1));
+            profile.setAdministrationFeeExpiryDate(approvalDate.plusYears(1));
+            profile.setLicenseFeeExpiryDate(approvalDate.plusYears(licenseValidityYear));
+            profile.setGuaranteeFeeExpiryDate(approvalDate.plusYears(licenseValidityYear));
+
             log.info("Approval Date (Gregorian): {}", approvalDate);
         } catch (Exception e) {
             throw new IllegalArgumentException("Invalid approval date provided: " + dto.getApprovalDate(), e);
@@ -103,9 +117,10 @@ public class LicenseApprovalService {
         profile.setDatabaseYearlyMaintainanceFees(dto.getDatabaseYearlyMaintainanceFees() != null ? dto.getDatabaseYearlyMaintainanceFees() : BigDecimal.ZERO);
         profile.setDatabaseYearlyMaintainanceFeesPaymentOffice(dto.getDatabaseYearlyMaintainanceFeesPaymentOffice());
 
-        //Add Expiry Dates
 
-        //profile.setDatabaseMaintianenceFeeExpiryDate(dto.getApprovalDate().plusYears(1));
+
+
+
 
 
 

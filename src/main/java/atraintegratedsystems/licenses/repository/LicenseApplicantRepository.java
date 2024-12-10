@@ -48,4 +48,6 @@ public interface LicenseApplicantRepository extends JpaRepository<LicenseApplica
 
 
 
+
+
 }
