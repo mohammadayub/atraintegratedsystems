@@ -3,6 +3,7 @@ package atraintegratedsystems.licenses.controller;
 import atraintegratedsystems.licenses.dto.LicenseApprovalDTO;
 import atraintegratedsystems.licenses.model.LicenseApproval;
 import atraintegratedsystems.licenses.service.LicenseAdministrationFeeService;
+import atraintegratedsystems.licenses.service.LicenseGuaranteeFeeService;
 import atraintegratedsystems.licenses.service.LicenseTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,12 +22,11 @@ public class LicenseGuaranteeFeesController {
     private LicenseTypeService licenseTypeService;
 
     @Autowired
-    private LicenseAdministrationFeeService licenseAdministrationFeeService;
-
+    private LicenseGuaranteeFeeService licenseGuaranteeFeeService;
 
     @GetMapping("/licenses/finance/license_finance/guarantee_fees/license_guarantee_fee_list")
     public String showApplicationProfile(Model model) {
-        List<LicenseApproval> profiles = licenseAdministrationFeeService.getAllApprovalApplicantsNotPaidAdministrationFee();
+        List<LicenseApproval> profiles = licenseGuaranteeFeeService.getAllApplicantsUnPaidGuarantee();
         model.addAttribute("profiles", profiles);
         return "/licenses/finance/license_finance/guarantee_fees/license_guarantee_fee_list";
     }
@@ -42,22 +42,22 @@ public class LicenseGuaranteeFeesController {
     @PostMapping("/licenses/finance/license_finance/guarantee_fees/license_guarantee_fee_list/add")
     public String updateLicenseApproval(@ModelAttribute LicenseApprovalDTO licenseApprovalDTO) {
         // Fetch the existing entity from the database
-        LicenseApproval existingLicenseApproval = licenseAdministrationFeeService.findById(licenseApprovalDTO.getId());
+        LicenseApproval existingLicenseApproval = licenseGuaranteeFeeService.findById(licenseApprovalDTO.getId());
 
         // Update only the required fields
-        existingLicenseApproval.setAdministrationFeeEntryVoucherDate(licenseApprovalDTO.getAdministrationFeeEntryVoucherDate());
-        existingLicenseApproval.setAdministrationFeeBankVoucherNo(licenseApprovalDTO.getAdministrationFeeBankVoucherNo());
-        existingLicenseApproval.setAdministrationFeePaymentStatus(licenseApprovalDTO.getAdministrationFeePaymentStatus());
+        existingLicenseApproval.setGuaranteeFeeEntryVoucherDate(licenseApprovalDTO.getGuaranteeFeeEntryVoucherDate());
+        existingLicenseApproval.setGuaranteeFeeBankVoucherNo(licenseApprovalDTO.getGuaranteeFeeBankVoucherNo());
+        existingLicenseApproval.setGuaranteeFeePaymentStatus(licenseApprovalDTO.getGuaranteeFeePaymentStatus());
 
         // Save the updated entity
-        licenseAdministrationFeeService.save(existingLicenseApproval);
+        licenseGuaranteeFeeService.save(existingLicenseApproval);
         return "redirect:/licenses/finance/license_finance/guarantee_fees/license_guarantee_fee_list";
     }
 
 
     @GetMapping("/licenses/finance/license_finance/guarantee_fees/license_guarantee_fee_list/update/{id}")
     public String UpdateMcitFee(@PathVariable Long id, Model model){
-        LicenseApproval licenseApproval = licenseAdministrationFeeService.findById(id);
+        LicenseApproval licenseApproval = licenseGuaranteeFeeService.findById(id);
         LicenseApprovalDTO licenseApprovalDTO = new LicenseApprovalDTO();
         // Map fields from licenseApplicant to licenseApplicantDTO
         licenseApprovalDTO.setId(licenseApproval.getId());
@@ -79,7 +79,7 @@ public class LicenseGuaranteeFeesController {
 
     @GetMapping("/licenses/finance/license_finance/guarantee_fees/license_guarantee_fee_list/print/{id}")
     public String GetTariff(@PathVariable Long id, Model model){
-        LicenseApproval licenseApproval = licenseAdministrationFeeService.findById(id);
+        LicenseApproval licenseApproval = licenseGuaranteeFeeService.findById(id);
         LicenseApprovalDTO licenseApprovalDTO = new LicenseApprovalDTO();
         // Map fields from licenseApplicant to licenseApplicantDTO
         licenseApprovalDTO.setId(licenseApproval.getId());

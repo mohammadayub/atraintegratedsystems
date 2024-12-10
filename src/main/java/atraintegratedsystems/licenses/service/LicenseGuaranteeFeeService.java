@@ -3,7 +3,6 @@ package atraintegratedsystems.licenses.service;
 import atraintegratedsystems.licenses.model.LicenseApproval;
 import atraintegratedsystems.licenses.repository.LicenseApprovalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
@@ -12,8 +11,9 @@ public class LicenseGuaranteeFeeService {
     @Autowired
     private LicenseApprovalRepository licenseApprovalRepository;
 
-    public List<LicenseApproval> getAllApprovalApplicants() {
-        return licenseApprovalRepository.findAll();
+    public List<LicenseApproval> getAllApplicantsUnPaidGuarantee()
+    {
+        return licenseApprovalRepository.findUnpaidguaranteeFees();
     }
 
     public LicenseApproval findById(Long id) {
