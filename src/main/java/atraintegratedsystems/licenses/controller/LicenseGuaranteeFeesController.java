@@ -56,7 +56,7 @@ public class LicenseGuaranteeFeesController {
 
 
     @GetMapping("/licenses/finance/license_finance/guarantee_fees/license_guarantee_fee_list/update/{id}")
-    public String UpdateMcitFee(@PathVariable Long id, Model model){
+    public String UpdateGuaranteeFee(@PathVariable Long id, Model model){
         LicenseApproval licenseApproval = licenseGuaranteeFeeService.findById(id);
         LicenseApprovalDTO licenseApprovalDTO = new LicenseApprovalDTO();
         // Map fields from licenseApplicant to licenseApplicantDTO
@@ -68,13 +68,13 @@ public class LicenseGuaranteeFeesController {
         licenseApprovalDTO.setBoardDecisionNumber(licenseApproval.getBoardDecisionNumber());
         licenseApprovalDTO.setApprovalStatus(licenseApproval.getApprovalStatus());
         licenseApprovalDTO.setCurrencyType(licenseApproval.getCurrencyType());
-        licenseApprovalDTO.setAdministrativeYearlyFees(licenseApproval.getAdministrativeYearlyFees());
-        licenseApprovalDTO.setAdministrationFeeEntryVoucherDate(licenseApproval.getAdministrationFeeEntryVoucherDate());
-        licenseApprovalDTO.setAdministrationFeeBankVoucherNo(licenseApproval.getAdministrationFeeBankVoucherNo());
-        licenseApprovalDTO.setAdministrationFeePaymentStatus(licenseApproval.getAdministrationFeePaymentStatus());
+        licenseApprovalDTO.setGuaranteeFees(licenseApproval.getGuaranteeFees());
+        licenseApprovalDTO.setGuaranteeFeeEntryVoucherDate(licenseApproval.getGuaranteeFeeEntryVoucherDate());
+        licenseApprovalDTO.setGuaranteeFeeBankVoucherNo(licenseApproval.getGuaranteeFeeBankVoucherNo());
+        licenseApprovalDTO.setGuaranteeFeePaymentStatus(licenseApproval.getGuaranteeFeePaymentStatus());
         model.addAttribute("licenseTypes", licenseTypeService.findAll());
         model.addAttribute("licenseApprovalDTO", licenseApprovalDTO);
-        return "/licenses/finance/license_finance/guarantee_fees/license_guarantee_fee_payment_confirmation";
+        return "licenses/finance/license_finance/guarantee_fees/license_guarantee_fee_payment_confirmation";
     }
 
     @GetMapping("/licenses/finance/license_finance/guarantee_fees/license_guarantee_fee_list/print/{id}")
@@ -90,9 +90,9 @@ public class LicenseGuaranteeFeesController {
         licenseApprovalDTO.setBoardDecisionNumber(licenseApproval.getBoardDecisionNumber());
         licenseApprovalDTO.setApprovalStatus(licenseApproval.getApprovalStatus());
         licenseApprovalDTO.setCurrencyType(licenseApproval.getCurrencyType());
-        licenseApprovalDTO.setAdministrativeYearlyFees(licenseApproval.getAdministrativeYearlyFees());
+        licenseApprovalDTO.setGuaranteeFees(licenseApproval.getGuaranteeFees());
         model.addAttribute("licenseTypes", licenseTypeService.findAll());
         model.addAttribute("licenseApprovalDTO", licenseApprovalDTO);
-        return "/licenses/finance/license_finance/guarantee_fees/license_guarantee_fee_print_tariff";
+        return "licenses/finance/license_finance/guarantee_fees/license_guarantee_fee_print_tariff";
     }
 }
