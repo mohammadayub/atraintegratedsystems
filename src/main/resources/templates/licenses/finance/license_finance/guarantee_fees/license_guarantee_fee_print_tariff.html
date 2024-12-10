@@ -93,7 +93,7 @@
       <th th:text="#{mcit_license_board_descision_no}">Board Decision Number</th>
       <th th:text="#{mcit_license_approval_status}"></th>
       <th th:text="#{mcit_license_approval_currency}"></th>
-      <th>Guarantee Fees</th>
+      <th th:text="#{guarantee_fees}"></th>
     </tr>
     <tr>
       <td><input type="text" th:field="${licenseApprovalDTO.id}" disabled> </td>
@@ -115,7 +115,7 @@
       </td>
     </tr>
   </table>
-  <a th:href="@{/licenses/finance/license_finance/administration_fees/license_administration_fee_list}" id="backtopage" class="btn" style="margin-top:20px;background-color:#5e331a;color:white;">
+  <a th:href="@{/licenses/finance/license_finance/guarantee_fees/license_guarantee_fee_list}" id="backtopage" class="btn" style="margin-top:20px;background-color:#5e331a;color:white;">
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6" style="width:20px;height:20px;">
       <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
     </svg>

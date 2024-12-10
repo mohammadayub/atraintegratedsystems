@@ -15,16 +15,16 @@
             <!-- Hidden ID Field -->
             <input type="hidden" th:field="*{id}">
             <div class="col-md-3 form-group">
-                <lable>Approval Id</lable>
+                <lable th:text="#{approval_id}"></lable>
                 <input type="text" th:field="*{approvalId}" class="form-control" disabled>
             </div>
             <div class="col-md-3 form-group">
-               <lable>Administration Fee Entry Voucher Date</lable>
+               <lable th:text="#{administration_fee_entry_voucher_date}"></lable>
                 <input type="text" th:field="*{administrationFeeEntryVoucherDate}" class="form-control hijrishamsi">
             </div>
             <!-- Currency Type -->
             <div class="col-md-3 form-group">
-                <label>Administration Fee Bank Voucher No</label>
+                <label >Administration Fee Bank Voucher No</label>
                 <input type="text" th:field="*{administrationFeeBankVoucherNo}" class="form-control" >
             </div>
             <!-- Payment Status -->
@@ -60,6 +60,11 @@
             </button>
         </div>
     </form>
+    <a th:href="@{/licenses/finance/license_finance/administration_fees/license_administration_fee_list}" id="backtopage" class="btn" style="margin-top:20px;background-color:#5e331a;color:white;">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6" style="width:20px;height:20px;">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
+        </svg>
+        Back to Page</a>
 </div>
 <!-- Common scripts -->
 <div th:replace="scripts :: common-scripts"></div>

@@ -5,6 +5,7 @@ import atraintegratedsystems.licenses.model.LicenseApproval;
 import atraintegratedsystems.licenses.service.LicenseAdministrationFeeService;
 import atraintegratedsystems.licenses.service.LicenseGuaranteeFeeService;
 import atraintegratedsystems.licenses.service.LicenseTypeService;
+import atraintegratedsystems.utils.DateConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Controller
@@ -44,6 +46,12 @@ public class LicenseGuaranteeFeesController {
         // Fetch the existing entity from the database
         LicenseApproval existingLicenseApproval = licenseGuaranteeFeeService.findById(licenseApprovalDTO.getId());
 
+        DateConverter dateConverter = new DateConverter();
+        LocalDate guaranteeEntryVoucherDate = dateConverter.jalaliToGregorian(
+                licenseApprovalDTO.getGuaranteeFeeEntryVoucherDate().getYear(),
+                licenseApprovalDTO.getGuaranteeFeeEntryVoucherDate().getMonthValue(),
+                licenseApprovalDTO.getGuaranteeFeeEntryVoucherDate().getDayOfMonth()
+        );
         // Update only the required fields
         existingLicenseApproval.setGuaranteeFeeEntryVoucherDate(licenseApprovalDTO.getGuaranteeFeeEntryVoucherDate());
         existingLicenseApproval.setGuaranteeFeeBankVoucherNo(licenseApprovalDTO.getGuaranteeFeeBankVoucherNo());
