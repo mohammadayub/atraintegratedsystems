@@ -5,6 +5,7 @@ import atraintegratedsystems.licenses.dto.LicenseApprovalDTO;
 import atraintegratedsystems.licenses.model.LicenseApproval;
 import atraintegratedsystems.licenses.service.LicenseAdministrationFeeService;
 import atraintegratedsystems.licenses.service.LicenseTypeService;
+import atraintegratedsystems.utils.DateConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Controller
@@ -46,7 +48,14 @@ public class LicenseAdministrationFeeController {
         LicenseApproval existingLicenseApproval = licenseAdministrationFeeService.findById(licenseApprovalDTO.getId());
 
         // Update only the required fields
-        existingLicenseApproval.setAdministrationFeeEntryVoucherDate(licenseApprovalDTO.getAdministrationFeeEntryVoucherDate());
+
+        DateConverter dateConverter = new DateConverter();
+        LocalDate administrationEntryVoucherDate = dateConverter.jalaliToGregorian(
+                licenseApprovalDTO.getAdministrationFeeEntryVoucherDate().getYear(),
+                licenseApprovalDTO.getAdministrationFeeEntryVoucherDate().getMonthValue(),
+                licenseApprovalDTO.getAdministrationFeeEntryVoucherDate().getDayOfMonth()
+        );
+        existingLicenseApproval.setAdministrationFeeEntryVoucherDate(administrationEntryVoucherDate);
         existingLicenseApproval.setAdministrationFeeBankVoucherNo(licenseApprovalDTO.getAdministrationFeeBankVoucherNo());
         existingLicenseApproval.setAdministrationFeePaymentStatus(licenseApprovalDTO.getAdministrationFeePaymentStatus());
 

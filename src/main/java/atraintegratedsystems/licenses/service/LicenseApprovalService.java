@@ -103,6 +103,12 @@ public class LicenseApprovalService {
         profile.setDatabaseYearlyMaintainanceFees(dto.getDatabaseYearlyMaintainanceFees() != null ? dto.getDatabaseYearlyMaintainanceFees() : BigDecimal.ZERO);
         profile.setDatabaseYearlyMaintainanceFeesPaymentOffice(dto.getDatabaseYearlyMaintainanceFeesPaymentOffice());
 
+        //Add Expiry Dates
+
+        //profile.setDatabaseMaintianenceFeeExpiryDate(dto.getApprovalDate().plusYears(1));
+
+
+
         log.info("Financial details set for profile.");
 
         // Set License Applicant
