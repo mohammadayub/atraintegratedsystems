@@ -46,9 +46,8 @@
             </div>
             <div class="col-md-3 form-group">
             <label for="isSend" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" th:text="#{is_send}"></label>
-            <select th:field="*{isSend}" id="isSend" class="form-control">
+            <select th:field="*{isSend}" id="isSend" class="form-control" readonly="readonly">
                 <option value="Yes" th:text="#{Yes}">Yes</option>
-                <option value="No" th:text="#{No}">No</option>
             </select>
             </div>
 
@@ -74,18 +73,20 @@
                 </a>
             </div>
         </div>
+        <a th:href="@{/licenses/license/registration/license_applicants_profile}" class="btn" style="margin-top:20px;color:white;background-color:#5e331a;">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6" style="width:20px;height:20px;">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
+            </svg>
+            Back to Page</a>
 
 
         <!-- Back Link -->
 
     </form>
+
     </div>
 
-    <a th:href="@{/licenses/license/registration/license_applicants_profile}" class="btn" style="margin-top:20px;color:white;background-color:#5e331a;">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6" style="width:20px;height:20px;">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
-        </svg>
-        Back to Page</a>
+
 </div>
 
 <div th:replace="scripts :: common-scripts"></div>
