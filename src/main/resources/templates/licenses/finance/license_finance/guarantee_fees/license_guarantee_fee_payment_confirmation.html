@@ -23,12 +23,12 @@
                 <input type="text" th:field="*{guaranteeFeeEntryVoucherDate}" class="form-control hijrishamsi">
             </div>
             <!-- Currency Type -->
-            <div class="col-md-3 form-group">
+            <div class="col-md-3 form-group" style="margin-top:-9px;">
                 <label>Guarantee Fee Bank Voucher No</label>
                 <input type="text" th:field="*{guaranteeFeeBankVoucherNo}" class="form-control" >
             </div>
             <!-- Payment Status -->
-            <div class="col-md-3 form-group align-items-center" style="margin-top: 38px; display: flex; align-items: center;">
+            <div class="col-md-3 form-group align-items-center" style="margin-top: 20px; display: flex; align-items: center;">
                 <input
                         type="checkbox"
                         th:field="*{guaranteeFeePaymentStatus}"
@@ -54,7 +54,7 @@
 
         <!-- Submit/Reset Buttons -->
         <div class="col-md-4 btn-group d-flex justify-content-center" style="margin-top: 15px; margin-bottom:80px; margin:0 auto;">
-            <button type="submit" class="btn btn-primary btn-sm" style="width: 100px;" th:text="#{confirmation_payment}">
+            <button type="submit" class="btn btn-primary btn-sm" style="width: 100px;background-color:#5e331a;color:white;" th:text="#{confirmation_payment}">
                 <span class="fas fa-check"></span> Confirm Payment
             </button>
         </div>
