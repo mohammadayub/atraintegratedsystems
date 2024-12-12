@@ -95,7 +95,7 @@ public class LicenseApproval {
 
 
 
-    public JalaliDate getLicenseFeeExpiryDate() {
+    public JalaliDate getlFeeExpiryDate() {
         if (licenseFeeExpiryDate == null) {
             return null; // Return null if issueLicenseDate is null
         }

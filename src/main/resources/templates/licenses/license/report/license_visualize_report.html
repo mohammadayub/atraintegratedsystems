@@ -1,0 +1,169 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head th:replace="~{layout :: page_head}">
+  <div th:replace="styles :: data-tables-styles"></div>
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css">
+  <title>ATRA Financial Integrated System</title>
+  <style>
+    /* Basic Table Styling */
+    body {
+        background-color: #f9f9f9;
+    }
+    .table-container {
+        max-height: 800px;
+        overflow-y: auto;
+        border: 1px solid #ddd;
+        background-color: #ffffff;
+        padding: 20px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+    #profileTable {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.9em;
+    }
+    #profileTable th, #profileTable td {
+        padding: 6px;
+        text-align: center;
+        vertical-align: middle;
+        font-size: 0.8em;
+    }
+    #profileTable thead th {
+        background-color: #1a73e8;
+        color: white;
+        font-size: 0.85em;
+    }
+    #profileTable tbody tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+    .chart-container {
+        width: 100%;
+        margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+<nav th:replace="~{layout :: page_navbar}"></nav>
+<div class="container-fluid">
+  <div class="table-container">
+    <table class="table table-bordered" id="profileTable">
+      <thead>
+      <tr>
+        <th>Approval Id</th>
+        <th>Approval Date</th>
+        <th>Approval Status</th>
+        <th>Board Decision Number</th>
+        <th>Board Decisions</th>
+        <th>License Type Name</th>
+        <th>Currency Type</th>
+        <th>License Fees</th>
+        <th>License Fees Expiry Date</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="profile : ${profiles}">
+        <td th:text="${profile.approvalId}"></td>
+        <td th:text="${profile.approvalDate}"></td>
+        <td th:text="${profile.approvalStatus}"></td>
+        <td th:text="${profile.boardDecisionNumber}"></td>
+        <td th:text="${profile.boardDecisions}"></td>
+        <td th:text="${profile.licenseType.name}"></td>
+        <td th:text="${profile.currencyType}"></td>
+        <td>
+          <span th:text="${profile.licenseFees}"></span>
+          <div class="chart-container">
+            <canvas id="chart-licenseFees-[[${profile.approvalId}]]"
+                    data-approval-date="[[${profile.approvalDate}]]"
+                    data-license-fee-expiry-date="[[${profile.licenseFeeExpiryDate}]]"></canvas>
+          </div>
+        </td>
+        <td th:text="${profile.licenseFeeExpiryDate}"></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Scripts -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+  $(document).ready(function () {
+    // Initialize DataTable
+    $('#profileTable').DataTable({
+      dom: 'Bfrtip',
+      buttons: [
+        {
+          extend: 'excelHtml5',
+          text: 'Export to Excel',
+          title: 'License Approvals Report'
+        }
+      ]
+    });
+
+    // Function to parse the date and calculate days
+    function parseDate(dateString) {
+      const dateParts = dateString.split('-'); // Split the date (yyyy-MM-dd)
+      return new Date(dateParts[0], dateParts[1] - 1, dateParts[2]); // Month is 0-indexed
+    }
+
+    // Function to calculate days between system date and the expiry date
+    function calculateDays(startDate, endDate) {
+      const now = new Date(); // Current system date
+      const start = parseDate(startDate); // Approval Date (start date)
+      const end = parseDate(endDate); // License Fee Expiry Date (end date)
+
+      // Log the parsed dates for debugging
+      console.log('Now (Current Date):', now);
+      console.log('Start (Approval Date):', start);
+      console.log('End (Expiry Date):', end);
+
+      // Calculate days passed from start (Approval Date) to now
+      const daysPassed = Math.max(0, Math.ceil((now - start) / (1000 * 60 * 60 * 24))); // in days
+
+      // Calculate remaining days to the expiry date
+      const daysRemaining = Math.max(0, Math.ceil((end - now) / (1000 * 60 * 60 * 24))); // in days
+
+      return { daysPassed, daysRemaining };
+    }
+
+    // Render Charts for License Fees
+    $('[id^="chart-licenseFees-"]').each(function () {
+      const chartId = $(this).attr('id');
+      const ctx = document.getElementById(chartId).getContext('2d');
+
+      const approvalDate = $(this).data('approval-date'); // Approval Date
+      const expiryDate = $(this).data('license-fee-expiry-date'); // License Fee Expiry Date
+
+      const { daysPassed, daysRemaining } = calculateDays(approvalDate, expiryDate);
+
+      // Log the data values to the console for debugging
+      console.log("Approval Date:", approvalDate);
+      console.log("Expiry Date:", expiryDate);
+      console.log("Days Passed:", daysPassed, "Days Remaining:", daysRemaining);
+
+      // Create the chart
+      new Chart(ctx, {
+        type: 'pie',
+        data: {
+          labels: ['Days Passed', 'Days Remaining'],
+          datasets: [{
+            data: [daysPassed, daysRemaining],
+            backgroundColor: ['#4caf50', '#f44336']
+          }]
+        }
+      });
+    });
+  });
+</script>
+
+<footer th:replace="~{layout :: page_footer}"></footer>
+</body>
+</html>
