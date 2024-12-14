@@ -4,9 +4,15 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link th:href="@{/images/favicon.png}" rel="icon" type="image/png">
-    <title>AFIS</title>
+    <title>ARIS</title>
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
-    <script>
+<!--    Start Google Font-->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cagliostro&family=Inder&family=Kite+One&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Moderustic:wght@300..800&family=Playfair+Display:ital@0;1&family=Racing+Sans+One&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <!--  End Google Fonts  -->
+     <script>
         window.addEventListener('DOMContentLoaded', (event) => {
             // Get the lang cookie
             const langCookie = document.cookie.split('; ').find(row => row.startsWith('langCookie='));
@@ -24,7 +30,8 @@
     </script>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: "Roboto", sans-serif;
+            font-weight: 500;
             background-color: #f5f5f5;
         }
         .navbar {
