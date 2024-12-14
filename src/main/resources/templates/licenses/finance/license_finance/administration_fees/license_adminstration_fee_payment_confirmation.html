@@ -9,7 +9,7 @@
 <body>
 <nav th:replace="~{layout :: page_navbar}"></nav>
 <h3 style="text-align:center;margin-top:30px;font-weight:bolder;" th:text="#{license_application_confirmation}">License Application Confirmation</h3>
-<div class="container-fluid" style="margin-top:40px;">
+<div class="container mt-4">
     <form th:action="@{/licenses/finance/license_finance/administration_fees/license_administration_fee_list/add}" th:object="${licenseApprovalDTO}" method="post">
         <div class="row">
             <!-- Hidden ID Field -->
@@ -18,17 +18,17 @@
                 <lable th:text="#{approval_id}"></lable>
                 <input type="text" th:field="*{approvalId}" class="form-control" disabled>
             </div>
-            <div class="col-md-3 form-group">
+            <div class="col-md-4 form-group">
                <lable th:text="#{administration_fee_entry_voucher_date}"></lable>
                 <input type="text" th:field="*{administrationFeeEntryVoucherDate}" class="form-control hijrishamsi">
             </div>
             <!-- Currency Type -->
-            <div class="col-md-3 form-group" style="margin-top:-9px;">
-                <label >Administration Fee Bank Voucher No</label>
+            <div class="col-md-4 form-group" style="margin-top:-9px;">
+                <label >Administration Fee Bank Voucher No#</label>
                 <input type="text" th:field="*{administrationFeeBankVoucherNo}" class="form-control" >
             </div>
             <!-- Payment Status -->
-            <div class="col-md-3 form-group align-items-center" style="margin-top: 20px; display: flex; align-items: center;">
+            <div class="col-md-1 form-group align-items-center" style="margin-top: 20px; display: flex; align-items: center;">
                 <input
                         type="checkbox"
                         th:field="*{administrationFeePaymentStatus}"
