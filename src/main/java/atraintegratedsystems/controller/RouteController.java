@@ -45,9 +45,10 @@ public class RouteController {
 //    {
 //        return "licenses/finance/administration_fees/administration_fees";
 //    }
-    @GetMapping("/license/finance/license_finance")
+    @GetMapping("/licenses/finance/license_finance")
    public String license_finance_home()
 {
+
     return "licenses/finance/license_finance/license_finance_home";
 }
 
