@@ -95,6 +95,13 @@ public class LicenseApproval {
 
 
 
+    //Chart
+
+    private String formattedApprovalDate; // For yyyy-MM-dd formatted dates
+    private String formattedLicenseFeeExpiryDate; // For yyyy-MM-dd formatted dates
+
+
+
     public JalaliDate getlFeeExpiryDate() {
         if (licenseFeeExpiryDate == null) {
             return null; // Return null if issueLicenseDate is null

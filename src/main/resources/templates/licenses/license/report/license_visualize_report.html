@@ -6,7 +6,6 @@
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css">
   <title>ATRA Financial Integrated System</title>
   <style>
-    /* Basic Table Styling */
     body {
         background-color: #f9f9f9;
     }
@@ -39,7 +38,15 @@
     }
     .chart-container {
         width: 100%;
+        max-width: 300px;  /* Adjust the max width */
+        height: 300px;     /* Set the height */
         margin-top: 10px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    canvas {
+        width: 100% !important;  /* Make the canvas fill the container */
+        height: 100% !important; /* Make the canvas fill the container */
     }
   </style>
 </head>
@@ -64,7 +71,7 @@
       <tbody>
       <tr th:each="profile : ${profiles}">
         <td th:text="${profile.approvalId}"></td>
-        <td th:text="${profile.approvalDate}"></td>
+        <td th:text="${profile.formattedApprovalDate}"></td>
         <td th:text="${profile.approvalStatus}"></td>
         <td th:text="${profile.boardDecisionNumber}"></td>
         <td th:text="${profile.boardDecisions}"></td>
@@ -74,11 +81,11 @@
           <span th:text="${profile.licenseFees}"></span>
           <div class="chart-container">
             <canvas id="chart-licenseFees-[[${profile.approvalId}]]"
-                    data-approval-date="[[${profile.approvalDate}]]"
-                    data-license-fee-expiry-date="[[${profile.licenseFeeExpiryDate}]]"></canvas>
+                    th:data-approval-date="${profile.formattedApprovalDate}"
+                    th:data-license-fee-expiry-date="${profile.formattedLicenseFeeExpiryDate}"></canvas>
           </div>
         </td>
-        <td th:text="${profile.licenseFeeExpiryDate}"></td>
+        <td th:text="${profile.formattedLicenseFeeExpiryDate}"></td>
       </tr>
       </tbody>
     </table>
@@ -110,7 +117,7 @@
 
     // Function to parse the date and calculate days
     function parseDate(dateString) {
-      const dateParts = dateString.split('-'); // Split the date (yyyy-MM-dd)
+      const dateParts = dateString.split('-');
       return new Date(dateParts[0], dateParts[1] - 1, dateParts[2]); // Month is 0-indexed
     }
 
@@ -119,11 +126,6 @@
       const now = new Date(); // Current system date
       const start = parseDate(startDate); // Approval Date (start date)
       const end = parseDate(endDate); // License Fee Expiry Date (end date)
-
-      // Log the parsed dates for debugging
-      console.log('Now (Current Date):', now);
-      console.log('Start (Approval Date):', start);
-      console.log('End (Expiry Date):', end);
 
       // Calculate days passed from start (Approval Date) to now
       const daysPassed = Math.max(0, Math.ceil((now - start) / (1000 * 60 * 60 * 24))); // in days
@@ -134,7 +136,7 @@
       return { daysPassed, daysRemaining };
     }
 
-    // Render Charts for License Fees
+    // Render 3D Charts for License Fees
     $('[id^="chart-licenseFees-"]').each(function () {
       const chartId = $(this).attr('id');
       const ctx = document.getElementById(chartId).getContext('2d');
@@ -144,20 +146,38 @@
 
       const { daysPassed, daysRemaining } = calculateDays(approvalDate, expiryDate);
 
-      // Log the data values to the console for debugging
-      console.log("Approval Date:", approvalDate);
-      console.log("Expiry Date:", expiryDate);
-      console.log("Days Passed:", daysPassed, "Days Remaining:", daysRemaining);
-
-      // Create the chart
+      // Create the chart with a 3D effect
       new Chart(ctx, {
         type: 'pie',
         data: {
           labels: ['Days Passed', 'Days Remaining'],
           datasets: [{
             data: [daysPassed, daysRemaining],
-            backgroundColor: ['#4caf50', '#f44336']
+            backgroundColor: ['#4caf50', '#f44336'],
+            borderWidth: 0, // Remove border to make it smoother
           }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: {
+              position: 'top',
+            },
+            tooltip: {
+              enabled: true,
+            }
+          },
+          rotation: Math.PI / 4, // Rotate the chart for a 3D effect
+          cutout: 50, // Make the center hollow
+          animation: {
+            animateRotate: true, // Add rotation animation
+            animateScale: true, // Add scaling effect
+          },
+          elements: {
+            arc: {
+              borderWidth: 0, // No border for a smoother look
+            }
+          },
         }
       });
     });

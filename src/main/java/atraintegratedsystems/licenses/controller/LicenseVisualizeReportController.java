@@ -18,11 +18,32 @@ public class LicenseVisualizeReportController {
     private LicenseTypeService licenseTypeService;
     @Autowired
     private LicenseGeneralReportService licenseGeneralReportService;
+//
+//    @GetMapping("/licenses/license/report/license_visualize_report")
+//    public String showApplicationProfile(Model model) {
+//
+//        List<LicenseApproval> profiles = licenseGeneralReportService.getAllApprovals();
+//        model.addAttribute("profiles", profiles);
+//        model.addAttribute("licenseTypes", licenseTypeService.findAll());
+//        return "licenses/license/report/license_visualize_report";
+//    }
 
+    // Backend: Controller
     @GetMapping("/licenses/license/report/license_visualize_report")
     public String showApplicationProfile(Model model) {
-
         List<LicenseApproval> profiles = licenseGeneralReportService.getAllApprovals();
+
+        // Format dates to yyyy-MM-dd for consistency
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        profiles.forEach(profile -> {
+            if (profile.getApprovalDate() != null) {
+                profile.setFormattedApprovalDate(profile.getApprovalDate().format(formatter));
+            }
+            if (profile.getLicenseFeeExpiryDate() != null) {
+                profile.setFormattedLicenseFeeExpiryDate(profile.getLicenseFeeExpiryDate().format(formatter));
+            }
+        });
+
         model.addAttribute("profiles", profiles);
         model.addAttribute("licenseTypes", licenseTypeService.findAll());
         return "licenses/license/report/license_visualize_report";

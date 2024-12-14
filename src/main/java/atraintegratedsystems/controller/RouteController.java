@@ -52,10 +52,9 @@ public class RouteController {
     return "licenses/finance/license_finance/license_finance_home";
 }
 
-    @GetMapping("/license/finance/reports")
+    @GetMapping("/licenses/license/report")
     public String license_reports()
     {
-
-        return "licenses/finance/reports/home";
+        return "licenses/license/report/home";
     }
 }
