@@ -1,0 +1,200 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head th:replace="~{layout :: page_head}">
+    <div th:replace="styles :: data-tables-styles"></div>
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css">
+    <div th:replace="styles :: select2-styles"></div>
+    <title>ATRA Financial Integrated System</title>
+
+    <style>
+        /* Basic Table Styling */
+        body {
+            background-color: #f9f9f9; /* Light gray for better readability */
+        }
+
+        .table-container {
+            max-height: 800px; /* Set a maximum height for the table container */
+            overflow-y: auto;   /* Enable vertical scrolling */
+            border: 1px solid #ddd; /* Optional: Add a border around the table */
+            background-color: #ffffff; /* White background for the table */
+            padding: 20px; /* Padding for better aesthetics */
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+        }
+
+        #profileTable {
+            width: 100%; /* Full width for the table */
+            border-collapse: collapse;
+            font-size: 0.9em; /* General smaller font for the table */
+        }
+
+        #profileTable th, #profileTable td {
+            padding: 6px;
+            text-align: center;
+            vertical-align: middle;
+            font-size: 0.8em; /* Small font size for headers and cells */
+        }
+
+        #profileTable thead th {
+            background-color: #1a73e8; /* Blue background for header */
+            color: white;
+            font-size: 0.85em; /* Slightly larger font for headers */
+        }
+
+        #profileTable tbody tr:nth-child(even) {
+            background-color: #f2f2f2; /* Zebra stripes for rows */
+        }
+
+        #profileTable td a.btn-primary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4px;
+        }
+
+        #profileTable .icon-small {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* Optional: Add some responsiveness */
+        @media (max-width: 768px) {
+            #profileTable th, #profileTable td {
+                font-size: 0.7em; /* Smaller font size for mobile view */
+                padding: 4px;
+            }
+        }
+
+        #profileTable th {
+            white-space: nowrap;
+        }
+
+        /* Excel Export Button Styling */
+        .dt-buttons {
+            margin-bottom: 10px;
+        }
+        .dt-buttons .btn {
+            background-color: #1a73e8;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            font-size: 0.85em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .dt-buttons .btn:hover {
+            background-color: #1557b5;
+        }
+    </style>
+</head>
+<body>
+<nav th:replace="~{layout :: page_navbar}"></nav>
+<div class="container-fluid">
+    <div class="table-container">
+        <table class="table table-bordered" id="profileTable">
+            <thead>
+            <tr>
+                <th>Approval Id</th>
+                <th>Approval Date</th>
+                <th>Approval Status</th>
+                <th>Board Decision Number</th>
+                <th>Board Decisions</th>
+                <th>License Type Name</th>
+                <th>Currency Type</th>
+                <th>License Fees</th>
+                <th>License Payment Office</th>
+                <th>Admin Yearly Fees</th>
+                <th>Admin Fees Payment Office</th>
+                <th>Guarantee Fee Type</th>
+                <th>Guarantee Fees</th>
+                <th>Guarantee Fees Payment Office</th>
+                <th>Database Maintainance Fees</th>
+                <th>Database Maint Fees Payment Office</th>
+                <th>License Fees Expiry Date</th>
+                <th>Guarantee Fees Expiry Date</th>
+                <th>Database Maintainance Fees Expiry Date</th>
+                <th>Admininstrative Fees Expiry Date</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="profile : ${profiles}">
+                <td th:text="${profile.approvalId}"></td>
+                <td th:text="${profile.getAppDate()}"></td>
+                <td th:text="${profile.approvalStatus}"></td>
+                <td th:text="${profile.boardDecisionNumber}"></td>
+                <td th:text="${profile.boardDecisions}"></td>
+                <td th:text="${profile.licenseType.name}"></td>
+                <td th:text="${profile.currencyType}"></td>
+                <td th:text="${profile.licenseFees}"></td>
+                <td th:text="${profile.licensePaymentOffice}"></td>
+                <td th:text="${profile.administrativeYearlyFees}"></td>
+                <td th:text="${profile.adminstrivateYearlyFeesPaymentOffice}"></td>
+                <td th:text="${profile.guaranteeFeesType}"></td>
+                <td th:text="${profile.guaranteeFees}"></td>
+                <td th:text="${profile.guaranteeFeesPaymentOffice}"></td>
+                <td th:text="${profile.databaseYearlyMaintainanceFees}"></td>
+                <td th:text="${profile.databaseYearlyMaintainanceFeesPaymentOffice}"></td>
+                <td th:text="${profile.getLicenseFeeExpiryDate()}"></td>
+                <td th:text="${profile.getguaranteeFeeExpiryDate()}"></td>
+                <td th:text="${profile.getdatabaseMaintianenceFeeExpiryDate()}"></td>
+                <td th:text="${profile.getadministrationFeeExpiryDate()}"></td>
+            </tr>
+            </tbody>
+        </table>
+        <br>
+    </div>
+    <a th:href="@{/licenses/license/report}" class="btn" style="margin-top:20px;color:white;background-color:#5e331a;">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6" style="width:20px;height:20px;">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
+        </svg>
+        Back to Page</a>
+</div>
+
+<!-- Common scripts -->
+<div th:replace="scripts :: common-scripts"></div>
+<div th:replace="scripts :: persian-datepicker-scripts"></div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#profileTable').DataTable({
+            dom: 'Bfrtip', // Include Buttons
+            buttons: [
+                {
+                    extend: 'excelHtml5',
+                    text: 'Export to Excel',
+                    title: 'License Approvals Report'
+                }
+            ],
+            initComplete: function () {
+                this.api().columns().every(function () {
+                    var column = this;
+                    var header = $(column.header());
+                    var columnText = header.text();
+                    header.empty().append('<div>' + columnText + '</div>');
+
+                    $('<input type="text" placeholder="Search" style="width: 100%; margin-top: 5px;"/>')
+                        .appendTo(header)
+                        .on('keyup change clear', function () {
+                            if (column.search() !== this.value) {
+                                column.search(this.value).draw();
+                            }
+                        });
+                });
+            }
+        });
+    });
+
+</script>
+
+<footer th:replace="~{layout :: page_footer}"></footer>
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>
