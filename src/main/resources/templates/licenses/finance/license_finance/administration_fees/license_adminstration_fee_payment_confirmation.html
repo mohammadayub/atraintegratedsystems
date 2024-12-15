@@ -18,14 +18,18 @@
                 <lable th:text="#{approval_id}"></lable>
                 <input type="text" th:field="*{approvalId}" class="form-control" disabled>
             </div>
-            <div class="col-md-4 form-group">
+            <div class="col-md-3 form-group">
                <lable th:text="#{administration_fee_entry_voucher_date}"></lable>
                 <input type="text" th:field="*{administrationFeeEntryVoucherDate}" class="form-control hijrishamsi">
             </div>
             <!-- Currency Type -->
-            <div class="col-md-4 form-group" style="margin-top:-9px;">
-                <label >Administration Fee Bank Voucher No#</label>
+            <div class="col-md-3 form-group">
+                <label style="margin:0px;">Administration Fee Bank Voucher No#</label>
                 <input type="text" th:field="*{administrationFeeBankVoucherNo}" class="form-control" >
+            </div>
+            <div class="col-md-3 form-group">
+                <lable>Administration Fee Bank Voucher Submission Date</lable>
+                <input type="text" th:field="*{administrationFeeEntryVoucherDate}" class="form-control hijrishamsi">
             </div>
             <!-- Payment Status -->
             <div class="col-md-1 form-group align-items-center" style="margin-top: 20px; display: flex; align-items: center;">

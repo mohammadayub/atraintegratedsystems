@@ -56,6 +56,11 @@ public class LicenseApproval {
     private LocalDate licenseFeeEntryVoucherDate;
     @Column(name="license_fee_mcit_bank_voucher_No")
     private String licenseFeeBankVoucherNo;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column(name="license_fee_bank_voucher_submission_date")
+    private LocalDate licenseFeeBankVoucherSubmissionDate;
+
     @Column(name="license_fee_mcit_payment_status")
     private String licenseFeePaymentStatus;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -66,6 +71,11 @@ public class LicenseApproval {
     private LocalDate databaseMaintianenceFeeEntryVoucherDate;
     @Column(name="database_maintainance_fee_bank_voucher_no")
     private String databaseMaintianenceFeeBankVoucherNo;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column(name="database_maintainance_fee_bank_voucher_submission_date")
+    private LocalDate databasemaintainanceFeeBankVoucherSubmissionDate;
+
     @Column(name="database_maintainance_fee_payment_status")
     private String databaseMaintianenceFeePaymentStatus;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -77,6 +87,11 @@ public class LicenseApproval {
     private LocalDate administrationFeeEntryVoucherDate;
     @Column(name="administration_fee_bank_voucher_No")
     private String administrationFeeBankVoucherNo;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column(name="administration_fee_bank_voucher_submission_date")
+    private LocalDate administrationFeeBankVoucherSubmissionDate;
+
     @Column(name="administration_fee_payment_status")
     private String administrationFeePaymentStatus;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -87,6 +102,11 @@ public class LicenseApproval {
     private LocalDate guaranteeFeeEntryVoucherDate;
     @Column(name="guarantee_fee_bank_voucher_No")
     private String guaranteeFeeBankVoucherNo;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column(name="guarantee_fee_bank_voucher_submission_date")
+    private LocalDate guaranteeFeeBankVoucherSubmissionDate;
+
     @Column(name="guarantee_fee_payment_status")
     private String guaranteeFeePaymentStatus;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -167,6 +187,34 @@ public class LicenseApproval {
         DateConverter dateConverter= new DateConverter();
         JalaliDate jalaliApprovalDate=dateConverter.gregorianToJalali(approvalDate.getYear(),approvalDate.getMonthValue(),approvalDate.getDayOfMonth());
         return jalaliApprovalDate;
+    }
+
+//    Submission section
+public JalaliDate getlicenseFeeBankVoucherSubmissionDate() {
+    if (licenseFeeBankVoucherSubmissionDate == null) {
+        return null; // Return null if issueLicenseDate is null
+    }
+    DateConverter dateConverter= new DateConverter();
+    JalaliDate jalalilicenseFeeBankVoucherSubmissionDate=dateConverter.gregorianToJalali(licenseFeeBankVoucherSubmissionDate.getYear(),licenseFeeBankVoucherSubmissionDate.getMonthValue(),licenseFeeBankVoucherSubmissionDate.getDayOfMonth());
+    return jalalilicenseFeeBankVoucherSubmissionDate;
+}
+
+    public JalaliDate getdatabasemaintainanceFeeBankVoucherSubmissionDate() {
+        if (databasemaintainanceFeeBankVoucherSubmissionDate == null) {
+            return null; // Return null if issueLicenseDate is null
+        }
+        DateConverter dateConverter= new DateConverter();
+        JalaliDate jalalidatabasemaintainanceFeeBankVoucherSubmissionDate=dateConverter.gregorianToJalali(databasemaintainanceFeeBankVoucherSubmissionDate.getYear(),databasemaintainanceFeeBankVoucherSubmissionDate.getMonthValue(),databasemaintainanceFeeBankVoucherSubmissionDate.getDayOfMonth());
+        return jalalidatabasemaintainanceFeeBankVoucherSubmissionDate;
+    }
+
+    public JalaliDate getguaranteeFeeBankVoucherSubmissionDate() {
+        if (guaranteeFeeBankVoucherSubmissionDate == null) {
+            return null; // Return null if issueLicenseDate is null
+        }
+        DateConverter dateConverter= new DateConverter();
+        JalaliDate jalaliguaranteeFeeBankVoucherSubmissionDate=dateConverter.gregorianToJalali(guaranteeFeeBankVoucherSubmissionDate.getYear(),guaranteeFeeBankVoucherSubmissionDate.getMonthValue(),guaranteeFeeBankVoucherSubmissionDate.getDayOfMonth());
+        return jalaliguaranteeFeeBankVoucherSubmissionDate;
     }
 
 

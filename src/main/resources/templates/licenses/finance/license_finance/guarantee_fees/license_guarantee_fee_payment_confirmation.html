@@ -9,12 +9,12 @@
 <body>
 <nav th:replace="~{layout :: page_navbar}"></nav>
 <h3 style="text-align:center;margin-top:30px;font-weight:bolder;" th:text="#{license_application_confirmation}">License Application Confirmation</h3>
-<div class="container-fluid" style="margin-top:40px;">
+<div class="container mt-4" style="margin-top:40px;">
     <form th:action="@{/licenses/finance/license_finance/guarantee_fees/license_guarantee_fee_list/add}" th:object="${licenseApprovalDTO}" method="post">
         <div class="row">
             <!-- Hidden ID Field -->
             <input type="hidden" th:field="*{id}">
-            <div class="col-md-3 form-group">
+            <div class="col-md-2 form-group">
                 <lable>Approval Id</lable>
                 <input type="text" th:field="*{approvalId}" class="form-control" disabled>
             </div>
@@ -23,12 +23,16 @@
                 <input type="text" th:field="*{guaranteeFeeEntryVoucherDate}" class="form-control hijrishamsi">
             </div>
             <!-- Currency Type -->
-            <div class="col-md-3 form-group" style="margin-top:-9px;">
-                <label>Guarantee Fee Bank Voucher No</label>
+            <div class="col-md-3">
+                <label style="margin:0px;">Guarantee Fee Bank Voucher No</label>
                 <input type="text" th:field="*{guaranteeFeeBankVoucherNo}" class="form-control" >
             </div>
+            <div class="col-md-3 form-group">
+                <lable>guaranteeFeeBankVoucherSubmissionDate</lable>
+                <input type="text" th:field="*{guaranteeFeeBankVoucherSubmissionDate}" class="form-control hijrishamsi">
+            </div>
             <!-- Payment Status -->
-            <div class="col-md-3 form-group align-items-center" style="margin-top: 20px; display: flex; align-items: center;">
+            <div class="col-md-1 form-group align-items-center" style="margin-top: 20px; display: flex; align-items: center;">
                 <input
                         type="checkbox"
                         th:field="*{guaranteeFeePaymentStatus}"

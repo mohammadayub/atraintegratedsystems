@@ -35,6 +35,9 @@ public class LicenseApprovalDTO {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate licenseFeeEntryVoucherDate;
     private String licenseFeeBankVoucherNo;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column(name="license_fee_bank_voucher_submission_date")
+    private LocalDate licenseFeeBankVoucherSubmissionDate;
     private String licenseFeePaymentStatus;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate licenseFeeExpiryDate;
@@ -42,6 +45,9 @@ public class LicenseApprovalDTO {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate databaseMaintianenceFeeEntryVoucherDate;
     private String databaseMaintianenceFeeBankVoucherNo;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column(name="database_maintainance_fee_bank_voucher_submission_date")
+    private LocalDate databasemaintainanceFeeBankVoucherSubmissionDate;
     private String databaseMaintianenceFeePaymentStatus;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate databaseMaintianenceFeeExpiryDate;
@@ -49,6 +55,9 @@ public class LicenseApprovalDTO {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate administrationFeeEntryVoucherDate;
     private String administrationFeeBankVoucherNo;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column(name="administration_fee_bank_voucher_submission_date")
+    private LocalDate administrationFeeBankVoucherSubmissionDate;
     private String administrationFeePaymentStatus;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate administrationFeeExpiryDate;
@@ -56,6 +65,9 @@ public class LicenseApprovalDTO {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate guaranteeFeeEntryVoucherDate;
     private String guaranteeFeeBankVoucherNo;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column(name="guarantee_fee_bank_voucher_submission_date")
+    private LocalDate guaranteeFeeBankVoucherSubmissionDate;
     private String guaranteeFeePaymentStatus;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate guaranteeFeeExpiryDate;

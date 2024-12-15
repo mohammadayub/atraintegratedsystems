@@ -101,6 +101,9 @@ public class LicenseApplicant {
     private LocalDate entryApplicationFeeVoucherDate;
     @Column(name="bank_voucher")
     private String bankVoucher;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column(name="application_fee_bank_voucher_submission_date")
+    private LocalDate applicationFeeBankVoucherSubmission_Date;
     @Column(name="payment_status")
     private String paymentStatus;
 
