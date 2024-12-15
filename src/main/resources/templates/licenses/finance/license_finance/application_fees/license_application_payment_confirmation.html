@@ -111,6 +111,12 @@
 
                 <input type="text" th:field="*{bankVoucher}" class="form-control" required>
             </div>
+            <div class="col-md-3 form-group">
+                <label th:text="#{applicationFeeBankVoucherSubmissionDate}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
+
+                <input type="text" th:field="*{applicationFeeBankVoucherSubmissionDate}" class="form-control hijrishamsi"  required>
+            </div>
+
 
             <!-- Payment Status -->
             <div class="col-md-3 form-group align-items-center" style="margin-top: 38px; display: flex; align-items: center;">

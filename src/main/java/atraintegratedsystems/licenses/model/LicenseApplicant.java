@@ -103,7 +103,7 @@ public class LicenseApplicant {
     private String bankVoucher;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name="application_fee_bank_voucher_submission_date")
-    private LocalDate applicationFeeBankVoucherSubmission_Date;
+    private LocalDate applicationFeeBankVoucherSubmissionDate;
     @Column(name="payment_status")
     private String paymentStatus;
 
@@ -177,6 +177,15 @@ public class LicenseApplicant {
         return jalaliApplicationFeeExpiry;
     }
 
+//  Submission Section
+public JalaliDate getapplicationFeeBankVoucherSubmissionDate(){
+    if (applicationFeeBankVoucherSubmissionDate == null) {
+        return null; // Return null if issueLicenseDate is null
+    }
+    DateConverter dateConverter= new DateConverter();
+    JalaliDate jalaliapplicationFeeBankVoucherSubmissionDate= dateConverter.gregorianToJalali(applicationFeeBankVoucherSubmissionDate.getYear(),applicationFeeBankVoucherSubmissionDate.getMonthValue(),applicationFeeBankVoucherSubmissionDate.getDayOfMonth()) ;
+    return jalaliapplicationFeeBankVoucherSubmissionDate;
+}
 
 
 
