@@ -174,12 +174,6 @@ public class LicenseApproval {
 
 
 
-
-
-
-
-
-
     public JalaliDate getAppDate() {
         if (approvalDate == null) {
             return null; // Return null if issueLicenseDate is null
@@ -188,6 +182,8 @@ public class LicenseApproval {
         JalaliDate jalaliApprovalDate=dateConverter.gregorianToJalali(approvalDate.getYear(),approvalDate.getMonthValue(),approvalDate.getDayOfMonth());
         return jalaliApprovalDate;
     }
+
+
 
 //    Submission section
 public JalaliDate getlicenseFeeBankVoucherSubmissionDate() {

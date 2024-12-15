@@ -1,7 +1,4 @@
 package atraintegratedsystems.licenses.dto;
-import atraintegratedsystems.licenses.model.LicenseApplicant;
-import atraintegratedsystems.utils.DateConverter;
-import atraintegratedsystems.utils.JalaliDate;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -36,7 +33,6 @@ public class LicenseApprovalDTO {
     private LocalDate licenseFeeEntryVoucherDate;
     private String licenseFeeBankVoucherNo;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @Column(name="license_fee_bank_voucher_submission_date")
     private LocalDate licenseFeeBankVoucherSubmissionDate;
     private String licenseFeePaymentStatus;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -46,7 +42,6 @@ public class LicenseApprovalDTO {
     private LocalDate databaseMaintianenceFeeEntryVoucherDate;
     private String databaseMaintianenceFeeBankVoucherNo;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @Column(name="database_maintainance_fee_bank_voucher_submission_date")
     private LocalDate databasemaintainanceFeeBankVoucherSubmissionDate;
     private String databaseMaintianenceFeePaymentStatus;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -56,7 +51,6 @@ public class LicenseApprovalDTO {
     private LocalDate administrationFeeEntryVoucherDate;
     private String administrationFeeBankVoucherNo;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @Column(name="administration_fee_bank_voucher_submission_date")
     private LocalDate administrationFeeBankVoucherSubmissionDate;
     private String administrationFeePaymentStatus;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -66,7 +60,6 @@ public class LicenseApprovalDTO {
     private LocalDate guaranteeFeeEntryVoucherDate;
     private String guaranteeFeeBankVoucherNo;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @Column(name="guarantee_fee_bank_voucher_submission_date")
     private LocalDate guaranteeFeeBankVoucherSubmissionDate;
     private String guaranteeFeePaymentStatus;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
