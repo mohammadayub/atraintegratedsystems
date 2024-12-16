@@ -213,6 +213,15 @@ public JalaliDate getlicenseFeeBankVoucherSubmissionDate() {
         JalaliDate jalaliguaranteeFeeBankVoucherSubmissionDate=dateConverter.gregorianToJalali(guaranteeFeeBankVoucherSubmissionDate.getYear(),guaranteeFeeBankVoucherSubmissionDate.getMonthValue(),guaranteeFeeBankVoucherSubmissionDate.getDayOfMonth());
         return jalaliguaranteeFeeBankVoucherSubmissionDate;
     }
+    public JalaliDate getadministrationFeeBankVoucherSubmissionDate() {
+        if (administrationFeeBankVoucherSubmissionDate == null) {
+            return null; // Return null if issueLicenseDate is null
+        }
+        DateConverter dateConverter= new DateConverter();
+        JalaliDate jalaliadministrationFeeBankVoucherSubmissionDate=dateConverter.gregorianToJalali(administrationFeeBankVoucherSubmissionDate.getYear(),administrationFeeBankVoucherSubmissionDate.getMonthValue(),administrationFeeBankVoucherSubmissionDate.getDayOfMonth());
+        return jalaliadministrationFeeBankVoucherSubmissionDate;
+    }
+
 
 
 

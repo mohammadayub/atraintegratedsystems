@@ -3,6 +3,7 @@ import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.persistence.Column;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -42,6 +43,8 @@ public class LicenseApplicantDTO {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate entryApplicationFeeVoucherDate;
     private String bankVoucher;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate applicationFeeBankVoucherSubmissionDate;
     private String paymentStatus;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate applicationFeeExpiryDate;
