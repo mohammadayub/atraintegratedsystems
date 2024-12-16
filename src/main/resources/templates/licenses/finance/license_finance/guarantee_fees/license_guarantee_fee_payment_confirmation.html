@@ -9,26 +9,26 @@
 <body>
 <nav th:replace="~{layout :: page_navbar}"></nav>
 <h3 style="text-align:center;margin-top:30px;font-weight:bolder;" th:text="#{license_application_confirmation}">License Application Confirmation</h3>
-<div class="container mt-4" style="margin-top:40px;">
+<div class="container-fluid mt-4">
     <form th:action="@{/licenses/finance/license_finance/guarantee_fees/license_guarantee_fee_list/add}" th:object="${licenseApprovalDTO}" method="post">
         <div class="row">
             <!-- Hidden ID Field -->
             <input type="hidden" th:field="*{id}">
             <div class="col-md-2 form-group">
-                <lable>Approval Id</lable>
+                <lable th:text="#{approval_id}"></lable>
                 <input type="text" th:field="*{approvalId}" class="form-control" disabled>
             </div>
             <div class="col-md-3 form-group">
-               <lable>Guarantee Fee Entry Voucher Date</lable>
+               <lable th:text="#{guarantee_fee_entry_voucher_date}"></lable>
                 <input type="text" th:field="*{guaranteeFeeEntryVoucherDate}" class="form-control hijrishamsi">
             </div>
             <!-- Currency Type -->
             <div class="col-md-3">
-                <label style="margin:0px;">Guarantee Fee Bank Voucher No</label>
+                <label style="margin:0px;" th:text="#{guarantee_fee_bank_voucher_no}"></label>
                 <input type="text" th:field="*{guaranteeFeeBankVoucherNo}" class="form-control" >
             </div>
             <div class="col-md-3 form-group">
-                <lable>guaranteeFeeBankVoucherSubmissionDate</lable>
+                <lable th:text="#{guarantee_fee_bank_voucher_submission_date}"></lable>
                 <input type="text" th:field="*{guaranteeFeeBankVoucherSubmissionDate}" class="form-control hijrishamsi">
             </div>
             <!-- Payment Status -->
@@ -48,6 +48,7 @@
         ">
                 &nbsp;&nbsp;
                 <label
+                        th:text="#{license_fee_payment_status}"
                         for="guaranteeFeePaymentStatus"
                         class="form-check-label me-2"
                         style="cursor: pointer;">
