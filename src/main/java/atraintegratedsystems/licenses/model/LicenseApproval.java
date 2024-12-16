@@ -116,8 +116,9 @@ public class LicenseApproval {
 
 
     //Chart
-
+    @Transient
     private String formattedApprovalDate; // For yyyy-MM-dd formatted dates
+    @Transient
     private String formattedLicenseFeeExpiryDate; // For yyyy-MM-dd formatted dates
 
 

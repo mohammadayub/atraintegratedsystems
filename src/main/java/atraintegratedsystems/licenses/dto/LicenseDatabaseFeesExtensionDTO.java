@@ -7,6 +7,7 @@ import java.time.LocalDate;
 public class LicenseDatabaseFeesExtensionDTO {
 
     private Long id;
+
     private Long licenseApprovalId;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")

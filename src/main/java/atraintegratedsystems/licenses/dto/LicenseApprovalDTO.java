@@ -67,7 +67,6 @@ public class LicenseApprovalDTO {
 
 
     //Chart
-
     private String formattedApprovalDate; // For yyyy-MM-dd formatted dates
     private String formattedLicenseFeeExpiryDate; // For yyyy-MM-dd formatted dates
 

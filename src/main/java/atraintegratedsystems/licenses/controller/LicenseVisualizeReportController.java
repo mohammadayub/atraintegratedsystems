@@ -18,15 +18,6 @@ public class LicenseVisualizeReportController {
     private LicenseTypeService licenseTypeService;
     @Autowired
     private LicenseGeneralReportService licenseGeneralReportService;
-//
-//    @GetMapping("/licenses/license/report/license_visualize_report")
-//    public String showApplicationProfile(Model model) {
-//
-//        List<LicenseApproval> profiles = licenseGeneralReportService.getAllApprovals();
-//        model.addAttribute("profiles", profiles);
-//        model.addAttribute("licenseTypes", licenseTypeService.findAll());
-//        return "licenses/license/report/license_visualize_report";
-//    }
 
     // Backend: Controller
     @GetMapping("/licenses/license/report/license_visualize_report")

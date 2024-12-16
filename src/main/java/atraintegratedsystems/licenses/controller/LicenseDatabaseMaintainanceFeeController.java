@@ -52,8 +52,15 @@ public class LicenseDatabaseMaintainanceFeeController {
                 licenseApprovalDTO.getDatabaseMaintianenceFeeEntryVoucherDate().getMonthValue(),
                 licenseApprovalDTO.getDatabaseMaintianenceFeeEntryVoucherDate().getDayOfMonth()
         );
+
+        LocalDate databasemaintainanceSubmissionVoucherDate = dateConverter.jalaliToGregorian(
+                licenseApprovalDTO.getDatabasemaintainanceFeeBankVoucherSubmissionDate().getYear(),
+                licenseApprovalDTO.getDatabasemaintainanceFeeBankVoucherSubmissionDate().getMonthValue(),
+                licenseApprovalDTO.getDatabasemaintainanceFeeBankVoucherSubmissionDate().getDayOfMonth()
+        );
         // Update only the required fields
-        existingLicenseApproval.setDatabaseMaintianenceFeeEntryVoucherDate(licenseApprovalDTO.getDatabaseMaintianenceFeeEntryVoucherDate());
+        existingLicenseApproval.setDatabaseMaintianenceFeeEntryVoucherDate(databasemaintainanceEntryVoucherDate);
+        existingLicenseApproval.setDatabasemaintainanceFeeBankVoucherSubmissionDate(databasemaintainanceSubmissionVoucherDate);
         existingLicenseApproval.setDatabaseMaintianenceFeeBankVoucherNo(licenseApprovalDTO.getDatabaseMaintianenceFeeBankVoucherNo());
         existingLicenseApproval.setDatabaseMaintianenceFeePaymentStatus(licenseApprovalDTO.getDatabaseMaintianenceFeePaymentStatus());
 
