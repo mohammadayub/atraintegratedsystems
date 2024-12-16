@@ -3,6 +3,7 @@ import atraintegratedsystems.licenses.dto.LicenseApprovalDTO;
 import atraintegratedsystems.licenses.model.LicenseApproval;
 import atraintegratedsystems.licenses.service.LicenseFeeMCITService;
 import atraintegratedsystems.licenses.service.LicenseTypeService;
+import atraintegratedsystems.utils.DateConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.time.LocalDate;
 import java.util.List;
 @Controller
 public class LicenseFeeMCITController {
@@ -38,7 +40,11 @@ public class LicenseFeeMCITController {
         // Fetch the existing entity from the database
         LicenseApproval existingLicenseApproval = licenseFeeMCITService.findById(licenseApprovalDTO.getId());
         // Update only the required fields
-        existingLicenseApproval.setLicenseFeeEntryVoucherDate(licenseApprovalDTO.getLicenseFeeEntryVoucherDate());
+        DateConverter dateConverter= new DateConverter();
+        LocalDate licenseFeeEntryVoucherDate = dateConverter.jalaliToGregorian(licenseApprovalDTO.getLicenseFeeEntryVoucherDate().getYear(), licenseApprovalDTO.getLicenseFeeEntryVoucherDate().getMonthValue(),licenseApprovalDTO.getLicenseFeeEntryVoucherDate().getDayOfMonth());
+        existingLicenseApproval.setLicenseFeeEntryVoucherDate(licenseFeeEntryVoucherDate);
+        LocalDate licenseFeeVoucherSubmissionDate = dateConverter.jalaliToGregorian(licenseApprovalDTO.getLicenseFeeBankVoucherSubmissionDate().getYear(),licenseApprovalDTO.getLicenseFeeBankVoucherSubmissionDate().getMonthValue(),licenseApprovalDTO.getLicenseFeeBankVoucherSubmissionDate().getDayOfMonth());
+        existingLicenseApproval.setLicenseFeeBankVoucherSubmissionDate(licenseFeeVoucherSubmissionDate);
         existingLicenseApproval.setLicenseFeeBankVoucherNo(licenseApprovalDTO.getLicenseFeeBankVoucherNo());
         existingLicenseApproval.setLicenseFeePaymentStatus(licenseApprovalDTO.getLicenseFeePaymentStatus());
         // Save the updated entity

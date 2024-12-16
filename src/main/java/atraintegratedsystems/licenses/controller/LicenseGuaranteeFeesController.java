@@ -53,7 +53,14 @@ public class LicenseGuaranteeFeesController {
                 licenseApprovalDTO.getGuaranteeFeeEntryVoucherDate().getDayOfMonth()
         );
         // Update only the required fields
-        existingLicenseApproval.setGuaranteeFeeEntryVoucherDate(licenseApprovalDTO.getGuaranteeFeeEntryVoucherDate());
+        existingLicenseApproval.setGuaranteeFeeEntryVoucherDate(guaranteeEntryVoucherDate);
+
+        LocalDate guaranteeEntrySubmissionVoucherDate = dateConverter.jalaliToGregorian(
+                licenseApprovalDTO.getGuaranteeFeeBankVoucherSubmissionDate().getYear(),
+                licenseApprovalDTO.getGuaranteeFeeBankVoucherSubmissionDate().getMonthValue(),
+                licenseApprovalDTO.getGuaranteeFeeBankVoucherSubmissionDate().getDayOfMonth()
+        );
+        existingLicenseApproval.setGuaranteeFeeBankVoucherSubmissionDate(guaranteeEntrySubmissionVoucherDate);
         existingLicenseApproval.setGuaranteeFeeBankVoucherNo(licenseApprovalDTO.getGuaranteeFeeBankVoucherNo());
         existingLicenseApproval.setGuaranteeFeePaymentStatus(licenseApprovalDTO.getGuaranteeFeePaymentStatus());
 

@@ -27,7 +27,7 @@ public class LicenseApplicationFeesFinanceController {
     @Autowired
     private LicenseTypeService licenseTypeService;
 
-    @GetMapping("/licenses/finance/application_fees/license_application_fee_list")
+    @GetMapping("/licenses/finance/license_finance/application_fees/license_application_fee_list")
     public String showApplicationProfile(Model model) {
         model.addAttribute("licenseTypes", licenseTypeService.findAll());
         List<LicenseApplicant> profiles = licenseApplicantFinanceService.getAllUnpaid();
@@ -35,7 +35,7 @@ public class LicenseApplicationFeesFinanceController {
         return "licenses/finance/license_finance/application_fees/license_application_fee_list";
     }
 
-    @GetMapping("/licenses/finance/application_fees/license_application_fee_list/add")
+    @GetMapping("/licenses/finance/license_finance/application_fees/license_application_fee_list/add")
     public String PaymentConfirmationAdd(Model model){
         model.addAttribute("licenseApplicantDTO",new LicenseApplicantDTO());
         model.addAttribute("licenseTypes", licenseTypeService.findAll());
@@ -43,7 +43,7 @@ public class LicenseApplicationFeesFinanceController {
     }
 
 
-    @PostMapping("/licenses/finance/application_fees/license_application_fee_list/add")
+    @PostMapping("/licenses/finance/license_finance/application_fees/license_application_fee_list/add")
     public String updateBankVoucherNoAndPaymentStatus(@Valid @ModelAttribute("licenseApplicantDTO") LicenseApplicantDTO licenseApplicantDTO, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             return "licenses/finance/license_finance/application_fees/license_application_payment_confirmation";
@@ -53,7 +53,9 @@ public class LicenseApplicationFeesFinanceController {
         DateConverter dateConverter = new DateConverter();
         // Convert Jalali date to Gregorian
         LocalDate entryDate = dateConverter.jalaliToGregorian(licenseApplicantDTO.getEntryApplicationFeeVoucherDate().getYear(), licenseApplicantDTO.getEntryApplicationFeeVoucherDate().getMonthValue(), licenseApplicantDTO.getEntryApplicationFeeVoucherDate().getDayOfMonth());
+        LocalDate entrySubmissionDate = dateConverter.jalaliToGregorian(licenseApplicantDTO.getApplicationFeeBankVoucherSubmissionDate().getYear(), licenseApplicantDTO.getApplicationFeeBankVoucherSubmissionDate().getMonthValue(), licenseApplicantDTO.getApplicationFeeBankVoucherSubmissionDate().getDayOfMonth());
         licenseApplicant.setEntryApplicationFeeVoucherDate(entryDate);
+        licenseApplicant.setApplicationFeeBankVoucherSubmissionDate(entrySubmissionDate);
         licenseApplicant.setBankVoucher(licenseApplicantDTO.getBankVoucher());
         licenseApplicant.setPaymentStatus(licenseApplicantDTO.getPaymentStatus());
         licenseApplicantFinanceService.PaymentSave(licenseApplicant);
@@ -62,7 +64,7 @@ public class LicenseApplicationFeesFinanceController {
 
 
 
-    @GetMapping("/licenses/finance/application_fees/license_application_fee_list/update/{reqId}")
+    @GetMapping("/licenses/finance/license_finance/application_fees/license_application_fee_list/update/{reqId}")
     public String updateApplicantGet(@PathVariable String reqId, Model model) throws Exception {
         LicenseApplicant licenseApplicant = licenseApplicantFinanceService.getApplicantByReqId(reqId)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid applicant ID: " + reqId));
@@ -87,7 +89,7 @@ public class LicenseApplicationFeesFinanceController {
         return "licenses/finance/license_finance/application_fees/license_application_payment_confirmation";
     }
 
-    @GetMapping("/licenses/finance/application_fees/license_application_fee_list/print/{reqId}")
+    @GetMapping("/licenses/finance/license_finance/application_fees/license_application_fee_list/print/{reqId}")
     public String GetTariff(@PathVariable String reqId, Model model){
         LicenseApplicant licenseApplicant = licenseApplicantFinanceService.getApplicantByReqId(reqId)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid applicant ID: " + reqId));
