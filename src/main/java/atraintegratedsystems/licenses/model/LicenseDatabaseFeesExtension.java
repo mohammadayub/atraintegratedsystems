@@ -29,6 +29,19 @@ public class LicenseDatabaseFeesExtension {
     @Column(name="extension_expire_date")
     private LocalDate extensionExpireDate;
 
+    //    Add bank voucher date,submission,Fees
+
+    @Column(name="extension_Database_fees")
+    private LocalDate extensionDatabaseFees;
+    @Column(name="extension_Database_fee_bank_voucher_no")
+    private LocalDate extensionDatabaseFeeBankVoucherNo;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column(name="extension_Database_fee_bank_voucher_date")
+    private LocalDate extensionDatabaseFeeBankVoucherDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column(name="extension_Database_fee_bank_voucher_submission_date")
+    private LocalDate extensionDatabaseFeeBankVoucherSubmissionDate;
+
 
     public JalaliDate getExtentStartDate() {
         if (extensionStartDate == null) {
@@ -46,6 +59,26 @@ public class LicenseDatabaseFeesExtension {
         DateConverter dateConverter= new DateConverter();
         JalaliDate jalaliExtensionExpireDate=dateConverter.gregorianToJalali(extensionExpireDate.getYear(),extensionExpireDate.getMonthValue(),extensionExpireDate.getDayOfMonth());
         return jalaliExtensionExpireDate;
+    }
+
+//    Bank Voucher Date
+public JalaliDate getextensionDatabaseFeeBankVoucherDate() {
+    if (extensionDatabaseFeeBankVoucherDate == null) {
+        return null; // Return null if issueLicenseDate is null
+    }
+    DateConverter dateConverter= new DateConverter();
+    JalaliDate jalaliextensionDatabaseFeeBankVoucherDate=dateConverter.gregorianToJalali(extensionDatabaseFeeBankVoucherDate.getYear(),extensionDatabaseFeeBankVoucherDate.getMonthValue(),extensionDatabaseFeeBankVoucherDate.getDayOfMonth());
+    return jalaliextensionDatabaseFeeBankVoucherDate;
+}
+
+    //    Bank Voucher Submission Date
+    public JalaliDate getextensionDatabaseFeeBankVoucherSubmissionDate() {
+        if (extensionDatabaseFeeBankVoucherSubmissionDate == null) {
+            return null; // Return null if issueLicenseDate is null
+        }
+        DateConverter dateConverter= new DateConverter();
+        JalaliDate jalaliextensionDatabaseFeeBankVoucherSubmissionDate=dateConverter.gregorianToJalali(extensionDatabaseFeeBankVoucherSubmissionDate.getYear(),extensionDatabaseFeeBankVoucherSubmissionDate.getMonthValue(),extensionDatabaseFeeBankVoucherSubmissionDate.getDayOfMonth());
+        return jalaliextensionDatabaseFeeBankVoucherSubmissionDate;
     }
 
 

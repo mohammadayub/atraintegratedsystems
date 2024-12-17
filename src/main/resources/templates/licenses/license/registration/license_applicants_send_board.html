@@ -34,7 +34,8 @@
         <div class="row">
             <!-- Hidden Fields -->
             <input type="hidden" th:field="*{id}">
-            <div class="col-md-3 offset-2 form-group">
+            <div class="col-md-1 form-group"></div>
+            <div class="col-md-3 form-group">
                 <label for="reqId" th:text="#{approval_request_id}"
                        th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
                 <input type="text" id="reqId" th:field="*{reqId}" class="form-control" required readonly>

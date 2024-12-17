@@ -29,6 +29,19 @@ public class LicenseAdminFeesExtension {
     @Column(name="extension_expire_date")
     private LocalDate extensionExpireDate;
 
+//    Add bank voucher date,submission,Fees
+
+    @Column(name="extension_Administration_fees")
+    private LocalDate extensionAdministrationFees;
+    @Column(name="extension_Administration_fee_bank_voucher_no")
+    private LocalDate extensionAdministrationFeeBankVoucherNo;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column(name="extension_Administration_fee_bank_voucher_date")
+    private LocalDate extensionAdministrationFeeBankVoucherDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column(name="extension_Administration_fee_bank_voucher_submission_date")
+    private LocalDate extensionAdministrationFeeBankVoucherSubmissionDate;
+
 
     public JalaliDate getExtentStartDate() {
         if (extensionStartDate == null) {
@@ -46,6 +59,25 @@ public class LicenseAdminFeesExtension {
         DateConverter dateConverter= new DateConverter();
         JalaliDate jalaliExtensionExpireDate=dateConverter.gregorianToJalali(extensionExpireDate.getYear(),extensionExpireDate.getMonthValue(),extensionExpireDate.getDayOfMonth());
         return jalaliExtensionExpireDate;
+    }
+//    Extension Bank Voucher Date
+   public JalaliDate getextensionAdministrationFeeBankVoucherDate() {
+    if (extensionAdministrationFeeBankVoucherDate == null) {
+        return null; // Return null if issueLicenseDate is null
+    }
+    DateConverter dateConverter= new DateConverter();
+    JalaliDate jalaliextensionAdministrationFeeBankVoucherDate=dateConverter.gregorianToJalali(extensionAdministrationFeeBankVoucherDate.getYear(),extensionAdministrationFeeBankVoucherDate.getMonthValue(),extensionAdministrationFeeBankVoucherDate.getDayOfMonth());
+    return jalaliextensionAdministrationFeeBankVoucherDate;
+}
+
+    //    Extension Bank Voucher Submission
+    public JalaliDate getextensionAdministrationFeeBankVoucherSubmissionDate() {
+        if (extensionAdministrationFeeBankVoucherSubmissionDate == null) {
+            return null; // Return null if issueLicenseDate is null
+        }
+        DateConverter dateConverter= new DateConverter();
+        JalaliDate jalaliextensionAdministrationFeeBankVoucherSubmissionDate=dateConverter.gregorianToJalali(extensionAdministrationFeeBankVoucherSubmissionDate.getYear(),extensionAdministrationFeeBankVoucherSubmissionDate.getMonthValue(),extensionAdministrationFeeBankVoucherSubmissionDate.getDayOfMonth());
+        return jalaliextensionAdministrationFeeBankVoucherSubmissionDate;
     }
 
 

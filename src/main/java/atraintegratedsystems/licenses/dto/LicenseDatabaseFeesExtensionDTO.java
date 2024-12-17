@@ -1,6 +1,8 @@
 package atraintegratedsystems.licenses.dto;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.persistence.Column;
 import java.time.LocalDate;
 
 @Data
@@ -15,4 +17,12 @@ public class LicenseDatabaseFeesExtensionDTO {
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate extensionExpireDate;
+
+    //    Add bank voucher date,submission,Fees
+    private LocalDate extensionDatabaseFees;
+    private LocalDate extensionDatabaseFeeBankVoucherNo;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate extensionDatabaseFeeBankVoucherDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate extensionDatabaseFeeBankVoucherSubmissionDate;
 }
