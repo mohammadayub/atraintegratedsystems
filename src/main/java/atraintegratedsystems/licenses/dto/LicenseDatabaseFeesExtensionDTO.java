@@ -3,6 +3,7 @@ import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Column;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Data
@@ -19,7 +20,7 @@ public class LicenseDatabaseFeesExtensionDTO {
     private LocalDate extensionExpireDate;
 
     //    Add bank voucher date,submission,Fees
-    private LocalDate extensionDatabaseFees;
+    private BigDecimal extensionDatabaseFees;
     private LocalDate extensionDatabaseFeeBankVoucherNo;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate extensionDatabaseFeeBankVoucherDate;
