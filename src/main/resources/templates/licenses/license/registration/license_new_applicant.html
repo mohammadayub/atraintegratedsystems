@@ -21,14 +21,14 @@
         text-align: left;
     }
     input[type="text"],input[type="number"],input[type="file"],input[type="website"],input[type="email"] {
-    border-left: 2px solid red;
+    border-left: 2px solid #3066be;
     }
 
   </style>
 </head>
 <body onload="setApplicationFees()">
 <nav th:replace="~{layout :: page_navbar}"></nav>
-<h2 class="text-center" th:text="#{license_applicant_header}" style="color:white; margin-top:10px;background-color:#5e331a;"></h2>
+<h2 class="text-center" th:text="#{license_applicant_header}" style="color:white; margin-top:10px;background-color:#3066be;"></h2>
 <div class="container-fluid mt-4" >
   <div>
     <div th:if="${successMessage}" class="alert alert-success" role="alert" th:text="${successMessage}"></div>
@@ -46,7 +46,7 @@
 
         <div class="col-md-3 form-group">
           <label for="licenseTypeId" th:text="#{applicant_license_type}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
-          <select id="licenseTypeId" th:field="*{licenseTypeId}" class="form-control" required onchange="setApplicationFees()" style="border-left: 2px solid red;">
+          <select id="licenseTypeId" th:field="*{licenseTypeId}" class="form-control" required onchange="setApplicationFees()" style="border-left: 2px solid #3066be;">
             <option th:each="licenseType : ${licenseTypes}" th:value="${licenseType.id}" th:text="${licenseType.name}"></option>
           </select>
         </div>
@@ -147,12 +147,12 @@
         </div>
         <div class="col-md-3 form-group">
           <label for="plannedActivitiesAndServices" th:text="#{license_application_plan_active_Service}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
-          <textarea id="plannedActivitiesAndServices" th:field="*{plannedActivitiesAndServices}" class="form-control" required style="border-left: 2px solid red;"></textarea>
+          <textarea id="plannedActivitiesAndServices" th:field="*{plannedActivitiesAndServices}" class="form-control" required style="border-left: 2px solid #3066be;"></textarea>
         </div>
 
         <div class="col-md-3 form-group">
           <label for="companyAddress" th:text="#{license_application_company_address}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
-          <textarea id="companyAddress" th:field="*{companyAddress}" class="form-control" required style="border-left: 2px solid red;"></textarea>
+          <textarea id="companyAddress" th:field="*{companyAddress}" class="form-control" required style="border-left: 2px solid #3066be;"></textarea>
         </div>
       </div>
       <!-- Row 6 -->
@@ -160,7 +160,7 @@
 
         <div class="col-md-3 form-group">
           <label for="postAddress" th:text="#{license_application_post_address}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
-          <textarea id="postAddress" th:field="*{postAddress}" class="form-control" required style="border-left: 2px solid red;"></textarea>
+          <textarea id="postAddress" th:field="*{postAddress}" class="form-control" required style="border-left: 2px solid #3066be;"></textarea>
         </div>
         <div class="col-md-3 form-group">
           <label for="contactNo" th:text="#{license_application_contact_no}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
@@ -178,28 +178,24 @@
       <div class="row">
         <div class="col-md-3 form-group">
           <label th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">Other Licenses</label>
-          <textarea id="other_licenses" th:field="*{otherLicenseTaken}" class="form-control" required style="border-left: 2px solid red;"></textarea>
+          <textarea id="other_licenses" th:field="*{otherLicenseTaken}" class="form-control" required style="border-left: 2px solid #3066be;"></textarea>
         </div>
       </div>
 
       <!-- Submit/Reset Buttons -->
       <div class="row">
         <div class="col-md-4 btn-group d-flex justify-content-center" style="margin-top: 15px;margin-bottom:80px; margin:0 auto;">
-          <button type="submit" class="btn btn-primary btn-sm" style="width: 60px; height: 40px; margin-right: 15px; border-radius:8px;box-shadow: 3px 1px 1px 2px darkblue;">
+          <button type="submit" class="btn btn-primary border border-primary rounded" style="width: 60px; height: 40px; margin-right: 15px;">
             <i class="fas fa-check" style="margin-right: 5px;"></i>Submit
           </button>
-          <button type="reset" class="btn btn-warning btn-sm" style="width: 60px; height: 40px; margin-right: 15px;border-radius:8px;box-shadow: 3px 1px 1px 2px orange;">
+          <button type="reset" class="btn btn-info  border border-info rounded" style="width: 60px; height: 40px; margin-right: 15px;">
             <i class="fas fa-redo" style="margin-right: 5px;"></i>Reset
           </button>
-          <a th:href="@{/licenses/license/home}" class="btn btn-secondary btn-sm pt-2"
-             style="width: 40px; height: 40px;margin-right: 15px;border-radius:8px;box-shadow: 3px 1px 1px 2px darkgray;">
-            <i class="fas fa-arrow-left" style="margin-right: 5px;margin-top:5px;"></i>Back
-          </a>
         </div>
       </div>
     </form>
   </div>
-  <a th:href="@{/licenses/license/home}" class="btn" style="margin-top:20px;color:white;background-color:#5e331a;">
+  <a th:href="@{/licenses/license/home}" class="btn" style="margin-top:20px;color:white;background-color:#3066be;">
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6" style="width:20px;height:20px;">
       <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
     </svg>
