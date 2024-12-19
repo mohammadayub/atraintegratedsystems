@@ -21,7 +21,7 @@
             text-align: left;
         }
 input[type="text"],input[type="number"],input[type="file"],input[type="website"],input[type="email"] {
-    border-left: 2px solid red;
+    border-left: 2px solid #3066be;;
     }
     </style>
 </head>
@@ -38,7 +38,7 @@ input[type="text"],input[type="number"],input[type="file"],input[type="website"]
             <div class="col-md-3 form-group">
                 <label for="licenseType" th:text="#{approval_license_approval_type}"
                        th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">License Type:</label>
-                <select id="licenseType" name="licenseApplicantId" th:field="*{id}" class="form-control" onchange="updateLicenseApplicantId()"  style="border-left: 2px solid red;">
+                <select id="licenseType" name="licenseApplicantId" th:field="*{id}" class="form-control" onchange="updateLicenseApplicantId()"  style="border-left: 2px solid #3066be;;">
                     <option th:each="type : ${licenseApplicants}"
                             th:value="${type.id}"
                             th:text="${type.companyLicenseName}"
@@ -48,7 +48,7 @@ input[type="text"],input[type="number"],input[type="file"],input[type="website"]
             <!-- License Type -->
             <div class="col-md-3 form-group">
                 <label for="licenseTypeId" th:text="#{approval_license_approval_type}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">License Type:</label>
-                <select id="licenseTypeId" name="licenseTypeId" th:field="*{licenseTypeId}" class="form-control"  style="border-left: 2px solid red;">
+                <select id="licenseTypeId" name="licenseTypeId" th:field="*{licenseTypeId}" class="form-control"  style="border-left: 2px solid #3066be;;">
                     <option th:each="type : ${licenseTypes}"
                             th:value="${type.id}"
                             th:text="${type.name}"
@@ -150,7 +150,7 @@ input[type="text"],input[type="number"],input[type="file"],input[type="website"]
                 <label for="approvalStatus"
                        th:text="#{license_approval_status}"
                        th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
-                <select id="approvalStatus" th:field="*{approvalStatus}" class="form-control" required  style="border-left: 2px solid red;">
+                <select id="approvalStatus" th:field="*{approvalStatus}" class="form-control" required  style="border-left: 2px solid #3066be;">
                     <option value="Approve" th:text="#{license_approval_approve}"></option>
                     <option value="Reject" th:text="#{license_approval_reject}"></option>
                 </select>
@@ -166,7 +166,7 @@ input[type="text"],input[type="number"],input[type="file"],input[type="website"]
                 <label for="boardDecisions"
                        th:text="#{license_approval_boardDecisions}"
                        th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
-                <textarea type="text" id="boardDecisions" th:field="*{boardDecisions}" class="form-control" required  style="border-left: 2px solid red;" />
+                <textarea type="text" id="boardDecisions" th:field="*{boardDecisions}" class="form-control" required  style="border-left: 2px solid #3066be;" />
             </div>
         </div>
 
@@ -174,17 +174,17 @@ input[type="text"],input[type="number"],input[type="file"],input[type="website"]
         <!-- Submit Button -->
         <div class="row btn-center">
             <!-- Buttons -->
-            <button type="submit" class="btn btn-sm" style="margin: 10px;color:white;background-color:#5e331a;">
+            <button type="submit" class="btn btn-primary btn-sm" style="margin: 10px;">
                 <span class="fas fa-check"></span>
                 <span th:text="#{license_approval_confirm}"></span>
             </button>
-            <a th:href="@{/licenses/license/approval/license_applicants_approval_list}" class="btn btn-secondary btn-sm" style="margin: 10px;">
+            <a th:href="@{/licenses/license/approval/license_applicants_approval_list}" class="btn btn-info btn-sm" style="margin: 10px;">
                 <span class="fas fa-arrow-left"></span>
                 <span th:text="#{license_approval_back_to_list}"></span>
             </a>
         </div>
         <!-- Back Link -->
-        <a th:href="@{/licenses/license/approval/license_applicants_approval_list}" class="btn" style="margin-top:20px;color:white;background-color:#5e331a;">
+        <a th:href="@{/licenses/license/approval/license_applicants_approval_list}" class="btn" style="margin-top:20px;color:white;background-color:#3066be;">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6" style="width:20px;height:20px;">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
             </svg>

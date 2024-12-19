@@ -38,16 +38,16 @@
             <div class="col-md-3 form-group">
                 <label for="reqId" th:text="#{approval_request_id}"
                        th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
-                <input type="text" id="reqId" th:field="*{reqId}" class="form-control" required readonly>
+                <input type="text" id="reqId" th:field="*{reqId}" class="form-control" required readonly style="border-left:1px solid #3066be;">
             </div>
 
             <div class="col-md-3 form-group">
                 <label for="referToBoardDate" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" th:text="#{refer_to_board_date}">Refer To BoardDate</label>
-                <input type="text" id="referToBoardDate" th:field="*{referToBoardDate}" class="form-control hijrishamsi" required>
+                <input type="text" id="referToBoardDate" th:field="*{referToBoardDate}" class="form-control hijrishamsi" required style="border-left:1px solid #3066be;">
             </div>
             <div class="col-md-3 form-group">
             <label for="isSend" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" th:text="#{is_send}"></label>
-            <select th:field="*{isSend}" id="isSend" class="form-control" readonly="readonly">
+            <select th:field="*{isSend}" id="isSend" class="form-control" readonly="readonly" style="border-left:1px solid #3066be;">
                 <option value="Yes" th:text="#{Yes}">Yes</option>
             </select>
             </div>
@@ -63,18 +63,18 @@
         <div class="d-flex justify-content-center align-items-center">
             <!-- Buttons -->
             <div>
-                <button type="submit" class="btn btn-primary btn-sm" style="margin: 10px;color:white;background-color:#5e331a;">
+                <button type="submit" class="btn btn-primary btn-sm" style="margin: 10px;">
                     <span class="fas fa-check"></span>
                     <span th:text="#{license_approval_confirm}"></span>
                 </button>
                 <a th:href="@{/licenses/license/registration/license_applicants_profile}"
-                   class="btn btn-secondary btn-sm" style="margin: 10px;">
+                   class="btn btn-info btn-sm" style="margin: 10px;">
                     <span class="fas fa-arrow-left"></span>
                     <span th:text="#{license_approval_back_to_list}"></span>
                 </a>
             </div>
         </div>
-        <a th:href="@{/licenses/license/registration/license_applicants_profile}" class="btn" style="margin-top:20px;color:white;background-color:#5e331a;">
+        <a th:href="@{/licenses/license/registration/license_applicants_profile}" class="btn" style="margin-top:20px;color:white;background-color:#3066be;">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6" style="width:20px;height:20px;">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
             </svg>
