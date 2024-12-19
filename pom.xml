@@ -11,7 +11,7 @@
 	</parent>
 
 	<groupId>atraintegratedsystems</groupId>
-	<artifactId>aris</artifactId>
+	<artifactId>lmis</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 

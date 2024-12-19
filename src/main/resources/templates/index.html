@@ -9,25 +9,34 @@
     <title>ATRA Enterprise Planning Project</title>
 
     <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa; /* Light background */
+        }
         .custom-card {
-            width: 170px; /* Fixed width for each card */
+            width: 200px; /* Adjusted width for better alignment */
             text-align: center;
             border: none;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             border-radius: 15px; /* Slightly rounded corners */
             padding: 20px;
-            background-color: #f8f9fa; /* Light background */
-            margin: 10px; /* Margin for space between cards */
+            background-color: #ffffff; /* White background for the card */
+            margin-bottom: 20px; /* Space between cards */
         }
         .custom-card img {
             width: 60px; /* Icon size */
             height: 60px;
             margin-bottom: 10px;
         }
-        .custom-card p {
+        .custom-card h4 {
             margin-top: 10px;
             font-size: 16px;
-            color: #333;
+            color: white;
+        }
+        hr {
+            border: 1px solid #ddd;
+            margin: 20px 0;
+            background-color: #0dcaf0;
         }
     </style>
 </head>
@@ -35,39 +44,36 @@
 <nav th:replace="~{layout :: page_navbar}"></nav>
 
 <div class="container mt-5">
-    <table class="table table-borderless">
-        <tr>
-            <td class="text-center">
-                <div class="custom-card">
-                    <a th:href="@{/licenses/license/home}">
-                    <img th:src="@{/images/licensing.png}" alt="License Management System"></a>
-                    <h4 class="license-link" style="margin-top: 12px;">
-                        <a th:href="@{/licenses/license/home}" th:text="#{lms}"></a>
-                    </h4>
-                </div>
-            </td>
-            <td class="text-center">
-                <div class="custom-card">
-                    <a th:href="@{/licenses/finance/home}">
-                    <img th:src="@{/images/finance.png}" alt="Finance Revenue Management System"></a>
-                    <h4 class="license-link" style="margin-top: 12px;">
-                        <a th:href="@{/licenses/finance/home}" th:text="#{frms}"></a>
-                    </h4>
-                </div>
-            </td>
-
-            <td class="text-center">
-                <div class="custom-card">
-                    <a th:href="@{/licenses/license/report}">
-                        <img th:src="@{/images/reports.png}" alt="Codes Management System"></a>
-                    <h4 class="license-link" style="margin-top: 12px;">
-                        <a th:href="@{/licenses/license/report}" th:text="#{reports}"></a>
-                    </h4>
-
-                </div>
-            </td>
-        </tr>
-    </table>
+    <!-- Card 1 -->
+    <div class="custom-card">
+        <a th:href="@{/licenses/license/home}">
+            <img th:src="@{/images/licensing.png}" alt="License Management System">
+        </a>
+        <h4 class="license-link">
+            <a th:href="@{/licenses/license/home}" th:text="#{lms}"></a>
+        </h4>
+    </div>
+    <hr>
+    <!-- Card 2 -->
+    <div class="custom-card">
+        <a th:href="@{/licenses/finance/home}">
+            <img th:src="@{/images/finance.png}" alt="Finance Revenue Management System">
+        </a>
+        <h4 class="license-link">
+            <a th:href="@{/licenses/finance/home}" th:text="#{frms}"></a>
+        </h4>
+    </div>
+    <hr>
+    <!-- Card 3 -->
+    <div class="custom-card">
+        <a th:href="@{/licenses/license/report}">
+            <img th:src="@{/images/reports.png}" alt="Codes Management System">
+        </a>
+        <h4 class="license-link">
+            <a th:href="@{/licenses/license/report}" th:text="#{reports}"></a>
+        </h4>
+    </div>
+    <hr>
 </div>
 
 <footer th:replace="~{layout :: page_footer}"></footer>

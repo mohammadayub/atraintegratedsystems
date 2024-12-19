@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "license_database_fees_extension")
+@Table(name = "license_admin_fees_extension")
 @Data
 public class LicenseAdminFeesExtension {
 
