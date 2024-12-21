@@ -16,6 +16,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -29,6 +30,23 @@ public class LicenseApprovalService {
 
     @Autowired
     private LicenseTypeRepository licenseTypeRepository;
+
+    @Transactional
+    public List<LicenseApprovalDTO> getAllApprovals() {
+        return licenseApprovalRepository.findAll().stream().map(entity -> {
+            LicenseApprovalDTO dto = new LicenseApprovalDTO();
+            // Map relevant fields to DTO
+            dto.setId(entity.getId());
+            dto.setApprovalId(entity.getApprovalId());
+            dto.setApplicantLicenseCompanyName(entity.getLicenseApplicant().getCompanyLicenseName());
+            dto.setLicenseFees(entity.getLicenseFees());
+            dto.setApprovalDate(entity.getApprovalDate());
+            return dto;
+        }).collect(Collectors.toList());
+    }
+
+
+
     @Transactional
     public List<LicenseApplicant> getAllpaid(){
         return licenseApplicantRepository.findAllApplicantsWithPaid();

@@ -1,148 +1,63 @@
-<!doctype html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
-<head th:replace="~{layout :: page_head}">
-  <div th:replace="styles :: data-tables-styles"></div>
-  <div th:replace="styles :: persian-datepicker-styles"></div>
-  <div th:replace="styles :: select2-styles"></div>
-  <title>ATRA Financial Integrated System</title>
-  <style>
-    /* Basic Table Styling */
-    .table-container {
-        max-height: 800px; /* Set a maximum height for the table container */
-        overflow-y: auto;   /* Enable vertical scrolling */
-        border: 1px solid #ddd; /* Optional: Add a border around the table */
-    }
-    #profileTable {
-        width: 100%; /* Full width for the table */
-        border-collapse: collapse;
-        font-size: 0.9em; /* General smaller font for the table */
-    }
-    #profileTable th, #profileTable td {
-        padding: 6px;
-        text-align: center;
-        vertical-align: middle;
-        font-size: 0.8em; /* Small font size for headers and cells */
-    }
-    #profileTable thead th {
-        background-color: #5e331a;
-        color: white;
-        font-size: 0.85em; /* Slightly larger font for headers */
-    }
-
-    #profileTable tbody tr:nth-child(even) {
-        background-color: #f2f2f2; /* Zebra stripes for rows */
-    }
-
-    #profileTable td a.btn-primary {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        padding: 4px;
-    }
-
-    #profileTable .icon-small {
-        width: 16px;
-        height: 16px;
-    }
-
-    /* Optional: Add some responsiveness */
-    @media (max-width: 768px) {
-        #profileTable th, #profileTable td {
-            font-size: 0.7em; /* Smaller font size for mobile view */
-            padding: 4px;
-        }
-    }
-    #profileTable th {
-    white-space: nowrap;
-}
-
-
-  </style>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>License Details</title>
 </head>
 <body>
-<nav th:replace="~{layout :: page_navbar}"></nav>
-<div class="container-fluid">
-  <div class="table-container">
-    <table class="table table-bordered" id="profileTable">
-      <thead>
-      <tr>
-        <th>Approval ID</th>
-        <th>Approval Date</th>
-        <th>Approval Status</th>
-        <th>License Fees</th>
-        <th>Extension Start Date</th>
-        <th>Extension Expire Date</th>
-        <th>Actions</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr th:each="dto : ${dtoList}">
-        <td th:text="${dto.approvalId}"></td>
-        <td th:text="${dto.approvalDate}"></td>
-        <td th:text="${dto.approvalStatus}"></td>
-        <td th:text="${dto.licenseFees}"></td>
-        <td>
-          <input type="date" th:name="'extensionStartDate_'+${dto.databaseFeesId}" th:value="${dto.extensionStartDate}" />
-        </td>
-        <td>
-          <input type="date" th:name="'extensionExpireDate_'+${dto.databaseFeesId}" th:value="${dto.extensionExpireDate}" />
-        </td>
-        <td>
-          <form th:action="@{/license-database-fees/update}" method="post">
-            <input type="hidden" name="databaseFeesId" th:value="${dto.databaseFeesId}" />
-            <input type="hidden" th:name="'extensionStartDate'" th:value="${#dates.format(dto.extensionStartDate, 'yyyy-MM-dd')}" />
-            <input type="hidden" th:name="'extensionExpireDate'" th:value="${#dates.format(dto.extensionExpireDate, 'yyyy-MM-dd')}" />
-            <button type="submit">Update</button>
-          </form>
-        </td>
-      </tr>
-      </tbody>
-    </table>
-    <br>
+<h1>License Approvals</h1>
+<table border="1">
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Approval ID</th>
+    <th>Company Name</th>
+    <th>License Fees</th>
+    <th>Approval Date</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="approval : ${approvals}">
+    <td th:text="${approval.id}"></td>
+    <td th:text="${approval.approvalId}"></td>
+    <td th:text="${approval.applicantLicenseCompanyName}"></td>
+    <td th:text="${approval.licenseFees}"></td>
+    <td th:text="${approval.approvalDate}"></td>
+  </tr>
+  </tbody>
+</table>
 
-  </div>
-  <a th:href="@{/licenses/license/home}" class="btn" style="margin-top:20px;color:white;background-color:#5e331a;">
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6" style="width:20px;height:20px;">
-      <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
-    </svg>
-    Back to Page</a>
-</div>
+<h1>License Database Fee Extensions</h1>
+<table border="1">
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Approval ID</th>
+    <th>Start Date</th>
+    <th>Expire Date</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="extension : ${extensions}">
+    <td th:text="${extension.id}"></td>
+    <td th:text="${extension.licenseApprovalId}"></td>
+    <td th:text="${extension.extensionStartDate}"></td>
+    <td th:text="${extension.extensionExpireDate}"></td>
+  </tr>
+  </tbody>
+</table>
 
-<!-- Common scripts -->
-<div th:replace="scripts :: common-scripts"></div>
-<div th:replace="scripts :: persian-datepicker-scripts"></div>
-<div th:replace="scripts :: data-tables-scripts"></div>
+<h2>Add New Extension</h2>
+<form th:action="@{/licenses/license/extension/license_database_fees_profile/extension}" method="post">
+  <label for="approvalId">Approval ID:</label>
+  <input type="text" id="approvalId" name="licenseApprovalId"/>
 
+  <label for="startDate">Start Date:</label>
+  <input type="date" id="startDate" name="extensionStartDate"/>
 
-<script>
-  $(document).ready(function () {
-      // Initialize DataTable with individual column search
-      let table = $('#profileTable').DataTable({
-          initComplete: function () {
-              this.api().columns().every(function () {
-                  var column = this;
-                  var header = $(column.header());
-                  var columnText = header.text(); // Get the existing header text
-                  header.empty().append('<div>' + columnText + '</div>'); // Keep the header text and add a wrapper
+  <label for="expireDate">Expire Date:</label>
+  <input type="date" id="expireDate" name="extensionExpireDate"/>
 
-                  // Append the search input below the header text
-                  $('<input type="text" placeholder="Search" style="width: 100%; margin-top: 5px;"/>')
-                      .appendTo(header)
-                      .on('keyup change clear', function () {
-                          if (column.search() !== this.value) {
-                              column
-                                  .search(this.value)
-                                  .draw();
-                          }
-                      });
-              });
-          }
-      });
-  });
-</script>
-
-
-<footer th:replace="~{layout :: page_footer}"></footer>
-<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+  <button type="submit">Save</button>
+</form>
 </body>
 </html>
