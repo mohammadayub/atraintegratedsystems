@@ -35,10 +35,9 @@
 <div class="container mt-5">
   <table class="table table-borderless">
     <tr style="border-bottom:1px solid darkgray;">
-
       <td>
         <div class="custom-card" >
-          <a th:href="@{/licenses/license/report/license_general_report}" style="margin:8%;">
+          <a th:href="@{/licenses/license/report/license_general_report}">
             <img th:src="@{/images/license_report.png}" alt="Codes Management System"></a>
           <h4 class="license-link" style="margin-top: 12px;">
             <a th:href="@{/licenses/license/report/license_general_report}" th:text="#{license_reports}"></a>
@@ -47,15 +46,19 @@
         </div>
       </td>
 
-      <td>
-        <div class="custom-card" >
-          <a th:href="@{/licenses/license/report/license_general_report}" style="margin:8%;">
-            <img th:src="@{/images/visualize_report.png}" alt="Codes Management System"></a>
-          <h4 class="license-link" style="margin-top: 12px;">
-            <a th:href="@{/licenses/license/report/license_visualize_report}" > License Visualize Report</a>
-          </h4>
 
-        </div>
+
+    </tr>
+    <tr style="border-bottom:1px solid darkgray;">
+      <td>
+      <div class="custom-card" >
+        <a th:href="@{/licenses/license/report/license_general_report}">
+          <img th:src="@{/images/visualize_report.png}" alt="Codes Management System"></a>
+        <h4 class="license-link" style="margin-top: 12px;">
+          <a th:href="@{/licenses/license/report/license_visualize_report}" > License Visualize Report</a>
+        </h4>
+
+      </div>
       </td>
     </tr>
     <tr>

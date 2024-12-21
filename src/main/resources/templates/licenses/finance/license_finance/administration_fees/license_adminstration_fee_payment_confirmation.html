@@ -5,6 +5,11 @@
     <div th:replace="styles :: persian-datepicker-styles"></div>
     <div th:replace="styles :: select2-styles"></div>
     <title>ATRA Revenue Integrated System</title>
+     <style>
+         input[type="text"]{
+            border-left: 2px solid #0dcaf0;
+    }
+     </style>
 </head>
 <body>
 <nav th:replace="~{layout :: page_navbar}"></nav>
@@ -60,12 +65,12 @@
 
         <!-- Submit/Reset Buttons -->
         <div class="col-md-4 btn-group d-flex justify-content-center" style="margin-top: 15px; margin-bottom:80px; margin:0 auto;">
-            <button type="submit" class="btn btn-primary btn-sm" style="width: 100px;background-color:#5e331a;color:white;" th:text="#{confirmation_payment}">
+            <button type="submit" class="btn btn-primary btn-sm" style="width: 100px;" th:text="#{confirmation_payment}">
                 <span class="fas fa-check"></span> Confirm Payment
             </button>
         </div>
     </form>
-    <a th:href="@{/licenses/finance/license_finance/administration_fees/license_administration_fee_list}" id="backtopage" class="btn" style="margin-top:20px;background-color:#5e331a;color:white;">
+    <a th:href="@{/licenses/finance/license_finance/administration_fees/license_administration_fee_list}" id="backtopage" class="btn" style="margin-top:20px;background-color:#0dcaf0;color:white;">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6" style="width:20px;height:20px;">
             <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
         </svg>

@@ -8,12 +8,12 @@
 </head>
 <style>
     input[type="text"],input[type="number"],input[type="file"],input[type="website"],input[type="email"] {
-    border-left: 2px solid red;
+    border-left: 2px solid #0dcaf0;
     }
 </style>
 <body>
 <nav th:replace="~{layout :: page_navbar}"></nav>
-<h3 style="text-align:center;margin-top:10px;font-weight:bolder;color:white;background-color:#5e331a;" th:text="#{license_application_confirmation}">License Application Confirmation</h3>
+<h3 style="text-align:center;margin-top:10px;font-weight:bolder;color:white;background-color:#0dcaf0;" th:text="#{license_application_confirmation}">License Application Confirmation</h3>
 <div class="container-fluid" style="margin-top:40px;">
     <form th:action="@{/licenses/finance/application_fees/license_application_fee_list/add}" th:object="${licenseApplicantDTO}" method="post">
         <div class="row">
@@ -31,7 +31,7 @@
             <!-- License Type -->
             <div class="col-md-3 form-group">
                 <label for="licenseTypeId" th:text="#{applicant_license_type}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
-                <select id="licenseTypeId" th:field="*{licenseTypeId}" class="form-control" required onchange="setApplicationFees()" disabled style="border-left: 2px solid red;">
+                <select id="licenseTypeId" th:field="*{licenseTypeId}" class="form-control" required onchange="setApplicationFees()" disabled style="border-left: 2px solid #0dcaf0;">
                     <option th:each="licenseType : ${licenseTypes}" th:value="${licenseType.id}" th:text="${licenseType.name}"></option>
                 </select>
             </div>
@@ -148,12 +148,12 @@
 
         <!-- Submit/Reset Buttons -->
         <div class="col-md-4 btn-group d-flex justify-content-center" style="margin-top: 15px; margin-bottom:80px; margin:0 auto;">
-            <button type="submit" class="btn" style="color:white;background-color:#5e331a;" th:text="#{confirmation_payment}">
+            <button type="submit" class="btn btn-primary" th:text="#{confirmation_payment}">
                 <span class="fas fa-check"></span> Confirm Payment
             </button>
         </div>
     </form>
-    <a th:href="@{/licenses/finance/license_finance/application_fees/license_application_fee_list}" class="btn" style="margin-top:20px;color:white;background-color:#5e331a;">
+    <a th:href="@{/licenses/finance/license_finance/application_fees/license_application_fee_list}" class="btn" style="margin-top:20px;color:white;background-color:#0dcaf0;">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6" style="width:20px;height:20px;">
             <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
         </svg>
