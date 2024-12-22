@@ -1,63 +1,185 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-  <title>License Details</title>
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head th:replace="~{layout :: page_head}">
+  <div th:replace="styles :: data-tables-styles"></div>
+  <div th:replace="styles :: persian-datepicker-styles"></div>
+  <div th:replace="styles :: select2-styles"></div>
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css">
+  <title>ATRA Financial Integrated System</title>
+
+  <style>
+    /* Basic Table Styling */
+    body {
+        background-color: #f9f9f9; /* Light gray for better readability */
+    }
+
+    .table-container {
+        max-height: 800px; /* Set a maximum height for the table container */
+        overflow-y: auto;   /* Enable vertical scrolling */
+        border: 1px solid #ddd; /* Optional: Add a border around the table */
+        background-color: #ffffff; /* White background for the table */
+        padding: 20px; /* Padding for better aesthetics */
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+    }
+
+    #profileTable {
+        width: 100%; /* Full width for the table */
+        border-collapse: collapse;
+        font-size: 0.9em; /* General smaller font for the table */
+    }
+
+    #profileTable th, #profileTable td {
+        padding: 6px;
+        text-align: center;
+        vertical-align: middle;
+        font-size: 0.8em; /* Small font size for headers and cells */
+    }
+
+    #profileTable thead th {
+        color:white;
+        background-color:#0dcaf0;
+        font-size: 0.85em; /* Slightly larger font for headers */
+    }
+
+    #profileTable tbody tr:nth-child(even) {
+        background-color: #f2f2f2; /* Zebra stripes for rows */
+    }
+
+    #profileTable td a.btn-primary {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 4px;
+    }
+
+
+
+    #profileTable th {
+        white-space: nowrap;
+    }
+    </style>
 </head>
 <body>
 <h1>License Approvals</h1>
-<table border="1">
-  <thead>
-  <tr>
-    <th>ID</th>
-    <th>Approval ID</th>
-    <th>Company Name</th>
-    <th>License Fees</th>
-    <th>Approval Date</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr th:each="approval : ${approvals}">
-    <td th:text="${approval.id}"></td>
-    <td th:text="${approval.approvalId}"></td>
-    <td th:text="${approval.applicantLicenseCompanyName}"></td>
-    <td th:text="${approval.licenseFees}"></td>
-    <td th:text="${approval.approvalDate}"></td>
-  </tr>
-  </tbody>
+<div class="table-container">
+<table border="1" class="table table-bordered" id="profileTable">
+<thead>
+<tr>
+<th>ID</th>
+<th>Approval ID</th>
+<th>Company Name</th>
+<th>License Fees</th>
+<th>Approval Date</th>
+</tr>
+</thead>
+<tbody>
+<tr th:each="approval : ${approvals}">
+<td th:text="${approval.id}"></td>
+<td th:text="${approval.approvalId}"></td>
+<td th:text="${approval.applicantLicenseCompanyName}"></td>
+<td th:text="${approval.licenseFees}"></td>
+<td th:text="${approval.approvalDate}"></td>
+</tr>
+</tbody>
 </table>
 
 <h1>License Database Fee Extensions</h1>
-<table border="1">
-  <thead>
-  <tr>
-    <th>ID</th>
-    <th>Approval ID</th>
-    <th>Start Date</th>
-    <th>Expire Date</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr th:each="extension : ${extensions}">
-    <td th:text="${extension.id}"></td>
-    <td th:text="${extension.licenseApprovalId}"></td>
-    <td th:text="${extension.extensionStartDate}"></td>
-    <td th:text="${extension.extensionExpireDate}"></td>
-  </tr>
-  </tbody>
+<table border="1" class="table table-bordered" id="profileTable">
+<thead>
+<tr>
+<th>ID</th>
+<th>Approval ID</th>
+<th>Start Date</th>
+<th>Expire Date</th>
+</tr>
+</thead>
+<tbody>
+<tr th:each="extension : ${extensions}">
+<td th:text="${extension.id}"></td>
+<td th:text="${extension.licenseApprovalId}"></td>
+<td th:text="${extension.extensionStartDate}"></td>
+<td th:text="${extension.extensionExpireDate}"></td>
+</tr>
+</tbody>
 </table>
+</div>
 
+<div class="container-fluid mt-4">
+  <div class="row"><div class="col-md-5">
 <h2>Add New Extension</h2>
 <form th:action="@{/licenses/license/extension/license_database_fees_profile/extension}" method="post">
-  <label for="approvalId">Approval ID:</label>
-  <input type="text" id="approvalId" name="licenseApprovalId"/>
+<label for="approvalId">Approval ID:</label>
+<input type="text" id="approvalId" th:field="*{licenseApproval}" class="form-control"/>
 
-  <label for="startDate">Start Date:</label>
-  <input type="date" id="startDate" name="extensionStartDate"/>
+<label for="startDate">Start Date:</label>
+<input type="date" id="startDate" th:field="*{extensionStartDate}" class="form-control hijrishamsi" />
 
-  <label for="expireDate">Expire Date:</label>
-  <input type="date" id="expireDate" name="extensionExpireDate"/>
+<label for="expireDate">Expire Date:</label>
+<input type="date" id="expireDate" th:field="*{extensionExpireDate}" class="form-control hijrishamsi" />
 
-  <button type="submit">Save</button>
+<button class="btn btn-primary mt-4" type="submit">Save</button>
 </form>
+  </div>
+  </div>
+</div>
+<!-- Common scripts -->
+<div th:replace="scripts :: common-scripts"></div>
+
+<!-- Persian DatePicker scripts -->
+<div th:replace="scripts :: persian-datepicker-scripts"></div>
+
+<div th:replace="scripts :: data-tables-scripts"></div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
+
+<script>
+  $('.hijrishamsi').persianDatepicker({
+        format: 'YYYY-MM-DD',
+        autoClose: true,
+        calendar: {
+            persian: {
+                locale: 'en'
+            }
+        }
+    });
+  $(document).ready(function () {
+      $('#profileTable').DataTable({
+          dom: 'Bfrtip', // Include Buttons
+          buttons: [
+              {
+                  extend: 'excelHtml5',
+                  text: 'Export to Excel',
+                  title: 'License Approvals Report'
+              }
+          ],
+          initComplete: function () {
+              this.api().columns().every(function () {
+                  var column = this;
+                  var header = $(column.header());
+                  var columnText = header.text();
+                  header.empty().append('<div>' + columnText + '</div>');
+
+                  $('<input type="text" placeholder="Search" style="width: 100%; margin-top: 5px;"/>')
+                      .appendTo(header)
+                      .on('keyup change clear', function () {
+                          if (column.search() !== this.value) {
+                              column.search(this.value).draw();
+                          }
+                      });
+              });
+          }
+      });
+  });
+
+</script>
+
+<footer th:replace="~{layout :: page_footer}"></footer>
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
 </body>
 </html>
