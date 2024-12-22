@@ -61,7 +61,8 @@
     </style>
 </head>
 <body>
-<h1>License Approvals</h1>
+<nav th:replace="~{layout :: page_navbar}"></nav>
+<h1 class="text-center mt-4">License Approvals</h1>
 <div class="table-container">
 <table border="1" class="table table-bordered" id="profileTable">
 <thead>
@@ -107,7 +108,7 @@
 
 <div class="container-fluid mt-4">
   <div class="row"><div class="col-md-5">
-<h2>Add New Extension</h2>
+<h2 class="text-center mt-4">Add New Extension</h2>
     <form th:action="@{/licenses/license/extension/license_database_fees_profile/extension}" method="post">
       <label for="approvalId">Approval ID:</label>
       <input type="text" id="approvalId" name="licenseApprovalId" class="form-control"/>
@@ -179,6 +180,29 @@
 
 </script>
 
+<script>
+  $(document).ready(function () {
+      // Initialize DataTable with individual column search
+      let table = $('#profileTable').DataTable({
+          initComplete: function () {
+              this.api().columns().every(function () {
+                  var column = this;
+                  var header = $(column.header());
+                  var columnText = header.text();
+                  header.empty().append('<div>' + columnText + '</div>');
+
+                  $('<input type="text" placeholder="Search ' + columnText + '" class="form-control form-control-sm mb-2" />')
+                      .appendTo(header.find('div'))
+                      .on('keyup change clear', function () {
+                          if (column.search() !== this.value) {
+                              column.search(this.value).draw();
+                          }
+                      });
+              });
+          }
+      });
+  });
+</script>
 <footer th:replace="~{layout :: page_footer}"></footer>
 <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
 </body>
