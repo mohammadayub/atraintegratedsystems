@@ -39,7 +39,7 @@ public class LicenseApprovalService {
             dto.setId(entity.getId());
             dto.setApprovalId(entity.getApprovalId());
             dto.setApplicantLicenseCompanyName(entity.getLicenseApplicant().getCompanyLicenseName());
-            dto.setLicenseFees(entity.getLicenseFees());
+            dto.setDatabaseYearlyMaintainanceFees(entity.getDatabaseYearlyMaintainanceFees());
             dto.setApprovalDate(entity.getApprovalDate());
             return dto;
         }).collect(Collectors.toList());
