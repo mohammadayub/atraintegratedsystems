@@ -4,8 +4,10 @@
   <div th:replace="styles :: data-tables-styles"></div>
   <div th:replace="styles :: persian-datepicker-styles"></div>
   <div th:replace="styles :: select2-styles"></div>
+  <!-- DataTables CSS -->
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css">
+  <div th:replace="styles :: select2-styles"></div>
   <title>ATRA Financial Integrated System</title>
 
   <style>
@@ -110,13 +112,13 @@
 <h2>Add New Extension</h2>
 <form th:action="@{/licenses/license/extension/license_database_fees_profile/extension}" method="post">
 <label for="approvalId">Approval ID:</label>
-<input type="text" id="approvalId" th:field="*{licenseApproval}" class="form-control"/>
+<input type="text" id="approvalId" name="licenseApprovalId" class="form-control"/>
 
 <label for="startDate">Start Date:</label>
-<input type="date" id="startDate" th:field="*{extensionStartDate}" class="form-control hijrishamsi" />
+<input type="date" id="startDate" name="extensionStartDate" class="form-control hijrishamsi" />
 
 <label for="expireDate">Expire Date:</label>
-<input type="date" id="expireDate" th:field="*{extensionExpireDate}" class="form-control hijrishamsi" />
+<input type="date" id="expireDate" name="extensionExpireDate" class="form-control hijrishamsi" />
 
 <button class="btn btn-primary mt-4" type="submit">Save</button>
 </form>
