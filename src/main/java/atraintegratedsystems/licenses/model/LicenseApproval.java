@@ -133,7 +133,7 @@ public class LicenseApproval {
     }
 
 //    Start My Code
-    public JalaliDate getdatabaseMaintianenceFeeExpiryDate() {
+    public JalaliDate getdatabaseFeesExpiryDate() {
         if (databaseMaintianenceFeeExpiryDate == null) {
             return null; // Return null if issueLicenseDate is null
         }
@@ -143,7 +143,7 @@ public class LicenseApproval {
     }
 
 
-    public JalaliDate getadministrationFeeExpiryDate() {
+    public JalaliDate getadminFeeExpiryDate() {
         if (administrationFeeExpiryDate == null) {
             return null; // Return null if issueLicenseDate is null
         }

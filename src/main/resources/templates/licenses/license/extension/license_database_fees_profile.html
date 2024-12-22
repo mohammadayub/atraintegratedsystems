@@ -7,201 +7,275 @@
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css">
   <title>ATRA Financial Integrated System</title>
-
   <style>
-    /* Basic Table Styling */
     body {
-        background-color: #f9f9f9; /* Light gray for better readability */
+        background-color: #f9f9f9;
     }
-
     .table-container {
-        max-height: 800px; /* Set a maximum height for the table container */
-        overflow-y: auto;   /* Enable vertical scrolling */
-        border: 1px solid #ddd; /* Optional: Add a border around the table */
-        background-color: #ffffff; /* White background for the table */
-        padding: 20px; /* Padding for better aesthetics */
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+        max-height: 800px;
+        overflow-y: auto;
+        border: 1px solid #ddd;
+        background-color: #ffffff;
+        padding: 20px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     }
-
-    #profileTable {
-        width: 100%; /* Full width for the table */
+    #profileTable, #extensionTable {
+        width: 100%;
         border-collapse: collapse;
-        font-size: 0.9em; /* General smaller font for the table */
+        font-size: 0.9em;
     }
-
-    #profileTable th, #profileTable td {
+    #profileTable th, #profileTable td, #extensionTable th, #extensionTable td {
         padding: 6px;
         text-align: center;
         vertical-align: middle;
-        font-size: 0.8em; /* Small font size for headers and cells */
+        font-size: 0.8em;
     }
-
-    #profileTable thead th {
-        color:white;
-        background-color:#0dcaf0;
-        font-size: 0.85em; /* Slightly larger font for headers */
+    #profileTable thead th, #extensionTable thead th {
+        color: white;
+        background-color: #0dcaf0;
+        font-size: 0.85em;
     }
-
-    #profileTable tbody tr:nth-child(even) {
-        background-color: #f2f2f2; /* Zebra stripes for rows */
+    #profileTable tbody tr:nth-child(even), #extensionTable tbody tr:nth-child(even) {
+        background-color: #f2f2f2;
     }
-
-    #profileTable td a.btn-primary {
+    #profileTable td a.btn-primary, #extensionTable td a.btn-primary {
         display: inline-flex;
         align-items: center;
         justify-content: center;
         padding: 4px;
     }
-
-
-
-    #profileTable th {
+    #profileTable th, #extensionTable th {
         white-space: nowrap;
     }
-    </style>
+  </style>
+
 </head>
 <body>
 <nav th:replace="~{layout :: page_navbar}"></nav>
-<h1 class="text-center mt-4">License Approvals</h1>
+<h4 class="mt-4">License Approvals Information</h4>
 <div class="table-container">
-<table border="1" class="table table-bordered" id="profileTable">
-<thead>
-<tr>
-<th>ID</th>
-<th>Approval ID</th>
-<th>Company Name</th>
-<th>License Fees</th>
-<th>Approval Date</th>
-</tr>
-</thead>
-<tbody>
-<tr th:each="approval : ${approvals}">
-<td th:text="${approval.id}"></td>
-<td th:text="${approval.approvalId}"></td>
-<td th:text="${approval.applicantLicenseCompanyName}"></td>
-<td th:text="${approval.licenseFees}"></td>
-<td th:text="${approval.approvalDate}"></td>
-</tr>
-</tbody>
-</table>
-
-<h1>License Database Fee Extensions</h1>
-<table border="1" class="table table-bordered" id="profileTable">
-<thead>
-<tr>
-<th>ID</th>
-<th>Approval ID</th>
-<th>Start Date</th>
-<th>Expire Date</th>
-</tr>
-</thead>
-<tbody>
-<tr th:each="extension : ${extensions}">
-<td th:text="${extension.id}"></td>
-<td th:text="${extension.licenseApprovalId}"></td>
-<td th:text="${extension.extensionStartDate}"></td>
-<td th:text="${extension.extensionExpireDate}"></td>
-</tr>
-</tbody>
-</table>
-</div>
-
-<div class="container-fluid mt-4">
-  <div class="row"><div class="col-md-5">
-<h2 class="text-center mt-4">Add New Extension</h2>
-    <form th:action="@{/licenses/license/extension/license_database_fees_profile/extension}" method="post">
-      <label for="approvalId">Approval ID:</label>
-      <input type="text" id="approvalId" name="licenseApprovalId" class="form-control"/>
-
-      <label for="startDate">Start Date:</label>
-      <input type="date" id="startDate" name="extensionStartDate" class="form-control hijrishamsi" />
-
-      <label for="expireDate">Expire Date:</label>
-      <input type="date" id="expireDate" name="extensionExpireDate" class="form-control hijrishamsi" />
-
-      <button class="btn btn-primary mt-4" type="submit">Save</button>
+  <table border="1" class="table table-bordered" id="profileTable">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Approval ID</th>
+      <th>Company Name</th>
+      <th>License Validity Years</th>
+      <th>Database Fees</th>
+      <th>Approval Date</th>
+      <th>Expire Date</th>
+      <th>Contract Extension</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="approval : ${approvals}">
+      <td th:text="${approval.id}"></td>
+      <td th:text="${approval.approvalId}"></td>
+      <td th:text="${approval.applicantLicenseCompanyName}"></td>
+      <td th:text="${approval.licenseValidity}"></td>
+      <td th:text="${approval.databaseYearlyMaintainanceFees}"></td>
+      <td th:text="${approval.approvalDate}"></td>
+      <td th:text="${approval.databaseMaintianenceFeeExpiryDate}" class="expireDate"></td>
+      <td>
+        <button class="btn btn-primary btn-sm select-button"
+                data-id="${approval.approvalId}"
+                data-fees="${approval.databaseYearlyMaintainanceFees}">
+          <!-- SVG Contract Extension Icon -->
+          <svg fill="#000000" height="20px" width="20px" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 237.783 237.783" xmlns:xlink="http://www.w3.org/1999/xlink" enable-background="new 0 0 237.783 237.783">
+            <g>
+              <path d="m42.735,50.071h96.959c3.313,0 6,2.687 6,6s-2.687,6-6,6h-96.959c-3.313,0-6-2.687-6-6s2.686-6 6-6zm0,25.934h96.959c3.313,0 6,2.687 6,6s-2.687,6-6,6h-96.959c-3.313,0-6-2.687-6-6s2.686-6 6-6zm0,25.935h96.959c3.313,0 6,2.687 6,6s-2.687,6-6,6h-96.959c-3.313,0-6-2.687-6-6s2.686-6 6-6zm0,25.935h96.959c3.313,0 6,2.687 6,6s-2.687,6-6,6h-96.959c-3.313,0-6-2.687-6-6s2.686-6 6-6z"/>
+              <path d="m42.735,62.071h96.959c3.313,0 6-2.687 6-6s-2.687-6-6-6h-96.959c-3.313,0-6,2.687-6,6s2.686,6 6,6z"/>
+              <path d="m42.735,88.005h96.959c3.313,0 6-2.687 6-6s-2.687-6-6-6h-96.959c-3.313,0-6,2.687-6,6s2.686,6 6,6z"/>
+              <path d="m42.735,113.94h96.959c3.313,0 6-2.687 6-6s-2.687-6-6-6h-96.959c-3.313,0-6,2.687-6,6s2.686,6 6,6z"/>
+              <path d="m42.735,139.875h96.959c3.313,0 6-2.687 6-6s-2.687-6-6-6h-96.959c-3.313,0-6,2.687-6,6s2.686,6 6,6z"/>
+              <path d="m237.783,98.361c0-1.591-0.632-3.117-1.757-4.243l-16.356-16.355c-1.125-1.125-2.651-1.757-4.243-1.757s-3.117,0.632-4.243,1.757l-28.756,28.756v-88.117c0-3.313-2.686-6-6-6h-170.428c-3.314,0-6,2.687-6,6v200.979c0,3.313 2.686,6 6,6h170.429c3.314,0 6-2.687 6-6v-63.18l53.597-53.597c1.125-1.125 1.757-2.651 1.757-4.243zm-225.783,115.02v-188.979h158.429v94.117l-35.291,35.291h-92.403c-3.313,0-6,2.687-6,6s2.687,6 6,6h80.403l-1.033,1.033c-0.777,0.777-1.326,1.753-1.586,2.821l-4.157,17.05h-25.148c-3.313,0-6,2.687-6,6s2.687,6 6,6c0,0 29.714,0 29.86,0 0.473,0 0.95-0.056 1.421-0.171l21.629-5.273c1.068-0.26 2.044-0.809 2.821-1.586l23.482-23.482v45.181h-158.427zm127.649-31.374l-10.408,2.538 2.538-10.408 83.648-83.648 7.871,7.871-83.649,83.647z"/>
+            </g>
+          </svg>
+        </button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <h4 class="mt-4" >License Database Fee Extensions Information</h4>
+  <table border="1" class="table table-bordered"   id="extensionTable">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Approval ID</th>
+      <th>Start Date</th>
+      <th>Expire Date</th>
+      <th>Database Fees</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="extension : ${extensions}">
+      <td th:text="${extension.id}"></td>
+      <td th:text="${extension.licenseApprovalId}"></td>
+      <td th:text="${extension.extensionStartDate}"></td>
+      <td th:text="${extension.extensionExpireDate}" class="expireDate"></td>
+      <td th:text="${extension.extensionDatabaseFees}"></td>
+    </tr>
+    </tbody>
+  </table>
+  <div class="container-fluid mt-4" >
+    <h4 class="text-center mt-4">Add New Extension</h4>
+    <form th:action="@{/licenses/license/extension/license_database_fees_profile/extension}" method="post" class="form-inline justify-content-center" style="display: flex; justify-content: space-between; align-items: center;">
+      <div class="form-group mr-3">
+        <label for="approvalId" class="mr-2">Approval ID:</label>
+        <input type="text" id="approvalId" name="licenseApprovalId" class="form-control"/>
+      </div>
+      <div class="form-group mr-3">
+        <label for="startDate" class="mr-2">Start Date:</label>
+        <input type="text" id="startDate" name="extensionStartDate" class="form-control hijrishamsi"/>
+      </div>
+      <div class="form-group mr-3">
+        <label for="extensionDatabaseFees" class="mr-2">Database Fees:</label>
+        <input type="text" id="extensionDatabaseFees" name="extensionDatabaseFees" class="form-control"/>
+      </div>
+      <button class="btn btn-primary" type="submit">Save</button>
     </form>
   </div>
-  </div>
+ <div style="height:50vh"></div>
+
 </div>
-<!-- Common scripts -->
 <div th:replace="scripts :: common-scripts"></div>
-
-<!-- Persian DatePicker scripts -->
 <div th:replace="scripts :: persian-datepicker-scripts"></div>
-
 <div th:replace="scripts :: data-tables-scripts"></div>
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
-
+<!--This is for Approval Table-->
 <script>
-  $('.hijrishamsi').persianDatepicker({
-        format: 'YYYY-MM-DD',
-        autoClose: true,
-        calendar: {
-            persian: {
-                locale: 'en'
-            }
-        }
-    });
   $(document).ready(function () {
-      $('#profileTable').DataTable({
-          dom: 'Bfrtip', // Include Buttons
-          buttons: [
-              {
-                  extend: 'excelHtml5',
-                  text: 'Export to Excel',
-                  title: 'License Approvals Report'
-              }
-          ],
-          initComplete: function () {
-              this.api().columns().every(function () {
-                  var column = this;
-                  var header = $(column.header());
-                  var columnText = header.text();
-                  header.empty().append('<div>' + columnText + '</div>');
+      // Get the current date
+      const currentDate = new Date();
 
-                  $('<input type="text" placeholder="Search" style="width: 100%; margin-top: 5px;"/>')
-                      .appendTo(header)
-                      .on('keyup change clear', function () {
-                          if (column.search() !== this.value) {
-                              column.search(this.value).draw();
-                          }
-                      });
-              });
+      // Loop through all the rows of the table
+      $('#profileTable tbody tr').each(function () {
+          const row = $(this);
+          const expiryDateText = row.find('.expireDate').text().trim();
+          const expiryDate = new Date(expiryDateText);
+
+          if (expiryDate instanceof Date && !isNaN(expiryDate)) {
+              const diffTime = expiryDate - currentDate;
+              const diffDays = diffTime / (1000 * 3600 * 24); // Difference in days
+
+              if (diffDays < 0) {
+                  // Expiry date has passed (Red)
+                  row.find('.expireDate').css('background-color', 'red');
+                  row.find('.expireDate').css('color', 'white');
+              } else if (diffDays <= 30) {
+                  // Expiry date is within 1 month (Yellow)
+                  row.find('.expireDate').css('background-color', 'yellow');
+                  row.find('.expireDate').css('color', 'black');
+              }
           }
       });
   });
+</script>
 
+<!--This is for Extension Table-->
+<script>
+  $(document).ready(function () {
+      // Get the current date
+      const currentDate = new Date();
+
+      // Loop through all the rows of the table
+      $('#extensionTable tbody tr').each(function () {
+          const row = $(this);
+          const expiryDateText = row.find('.expireDate').text().trim();
+          const expiryDate = new Date(expiryDateText);
+
+          if (expiryDate instanceof Date && !isNaN(expiryDate)) {
+              const diffTime = expiryDate - currentDate;
+              const diffDays = diffTime / (1000 * 3600 * 24); // Difference in days
+
+              if (diffDays < 0) {
+                  // Expiry date has passed (Red)
+                  row.find('.expireDate').css('background-color', 'red');
+                  row.find('.expireDate').css('color', 'white');
+              } else if (diffDays <= 30) {
+                  // Expiry date is within 1 month (Yellow)
+                  row.find('.expireDate').css('background-color', 'yellow');
+                  row.find('.expireDate').css('color', 'black');
+              }
+          }
+      });
+  });
+</script>
+
+<!--Taking Approval Id and Fees-->
+<script>
+  $(document).on('click', '.select-button', function () {
+      const approvalId = $(this).closest('tr').find('td:nth-child(1)').text();
+      const databaseFees = $(this).closest('tr').find('td:nth-child(5)').text();
+
+      $('#approvalId').val(approvalId.trim());
+      $('#extensionDatabaseFees').val(databaseFees.trim());
+  });
+
+
+      $('.hijrishamsi').persianDatepicker({
+          format: 'YYYY-MM-DD',
+          autoClose: true,
+          initialValue: false,
+          calendar: {
+              persian: {
+                  locale: 'en'
+              }
+          }
+      });
 </script>
 
 <script>
   $(document).ready(function () {
-      // Initialize DataTable with individual column search
-      let table = $('#profileTable').DataTable({
-          initComplete: function () {
-              this.api().columns().every(function () {
-                  var column = this;
-                  var header = $(column.header());
-                  var columnText = header.text();
-                  header.empty().append('<div>' + columnText + '</div>');
+       // Initialize DataTable with individual column search
+       let table = $('#profileTable').DataTable({
+           initComplete: function () {
+               this.api().columns().every(function () {
+                   var column = this;
+                   var header = $(column.header());
+                   var columnText = header.text(); // Get the existing header text
+                   header.empty().append('<div>' + columnText + '</div>'); // Keep the header text and add a wrapper
 
-                  $('<input type="text" placeholder="Search ' + columnText + '" class="form-control form-control-sm mb-2" />')
-                      .appendTo(header.find('div'))
-                      .on('keyup change clear', function () {
-                          if (column.search() !== this.value) {
-                              column.search(this.value).draw();
-                          }
-                      });
-              });
-          }
-      });
-  });
+                   // Append the search input below the header text
+                   $('<input type="text" placeholder="Search" style="width: 100%; margin-top: 5px;"/>')
+                       .appendTo(header)
+                       .on('keyup change clear', function () {
+                           if (column.search() !== this.value) {
+                               column
+                                   .search(this.value)
+                                   .draw();
+                           }
+                       });
+               });
+           }
+       });
+   });
+
+  //Extension
+
+    $(document).ready(function () {
+       // Initialize DataTable with individual column search
+       let table = $('#extensionTable').DataTable({
+           initComplete: function () {
+               this.api().columns().every(function () {
+                   var column = this;
+                   var header = $(column.header());
+                   var columnText = header.text(); // Get the existing header text
+                   header.empty().append('<div>' + columnText + '</div>'); // Keep the header text and add a wrapper
+
+                   // Append the search input below the header text
+                   $('<input type="text" placeholder="Search" style="width: 100%; margin-top: 5px;"/>')
+                       .appendTo(header)
+                       .on('keyup change clear', function () {
+                           if (column.search() !== this.value) {
+                               column
+                                   .search(this.value)
+                                   .draw();
+                           }
+                       });
+               });
+           }
+       });
+   });
 </script>
 <footer th:replace="~{layout :: page_footer}"></footer>
 <script th:src="@{/js/bootstrap.bundle.min.js}"></script>

@@ -32,19 +32,36 @@ public class LicenseApprovalService {
     private LicenseTypeRepository licenseTypeRepository;
 
     @Transactional
-    public List<LicenseApprovalDTO> getAllApprovals() {
+    public List<LicenseApprovalDTO> getAllForDatabaseFeesExtension() {
         return licenseApprovalRepository.findAll().stream().map(entity -> {
             LicenseApprovalDTO dto = new LicenseApprovalDTO();
             // Map relevant fields to DTO
             dto.setId(entity.getId());
             dto.setApprovalId(entity.getApprovalId());
             dto.setApplicantLicenseCompanyName(entity.getLicenseApplicant().getCompanyLicenseName());
+            dto.setLicenseValidity(entity.getLicenseApplicant().getValidity());
             dto.setDatabaseYearlyMaintainanceFees(entity.getDatabaseYearlyMaintainanceFees());
             dto.setApprovalDate(entity.getApprovalDate());
+            dto.setDatabaseMaintianenceFeeExpiryDate(entity.getDatabaseMaintianenceFeeExpiryDate());
             return dto;
         }).collect(Collectors.toList());
     }
 
+    @Transactional
+    public List<LicenseApprovalDTO> getAllForAdminFeesExtension() {
+        return licenseApprovalRepository.findAll().stream().map(entity -> {
+            LicenseApprovalDTO dto = new LicenseApprovalDTO();
+            // Map relevant fields to DTO
+            dto.setId(entity.getId());
+            dto.setApprovalId(entity.getApprovalId());
+            dto.setApplicantLicenseCompanyName(entity.getLicenseApplicant().getCompanyLicenseName());
+            dto.setLicenseValidity(entity.getLicenseApplicant().getValidity());
+            dto.setAdministrativeYearlyFees(entity.getAdministrativeYearlyFees());
+            dto.setApprovalDate(entity.getApprovalDate());
+            dto.setAdministrationFeeExpiryDate(entity.getAdministrationFeeExpiryDate());
+            return dto;
+        }).collect(Collectors.toList());
+    }
 
 
     @Transactional

@@ -29,6 +29,7 @@ public class LicenseApprovalDTO {
     private String databaseYearlyMaintainanceFeesPaymentOffice;
     private Long licenseApplicantId;
     private String applicantLicenseCompanyName;
+    private int  licenseValidity;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate licenseFeeEntryVoucherDate;
     private String licenseFeeBankVoucherNo;
