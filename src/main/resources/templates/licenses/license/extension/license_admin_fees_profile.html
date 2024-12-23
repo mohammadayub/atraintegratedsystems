@@ -12,7 +12,6 @@
         background-color: #f9f9f9;
     }
     .table-container {
-        max-height: 800px;
         overflow-y: auto;
         border: 1px solid #ddd;
         background-color: #ffffff;
@@ -57,16 +56,16 @@
   <table border="1" class="table table-bordered" id="profileTable">
     <thead>
     <tr>
-      <th>ID</th>
-      <th>Approval ID</th>
-      <th>Company Name</th>
-      <th>License Validity Years</th>
-      <th>Admin Fees</th>
-      <th>Approval Date</th>
-      <th>Miladi Approval Date</th>
-      <th>Expire Date</th>
-      <th>Miladi Expire Date</th>
-      <th>Contract Extension</th>
+      <th th:text="#{id}"></th>
+      <th th:text="#{mcit_license_approval_id}"></th>
+      <th th:text="#{license_application_company_license_name}"></th>
+      <th th:text="#{license_application_validity}"></th>
+      <th th:text="#{administration_fees}"></th>
+      <th th:text="#{mcit_license_approval_date}"></th>
+      <th th:text="#{miladi_approval_date}"></th>
+      <th th:text="#{license_application_expiry_date}"></th>
+      <th th:text="#{miladi_expiry_date}"></th>
+      <th th:text="#{contrackt_extension}"></th>
     </tr>
     </thead>
     <tbody>
@@ -104,13 +103,13 @@
   <table border="1" class="table table-bordered"   id="extensionTable">
     <thead>
     <tr>
-      <th>ID</th>
-      <th>Approval ID</th>
-      <th>Start Date</th>
-      <th>Miladi Start Date</th>
-      <th>Expire Date</th>
-      <th>Miladi Expire Date</th>
-      <th>Admin Fees</th>
+      <th th:text="#{id}"></th>
+      <th th:text="#{mcit_license_approval_id}"></th>
+      <th th:text="#{extension_Start_date}">Start Date</th>
+      <th th:text="#{miladi_approval_date}">Miladi Start Date</th>
+      <th th:text="#{license_application_expiry_date}">Expire Date</th>
+      <th th:text="#{miladi_expiry_date}">Miladi Expire Date</th>
+      <th th:text="#{administration_fees}">Admin Fees</th>
     </tr>
     </thead>
     <tbody>
@@ -125,23 +124,27 @@
     </tr>
     </tbody>
   </table>
-  <div class="container-fluid mt-4" >
-    <h4 class="text-center mt-4">Add New Extension</h4>
-    <form th:action="@{/licenses/license/extension/license_admin_fees_profile/extension}" method="post" class="form-inline justify-content-center" style="display: flex; justify-content: space-between; align-items: center;">
+  <div class="container mt-4">
+    <div class="row"><div class="col-md-8">
+    <form th:action="@{/licenses/license/extension/license_admin_fees_profile/extension}" method="post">
+      <fieldset class="border p-3">
+        <legend class="w-auto px-2">Add New Extension</legend>
       <div class="form-group mr-3">
-        <label for="approvalId" class="mr-2">Approval ID:</label>
+        <label for="approvalId" th:text="#{mcit_license_approval_id}"></label>
         <input type="text" id="approvalId" name="licenseApprovalId" class="form-control" readonly/>
       </div>
       <div class="form-group mr-3">
-        <label for="startDate" class="mr-2">Start Date:</label>
+        <label for="startDate" th:text="#{extension_Start_date}">Start Date</label>
         <input type="text" id="startDate" name="extensionStartDate" class="form-control hijrishamsi"/>
       </div>
-      <div class="form-group mr-3">
-        <label for="extensionDatabaseFees" class="mr-2">Admin Fees:</label>
+      <div class="form-group mr-2">
+        <label for="extensionDatabaseFees" th:text="#{administration_fees}"></label>
         <input type="text" id="extensionDatabaseFees" name="extensionDatabaseFees" class="form-control" readonly/>
       </div>
       <button class="btn btn-primary" type="submit">Save</button>
+      </fieldset>
     </form>
+    </div> </div>
     <br>
     <a th:href="@{/licenses/license/extension/extension_home}" class="btn" style="margin-top:20px; margin-left:0px;background-color:#0dcaf0;color:white;">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6" style="width:20px;height:20px;">
