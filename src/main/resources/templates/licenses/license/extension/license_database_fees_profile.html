@@ -63,7 +63,9 @@
       <th>License Validity Years</th>
       <th>Database Fees</th>
       <th>Approval Date</th>
+      <th>Miladi Approval Date</th>
       <th>Expire Date</th>
+      <th>Miladi Expire Date</th>
       <th>Contract Extension</th>
     </tr>
     </thead>
@@ -74,8 +76,11 @@
       <td th:text="${approval.applicantLicenseCompanyName}"></td>
       <td th:text="${approval.licenseValidity}"></td>
       <td th:text="${approval.databaseYearlyMaintainanceFees}"></td>
+      <td th:text="${approval.appDate}"></td>
       <td th:text="${approval.approvalDate}"></td>
+      <td th:text="${approval.dbFeesExpireDate}" ></td>
       <td th:text="${approval.databaseMaintianenceFeeExpiryDate}" class="expireDate"></td>
+
       <td>
         <button class="btn btn-primary btn-sm select-button"
                 data-id="${approval.approvalId}"
@@ -104,6 +109,7 @@
       <th>Approval ID</th>
       <th>Start Date</th>
       <th>Expire Date</th>
+      <th>Miladi Expire Date</th>
       <th>Database Fees</th>
     </tr>
     </thead>
@@ -111,7 +117,8 @@
     <tr th:each="extension : ${extensions}">
       <td th:text="${extension.id}"></td>
       <td th:text="${extension.licenseApprovalId}"></td>
-      <td th:text="${extension.extensionStartDate}"></td>
+      <td th:text="${extension.extStartDate}"></td>
+      <td th:text="${extension.extExpireDate}"></td>
       <td th:text="${extension.extensionExpireDate}" class="expireDate"></td>
       <td th:text="${extension.extensionDatabaseFees}"></td>
     </tr>

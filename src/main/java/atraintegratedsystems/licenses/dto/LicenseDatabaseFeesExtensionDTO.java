@@ -1,4 +1,5 @@
 package atraintegratedsystems.licenses.dto;
+import atraintegratedsystems.utils.JalaliDate;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -26,4 +27,10 @@ public class LicenseDatabaseFeesExtensionDTO {
     private LocalDate extensionDatabaseFeeBankVoucherDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate extensionDatabaseFeeBankVoucherSubmissionDate;
+
+    //for Extension Section Show Jalali Date
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private JalaliDate extStartDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private JalaliDate extExpireDate;
 }

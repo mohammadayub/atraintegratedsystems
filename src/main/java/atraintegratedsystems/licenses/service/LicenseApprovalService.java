@@ -42,7 +42,9 @@ public class LicenseApprovalService {
             dto.setLicenseValidity(entity.getLicenseApplicant().getValidity());
             dto.setDatabaseYearlyMaintainanceFees(entity.getDatabaseYearlyMaintainanceFees());
             dto.setApprovalDate(entity.getApprovalDate());
+            dto.setAppDate(entity.getAppDate());
             dto.setDatabaseMaintianenceFeeExpiryDate(entity.getDatabaseMaintianenceFeeExpiryDate());
+            dto.setDbFeesExpireDate(entity.getdatabaseFeesExpiryDate());
             return dto;
         }).collect(Collectors.toList());
     }
@@ -58,7 +60,9 @@ public class LicenseApprovalService {
             dto.setLicenseValidity(entity.getLicenseApplicant().getValidity());
             dto.setAdministrativeYearlyFees(entity.getAdministrativeYearlyFees());
             dto.setApprovalDate(entity.getApprovalDate());
+            dto.setAppDate(entity.getAppDate());
             dto.setAdministrationFeeExpiryDate(entity.getAdministrationFeeExpiryDate());
+            dto.setAdFeesExpireDate(entity.getadminFeeExpiryDate());
             return dto;
         }).collect(Collectors.toList());
     }

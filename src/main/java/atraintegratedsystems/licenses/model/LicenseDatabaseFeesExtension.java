@@ -44,7 +44,7 @@ public class LicenseDatabaseFeesExtension {
     private LocalDate extensionDatabaseFeeBankVoucherSubmissionDate;
 
 
-    public JalaliDate getExtentStartDate() {
+    public JalaliDate getExtStartDate() {
         if (extensionStartDate == null) {
             return null; // Return null if issueLicenseDate is null
         }
@@ -53,7 +53,7 @@ public class LicenseDatabaseFeesExtension {
         return jalaliExtensionStartDate;
     }
 
-    public JalaliDate getExtentExpDate() {
+    public JalaliDate getExtExpDate() {
         if (extensionExpireDate == null) {
             return null; // Return null if issueLicenseDate is null
         }

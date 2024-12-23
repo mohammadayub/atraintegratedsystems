@@ -28,12 +28,10 @@ public class LicenseDatabaseFeesExtensionService {
             // Map relevant fields to DTO
             dto.setId(entity.getId());
             dto.setLicenseApprovalId(entity.getLicenseApproval().getId());
-
-            DateConverter dateConverter= new DateConverter();
-            LocalDate extensionStartDate = dateConverter.jalaliToGregorian(entity.getExtensionStartDate().getYear(),entity.getExtensionStartDate().getMonthValue(),entity.getExtensionStartDate().getDayOfMonth());
-            dto.setExtensionStartDate(extensionStartDate);
-
-            dto.setExtensionExpireDate(extensionStartDate.plusYears(1));
+            dto.setExtensionStartDate(entity.getExtensionStartDate());
+            dto.setExtStartDate(entity.getExtStartDate());
+            dto.setExtensionExpireDate(entity.getExtensionStartDate().plusYears(1));
+            dto.setExtExpireDate(entity.getExtExpDate());
             dto.setExtensionDatabaseFees(entity.getExtensionDatabaseFees());
             return dto;
         }).collect(Collectors.toList());
@@ -47,8 +45,11 @@ public class LicenseDatabaseFeesExtensionService {
         // Map DTO to entity
         LicenseDatabaseFeesExtension entity = new LicenseDatabaseFeesExtension();
         entity.setLicenseApproval(licenseApproval); // Set the LicenseApproval relationship
-        entity.setExtensionStartDate(dto.getExtensionStartDate());
-        entity.setExtensionExpireDate(dto.getExtensionExpireDate());
+
+        DateConverter dateConverter = new DateConverter();
+        LocalDate extensionStartDate = dateConverter.jalaliToGregorian(dto.getExtensionStartDate().getYear(), dto.getExtensionStartDate().getMonthValue(),dto.getExtensionStartDate().getDayOfMonth());
+        entity.setExtensionStartDate(extensionStartDate);
+        entity.setExtensionExpireDate(extensionStartDate.plusYears(1));
         entity.setExtensionDatabaseFees(dto.getExtensionDatabaseFees());
 //        entity.setExtensionDatabaseFeeBankVoucherNo(dto.getExtensionDatabaseFeeBankVoucherNo());
 //        entity.setExtensionDatabaseFeeBankVoucherDate(dto.getExtensionDatabaseFeeBankVoucherDate());

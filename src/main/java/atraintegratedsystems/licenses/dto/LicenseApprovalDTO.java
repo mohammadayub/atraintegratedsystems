@@ -1,4 +1,5 @@
 package atraintegratedsystems.licenses.dto;
+import atraintegratedsystems.utils.JalaliDate;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -70,5 +71,16 @@ public class LicenseApprovalDTO {
     //Chart
     private String formattedApprovalDate; // For yyyy-MM-dd formatted dates
     private String formattedLicenseFeeExpiryDate; // For yyyy-MM-dd formatted dates
+
+
+
+    //for Extension Section Show Jalali Date
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+     private JalaliDate appDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+     private JalaliDate dbFeesExpireDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+     private JalaliDate adFeesExpireDate;
+
 
 }

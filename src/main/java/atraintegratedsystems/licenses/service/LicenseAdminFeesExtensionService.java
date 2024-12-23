@@ -8,10 +8,12 @@ import atraintegratedsystems.licenses.model.LicenseDatabaseFeesExtension;
 import atraintegratedsystems.licenses.repository.LicenseAdminFeesExtensionRepository;
 import atraintegratedsystems.licenses.repository.LicenseApprovalRepository;
 import atraintegratedsystems.licenses.repository.LicenseDatabaseFeesExtensionRepository;
+import atraintegratedsystems.utils.DateConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -30,7 +32,9 @@ public class LicenseAdminFeesExtensionService {
             dto.setId(entity.getId());
             dto.setLicenseApprovalId(entity.getLicenseApproval().getId());
             dto.setExtensionStartDate(entity.getExtensionStartDate());
+            dto.setExtStartDate(entity.getExtentStartDate());
             dto.setExtensionExpireDate(entity.getExtensionExpireDate());
+            dto.setExtExpireDate(entity.getExtentExpDate());
             dto.setExtensionAdministrationFees(entity.getExtensionAdministrationFees());
             return dto;
         }).collect(Collectors.toList());
@@ -44,8 +48,10 @@ public class LicenseAdminFeesExtensionService {
         // Map DTO to entity
         LicenseAdminFeesExtension entity = new LicenseAdminFeesExtension();
         entity.setLicenseApproval(licenseApproval); // Set the LicenseApproval relationship
-        entity.setExtensionStartDate(dto.getExtensionStartDate());
-        entity.setExtensionExpireDate(dto.getExtensionExpireDate());
+        DateConverter dateConverter = new DateConverter();
+        LocalDate extensionStartDate = dateConverter.jalaliToGregorian(dto.getExtensionStartDate().getYear(),dto.getExtensionStartDate().getMonthValue(),dto.getExtensionStartDate().getDayOfMonth());
+        entity.setExtensionStartDate(extensionStartDate);
+        entity.setExtensionExpireDate(extensionStartDate.plusYears(1));
         entity.setExtensionAdministrationFees(dto.getExtensionAdministrationFees());
 //        entity.setExtensionDatabaseFeeBankVoucherNo(dto.getExtensionDatabaseFeeBankVoucherNo());
 //        entity.setExtensionDatabaseFeeBankVoucherDate(dto.getExtensionDatabaseFeeBankVoucherDate());
