@@ -6,7 +6,7 @@
   <div th:replace="styles :: select2-styles"></div>
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css">
-  <title>ATRA Financial Integrated System</title>
+  <title>LMIS</title>
   <style>
     body {
         background-color: #f9f9f9;
@@ -122,7 +122,7 @@
     <form th:action="@{/licenses/license/extension/license_database_fees_profile/extension}" method="post" class="form-inline justify-content-center" style="display: flex; justify-content: space-between; align-items: center;">
       <div class="form-group mr-3">
         <label for="approvalId" class="mr-2">Approval ID:</label>
-        <input type="text" id="approvalId" name="licenseApprovalId" class="form-control"/>
+        <input type="text" id="approvalId" name="licenseApprovalId" class="form-control" readonly/>
       </div>
       <div class="form-group mr-3">
         <label for="startDate" class="mr-2">Start Date:</label>
@@ -130,10 +130,16 @@
       </div>
       <div class="form-group mr-3">
         <label for="extensionDatabaseFees" class="mr-2">Database Fees:</label>
-        <input type="text" id="extensionDatabaseFees" name="extensionDatabaseFees" class="form-control"/>
+        <input type="text" id="extensionDatabaseFees" name="extensionDatabaseFees" class="form-control" readonly/>
       </div>
       <button class="btn btn-primary" type="submit">Save</button>
     </form>
+    <br>
+    <a th:href="@{/licenses/license/extension/extension_home}" class="btn" style="margin-top:20px; margin-left:0px;background-color:#0dcaf0;color:white;">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6" style="width:20px;height:20px;">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
+      </svg>
+      Back to Page</a>
   </div>
  <div style="height:50vh"></div>
 

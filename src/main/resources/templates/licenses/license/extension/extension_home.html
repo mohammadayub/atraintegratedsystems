@@ -6,7 +6,7 @@
   <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <title>ATRA Enterprise Planning Project</title>
+  <title>LMIS</title>
   <style>
     .custom-card {
         width: 170px; /* Fixed width for each card */
@@ -37,10 +37,10 @@
     <tr style="border-bottom:1px solid darkgray;">
       <td>
         <div class="custom-card" >
-          <a th:href="@{/licenses/license/report/license_general_report}">
+          <a th:href="@{/licenses/license/extension/license_database_fees_profile}">
             <img th:src="@{/images/license_report.png}" alt="Codes Management System"></a>
           <h4 class="license-link" style="margin-top: 12px;">
-            <a th:href="@{/licenses/license/report/license_general_report}" th:text="#{license_reports}"></a>
+            <a th:href="@{/licenses/license/extension/license_database_fees_profile}">License Database Fees Extension</a>
           </h4>
 
         </div>
@@ -51,19 +51,19 @@
     </tr>
     <tr style="border-bottom:1px solid darkgray;">
       <td>
-      <div class="custom-card" >
-        <a th:href="@{/licenses/license/report/license_general_report}">
-          <img th:src="@{/images/visualize_report.png}" alt="Codes Management System"></a>
-        <h4 class="license-link" style="margin-top: 12px;">
-          <a th:href="@{/licenses/license/report/license_visualize_report}" > License Visualize Report</a>
-        </h4>
+        <div class="custom-card" >
+          <a th:href="@{/licenses/license/extension/license_admin_fees_profile}">
+            <img th:src="@{/images/extension.png}" alt="Codes Management System"></a>
+          <h4 class="license-link" style="margin-top: 12px;">
+            <a th:href="@{/licenses/license/extension/license_admin_fees_profile}" > License Administrantion Fee Extension</a>
+          </h4>
 
-      </div>
+        </div>
       </td>
     </tr>
     <tr>
       <td>
-        <a th:href="@{/}" class="btn" style="margin-top:20px; margin-left:0px;background-color:#0dcaf0;color:white;">
+        <a th:href="@{/licenses/license/home}" class="btn" style="margin-top:20px; margin-left:0px;background-color:#0dcaf0;color:white;">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6" style="width:20px;height:20px;">
             <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
           </svg>

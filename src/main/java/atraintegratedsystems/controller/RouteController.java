@@ -57,4 +57,9 @@ public class RouteController {
     {
         return "licenses/license/report/home";
     }
+    @GetMapping("licenses/license/extension/extension_home")
+    public String extension_home()
+    {
+        return "licenses/license/extension/extension_home";
+    }
 }
