@@ -44,6 +44,11 @@ public class LicenseAdminFeesExtension {
     private LocalDate extensionAdministrationFeeBankVoucherSubmissionDate;
 
 
+    //Status
+    @Column(name="extend_status")
+    private String extendStatus;
+
+
     public JalaliDate getExtentStartDate() {
         if (extensionStartDate == null) {
             return null; // Return null if issueLicenseDate is null

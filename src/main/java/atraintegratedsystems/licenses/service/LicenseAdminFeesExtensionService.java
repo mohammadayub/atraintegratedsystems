@@ -26,11 +26,12 @@ public class LicenseAdminFeesExtensionService {
     private LicenseApprovalRepository licenseApprovalRepository;
     @Transactional
     public List<LicenseAdminFeesExtensionDTO> getAllExtensions() {
-        return licenseAdminFeesExtensionRepository.findAll().stream().map(entity -> {
+        return licenseAdminFeesExtensionRepository.findExtensionsWithStatusNotYes().stream().map(entity -> {
             LicenseAdminFeesExtensionDTO dto = new LicenseAdminFeesExtensionDTO();
             // Map relevant fields to DTO
             dto.setId(entity.getId());
             dto.setLicenseApprovalId(entity.getLicenseApproval().getId());
+            dto.setLicenseCompanyName(entity.getLicenseApproval().getLicenseApplicant().getCompanyLicenseName());
             dto.setExtensionStartDate(entity.getExtensionStartDate());
             dto.setExtStartDate(entity.getExtentStartDate());
             dto.setExtensionExpireDate(entity.getExtensionExpireDate());
@@ -40,23 +41,11 @@ public class LicenseAdminFeesExtensionService {
         }).collect(Collectors.toList());
     }
 
-    public void saveExtension(LicenseAdminFeesExtensionDTO dto) {
-        // Retrieve LicenseApproval entity by ID
-        LicenseApproval licenseApproval = licenseApprovalRepository.findById(dto.getLicenseApprovalId())
-                .orElseThrow(() -> new IllegalArgumentException("Invalid License Approval ID: " + dto.getLicenseApprovalId()));
-
-        // Map DTO to entity
-        LicenseAdminFeesExtension entity = new LicenseAdminFeesExtension();
-        entity.setLicenseApproval(licenseApproval); // Set the LicenseApproval relationship
-        DateConverter dateConverter = new DateConverter();
-        LocalDate extensionStartDate = dateConverter.jalaliToGregorian(dto.getExtensionStartDate().getYear(),dto.getExtensionStartDate().getMonthValue(),dto.getExtensionStartDate().getDayOfMonth());
-        entity.setExtensionStartDate(extensionStartDate);
-        entity.setExtensionExpireDate(extensionStartDate.plusYears(1));
-        entity.setExtensionAdministrationFees(dto.getExtensionAdministrationFees());
-//        entity.setExtensionDatabaseFeeBankVoucherNo(dto.getExtensionDatabaseFeeBankVoucherNo());
-//        entity.setExtensionDatabaseFeeBankVoucherDate(dto.getExtensionDatabaseFeeBankVoucherDate());
-//        entity.setExtensionDatabaseFeeBankVoucherSubmissionDate(dto.getExtensionDatabaseFeeBankVoucherSubmissionDate());
-        // Save the entity
+    @Transactional
+    public void updateExtendStatus(Long id, String extendStatus) {
+        LicenseAdminFeesExtension entity = licenseAdminFeesExtensionRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid ID: " + id));
+        entity.setExtendStatus(extendStatus);
         licenseAdminFeesExtensionRepository.save(entity);
     }
 }

@@ -13,6 +13,7 @@ public class LicenseAdminFeesExtensionDTO {
 
     private Long id;
     private Long licenseApprovalId;
+    private String licenseCompanyName;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate extensionStartDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -31,4 +32,9 @@ public class LicenseAdminFeesExtensionDTO {
     private JalaliDate extStartDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private JalaliDate extExpireDate;
+
+
+    //Status
+    @Column(name="extend_status")
+    private String extendStatus;
 }

@@ -23,7 +23,7 @@ public class LicenseDatabaseFeesExtensionService {
     private LicenseApprovalRepository licenseApprovalRepository;
     @Transactional
     public List<LicenseDatabaseFeesExtensionDTO> getAllExtensions() {
-        return licenseDatabaseFeesExtensionRepository.findAll().stream().map(entity -> {
+        return licenseDatabaseFeesExtensionRepository.findExtensionsWithStatusNotYes().stream().map(entity -> {
             LicenseDatabaseFeesExtensionDTO dto = new LicenseDatabaseFeesExtensionDTO();
             // Map relevant fields to DTO
             dto.setId(entity.getId());
@@ -37,24 +37,11 @@ public class LicenseDatabaseFeesExtensionService {
         }).collect(Collectors.toList());
     }
 
-    public void saveExtension(LicenseDatabaseFeesExtensionDTO dto) {
-        // Retrieve LicenseApproval entity by ID
-        LicenseApproval licenseApproval = licenseApprovalRepository.findById(dto.getLicenseApprovalId())
-                .orElseThrow(() -> new IllegalArgumentException("Invalid License Approval ID: " + dto.getLicenseApprovalId()));
-
-        // Map DTO to entity
-        LicenseDatabaseFeesExtension entity = new LicenseDatabaseFeesExtension();
-        entity.setLicenseApproval(licenseApproval); // Set the LicenseApproval relationship
-
-        DateConverter dateConverter = new DateConverter();
-        LocalDate extensionStartDate = dateConverter.jalaliToGregorian(dto.getExtensionStartDate().getYear(), dto.getExtensionStartDate().getMonthValue(),dto.getExtensionStartDate().getDayOfMonth());
-        entity.setExtensionStartDate(extensionStartDate);
-        entity.setExtensionExpireDate(extensionStartDate.plusYears(1));
-        entity.setExtensionDatabaseFees(dto.getExtensionDatabaseFees());
-//        entity.setExtensionDatabaseFeeBankVoucherNo(dto.getExtensionDatabaseFeeBankVoucherNo());
-//        entity.setExtensionDatabaseFeeBankVoucherDate(dto.getExtensionDatabaseFeeBankVoucherDate());
-//        entity.setExtensionDatabaseFeeBankVoucherSubmissionDate(dto.getExtensionDatabaseFeeBankVoucherSubmissionDate());
-        // Save the entity
+    @Transactional
+    public void updateExtendStatus(Long id, String extendStatus) {
+        LicenseDatabaseFeesExtension entity = licenseDatabaseFeesExtensionRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid ID: " + id));
+        entity.setExtendStatus(extendStatus);
         licenseDatabaseFeesExtensionRepository.save(entity);
     }
 

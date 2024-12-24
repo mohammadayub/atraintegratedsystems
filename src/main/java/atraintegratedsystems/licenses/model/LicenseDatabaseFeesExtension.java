@@ -3,6 +3,7 @@ package atraintegratedsystems.licenses.model;
 import atraintegratedsystems.utils.DateConverter;
 import atraintegratedsystems.utils.JalaliDate;
 import lombok.Data;
+import org.hibernate.annotations.Columns;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -42,6 +43,11 @@ public class LicenseDatabaseFeesExtension {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name="extension_Database_fee_bank_voucher_submission_date")
     private LocalDate extensionDatabaseFeeBankVoucherSubmissionDate;
+
+
+    //Status
+    @Column(name="extend_status")
+    private String extendStatus;
 
 
     public JalaliDate getExtStartDate() {

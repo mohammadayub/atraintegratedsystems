@@ -2,8 +2,6 @@ package atraintegratedsystems.licenses.dto;
 import atraintegratedsystems.utils.JalaliDate;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
-
-import javax.persistence.Column;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 

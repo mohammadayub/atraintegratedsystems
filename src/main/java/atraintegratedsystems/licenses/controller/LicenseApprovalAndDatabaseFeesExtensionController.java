@@ -10,6 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -31,9 +33,16 @@ public class LicenseApprovalAndDatabaseFeesExtensionController {
         return "licenses/license/extension/license_database_fees_profile"; // Thymeleaf template
     }
 
-    @PostMapping("/licenses/license/extension/license_database_fees_profile/extension")
-    public String saveExtension(@ModelAttribute LicenseDatabaseFeesExtensionDTO extensionDTO) {
-        extensionService.saveExtension(extensionDTO);
+
+    @PostMapping("/licenses/license/extension/license_database_fees_profile/update-status")
+    public String updateExtendStatus(@RequestParam Long id, @RequestParam String extendStatus, RedirectAttributes redirectAttributes) {
+        try {
+            extensionService.updateExtendStatus(id, extendStatus);
+            redirectAttributes.addFlashAttribute("message", "Extend status updated successfully for ID: " + id);
+        } catch (Exception ex) {
+            redirectAttributes.addFlashAttribute("error", "Failed to update extend status for ID: " + id);
+        }
         return "redirect:/licenses/license/extension/license_database_fees_profile";
     }
+
 }
