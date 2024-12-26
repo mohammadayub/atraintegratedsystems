@@ -21,7 +21,7 @@
             text-align: left;
         }
 input[type="text"],input[type="number"],input[type="file"],input[type="website"],input[type="email"] {
-    border-left: 2px solid #3066be;;
+    border-left: 2px solid blue;
     }
     </style>
 </head>
@@ -38,7 +38,7 @@ input[type="text"],input[type="number"],input[type="file"],input[type="website"]
             <div class="col-md-3 form-group">
                 <label for="licenseType" th:text="#{approval_license_approval_type}"
                        th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">License Type:</label>
-                <select id="licenseType" name="licenseApplicantId" th:field="*{id}" class="form-control" onchange="updateLicenseApplicantId()"  style="border-left: 2px solid #3066be;;">
+                <select id="licenseType" name="licenseApplicantId" th:field="*{id}" class="form-control" onchange="updateLicenseApplicantId()"  style="border-left: 2px solid blue;">
                     <option th:each="type : ${licenseApplicants}"
                             th:value="${type.id}"
                             th:text="${type.companyLicenseName}"
@@ -48,7 +48,7 @@ input[type="text"],input[type="number"],input[type="file"],input[type="website"]
             <!-- License Type -->
             <div class="col-md-3 form-group">
                 <label for="licenseTypeId" th:text="#{approval_license_approval_type}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">License Type:</label>
-                <select id="licenseTypeId" name="licenseTypeId" th:field="*{licenseTypeId}" class="form-control"  style="border-left: 2px solid #3066be;;">
+                <select id="licenseTypeId" name="licenseTypeId" th:field="*{licenseTypeId}" class="form-control"  style="border-left: 2px solid blue;">
                     <option th:each="type : ${licenseTypes}"
                             th:value="${type.id}"
                             th:text="${type.name}"
@@ -166,7 +166,7 @@ input[type="text"],input[type="number"],input[type="file"],input[type="website"]
                 <label for="boardDecisions"
                        th:text="#{license_approval_boardDecisions}"
                        th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
-                <textarea type="text" id="boardDecisions" th:field="*{boardDecisions}" class="form-control" required  style="border-left: 2px solid #3066be;" />
+                <textarea type="text" id="boardDecisions" th:field="*{boardDecisions}" class="form-control" required  style="border-left: 2px solid blue;" />
             </div>
         </div>
 
@@ -531,7 +531,7 @@ function setApplicationFees() {
 }
 
 </script>
-
+<div style="height:5vh;"></div>
 <footer th:replace="~{layout :: page_footer}"></footer>
 </body>
 </html>

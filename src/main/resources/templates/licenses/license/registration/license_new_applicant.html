@@ -21,14 +21,14 @@
         text-align: left;
     }
     input[type="text"],input[type="number"],input[type="file"],input[type="website"],input[type="email"]{
-    border-left: 2px solid #0dcaf0;
+    border-left: 2px solid blue;
     }
 
   </style>
 </head>
 <body onload="setApplicationFees()">
 <nav th:replace="~{layout :: page_navbar}"></nav>
-<h2 class="text-center" th:text="#{license_applicant_header}" style="color:white; margin-top:10px;background-color:#0dcaf0;"></h2>
+<h2 class="text-center bg-primary" th:text="#{license_applicant_header}" style="color:white; margin-top:10px;"></h2>
 <div class="container-fluid mt-4" >
   <div>
     <div th:if="${successMessage}" class="alert alert-success" role="alert" th:text="${successMessage}"></div>
@@ -147,12 +147,12 @@
         </div>
         <div class="col-md-3 form-group">
           <label for="plannedActivitiesAndServices" th:text="#{license_application_plan_active_Service}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
-          <textarea id="plannedActivitiesAndServices" th:field="*{plannedActivitiesAndServices}" class="form-control" required style="border-left: 2px solid #0dcaf0;"></textarea>
+          <textarea id="plannedActivitiesAndServices" th:field="*{plannedActivitiesAndServices}" class="form-control" required style="border-left: 2px solid blue;"></textarea>
         </div>
 
         <div class="col-md-3 form-group">
           <label for="companyAddress" th:text="#{license_application_company_address}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
-          <textarea id="companyAddress" th:field="*{companyAddress}" class="form-control" required style="border-left: 2px solid #0dcaf0;"></textarea>
+          <textarea id="companyAddress" th:field="*{companyAddress}" class="form-control" required style="border-left: 2px solid blue;"></textarea>
         </div>
       </div>
       <!-- Row 6 -->
@@ -160,7 +160,7 @@
 
         <div class="col-md-3 form-group">
           <label for="postAddress" th:text="#{license_application_post_address}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
-          <textarea id="postAddress" th:field="*{postAddress}" class="form-control" required style="border-left: 2px solid #0dcaf0;"></textarea>
+          <textarea id="postAddress" th:field="*{postAddress}" class="form-control" required style="border-left: 2px solid blue;"></textarea>
         </div>
         <div class="col-md-3 form-group">
           <label for="contactNo" th:text="#{license_application_contact_no}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
@@ -326,6 +326,7 @@
 
 
 </script>
+<div style="height:5vh;"></div>
 <footer th:replace="~{layout :: page_footer}"></footer>
 <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
 </body>
