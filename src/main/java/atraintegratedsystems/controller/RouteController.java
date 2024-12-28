@@ -2,9 +2,6 @@ package atraintegratedsystems.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class RouteController {
     @GetMapping("/main")
@@ -43,18 +40,11 @@ public class RouteController {
     {
         return "licenses/license/approval/license_applicants_approval";
     }
-    //    @GetMapping("/administrationfees")
-//    public String administration()
-//    {
-//        return "licenses/finance/administration_fees/administration_fees";
-//    }
     @GetMapping("/licenses/finance/license_finance")
-    public String license_finance_home()
+   public String license_finance_home()
     {
-
         return "licenses/finance/license_finance/license_finance_home";
     }
-
     @GetMapping("/licenses/license/report")
     public String license_reports()
     {
