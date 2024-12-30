@@ -10,4 +10,7 @@ public interface LicenseAdminFeesExtensionRepository extends JpaRepository<Licen
 
     @Query(value = "SELECT * FROM license_admin_fees_extension WHERE extend_status != 'Yes'", nativeQuery = true)
     List<LicenseAdminFeesExtension> findExtensionsWithStatusNotYes();
+
+    @Query(value = "SELECT * FROM license_admin_fees_extension WHERE extend_status = 'Yes'", nativeQuery = true)
+    List<LicenseAdminFeesExtension> findExtensionsWithStatusYes();
 }
