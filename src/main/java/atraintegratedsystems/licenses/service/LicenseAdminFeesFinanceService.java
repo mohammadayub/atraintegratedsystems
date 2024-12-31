@@ -28,4 +28,9 @@ public class LicenseAdminFeesFinanceService {
                 .orElseThrow(() -> new EntityNotFoundException("LicenseApproval not found with id: " + id));
     }
 
+    @Transactional
+    public void save(LicenseAdminFeesExtension licenseAdminFeesExtension) {
+        licenseAdminFeesExtensionRepository.save(licenseAdminFeesExtension);
+    }
+
 }

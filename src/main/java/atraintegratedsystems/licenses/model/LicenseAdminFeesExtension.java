@@ -35,13 +35,15 @@ public class LicenseAdminFeesExtension {
     @Column(name="extension_Administration_fees")
     private BigDecimal extensionAdministrationFees;
     @Column(name="extension_Administration_fee_bank_voucher_no")
-    private LocalDate extensionAdministrationFeeBankVoucherNo;
+    private String extensionAdministrationFeeBankVoucherNo;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name="extension_Administration_fee_bank_voucher_date")
     private LocalDate extensionAdministrationFeeBankVoucherDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name="extension_Administration_fee_bank_voucher_submission_date")
     private LocalDate extensionAdministrationFeeBankVoucherSubmissionDate;
+    @Column(name="extension_Administration_payment_status")
+    private String extensionAdministrationPaymentStatus;
 
 
     //Status

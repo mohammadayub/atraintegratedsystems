@@ -22,11 +22,13 @@ public class LicenseAdminFeesExtensionDTO {
     private LocalDate extensionExpireDate;
     //    Add bank voucher date,submission,Fees
     private BigDecimal extensionAdministrationFees;
-    private LocalDate extensionAdministrationFeeBankVoucherNo;
+    private String extensionAdministrationFeeBankVoucherNo;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate extensionAdministrationFeeBankVoucherDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate extensionAdministrationFeeBankVoucherSubmissionDate;
+
+    private String extensionAdministrationPaymentStatus;
 
 
     //for Extension Section Show Jalali Date
