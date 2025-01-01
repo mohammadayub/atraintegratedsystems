@@ -15,7 +15,7 @@
 <nav th:replace="~{layout :: page_navbar}"></nav>
 <h3 style="text-align:center;margin-top:30px;font-weight:bolder;" th:text="#{license_application_confirmation}">License Extension Database Fees Confirmation</h3>
 <div class="container-fluid mt-4">
-    <form th:action="@{/licenses/finance/extension/database_fees_extension/license_admin_fees/add}" th:object="${licenseDatabaseFeesExtensionDTO}" method="post">
+    <form th:action="@{/licenses/finance/extension/database_fees_extension/license_database_fees/add}" th:object="${licenseDatabaseFeesExtensionDTO}" method="post">
         <div class="row">
             <!-- Hidden ID Field -->
             <input type="hidden" th:field="*{id}">

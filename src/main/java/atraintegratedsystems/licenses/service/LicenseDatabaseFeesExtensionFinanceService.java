@@ -19,4 +19,14 @@ public class LicenseDatabaseFeesExtensionFinanceService {
         return licenseDatabaseFeesExtensionRepository.findExtensionsWithStatusYes();
     }
 
+    @Transactional
+    public LicenseDatabaseFeesExtension findById(Long id) {
+        return licenseDatabaseFeesExtensionRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("LicenseApproval not found with id: " + id));
+    }
+
+    @Transactional
+    public void save(LicenseDatabaseFeesExtension licenseAdminFeesExtension) {
+        licenseDatabaseFeesExtensionRepository.save(licenseAdminFeesExtension);
+    }
 }

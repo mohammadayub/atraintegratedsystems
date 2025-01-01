@@ -14,7 +14,7 @@ public interface LicenseDatabaseFeesExtensionRepository extends JpaRepository<Li
     @Query(value = "SELECT * FROM license_database_fees_extension WHERE extend_status != 'Yes'", nativeQuery = true)
     List<LicenseDatabaseFeesExtension> findExtensionsWithStatusNotYes();
 
-    @Query(value = "SELECT * FROM license_database_fees_extension WHERE extend_status = 'Yes'", nativeQuery = true)
+    @Query(value = "SELECT * FROM license_database_fees_extension  WHERE extend_status = 'Yes'  AND extension_database_payment_status is Null", nativeQuery = true)
     List<LicenseDatabaseFeesExtension> findExtensionsWithStatusYes();
 
 }

@@ -31,8 +31,7 @@ public class LicenseDatabaseFeesExtension {
     @Column(name="extension_expire_date")
     private LocalDate extensionExpireDate;
 
-    //    Add bank voucher date,submission,Fees
-
+    // Add bank voucher date,submission,Fees
     @Column(name="extension_Database_fees")
     private BigDecimal extensionDatabaseFees;
     @Column(name="extension_Database_fee_bank_voucher_no")
