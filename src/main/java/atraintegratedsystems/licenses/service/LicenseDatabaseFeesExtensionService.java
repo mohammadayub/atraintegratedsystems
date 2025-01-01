@@ -29,9 +29,9 @@ public class LicenseDatabaseFeesExtensionService {
             dto.setId(entity.getId());
             dto.setLicenseApprovalId(entity.getLicenseApproval().getId());
             dto.setExtensionStartDate(entity.getExtensionStartDate());
-            dto.setExtStartDate(entity.getExtStartDate());
+            dto.setExtStartDate(entity.getExtentStartDate());
             dto.setExtensionExpireDate(entity.getExtensionStartDate().plusYears(1));
-            dto.setExtExpireDate(entity.getExtExpDate());
+            dto.setExtExpireDate(entity.getExtentExpDate());
             dto.setExtensionDatabaseFees(entity.getExtensionDatabaseFees());
             return dto;
         }).collect(Collectors.toList());
