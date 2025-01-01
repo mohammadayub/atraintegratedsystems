@@ -1,0 +1,146 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head th:replace="~{layout :: page_head}">
+    <div th:replace="styles :: data-tables-styles"></div>
+    <div th:replace="styles :: persian-datepicker-styles"></div>
+    <div th:replace="styles :: select2-styles"></div>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css">
+    <title>LMIS</title>
+    <style>
+        body {
+            background-color: #f9f9f9;
+        }
+        .table-container {
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            background-color: #f9f9f9;
+        }
+        #profileTable, #extensionTable {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9em;
+        }
+        #profileTable th, #profileTable td, #extensionTable th, #extensionTable td {
+            padding: 6px;
+            text-align: center;
+            vertical-align: middle;
+            font-size: 0.8em;
+        }
+        #profileTable thead th, #extensionTable thead th {
+            color: white;
+            font-size: 16px;
+        }
+        #profileTable tbody tr:nth-child(even), #extensionTable tbody tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        #profileTable td a.btn-primary, #extensionTable td a.btn-primary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4px;
+        }
+        #profileTable th, #extensionTable th {
+            white-space: nowrap;
+        }
+    </style>
+</head>
+<body>
+<nav th:replace="~{layout :: page_navbar}"></nav>
+<h4 class="mt-4">License Extension Finance Section</h4>
+<div class="table-container">
+    <table border="1" class="table table-bordered" id="profileTable">
+        <thead>
+        <tr class="bg-primary">
+            <th>Id</th>
+            <th>Approval Id</th>
+            <th>Approval Date</th>
+            <th>Company Name</th>
+            <th>License Type</th>
+            <th>Extend Start</th>
+            <th>Extend Expire Date</th>
+            <th>Admin Fees</th>
+            <th>Print Tariff</th>
+            <th>Payment Confirmation</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="extension : ${profiles}">
+            <td th:text="${extension.id}"></td>
+            <td th:text="${extension.licenseApproval.approvalId}"></td>
+            <td th:text="${extension.licenseApproval.getAppDate()}"></td>
+            <td th:text="${extension.licenseApproval.licenseApplicant.companyLicenseName}"></td>
+            <td th:text="${extension.licenseApproval.licenseType.name}"></td>
+            <td th:text="${extension.getExtentStartDate()}"></td>
+            <td th:text="${extension.getExtentExpDate()}"></td>
+            <td th:text="${extension.extensionAdministrationFees}"></td>
+            <td class="hide-print" >
+                <a  th:href="@{/licenses/finance/extension/admin_fees_extension/license_admin_fees/print/{id}(id=${extension.id})}" class="btn btn-primary">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-printer" viewBox="0 0 16 16">
+                        <path d="M2.5 8a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1"/>
+                        <path d="M5 1a2 2 0 0 0-2 2v2H2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1v1a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1V3a2 2 0 0 0-2-2zM4 3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2H4zm1 5a2 2 0 0 0-2 2v1H2a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v-1a2 2 0 0 0-2-2zm7 2v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1"/>
+                    </svg>
+                </a>
+            </td>
+
+            <td class="hide-print" >
+                <a  th:href="@{/licenses/finance/extension/admin_fees_extension/license_admin_fees/update/{id}(id=${extension.id})}" class="btn btn-primary">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bank" viewBox="0 0 16 16">
+                        <path d="m8 0 6.61 3h.89a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5H15v7a.5.5 0 0 1 .485.38l.5 2a.498.498 0 0 1-.485.62H.5a.498.498 0 0 1-.485-.62l.5-2A.5.5 0 0 1 1 13V6H.5a.5.5 0 0 1-.5-.5v-2A.5.5 0 0 1 .5 3h.89zM3.777 3h8.447L8 1zM2 6v7h1V6zm2 0v7h2.5V6zm3.5 0v7h1V6zm2 0v7H12V6zM13 6v7h1V6zm2-1V4H1v1zm-.39 9H1.39l-.25 1h13.72z"/>
+                    </svg>
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div th:replace="scripts :: common-scripts"></div>
+<div th:replace="scripts :: persian-datepicker-scripts"></div>
+<div th:replace="scripts :: data-tables-scripts"></div>
+<!--Taking Approval Id and Fees-->
+<script>
+    $('.hijrishamsi').persianDatepicker({
+        format: 'YYYY-MM-DD',
+        autoClose: true,
+        initialValue: false,
+        calendar: {
+            persian: {
+                locale: 'en'
+            }
+        }
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+         // Initialize DataTable with individual column search
+         let table = $('#profileTable').DataTable({
+             initComplete: function () {
+                 this.api().columns().every(function () {
+                     var column = this;
+                     var header = $(column.header());
+                     var columnText = header.text(); // Get the existing header text
+                     header.empty().append('<div>' + columnText + '</div>'); // Keep the header text and add a wrapper
+
+                     // Append the search input below the header text
+                     $('<input type="text" placeholder="Search" style="width: 100%; margin-top: 5px;"/>')
+                         .appendTo(header)
+                         .on('keyup change clear', function () {
+                             if (column.search() !== this.value) {
+                                 column
+                                     .search(this.value)
+                                     .draw();
+                             }
+                         });
+                 });
+             }
+         });
+     });
+
+</script>
+<footer th:replace="~{layout :: page_footer}"></footer>
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

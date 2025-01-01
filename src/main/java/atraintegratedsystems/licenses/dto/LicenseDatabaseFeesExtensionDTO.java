@@ -10,6 +10,9 @@ import java.time.LocalDate;
 @Data
 public class LicenseDatabaseFeesExtensionDTO {
     private Long id;
+    private String licenseAppId;
+    private String licenseCompanyName;
+    private String licenseTypeName;
     private Long licenseApprovalId;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate extensionStartDate;
@@ -17,7 +20,7 @@ public class LicenseDatabaseFeesExtensionDTO {
     private LocalDate extensionExpireDate;
     //    Add bank voucher date,submission,Fees
     private BigDecimal extensionDatabaseFees;
-    private LocalDate extensionDatabaseFeeBankVoucherNo;
+    private String extensionDatabaseFeeBankVoucherNo;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate extensionDatabaseFeeBankVoucherDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -27,6 +30,7 @@ public class LicenseDatabaseFeesExtensionDTO {
     private JalaliDate extStartDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private JalaliDate extExpireDate;
+    private String extensionDatabasePaymentStatus;
     //Status
     private String extendStatus;
 }

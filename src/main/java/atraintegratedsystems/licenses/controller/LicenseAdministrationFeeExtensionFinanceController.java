@@ -1,10 +1,8 @@
 package atraintegratedsystems.licenses.controller;
 
 import atraintegratedsystems.licenses.dto.LicenseAdminFeesExtensionDTO;
-import atraintegratedsystems.licenses.dto.LicenseApprovalDTO;
 import atraintegratedsystems.licenses.model.LicenseAdminFeesExtension;
-import atraintegratedsystems.licenses.model.LicenseApproval;
-import atraintegratedsystems.licenses.service.LicenseAdminFeesFinanceService;
+import atraintegratedsystems.licenses.service.LicenseAdminFeesExtensionFinanceService;
 import atraintegratedsystems.utils.DateConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,13 +16,13 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Controller
-public class LicenseAdministrationFeeFinanceController {
+public class LicenseAdministrationFeeExtensionFinanceController {
     @Autowired
-    private LicenseAdminFeesFinanceService licenseAdminFeesFinanceService;
+    private LicenseAdminFeesExtensionFinanceService licenseAdminFeesExtensionFinanceService;
 
     @GetMapping("/licenses/finance/extension/admin_fees_extension/license_admin_fees")
     public String showApplicationProfile(Model model) {
-        List<LicenseAdminFeesExtension> profiles = licenseAdminFeesFinanceService.getAllAdminFeesExtension() ;
+        List<LicenseAdminFeesExtension> profiles = licenseAdminFeesExtensionFinanceService.getAllAdminFeesExtension() ;
         model.addAttribute("profiles", profiles);
         return "licenses/finance/extension/admin_fees_extension/license_admin_fees";
     }
@@ -39,7 +37,7 @@ public class LicenseAdministrationFeeFinanceController {
     @PostMapping("/licenses/finance/extension/admin_fees_extension/license_admin_fees/add")
     public String updateLicenseApproval(@ModelAttribute LicenseAdminFeesExtensionDTO licenseAdminFeesExtensionDTO) {
         // Fetch the existing entity from the database
-        LicenseAdminFeesExtension existingLicenseAdminFeesExtension = licenseAdminFeesFinanceService.findById(licenseAdminFeesExtensionDTO.getId());
+        LicenseAdminFeesExtension existingLicenseAdminFeesExtension = licenseAdminFeesExtensionFinanceService.findById(licenseAdminFeesExtensionDTO.getId());
         DateConverter dateConverter = new DateConverter();
         LocalDate adminEntryVoucherDate = dateConverter.jalaliToGregorian(
                 licenseAdminFeesExtensionDTO.getExtensionAdministrationFeeBankVoucherDate().getYear(),
@@ -59,13 +57,13 @@ public class LicenseAdministrationFeeFinanceController {
         existingLicenseAdminFeesExtension.setExtensionAdministrationPaymentStatus(licenseAdminFeesExtensionDTO.getExtensionAdministrationPaymentStatus());
 
         // Save the updated entity
-        licenseAdminFeesFinanceService.save(existingLicenseAdminFeesExtension);
+        licenseAdminFeesExtensionFinanceService.save(existingLicenseAdminFeesExtension);
         return "redirect:/licenses/finance/extension/admin_fees_extension/license_admin_fees";
     }
 
     @GetMapping("/licenses/finance/extension/admin_fees_extension/license_admin_fees/print/{id}")
     public String GetTariff(@PathVariable Long id, Model model){
-        LicenseAdminFeesExtension licenseAdminFeesExtension = licenseAdminFeesFinanceService.findById(id);
+        LicenseAdminFeesExtension licenseAdminFeesExtension = licenseAdminFeesExtensionFinanceService.findById(id);
         LicenseAdminFeesExtensionDTO licenseAdminFeesExtensionDTO = new LicenseAdminFeesExtensionDTO();
         // Map fields from licenseApplicant to licenseApplicantDTO
         licenseAdminFeesExtensionDTO.setId(licenseAdminFeesExtension.getId());
@@ -82,7 +80,7 @@ public class LicenseAdministrationFeeFinanceController {
 
     @GetMapping("/licenses/finance/extension/admin_fees_extension/license_admin_fees/update/{id}")
     public String AdminFeesGet(@PathVariable Long id, Model model){
-        LicenseAdminFeesExtension licenseAdminFeesExtension = licenseAdminFeesFinanceService.findById(id);
+        LicenseAdminFeesExtension licenseAdminFeesExtension = licenseAdminFeesExtensionFinanceService.findById(id);
         LicenseAdminFeesExtensionDTO licenseAdminFeesExtensionDTO = new LicenseAdminFeesExtensionDTO();
         // Map fields from licenseApplicant to licenseApplicantDTO
         licenseAdminFeesExtensionDTO.setId(licenseAdminFeesExtension.getId());

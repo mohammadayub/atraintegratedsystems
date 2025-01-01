@@ -11,6 +11,7 @@
       margin: 0; /* Remove default margin */
     }
 
+
     .container {
       display: flex;
       justify-content: center;
@@ -69,6 +70,7 @@
         padding: 10px; /* Adjusted button padding for smaller screens */
       }
     }
+
   </style>
 </head>
 <body>
@@ -84,26 +86,24 @@
         <h3 th:text="#{license_directorate}"></h3>
       </th>
     </tr>
-    <tr>  <th th:text="#{license_request_id}"></th>
-      <th th:text="#{mcit_license_approval_id}"></th>
-      <th th:text="#{license_application_company_license_name}"></th>
-      <th th:text="#{approval_license_type}"></th>
-      <th th:text="#{mcit_license_approval_date}"></th>
-      <th th:text="#{mcit_license_board_descision_no}">Board Decision Number</th>
-      <th th:text="#{mcit_license_approval_status}"></th>
-      <th th:text="#{mcit_license_approval_currency}"></th>
-      <th th:text="#{database_fees}"></th>
+    <tr>
+      <th>Id</th>
+      <th>Approval Id</th>
+      <th>License Company Name</th>
+      <th>License Type Name</th>
+      <th>Extension Start Date</th>
+      <th>Extension End Date</th>
+      <th>License Admin Fees</th>
     </tr>
     <tr>
-      <td><input type="text" th:field="${licenseApprovalDTO.id}" disabled> </td>
-      <td><input type="text" th:field="${licenseApprovalDTO.approvalId}" disabled></td>
-      <td><input type="text" th:field="${licenseApprovalDTO.applicantLicenseCompanyName}" disabled></td>
-      <td><input type="text" th:field="${licenseApprovalDTO.licenseTypeName}" disabled></td>
-      <td><input type="text" class="hijrishamsi" th:field="${licenseApprovalDTO.approvalDate}" disabled></td>
-      <td><input type="text"  th:field="${licenseApprovalDTO.boardDecisionNumber}" disabled></td>
-      <td><input type="text"  th:field="${licenseApprovalDTO.approvalStatus}" disabled></td>
-      <td><input type="text"  th:field="${licenseApprovalDTO.currencyType}" disabled></td>
-      <td><input type="text"  th:field="${licenseApprovalDTO.databaseYearlyMaintainanceFees}" disabled></td>
+      <td><input type="text" th:field="${licenseAdminFeesExtensionDTO.id}" disabled> </td>
+      <td><input type="text" th:field="${licenseAdminFeesExtensionDTO.licenseAppId}" disabled></td>
+      <td><input type="text" th:field="${licenseAdminFeesExtensionDTO.licenseCompanyName}" disabled></td>
+      <td><input type="text" th:field="${licenseAdminFeesExtensionDTO.licenseTypeName}" disabled></td>
+      <td><input type="text" th:field="${licenseAdminFeesExtensionDTO.extStartDate}" disabled></td>
+      <td><input type="text" th:field="${licenseAdminFeesExtensionDTO.extExpireDate}" disabled></td>
+      <td><input type="text" th:field="${licenseAdminFeesExtensionDTO.extensionAdministrationFees}" disabled></td>
+
     </tr>
     <tr>
       <td colspan="9" class="signature-section" th:text="#{signature}"></td>
@@ -114,7 +114,7 @@
       </td>
     </tr>
   </table>
-  <a th:href="@{/licenses/finance/license_finance/database_maintainance_fees/license_database_fee_list}" id="backtopage" class="btn btn-primary" style="margin-top:20px;">
+  <a th:href="@{/licenses/finance/extension/admin_fees_extension/license_admin_fees}" id="backtopage" class="btn" style="margin-top:20px;background-color:#0dcaf0;color:white;">
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6" style="width:20px;height:20px;">
       <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
     </svg>
@@ -127,7 +127,10 @@
     document.getElementById("pagfooter").style.display = "none";
     document.getElementById("prn").style.display = "none";
     document.getElementById("backtopage").style.display = "none";
+
+
     window.print();
+
     document.getElementById("pagnav").style.display = "block";
     document.getElementById("pagfooter").style.display = "inline-block";
     document.getElementById("prn").style.display = "inline-block";

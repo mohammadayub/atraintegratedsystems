@@ -4,7 +4,7 @@
     <div th:replace="styles :: data-tables-styles"></div>
     <div th:replace="styles :: persian-datepicker-styles"></div>
     <div th:replace="styles :: select2-styles"></div>
-    <title>LMIS</title>
+    <title>ATRA Revenue Integrated System</title>
     <style>
         input[type="text"]{
            border-left: 2px solid blue;
@@ -13,36 +13,36 @@
 </head>
 <body>
 <nav th:replace="~{layout :: page_navbar}"></nav>
-<h3 style="text-align:center;margin-top:30px;font-weight:bolder;" th:text="#{license_application_confirmation}">License Application Confirmation</h3>
+<h3 style="text-align:center;margin-top:30px;font-weight:bolder;" th:text="#{license_application_confirmation}">License Extension Admin Fees Confirmation</h3>
 <div class="container-fluid mt-4">
-    <form th:action="@{/licenses/finance/license_finance/database_maintainance_fees/license_database_fee_list/add}" th:object="${licenseApprovalDTO}" method="post">
+    <form th:action="@{/licenses/finance/extension/admin_fees_extension/license_admin_fees/add}" th:object="${licenseAdminFeesExtensionDTO}" method="post">
         <div class="row">
             <!-- Hidden ID Field -->
             <input type="hidden" th:field="*{id}">
             <div class="col-md-2 form-group">
                 <lable th:text="#{approval_id}"></lable>
-                <input type="text" th:field="*{approvalId}" class="form-control" disabled>
+                <input type="text" th:field="*{licenseApprovalId}" class="form-control" disabled>
             </div>
             <div class="col-md-3 form-group">
-               <lable th:text="#{database_fee_entry_voucher_date}"></lable>
-                <input type="text" th:field="*{databaseMaintianenceFeeEntryVoucherDate}" class="form-control hijrishamsi">
+                <lable>Extension Admin Fees Voucher Date</lable>
+                <input type="text" th:field="*{extensionAdministrationFeeBankVoucherDate}" class="form-control hijrishamsi">
             </div>
             <!-- Currency Type -->
             <div class="col-md-3 form-group">
-                <label style="margin:0px;" th:text="#{database_fee_bank_voucher_no}"></label>
-                <input type="text" th:field="*{databaseMaintianenceFeeBankVoucherNo}" class="form-control" >
+                <label>Extension Admin Fees Voucher No</label>
+                <input type="text" th:field="*{extensionAdministrationFeeBankVoucherNo}" class="form-control" >
             </div>
             <div class="col-md-3 form-group">
-                <lable th:text="#{database_fee_bank_voucher_submission_date}"></lable>
-                <input type="text" th:field="*{databasemaintainanceFeeBankVoucherSubmissionDate}" class="form-control hijrishamsi">
+                <lable>Extension Admin Fees Submission Voucher Date</lable>
+                <input type="text" th:field="*{extensionAdministrationFeeBankVoucherSubmissionDate}" class="form-control hijrishamsi">
             </div>
             <!-- Payment Status -->
             <div class="col-md-1 form-group align-items-center" style="margin-top: 20px; display: flex; align-items: center;">
                 <input
                         type="checkbox"
-                        th:field="*{databaseMaintianenceFeePaymentStatus}"
+                        th:field="*{extensionAdministrationPaymentStatus}"
                         value="Paid"
-                        id="databaseMaintianenceFeePaymentStatus"
+                        id="extensionAdministrationPaymentStatus"
                         style="
             width: 20px;
             height: 20px;
@@ -54,7 +54,7 @@
                 &nbsp;&nbsp;
                 <label
                         th:text="#{license_fee_payment_status}"
-                        for="databaseMaintianenceFeePaymentStatus"
+                        for="extensionAdministrationPaymentStatus"
                         class="form-check-label me-2"
                         style="cursor: pointer;">
                     Paid
@@ -68,7 +68,7 @@
             </button>
         </div>
     </form>
-    <a th:href="@{/licenses/finance/license_finance/database_maintainance_fees/license_database_fee_list}" id="backtopage" class="btn btn-primary" style="margin-top:20px;">
+    <a th:href="@{/licenses/finance/license_finance/administration_fees/license_administration_fee_list}" id="backtopage" class="btn" style="margin-top:20px;background-color:#0dcaf0;color:white;">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6" style="width:20px;height:20px;">
             <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
         </svg>

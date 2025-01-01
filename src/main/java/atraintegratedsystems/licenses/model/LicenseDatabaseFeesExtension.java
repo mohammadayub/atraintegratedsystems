@@ -36,13 +36,14 @@ public class LicenseDatabaseFeesExtension {
     @Column(name="extension_Database_fees")
     private BigDecimal extensionDatabaseFees;
     @Column(name="extension_Database_fee_bank_voucher_no")
-    private LocalDate extensionDatabaseFeeBankVoucherNo;
+    private String extensionDatabaseFeeBankVoucherNo;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name="extension_Database_fee_bank_voucher_date")
     private LocalDate extensionDatabaseFeeBankVoucherDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name="extension_Database_fee_bank_voucher_submission_date")
     private LocalDate extensionDatabaseFeeBankVoucherSubmissionDate;
+    private String extensionDatabasePaymentStatus;
 
 
     //Status
@@ -50,7 +51,7 @@ public class LicenseDatabaseFeesExtension {
     private String extendStatus;
 
 
-    public JalaliDate getExtStartDate() {
+    public JalaliDate getExtentStartDate() {
         if (extensionStartDate == null) {
             return null; // Return null if issueLicenseDate is null
         }
@@ -59,7 +60,7 @@ public class LicenseDatabaseFeesExtension {
         return jalaliExtensionStartDate;
     }
 
-    public JalaliDate getExtExpDate() {
+    public JalaliDate getExtentExpDate() {
         if (extensionExpireDate == null) {
             return null; // Return null if issueLicenseDate is null
         }
@@ -67,18 +68,17 @@ public class LicenseDatabaseFeesExtension {
         JalaliDate jalaliExtensionExpireDate=dateConverter.gregorianToJalali(extensionExpireDate.getYear(),extensionExpireDate.getMonthValue(),extensionExpireDate.getDayOfMonth());
         return jalaliExtensionExpireDate;
     }
-
-//    Bank Voucher Date
-public JalaliDate getextensionDatabaseFeeBankVoucherDate() {
-    if (extensionDatabaseFeeBankVoucherDate == null) {
-        return null; // Return null if issueLicenseDate is null
+    //    Extension Bank Voucher Date
+    public JalaliDate getextensionAdministrationFeeBankVoucherDate() {
+        if (extensionDatabaseFeeBankVoucherDate == null) {
+            return null; // Return null if issueLicenseDate is null
+        }
+        DateConverter dateConverter= new DateConverter();
+        JalaliDate jalaliextensionDatabaseFeeBankVoucherDate=dateConverter.gregorianToJalali(extensionDatabaseFeeBankVoucherDate.getYear(),extensionDatabaseFeeBankVoucherDate.getMonthValue(),extensionDatabaseFeeBankVoucherDate.getDayOfMonth());
+        return jalaliextensionDatabaseFeeBankVoucherDate;
     }
-    DateConverter dateConverter= new DateConverter();
-    JalaliDate jalaliextensionDatabaseFeeBankVoucherDate=dateConverter.gregorianToJalali(extensionDatabaseFeeBankVoucherDate.getYear(),extensionDatabaseFeeBankVoucherDate.getMonthValue(),extensionDatabaseFeeBankVoucherDate.getDayOfMonth());
-    return jalaliextensionDatabaseFeeBankVoucherDate;
-}
 
-    //    Bank Voucher Submission Date
+    //    Extension Bank Voucher Submission
     public JalaliDate getextensionDatabaseFeeBankVoucherSubmissionDate() {
         if (extensionDatabaseFeeBankVoucherSubmissionDate == null) {
             return null; // Return null if issueLicenseDate is null
@@ -87,6 +87,5 @@ public JalaliDate getextensionDatabaseFeeBankVoucherDate() {
         JalaliDate jalaliextensionDatabaseFeeBankVoucherSubmissionDate=dateConverter.gregorianToJalali(extensionDatabaseFeeBankVoucherSubmissionDate.getYear(),extensionDatabaseFeeBankVoucherSubmissionDate.getMonthValue(),extensionDatabaseFeeBankVoucherSubmissionDate.getDayOfMonth());
         return jalaliextensionDatabaseFeeBankVoucherSubmissionDate;
     }
-
 
 }

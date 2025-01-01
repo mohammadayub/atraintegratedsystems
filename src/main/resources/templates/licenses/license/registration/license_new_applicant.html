@@ -113,7 +113,7 @@
           <div class="row">
             <div class="col-md-6">
           <label for="tinUpload" th:text="#{license_application_tin_upload}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
-          <input type="file" id="tinUpload" th:field="*{tinUpload}" class="form-control-file" accept=".pdf,.jpg,.jpeg,.png" style="border:0px;" required />
+          <input type="file" id="tinUpload" th:field="*{tinUpload}" class="form-control-file" accept=".pdf,.jpg,.jpeg,.png" style=" border-left: 2px solid blue;" required />
         </div>
         </div>
         </div>
@@ -195,7 +195,7 @@
       </div>
     </form>
   </div>
-  <a th:href="@{/licenses/license/home}" class="btn" style="margin-top:20px;color:white;background-color:#0dcaf0;">
+  <a th:href="@{/licenses/license/home}" class="btn btn-primary" style="margin-top:20px;">
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6" style="width:20px;height:20px;">
       <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
     </svg>
