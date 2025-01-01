@@ -33,7 +33,6 @@ public class LicenseApprovalAndDatabaseFeesExtensionController {
         return "licenses/license/extension/license_database_fees_profile"; // Thymeleaf template
     }
 
-
     @PostMapping("/licenses/license/extension/license_database_fees_profile/update-status")
     public String updateExtendStatus(@RequestParam Long id, @RequestParam String extendStatus, RedirectAttributes redirectAttributes) {
         try {

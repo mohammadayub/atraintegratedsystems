@@ -75,7 +75,7 @@ public class LicenseDatabaseFeeExtensionFinanceController {
         licenseDatabaseFeesExtensionDTO.setExtExpireDate(licenseDatabaseFeesExtension.getExtentExpDate());
         licenseDatabaseFeesExtensionDTO.setExtensionDatabaseFees(licenseDatabaseFeesExtension.getExtensionDatabaseFees());
         model.addAttribute("licenseDatabaseFeesExtensionDTO", licenseDatabaseFeesExtensionDTO);
-        return "licenses/finance/extension/database_fees_extension/license_database_fees_print_tariff";
+        return "licenses/finance/extension/database_fees_extension/database_admin_fees_print_tariff";
     }
 
     @GetMapping("/licenses/finance/extension/database_fees_extension/license_database_fees/update/{id}")
