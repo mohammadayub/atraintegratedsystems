@@ -55,4 +55,10 @@ public class RouteController {
     {
         return "licenses/license/extension/extension_home";
     }
+    @GetMapping("licenses/finanace/extension/home")
+    public String finance_extension_home()
+    {
+
+        return "licenses/finance/extension/home";
+    }
 }

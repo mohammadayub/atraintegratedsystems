@@ -93,18 +93,16 @@
                 </a>
             </td>
         </tr>
-        <tr>
-            <td>
-                <a th:href="@{/licenses/finance/license_finance/administration_fees/license_administration_fee_list}" id="backtopage" class="btn btn-primary" style="margin-top:20px;">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6" style="width:20px;height:20px;">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
-                    </svg>
-                    Back to Page</a>
-            </td>
-        </tr>
+
         </tbody>
 
     </table>
+
+    <a th:href="@{/licenses/finanace/extension/home}" id="backtopage" class="btn btn-primary" style="margin-top:20px;">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6" style="width:20px;height:20px;">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
+        </svg>
+        Back to Page</a>
 </div>
 <div th:replace="scripts :: common-scripts"></div>
 <div th:replace="scripts :: persian-datepicker-scripts"></div>

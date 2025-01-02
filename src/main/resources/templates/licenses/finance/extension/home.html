@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en" th:lang="#{lang}" th:dir="${#locale.language == 'ps' ? 'rtl' : 'ltr'}"
+      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head th:replace="~{layout :: page_head}">
+    <title>LMIS</title>
+    <style>
+        body {
+        font-family: Arial, sans-serif;
+        direction: ltr; /* Default layout direction */
+    }
+    [dir="rtl"] body {
+        direction: rtl;
+    }
+
+    .custom-card {
+        padding: 16px;
+        text-align: center;
+        margin-inline: auto; /* Center align in both RTL and LTR */
+        width: fit-content;
+    }
+
+    .license-link {
+        padding-inline-start: 12px;
+        padding-inline-end: 12px;
+    }
+
+
+    </style>
+</head>
+<body>
+<nav th:replace="~{layout :: page_navbar}"></nav>
+<div class="container mt-5">
+    <table class="table table-borderless">
+        <tr style="border-bottom:1px solid darkgray;">
+            <td>
+                <div class="custom-card" >
+                    <a th:href="@{/licenses/finance/extension/admin_fees_extension/license_admin_fees}">
+                        <img th:src="@{/images/finance_Home.png}"></a>
+                    <h4 class="license-link" style="margin-top: 12px;">
+                        <a th:href="@{/licenses/finance/extension/admin_fees_extension/license_admin_fees}">License Admin Fee Extension</a>
+                    </h4>
+
+                </div>
+            </td>
+        </tr>
+        <tr style="border-bottom:1px solid darkgray;">
+            <td>
+                <div class="custom-card" >
+                    <a th:href="@{/licenses/finance/extension/database_fees_extension/license_database_fees}">
+                        <img th:src="@{/images/finance_Home.png}"></a>
+                    <h4 class="license-link" style="margin-top: 12px;">
+                        <a th:href="@{/licenses/finance/extension/database_fees_extension/license_database_fees}">License Database Fees Extension</a>
+                    </h4>
+
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a th:href="@{/}" class="btn btn-primary" style="margin-top:20px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6" style="width:20px;height:20px;">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
+                    </svg>
+                    Back to Page</a>
+            </td>
+        </tr>
+
+    </table>
+</div>
+<div th:replace="scripts :: common-scripts"></div>
+<footer th:replace="~{layout :: page_footer}"></footer>
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>
