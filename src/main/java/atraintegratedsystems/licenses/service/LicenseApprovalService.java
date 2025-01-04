@@ -162,147 +162,50 @@ public class LicenseApprovalService {
         LicenseApproval savedProfile = licenseApprovalRepository.save(profile);
         log.info("License Approval saved with ID: {}", savedProfile.getId());
 
-        // Add entries to LicenseDatabaseFeesExtension for validity period
-        int validityYears = savedProfile.getLicenseApplicant().getValidity();
-        LocalDate extensionStartDate = savedProfile.getApprovalDate().plusYears(1);
-        for (int i = 1; i < validityYears; i++) {
-            LocalDate extensionEndDate = extensionStartDate.plusYears(1);
-            LicenseDatabaseFeesExtension extension = new LicenseDatabaseFeesExtension();
-            extension.setLicenseApproval(savedProfile);
-            extension.setExtensionStartDate(extensionStartDate);
-            extension.setExtensionExpireDate(extensionEndDate);
-            extension.setExtensionDatabaseFees(savedProfile.getDatabaseYearlyMaintainanceFees());
-            extension.setExtendStatus("No");
-            licenseDatabaseFeesExtensionRepository.save(extension);
-            log.info("Added LicenseDatabaseFeesExtension record for year: {}", i);
+        if ("Approve".equals(profile.getApprovalStatus())) {
+            // Add entries to LicenseDatabaseFeesExtension for validity period
+            int validityYears = profile.getLicenseApplicant().getValidity();
+            LocalDate extensionStartDate = profile.getApprovalDate().plusYears(1);
 
-            extensionStartDate = extensionEndDate;
+            for (int i = 1; i < validityYears; i++) {
+                LocalDate extensionEndDate = extensionStartDate.plusYears(1);
+                LicenseDatabaseFeesExtension extension = new LicenseDatabaseFeesExtension();
+                extension.setLicenseApproval(profile);
+                extension.setExtensionStartDate(extensionStartDate);
+                extension.setExtensionExpireDate(extensionEndDate);
+                extension.setExtensionDatabaseFees(profile.getDatabaseYearlyMaintainanceFees());
+                extension.setExtendStatus("No");
+                licenseDatabaseFeesExtensionRepository.save(extension);
+                log.info("Added LicenseDatabaseFeesExtension record for year: {}", i);
+
+                extensionStartDate = extensionEndDate;
+            }
+
+            // Add entries to LicenseAdminFeesExtension for validity period
+            int adminValidityYears = profile.getLicenseApplicant().getValidity();
+            LocalDate adminExtensionStartDate = profile.getApprovalDate().plusYears(1);
+
+            for (int i = 1; i < adminValidityYears; i++) {
+                LocalDate adminExtensionEndDate = adminExtensionStartDate.plusYears(1);
+                LicenseAdminFeesExtension adminExtension = new LicenseAdminFeesExtension();
+                adminExtension.setLicenseApproval(profile);
+                adminExtension.setExtensionStartDate(adminExtensionStartDate);
+                adminExtension.setExtensionExpireDate(adminExtensionEndDate);
+                adminExtension.setExtensionAdministrationFees(profile.getAdministrativeYearlyFees());
+                adminExtension.setExtendStatus("No");
+                licenseAdminFeesExtensionRepository.save(adminExtension);
+                log.info("Added LicenseAdminFeesExtension record for year: {}", i);
+
+                adminExtensionStartDate = adminExtensionEndDate;
+            }
         }
-
-        // Add entries to LicenseAdminFeesExtension for validity period
-        int adminValidityYears = savedProfile.getLicenseApplicant().getValidity();
-        LocalDate adminExtensionStartDate = savedProfile.getApprovalDate().plusYears(1);
-
-        for (int i = 1; i < adminValidityYears; i++) {
-            LocalDate adminExtensionEndDate = adminExtensionStartDate.plusYears(1);
-            LicenseAdminFeesExtension adminExtension = new LicenseAdminFeesExtension();
-
-            // Set fields for the LicenseAdminFeesExtension
-            adminExtension.setLicenseApproval(savedProfile);
-            adminExtension.setExtensionStartDate(adminExtensionStartDate);
-            adminExtension.setExtensionExpireDate(adminExtensionEndDate);
-            adminExtension.setExtensionAdministrationFees(savedProfile.getAdministrativeYearlyFees());
-            adminExtension.setExtendStatus("No");
-
-            // Save the admin extension record
-            licenseAdminFeesExtensionRepository.save(adminExtension);
-            log.info("Added LicenseAdminFeesExtension record for year: {}", i);
-
-            // Update the start date for the next iteration
-            adminExtensionStartDate = adminExtensionEndDate;
-        }
-
-
         return savedProfile;
     }
 
 
 
 
-//    @Transactional
-//    public LicenseApproval saveApproval(LicenseApprovalDTO dto) throws Exception {
-//        log.info("Starting saveApproval for DTO: {}", dto);
-//
-//        // Create and populate LicenseApproval entity
-//        LicenseApproval profile = new LicenseApproval();
-//
-//        // Generate and set Approval ID
-//        String approvalId = generateApprovalId();
-//        profile.setApprovalId(approvalId);
-//        log.info("Generated Approval ID: {}", approvalId);
-//
-//        // Convert Jalali date to Gregorian
-//        try {
-//            DateConverter dateConverter = new DateConverter();
-//            LocalDate approvalDate = dateConverter.jalaliToGregorian(
-//                    dto.getApprovalDate().getYear(),
-//                    dto.getApprovalDate().getMonthValue(),
-//                    dto.getApprovalDate().getDayOfMonth()
-//            );
-//            profile.setApprovalDate(approvalDate);
-//
-//            // Expiry Date
-//
-//            // Fetch the LicenseApplicant from the repository
-//            LicenseApplicant licenseApplicant = licenseApplicantRepository.findById(dto.getId())
-//                    .orElseThrow(() -> new IllegalArgumentException("LicenseApplicant not found with ID: " + dto.getId()));
-//
-//            int licenseValidityYear=licenseApplicant.getValidity();
-//
-//            profile.setDatabaseMaintianenceFeeExpiryDate(approvalDate.plusYears(1));
-//            profile.setAdministrationFeeExpiryDate(approvalDate.plusYears(1));
-//            profile.setLicenseFeeExpiryDate(approvalDate.plusYears(licenseValidityYear));
-//            profile.setGuaranteeFeeExpiryDate(approvalDate.plusYears(licenseValidityYear));
-//
-//            log.info("Approval Date (Gregorian): {}", approvalDate);
-//        } catch (Exception e) {
-//            throw new IllegalArgumentException("Invalid approval date provided: " + dto.getApprovalDate(), e);
-//        }
-//
-//        // Set Approval Status
-//        profile.setApprovalStatus(dto.getApprovalStatus());
-//        log.info("Approval Status: {}", dto.getApprovalStatus());
-//
-//        profile.setBoardDecisionNumber(dto.getBoardDecisionNumber());
-//        log.info("Board Decision Number: {}",dto.getBoardDecisionNumber());
-//        profile.setBoardDecisions(dto.getBoardDecisions());
-//        log.info("Approval Status: {}", dto.getBoardDecisions());
-//
-//
-//        if (dto.getLicenseTypeId() != null) {
-//            LicenseType licenseType = licenseTypeRepository.findById(dto.getLicenseTypeId())
-//                    .orElseThrow(() -> new IllegalArgumentException("Invalid License Type ID: " + dto.getLicenseTypeId()));
-//            profile.setLicenseType(licenseType);
-//            log.info("License Type: {}", licenseType.getName());
-//        } else {
-//            throw new IllegalArgumentException("License Type is required.");
-//        }
-//
-//        // Set Financial and Payment Details
-//        profile.setCurrencyType(dto.getCurrencyType());
-//        profile.setLicenseFees(dto.getLicenseFees() != null ? dto.getLicenseFees() : BigDecimal.ZERO);
-//        profile.setLicensePaymentOffice(dto.getLicensePaymentOffice());
-//        profile.setAdministrativeYearlyFees(dto.getAdministrativeYearlyFees() != null ? dto.getAdministrativeYearlyFees() : BigDecimal.ZERO);
-//        profile.setAdminstrivateYearlyFeesPaymentOffice(dto.getAdminstrivateYearlyFeesPaymentOffice());
-//        profile.setGuaranteeFees(dto.getGuaranteeFees() != null ? dto.getGuaranteeFees() : BigDecimal.ZERO);
-//        profile.setGuaranteeFeesPaymentOffice(dto.getGuaranteeFeesPaymentOffice());
-//        profile.setDatabaseYearlyMaintainanceFees(dto.getDatabaseYearlyMaintainanceFees() != null ? dto.getDatabaseYearlyMaintainanceFees() : BigDecimal.ZERO);
-//        profile.setDatabaseYearlyMaintainanceFeesPaymentOffice(dto.getDatabaseYearlyMaintainanceFeesPaymentOffice());
-//
-//
-//
-//
-//
-//
-//
-//
-//        log.info("Financial details set for profile.");
-//
-//        // Set License Applicant
-//        if (dto.getLicenseApplicantId() != null) {
-//            LicenseApplicant licenseApplicant = licenseApplicantRepository.findById(dto.getLicenseApplicantId())
-//                    .orElseThrow(() -> new IllegalArgumentException("Invalid License Applicant ID: " + dto.getLicenseApplicantId()));
-//            profile.setLicenseApplicant(licenseApplicant);
-//            log.info("License Applicant: {}", licenseApplicant.getId());
-//        } else {
-//            throw new IllegalArgumentException("License Applicant ID is required.");
-//        }
-//
-//        // Save to Database
-//        LicenseApproval savedProfile = licenseApprovalRepository.save(profile);
-//        log.info("License Approval saved with ID: {}", savedProfile.getId());
-//        return savedProfile;
-//    }
+
 
     private String generateApprovalId() {
         Long maxId = licenseApprovalRepository.findMaxId();
