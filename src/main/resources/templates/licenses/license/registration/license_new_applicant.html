@@ -4,6 +4,7 @@
   <div th:replace="styles :: data-tables-styles"></div>
   <div th:replace="styles :: persian-datepicker-styles"></div>
   <div th:replace="styles :: select2-styles"></div>
+  <div th:replace="styles :: sweetalertcss"></div>
   <title>ATRA Financial Integrated Systems</title>
   <style>
     .label-rtl {
@@ -33,7 +34,7 @@
   <div>
     <div th:if="${successMessage}" class="alert alert-success" role="alert" th:text="${successMessage}"></div>
     <div th:if="${errorMessage}" class="alert alert-danger" role="alert" th:text="${errorMessage}"></div>
-    <form th:action="@{/licenses/license/registration/license_new_applicant}" th:object="${profile}" method="post" enctype="multipart/form-data">
+    <form id="licenseForm" th:action="@{/licenses/license/registration/license_new_applicant}" th:object="${profile}" method="post" enctype="multipart/form-data">
       <!-- Row 1: Request Date, License Type, Currency Type, Finance Type -->
       <div class="row">
         <div class="col-md-3 form-group">
@@ -69,7 +70,7 @@
         </div>
         <div class="col-md-3 form-group">
           <label for="companyLicenseName" th:text="#{license_application_company_license_name}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
-          <input type="text" id="companyLicenseName" th:field="*{companyLicenseName}" class="form-control" required>
+          <input type="text" id="companyLicenseName" th:field="*{companyLicenseName}" class="form-control" maxlength="80" required>
         </div>
         <div class="col-md-3 form-group">
           <label for="financeType" th:text="#{applicant_license_finance_type}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
@@ -78,7 +79,7 @@
         </div>
         <div class="col-md-3 form-group">
           <label for="expectedInvestment" th:text="#{license_application_expected_investment}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
-          <input type="text" id="expectedInvestment" th:field="*{expectedInvestment}" class="form-control" required>
+          <input type="number" id="expectedInvestment" th:field="*{expectedInvestment}" class="form-control" required>
         </div>
 
       </div>
@@ -86,11 +87,11 @@
       <div class="row">
         <div class="col-md-3 form-group">
           <label for="cash" th:text="#{license_application_cash}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
-          <input type="text" id="cash" th:field="*{cash}" class="form-control" required>
+          <input type="number" id="cash" th:field="*{cash}" class="form-control" required>
         </div>
         <div class="col-md-3 form-group">
           <label for="licenseNo" th:text="#{license_application_license_no}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
-          <input type="text" id="licenseNo" th:field="*{licenseNo}" class="form-control" required>
+          <input type="text" id="licenseNo" th:field="*{licenseNo}" class="form-control" maxlength="50" required>
         </div>
         <div class="col-md-3 form-group">
           <div class="row">
@@ -102,7 +103,7 @@
           </div>
         <div class="col-md-3 form-group">
           <label for="tinNo" th:text="#{license_application_tin}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
-          <input type="text" id="tinNo" th:field="*{tinNo}" class="form-control" required>
+          <input type="text" id="tinNo" th:field="*{tinNo}" class="form-control" maxlength="50" required>
         </div>
       </div>
       <!-- Row 4: Employees, Planned Activities, Other Licenses -->
@@ -139,11 +140,11 @@
       <div class="row">
         <div class="col-md-3 form-group">
           <label for="totalNationalEmployees" th:text="#{license_application_national_employee}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
-          <input type="number" id="totalNationalEmployees" th:field="*{totalNationalEmployees}" class="form-control" required>
+          <input type="number" id="totalNationalEmployees" th:field="*{totalNationalEmployees}" class="form-control" maxlength="10" required>
         </div>
         <div class="col-md-3 form-group">
           <label for="totalInternationalEmployees" th:text="#{license_application_international_employee}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
-          <input type="number" id="totalInternationalEmployees" th:field="*{totalInternationalEmployees}" class="form-control" required>
+          <input type="number" id="totalInternationalEmployees" th:field="*{totalInternationalEmployees}" class="form-control" maxlength="10" required>
         </div>
         <div class="col-md-3 form-group">
           <label for="plannedActivitiesAndServices" th:text="#{license_application_plan_active_Service}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
@@ -184,11 +185,11 @@
 
       <!-- Submit/Reset Buttons -->
       <div class="row">
-        <div class="col-md-4 btn-group d-flex justify-content-center" style="margin-top: 15px;margin-bottom:80px; margin:0 auto;">
-          <button type="submit" class="btn btn-primary border border-primary rounded" style="width: 60px; height: 40px; margin-right: 15px;">
+        <div class="col-md-4 btn-group d-flex justify-content-center" style="margin-top: 15px; margin-bottom: 80px; margin: 0 auto;">
+          <button type="button" class="btn btn-primary border border-primary rounded" onclick="confirmSubmit()" style="width: 60px; height: 40px; margin-right: 15px;">
             <i class="fas fa-check" style="margin-right: 5px;"></i>Submit
           </button>
-          <button type="reset" class="btn btn-info  border border-info rounded" style="width: 60px; height: 40px; margin-right: 15px;">
+          <button type="button" class="btn btn-info border border-info rounded" onclick="confirmReset()" style="width: 60px; height: 40px; margin-right: 15px;">
             <i class="fas fa-redo" style="margin-right: 5px;"></i>Reset
           </button>
         </div>
@@ -209,6 +210,8 @@
 <div th:replace="scripts :: persian-datepicker-scripts"></div>
 
 <div th:replace="scripts :: data-tables-scripts"></div>
+
+<div th:replace="scripts :: sweetalertjs"></div>
 
 <script>
   $('.hijrishamsi').persianDatepicker({
@@ -323,9 +326,57 @@
         applicationFeesField.value = ""; // Clear if no valid option is selected
     }
 }
-
-
 </script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    function confirmSubmit() {
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "Do you want to Save the Applicant?",
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, Submit it!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          const form = document.getElementById('licenseForm');
+          if (form) {
+            form.submit();
+          } else {
+            Swal.fire('Error', 'Form not found!', 'error');
+          }
+        }
+      });
+    }
+
+    function confirmReset() {
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "This will clear all form data.",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, Reset it!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          const form = document.getElementById('licenseForm');
+          if (form) {
+            form.reset();
+          } else {
+            Swal.fire('Error', 'Form not found!', 'error');
+          }
+        }
+      });
+    }
+
+    // Attach these functions to buttons or links if needed
+    window.confirmSubmit = confirmSubmit;
+    window.confirmReset = confirmReset;
+  });
+</script>
+
 <div style="height:5vh;"></div>
 <footer th:replace="~{layout :: page_footer}"></footer>
 <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
