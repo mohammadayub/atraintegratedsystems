@@ -4,6 +4,7 @@
     <div th:replace="styles :: data-tables-styles"></div>
     <div th:replace="styles :: persian-datepicker-styles"></div>
     <div th:replace="styles :: select2-styles"></div>
+    <div th:replace="styles :: sweetalertcss"></div>
     <title>LMIS</title>
 </head>
 <style>
@@ -15,7 +16,7 @@
 <nav th:replace="~{layout :: page_navbar}"></nav>
 <h3 style="text-align:center;margin-top:10px;font-weight:bolder;color:white;" class="bg-primary" th:text="#{license_application_confirmation}">License Application Confirmation</h3>
 <div class="container-fluid" style="margin-top:40px;">
-    <form th:action="@{/licenses/finance/license_finance/application_fees/license_application_fee_list/add}" th:object="${licenseApplicantDTO}" method="post">
+    <form id="licenseForm" th:action="@{/licenses/finance/license_finance/application_fees/license_application_fee_list/add}" th:object="${licenseApplicantDTO}" method="post">
         <div class="row">
             <!-- Hidden ID Field -->
             <input type="hidden" th:field="*{reqId}">
@@ -25,13 +26,13 @@
                 <label th:text="#{applicant_request_date}"
                        th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
                 </label>
-                <input type="text" th:field="*{reqDate}" class="form-control hijrishamsi" disabled>
+                <input type="text" th:field="*{reqDate}" class="form-control hijrishamsi" readonly>
             </div>
 
             <!-- License Type -->
             <div class="col-md-3 form-group">
                 <label for="licenseTypeId" th:text="#{applicant_license_type}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
-                <select id="licenseTypeId" th:field="*{licenseTypeId}" class="form-control" required onchange="setApplicationFees()" disabled style="border-left: 2px solid blue;">
+                <select id="licenseTypeId" th:field="*{licenseTypeId}" class="form-control" required onchange="setApplicationFees()" readonly style="border-left: 2px solid blue;">
                     <option th:each="licenseType : ${licenseTypes}" th:value="${licenseType.id}" th:text="${licenseType.name}"></option>
                 </select>
             </div>
@@ -40,14 +41,14 @@
             <div class="col-md-3 form-group">
                 <label th:text="#{applicant_license_currency}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
 
-                <input type="text" th:field="*{currencyType}" class="form-control"  disabled>
+                <input type="text" th:field="*{currencyType}" class="form-control"  readonly>
             </div>
 
             <!-- Finance Type -->
             <div class="col-md-3 form-group">
                 <label th:text="#{applicant_license_finance_type}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
 
-                <input type="text" th:field="*{financeType}" class="form-control"  disabled>
+                <input type="text" th:field="*{financeType}" class="form-control"  readonly>
             </div>
         </div>
 
@@ -56,28 +57,28 @@
             <div class="col-md-3 form-group">
                 <label th:text="#{license_application_company_license_name}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
 
-                <input type="text" th:field="*{companyLicenseName}" class="form-control"  disabled>
+                <input type="text" th:field="*{companyLicenseName}" class="form-control"  readonly>
             </div>
 
             <!-- License Number -->
             <div class="col-md-3 form-group">
                 <label th:text="#{license_application_license_no}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
 
-                <input type="text" th:field="*{licenseNo}" class="form-control"  disabled>
+                <input type="text" th:field="*{licenseNo}" class="form-control"  readonly>
             </div>
 
             <!-- Year of Establishment -->
             <div class="col-md-3 form-group">
                 <label th:text="#{license_application_year_establishment}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
 
-                <input type="text" th:field="*{yearOfEstablishment}" class="form-control hijrishamsi"  disabled>
+                <input type="text" th:field="*{yearOfEstablishment}" class="form-control hijrishamsi"  readonly>
             </div>
 
             <!-- Expiry Date -->
             <div class="col-md-3 form-group">
                 <label th:text="#{license_application_expiry_date}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
 
-                <input type="text" th:field="*{expiryDate}" class="form-control hijrishamsi"  disabled>
+                <input type="text" th:field="*{expiryDate}" class="form-control hijrishamsi"  readonly>
             </div>
         </div>
 
@@ -86,7 +87,7 @@
             <div class="col-md-3 form-group">
                 <label th:text="#{license_application_fee}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
 
-                <input type="number" step="0.01" th:field="*{applicationFees}" class="form-control"  disabled>
+                <input type="number" step="0.01" th:field="*{applicationFees}" class="form-control" readonly>
             </div>
 
             <div class="col-md-3 form-group">
@@ -148,7 +149,7 @@
 
         <!-- Submit/Reset Buttons -->
         <div class="col-md-4 btn-group d-flex justify-content-center" style="margin-top: 15px; margin-bottom:80px; margin:0 auto;">
-            <button type="submit" class="btn btn-primary" th:text="#{confirmation_payment}">
+            <button type="submit" class="btn btn-primary" th:text="#{confirmation_payment}" onclick="confirmSubmit(event)">
                 <span class="fas fa-check"></span> Confirm Payment
             </button>
         </div>
@@ -164,6 +165,7 @@
 <div th:replace="scripts :: common-scripts"></div>
 <div th:replace="scripts :: persian-datepicker-scripts"></div>
 <div th:replace="scripts :: data-tables-scripts"></div>
+<div th:replace="scripts :: sweetalertjs"></div>
 
 <script>
     $('.hijrishamsi').persianDatepicker({
@@ -175,6 +177,27 @@
           }
       }
   });
+    function confirmSubmit(event) {
+        event.preventDefault(); // Prevent default form submission
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "Do you want to Send For Approval",
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, Submit it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                const form = document.getElementById('licenseForm');
+                if (form) {
+                    form.submit();
+                } else {
+                    Swal.fire('Error', 'Form not found!', 'error');
+                }
+            }
+        });
+    }
 </script>
 <div style="height:5vh;"></div>
 <footer th:replace="~{layout :: page_footer}"></footer>

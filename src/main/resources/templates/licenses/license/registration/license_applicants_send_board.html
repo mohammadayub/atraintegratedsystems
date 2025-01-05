@@ -4,6 +4,7 @@
     <div th:replace="styles :: data-tables-styles"></div>
     <div th:replace="styles :: persian-datepicker-styles"></div>
     <div th:replace="styles :: select2-styles"></div>
+    <div th:replace="styles :: sweetalertcss"></div>
     <title>LMIS</title>
     <style>
         .label-rtl {
@@ -11,7 +12,7 @@
             font-weight: bolder !important;
             width: 100% !important;
             direction: rtl !important;
-            text-align: right; /* Ensures text alignment in RTL */
+            text-align: right;
         }
         .label-ltr {
             color: black !important;
@@ -20,140 +21,111 @@
             direction: ltr !important;
             text-align: left;
         }
-
     </style>
 </head>
-<body  onload="setApplicationFees()">
+<body onload="setApplicationFees()">
 <nav th:replace="~{layout :: page_navbar}"></nav>
 <div class="container-fluid">
     <!-- Form for License Approval -->
     <div class="container justify-content-center" style="margin-top: 50px;">
-    <h3 style="text-align:center;font-weight:bold;margin:20px;" th:text="#{transfer_to_board}"></h3>
-    <form th:action="@{/licenses/license/registration/license_applicants_send_board}"
-          th:object="${licenseApplicant}" method="post">
-        <div class="row">
-            <!-- Hidden Fields -->
-            <input type="hidden" th:field="*{id}">
-            <div class="col-md-1 form-group"></div>
-            <div class="col-md-3 form-group">
-                <label for="reqId" th:text="#{approval_request_id}"
-                       th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
-                <input type="text" id="reqId" th:field="*{reqId}" class="form-control" required readonly style="border-left:1px solid blue;">
+        <h3 style="text-align:center;font-weight:bold;margin:20px;" th:text="#{transfer_to_board}"></h3>
+        <form id="licenseForm" th:action="@{/licenses/license/registration/license_applicants_send_board}"
+              th:object="${licenseApplicant}" method="post">
+            <div class="row">
+                <!-- Hidden Fields -->
+                <input type="hidden" th:field="*{id}">
+                <div class="col-md-1 form-group"></div>
+                <div class="col-md-3 form-group">
+                    <label for="reqId" th:text="#{approval_request_id}"
+                           th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
+                    <input type="text" id="reqId" th:field="*{reqId}" class="form-control" required readonly style="border-left:1px solid blue;">
+                </div>
+
+                <div class="col-md-3 form-group">
+                    <label for="referToBoardDate" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" th:text="#{refer_to_board_date}"></label>
+                    <input type="text" id="referToBoardDate" th:field="*{referToBoardDate}" class="form-control hijrishamsi" required style="border-left:1px solid blue;">
+                </div>
+                <div class="col-md-3 form-group">
+                    <label for="isSend" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" th:text="#{is_send}"></label>
+                    <select th:field="*{isSend}" id="isSend" class="form-control" readonly="readonly" style="border-left:1px solid blue;">
+                        <option value="Yes" th:text="#{Yes}">Yes</option>
+                    </select>
+                </div>
             </div>
 
-            <div class="col-md-3 form-group">
-                <label for="referToBoardDate" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" th:text="#{refer_to_board_date}">Refer To BoardDate</label>
-                <input type="text" id="referToBoardDate" th:field="*{referToBoardDate}" class="form-control hijrishamsi" required style="border-left:1px solid blue;">
+            <!-- Submit Button -->
+            <div class="d-flex justify-content-center align-items-center">
+                <div>
+                    <button type="submit" class="btn btn-primary btn-sm" style="margin: 10px;" onclick="confirmSubmit(event)">
+                        <span class="fas fa-check"></span>
+                        <span th:text="#{license_approval_confirm}"></span>
+                    </button>
+                    <a th:href="@{/licenses/license/registration/license_applicants_profile}"
+                       class="btn btn-info btn-sm" style="margin: 10px;">
+                        <span class="fas fa-arrow-left"></span>
+                        <span th:text="#{license_approval_back_to_list}"></span>
+                    </a>
+                </div>
             </div>
-            <div class="col-md-3 form-group">
-            <label for="isSend" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" th:text="#{is_send}"></label>
-            <select th:field="*{isSend}" id="isSend" class="form-control" readonly="readonly" style="border-left:1px solid blue;">
-                <option value="Yes" th:text="#{Yes}">Yes</option>
-            </select>
-            </div>
-
-
-        </div>
-
-
-
-
-
-        <!-- Submit Button -->
-        <div class="d-flex justify-content-center align-items-center">
-            <!-- Buttons -->
-            <div>
-                <button type="submit" class="btn btn-primary btn-sm" style="margin: 10px;">
-                    <span class="fas fa-check"></span>
-                    <span th:text="#{license_approval_confirm}"></span>
-                </button>
-                <a th:href="@{/licenses/license/registration/license_applicants_profile}"
-                   class="btn btn-info btn-sm" style="margin: 10px;">
-                    <span class="fas fa-arrow-left"></span>
-                    <span th:text="#{license_approval_back_to_list}"></span>
-                </a>
-            </div>
-        </div>
-        <a th:href="@{/licenses/license/registration/license_applicants_profile}" class="btn" style="margin-top:20px;color:white;background-color:#3066be;">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6" style="width:20px;height:20px;">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
-            </svg>
-            Back to Page</a>
-
-
-        <!-- Back Link -->
-
-    </form>
-
+            <a th:href="@{/licenses/license/registration/license_applicants_profile}" class="btn" style="margin-top:20px;color:white;background-color:#3066be;">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6" style="width:20px;height:20px;">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
+                </svg>
+                Back to Page</a>
+        </form>
     </div>
-
-
 </div>
 
 <div th:replace="scripts :: common-scripts"></div>
 <div th:replace="scripts :: persian-datepicker-scripts"></div>
 <div th:replace="scripts :: data-tables-scripts"></div>
+<div th:replace="scripts :: sweetalertjs"></div>
 <script>
-    $('.hijrishamsi').persianDatepicker({
-      format: 'YYYY-MM-DD',
-      autoClose: true,
-      calendar: {
-          persian: {
-              locale: 'en'
-          }
-      }
-  });
-function setApplicationFees() {
-    const licenseType = document.getElementById("licenseTypeId").value;
-    const guaranteeFees = document.getElementById("guaranteeFees");
-    const guaranteeFeesPaymentOffice = document.getElementById("guaranteeFeesPaymentOffice");
-    const validity = document.getElementById("validity");
-    const currencyType = document.getElementById("currencyType");
-    const adminFees = document.getElementById("adminFees");
-    const licenseFees = document.getElementById("licenseFees");
-    const databaseMaintenanceFees = document.getElementById("databaseMaintenanceFees");
+    document.addEventListener('DOMContentLoaded', function () {
+        $('.hijrishamsi').persianDatepicker({
+            format: 'YYYY-MM-DD',
+            autoClose: true,
+            calendar: {
+                persian: {
+                    locale: 'en'
+                }
+            }
+        });
+    });
 
-    // Ensure these elements exist in your HTML
-    const licensePaymentOffice = document.getElementById("licensePaymentOffice");
-    const adminFeesPaymentOffice = document.getElementById("adminFeesPaymentOffice");
-    const licenseApprovalDatabaseFeesPaymentOffice = document.getElementById("licenseApprovalDatabaseFeesPaymentOffice");
-    const databaseMaintenanceFeesPaymentOffice = document.getElementById("databaseMaintenanceFeesPaymentOffice");
-
-
-    // Currency Section
-    if (licenseType === "6" || licenseType === "7" || licenseType === "8") {
-        currencyType.value = "USD";
-    } else {
-        currencyType.value = "AFN";
+    function setApplicationFees() {
+        // Logic for setting application fees
+        const licenseType = document.getElementById("licenseTypeId").value;
+        const currencyType = document.getElementById("currencyType");
+        if (licenseType === "6" || licenseType === "7" || licenseType === "8") {
+            currencyType.value = "USD";
+        } else {
+            currencyType.value = "AFN";
+        }
+        // Add additional logic here if necessary
     }
-    // End Of Currency Section
 
-    if (licenseType === "1") {
-        licenseFees.value = 1950000000;
-        guaranteeFees.value = 1000000;
-        guaranteeFeesPaymentOffice.value = "ATRA";
-        licensePaymentOffice.value = "MCIT";
-        adminFees.value = 37000000;
-        adminFeesPaymentOffice.value = "ATRA";
-        databaseMaintenanceFees.value = 350000;
-        databaseMaintenanceFeesPaymentOffice.value = "ATRA"
-        licenseApprovalDatabaseFeesPaymentOffice.value = "ATRA";
-
-    } else {
-        // Clear fields if no valid license type
-        licenseFees.value = "";
-        guaranteeFees.value = "";
-        guaranteeFeesPaymentOffice.value = "";
-        adminFees.value = "";
-        databaseMaintenanceFees.value = "";
-        guaranteeFees.value = "";
-        licensePaymentOffice.value = "";
-        adminFeesPaymentOffice.value = "";
-        databaseMaintenanceFeesPaymentOffice.value = "";
-        licenseApprovalDatabaseFeesPaymentOffice.value = "";
+    function confirmSubmit(event) {
+        event.preventDefault(); // Prevent default form submission
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "Do you want to Send For Approval",
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, Submit it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                const form = document.getElementById('licenseForm');
+                if (form) {
+                    form.submit();
+                } else {
+                    Swal.fire('Error', 'Form not found!', 'error');
+                }
+            }
+        });
     }
-}
-
 </script>
 <footer th:replace="~{layout :: page_footer}"></footer>
 </body>

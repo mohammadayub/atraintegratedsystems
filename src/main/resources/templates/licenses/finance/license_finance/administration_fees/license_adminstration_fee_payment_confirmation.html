@@ -4,6 +4,7 @@
     <div th:replace="styles :: data-tables-styles"></div>
     <div th:replace="styles :: persian-datepicker-styles"></div>
     <div th:replace="styles :: select2-styles"></div>
+    <div th:replace="styles :: sweetalertcss"></div>
     <title>LMIS</title>
      <style>
          input[type="text"]{
@@ -15,13 +16,13 @@
 <nav th:replace="~{layout :: page_navbar}"></nav>
 <h3 style="text-align:center;margin-top:30px;font-weight:bolder;" th:text="#{license_application_confirmation}">License Application Confirmation</h3>
 <div class="container-fluid mt-4">
-    <form th:action="@{/licenses/finance/license_finance/administration_fees/license_administration_fee_list/add}" th:object="${licenseApprovalDTO}" method="post">
+    <form id="licenseForm" th:action="@{/licenses/finance/license_finance/administration_fees/license_administration_fee_list/add}" th:object="${licenseApprovalDTO}" method="post">
         <div class="row">
             <!-- Hidden ID Field -->
             <input type="hidden" th:field="*{id}">
             <div class="col-md-2 form-group">
                 <lable th:text="#{approval_id}"></lable>
-                <input type="text" th:field="*{approvalId}" class="form-control" disabled>
+                <input type="text" th:field="*{approvalId}" class="form-control" readonly>
             </div>
             <div class="col-md-3 form-group">
                <lable th:text="#{admin_fee_entry_voucher_date}"></lable>
@@ -65,7 +66,7 @@
 
         <!-- Submit/Reset Buttons -->
         <div class="col-md-4 btn-group d-flex justify-content-center" style="margin-top: 15px; margin-bottom:80px; margin:0 auto;">
-            <button type="submit" class="btn btn-primary btn-sm" style="width: 100px;" th:text="#{confirmation_payment}">
+            <button type="submit" class="btn btn-primary btn-sm" style="width: 100px;" th:text="#{confirmation_payment}" onclick="confirmSubmit(event)">
                 <span class="fas fa-check"></span> Confirm Payment
             </button>
         </div>
@@ -80,6 +81,7 @@
 <div th:replace="scripts :: common-scripts"></div>
 <div th:replace="scripts :: persian-datepicker-scripts"></div>
 <div th:replace="scripts :: data-tables-scripts"></div>
+<div th:replace="scripts :: sweetalertjs"></div>
 <script>
     $('.hijrishamsi').persianDatepicker({
       format: 'YYYY-MM-DD',
@@ -90,6 +92,27 @@
           }
       }
   });
+    function confirmSubmit(event) {
+        event.preventDefault(); // Prevent default form submission
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "Do you want to Confirm Administration Fee",
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, Submit it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                const form = document.getElementById('licenseForm');
+                if (form) {
+                    form.submit();
+                } else {
+                    Swal.fire('Error', 'Form not found!', 'error');
+                }
+            }
+        });
+    }
 </script>
 <footer th:replace="~{layout :: page_footer}"></footer>
 <script th:src="@{/js/bootstrap.bundle.min.js}"></script>

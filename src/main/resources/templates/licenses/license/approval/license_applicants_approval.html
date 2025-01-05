@@ -4,7 +4,8 @@
     <div th:replace="styles :: data-tables-styles"></div>
     <div th:replace="styles :: persian-datepicker-styles"></div>
     <div th:replace="styles :: select2-styles"></div>
-    <title>ATRA Financial Integrated System</title>
+    <div th:replace="styles :: sweetalertcss"></div>
+    <title>LMIS</title>
     <style>
         .label-rtl {
             color: black !important;
@@ -29,7 +30,7 @@ input[type="text"],input[type="number"],input[type="file"],input[type="website"]
 <nav th:replace="~{layout :: page_navbar}"></nav>
 <div class="container-fluid">
     <!-- Form for License Approval -->
-    <form th:action="@{/licenses/license/approval/license_applicants_approval}"
+    <form id="licenseForm" th:action="@{/licenses/license/approval/license_applicants_approval}"
           th:object="${licenseApplicantDTO}" method="post" style="margin-top:5%;padding-left:5%;padding-right:5%;">
         <div class="row">
             <!-- Hidden Fields -->
@@ -174,7 +175,7 @@ input[type="text"],input[type="number"],input[type="file"],input[type="website"]
         <!-- Submit Button -->
         <div class="row btn-center">
             <!-- Buttons -->
-            <button type="submit" class="btn btn-primary btn-sm" style="margin: 10px;">
+            <button type="submit" class="btn btn-primary btn-sm" style="margin: 10px;" onclick="confirmSubmit(event)">
                 <span class="fas fa-check"></span>
                 <span th:text="#{license_approval_confirm}"></span>
             </button>
@@ -195,6 +196,7 @@ input[type="text"],input[type="number"],input[type="file"],input[type="website"]
 <div th:replace="scripts :: common-scripts"></div>
 <div th:replace="scripts :: persian-datepicker-scripts"></div>
 <div th:replace="scripts :: data-tables-scripts"></div>
+<div th:replace="scripts :: sweetalertjs"></div>
 <script>
     $('.hijrishamsi').persianDatepicker({
       format: 'YYYY-MM-DD',
@@ -529,6 +531,29 @@ function setApplicationFees() {
 
 
 }
+function confirmSubmit(event) {
+        event.preventDefault(); // Prevent default form submission
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "Do you want to Approve This License",
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, Submit it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                const form = document.getElementById('licenseForm');
+                if (form) {
+                    form.submit();
+                } else {
+                    Swal.fire('Error', 'Form not found!', 'error');
+                }
+            }
+        });
+    }
+</script>
+<script>
 
 </script>
 <div style="height:5vh;"></div>

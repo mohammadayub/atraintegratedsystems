@@ -4,7 +4,8 @@
     <div th:replace="styles :: data-tables-styles"></div>
     <div th:replace="styles :: persian-datepicker-styles"></div>
     <div th:replace="styles :: select2-styles"></div>
-    <title>ATRA Revenue Integrated System</title>
+    <div th:replace="styles :: sweetalertcss"></div>
+    <title>LMIS</title>
     <style>
         input[type="text"]{
            border-left: 2px solid blue;
@@ -15,13 +16,13 @@
 <nav th:replace="~{layout :: page_navbar}"></nav>
 <h3 style="text-align:center;margin-top:30px;font-weight:bolder;" th:text="#{license_application_confirmation}">License Extension Admin Fees Confirmation</h3>
 <div class="container-fluid mt-4">
-    <form th:action="@{/licenses/finance/extension/admin_fees_extension/license_admin_fees/add}" th:object="${licenseAdminFeesExtensionDTO}" method="post">
+    <form id="licenseForm" th:action="@{/licenses/finance/extension/admin_fees_extension/license_admin_fees/add}" th:object="${licenseAdminFeesExtensionDTO}" method="post">
         <div class="row">
             <!-- Hidden ID Field -->
             <input type="hidden" th:field="*{id}">
             <div class="col-md-2 form-group">
                 <lable th:text="#{approval_id}"></lable>
-                <input type="text" th:field="*{licenseApprovalId}" class="form-control" disabled>
+                <input type="text" th:field="*{licenseApprovalId}" class="form-control" readonly>
             </div>
             <div class="col-md-3 form-group">
                 <lable>Extension Admin Fees Voucher Date</lable>
@@ -62,7 +63,7 @@
             </div>
         </div>
         <!-- Submit/Reset Buttons -->
-        <div class="col-md-4 btn-group d-flex justify-content-center" style="margin-top: 15px; margin-bottom:80px; margin:0 auto;">
+        <div class="col-md-4 btn-group d-flex justify-content-center" style="margin-top: 15px; margin-bottom:80px; margin:0 auto;" onclick="confirmSubmit(event)">
             <button type="submit" class="btn btn-primary btn-sm" style="width: 100px;" th:text="#{confirmation_payment}">
                 <span class="fas fa-check"></span> Confirm Payment
             </button>
@@ -78,6 +79,7 @@
 <div th:replace="scripts :: common-scripts"></div>
 <div th:replace="scripts :: persian-datepicker-scripts"></div>
 <div th:replace="scripts :: data-tables-scripts"></div>
+<div th:replace="scripts :: sweetalertjs"></div>
 <script>
     $('.hijrishamsi').persianDatepicker({
       format: 'YYYY-MM-DD',
@@ -88,6 +90,27 @@
           }
       }
   });
+    function confirmSubmit(event) {
+        event.preventDefault(); // Prevent default form submission
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "Do You Want to Confirm Extend Admin Fee",
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, Submit it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                const form = document.getElementById('licenseForm');
+                if (form) {
+                    form.submit();
+                } else {
+                    Swal.fire('Error', 'Form not found!', 'error');
+                }
+            }
+        });
+    }
 </script>
 <div style="height:15vh;"></div>
 <footer th:replace="~{layout :: page_footer}"></footer>
