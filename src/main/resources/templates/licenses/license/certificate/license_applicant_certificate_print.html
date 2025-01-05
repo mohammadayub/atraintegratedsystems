@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: page_head}">
+  <meta charset="utf-8">
+  <div th:replace="styles :: persian-datepicker-styles"></div>
+  <div th:replace="styles :: select2-styles"></div>
+  <style>
+
+    .certificate-container {
+      width: 100%;
+      max-width: 900px;
+      margin: 50px auto;
+      padding: 40px;
+      border: 15px solid #ADD8E6; /* Light blue border color */
+      box-shadow: 1 6px 15px rgba(0, 0, 0, 0.15);
+      background-color: #fff;
+      text-align: center;
+      background-image: url('path/to/your/certificate-pattern.png');
+      background-size: cover;
+      background-position: center;
+    }
+
+    .certificate-header img {
+      max-width: 100px;
+      margin-bottom: 15px;
+    }
+
+    .certificate-header h1 {
+      font-size: 36px;
+      margin: 10px 0;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #000;
+    }
+
+    .certificate-header h2 {
+      font-size: 22px;
+      margin: 10px 0;
+      text-transform: uppercase;
+      color: #555;
+    }
+
+    .certificate-header h4 {
+      font-size: 18px;
+      margin: 10px 0;
+      color: #444;
+    }
+
+    .certificate-header h5 {
+      font-size: 16px;
+      margin: 20px 0;
+      font-style: italic;
+      color: #555;
+    }
+
+    .dates {
+      text-align: left;
+      margin-top: 20px;
+    }
+
+    .dates h4, .approvalId h4 {
+      display: flex;
+      justify-content: space-between;
+      font-size: 16px;
+      margin: 10px 0;
+      color: #333;
+    }
+
+    .signature-section {
+      margin-top: 50px;
+      font-style: italic;
+      font-size: 18px;
+      text-align: right;
+      padding-right: 30px;
+      color: #000;
+    }
+
+    .buttons {
+      margin-top: 30px;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .btn {
+      padding: 10px 20px;
+      font-size: 16px;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background-color: #CCC;
+    }
+
+    input {
+      border: none;
+      text-align: center;
+      background: none;
+      font-size: 16px;
+      color: #000;
+      border-bottom: 1px solid #aaa;
+      width: auto;
+    }
+
+    /* Print styles */
+    @media print {
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      .certificate-container {
+        width: 100%;
+        max-width: none;
+        padding: 20px;
+        box-shadow: none;
+        border: 10px solid #ADD8E6; /* Light blue border color for print */
+        background-image: none;
+      }
+
+      .certificate-header h1,
+      .certificate-header h2,
+      .certificate-header h4,
+      .certificate-header h5 {
+        font-size: 20px; /* Adjust text size for print */
+      }
+
+      .buttons {
+        display: none; /* Hide buttons during print */
+      }
+
+      /* Landscape page format for printing */
+      @page {
+        size: landscape;
+        margin: 0;
+      }
+
+      .certificate-container {
+        page-break-after: auto; /* Allow content to fit on the first page */
+      }
+    }
+  </style>
+</head>
+<body>
+<nav th:replace="~{layout :: page_navbar}" id="pagnav"></nav>
+<div class="certificate-container">
+  <div class="certificate-header">
+    <img th:src="@{/images/tariff_pic.png}" alt="Logo">
+    <h1>CERTIFICATE</h1>
+    <h2>OF ACHIEVEMENT</h2>
+    <h2>THIS CERTIFICATE IS PRESENTED TO</h2>
+    <h2>
+      <input type="text" th:field="${licenseApprovalDTO.applicantLicenseCompanyName}" readonly>
+    </h2>
+    <h5>In recognition of their efforts in completing the License Type:</h5>
+    <h5>
+      <input type="text" th:field="${licenseApprovalDTO.licenseTypeName}" readonly>
+    </h5>
+    <div class="dates">
+      <h4>
+        Date of Issue:
+        <input type="text" th:field="${licenseApprovalDTO.approvalDate}" readonly>
+      </h4>
+      <h4>
+        Date of Expiration:
+        <input type="text" th:field="${licenseApprovalDTO.licenseFeeExpiryDate}" readonly>
+      </h4>
+    </div>
+    <div class="approvalId">
+      <h4>
+        Approval ID:
+        <input type="text" th:field="${licenseApprovalDTO.approvalId}" readonly>
+      </h4>
+    </div>
+  </div>
+  <div class="signature-section">CEO Signature</div>
+  <div class="buttons">
+    <button class="btn btn-primary" onclick="doPrint();" id="prn">Print</button>
+    <a th:href="@{/licenses/license/certificate/license_applicants_certificate_list}" id="backtopage" class="btn btn-primary">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width:20px;height:20px;">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M9 15L3 9m0 0L9 3m-6 6h12a6 6 0 1 1 0 12h-3" />
+      </svg>
+      Back to Page
+    </a>
+  </div>
+</div>
+<div th:replace="scripts :: common-scripts"></div>
+<script>
+  function doPrint() {
+    window.print();
+  }
+</script>
+
+</body>
+</html>
