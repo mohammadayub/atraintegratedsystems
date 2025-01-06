@@ -4,6 +4,7 @@ import atraintegratedsystems.utils.JalaliDate;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -15,10 +16,10 @@ public class LicenseApplicant {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "req_id", nullable = false)
+    @Column(name = "req_id")
     private String reqId;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @Column(name = "req_date", nullable = false)
+    @Column(name = "req_date")
     private LocalDate reqDate;
     @ManyToOne
     @JoinColumn(name = "license_type_id")
@@ -28,54 +29,55 @@ public class LicenseApplicant {
     private String currencyType;
 
     private String financeType;
-    @Column(name = "company_license_name",nullable = false)
+    @Column(name = "company_license_name")
+    @NotBlank(message = "Please enter Company Name")
     private String companyLicenseName;
 
     @Column(name = "license_no")
     private String licenseNo;
 
     @Lob
-    @Column(name = "license_upload" , nullable = false)
+    @Column(name = "license_upload")
     private byte[] licenseUpload;
 
     @Column(name = "tin_no")
     private String tinNo;
 
     @Lob
-    @Column(name = "tin_upload", nullable = false)
+    @Column(name = "tin_upload")
     private byte[] tinUpload;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @Column(name = "year_of_establishment",nullable = false)
+    @Column(name = "year_of_establishment")
     private LocalDate yearOfEstablishment;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @Column(name = "expiry_date",nullable = false)
+    @Column(name = "expiry_date")
     private LocalDate expiryDate;
 
-    @Column(name = "application_fees",nullable = false)
+    @Column(name = "application_fees")
     private BigDecimal applicationFees;
 
-    @Column(name="validity", nullable = false)
+    @Column(name="validity")
     private Integer validity;
 
-    @Column(name = "planned_activities_services",nullable = false)
+    @Column(name = "planned_activities_services")
     private String plannedActivitiesAndServices;
 
-    @Column(name = "total_national_employees",nullable = false)
+    @Column(name = "total_national_employees")
     private Integer totalNationalEmployees;
 
-    @Column(name = "total_international_employees",nullable = false)
+    @Column(name = "total_international_employees")
     private Integer totalInternationalEmployees;
 
-    @Column(name = "expected_investment",nullable = false)
+    @Column(name = "expected_investment")
     private Double expectedInvestment;
 
-    @Column(name = "cash",nullable = false)
+    @Column(name = "cash")
     private Double cash;
 
     @Lob
-    @Column(name = "bank_statement_upload" , nullable = false)
+    @Column(name = "bank_statement_upload")
     private byte[] bankStatementUpload;
 
     @Column(name = "other_license_taken")
@@ -96,24 +98,24 @@ public class LicenseApplicant {
     @Column(name = "post_address")
     private String postAddress;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @Column(name="entry_voucher_date" , nullable = false)
+    @Column(name="entry_voucher_date")
     private LocalDate entryApplicationFeeVoucherDate;
-    @Column(name="bank_voucher",nullable = false)
+    @Column(name="bank_voucher")
     private String bankVoucher;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @Column(name="application_fee_bank_voucher_submission_date",nullable = false)
+    @Column(name="application_fee_bank_voucher_submission_date")
     private LocalDate applicationFeeBankVoucherSubmissionDate;
-    @Column(name="payment_status",nullable = false)
+    @Column(name="payment_status")
     private String paymentStatus;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @Column(name="application_fee_expiry_date",nullable = false)
+    @Column(name="application_fee_expiry_date")
     private LocalDate applicationFeeExpiryDate;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @Column(name="refer_to_board_date",nullable = false)
+    @Column(name="refer_to_board_date")
     private LocalDate referToBoardDate;
-    @Column(name="is_send",nullable = false)
+    @Column(name="is_send")
     private String isSend;
 
 

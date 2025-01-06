@@ -4,6 +4,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.Column;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -17,6 +19,7 @@ public class LicenseApplicantDTO {
     private String licenseTypeName;
     private String currencyType;
     private String financeType;
+    @NotBlank(message = "Please enter Company Name")
     private String companyLicenseName;
     private String licenseNo;
     private MultipartFile licenseUpload;

@@ -4,7 +4,6 @@
     <div th:replace="styles :: data-tables-styles"></div>
     <div th:replace="styles :: persian-datepicker-styles"></div>
     <div th:replace="styles :: select2-styles"></div>
-    <div th:replace="styles :: sweetalertcss"></div>
     <title>LMIS</title>
     <style>
         .label-rtl {
@@ -23,13 +22,13 @@
         }
     </style>
 </head>
-<body onload="setApplicationFees()">
+<body >
 <nav th:replace="~{layout :: page_navbar}"></nav>
 <div class="container-fluid">
     <!-- Form for License Approval -->
     <div class="container justify-content-center" style="margin-top: 50px;">
         <h3 style="text-align:center;font-weight:bold;margin:20px;" th:text="#{transfer_to_board}"></h3>
-        <form id="licenseForm" th:action="@{/licenses/license/registration/license_applicants_send_board}"
+        <form th:action="@{/licenses/license/registration/license_applicants_send_board}"
               th:object="${licenseApplicant}" method="post">
             <div class="row">
                 <!-- Hidden Fields -->
@@ -56,7 +55,7 @@
             <!-- Submit Button -->
             <div class="d-flex justify-content-center align-items-center">
                 <div>
-                    <button type="submit" class="btn btn-primary btn-sm" style="margin: 10px;" onclick="confirmSubmit(event)">
+                    <button type="submit" class="btn btn-primary btn-sm" style="margin: 10px;" >
                         <span class="fas fa-check"></span>
                         <span th:text="#{license_approval_confirm}"></span>
                     </button>
@@ -79,7 +78,6 @@
 <div th:replace="scripts :: common-scripts"></div>
 <div th:replace="scripts :: persian-datepicker-scripts"></div>
 <div th:replace="scripts :: data-tables-scripts"></div>
-<div th:replace="scripts :: sweetalertjs"></div>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         $('.hijrishamsi').persianDatepicker({
@@ -93,39 +91,7 @@
         });
     });
 
-    function setApplicationFees() {
-        // Logic for setting application fees
-        const licenseType = document.getElementById("licenseTypeId").value;
-        const currencyType = document.getElementById("currencyType");
-        if (licenseType === "6" || licenseType === "7" || licenseType === "8") {
-            currencyType.value = "USD";
-        } else {
-            currencyType.value = "AFN";
-        }
-        // Add additional logic here if necessary
-    }
 
-    function confirmSubmit(event) {
-        event.preventDefault(); // Prevent default form submission
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "Do you want to Send For Approval",
-            icon: 'question',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, Submit it!'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                const form = document.getElementById('licenseForm');
-                if (form) {
-                    form.submit();
-                } else {
-                    Swal.fire('Error', 'Form not found!', 'error');
-                }
-            }
-        });
-    }
 </script>
 <footer th:replace="~{layout :: page_footer}"></footer>
 </body>

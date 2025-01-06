@@ -14,9 +14,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -47,21 +50,34 @@ public class LicenseApplicantController {
     }
 
     @PostMapping("/licenses/license/registration/license_new_applicant")
-    public String saveProfile(@ModelAttribute("profile") LicenseApplicantDTO dto, Model model) {
+    public String saveProfile(@ModelAttribute("profile") @Valid LicenseApplicantDTO dto,
+                              BindingResult bindingResult,
+                              Model model,
+                              RedirectAttributes redirectAttributes) {
+        if (bindingResult.hasErrors()) {
+            // If the reqDate is null, set it to the current date as a LocalDate
+                dto.setReqDate(LocalDate.now());  // Using LocalDate.now() to set the current date
+                dto.setExpiryDate(LocalDate.now());
+                dto.setYearOfEstablishment(LocalDate.now());
+            model.addAttribute("licenseTypes", licenseTypeService.findAll());
+            return "licenses/license/registration/license_new_applicant";
+        }
+
         try {
             licenseService.saveProfile(dto);
-            model.addAttribute("successMessage", "Profile registered successfully!");
-        } catch (IOException e) {
-            model.addAttribute("errorMessage", "An error occurred while saving the profile. Please try again.");
-        } catch (IllegalArgumentException e) {
-            model.addAttribute("errorMessage", e.getMessage());
+            redirectAttributes.addFlashAttribute("successMessage", "Profile registered successfully!");
+            return "redirect:/licenses/license/registration/license_applicants_profile";
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            model.addAttribute("errorMessage", e instanceof IOException
+                    ? "An error occurred while saving the profile. Please try again."
+                    : e.getMessage());
+            model.addAttribute("profile", dto);
+            model.addAttribute("licenseTypes", licenseTypeService.findAll());
+            return "licenses/license/registration/license_new_applicant";
         }
-        model.addAttribute("profile", new LicenseApplicantDTO());
-        model.addAttribute("licenseTypes", licenseTypeService.findAll());
-        return "redirect:/licenses/license/registration/license_applicants_profile";
     }
+
+
 
 
     @GetMapping("/licenses/license/registration/licenseDownload/{id}")
@@ -206,7 +222,7 @@ public class LicenseApplicantController {
 
     @PostMapping("/licenses/license/registration/license_applicants_send_board")
     public String updateProfile(
-            @ModelAttribute("licenseApplicant") @Valid LicenseApplicantDTO dto,
+            @ModelAttribute("licenseApplicant") LicenseApplicantDTO dto,
             BindingResult bindingResult,
             Model model) {
 
