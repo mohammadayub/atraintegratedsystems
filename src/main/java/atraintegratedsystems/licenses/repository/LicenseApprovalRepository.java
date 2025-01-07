@@ -47,6 +47,8 @@ public interface LicenseApprovalRepository extends JpaRepository<LicenseApproval
             nativeQuery = true)
     List<LicenseApproval> findApprovedAndPaidLicenses();
 
+    @Query(value = "SELECT * FROM License_Approvals WHERE approval_status = 'Reject' " ,nativeQuery = true)
+    List<LicenseApproval>findAllRejection();
 
 
 

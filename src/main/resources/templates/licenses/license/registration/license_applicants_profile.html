@@ -5,7 +5,6 @@
     <div th:replace="styles :: persian-datepicker-styles"></div>
     <div th:replace="styles :: select2-styles"></div>
     <title>ATRA Financial Integrated System</title>
-
     <style>
         /* Basic Table Styling */
         .table-container {
@@ -156,8 +155,6 @@
                 </td>
             </tr>
             </tbody>
-
-
         </table>
         <br>
 
@@ -168,13 +165,10 @@
         </svg>
         Back to Page</a>
 </div>
-
 <!-- Common scripts -->
 <div th:replace="scripts :: common-scripts"></div>
 <div th:replace="scripts :: persian-datepicker-scripts"></div>
 <div th:replace="scripts :: data-tables-scripts"></div>
-
-
 <script>
     $(document).ready(function () {
         // Initialize DataTable with individual column search
@@ -201,8 +195,6 @@
         });
     });
 </script>
-
-
 <footer th:replace="~{layout :: page_footer}"></footer>
 <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
 </body>
