@@ -4,7 +4,8 @@
     <div th:replace="styles :: data-tables-styles"></div>
     <div th:replace="styles :: persian-datepicker-styles"></div>
     <div th:replace="styles :: select2-styles"></div>
-    <title>ATRA Financial Integrated System</title>
+    <div th:replace="styles :: popup"></div>
+    <title>LMS</title>
     <style>
         input[type="text"]{
                 border-left: 2px solid blue;
@@ -74,6 +75,17 @@
             <button type="submit" class="btn btn-primary btn-sm" style="width: 100px;" th:text="#{confirmation_payment}">
                 <span class="fas fa-check"></span> Confirm Payment
             </button>
+        </div>
+        <!-- Confirmation Popup -->
+        <div id="confirmationPopup" class="confirmation-popup" style="display: none;">
+            <div class="confirmation-popup-content">
+                <img th:src="@{/images/tariff_pic.png}" />
+                <h3>Are you sure you want to submit License Fee?</h3>
+                <div class="confirmation-buttons">
+                    <button id="confirmYesButton" class="confirm-btn yes-btn">Yes, Submit</button>
+                    <button id="confirmNoButton" class="confirm-btn no-btn">No, Stay</button>
+                </div>
+            </div>
         </div>
     </form>
     <a th:href="@{/licenses/finance/mcit/license_fee_list}" id="backtopage" class="btn btn-primary" style="margin-top:20px;">

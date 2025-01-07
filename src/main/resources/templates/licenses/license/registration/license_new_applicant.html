@@ -5,7 +5,7 @@
   <div th:replace="styles :: persian-datepicker-styles"></div>
   <div th:replace="styles :: select2-styles"></div>
   <div th:replace="styles :: popup"></div>
-  <title>LMIS</title>
+  <title>LMS</title>
   <style>
     .label-rtl {
         color: black !important;
@@ -208,6 +208,7 @@
       <!-- Confirmation Popup -->
       <div id="confirmationPopup" class="confirmation-popup" style="display: none;">
         <div class="confirmation-popup-content">
+          <img th:src="@{/images/tariff_pic.png}" />
           <h3>Are you sure you want to submit the form?</h3>
           <div class="confirmation-buttons">
             <button id="confirmYesButton" class="confirm-btn yes-btn">Yes, Submit</button>
@@ -230,42 +231,8 @@
 <!-- Persian DatePicker scripts -->
 <div th:replace="scripts :: persian-datepicker-scripts"></div>
 <div th:replace="scripts :: data-tables-scripts"></div>
-
-<!--popup for submit-->
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-      // Get references to the buttons and the popup
-      const submitButton = document.getElementById("submitButton");
-      const confirmationPopup = document.getElementById("confirmationPopup");
-      const confirmYesButton = document.getElementById("confirmYesButton");
-      const confirmNoButton = document.getElementById("confirmNoButton");
-      const form = document.querySelector("form");
-
-      // Show the popup only if the form is valid
-      submitButton.addEventListener("click", function (event) {
-          // Check if the form is valid using browser's built-in validation
-          if (form.checkValidity()) {
-              event.preventDefault(); // Prevent immediate form submission
-              confirmationPopup.style.display = "flex"; // Show the confirmation popup
-          } else {
-              // If form is invalid, show validation messages
-              form.reportValidity();
-          }
-      });
-
-      // If the user clicks "Yes, Submit"
-      confirmYesButton.addEventListener("click", function () {
-          form.submit(); // Submit the form explicitly
-      });
-
-      // If the user clicks "No, Stay"
-      confirmNoButton.addEventListener("click", function () {
-          event.preventDefault();
-          confirmationPopup.style.display = "none"; // Hide the confirmation popup
-          // No form submission happens here
-      });
-  });
-</script>
+<div th:replace="scripts :: alert"></div>
+<div th:replace="scripts :: applicationfees"></div>
 <script>
   $('.hijrishamsi').persianDatepicker({
         format: 'YYYY-MM-DD',
@@ -276,109 +243,7 @@
             }
         }
     });
-    function setApplicationFees() {
-    const licenseType = document.getElementById("licenseTypeId").value;
-    const applicationFeesField = document.getElementById("applicationFees");
-    const validity = document.getElementById("validity")
-    const currencyType = document.getElementById("currencyType");
-    //Currency Section
-    if (licenseType === "6" || licenseType === "7" || licenseType === "8") {currencyType.value="USD";}
-    else{currencyType.value="AFN";}
-    // End Of Currency Section
-    if (licenseType === "1") {
-        applicationFeesField.value = 195000000;
-        validity.value=15;
 
-
-    } else if (licenseType === "2") {
-        applicationFeesField.value = 0;
-        validity.value=15;
-    }
-    else if (licenseType === "3") {
-        applicationFeesField.value = 7800000;
-        validity.value=15;
-    }
-    else if (licenseType === "4") {
-        applicationFeesField.value = 1170000;
-        validity.value=15;
-    }
-    else if (licenseType === "5") {
-        applicationFeesField.value = 273000;
-        validity.value=15;
-    }
-    else if (licenseType === "6") {
-        applicationFeesField.value = 2000;
-        validity.value=15;
-    }
-    else if (licenseType === "7") {
-        applicationFeesField.value = 1500;
-        validity.value=15;
-    }
-    else if (licenseType === "8") {
-        applicationFeesField.value = 1000;
-        validity.value=15;
-    }
-    else if (licenseType === "9") {
-        applicationFeesField.value = 75000;
-        validity.value=10;
-    }
-    else if (licenseType === "10") {
-        applicationFeesField.value = 15000;
-        validity.value=10;
-    }
-    else if (licenseType === "11") {
-        applicationFeesField.value = 1014000;
-        validity.value=15;
-    }
-    else if (licenseType === "12") {
-        applicationFeesField.value = 10000;
-        validity.value=15;
-    }
-    else if (licenseType === "13") {
-        applicationFeesField.value = 30000;
-        validity.value=10;
-    }
-    else if (licenseType === "14") {
-        applicationFeesField.value = 10000;
-        validity.value=10;
-    }
-    else if (licenseType === "15") {
-        applicationFeesField.value = 10000;
-        validity.value=10;
-    }
-    else if (licenseType === "16") {
-        applicationFeesField.value = 10000;
-        validity.value=10;
-    }
-    else if (licenseType === "17") {
-        applicationFeesField.value = 250000;
-        validity.value=5;
-    }
-    else if (licenseType === "18") {
-        applicationFeesField.value = 100000;
-        validity.value=5;
-    }
-    else if (licenseType === "19") {
-        applicationFeesField.value = 50000;
-        validity.value=5;
-    }
-    else if (licenseType === "20") {
-        applicationFeesField.value = 20000;
-        validity.value=5;
-    }
-    else if (licenseType === "21") {
-        applicationFeesField.value = 10000;
-        validity.value=5;
-    }
-    else if (licenseType === "22") {
-        applicationFeesField.value = 50000;
-        validity.value=5;
-    }
-
-    else {
-        applicationFeesField.value = ""; // Clear if no valid option is selected
-    }
-}
 </script>
 <div style="height:5vh;"></div>
 <footer th:replace="~{layout :: page_footer}"></footer>

@@ -4,6 +4,7 @@
     <div th:replace="styles :: data-tables-styles"></div>
     <div th:replace="styles :: persian-datepicker-styles"></div>
     <div th:replace="styles :: select2-styles"></div>
+    <div th:replace="styles :: popup"></div>
     <title>LMIS</title>
     <style>
         .label-rtl {
@@ -55,7 +56,7 @@
             <!-- Submit Button -->
             <div class="d-flex justify-content-center align-items-center">
                 <div>
-                    <button type="submit" class="btn btn-primary btn-sm" style="margin: 10px;" >
+                    <button type="submit" id="submitButton" class="btn btn-primary btn-sm" style="margin: 10px;" >
                         <span class="fas fa-check"></span>
                         <span th:text="#{license_approval_confirm}"></span>
                     </button>
@@ -64,6 +65,17 @@
                         <span class="fas fa-arrow-left"></span>
                         <span th:text="#{license_approval_back_to_list}"></span>
                     </a>
+                </div>
+            </div>
+            <!-- Confirmation Popup -->
+            <div id="confirmationPopup" class="confirmation-popup" style="display: none;">
+                <div class="confirmation-popup-content">
+                    <img th:src="@{/images/tariff_pic.png}" />
+                    <h3>Are you sure you want to submit the form?</h3>
+                    <div class="confirmation-buttons">
+                        <button id="confirmYesButton" class="confirm-btn yes-btn">Yes, Submit</button>
+                        <button id="confirmNoButton" class="confirm-btn no-btn">No, Stay</button>
+                    </div>
                 </div>
             </div>
             <a th:href="@{/licenses/license/registration/license_applicants_profile}" class="btn" style="margin-top:20px;color:white;background-color:#3066be;">
@@ -78,6 +90,8 @@
 <div th:replace="scripts :: common-scripts"></div>
 <div th:replace="scripts :: persian-datepicker-scripts"></div>
 <div th:replace="scripts :: data-tables-scripts"></div>
+<div th:replace="scripts :: alert"></div>
+<div th:replace="scripts :: applicationfees"></div>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         $('.hijrishamsi').persianDatepicker({
