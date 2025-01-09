@@ -229,5 +229,180 @@
    }
     </style>
 </div>
+<!-- Update Css -->
+<div th:fragment="commoncss">
+    <style>
+        .label-rtl {
+            color: black !important;
+            font-weight: bolder !important;
+            width: 100% !important;
+            direction: rtl !important;
+            text-align: right; /* Ensures text alignment in RTL */
+        }
+        .label-ltr {
+            color: black !important;
+            font-weight: bolder !important;
+            width: 100% !important;
+            direction: ltr !important;
+            text-align: left;
+        }
+        input[type="text"],input[type="number"],input[type="file"],input[type="website"],input[type="email"]{
+        border-left: 2px solid blue;
+        }
+
+
+
+          /* Basic Table Styling */
+        .table-container {
+            max-height: 800px; /* Set a maximum height for the table container */
+            overflow-y: auto;   /* Enable vertical scrolling */
+            border: 1px solid #ddd; /* Optional: Add a border around the table */
+        }
+
+        #profileTable {
+            width: 100%; /* Full width for the table */
+            border-collapse: collapse;
+            font-size: 0.9em; /* General smaller font for the table */
+        }
+
+        #profileTable th, #profileTable td {
+            padding: 6px;
+            text-align: center;
+            vertical-align: middle;
+            font-size: 0.8em; /* Small font size for headers and cells */
+        }
+
+        #profileTable thead th {
+            color: white;
+            font-size: 16px; /* Slightly larger font for headers */
+        }
+
+
+        #profileTable td a.btn-primary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4px;
+        }
+
+        #profileTable .icon-small {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* Optional: Add some responsiveness */
+        @media (max-width: 768px) {
+            #profileTable th, #profileTable td {
+                font-size: 0.7em; /* Smaller font size for mobile view */
+                padding: 4px;
+            }
+        }
+        #profileTable th {
+        white-space: nowrap;
+    }
+
+        body {
+            background-color: #f9f9f9;
+        }
+        .table-container {
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            background-color: #f9f9f9;
+        }
+        #profileTable, #extensionTable {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9em;
+        }
+        #profileTable th, #profileTable td, #extensionTable th, #extensionTable td {
+            padding: 6px;
+            text-align: center;
+            vertical-align: middle;
+            font-size: 0.8em;
+        }
+        #profileTable td a.btn-primary, #extensionTable td a.btn-primary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4px;
+        }
+        #profileTable th, #extensionTable th {
+            white-space: nowrap;
+        }
+
+    </style>
+</div>
+<!-- Common print Tariff Css Part-->
+<div th:fragment="commontariffcss">
+    <style>
+        body {
+          font-family: Arial, sans-serif;
+          margin: 0; /* Remove default margin */
+        }
+
+
+        .container {
+          display: flex;
+          justify-content: center;
+          padding-top: 30px; /* Increased padding for more space */
+          width: 100%; /* Ensure container takes full width */
+        }
+
+        table {
+          width: 100%;
+          max-width: 1500px; /* Increased table width */
+          border-collapse: collapse;
+          margin: 0 auto;
+        }
+
+        table th, table td {
+          text-align: center;
+          padding: 12px; /* Increased padding for better spacing */
+          font-size: 14px; /* Decreased font size for headers */
+        }
+
+        table th {
+          background-color: #f4f4f4;
+        }
+
+        table td input {
+          width: 100%;
+          padding: 14px; /* Increased padding for larger input fields */
+          font-size: 14px; /* Decreased font size for input fields */
+          text-align: center;
+          box-sizing: border-box; /* Ensures padding does not overflow */
+        }
+
+        table tr:nth-child(even) {
+          background-color: #f9f9f9;
+        }
+
+        .signature-section {
+          text-align: center;
+          font-style: italic;
+          padding-top: 20px; /* Increased padding for signature section */
+          font-size: 16px; /* Increased font size */
+        }
+
+        @media (max-width: 768px) {
+          table th, table td {
+            font-size: 12px; /* Adjusted font size for smaller screens */
+          }
+
+          table td input {
+            font-size: 12px; /* Adjusted input font size for smaller screens */
+            padding: 10px; /* Adjusted padding for smaller screens */
+          }
+
+          .btn {
+            font-size: 14px; /* Adjusted button font size for smaller screens */
+            padding: 10px; /* Adjusted button padding for smaller screens */
+          }
+        }
+
+    </style>
+</div>
 </body>
 </html>

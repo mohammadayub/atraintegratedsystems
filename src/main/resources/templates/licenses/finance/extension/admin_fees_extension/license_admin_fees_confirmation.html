@@ -5,12 +5,8 @@
     <div th:replace="styles :: persian-datepicker-styles"></div>
     <div th:replace="styles :: select2-styles"></div>
     <div th:replace="styles :: popup"></div>
+    <div th:replace="styles :: commoncss"></div>
     <title>LMS</title>
-    <style>
-        input[type="text"]{
-           border-left: 2px solid blue;
-   }
-    </style>
 </head>
 <body>
 <nav th:replace="~{layout :: page_navbar}"></nav>
@@ -91,17 +87,8 @@
 <div th:replace="scripts :: persian-datepicker-scripts"></div>
 <div th:replace="scripts :: data-tables-scripts"></div>
 <div th:replace="scripts :: alert"></div>
-<script>
-    $('.hijrishamsi').persianDatepicker({
-      format: 'YYYY-MM-DD',
-      autoClose: true,
-      calendar: {
-          persian: {
-              locale: 'en'
-          }
-      }
-  });
-</script>
+<div th:replace="scripts :: commonhijrishamsidate"></div>
+
 <div style="height:15vh;"></div>
 <footer th:replace="~{layout :: page_footer}"></footer>
 <script th:src="@{/js/bootstrap.bundle.min.js}"></script>

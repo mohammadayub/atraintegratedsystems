@@ -4,62 +4,8 @@
     <div th:replace="styles :: data-tables-styles"></div>
     <div th:replace="styles :: persian-datepicker-styles"></div>
     <div th:replace="styles :: select2-styles"></div>
-    <title>ATRA Financial Integrated System</title>
-    <style>
-        /* Basic Table Styling */
-        .table-container {
-            max-height: 800px; /* Set a maximum height for the table container */
-            overflow-y: auto;   /* Enable vertical scrolling */
-            border: 1px solid #ddd; /* Optional: Add a border around the table */
-        }
-
-        #profileTable {
-            width: 100%; /* Full width for the table */
-            border-collapse: collapse;
-            font-size: 0.9em; /* General smaller font for the table */
-        }
-
-        #profileTable th, #profileTable td {
-            padding: 6px;
-            text-align: center;
-            vertical-align: middle;
-            font-size: 0.8em; /* Small font size for headers and cells */
-        }
-
-        #profileTable thead th {
-            color: white;
-            font-size: 16px; /* Slightly larger font for headers */
-        }
-
-        #profileTable tbody tr:nth-child(even) {
-            background-color: #f2f2f2; /* Zebra stripes for rows */
-        }
-
-        #profileTable td a.btn-primary {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 4px;
-        }
-
-        #profileTable .icon-small {
-            width: 16px;
-            height: 16px;
-        }
-
-        /* Optional: Add some responsiveness */
-        @media (max-width: 768px) {
-            #profileTable th, #profileTable td {
-                font-size: 0.7em; /* Smaller font size for mobile view */
-                padding: 4px;
-            }
-        }
-        #profileTable th {
-        white-space: nowrap;
-    }
-
-
-    </style>
+    <div th:replace="styles :: commoncss"></div>
+    <title>LMS</title>
 </head>
 <body>
 <nav th:replace="~{layout :: page_navbar}"></nav>
@@ -169,32 +115,9 @@
 <div th:replace="scripts :: common-scripts"></div>
 <div th:replace="scripts :: persian-datepicker-scripts"></div>
 <div th:replace="scripts :: data-tables-scripts"></div>
-<script>
-    $(document).ready(function () {
-        // Initialize DataTable with individual column search
-        let table = $('#profileTable').DataTable({
-            initComplete: function () {
-                this.api().columns().every(function () {
-                    var column = this;
-                    var header = $(column.header());
-                    var columnText = header.text(); // Get the existing header text
-                    header.empty().append('<div>' + columnText + '</div>'); // Keep the header text and add a wrapper
+<div th:replace="scripts :: commondatatable"></div>
 
-                    // Append the search input below the header text
-                    $('<input type="text" placeholder="Search" style="width: 100%; margin-top: 5px;"/>')
-                        .appendTo(header)
-                        .on('keyup change clear', function () {
-                            if (column.search() !== this.value) {
-                                column
-                                    .search(this.value)
-                                    .draw();
-                            }
-                        });
-                });
-            }
-        });
-    });
-</script>
+<div style="height:10vh"></div>
 <footer th:replace="~{layout :: page_footer}"></footer>
 <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
 </body>
