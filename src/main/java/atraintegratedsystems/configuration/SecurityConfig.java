@@ -25,16 +25,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/Codes/Finance/**").access("hasRole('ROLE_CODE_FINANCE') or hasRole('ROLE_ADMIN')")
-                .antMatchers("/Codes/Standard/**").access("hasRole('ROLE_STANDARD') or hasRole('ROLE_ADMIN')")
-                .antMatchers("/Licenses/License/Registration/**").access("hasRole('ROLE_REG_LICENSE') or hasRole('ROLE_ADMIN')")
-                .antMatchers("/Licenses/License/Issues/**").access("hasRole('ROLE_ISSUE_LICENSE') or hasRole('ROLE_ADMIN')")
+                .antMatchers("/licenses/license/**").access("hasRole('ROLE_LICENSE') or hasRole('ROLE_ADMIN')")
+                .antMatchers("/licenses/finance/license_finance/administration_fees/**").access("hasRole('ROLE_ATRA_FINANCE') or hasRole('ROLE_ADMIN')")
+                .antMatchers("/licenses/finance/license_finance/application_fees/**").access("hasRole('ROLE_ATRA_FINANCE') or hasRole('ROLE_ADMIN')")
+                .antMatchers("/licenses/finance/license_finance/database_maintainance_fees/**").access("hasRole('ROLE_ATRA_FINANCE') or hasRole('ROLE_ADMIN')")
+                .antMatchers("/licenses/finance/license_finance/guarantee_fees/**").access("hasRole('ROLE_ATRA_FINANCE') or hasRole('ROLE_ADMIN')")
+                .antMatchers("/licenses/finance/license_finance/mcit/**").access("hasRole('ROLE_MCIT_FINANCE') or hasRole('ROLE_ADMIN')")
+                .antMatchers("/licenses/admin/**").access("hasRole('ROLE_ADMIN')")
                 .antMatchers("/**").hasRole("ADMIN")
+                .antMatchers("/**").hasRole("LICENSE")
+
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -76,9 +80,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public RoleHierarchy roleHierarchy() {
         RoleHierarchyImpl roleHierarchy = new RoleHierarchyImpl();
         roleHierarchy.setHierarchy(
-                "ROLE_ADMIN > ROLE_CODE_FINANCE \n" +
-                        "ROLE_ADMIN > ROLE_STANDARD \n" +
-                        "ROLE_ADMIN > ROLE_REG_LICENSE \n" +
+                "ROLE_ADMIN > ROLE_LICENSE \n" +
+                        "ROLE_ADMIN > ROLE_ATRA_FINANCE \n" +
+                        "ROLE_ADMIN > ROLE_MCIT_FINANCE \n" +
                         "ROLE_ADMIN > ROLE_ISSUE_LICENSE"
         );
         return roleHierarchy;

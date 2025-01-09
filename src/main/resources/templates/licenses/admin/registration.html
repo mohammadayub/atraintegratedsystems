@@ -1,0 +1,107 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head th:replace="~{layout :: page_head}">
+  <div th:replace="styles :: data-tables-styles"></div>
+  <div th:replace="styles :: persian-datepicker-styles"></div>
+  <div th:replace="styles :: select2-styles"></div>
+  <div th:replace="styles :: popup"></div>
+  <title>LMS</title>
+  <style>
+    .label-rtl {
+        color: black !important;
+        font-weight: bolder !important;
+        width: 100% !important;
+        direction: rtl !important;
+        text-align: right; /* Ensures text alignment in RTL */
+    }
+    .label-ltr {
+        color: black !important;
+        font-weight: bolder !important;
+        width: 100% !important;
+        direction: ltr !important;
+        text-align: left;
+    }
+    input[type="text"],input[type="number"],input[type="file"],input[type="website"],input[type="email"]{
+    border-left: 2px solid blue;
+    }
+
+  </style>
+</head>
+<body onload="setApplicationFees()">
+<nav th:replace="~{layout :: page_navbar}"></nav>
+<h2 class="text-center bg-primary" th:text="#{license_applicant_header}" style="color:white; margin-top:10px;"></h2>
+<div class="container-fluid">
+  <div class="container mt-5">
+    <h2 class="mb-4">User Registration</h2>
+
+    <form th:action="@{/licenses/admin/registration}" th:object="${user}" method="post">
+      <div class="form-group">
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" th:field="*{firstName}" class="form-control" />
+      </div>
+
+      <div class="form-group">
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" th:field="*{lastName}" class="form-control" />
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" th:field="*{email}" class="form-control" />
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" id="password" th:field="*{password}" class="form-control" />
+      </div>
+
+      <div class="form-group">
+        <label for="organization">Organization:</label>
+        <select id="organization" th:field="*{organizationId}" class="form-control">
+          <option th:each="organization : ${organizations}"
+                  th:value="${organization.id}"
+                  th:text="${organization.name}">
+          </option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="roles">Roles:</label>
+        <select id="roles" th:field="*{roleIds}" class="form-control" multiple>
+          <option th:each="role : ${availableRoles}"
+                  th:value="${role.id}"
+                  th:text="${role.name}">
+          </option>
+        </select>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Register</button>
+    </form>
+
+    <p th:text="${successMessage}" class="mt-3"></p>
+  </div>
+</div>
+
+<!-- Common scripts -->
+<div th:replace="scripts :: common-scripts"></div>
+<!-- Persian DatePicker scripts -->
+<div th:replace="scripts :: persian-datepicker-scripts"></div>
+<div th:replace="scripts :: data-tables-scripts"></div>
+<div th:replace="scripts :: alert"></div>
+<div th:replace="scripts :: applicationfees"></div>
+<script>
+  $('.hijrishamsi').persianDatepicker({
+        format: 'YYYY-MM-DD',
+        autoClose: true,
+        calendar: {
+            persian: {
+                locale: 'en'
+            }
+        }
+    });
+</script>
+<div style="height:5vh;"></div>
+<footer th:replace="~{layout :: page_footer}"></footer>
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

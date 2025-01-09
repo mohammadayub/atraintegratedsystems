@@ -37,7 +37,7 @@
     <table class="table table-borderless">
         <tr style="border-bottom:1px solid darkgray;">
             <td class="text-center">
-                <div class="custom-card">
+                <div class="custom-card" sec:authorize="hasRole('ROLE_LICENSE')">
                     <a th:href="@{/licenses/license/home}">
                         <img th:src="@{/images/licensing.png}" alt="License Management System">
                     </a>
@@ -47,7 +47,7 @@
                 </div>
             </td>
             <td class="text-center">
-                <div class="custom-card">
+                <div class="custom-card"  sec:authorize="hasRole('ROLE_ATRA_FINANCE')">
                     <a th:href="@{/licenses/finance/home}">
                         <img th:src="@{/images/finance.png}" alt="Finance Revenue Management System">
                     </a>
