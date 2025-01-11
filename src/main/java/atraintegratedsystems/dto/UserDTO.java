@@ -10,6 +10,7 @@ public class UserDTO {
     private String lastName;
     private String email;
     private String password;
-    private List<Integer> roleIds;;
+    private List<Integer> roleIds;
     private int organizationId;
+    private String organizationName;
 }

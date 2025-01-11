@@ -3,6 +3,7 @@ package atraintegratedsystems.controller;
 import atraintegratedsystems.dto.UserDTO;
 import atraintegratedsystems.model.Organization;
 import atraintegratedsystems.model.Role;
+import atraintegratedsystems.model.User;
 import atraintegratedsystems.service.OrganizationService;
 import atraintegratedsystems.service.RoleService;
 import atraintegratedsystems.service.UserService;
@@ -28,8 +29,21 @@ public class UserController {
     @Autowired
     private OrganizationService organizationService;
 
-    @GetMapping("/licenses/admin/registration")
-    public String showRegistrationForm(Model model) {
+    @GetMapping("/licenses/admin/userlists")
+    public String showUsersForm(Model model) {
+        List<UserDTO> users = userService.getAllUsers();
+        List<Role> roles = roleService.getAllRoles();
+        List<Organization> organizations = organizationService.getAllOrganizations();
+
+        model.addAttribute("users", users);
+        model.addAttribute("availableRoles", roles);
+        model.addAttribute("organizations", organizations);
+        return "licenses/admin/userlists";
+    }
+
+
+    @GetMapping("/licenses/admin/registration/add")
+    public String getRegistrationForm(Model model) {
         model.addAttribute("user", new UserDTO());
         List<Role> roles = roleService.getAllRoles();
         List<Organization> organizations = organizationService.getAllOrganizations();
@@ -37,7 +51,6 @@ public class UserController {
         model.addAttribute("organizations", organizations);
         return "licenses/admin/registration";
     }
-
     @PostMapping("/licenses/admin/registration")
     public String registerUser(@ModelAttribute("user") UserDTO userDTO, Model model) {
         List<Role> roles = roleService.getAllRoles();

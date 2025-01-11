@@ -11,7 +11,7 @@
 	</parent>
 
 	<groupId>atraintegratedsystems</groupId>
-	<artifactId>lmis</artifactId>
+	<artifactId>lms</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 
@@ -60,9 +60,6 @@
 			<artifactId>javassist</artifactId>
 			<version>3.20.0-GA</version>
 		</dependency>
-
-
-
 
 		<!-- PostgreSQL Driver -->
 		<dependency>
