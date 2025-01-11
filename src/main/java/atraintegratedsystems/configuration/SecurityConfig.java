@@ -38,7 +38,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/licenses/admin/**").access("hasRole('ROLE_ADMIN')")
                 .antMatchers("/**").hasRole("ADMIN")
                 .antMatchers("/**").hasRole("LICENSE")
-
+                .antMatchers("/**").hasRole("ATRA_FINANCE")
+                .antMatchers("/**").hasRole("MCIT_FINANCE")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
