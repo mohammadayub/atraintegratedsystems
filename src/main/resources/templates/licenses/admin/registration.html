@@ -1,9 +1,6 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head th:replace="~{layout :: page_head}">
-  <div th:replace="styles :: data-tables-styles"></div>
-  <div th:replace="styles :: persian-datepicker-styles"></div>
-  <div th:replace="styles :: select2-styles"></div>
   <div th:replace="styles :: popup"></div>
   <title>LMS</title>
   <style>
@@ -96,21 +93,7 @@
 
 <!-- Common scripts -->
 <div th:replace="scripts :: common-scripts"></div>
-<div th:replace="scripts :: persian-datepicker-scripts"></div>
-<div th:replace="scripts :: data-tables-scripts"></div>
 <div th:replace="scripts :: alert"></div>
-<div th:replace="scripts :: applicationfees"></div>
-<script>
-  $('.hijrishamsi').persianDatepicker({
-    format: 'YYYY-MM-DD',
-    autoClose: true,
-    calendar: {
-      persian: {
-        locale: 'en'
-      }
-    }
-  });
-</script>
 <div style="height:10vh;"></div>
 <footer th:replace="~{layout :: page_footer}"></footer>
 <script th:src="@{/js/bootstrap.bundle.min.js}"></script>

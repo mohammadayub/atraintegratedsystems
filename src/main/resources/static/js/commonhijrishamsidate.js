@@ -1,7 +1,7 @@
 $('.hijrishamsi').persianDatepicker({
         format: 'YYYY-MM-DD',
         autoClose: true,
-        initialValue: false,
+        initialValue: true,
         calendar: {
             persian: {
                 locale: 'en'
