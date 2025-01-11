@@ -25,40 +25,50 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
+                // Allow login page and resources to be accessible without login
+                .antMatchers("/login", "/login/**", "/resources/**", "/static/**", "/images/**", "/css/**", "/js/**").permitAll()
+
+                // Require authentication for all other pages (including the index page)
+                .antMatchers("/**").authenticated()
+
+                // License-related paths - only accessible by specific roles
                 .antMatchers("/licenses/license/**").access("hasRole('ROLE_LICENSE') or hasRole('ROLE_ADMIN')")
-                .antMatchers("/licenses/finance/license_finance/administration_fees/**").access("hasRole('ROLE_ATRA_FINANCE') or hasRole('ROLE_ADMIN')")
-                .antMatchers("/licenses/finance/license_finance/application_fees/**").access("hasRole('ROLE_ATRA_FINANCE') or hasRole('ROLE_ADMIN')")
-                .antMatchers("/licenses/finance/license_finance/database_maintainance_fees/**").access("hasRole('ROLE_ATRA_FINANCE') or hasRole('ROLE_ADMIN')")
-                .antMatchers("/licenses/finance/license_finance/guarantee_fees/**").access("hasRole('ROLE_ATRA_FINANCE') or hasRole('ROLE_ADMIN')")
-                .antMatchers("/licenses/finance/license_finance/mcit/**").access("hasRole('ROLE_MCIT_FINANCE') or hasRole('ROLE_ADMIN')")
+
+                // Finance-related paths - only accessible by specific roles
+                .antMatchers("/licenses/finance/license_finance/administration_fees/**").access("hasRole('ROLE_FINANCE') or hasRole('ROLE_ADMIN')")
+                .antMatchers("/licenses/finance/license_finance/application_fees/**").access("hasRole('ROLE_FINANCE') or hasRole('ROLE_ADMIN')")
+                .antMatchers("/licenses/finance/license_finance/database_maintainance_fees/**").access("hasRole('ROLE_FINANCE') or hasRole('ROLE_ADMIN')")
+                .antMatchers("/licenses/finance/license_finance/guarantee_fees/**").access("hasRole('ROLE_FINANCE') or hasRole('ROLE_ADMIN')")
+
+                // Ministry-related paths - only accessible by specific roles
+                .antMatchers("/licenses/finance/license_finance/mcit/**").access("hasRole('ROLE_MINISTRY') or hasRole('ROLE_ADMIN')")
+
+                // Admin-only paths - only accessible by the admin role
                 .antMatchers("/licenses/admin/**").access("hasRole('ROLE_ADMIN')")
-                .antMatchers("/**").hasRole("ADMIN")
-                .antMatchers("/**").hasRole("LICENSE")
-                .antMatchers("/**").hasRole("ATRA_FINANCE")
-                .antMatchers("/**").hasRole("MCIT_FINANCE")
-                .anyRequest().authenticated()
+
                 .and()
                 .formLogin()
-                .loginPage("/login")
-                .successHandler(customAuthenticationSuccessHandler)
-                .permitAll()
-                .failureUrl("/login") // Include language in failure URL
-                .usernameParameter("email")
-                .passwordParameter("password")
+                .loginPage("/login") // Custom login page
+                .permitAll()  // Allow everyone to access the login page
+                .successHandler(customAuthenticationSuccessHandler)  // Redirect after successful login
+                .failureUrl("/login?error")  // Redirect to login page if authentication fails
+                .usernameParameter("email")  // Custom username parameter (email)
+                .passwordParameter("password")  // Custom password parameter
                 .and()
                 .logout()
-                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .logoutSuccessUrl("/login") // Include language in logout success URL
-                .invalidateHttpSession(true)
-                .deleteCookies("JSESSIONID")
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))  // Handle logout request
+                .logoutSuccessUrl("/login")  // Redirect after logout
+                .invalidateHttpSession(true)  // Invalidate session on logout
+                .deleteCookies("JSESSIONID")  // Delete session cookies on logout
                 .and()
                 .exceptionHandling()
                 .and()
-                .csrf().disable();
+                .csrf().disable();  // Disable CSRF for simplicity (use with caution)
     }
 
     @Bean
@@ -82,10 +92,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         RoleHierarchyImpl roleHierarchy = new RoleHierarchyImpl();
         roleHierarchy.setHierarchy(
                 "ROLE_ADMIN > ROLE_LICENSE \n" +
-                        "ROLE_ADMIN > ROLE_ATRA_FINANCE \n" +
-                        "ROLE_ADMIN > ROLE_MCIT_FINANCE \n" +
-                        "ROLE_ADMIN > ROLE_ISSUE_LICENSE"
+                        "ROLE_ADMIN > ROLE_FINANCE \n" +
+                        "ROLE_ADMIN > ROLE_MINISTRY"
         );
         return roleHierarchy;
     }
+
 }

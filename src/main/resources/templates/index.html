@@ -47,7 +47,7 @@
                 </div>
             </td>
             <td class="text-center">
-                <div class="custom-card"  sec:authorize="hasRole('ROLE_ATRA_FINANCE')">
+                <div class="custom-card"  sec:authorize="hasRole('ROLE_FINANCE') or hasRole('ROLE_MINISTRY')">
                     <a th:href="@{/licenses/finance/home}">
                         <img th:src="@{/images/finance.png}" alt="Finance Revenue Management System">
                     </a>
