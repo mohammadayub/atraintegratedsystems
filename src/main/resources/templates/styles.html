@@ -102,6 +102,12 @@
 <div th:fragment="popup">
     <style>
         /* Styles for the confirmation popup */
+         input[type="text"]{
+            border-left: 2px solid blue;
+    }
+    input[type="text"],input[type="number"],input[type="file"],input[type="website"],input[type="email"] {
+    border-left: 2px solid blue;
+    }
 .confirmation-popup {
   display: none; /* Hidden by default */
   position: fixed;
@@ -230,7 +236,7 @@
     </style>
 </div>
 <!-- Update Css -->
-<div th:fragment="commoncss">
+<div th:fragment="common-css">
     <style>
         .label-rtl {
             color: black !important;
@@ -249,6 +255,18 @@
         input[type="text"],input[type="number"],input[type="file"],input[type="website"],input[type="email"]{
         border-left: 2px solid blue;
         }
+            .chart-container {
+        width: 100%;
+        max-width: 300px;  /* Adjust the max width */
+        height: 300px;     /* Set the height */
+        margin-top: 10px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    canvas {
+        width: 100% !important;  /* Make the canvas fill the container */
+        height: 100% !important; /* Make the canvas fill the container */
+    }
 
 
 
@@ -402,6 +420,285 @@
           }
         }
 
+    </style>
+</div>
+<div th:fragment="common-database_fees_finance_extension_print">
+    <style>
+        body {
+     font-family: Arial, sans-serif;
+     margin: 0; /* Remove default margin */
+   }
+   .container {
+     display: flex;
+     justify-content: center;
+     padding-top: 30px; /* Increased padding for more space */
+     width: 100%; /* Ensure container takes full width */
+   }
+
+   table {
+     width: 100%;
+     max-width: 1500px; /* Increased table width */
+     border-collapse: collapse;
+     margin: 0 auto;
+   }
+
+   table th, table td {
+     text-align: center;
+     padding: 12px; /* Increased padding for better spacing */
+     font-size: 14px; /* Decreased font size for headers */
+   }
+
+   table th {
+     background-color: #f4f4f4;
+   }
+
+   table td input {
+     width: 100%;
+     padding: 14px; /* Increased padding for larger input fields */
+     font-size: 14px; /* Decreased font size for input fields */
+     text-align: center;
+     box-sizing: border-box; /* Ensures padding does not overflow */
+   }
+
+   table tr:nth-child(even) {
+     background-color: #f9f9f9;
+   }
+
+   .signature-section {
+     text-align: center;
+     font-style: italic;
+     padding-top: 20px; /* Increased padding for signature section */
+     font-size: 16px; /* Increased font size */
+   }
+
+   @media (max-width: 768px) {
+     table th, table td {
+       font-size: 12px; /* Adjusted font size for smaller screens */
+     }
+
+     table td input {
+       font-size: 12px; /* Adjusted input font size for smaller screens */
+       padding: 10px; /* Adjusted padding for smaller screens */
+     }
+
+     .btn {
+       font-size: 14px; /* Adjusted button font size for smaller screens */
+       padding: 10px; /* Adjusted button padding for smaller screens */
+     }
+   }
+    </style>
+</div>
+
+<div th:fragment="license-print-tariffs">
+    <style>
+        body {
+          font-family: Arial, sans-serif;
+          margin: 0; /* Remove default margin */
+        }
+
+
+        .container {
+          display: flex;
+          justify-content: center;
+          padding-top: 30px; /* Increased padding for more space */
+          width: 100%; /* Ensure container takes full width */
+        }
+
+        table {
+          width: 100%;
+          max-width: 1500px; /* Increased table width */
+          border-collapse: collapse;
+          margin: 0 auto;
+        }
+
+        table th, table td {
+          text-align: center;
+          padding: 12px; /* Increased padding for better spacing */
+          font-size: 14px; /* Decreased font size for headers */
+        }
+
+        table th {
+          background-color: #f4f4f4;
+        }
+
+        table td input {
+          width: 100%;
+          padding: 14px; /* Increased padding for larger input fields */
+          font-size: 14px; /* Decreased font size for input fields */
+          text-align: center;
+          box-sizing: border-box; /* Ensures padding does not overflow */
+        }
+
+        table tr:nth-child(even) {
+          background-color: #f9f9f9;
+        }
+
+        .signature-section {
+          text-align: center;
+          font-style: italic;
+          padding-top: 20px; /* Increased padding for signature section */
+          font-size: 16px; /* Increased font size */
+        }
+
+        @media (max-width: 768px) {
+          table th, table td {
+            font-size: 12px; /* Adjusted font size for smaller screens */
+          }
+
+          table td input {
+            font-size: 12px; /* Adjusted input font size for smaller screens */
+            padding: 10px; /* Adjusted padding for smaller screens */
+          }
+
+          .btn {
+            font-size: 14px; /* Adjusted button font size for smaller screens */
+            padding: 10px; /* Adjusted button padding for smaller screens */
+          }
+        }
+
+    </style>
+</div>
+<div th:fragment="certificate">
+    <style>
+
+        .certificate-container {
+          width: 100%;
+          max-width: 900px;
+          margin: 50px auto;
+          padding: 40px;
+          border: 15px solid #ADD8E6; /* Light blue border color */
+          box-shadow: 1 6px 15px rgba(0, 0, 0, 0.15);
+          background-color: #fff;
+          text-align: center;
+          background-image: url('path/to/your/certificate-pattern.png');
+          background-size: cover;
+          background-position: center;
+        }
+
+        .certificate-header img {
+          max-width: 100px;
+          margin-bottom: 15px;
+        }
+
+        .certificate-header h1 {
+          font-size: 36px;
+          margin: 10px 0;
+          font-weight: bold;
+          text-transform: uppercase;
+          letter-spacing: 2px;
+          color: #000;
+        }
+
+        .certificate-header h2 {
+          font-size: 22px;
+          margin: 10px 0;
+          text-transform: uppercase;
+          color: #555;
+        }
+
+        .certificate-header h4 {
+          font-size: 18px;
+          margin: 10px 0;
+          color: #444;
+        }
+
+        .certificate-header h5 {
+          font-size: 16px;
+          margin: 20px 0;
+          font-style: italic;
+          color: #555;
+        }
+
+        .dates {
+          text-align: left;
+          margin-top: 20px;
+        }
+
+        .dates h4, .approvalId h4 {
+          display: flex;
+          justify-content: space-between;
+          font-size: 16px;
+          margin: 10px 0;
+          color: #333;
+        }
+
+        .signature-section {
+          margin-top: 50px;
+          font-style: italic;
+          font-size: 18px;
+          text-align: right;
+          padding-right: 30px;
+          color: #000;
+        }
+
+        .buttons {
+          margin-top: 30px;
+          display: flex;
+          justify-content: center;
+          gap: 20px;
+        }
+
+        .btn {
+          padding: 10px 20px;
+          font-size: 16px;
+          color: #fff;
+          border: none;
+          border-radius: 4px;
+          text-decoration: none;
+          cursor: pointer;
+        }
+
+        .btn:hover {
+          background-color: #CCC;
+        }
+
+        input {
+          border: none;
+          text-align: center;
+          background: none;
+          font-size: 16px;
+          color: #000;
+          border-bottom: 1px solid #aaa;
+          width: auto;
+        }
+
+        /* Print styles */
+        @media print {
+          body {
+            margin: 0;
+            padding: 0;
+          }
+
+          .certificate-container {
+            width: 100%;
+            max-width: none;
+            padding: 20px;
+            box-shadow: none;
+            border: 10px solid #ADD8E6; /* Light blue border color for print */
+            background-image: none;
+          }
+
+          .certificate-header h1,
+          .certificate-header h2,
+          .certificate-header h4,
+          .certificate-header h5 {
+            font-size: 20px; /* Adjust text size for print */
+          }
+
+          .buttons {
+            display: none; /* Hide buttons during print */
+          }
+
+          /* Landscape page format for printing */
+          @page {
+            size: landscape;
+            margin: 0;
+          }
+
+          .certificate-container {
+            page-break-after: auto; /* Allow content to fit on the first page */
+          }
+        }
     </style>
 </div>
 </body>

@@ -7,11 +7,6 @@
     <div th:replace="styles :: popup"></div>
     <title>LMS</title>
 </head>
-<style>
-    input[type="text"],input[type="number"],input[type="file"],input[type="website"],input[type="email"] {
-    border-left: 2px solid blue;
-    }
-</style>
 <body>
 <nav th:replace="~{layout :: page_navbar}"></nav>
 <h3 style="text-align:center;margin-top:10px;font-weight:bolder;color:white;" class="bg-primary" th:text="#{license_application_confirmation}">License Application Confirmation</h3>
@@ -178,39 +173,10 @@
 <div th:replace="scripts :: data-tables-scripts"></div>
 <div th:replace="scripts :: alert"></div>
 <div th:replace="scripts :: applicationfees"></div>
-<script>
-    $('.hijrishamsi').persianDatepicker({
-      format: 'YYYY-MM-DD',
-      autoClose: true,
-      calendar: {
-          persian: {
-              locale: 'en'
-          }
-      }
-  });
-    function confirmSubmit(event) {
-        event.preventDefault(); // Prevent default form submission
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "Do you want to Send For Approval",
-            icon: 'question',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, Submit it!'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                const form = document.getElementById('licenseForm');
-                if (form) {
-                    form.submit();
-                } else {
-                    Swal.fire('Error', 'Form not found!', 'error');
-                }
-            }
-        });
-    }
-</script>
-<div style="height:5vh;"></div>
+<div th:replace="scripts :: common-hijrishamsi-date"></div>
+
+
+<div style="height:10vh;"></div>
 <footer th:replace="~{layout :: page_footer}"></footer>
 <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
 </body>

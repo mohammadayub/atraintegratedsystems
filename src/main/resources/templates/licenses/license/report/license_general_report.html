@@ -6,86 +6,8 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css">
     <div th:replace="styles :: select2-styles"></div>
-    <title>ATRA Financial Integrated System</title>
+    <title>LMS</title>
 
-    <style>
-        /* Basic Table Styling */
-        body {
-            background-color: #f9f9f9; /* Light gray for better readability */
-        }
-
-        .table-container {
-            max-height: 800px; /* Set a maximum height for the table container */
-            overflow-y: auto;   /* Enable vertical scrolling */
-            border: 1px solid #ddd; /* Optional: Add a border around the table */
-            background-color: #ffffff; /* White background for the table */
-            padding: 20px; /* Padding for better aesthetics */
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
-        }
-
-        #profileTable {
-            width: 100%; /* Full width for the table */
-            border-collapse: collapse;
-            font-size: 0.9em; /* General smaller font for the table */
-        }
-
-        #profileTable th, #profileTable td {
-            padding: 6px;
-            text-align: center;
-            vertical-align: middle;
-            font-size: 0.8em; /* Small font size for headers and cells */
-        }
-
-        #profileTable thead th {
-            color:white;
-            font-size: 16px; /* Slightly larger font for headers */
-        }
-
-        #profileTable tbody tr:nth-child(even) {
-            background-color: #f2f2f2; /* Zebra stripes for rows */
-        }
-
-        #profileTable td a.btn-primary {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 4px;
-        }
-
-        #profileTable .icon-small {
-            width: 16px;
-            height: 16px;
-        }
-
-        /* Optional: Add some responsiveness */
-        @media (max-width: 768px) {
-            #profileTable th, #profileTable td {
-                font-size: 0.7em; /* Smaller font size for mobile view */
-                padding: 4px;
-            }
-        }
-
-        #profileTable th {
-            white-space: nowrap;
-        }
-
-        /* Excel Export Button Styling */
-        .dt-buttons {
-            margin-bottom: 10px;
-        }
-        .dt-buttons .btn {
-            background-color: #1a73e8;
-            color: white;
-            border: none;
-            padding: 5px 10px;
-            font-size: 0.85em;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        .dt-buttons .btn:hover {
-            background-color: #1557b5;
-        }
-    </style>
 </head>
 <body>
 <nav th:replace="~{layout :: page_navbar}"></nav>
@@ -160,38 +82,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
-
-<script>
-    $(document).ready(function () {
-        $('#profileTable').DataTable({
-            dom: 'Bfrtip', // Include Buttons
-            buttons: [
-                {
-                    extend: 'excelHtml5',
-                    text: 'Export to Excel',
-                    title: 'License Approvals Report'
-                }
-            ],
-            initComplete: function () {
-                this.api().columns().every(function () {
-                    var column = this;
-                    var header = $(column.header());
-                    var columnText = header.text();
-                    header.empty().append('<div>' + columnText + '</div>');
-
-                    $('<input type="text" placeholder="Search" style="width: 100%; margin-top: 5px;"/>')
-                        .appendTo(header)
-                        .on('keyup change clear', function () {
-                            if (column.search() !== this.value) {
-                                column.search(this.value).draw();
-                            }
-                        });
-                });
-            }
-        });
-    });
-
-</script>
+<div th:replace="scripts :: common-datatable"></div>
 
 <footer th:replace="~{layout :: page_footer}"></footer>
 <script th:src="@{/js/bootstrap.bundle.min.js}"></script>

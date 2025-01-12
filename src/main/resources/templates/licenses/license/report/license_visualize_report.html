@@ -4,50 +4,9 @@
   <div th:replace="styles :: data-tables-styles"></div>
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css">
-  <title>ATRA Financial Integrated System</title>
-  <style>
-    body {
-        background-color: #f9f9f9;
-    }
-    .table-container {
-        max-height: 800px;
-        overflow-y: auto;
-        border: 1px solid #ddd;
-        background-color: #ffffff;
-        padding: 20px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    }
-    #profileTable {
-        width: 100%;
-        border-collapse: collapse;
-        font-size: 0.9em;
-    }
-    #profileTable th, #profileTable td {
-        padding: 6px;
-        text-align: center;
-        vertical-align: middle;
-        font-size: 0.8em;
-    }
-    #profileTable thead th {
-        color: white;
-        font-size: 16px;
-    }
-    #profileTable tbody tr:nth-child(even) {
-        background-color: #f2f2f2;
-    }
-    .chart-container {
-        width: 100%;
-        max-width: 300px;  /* Adjust the max width */
-        height: 300px;     /* Set the height */
-        margin-top: 10px;
-        margin-left: auto;
-        margin-right: auto;
-    }
-    canvas {
-        width: 100% !important;  /* Make the canvas fill the container */
-        height: 100% !important; /* Make the canvas fill the container */
-    }
-  </style>
+  <div th:replace="styles :: common-css"></div>
+  <title>LMS</title>
+
 </head>
 <body>
 <nav th:replace="~{layout :: page_navbar}"></nav>
@@ -99,90 +58,9 @@
 <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<div th:replace="scripts :: report-chart"></div>
 
-<script>
-  $(document).ready(function () {
-    // Initialize DataTable
-    $('#profileTable').DataTable({
-      dom: 'Bfrtip',
-      buttons: [
-        {
-          extend: 'excelHtml5',
-          text: 'Export to Excel',
-          title: 'License Approvals Report'
-        }
-      ]
-    });
-
-    // Function to parse the date and calculate days
-    function parseDate(dateString) {
-      const dateParts = dateString.split('-');
-      return new Date(dateParts[0], dateParts[1] - 1, dateParts[2]); // Month is 0-indexed
-    }
-
-    // Function to calculate days between system date and the expiry date
-    function calculateDays(startDate, endDate) {
-      const now = new Date(); // Current system date
-      const start = parseDate(startDate); // Approval Date (start date)
-      const end = parseDate(endDate); // License Fee Expiry Date (end date)
-
-      // Calculate days passed from start (Approval Date) to now
-      const daysPassed = Math.max(0, Math.ceil((now - start) / (1000 * 60 * 60 * 24))); // in days
-
-      // Calculate remaining days to the expiry date
-      const daysRemaining = Math.max(0, Math.ceil((end - now) / (1000 * 60 * 60 * 24))); // in days
-
-      return { daysPassed, daysRemaining };
-    }
-
-    // Render 3D Charts for License Fees
-    $('[id^="chart-licenseFees-"]').each(function () {
-      const chartId = $(this).attr('id');
-      const ctx = document.getElementById(chartId).getContext('2d');
-
-      const approvalDate = $(this).data('approval-date'); // Approval Date
-      const expiryDate = $(this).data('license-fee-expiry-date'); // License Fee Expiry Date
-
-      const { daysPassed, daysRemaining } = calculateDays(approvalDate, expiryDate);
-
-      // Create the chart with a 3D effect
-      new Chart(ctx, {
-        type: 'pie',
-        data: {
-          labels: ['Days Passed', 'Days Remaining'],
-          datasets: [{
-            data: [daysPassed, daysRemaining],
-            backgroundColor: ['#4caf50', '#f44336'],
-            borderWidth: 0, // Remove border to make it smoother
-          }]
-        },
-        options: {
-          responsive: true,
-          plugins: {
-            legend: {
-              position: 'top',
-            },
-            tooltip: {
-              enabled: true,
-            }
-          },
-          rotation: Math.PI / 4, // Rotate the chart for a 3D effect
-          cutout: 50, // Make the center hollow
-          animation: {
-            animateRotate: true, // Add rotation animation
-            animateScale: true, // Add scaling effect
-          },
-          elements: {
-            arc: {
-              borderWidth: 0, // No border for a smoother look
-            }
-          },
-        }
-      });
-    });
-  });
-</script>
-
+<div style="height:10vh;"></div>
 <footer th:replace="~{layout :: page_footer}"></footer>
 </body>
 </html>

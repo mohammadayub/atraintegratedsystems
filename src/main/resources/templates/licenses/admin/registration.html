@@ -2,28 +2,9 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head th:replace="~{layout :: page_head}">
   <div th:replace="styles :: popup"></div>
+  <div th:replace="styles :: common-css"></div>
   <title>LMS</title>
   <style>
-    .label-rtl {
-      color: black !important;
-      font-weight: bolder !important;
-      width: 100% !important;
-      direction: rtl !important;
-      text-align: right;
-    }
-
-    .label-ltr {
-      color: black !important;
-      font-weight: bolder !important;
-      width: 100% !important;
-      direction: ltr !important;
-      text-align: left;
-    }
-
-    input[type="text"], input[type="number"], input[type="file"], input[type="website"], input[type="email"] {
-      border-left: 2px solid blue;
-    }
-
     .form-container {
       background: white;
       padding: 2rem;

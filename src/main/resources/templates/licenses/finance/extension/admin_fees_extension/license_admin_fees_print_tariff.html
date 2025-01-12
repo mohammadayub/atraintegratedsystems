@@ -55,30 +55,12 @@
     Back to Page</a>
 </div>
 
-<script>
-  function doPrint() {
-    document.getElementById("pagnav").style.display = "none";
-    document.getElementById("pagfooter").style.display = "none";
-    document.getElementById("prn").style.display = "none";
-    document.getElementById("backtopage").style.display = "none";
-
-
-    window.print();
-
-    document.getElementById("pagnav").style.display = "block";
-    document.getElementById("pagfooter").style.display = "inline-block";
-    document.getElementById("prn").style.display = "inline-block";
-    document.getElementById("backtopage").style.display = "inline-block";
-
-
-  }
-</script>
-
 <!-- Common scripts -->
 <div th:replace="scripts :: common-scripts"></div>
 <div th:replace="scripts :: persian-datepicker-scripts"></div>
 <div th:replace="scripts :: data-tables-scripts"></div>
-<div th:replace="scripts :: commonhijrishamsidate"></div>
+<div th:replace="scripts :: common-hijrishamsi-date"></div>
+<div th:replace="scripts :: common-do-print"></div>
 
 <div style="height:15vh;"></div>
 <footer th:replace="~{layout :: page_footer}" id="pagfooter"></footer>
