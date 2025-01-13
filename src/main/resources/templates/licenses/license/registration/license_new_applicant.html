@@ -169,7 +169,7 @@
       </div>
       <div class="row">
         <div class="col-md-3 form-group">
-          <label th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">Other Licenses</label>
+          <label th:text="#{other_license}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
           <textarea id="other_licenses" th:field="*{otherLicenseTaken}" class="form-control"  style="border-left: 2px solid #3066be;"></textarea>
         </div>
       </div>
