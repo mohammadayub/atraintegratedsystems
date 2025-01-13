@@ -8,11 +8,10 @@ import atraintegratedsystems.service.OrganizationService;
 import atraintegratedsystems.service.RoleService;
 import atraintegratedsystems.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -28,6 +27,9 @@ public class UserController {
 
     @Autowired
     private OrganizationService organizationService;
+
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
 
     @GetMapping("/licenses/admin/userlists")
     public String showUsersForm(Model model) {
@@ -60,6 +62,36 @@ public class UserController {
         userService.registerUser(userDTO);
         model.addAttribute("successMessage", "User registered successfully!");
         return "licenses/admin/registration";
+    }
+
+
+    @GetMapping("/licenses/admin/change-password/{id}")
+    public String showChangePasswordForm(@PathVariable("id") int userId, Model model) {
+        model.addAttribute("userId", userId);
+        return "licenses/admin/change-password";
+    }
+
+    @PostMapping("/licenses/admin/change-password/{id}")
+    public String changePassword(@PathVariable("id") int userId,
+                                 @RequestParam("newPassword") String newPassword,
+                                 @RequestParam("confirmPassword") String confirmPassword,
+                                 Model model) {
+        if (!newPassword.equals(confirmPassword)) {
+            model.addAttribute("errorMessage", "Passwords do not match.");
+            return "licenses/admin/change-password";
+        }
+
+        User user = userService.getUserById(userId);
+        if (user == null) {
+            model.addAttribute("errorMessage", "User not found.");
+            return "licenses/admin/change-password";
+        }
+
+        user.setPassword(passwordEncoder.encode(newPassword));
+        userService.updateUser(user);
+
+        model.addAttribute("successMessage", "Password changed successfully.");
+        return "licenses/admin/change-password";
     }
 
 

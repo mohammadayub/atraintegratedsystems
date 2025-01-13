@@ -26,6 +26,7 @@
                 <th th:text="#{user_email}">Email</th>
                 <th th:text="#{user_role}">Role Name</th>
                 <th th:text="#{user_organization}">Organization Name</th>
+                <th>Change Password</th>
             </tr>
             </thead>
             <tbody>
@@ -43,6 +44,11 @@
                         </option>
                     </select></td>
                 <td th:text="${user.organizationName}"></td>
+                <td>
+                    <a th:href="@{/licenses/admin/change-password/{id}(id=${user.id})}" class="btn btn-warning btn-sm">
+                        Change Password
+                    </a>
+                </td>
 
             </tr>
             </tbody>
@@ -61,7 +67,6 @@
 <div th:replace="scripts :: persian-datepicker-scripts"></div>
 <div th:replace="scripts :: data-tables-scripts"></div>
 <div th:replace="scripts :: common-datatable"></div>
-
 <div style="height:10vh"></div>
 <footer th:replace="~{layout :: page_footer}"></footer>
 <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
