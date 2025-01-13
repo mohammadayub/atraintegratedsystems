@@ -5,6 +5,7 @@ import atraintegratedsystems.licenses.service.LicenseFeeMCITService;
 import atraintegratedsystems.licenses.service.LicenseTypeService;
 import atraintegratedsystems.utils.DateConverter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +24,7 @@ public class LicenseFeeMCITController {
     @Autowired
     private LicenseFeeMCITService licenseFeeMCITService;
 
+    @PreAuthorize("hasRole('ROLE_MINISTRY') or hasRole('ROLE_ADMIN')")
     @GetMapping("/licenses/finance/mcit/license_fee_list")
     public String showApplicationProfile(Model model) {
         List<LicenseApproval> profiles = licenseFeeMCITService.getAllApprovalApplicants();

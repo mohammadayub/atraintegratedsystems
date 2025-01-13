@@ -26,15 +26,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
 
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
                 // Allow login page and resources to be accessible without login
                 .antMatchers("/login", "/login/**", "/resources/**", "/static/**", "/images/**", "/css/**", "/js/**").permitAll()
-
-                // Require authentication for all other pages (including the index page)
-                .antMatchers("/**").authenticated()
+                // Allow the index page for all authenticated users
+                .antMatchers("/").authenticated()
 
                 // License-related paths - only accessible by specific roles
                 .antMatchers("/licenses/license/**").access("hasRole('ROLE_LICENSE') or hasRole('ROLE_ADMIN')")
@@ -44,12 +44,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/licenses/finance/license_finance/application_fees/**").access("hasRole('ROLE_FINANCE') or hasRole('ROLE_ADMIN')")
                 .antMatchers("/licenses/finance/license_finance/database_maintainance_fees/**").access("hasRole('ROLE_FINANCE') or hasRole('ROLE_ADMIN')")
                 .antMatchers("/licenses/finance/license_finance/guarantee_fees/**").access("hasRole('ROLE_FINANCE') or hasRole('ROLE_ADMIN')")
-
                 // Ministry-related paths - only accessible by specific roles
                 .antMatchers("/licenses/finance/license_finance/mcit/**").access("hasRole('ROLE_MINISTRY') or hasRole('ROLE_ADMIN')")
 
                 // Admin-only paths - only accessible by the admin role
                 .antMatchers("/licenses/admin/**").access("hasRole('ROLE_ADMIN')")
+                // Require authentication for all other pages
+                .anyRequest().authenticated()
 
                 .and()
                 .formLogin()
@@ -67,9 +68,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .deleteCookies("JSESSIONID")  // Delete session cookies on logout
                 .and()
                 .exceptionHandling()
+                .accessDeniedPage("/access-denied")  // Redirects to /access-denied
                 .and()
                 .csrf().disable();  // Disable CSRF for simplicity (use with caution)
     }
+
 
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
