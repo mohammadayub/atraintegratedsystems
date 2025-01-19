@@ -1,0 +1,324 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head th:replace="~{layout :: page_head}">
+  <div th:replace="styles :: data-tables-styles"></div>
+  <div th:replace="styles :: persian-datepicker-styles"></div>
+  <div th:replace="styles :: select2-styles"></div>
+  <div th:replace="styles :: popup"></div>
+  <div th:replace="styles :: common-css"></div>
+  <title>LMS</title>
+</head>
+<body onload="setApplicationFees()">
+<nav th:replace="~{layout :: page_navbar}"></nav>
+<h2 class="text-center bg-primary" th:text="#{license_applicant_header}" style="color:white; margin-top:10px;"></h2>
+<div class="container-fluid mt-4" >
+  <div>
+    <form th:action="@{/licenses/license/registration/complete-profile/license_applicant_complete_profile}" th:object="${licenseApplicant}" method="post" enctype="multipart/form-data">
+      <!-- Row 1: Request Date, License Type, Currency Type, Finance Type -->
+<!--      <div class="row">-->
+<!--        <div class="col-md-3 form-group">-->
+<!--          <label-->
+<!--                  th:text="#{applicant_request_date}"-->
+<!--                  th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">-->
+<!--          </label>-->
+<!--          <input type="text" id="reqDate" th:field="*{reqDate}" class="form-control hijrishamsi" required>-->
+<!--        </div>-->
+
+<!--        <div class="col-md-3 form-group">-->
+<!--          <label for="licenseTypeId" th:text="#{applicant_license_type}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>-->
+<!--          <select id="licenseTypeId" th:field="*{licenseTypeId}" class="form-control" required onchange="setApplicationFees()" style="border-left: 2px solid #3066be;">-->
+<!--            <option th:each="licenseType : ${licenseTypes}" th:value="${licenseType.id}" th:text="${licenseType.name}"></option>-->
+<!--          </select>-->
+<!--        </div>-->
+<!--        <div class="col-md-3 form-group">-->
+<!--          <label for="applicationFees" th:text="#{license_application_fee}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>-->
+<!--          <input type="text" id="applicationFees" th:field="*{applicationFees}" class="form-control" required readonly="readonly">-->
+<!--        </div>-->
+<!--        <div class="col-md-3 form-group" style="width:90px">-->
+<!--          <label for="currencyType" th:text="#{applicant_license_currency}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>-->
+<!--          <input type="text" id="currencyType" th:field="*{currencyType}" class="form-control" readonly="readonly">-->
+<!--        </div>-->
+
+
+<!--      </div>-->
+      <!-- Row 2: Application Fees, Expected Investment, Cash -->
+<!--      <div class="row">-->
+<!--        <div class="col-md-3 form-group">-->
+<!--          <label for="validity" th:text="#{license_application_validity}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>-->
+<!--          <input type="text" id="validity" th:field="*{validity}" class="form-control" required readonly="readonly">-->
+<!--        </div>-->
+<!--        <div class="col-md-3 form-group">-->
+<!--          <label for="companyLicenseName"-->
+<!--                 th:text="#{license_application_company_license_name}"-->
+<!--                 th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">-->
+<!--          </label>-->
+<!--          <input type="text" id="companyLicenseName"-->
+<!--                 th:field="*{companyLicenseName}"-->
+<!--                 class="form-control"-->
+<!--                 maxlength="80" >-->
+<!--          &lt;!&ndash; Error message display &ndash;&gt;-->
+<!--          <div th:if="${#fields.hasErrors('companyLicenseName')}"-->
+<!--               class="text-danger small"-->
+<!--               th:errors="*{companyLicenseName}">-->
+<!--          </div>-->
+<!--        </div>-->
+
+<!--        <div class="col-md-3 form-group">-->
+<!--          <label for="financeType" th:text="#{applicant_license_finance_type}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>-->
+<!--          <input type="text" id="financeType" class="form-control" value="ATRA" readonly="readonly">-->
+<!--        </div>-->
+<!--        -->
+<!--        <div class="col-md-3 form-group">-->
+<!--          <label for="expectedInvestment" th:text="#{license_application_expected_investment}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>-->
+<!--          <input type="number" id="expectedInvestment" th:field="*{expectedInvestment}" class="form-control" >-->
+<!--        </div>-->
+
+<!--      </div>-->
+      <!-- Row 3: TIN Upload, Bank Statement Upload, Year of Establishment, Expiry Date -->
+      <div class="row">
+        <div class="col-md-3 form-group">
+          <label for="cash" th:text="#{license_application_cash}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
+          <input type="number" id="cash" th:field="*{cash}" class="form-control" >
+        </div>
+        <div class="col-md-3 form-group">
+          <label for="licenseNo" th:text="#{license_application_license_no}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
+          <input type="text" id="licenseNo" th:field="*{licenseNo}" class="form-control" maxlength="50" >
+        </div>
+        <div class="col-md-3 form-group">
+          <div class="row">
+            <div class="col-md-6">
+          <label for="licenseUpload" th:text="#{license_application_upload}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
+          <input type="file" id="licenseUpload" th:field="*{licenseUpload}" class="form-control-file" accept=".pdf,.jpg,.jpeg,.png" />
+        </div>
+            </div>
+          </div>
+        <div class="col-md-3 form-group">
+          <label for="tinNo" th:text="#{license_application_tin}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
+          <input type="text" id="tinNo" th:field="*{tinNo}" class="form-control" maxlength="50" >
+        </div>
+      </div>
+      <!-- Row 4: Employees, Planned Activities, Other Licenses -->
+      <div class="row">
+
+
+        <div class="col-md-3 form-group">
+          <div class="row">
+            <div class="col-md-6">
+          <label for="tinUpload" th:text="#{license_application_tin_upload}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
+          <input type="file" id="tinUpload" th:field="*{tinUpload}" class="form-control-file" accept=".pdf,.jpg,.jpeg,.png" style=" border-left: 2px solid blue;"  />
+        </div>
+        </div>
+        </div>
+        <div class="col-md-3 form-group">
+          <div class="row">
+            <div class="col-md-6">
+          <label for="bankStatementUpload" th:text="#{license_application_bank_statement_file}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
+          <input type="file" id="bankStatementUpload" th:field="*{bankStatementUpload}" class="form-control-file" accept=".pdf,.jpg,.jpeg,.png"  />
+        </div>
+          </div>
+        </div>
+        <div class="col-md-3 form-group">
+          <label for="yearOfEstablishment" th:text="#{license_application_year_establishment}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
+          <input type="text" id="yearOfEstablishment" th:field="*{yearOfEstablishment}" class="form-control hijrishamsi" >
+        </div>
+        <div class="col-md-3 form-group">
+          <label for="expiryDate" th:text="#{license_application_expiry_date}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
+          <input type="text" id="expiryDate" th:field="*{expiryDate}" class="form-control hijrishamsi" >
+        </div>
+        <!-- No Row Close -->
+      </div>
+      <!-- Row 5: Company Info, Post Address, Contact Info -->
+      <div class="row">
+        <div class="col-md-3 form-group">
+          <label for="totalNationalEmployees" th:text="#{license_application_national_employee}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
+          <input type="number" id="totalNationalEmployees" th:field="*{totalNationalEmployees}" class="form-control" maxlength="10" >
+        </div>
+        <div class="col-md-3 form-group">
+          <label for="totalInternationalEmployees" th:text="#{license_application_international_employee}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
+          <input type="number" id="totalInternationalEmployees" th:field="*{totalInternationalEmployees}" class="form-control" maxlength="10" >
+        </div>
+        <div class="col-md-3 form-group">
+          <label for="plannedActivitiesAndServices" th:text="#{license_application_plan_active_Service}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
+          <textarea id="plannedActivitiesAndServices" th:field="*{plannedActivitiesAndServices}" class="form-control"  style="border-left: 2px solid blue;"></textarea>
+        </div>
+
+        <div class="col-md-3 form-group">
+          <label for="companyAddress" th:text="#{license_application_company_address}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
+          <textarea id="companyAddress" th:field="*{companyAddress}" class="form-control"  style="border-left: 2px solid blue;"></textarea>
+        </div>
+      </div>
+      <!-- Row 6 -->
+      <div class="row">
+
+        <div class="col-md-3 form-group">
+          <label for="postAddress" th:text="#{license_application_post_address}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
+          <textarea id="postAddress" th:field="*{postAddress}" class="form-control"  style="border-left: 2px solid blue;"></textarea>
+        </div>
+        <div class="col-md-3 form-group">
+          <label for="contactNo" th:text="#{license_application_contact_no}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
+          <input type="text" id="contactNo" th:field="*{contactNo}" class="form-control" required>
+        </div>
+        <div class="col-md-3 form-group">
+          <label for="email" th:text="#{license_application_email}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
+          <input type="email" id="email" th:field="*{email}" class="form-control" >
+        </div>
+        <div class="col-md-3 form-group">
+          <label th:text="#{license_application_website}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
+          <input type="website" id="website" th:field="*{website}" class="form-control" >
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3 form-group">
+          <label th:text="#{other_license}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
+          <textarea id="other_licenses" th:field="*{otherLicenseTaken}" class="form-control"  style="border-left: 2px solid #3066be;"></textarea>
+        </div>
+      </div>
+
+      <!-- Submit/Reset Buttons -->
+      <div class="row">
+        <div class="col-md-4 btn-group d-flex justify-content-center" style="margin-top: 15px; margin-bottom: 80px; margin: 0 auto;">
+          <button type="submit" id="submitButton" class="btn btn-primary border border-primary rounded" style="width: 60px; height: 40px; margin-right: 15px;">
+            <i class="fas fa-check" style="margin-right: 5px;"></i>Submit
+          </button>
+          <button type="reset" class="btn btn-info border border-info rounded" style="width: 60px; height: 40px; margin-right: 15px;">
+            <i class="fas fa-redo" style="margin-right: 5px;"></i>Reset
+          </button>
+        </div>
+      </div>
+
+      <!-- Confirmation Popup -->
+      <div id="confirmationPopup" class="confirmation-popup" style="display: none;">
+        <div class="confirmation-popup-content">
+          <img th:src="@{/images/tariff_pic.png}" />
+          <h3>Are you sure you want to submit the form?</h3>
+          <div class="confirmation-buttons">
+            <button id="confirmYesButton" class="confirm-btn yes-btn">Yes, Submit</button>
+            <button id="confirmNoButton" class="confirm-btn no-btn">No, Stay</button>
+          </div>
+        </div>
+      </div>
+
+    </form>
+  </div>
+  <a th:href="@{/licenses/license/home}" class="btn btn-primary" style="margin-top:20px;">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6" style="width:20px;height:20px;">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
+    </svg>
+    Back to Page</a>
+</div>
+
+<!-- Common scripts -->
+<div th:replace="scripts :: common-scripts"></div>
+<!-- Persian DatePicker scripts -->
+<div th:replace="scripts :: persian-datepicker-scripts"></div>
+<div th:replace="scripts :: data-tables-scripts"></div>
+<div th:replace="scripts :: alert"></div>
+<div th:replace="scripts :: common-hijrishamsi-date"></div>
+
+<script>
+  function setApplicationFees() {
+   const licenseType = document.getElementById("licenseTypeId").value;
+   const applicationFeesField = document.getElementById("applicationFees");
+   const validity = document.getElementById("validity")
+   const currencyType = document.getElementById("currencyType");
+   //Currency Section
+   if (licenseType === "6" || licenseType === "7" || licenseType === "8") {currencyType.value="USD";}
+   else{currencyType.value="AFN";}
+   // End Of Currency Section
+   if (licenseType === "1") {
+       applicationFeesField.value = 195000000;
+       validity.value=15;
+
+
+   } else if (licenseType === "2") {
+       applicationFeesField.value = 0;
+       validity.value=15;
+   }
+   else if (licenseType === "3") {
+       applicationFeesField.value = 7800000;
+       validity.value=15;
+   }
+   else if (licenseType === "4") {
+       applicationFeesField.value = 1170000;
+       validity.value=15;
+   }
+   else if (licenseType === "5") {
+       applicationFeesField.value = 273000;
+       validity.value=15;
+   }
+   else if (licenseType === "6") {
+       applicationFeesField.value = 2000;
+       validity.value=15;
+   }
+   else if (licenseType === "7") {
+       applicationFeesField.value = 1500;
+       validity.value=15;
+   }
+   else if (licenseType === "8") {
+       applicationFeesField.value = 1000;
+       validity.value=15;
+   }
+   else if (licenseType === "9") {
+       applicationFeesField.value = 75000;
+       validity.value=10;
+   }
+   else if (licenseType === "10") {
+       applicationFeesField.value = 15000;
+       validity.value=10;
+   }
+   else if (licenseType === "11") {
+       applicationFeesField.value = 1014000;
+       validity.value=15;
+   }
+   else if (licenseType === "12") {
+       applicationFeesField.value = 10000;
+       validity.value=15;
+   }
+   else if (licenseType === "13") {
+       applicationFeesField.value = 30000;
+       validity.value=10;
+   }
+   else if (licenseType === "14") {
+       applicationFeesField.value = 10000;
+       validity.value=10;
+   }
+   else if (licenseType === "15") {
+       applicationFeesField.value = 10000;
+       validity.value=10;
+   }
+   else if (licenseType === "16") {
+       applicationFeesField.value = 10000;
+       validity.value=10;
+   }
+   else if (licenseType === "17") {
+       applicationFeesField.value = 250000;
+       validity.value=5;
+   }
+   else if (licenseType === "18") {
+       applicationFeesField.value = 100000;
+       validity.value=5;
+   }
+   else if (licenseType === "19") {
+       applicationFeesField.value = 50000;
+       validity.value=5;
+   }
+   else if (licenseType === "20") {
+       applicationFeesField.value = 20000;
+       validity.value=5;
+   }
+   else if (licenseType === "21") {
+       applicationFeesField.value = 10000;
+       validity.value=5;
+   }
+   else if (licenseType === "22") {
+       applicationFeesField.value = 50000;
+       validity.value=5;
+   }
+
+   else {
+       applicationFeesField.value = ""; // Clear if no valid option is selected
+   }
+}
+</script>
+</body>
+</html>

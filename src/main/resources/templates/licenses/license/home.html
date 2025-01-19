@@ -12,20 +12,30 @@
       <!-- Card 1 -->
       <div class="col-sm-4">
         <div class="custom-card text-center p-3 border rounded">
-          <a th:href="@{/licenses/license/registration/license_new_applicant}">
+          <a th:href="@{/licenses/license/registration/profile/license_new_profile}">
             <img th:src="@{/images/license_new_applicant.png}" alt="License Management System" class="img-fluid"></a>
           <h4 class="license-link mt-2">
-            <a th:href="@{/licenses/license/registration/license_new_applicant}" th:text="#{license_applicant}"></a>
+            <a th:href="@{/licenses/license/registration/profile/license_new_profile}" th:text="#{license_applicant}"></a>
           </h4>
         </div>
       </div>
       <!-- Card 2 -->
       <div class="col-sm-4">
         <div class="custom-card text-center p-3 border rounded">
-          <a th:href="@{/licenses/license/registration/license_applicants_profile}">
+          <a th:href="@{/licenses/license/registration/profile/license_applicants_profile}">
             <img th:src="@{/images/applicant.png}" alt="Finance Revenue Management System" class="img-fluid"></a>
           <h4 class="license-link mt-2">
-            <a th:href="@{/licenses/license/registration/license_applicants_profile}" th:text="#{applicant_list}"></a>
+            <a th:href="@{/licenses/license/registration/profile/license_applicants_profile}" th:text="#{applicant_list}"></a>
+          </h4>
+        </div>
+      </div>
+
+      <div class="col-sm-4">
+        <div class="custom-card text-center p-3 border rounded">
+          <a th:href="@{/licenses/license/registration/profile/license_applicants_profile}">
+            <img th:src="@{/images/applicant.png}" alt="Finance Revenue Management System" class="img-fluid"></a>
+          <h4 class="license-link mt-2">
+            <a th:href="@{/licenses/license/registration/license_applicants_profile}">Complete Applicant Profiles</a>
           </h4>
         </div>
       </div>

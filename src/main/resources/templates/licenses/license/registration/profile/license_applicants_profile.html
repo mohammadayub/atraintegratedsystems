@@ -1,0 +1,172 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head th:replace="~{layout :: page_head}">
+    <div th:replace="styles :: data-tables-styles"></div>
+    <div th:replace="styles :: persian-datepicker-styles"></div>
+    <div th:replace="styles :: select2-styles"></div>
+    <title>LMS</title>
+    <style>
+        /* Basic Table Styling */
+        .table-container {
+            max-height: 800px; /* Set a maximum height for the table container */
+            overflow-y: auto; /* Enable vertical scrolling */
+            border: 1px solid #ddd; /* Optional: Add a border around the table */
+            margin-top: 15px;
+        }
+
+        #profileTable {
+            width: 100%; /* Full width for the table */
+            border-collapse: collapse;
+            font-size: 0.9em; /* General smaller font for the table */
+        }
+
+        #profileTable th, #profileTable td {
+            padding: 6px;
+            text-align: center;
+            vertical-align: middle;
+            font-size: 0.8em; /* Small font size for headers and cells */
+        }
+
+        #profileTable thead th {
+            color: white;
+            font-size: 16px; /* Slightly larger font for headers */
+        }
+
+        #profileTable tbody tr:nth-child(even) {
+            background-color: #f2f2f2; /* Zebra stripes for rows */
+        }
+
+        #profileTable td a.btn-primary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4px;
+        }
+
+        #profileTable .icon-small {
+            width: 16px;
+            height: 16px;
+        }
+
+        #profileTable th {
+            white-space: nowrap;
+        }
+
+        /* Styling for fieldset and legend */
+        fieldset {
+
+            border: 1px solid #007bff;
+            border-radius: 5px;
+            padding: 15px;
+            background-color: #f9f9f9;
+        }
+
+        legend {
+
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #007bff;
+            padding: 0 10px;
+            border: 1px solid #007bff;
+            border-radius: 5px;
+            background-color: #ffffff;
+        }
+
+        /* Optional: Add some responsiveness */
+        @media (max-width: 768px) {
+            #profileTable th, #profileTable td {
+                font-size: 0.7em; /* Smaller font size for mobile view */
+                padding: 4px;
+            }
+        }
+    </style>
+</head>
+<body>
+<nav th:replace="~{layout :: page_navbar}"></nav>
+<div class="container-fluid">
+    <br>
+    <fieldset>
+        <legend>Applicant License Requests</legend>
+        <div class="table-container">
+            <table class="table table-bordered" id="profileTable">
+                <thead class="bg-primary">
+                <tr>
+                    <th th:text="#{license_request_id}"></th>
+                    <th th:text="#{applicant_request_date}"></th>
+                    <th th:text="#{applicant_license_type}"></th>
+                    <th th:text="#{applicant_license_currency}"></th>
+                    <th>Name (Company, NGO, Organization)</th>
+                    <th>Application Download</th>
+                    <th th:text="#{license_payment_status}"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="profile : ${profiles}">
+                    <td th:text="${profile.reqId}"></td>
+                    <td th:text="${profile.getRegDate()}"></td>
+                    <td th:text="${profile.licenseType.name}"></td>
+                    <td th:text="${profile.currencyType}"></td>
+                    <td th:text="${profile.companyLicenseName}"></td>
+                    <td>
+                        <div th:if="${profile.applicationUpload}">
+                            <a th:href="@{/licenses/license/registration/applicationDownload/{id}(id=${profile.id})}" class="btn btn-primary">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-download icon-small" viewBox="0 0 16 16">
+                                    <path d="M8 0a.5.5 0 0 1 .5.5V8.707l2.854-2.854a.5.5 0 0 1 .707.707L8.5 9.207 5.939 6.646a.5.5 0 0 1 .707-.707L8 8.707V.5A.5.5 0 0 1 8 0zM2 14a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v.5a.5.5 0 0 1-.5.5H2.5a.5.5 0 0 1-.5-.5V14z"/>
+                                </svg>
+                            </a>
+                        </div>
+                        <div th:unless="${profile.applicationUpload}">
+                            <span>No File</span>
+                        </div>
+                    </td>
+                    <td th:text="${profile.paymentStatus}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </fieldset>
+
+    <a th:href="@{/licenses/license/home}" class="btn btn-primary" style="margin-top:20px;">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6" style="width:20px;height:20px;">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
+        </svg>
+        Back to Page
+    </a>
+</div>
+
+<!-- Common scripts -->
+<div th:replace="scripts :: common-scripts"></div>
+<div th:replace="scripts :: persian-datepicker-scripts"></div>
+<div th:replace="scripts :: data-tables-scripts"></div>
+
+<script>
+    $(document).ready(function () {
+        // Initialize DataTable with individual column search
+        let table = $('#profileTable').DataTable({
+            initComplete: function () {
+                this.api().columns().every(function () {
+                    var column = this;
+                    var header = $(column.header());
+                    var columnText = header.text(); // Get the existing header text
+                    header.empty().append('<div>' + columnText + '</div>'); // Keep the header text and add a wrapper
+
+                    // Append the search input below the header text
+                    $('<input type="text" placeholder="Search" style="width: 100%; margin-top: 5px;"/>')
+                        .appendTo(header)
+                        .on('keyup change clear', function () {
+                            if (column.search() !== this.value) {
+                                column
+                                    .search(this.value)
+                                    .draw();
+                            }
+                        });
+                });
+            }
+        });
+    });
+</script>
+
+<footer th:replace="~{layout :: page_footer}"></footer>
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

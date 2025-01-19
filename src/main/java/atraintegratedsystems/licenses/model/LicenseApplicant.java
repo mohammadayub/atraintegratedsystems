@@ -33,6 +33,9 @@ public class LicenseApplicant {
     @NotBlank(message = "Please enter Company Name")
     private String companyLicenseName;
 
+    @Column(name="application_upload")
+    private byte[] applicationUpload;
+
     @Column(name = "license_no")
     private String licenseNo;
 

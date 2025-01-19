@@ -1,9 +1,9 @@
 package atraintegratedsystems.licenses.service;
 
+
 import atraintegratedsystems.licenses.dto.LicenseApplicantApprovalDTO;
 import atraintegratedsystems.licenses.dto.LicenseApplicantDTO;
 import atraintegratedsystems.licenses.model.LicenseApplicant;
-import atraintegratedsystems.licenses.model.LicenseApproval;
 import atraintegratedsystems.licenses.model.LicenseType;
 import atraintegratedsystems.licenses.repository.LicenseApplicantRepository;
 import atraintegratedsystems.licenses.repository.LicenseTypeRepository;
@@ -12,25 +12,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
-
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class LicenseApplicantService {
-
     @Autowired
     private LicenseApplicantRepository repository;
-
     @Autowired
     private LicenseTypeRepository licenseTypeRepository;
-
     private static final List<String> VALID_FILE_TYPES = Arrays.asList("application/pdf", "image/jpeg", "image/png");
-
 
     @Transactional
     public List<LicenseApplicant> getAllApplicants() {
@@ -67,6 +61,20 @@ public class LicenseApplicantService {
         profile.setCurrencyType(dto.getCurrencyType());
         profile.setFinanceType(dto.getFinanceType());
         profile.setCompanyLicenseName(dto.getCompanyLicenseName());
+
+        MultipartFile applicationUpload = dto.getApplicationUpload();
+
+        if (applicationUpload != null && !applicationUpload.isEmpty()) {
+            String contentType = applicationUpload.getContentType();
+
+            if (!VALID_FILE_TYPES.contains(contentType)) {
+                throw new IllegalArgumentException("Invalid File Type: " + contentType);
+            }
+
+            profile.setApplicationUpload(applicationUpload.getBytes());
+        }
+
+
         profile.setLicenseNo(dto.getLicenseNo());
 
         MultipartFile licenseUpload = dto.getLicenseUpload();
@@ -141,8 +149,6 @@ public class LicenseApplicantService {
         Long nextId = maxId + 1;
         return prefix + String.format("%04d", nextId);
     }
-
-
     @Transactional
     public LicenseApplicant updateProfile(Long licenseId, LicenseApplicantDTO dto) {
         LicenseApplicant profile = repository.findById(licenseId)
@@ -154,43 +160,23 @@ public class LicenseApplicantService {
         profile.setIsSend(dto.getIsSend());
         return repository.save(profile);
     }
+
     @Transactional
     public LicenseApplicant updateCompleteProfile(Long id, LicenseApplicantDTO dto) throws IOException {
         LicenseApplicant profile = repository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Profile not found with ID: " + id));
             DateConverter dateConverter = new DateConverter();
-            // Convert Jalali date to Gregorian
-            LocalDate requestDate = dateConverter.jalaliToGregorian(dto.getReqDate().getYear(), dto.getReqDate().getMonthValue(), dto.getReqDate().getDayOfMonth());
-            profile.setReqDate(requestDate);
-
-            // Set the LicenseType based on the provided licenseTypeId
-            if (dto.getLicenseTypeId() != null) {
-                LicenseType licenseType = licenseTypeRepository.findById(dto.getLicenseTypeId())
-                        .orElseThrow(() -> new IllegalArgumentException("Invalid license type ID: " + dto.getLicenseTypeId()));
-                profile.setLicenseType(licenseType);
-            } else {
-                throw new IllegalArgumentException("License type is required");
-            }
-
-            profile.setCurrencyType(dto.getCurrencyType());
-            profile.setFinanceType(dto.getFinanceType());
-            profile.setCompanyLicenseName(dto.getCompanyLicenseName());
             profile.setLicenseNo(dto.getLicenseNo());
-
             MultipartFile licenseUpload = dto.getLicenseUpload();
-
             if (licenseUpload != null && !licenseUpload.isEmpty()) {
                 String contentType = licenseUpload.getContentType();
-
                 if (!VALID_FILE_TYPES.contains(contentType)) {
                     throw new IllegalArgumentException("Invalid File Type: " + contentType);
                 }
-
                 profile.setLicenseUpload(licenseUpload.getBytes());
             }
 
             profile.setTinNo(dto.getTinNo());
-
             MultipartFile tinUpload=dto.getTinUpload();
             if(tinUpload != null && !tinUpload.isEmpty()){
                 String contentType=tinUpload.getContentType();
@@ -224,37 +210,6 @@ public class LicenseApplicantService {
             profile.setEmail(dto.getEmail());
             profile.setWebsite(dto.getWebsite());
             profile.setPostAddress(dto.getPostAddress());
-
-            LocalDate entryVoucherDate = null;
-            if (dto.getEntryApplicationFeeVoucherDate() != null) {
-                entryVoucherDate = dateConverter.jalaliToGregorian(
-                        dto.getEntryApplicationFeeVoucherDate().getYear(),
-                        dto.getEntryApplicationFeeVoucherDate().getMonthValue(),
-                        dto.getEntryApplicationFeeVoucherDate().getDayOfMonth()
-                );
-            }
-            profile.setEntryApplicationFeeVoucherDate(entryVoucherDate);
-            profile.setBankVoucher(dto.getBankVoucher());
-            profile.setPaymentStatus(dto.getPaymentStatus());
             return repository.save(profile);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

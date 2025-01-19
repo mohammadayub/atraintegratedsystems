@@ -5,7 +5,6 @@
     <div th:replace="styles :: persian-datepicker-styles"></div>
     <div th:replace="styles :: select2-styles"></div>
     <title>LMS</title>
-
     <style>
         /* Basic Table Styling */
         .table-container {
@@ -47,7 +46,6 @@
             width: 16px;
             height: 16px;
         }
-
         /* Optional: Add some responsiveness */
         @media (max-width: 768px) {
             #profileTable th, #profileTable td {
@@ -58,8 +56,6 @@
         #profileTable th {
         white-space: nowrap;
     }
-
-
     </style>
 </head>
 <body>
@@ -73,8 +69,8 @@
                 <th th:text="#{applicant_request_date}"></th>
                 <th th:text="#{applicant_license_type}"></th>
                 <th th:text="#{applicant_license_currency}"></th>
-                <th th:text="#{applicant_license_finance_type}"></th>
-                <th th:text="#{license_application_company_license_name}"></th>
+                <th>Name (Company,NGO,Organization)</th>
+                <th>Application Download</th>
                 <th th:text="#{license_application_license_no}"></th>
                 <th th:text="#{license_application_upload}"></th>
                 <th th:text="#{license_application_tin}"></th>
@@ -84,18 +80,12 @@
                 <th th:text="#{license_application_expiry_date}"></th>
                 <th th:text="#{license_application_fee}"></th>
                 <th th:text="#{license_application_validity}"></th>
-                <th th:text="#{license_application_plan_active_Service}"></th>
-                <th th:text="#{license_application_national_employee}"></th>
-                <th th:text="#{license_application_international_employee}"></th>
-                <th th:text="#{license_application_other_license}"></th>
-                <th th:text="#{license_application_company_address}"></th>
-                <th th:text="#{license_application_contact_no}"></th>
-                <th th:text="#{license_application_email}"></th>
-                <th th:text="#{license_application_website}"></th>
                 <th th:text="#{license_payment_status}"></th>
                 <th>Refer To Board Date</th>
                 <th>Refer Status</th>
+                <th>Complete Profile</th>
                 <th>Refer to Board</th>
+
             </tr>
             </thead>
             <tbody>
@@ -104,46 +94,71 @@
                 <td th:text="${profile.getRegDate()}"></td>
                 <td th:text="${profile.licenseType.name}"></td>
                 <td th:text="${profile.currencyType}"></td>
-                <td th:text="${profile.financeType}"></td>
                 <td th:text="${profile.companyLicenseName}"></td>
+                <td>
+                    <div th:if="${profile.applicationUpload}">
+                        <a th:href="@{/licenses/license/registration/applicationDownload/{id}(id=${profile.id})}" class="btn btn-primary">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-download icon-small" viewBox="0 0 16 16">
+                                <path d="M8 0a.5.5 0 0 1 .5.5V8.707l2.854-2.854a.5.5 0 0 1 .707.707L8.5 9.207 5.939 6.646a.5.5 0 0 1 .707-.707L8 8.707V.5A.5.5 0 0 1 8 0zM2 14a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v.5a.5.5 0 0 1-.5.5H2.5a.5.5 0 0 1-.5-.5V14z"/>
+                            </svg>
+                        </a>
+                    </div>
+                    <div th:unless="${profile.applicationUpload}">
+                        <span>No File</span>
+                    </div>
+                </td>
                 <td th:text="${profile.licenseNo}"></td>
                 <td>
+                    <div th:if="${profile.licenseUpload}">
                     <a th:href="@{/licenses/license/registration/licenseDownload/{id}(id=${profile.id})}" class="btn btn-primary">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-download icon-small" viewBox="0 0 16 16">
                             <path d="M8 0a.5.5 0 0 1 .5.5V8.707l2.854-2.854a.5.5 0 0 1 .707.707L8.5 9.207 5.939 6.646a.5.5 0 0 1 .707-.707L8 8.707V.5A.5.5 0 0 1 8 0zM2 14a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v.5a.5.5 0 0 1-.5.5H2.5a.5.5 0 0 1-.5-.5V14z"/>
                         </svg>
                     </a>
+                    </div>
+                    <div th:unless="${profile.licenseUpload}">
+                        <span>No File</span>
+                    </div>
                 </td>
                 <td th:text="${profile.tinNo}"></td>
                 <td>
+                    <div th:if="${profile.tinUpload}">
                     <a th:href="@{/licenses/license/registration/tinDownload/{id}(id=${profile.id})}" class="btn btn-primary">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-download icon-small" viewBox="0 0 16 16">
                             <path d="M8 0a.5.5 0 0 1 .5.5V8.707l2.854-2.854a.5.5 0 0 1 .707.707L8.5 9.207 5.939 6.646a.5.5 0 0 1 .707-.707L8 8.707V.5A.5.5 0 0 1 8 0zM2 14a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v.5a.5.5 0 0 1-.5.5H2.5a.5.5 0 0 1-.5-.5V14z"/>
                         </svg>
                     </a>
+                    </div>
+                    <div th:unless="${profile.tinUpload}">
+                        <span>No File</span>
+                    </div>
                 </td>
                 <td>
-                    <a th:href="@{/licenses/license/registration/bankDownload/{id}(id=${profile.id})}" class="btn btn-primary">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-download icon-small" viewBox="0 0 16 16">
-                            <path d="M8 0a.5.5 0 0 1 .5.5V8.707l2.854-2.854a.5.5 0 0 1 .707.707L8.5 9.207 5.939 6.646a.5.5 0 0 1 .707-.707L8 8.707V.5A.5.5 0 0 1 8 0zM2 14a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v.5a.5.5 0 0 1-.5.5H2.5a.5.5 0 0 1-.5-.5V14z"/>
-                        </svg>
-                    </a>
+                    <div th:if="${profile.bankStatementUpload}">
+                        <a th:href="@{/licenses/license/registration/bankDownload/{id}(id=${profile.id})}" class="btn btn-primary">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-download icon-small" viewBox="0 0 16 16">
+                                <path d="M8 0a.5.5 0 0 1 .5.5V8.707l2.854-2.854a.5.5 0 0 1 .707.707L8.5 9.207 5.939 6.646a.5.5 0 0 1 .707-.707L8 8.707V.5A.5.5 0 0 1 8 0zM2 14a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v.5a.5.5 0 0 1-.5.5H2.5a.5.5 0 0 1-.5-.5V14z"/>
+                            </svg>
+                        </a>
+                    </div>
+                    <div th:unless="${profile.bankStatementUpload}">
+                        <span>No File</span>
+                    </div>
                 </td>
                 <td th:text="${profile.getEstablishmentYear()}"></td>
                 <td th:text="${profile.expiryDate}"></td>
                 <td th:text="${profile.applicationFees}"></td>
                 <td th:text="${profile.validity}"></td>
-                <td th:text="${profile.plannedActivitiesAndServices}"></td>
-                <td th:text="${profile.totalNationalEmployees}"></td>
-                <td th:text="${profile.totalInternationalEmployees}"></td>
-                <td th:text="${profile.otherLicenseTaken}"></td>
-                <td th:text="${profile.companyAddress}"></td>
-                <td th:text="${profile.contactNo}"></td>
-                <td th:text="${profile.email}"></td>
-                <td th:text="${profile.website}"></td>
                 <td th:text="${profile.paymentStatus}"></td>
                 <td th:text="${profile.getRefToBoardDate()}"></td>
                 <td th:text="${profile.isSend != null ? profile.isSend : 'No'}"></td> <!-- Handle null as 'No' -->
+                <td>
+                    <a  th:href="@{/licenses/license/registration/complete-profile/license_applicant_complete_profile/{id}(id=${profile.id})}"  class="btn btn-primary">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+                            <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z"/>
+                        </svg>
+                    </a>
+                </td>
                 <td class="hide-print">
                     <a th:href="@{/licenses/license/registration/license_applicants_send_board/{id}(id=${profile.id})}"
                        class="btn btn-primary"
@@ -201,8 +216,6 @@
         });
     });
 </script>
-
-
 <footer th:replace="~{layout :: page_footer}"></footer>
 <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
 </body>

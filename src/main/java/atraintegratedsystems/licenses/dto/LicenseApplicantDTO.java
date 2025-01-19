@@ -19,8 +19,8 @@ public class LicenseApplicantDTO {
     private String licenseTypeName;
     private String currencyType;
     private String financeType;
-    @NotBlank(message = "Please enter Company Name")
     private String companyLicenseName;
+    private MultipartFile applicationUpload;
     private String licenseNo;
     private MultipartFile licenseUpload;
     private String tinNo;

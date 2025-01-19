@@ -14,11 +14,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -33,6 +35,8 @@ public class LicenseApplicantController {
     @Autowired
     private LicenseTypeService licenseTypeService;
 
+
+
     @GetMapping("/licenses/license/registration/license_applicants_profile")
     public String showApplicationProfile(Model model) {
         List<LicenseApplicant> profiles = licenseService.getAllApplicants();
@@ -42,43 +46,124 @@ public class LicenseApplicantController {
     }
 
 
-    @GetMapping("/licenses/license/registration/license_new_applicant")
-    public String showRegistrationForm(Model model) {
-        model.addAttribute("profile", new LicenseApplicantDTO());
-        model.addAttribute("licenseTypes", licenseTypeService.findAll());
-        return "licenses/license/registration/license_new_applicant";
+    //Refer to Complete Profile
+    @GetMapping("/licenses/license/registration/complete-profile/license_applicant_complete_profile/{id}")
+    public String completeProfile(@PathVariable Long id, Model model) {
+        Optional<LicenseApplicant> profileOpt = licenseService.getApplicantById(id);
+        if (profileOpt.isPresent()) {
+            LicenseApplicant profile = profileOpt.get();
+            LicenseApplicantDTO licenseApplicantDTO = new LicenseApplicantDTO();
+            licenseApplicantDTO.setId(profile.getId());
+            licenseApplicantDTO.setLicenseNo(profile.getLicenseNo());
+            MultipartFile licenseUpload=licenseApplicantDTO.getLicenseUpload();
+            licenseApplicantDTO.setLicenseUpload(licenseUpload);
+            licenseApplicantDTO.setTinNo(profile.getTinNo());
+            MultipartFile tinUpload= licenseApplicantDTO.getTinUpload();
+            licenseApplicantDTO.setTinUpload(tinUpload);
+            licenseApplicantDTO.setYearOfEstablishment(profile.getYearOfEstablishment());
+            licenseApplicantDTO.setExpiryDate(profile.getExpiryDate());
+            licenseApplicantDTO.setPlannedActivitiesAndServices(profile.getPlannedActivitiesAndServices());
+            licenseApplicantDTO.setTotalNationalEmployees(profile.getTotalNationalEmployees());
+            licenseApplicantDTO.setTotalInternationalEmployees(profile.getTotalInternationalEmployees());
+            licenseApplicantDTO.setExpectedInvestment(profile.getExpectedInvestment());
+            licenseApplicantDTO.setCash(profile.getCash());
+            // Add the DTO to the model for the form
+            model.addAttribute("licenseApplicant", licenseApplicantDTO);
+        } else {
+            // Handle case where applicant is not found
+            model.addAttribute("error", "Applicant not found");
+            return "error-page";
+        }
+
+        return "licenses/license/registration/complete-profile/license_applicant_complete_profile";
     }
 
-    @PostMapping("/licenses/license/registration/license_new_applicant")
-    public String saveProfile(@ModelAttribute("profile") @Valid LicenseApplicantDTO dto,
-                              BindingResult bindingResult,
-                              Model model,
-                              RedirectAttributes redirectAttributes) {
+
+    @PostMapping("/licenses/license/registration/complete-profile/license_applicant_complete_profile")
+    public String updateCompleteProfile(
+            @ModelAttribute("licenseApplicant") LicenseApplicantDTO dto,
+            BindingResult bindingResult,
+            Model model) {
+
         if (bindingResult.hasErrors()) {
-            // If the reqDate is null, set it to the current date as a LocalDate
-                dto.setReqDate(LocalDate.now());  // Using LocalDate.now() to set the current date
-                dto.setExpiryDate(LocalDate.now());
-                dto.setYearOfEstablishment(LocalDate.now());
-            model.addAttribute("licenseTypes", licenseTypeService.findAll());
-            return "licenses/license/registration/license_new_applicant";
+            return "licenses/license/registration/complete-profile/license_applicant_complete_profile"; // View for re-editing
         }
 
         try {
-            licenseService.saveProfile(dto);
-            redirectAttributes.addFlashAttribute("successMessage", "Profile registered successfully!");
+            LicenseApplicant updatedProfile = licenseService.updateCompleteProfile(dto.getId(), dto);
+            // Add success message
+            model.addAttribute("message", "Profile updated successfully.");
+            // Redirect to a success page
             return "redirect:/licenses/license/registration/license_applicants_profile";
-        } catch (Exception e) {
-            model.addAttribute("errorMessage", e instanceof IOException
-                    ? "An error occurred while saving the profile. Please try again."
-                    : e.getMessage());
-            model.addAttribute("profile", dto);
-            model.addAttribute("licenseTypes", licenseTypeService.findAll());
-            return "licenses/license/registration/license_new_applicant";
+
+        } catch (IllegalArgumentException ex) {
+            // Handle errors
+            model.addAttribute("error", ex.getMessage());
+            return "licenses/license/registration/complete-profile/license_applicant_complete_profile";
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 
 
+//    @GetMapping("/licenses/license/registration/license_new_applicant")
+//    public String showRegistrationForm(Model model) {
+//        model.addAttribute("profile", new LicenseApplicantDTO());
+//        model.addAttribute("licenseTypes", licenseTypeService.findAll());
+//        return "licenses/license/registration/license_new_applicant";
+//    }
 
+//    @PostMapping("/licenses/license/registration/license_new_applicant")
+//    public String saveProfile(@ModelAttribute("profile") @Valid LicenseApplicantDTO dto,
+//                              BindingResult bindingResult,
+//                              Model model,
+//                              RedirectAttributes redirectAttributes) {
+//        if (bindingResult.hasErrors()) {
+//            // If the reqDate is null, set it to the current date as a LocalDate
+//                dto.setReqDate(LocalDate.now());  // Using LocalDate.now() to set the current date
+//                dto.setExpiryDate(LocalDate.now());
+//                dto.setYearOfEstablishment(LocalDate.now());
+//            model.addAttribute("licenseTypes", licenseTypeService.findAll());
+//            return "licenses/license/registration/license_new_applicant";
+//        }
+//
+//        try {
+//            licenseService.saveProfile(dto);
+//            redirectAttributes.addFlashAttribute("successMessage", "Profile registered successfully!");
+//            return "redirect:/licenses/license/registration/license_applicants_profile";
+//        } catch (Exception e) {
+//            model.addAttribute("errorMessage", e instanceof IOException
+//                    ? "An error occurred while saving the profile. Please try again."
+//                    : e.getMessage());
+//            model.addAttribute("profile", dto);
+//            model.addAttribute("licenseTypes", licenseTypeService.findAll());
+//            return "licenses/license/registration/license_new_applicant";
+//        }
+//    }
+
+
+
+    @GetMapping("/licenses/license/registration/applicationDownload/{id}")
+    public ResponseEntity<ByteArrayResource> downloadApplicationFile(@PathVariable Long id) {
+        Optional<LicenseApplicant> profileOpt = licenseService.getApplicantById(id);
+        if (!profileOpt.isPresent()) {
+            return ResponseEntity.notFound().build();
+        }
+        LicenseApplicant profile = profileOpt.get();
+        byte[] fileData = profile.getApplicationUpload();
+        String fileName =  getFileExtension(profile.getApplicationUpload());
+        String mimeType = getMimeType(fileData); // Get the correct MIME type
+        HttpHeaders headers = new HttpHeaders();
+        headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileName + "\"");
+        headers.add(HttpHeaders.CONTENT_TYPE, mimeType);
+
+        ByteArrayResource resource = new ByteArrayResource(fileData);
+
+        return ResponseEntity.ok()
+                .headers(headers)
+                .contentLength(fileData.length)
+                .body(resource);
+    }
 
     @GetMapping("/licenses/license/registration/licenseDownload/{id}")
     public ResponseEntity<ByteArrayResource> downloadFile(@PathVariable Long id) {
@@ -146,8 +231,6 @@ public class LicenseApplicantController {
                 .contentLength(fileData.length)
                 .body(resource);
     }
-
-
 
     private String getFileExtension(byte[] fileData) {
         if (fileData == null || fileData.length < 4) {
@@ -245,15 +328,6 @@ public class LicenseApplicantController {
             return "licenses/license/registration/license_applicants_send_board";
         }
     }
-
-
-
-
-
-
-
-
-
 
 
 
