@@ -10,53 +10,156 @@
 <body>
 <nav th:replace="~{layout :: page_navbar}" id="pagnav"></nav>
 
-<div class="container-fluid">
-  <table class="table table-hover mt-4">
-    <tr>
-      <th colspan="9" style="text-align:center;">
-        <img th:src="@{/images/tariff_pic.png}" alt="Image Not Displayed">
-        <br><h3 th:text="#{atra}">ATRA</h3>
-        <h3 th:text="#{islamic_emarat}"></h3>
-        <h3 th:text="#{license_directorate}"></h3>
-      </th>
-    </tr>
-    <tr>
-      <th th:text="#{license_request_id}"></th>
-      <th th:text="#{mcit_license_approval_id}"></th>
-      <th th:text="#{license_application_company_license_name}"></th>
-      <th th:text="#{approval_license_type}"></th>
-      <th th:text="#{mcit_license_approval_date}"></th>
-      <th th:text="#{mcit_license_board_descision_no}">Board Decision Number</th>
-      <th th:text="#{mcit_license_approval_status}"></th>
-      <th th:text="#{mcit_license_approval_currency}"></th>
-      <th th:text="#{administration_fees}"></th>
-    </tr>
-    <tr>
-      <td><input type="text" th:field="${licenseApprovalDTO.id}" disabled> </td>
-      <td><input type="text" th:field="${licenseApprovalDTO.approvalId}" disabled></td>
-      <td><input type="text" th:field="${licenseApprovalDTO.applicantLicenseCompanyName}" disabled></td>
-      <td><input type="text" th:field="${licenseApprovalDTO.licenseTypeName}" disabled></td>
-      <td><input type="text" class="hijrishamsi" th:field="${licenseApprovalDTO.approvalDate}" disabled></td>
-      <td><input type="text"  th:field="${licenseApprovalDTO.boardDecisionNumber}" disabled></td>
-      <td><input type="text"  th:field="${licenseApprovalDTO.approvalStatus}" disabled></td>
-      <td><input type="text"  th:field="${licenseApprovalDTO.currencyType}" disabled></td>
-      <td><input type="text"  th:field="${licenseApprovalDTO.administrativeYearlyFees}" disabled></td>
-    </tr>
-    <tr>
-      <td colspan="9" class="signature-section" th:text="#{signature}"></td>
-    </tr>
-    <tr>
-      <td colspan="9">
-        <button class="btn btn-primary" onclick="doPrint();" id="prn" th:text="#{print}"></button>
-      </td>
-    </tr>
-  </table>
-  <a th:href="@{/licenses/finance/license_finance/administration_fees/license_administration_fee_list}" id="backtopage" class="btn btn-primary" style="margin-top:20px;">
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6" style="width:20px;height:20px;">
-      <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
-    </svg>
-    Back to Page</a>
+<table class="container-fluid mt-4" style="font-family:Arabic Typesetting;">
+  <tr>
+    <td id="atra_logo"><img th:src="@{/images/atra_afghanistan.png}" alt="Image Not Displayed"></td>
+    <th id="dari_text" class="text-center">
+      امارت اسلامی افغانستان
+      <br>
+      وزارت مخابرات و تکنالوژی معلوماتی
+      <br>
+      اداره تنظیم خدمات مخابراتی افغانستان</th>
+    <th id="pashto_text" class="text-center">
+      د افغانستان اسلامي امارت
+      <br>
+      دمخابراتو او معلوماتي تکنالوجي وزارت
+      <br>
+      د افغانستان د مخابراتي خدمتونو د تنظیم اداره
+
+    </th>
+    <td id="emarat_logo"><img th:src="@{/images/islami_emarat.png}" alt="Image Not Displayed"></td>
+  </tr>
+  <tr>
+    <td colspan="3"></td>
+    <th dir="rtl" style="text-align:right;">
+      شمیره: -----------
+    </th>
+  </tr>
+  <tr>
+    <th>
+      <table dir="rtl">
+        <tr><td><input type="checkbox"></td><td><input type="checkbox" checked></td>
+          <td><input type="checkbox"></td><td><input type="checkbox"></td>
+          <td><input type="checkbox"></td></tr>
+        <tr><td>عاجل</td><td>عادي</td><td>اطمینانیه</td><td>ابلاغیه</td><td>نور</td></tr>
+      </table>
+    </th>
+    <th colspan="2" style="text-align:center;">
+      د خقوق او جواز ریاست
+      <br>
+      د جواز د صدور آمریت
+    </th>
+    <th style="text-align:right;" >:نیټه</th>
+  </tr>
+  <tr>
+    <td colspan="3"></td>
+    <th dir="rtl" style="text-align:right;">
+       د شرکت/اداری نوم :<input type="text" th:field="${licenseApprovalDTO.applicantLicenseCompanyName}" disabled style="border:0px;">
+    </th>
+  </tr>
+  <tr>
+    <td colspan="3"></td>
+    <th dir="rtl" style="text-align:right;">
+      د جواز/لیک ډول:<input type="text" th:field="${licenseApprovalDTO.licenseTypeName}" disabled style="border:0px;">
+    </th>
+  </tr>
+  <tr>
+    <td colspan="3"></td>
+    <th dir="rtl" style="text-align:right;">
+      د جواز/لیک د اعتبار مجموعي موده: یو کال
+
+    </th>
+  </tr>
+  <tr>
+    <table class="table table-hover mt-5" border="1px" dir="rtl" style="font-family:Arabic Typesetting;">
+      <tr><th>مدرک</th><th>فبس</th></tr>
+      <tr>
+              <td>
+                د جواز لیک فیس (د جوازلیک قیمت) د (یو کال) مودی لپاره
+              </td>
+        <td th:text="${licenseApprovalDTO.administrativeYearlyFees}">
+
+        </td>
+
+      </tr>
+            </table>
+          </tr>
+        </table>
+<div class="mt-5 text-center" dir="rtl" style="font-family:Arabic Typesetting; line-height: 1.5;">
+  په درنښت<br>
+  د حقوق او جواز ریاست
 </div>
+
+<div class="mt-5 pr-4 text-right" dir="rtl" style="margin-top:50px;padding-top:220px;font-family: font-family:Arabic Typesetting; line-height: 1.5;">
+  <h2 class="text-right" style="font-family:Arabic Typesetting;">تائیدي ریاست مالی در صورت تخویلی وچوه متذکره</h2>
+  برویت آویزات بانکی شماره --------------- مورخ--------------
+  <br>
+  که کاپی آن ضمیمه مکتوب هذا میباشد،صرفا از تحویلی مبلغ مندرج مکتوب هذا تصدیق ګردید.
+  <div class="text-right" style="font-family:Arabic Typesetting;">
+  <h3 h2 class="text-center">مدیریت محاسبه شرکت ها</h3>
+  </div>
+  <br><br>
+  <div class="text-right" style="font-family:Arabic Typesetting;">
+  <h4 h2 class="text-center">مهر ریاست مالی</h4>
+  </div>
+<!--  <button class="btn btn-primary" onclick="doPrint();" id="prn" th:text="#{print}"></button>-->
+</div>
+<button class="m-4 btn btn-primary" onclick="doPrint();" id="prn">Print</button>
+<br>
+<a th:href="@{/licenses/finance/license_finance/administration_fees/license_administration_fee_list}" id="backtopage" class="m-4 btn btn-primary" style="margin-top:20px;">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6" style="width:20px;height:20px;">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
+      </svg>
+         Back to Page</a>
+
+          <!--<div class="container-fluid">-->
+<!--  <table class="table table-hover mt-4">-->
+
+<!--    <tr>-->
+<!--      <th colspan="9" style="text-align:center;">-->
+<!--        <img th:src="@{/images/tariff_pic.png}" alt="Image Not Displayed">-->
+<!--        <br><h3 th:text="#{atra}">ATRA</h3>-->
+<!--        <h3 th:text="#{islamic_emarat}"></h3>-->
+<!--        <h3 th:text="#{license_directorate}"></h3>-->
+<!--      </th>-->
+<!--    </tr>-->
+<!--    <tr>-->
+<!--      <th th:text="#{license_request_id}"></th>-->
+<!--      <th th:text="#{mcit_license_approval_id}"></th>-->
+<!--      <th th:text="#{license_application_company_license_name}"></th>-->
+<!--      <th th:text="#{approval_license_type}"></th>-->
+<!--      <th th:text="#{mcit_license_approval_date}"></th>-->
+<!--      <th th:text="#{mcit_license_board_descision_no}">Board Decision Number</th>-->
+<!--      <th th:text="#{mcit_license_approval_status}"></th>-->
+<!--      <th th:text="#{mcit_license_approval_currency}"></th>-->
+<!--      <th th:text="#{administration_fees}"></th>-->
+<!--    </tr>-->
+<!--    <tr>-->
+<!--      <td><input type="text" th:field="${licenseApprovalDTO.id}" disabled> </td>-->
+<!--      <td><input type="text" th:field="${licenseApprovalDTO.approvalId}" disabled></td>-->
+<!--      <td><input type="text" th:field="${licenseApprovalDTO.applicantLicenseCompanyName}" disabled></td>-->
+<!--      <td><input type="text" th:field="${licenseApprovalDTO.licenseTypeName}" disabled></td>-->
+<!--      <td><input type="text" class="hijrishamsi" th:field="${licenseApprovalDTO.approvalDate}" disabled></td>-->
+<!--      <td><input type="text"  th:field="${licenseApprovalDTO.boardDecisionNumber}" disabled></td>-->
+<!--      <td><input type="text"  th:field="${licenseApprovalDTO.approvalStatus}" disabled></td>-->
+<!--      <td><input type="text"  th:field="${licenseApprovalDTO.currencyType}" disabled></td>-->
+<!--      <td><input type="text"  th:field="${licenseApprovalDTO.administrativeYearlyFees}" disabled></td>-->
+<!--    </tr>-->
+<!--    <tr>-->
+<!--      <td colspan="9" class="signature-section" th:text="#{signature}"></td>-->
+<!--    </tr>-->
+<!--    <tr>-->
+<!--      <td colspan="9">-->
+<!--        <button class="btn btn-primary" onclick="doPrint();" id="prn" th:text="#{print}"></button>-->
+<!--      </td>-->
+<!--    </tr>-->
+<!--  </table>-->
+<!--  <a th:href="@{/licenses/finance/license_finance/administration_fees/license_administration_fee_list}" id="backtopage" class="btn btn-primary" style="margin-top:20px;">-->
+<!--    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6" style="width:20px;height:20px;">-->
+<!--      <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />-->
+<!--    </svg>-->
+<!--    Back to Page</a>-->
+<!--</div>-->
 
 <!-- Common scripts -->
 <div th:replace="scripts :: common-scripts"></div>
@@ -65,6 +168,7 @@
 <div th:replace="scripts :: common-do-print"></div>
 <div th:replace="scripts :: common-hijrishamsi-date"></div>
 
+<div style="height:10vh;"></div>
 <footer th:replace="~{layout :: page_footer}" id="pagfooter"></footer>
 
 </body>

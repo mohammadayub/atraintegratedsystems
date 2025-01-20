@@ -106,6 +106,7 @@ public class LicenseApplicationFeesFinanceController {
         licenseApplicantDTO.setYearOfEstablishment(licenseApplicant.getYearOfEstablishment());
         licenseApplicantDTO.setExpiryDate(licenseApplicant.getExpiryDate());
         licenseApplicantDTO.setApplicationFees(licenseApplicant.getApplicationFees());
+        licenseApplicantDTO.setValidity(licenseApplicant.getValidity());
         licenseApplicantDTO.setEntryApplicationFeeVoucherDate(licenseApplicant.getEntryApplicationFeeVoucherDate());
         licenseApplicantDTO.setBankVoucher(licenseApplicant.getBankVoucher());
         licenseApplicantDTO.setPaymentStatus(licenseApplicant.getPaymentStatus());

@@ -105,6 +105,7 @@ public class LicenseGuaranteeFeesController {
         licenseApprovalDTO.setBoardDecisionNumber(licenseApproval.getBoardDecisionNumber());
         licenseApprovalDTO.setApprovalStatus(licenseApproval.getApprovalStatus());
         licenseApprovalDTO.setCurrencyType(licenseApproval.getCurrencyType());
+        licenseApprovalDTO.setLicenseValidity(licenseApproval.getLicenseApplicant().getValidity());
         licenseApprovalDTO.setGuaranteeFees(licenseApproval.getGuaranteeFees());
         model.addAttribute("licenseTypes", licenseTypeService.findAll());
         model.addAttribute("licenseApprovalDTO", licenseApprovalDTO);

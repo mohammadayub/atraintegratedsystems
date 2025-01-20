@@ -88,6 +88,7 @@ public class LicenseFeeMCITController {
         licenseApprovalDTO.setApprovalStatus(licenseApproval.getApprovalStatus());
         licenseApprovalDTO.setCurrencyType(licenseApproval.getCurrencyType());
         licenseApprovalDTO.setLicenseFees(licenseApproval.getLicenseFees());
+        licenseApprovalDTO.setLicenseValidity(licenseApproval.getLicenseApplicant().getValidity());
         model.addAttribute("licenseTypes", licenseTypeService.findAll());
         model.addAttribute("licenseApprovalDTO", licenseApprovalDTO);
         return "licenses/finance/license_finance/mcit/license_fee_print_tariff";

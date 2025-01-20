@@ -1,15 +1,22 @@
-  function doPrint() {
-    document.getElementById("pagnav").style.display = "none";
-    document.getElementById("pagfooter").style.display = "none";
-    document.getElementById("prn").style.display = "none";
-    document.getElementById("backtopage").style.display = "none";
+function doPrint() {
+    const hideElements = ["pagnav", "pagfooter", "prn", "backtopage"];
 
+    // Hide elements if they exist
+    hideElements.forEach(id => {
+        const element = document.getElementById(id);
+        if (element) {
+            element.style.display = "none";
+        }
+    });
 
+    // Print the page
     window.print();
 
-    document.getElementById("pagnav").style.display = "block";
-    document.getElementById("pagfooter").style.display = "inline-block";
-    document.getElementById("prn").style.display = "inline-block";
-    document.getElementById("backtopage").style.display = "inline-block";
-
-  }
+    // Restore elements if they exist
+    hideElements.forEach(id => {
+        const element = document.getElementById(id);
+        if (element) {
+            element.style.display = id === "pagfooter" ? "inline-block" : "block";
+        }
+    });
+}

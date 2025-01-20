@@ -87,7 +87,6 @@ public class LicenseApproval {
     private LocalDate administrationFeeEntryVoucherDate;
     @Column(name="administration_fee_bank_voucher_No")
     private String administrationFeeBankVoucherNo;
-
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name="administration_fee_bank_voucher_submission_date")
     private LocalDate administrationFeeBankVoucherSubmissionDate;
@@ -221,8 +220,5 @@ public JalaliDate getlicenseFeeBankVoucherSubmissionDate() {
         JalaliDate jalaliadministrationFeeBankVoucherSubmissionDate=dateConverter.gregorianToJalali(administrationFeeBankVoucherSubmissionDate.getYear(),administrationFeeBankVoucherSubmissionDate.getMonthValue(),administrationFeeBankVoucherSubmissionDate.getDayOfMonth());
         return jalaliadministrationFeeBankVoucherSubmissionDate;
     }
-
-
-
 
 }
