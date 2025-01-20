@@ -35,74 +35,12 @@ public class LicenseApplicantController {
     @Autowired
     private LicenseTypeService licenseTypeService;
 
-
-
     @GetMapping("/licenses/license/registration/license_applicants_profile")
     public String showApplicationProfile(Model model) {
         List<LicenseApplicant> profiles = licenseService.getAllApplicants();
         model.addAttribute("profiles", profiles);
         model.addAttribute("licenseTypes", licenseTypeService.findAll());
         return "licenses/license/registration/license_applicants_profile";
-    }
-
-
-    //Refer to Complete Profile
-    @GetMapping("/licenses/license/registration/complete-profile/license_applicant_complete_profile/{id}")
-    public String completeProfile(@PathVariable Long id, Model model) {
-        Optional<LicenseApplicant> profileOpt = licenseService.getApplicantById(id);
-        if (profileOpt.isPresent()) {
-            LicenseApplicant profile = profileOpt.get();
-            LicenseApplicantDTO licenseApplicantDTO = new LicenseApplicantDTO();
-            licenseApplicantDTO.setId(profile.getId());
-            licenseApplicantDTO.setLicenseNo(profile.getLicenseNo());
-            MultipartFile licenseUpload=licenseApplicantDTO.getLicenseUpload();
-            licenseApplicantDTO.setLicenseUpload(licenseUpload);
-            licenseApplicantDTO.setTinNo(profile.getTinNo());
-            MultipartFile tinUpload= licenseApplicantDTO.getTinUpload();
-            licenseApplicantDTO.setTinUpload(tinUpload);
-            licenseApplicantDTO.setYearOfEstablishment(profile.getYearOfEstablishment());
-            licenseApplicantDTO.setExpiryDate(profile.getExpiryDate());
-            licenseApplicantDTO.setPlannedActivitiesAndServices(profile.getPlannedActivitiesAndServices());
-            licenseApplicantDTO.setTotalNationalEmployees(profile.getTotalNationalEmployees());
-            licenseApplicantDTO.setTotalInternationalEmployees(profile.getTotalInternationalEmployees());
-            licenseApplicantDTO.setExpectedInvestment(profile.getExpectedInvestment());
-            licenseApplicantDTO.setCash(profile.getCash());
-            // Add the DTO to the model for the form
-            model.addAttribute("licenseApplicant", licenseApplicantDTO);
-        } else {
-            // Handle case where applicant is not found
-            model.addAttribute("error", "Applicant not found");
-            return "error-page";
-        }
-
-        return "licenses/license/registration/complete-profile/license_applicant_complete_profile";
-    }
-
-
-    @PostMapping("/licenses/license/registration/complete-profile/license_applicant_complete_profile")
-    public String updateCompleteProfile(
-            @ModelAttribute("licenseApplicant") LicenseApplicantDTO dto,
-            BindingResult bindingResult,
-            Model model) {
-
-        if (bindingResult.hasErrors()) {
-            return "licenses/license/registration/complete-profile/license_applicant_complete_profile"; // View for re-editing
-        }
-
-        try {
-            LicenseApplicant updatedProfile = licenseService.updateCompleteProfile(dto.getId(), dto);
-            // Add success message
-            model.addAttribute("message", "Profile updated successfully.");
-            // Redirect to a success page
-            return "redirect:/licenses/license/registration/license_applicants_profile";
-
-        } catch (IllegalArgumentException ex) {
-            // Handle errors
-            model.addAttribute("error", ex.getMessage());
-            return "licenses/license/registration/complete-profile/license_applicant_complete_profile";
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
     }
 
 

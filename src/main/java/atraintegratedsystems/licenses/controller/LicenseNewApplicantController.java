@@ -10,10 +10,14 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
+
 @Controller
 public class LicenseNewApplicantController {
 
@@ -61,6 +65,68 @@ public class LicenseNewApplicantController {
             return "licenses/license/registration/profile/license_new_profile";
         }
     }
+
+    //Refer to Complete Profile
+    @GetMapping("/licenses/license/registration/profile/license_applicant_complete_profile/{id}")
+    public String completeProfile(@PathVariable Long id, Model model) {
+        Optional<LicenseApplicant> profileOpt = licenseService.getApplicantById(id);
+        if (profileOpt.isPresent()) {
+            LicenseApplicant profile = profileOpt.get();
+            LicenseApplicantDTO licenseApplicantDTO = new LicenseApplicantDTO();
+            licenseApplicantDTO.setId(profile.getId());
+            licenseApplicantDTO.setLicenseNo(profile.getLicenseNo());
+            MultipartFile licenseUpload=licenseApplicantDTO.getLicenseUpload();
+            licenseApplicantDTO.setLicenseUpload(licenseUpload);
+            licenseApplicantDTO.setTinNo(profile.getTinNo());
+            MultipartFile tinUpload= licenseApplicantDTO.getTinUpload();
+            licenseApplicantDTO.setTinUpload(tinUpload);
+            licenseApplicantDTO.setYearOfEstablishment(profile.getYearOfEstablishment());
+            licenseApplicantDTO.setExpiryDate(profile.getExpiryDate());
+            licenseApplicantDTO.setPlannedActivitiesAndServices(profile.getPlannedActivitiesAndServices());
+            licenseApplicantDTO.setTotalNationalEmployees(profile.getTotalNationalEmployees());
+            licenseApplicantDTO.setTotalInternationalEmployees(profile.getTotalInternationalEmployees());
+            licenseApplicantDTO.setExpectedInvestment(profile.getExpectedInvestment());
+            licenseApplicantDTO.setCash(profile.getCash());
+            // Add the DTO to the model for the form
+            model.addAttribute("licenseApplicant", licenseApplicantDTO);
+        } else {
+            // Handle case where applicant is not found
+            model.addAttribute("error", "Applicant not found");
+            return "error-page";
+        }
+
+        return "licenses/license/registration/profile/license_applicant_complete_profile";
+    }
+
+
+    @PostMapping("/licenses/license/registration/profile/license_applicant_complete_profile")
+    public String updateCompleteProfile(
+            @ModelAttribute("licenseApplicant") LicenseApplicantDTO dto,
+            BindingResult bindingResult,
+            Model model) {
+
+        if (bindingResult.hasErrors()) {
+            return "licenses/license/registration/profile/license_applicant_complete_profile"; // View for re-editing
+        }
+
+        try {
+            LicenseApplicant updatedProfile = licenseService.updateCompleteProfile(dto.getId(), dto);
+            // Add success message
+            model.addAttribute("message", "Profile updated successfully.");
+            // Redirect to a success page
+            return "redirect:/licenses/license/registration/license_applicants_profile";
+
+        } catch (IllegalArgumentException ex) {
+            // Handle errors
+            model.addAttribute("error", ex.getMessage());
+            return "licenses/license/registration/profile/license_applicant_complete_profile";
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+
     private String getFileExtension(byte[] fileData) {
         if (fileData == null || fileData.length < 4) {
             return ".bin"; // Default to binary if no data or too short
