@@ -6,12 +6,12 @@
 <body>
 <nav th:replace="~{layout :: page_navbar}"></nav>
 <div class="container mt-5">
-  <fieldset class="border p-3 rounded">
-    <legend class="float-none w-auto px-3 text-primary fw-bold">License Management Section</legend>
+  <fieldset style="border: 2px solid #DCAF45; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+    <legend style="width: auto; font-size: 1.2rem; color: #14438B; padding: 0 10px; font-weight: bold;">License Management Section</legend>
     <div class="row g-4">
       <!-- Card 1 -->
       <div class="col-sm-4">
-        <div class="custom-card text-center p-3 border rounded">
+        <div class="custom-card text-center p-3">
           <a th:href="@{/licenses/license/registration/profile/license_new_profile}">
             <img th:src="@{/images/license_new_applicant.png}" alt="License Management System" class="img-fluid"></a>
           <h4 class="license-link mt-2">
@@ -21,7 +21,7 @@
       </div>
       <!-- Card 2 -->
       <div class="col-sm-4">
-        <div class="custom-card text-center p-3 border rounded">
+        <div class="custom-card text-center p-3">
           <a th:href="@{/licenses/license/registration/profile/license_applicants_profile}">
             <img th:src="@{/images/applicant.png}" alt="Finance Revenue Management System" class="img-fluid"></a>
           <h4 class="license-link mt-2">
@@ -31,24 +31,24 @@
       </div>
 
       <div class="col-sm-4">
-        <div class="custom-card text-center p-3 border rounded">
+        <div class="custom-card text-center p-3">
           <a th:href="@{/licenses/license/registration/profile/license_applicants_profile}">
-            <img th:src="@{/images/applicant.png}" alt="Finance Revenue Management System" class="img-fluid"></a>
+            <img th:src="@{/images/complete_profile.png}" alt="Finance Revenue Management System" class="img-fluid"></a>
           <h4 class="license-link mt-2">
-            <a th:href="@{/licenses/license/registration/license_applicants_profile}">Complete Applicant Profiles</a>
+            <a th:href="@{/licenses/license/registration/license_applicants_profile}">Complete Profiles</a>
           </h4>
         </div>
       </div>
     </div>
   </fieldset>
 <br>
-  <fieldset class="border p-3 rounded">
-    <legend class="float-none w-auto px-3 text-primary fw-bold">License Approval Management Section</legend>
+  <fieldset style="border: 2px solid #DCAF45; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+    <legend style="width: auto; font-size: 1.2rem; color: #14438B; padding: 0 10px; font-weight: bold;">License Approval Management Section</legend>
 
     <div class="row g-4">
       <!-- Card 1 -->
       <div class="col-sm-4">
-        <div class="custom-card text-center p-3 border rounded">
+        <div class="custom-card text-center p-3">
           <a th:href="@{/licenses/license/approval/license_applicants_approval_list}">
             <img th:src="@{/images/licenseapproval.png}" alt="Codes Management System" class="img-fluid">
           </a>
@@ -60,7 +60,7 @@
 
       <!-- Card 2 -->
       <div class="col-sm-4">
-        <div class="custom-card text-center p-3 border rounded">
+        <div class="custom-card text-center p-3">
           <a th:href="@{/licenses/license/rejection/license_applicants_rejection_list}">
             <img th:src="@{/images/rejection.png}" alt="Codes Management System" class="img-fluid">
           </a>
@@ -73,10 +73,10 @@
   </fieldset>
   <br>
 
-  <fieldset class="border p-3 rounded">
-    <legend class="float-none w-auto px-3 text-primary fw-bold">License Extension Management Section</legend>
+  <fieldset style="border: 2px solid #DCAF45; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+    <legend style="width: auto; font-size: 1.2rem; color: #14438B; padding: 0 10px; font-weight: bold;">License Extension Management Section</legend>
     <div class="col-sm-4">
-      <div class="custom-card text-center p-3 border rounded">
+      <div class="custom-card text-center p-3">
           <a th:href="@{/licenses/license/extension/extension_home}">
             <img th:src="@{/images/extension.png}" alt="Codes Management System"></a>
           <h4 class="license-link" style="margin-top: 12px;">
@@ -86,10 +86,10 @@
     </div>
   </fieldset>
   <br>
-  <fieldset class="border p-3 rounded">
-    <legend class="float-none w-auto px-3 text-primary fw-bold">License Certificate Management Section</legend>
+  <fieldset style="border: 2px solid #DCAF45; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+    <legend style="width: auto; font-size: 1.2rem; color: #14438B; padding: 0 10px; font-weight: bold;">License Certificate Management Section</legend>
     <div class="col-sm-4">
-      <div class="custom-card text-center p-3 border rounded">
+      <div class="custom-card text-center p-3">
           <a th:href="@{/licenses/license/certificate/license_applicants_certificate_list}">
             <img th:src="@{/images/certificate.png}" alt="Codes Management System"></a>
           <h4 class="license-link" style="margin-top: 12px;">

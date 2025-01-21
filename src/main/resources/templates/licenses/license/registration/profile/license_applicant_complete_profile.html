@@ -16,26 +16,26 @@
           th:object="${licenseApplicant}" method="post" enctype="multipart/form-data">
 
       <!-- Personal Information Section -->
-      <fieldset style="border: 2px solid #007bff; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
-        <legend style="width: auto; font-size: 1.2rem; color: #007bff; padding: 0 10px; font-weight: bold;">
-          Personal Information
+      <fieldset style="border: 2px solid #DCAF45; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+        <legend style="width: auto; font-size: 1.2rem; color: #14438B; padding: 0 10px; font-weight: bold;">
+          License Information
         </legend>
         <div class="row">
           <div class="col-md-3 form-group">
             <label for="cash" th:text="#{license_application_cash}"
-                   th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+                   th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" style="color:#14438B;">
             </label>
             <input type="number" id="cash" th:field="*{cash}" class="form-control">
           </div>
           <div class="col-md-3 form-group">
             <label for="licenseNo" th:text="#{license_application_license_no}"
-                   th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+                   th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" style="color:#14438B;">
             </label>
             <input type="text" id="licenseNo" th:field="*{licenseNo}" class="form-control" maxlength="50">
           </div>
           <div class="col-md-3 form-group">
             <label for="tinNo" th:text="#{license_application_tin}"
-                   th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+                   th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" style="color:#14438B;">
             </label>
             <input type="text" id="tinNo" th:field="*{tinNo}" class="form-control" maxlength="50">
           </div>
@@ -43,8 +43,8 @@
       </fieldset>
 
       <!-- Document Upload Section -->
-      <fieldset style="border: 2px solid #28a745; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
-        <legend style="width: auto; font-size: 1.2rem; color: #28a745; padding: 0 10px; font-weight: bold;">
+      <fieldset style="border: 2px solid #DCAF45; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+        <legend style="width: auto; font-size: 1.2rem; color: #14438B; padding: 0 10px; font-weight: bold;">
           Document Upload
         </legend>
         <div class="row">
@@ -70,8 +70,8 @@
       </fieldset>
 
       <!-- Company Information Section -->
-      <fieldset style="border: 2px solid #dc3545; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
-        <legend style="width: auto; font-size: 1.2rem; color: #dc3545; padding: 0 10px; font-weight: bold;">
+      <fieldset style="border: 2px solid #DCAF45; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+        <legend style="width: auto; font-size: 1.2rem; color: #14438B; padding: 0 10px; font-weight: bold;">
           Company Information
         </legend>
         <div class="row">
@@ -101,8 +101,8 @@
           </div>
         </div>
       </fieldset>
-      <fieldset style="border: 2px solid #dc3545; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
-        <legend style="width: auto; font-size: 1.2rem; color: #dc3545; padding: 0 10px; font-weight: bold;">
+      <fieldset style="border: 2px solid #DCAF45; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+        <legend style="width: auto; font-size: 1.2rem; color:#14438B; padding: 0 10px; font-weight: bold;">
           Activities
         </legend>
         <div class="row">
@@ -116,8 +116,8 @@
           </div>
         </div>
       </fieldset>
-      <fieldset style="border: 2px solid #dc3545; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
-        <legend style="width: auto; font-size: 1.2rem; color: #dc3545; padding: 0 10px; font-weight: bold;">
+      <fieldset style="border: 2px solid #DCAF45; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+        <legend style="width: auto; font-size: 1.2rem; color: #14438B; padding: 0 10px; font-weight: bold;">
           Company Address
         </legend>
         <div class="row">
