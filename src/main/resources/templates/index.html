@@ -9,9 +9,12 @@
 <body>
 <nav th:replace="~{layout :: page_navbar}"></nav>
 <div class="container mt-5">
-    <table class="table table-borderless">
-        <tr style="border-bottom:1px solid darkgray;">
-            <td class="text-center">
+
+        <fieldset style="border: 2px solid #DCAF45; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+            <legend style="width: auto; font-size: 1.2rem; color: #14438B; padding: 0 10px; font-weight: bold;">License Section</legend>
+            <table class="table table-borderless">
+            <tr>
+            <td>
                 <div class="custom-card" sec:authorize="hasRole('ROLE_LICENSE')">
                     <a th:href="@{/licenses/license/home}">
                         <img th:src="@{/images/licensing.png}" alt="License Management System">
@@ -21,7 +24,7 @@
                     </h4>
                 </div>
             </td>
-            <td class="text-center">
+            <td>
                 <div class="custom-card"  sec:authorize="hasRole('ROLE_FINANCE') or hasRole('ROLE_MINISTRY')">
                     <a th:href="@{/licenses/finance/home}">
                         <img th:src="@{/images/revenue-growth.gif}" class="rounded" style="width:100px;height:100px;" alt="LMS">
@@ -32,8 +35,13 @@
                 </div>
             </td>
         </tr>
-        <tr style="border-bottom:1px solid darkgray;">
-            <td class="text-center">
+            </table>
+        </fieldset>
+    <fieldset style="border: 2px solid #DCAF45; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+        <legend style="width: auto; font-size: 1.2rem; color: #14438B; padding: 0 10px; font-weight: bold;">Report Section</legend>
+    <table class="table table-borderless">
+        <tr>
+            <td>
                 <div class="custom-card">
                     <a th:href="@{/licenses/license/report}">
                         <img th:src="@{/images/reports.png}" alt="Codes Management System">
@@ -44,9 +52,14 @@
                 </div>
             </td>
         </tr>
+    </table>
+    </fieldset>
 
-        <tr style="border-bottom:1px solid darkgray;">
-            <td class="text-center">
+    <fieldset style="border: 2px solid #DCAF45; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+        <legend style="width: auto; font-size: 1.2rem; color: #14438B; padding: 0 10px; font-weight: bold;">User Management Section</legend>
+    <table class="table table-borderless">
+        <tr>
+            <td>
                 <div class="custom-card">
                     <a th:href="@{/licenses/admin/userlists}">
                         <img class="rounded" th:src="@{/images/user.gif}" alt="lms" style="height:100px;width:100px;">
@@ -58,8 +71,10 @@
             </td>
         </tr>
     </table>
+    </fieldset>
 </div>
 <div th:replace="scripts :: common-scripts"></div>
+<div style="height:10vh;"></div>
 <footer th:replace="~{layout :: page_footer}"></footer>
 <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
 </body>
