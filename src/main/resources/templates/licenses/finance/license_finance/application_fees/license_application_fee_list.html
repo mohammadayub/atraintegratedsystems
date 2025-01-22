@@ -5,11 +5,14 @@
     <div th:replace="styles :: persian-datepicker-styles"></div>
     <div th:replace="styles :: select2-styles"></div>
     <div th:replace="styles :: common-css"></div>
+    <div th:replace="styles :: commonfieldset-with-legend-border"></div>
     <title>LMS</title>
 </head>
 <body>
 <nav th:replace="~{layout :: page_navbar}"></nav>
 <div class="container-fluid">
+    <fieldset>
+        <legend>License Application Fee List</legend>
     <div class="table-container">
         <table class="slip" id="profileTable" >
             <thead>
@@ -61,6 +64,7 @@
             </tbody>
         </table>
     </div>
+    </fieldset>
     <a th:href="@{/licenses/finance/license_finance}" class="btn btn-primary" style="margin-top:20px;">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6" style="width:20px;height:20px;">
             <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />

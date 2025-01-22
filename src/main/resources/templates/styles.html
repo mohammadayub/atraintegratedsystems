@@ -293,6 +293,7 @@
         #profileTable thead th {
             color: white;
             font-size: 16px; /* Slightly larger font for headers */
+            background-color:#8B0000;
         }
 
 
@@ -323,11 +324,11 @@
             background-color: #f9f9f9;
         }
         .table-container {
-            overflow-y: auto;
             border: 1px solid #ddd;
             padding: 20px;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
             background-color: #f9f9f9;
+            height:100%;
         }
         #profileTable, #extensionTable {
             width: 100%;
@@ -350,6 +351,44 @@
             white-space: nowrap;
         }
 
+    </style>
+</div>
+<!-- Common Fieldset -->
+<div th:fragment="commonfieldset">
+    <style>
+        fieldset {
+            border: 2px solid #DCAF45;
+            padding: 15px; border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        legend {
+        width: auto;
+        font-size: 1.2rem;
+        color: #14438B;
+        padding: 0 10px;
+        font-weight: bold;"
+        }
+    </style>
+</div>
+<div th:fragment="commonfieldset-with-legend-border">
+    <style>
+    fieldset {
+    margin-top:15px;
+    border: 2px solid #DCAF45;
+    border-radius: 5px;
+    padding: 15px;
+    background-color: #f9f9f9;
+    }
+    legend {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #14438B;
+    padding: 0 10px;
+    border: 2px solid #007bff;
+    border-radius: 5px;
+    background-color: #ffffff;
+    }
     </style>
 </div>
 <!-- Common print Tariff Css Part-->

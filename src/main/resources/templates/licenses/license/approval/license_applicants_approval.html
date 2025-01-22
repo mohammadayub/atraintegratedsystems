@@ -5,11 +5,14 @@
     <div th:replace="styles :: persian-datepicker-styles"></div>
     <div th:replace="styles :: select2-styles"></div>
     <div th:replace="styles :: common-css"></div>
+    <div th:replace="styles :: commonfieldset"></div>
     <title>LMS</title>
 </head>
 <body  onload="setApplicationFees()">
 <nav th:replace="~{layout :: page_navbar}"></nav>
 <div class="container-fluid">
+    <fieldset>
+        <legend>Approve License</legend>
     <!-- Form for License Approval -->
     <form th:action="@{/licenses/license/approval/license_applicants_approval}"
           th:object="${licenseApplicantDTO}" method="post" style="margin-top:5%;padding-left:5%;padding-right:5%;">
@@ -165,14 +168,14 @@
                 <span th:text="#{license_approval_back_to_list}"></span>
             </a>
         </div>
-        <!-- Back Link -->
-        <a th:href="@{/licenses/license/approval/license_applicants_approval_list}" class="btn" style="margin-top:20px;color:white;background-color:#3066be;">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6" style="width:20px;height:20px;">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
-            </svg>
-            Back to Page</a>
-
     </form>
+    </fieldset>
+    <!-- Back Link -->
+    <a th:href="@{/licenses/license/approval/license_applicants_approval_list}" class="btn" style="margin-top:20px;color:white;background-color:#3066be;">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6" style="width:20px;height:20px;">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
+        </svg>
+        Back to Page</a>
 </div>
 
 

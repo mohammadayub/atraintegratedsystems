@@ -1,11 +1,14 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head th:replace="~{layout :: page_head}">
+    <div th:replace="styles :: commonfieldset"></div>
     <title>LMS</title>
 </head>
 <body>
 <nav th:replace="~{layout :: page_navbar}"></nav>
 <div class="container mt-5">
+    <fieldset>
+        <legend>Fees & Tariffs Section</legend>
     <table class="table table-borderless">
         <tr style="border-bottom:1px solid darkgray;">
             <td class="text-center">
@@ -64,19 +67,17 @@
                 </div>
             </td>
         </tr>
-        <tr>
-            <td class="text-center">
-                <a th:href="@{/licenses/finance/home}" class="btn btn-primary" style="margin-top:20px;">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6" style="width:20px;height:20px;">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
-                    </svg>
-                    Back to Page</a>
-            </td>
-        </tr>
     </table>
+    </fieldset>
+    <a th:href="@{/licenses/finance/home}" class="btn btn-primary" style="margin-top:20px;">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6" style="width:20px;height:20px;">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
+        </svg>
+        Back to Page</a>
 </div>
 
 <div th:replace="scripts :: common-scripts"></div>
+<div style="height:10vh;"></div>
 <footer th:replace="~{layout :: page_footer}"></footer>
 <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
 </body>

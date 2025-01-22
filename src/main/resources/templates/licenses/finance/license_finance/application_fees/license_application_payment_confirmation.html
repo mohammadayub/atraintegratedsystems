@@ -1,16 +1,19 @@
 <!doctype html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" th:lang="${session.lang}" th:attr="dir=${session.dir}">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      xmlns="http://www.w3.org/1999/html" th:lang="${session.lang}" th:attr="dir=${session.dir}">
 <head th:replace="~{layout :: page_head}">
     <div th:replace="styles :: data-tables-styles"></div>
     <div th:replace="styles :: persian-datepicker-styles"></div>
     <div th:replace="styles :: select2-styles"></div>
     <div th:replace="styles :: popup"></div>
+    <div th:replace="styles :: commonfieldset"></div>
     <title>LMS</title>
 </head>
 <body>
 <nav th:replace="~{layout :: page_navbar}"></nav>
-<h3 style="text-align:center;margin-top:10px;font-weight:bolder;color:white;" class="bg-primary" th:text="#{license_application_confirmation}">License Application Confirmation</h3>
 <div class="container-fluid" style="margin-top:40px;">
+    <fieldset>
+        <legend>License Application Fee Confirmation</legend>
     <form id="licenseForm" th:action="@{/licenses/finance/license_finance/application_fees/license_application_fee_list/add}" th:object="${licenseApplicantDTO}" method="post">
         <div class="row">
             <!-- Hidden ID Field -->
@@ -160,6 +163,7 @@
             </div>
         </div>
     </form>
+    </fieldset>
     <a th:href="@{/licenses/finance/license_finance/application_fees/license_application_fee_list}" class="btn btn-primary" style="margin-top:20px;">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6" style="width:20px;height:20px;">
             <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />

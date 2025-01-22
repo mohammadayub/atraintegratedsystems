@@ -7,14 +7,17 @@
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css">
   <div th:replace="styles :: common-css"></div>
+  <div th:replace="styles :: commonfieldset-with-legend-border"></div>
   <title>LMS</title>
 
 
 </head>
 <body>
 <nav th:replace="~{layout :: page_navbar}"></nav>
-<h4 class="mt-4">License Approvals Information</h4>
+
 <div class="table-container">
+  <fieldset class="mt-2">
+    <legend>License Approvals Information</legend>
   <table border="1" class="table table-bordered" id="profileTable">
     <thead>
     <tr class="bg-primary">
@@ -44,7 +47,10 @@
     </tr>
     </tbody>
   </table>
-  <h4 class="mt-4" >License Database Fee Extensions Information</h4>
+</fieldset>
+
+  <fieldset class="mt-2">
+    <legend>License Admin Fee Extensions Information</legend>
   <table border="1" class="table table-bordered" id="extensionTable">
     <thead>
     <tr class="bg-primary">
@@ -80,6 +86,7 @@
     </tr>
     </tbody>
   </table>
+  </fieldset>
 </div>
 <div th:replace="scripts :: common-scripts"></div>
 <div th:replace="scripts :: persian-datepicker-scripts"></div>
