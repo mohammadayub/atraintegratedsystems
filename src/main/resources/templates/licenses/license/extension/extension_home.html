@@ -1,5 +1,6 @@
 <!doctype html>
-<html xmlns:th="http://www.thymeleaf.org" th:lang="${session.lang}" th:attr="dir=${session.dir}">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" th:lang="${session.lang}"
+      th:attr="dir=${session.dir}">
 <head th:replace="~{layout :: page_head}">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,7 +21,7 @@
 </head>
 <body>
 <nav th:replace="~{layout :: page_navbar}"></nav>
-<div class="container mt-5">
+<div class="container mt-5" sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_LICENSE')">
   <fieldset>
     <legend>Database Fee Extension</legend>
   <table class="table table-borderless">

@@ -67,6 +67,26 @@
             <input type="file" id="bankStatementUpload" th:field="*{bankStatementUpload}" class="form-control-file" accept=".pdf,.jpg,.jpeg,.png">
           </div>
         </div>
+        <div class="row">
+          <div class="col-md-3 form-group">
+            <label for="licenseUpload"
+                   th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">Electronic Tazkira(NID)
+            </label>
+            <input type="file" id="e-tazkira" class="form-control-file" accept=".pdf,.jpg,.jpeg,.png">
+          </div>
+          <div class="col-md-3 form-group">
+            <label for="bankStatement(first and last page)"
+                   th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">Bank Statement(fist and Last pages)
+            </label>
+            <input type="file" id="bankStatement(first and last page)" class="form-control-file" accept=".pdf,.jpg,.jpeg,.png" style="border-left: 2px solid blue;">
+          </div>
+          <div class="col-md-3 form-group">
+            <label for="bp"
+                   th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">Business Plan & evaluation
+            </label>
+            <input type="file" id="bp" class="form-control-file" accept=".pdf,.jpg,.jpeg,.png">
+          </div>
+        </div>
       </fieldset>
 
       <!-- Company Information Section -->

@@ -14,14 +14,14 @@
 </head>
 <body>
 <nav th:replace="~{layout :: page_navbar}"></nav>
-<div class="container mt-5">
+<div class="container mt-5" sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_FINANCE')">
     <fieldset>
         <legend>Admin Fee Extension</legend>
 
     <table class="table table-borderless">
         <tr>
             <td>
-                <div class="custom-card">
+                <div class="custom-card" sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_FINANCE')">
                     <a th:href="@{/licenses/finance/extension/admin_fees_extension/license_admin_fees}">
                         <img th:src="@{/images/adminFees.png}"></a>
                     <h4 class="license-link" style="margin-top: 12px;">
@@ -38,7 +38,7 @@
     <table class="table table-borderless">
         <tr>
             <td>
-                <div class="custom-card" >
+                <div class="custom-card" sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_FINANCE')">
                     <a th:href="@{/licenses/finance/extension/database_fees_extension/license_database_fees}">
                         <img th:src="@{/images/databaseMaintainanceCost.png}"></a>
                     <h4 class="license-link" style="margin-top: 12px;">
