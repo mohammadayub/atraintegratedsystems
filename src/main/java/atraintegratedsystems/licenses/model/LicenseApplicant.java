@@ -36,6 +36,15 @@ public class LicenseApplicant {
     @Column(name="application_upload")
     private byte[] applicationUpload;
 
+    @Column(name="enid_upload")
+    private byte[] enidUpload;
+
+    @Column(name="article_of_association_upload")
+    private byte[] articleOfAssociationUpload;
+
+    @Column(name="business_plan_upload")
+    private byte[] businessPlanUpload;
+
     @Column(name = "license_no")
     private String licenseNo;
 

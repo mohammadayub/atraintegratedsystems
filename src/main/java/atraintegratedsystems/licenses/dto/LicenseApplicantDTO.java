@@ -21,6 +21,9 @@ public class LicenseApplicantDTO {
     private String financeType;
     private String companyLicenseName;
     private MultipartFile applicationUpload;
+    private MultipartFile enidUpload;
+    private MultipartFile articleOfAssociationUpload;
+    private MultipartFile businessPlanUpload;
     private String licenseNo;
     private MultipartFile licenseUpload;
     private String tinNo;
