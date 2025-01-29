@@ -72,19 +72,19 @@
             <label for="enidUpload"
                    th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">Electronic Tazkira(NID)
             </label>
-            <input type="file" id="enidUpload" class="form-control-file" accept=".pdf,.jpg,.jpeg,.png">
+            <input type="file" id="enidUpload" th:field="*{enidUpload}"  class="form-control-file" accept=".pdf,.jpg,.jpeg,.png">
           </div>
           <div class="col-md-3 form-group">
-            <label for="bankStatement(first and last page)"
+            <label for="Articales_of_Association"
                    th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">Articales Of Association
             </label>
-            <input type="file" id="bankStatement(first and last page)" class="form-control-file" accept=".pdf,.jpg,.jpeg,.png" style="border-left: 2px solid blue;">
+            <input type="file" id="Articales_of_Association" th:field="*{articleOfAssociationUpload}" class="form-control-file" accept=".pdf,.jpg,.jpeg,.png" style="border-left: 2px solid blue;">
           </div>
           <div class="col-md-3 form-group">
             <label for="bp"
                    th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">Business Plan & evaluation
             </label>
-            <input type="file" id="bp" class="form-control-file" accept=".pdf,.jpg,.jpeg,.png">
+            <input type="file" id="bp" th:field="*{businessPlanUpload}" class="form-control-file" accept=".pdf,.jpg,.jpeg,.png">
           </div>
         </div>
       </fieldset>
