@@ -33,15 +33,19 @@ public class LicenseApplicant {
     @NotBlank(message = "Please enter Company Name")
     private String companyLicenseName;
 
+    @Lob
     @Column(name="application_upload")
     private byte[] applicationUpload;
 
+    @Lob
     @Column(name="enid_upload")
     private byte[] enidUpload;
 
+    @Lob
     @Column(name="article_of_association_upload")
     private byte[] articleOfAssociationUpload;
 
+    @Lob
     @Column(name="business_plan_upload")
     private byte[] businessPlanUpload;
 

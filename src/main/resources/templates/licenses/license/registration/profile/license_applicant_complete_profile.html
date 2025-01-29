@@ -75,16 +75,16 @@
             <input type="file" id="enidUpload" th:field="*{enidUpload}"  class="form-control-file" accept=".pdf,.jpg,.jpeg,.png">
           </div>
           <div class="col-md-3 form-group">
-            <label for="Articales_of_Association"
+            <label for="articleOfAssociationUpload"
                    th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">Articales Of Association
             </label>
-            <input type="file" id="Articales_of_Association" th:field="*{articleOfAssociationUpload}" class="form-control-file" accept=".pdf,.jpg,.jpeg,.png" style="border-left: 2px solid blue;">
+            <input type="file" id="articleOfAssociationUpload" th:field="*{articleOfAssociationUpload}" class="form-control-file" accept=".pdf,.jpg,.jpeg,.png" style="border-left: 2px solid blue;">
           </div>
           <div class="col-md-3 form-group">
-            <label for="bp"
+            <label for="businessPlanUpload"
                    th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">Business Plan & evaluation
             </label>
-            <input type="file" id="bp" th:field="*{businessPlanUpload}" class="form-control-file" accept=".pdf,.jpg,.jpeg,.png">
+            <input type="file" id="businessPlanUpload" th:field="*{businessPlanUpload}" class="form-control-file" accept=".pdf,.jpg,.jpeg,.png">
           </div>
         </div>
       </fieldset>

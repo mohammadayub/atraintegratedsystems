@@ -75,6 +75,16 @@ public class LicenseNewApplicantController {
             LicenseApplicantDTO licenseApplicantDTO = new LicenseApplicantDTO();
             licenseApplicantDTO.setId(profile.getId());
             licenseApplicantDTO.setLicenseNo(profile.getLicenseNo());
+
+            MultipartFile enidUpload=licenseApplicantDTO.getEnidUpload();
+            licenseApplicantDTO.setEnidUpload(enidUpload);
+
+            MultipartFile articleOfAssociation= licenseApplicantDTO.getArticleOfAssociationUpload();
+            licenseApplicantDTO.setArticleOfAssociationUpload(articleOfAssociation);
+
+            MultipartFile businessPlan= licenseApplicantDTO.getBusinessPlanUpload();
+            licenseApplicantDTO.setBusinessPlanUpload(businessPlan);
+
             MultipartFile licenseUpload=licenseApplicantDTO.getLicenseUpload();
             licenseApplicantDTO.setLicenseUpload(licenseUpload);
             licenseApplicantDTO.setTinNo(profile.getTinNo());

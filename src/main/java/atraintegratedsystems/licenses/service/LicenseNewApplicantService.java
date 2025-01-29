@@ -95,6 +95,35 @@ public class LicenseNewApplicantService {
                 .orElseThrow(() -> new IllegalArgumentException("Profile not found with ID: " + id));
         DateConverter dateConverter = new DateConverter();
         profile.setLicenseNo(dto.getLicenseNo());
+        MultipartFile enidUpload = dto.getEnidUpload();
+        if (enidUpload != null && !enidUpload.isEmpty()) {
+            String contentType = enidUpload.getContentType();
+            if (!VALID_FILE_TYPES.contains(contentType)) {
+                throw new IllegalArgumentException("Invalid File Type: " + contentType);
+            }
+            profile.setEnidUpload(enidUpload.getBytes());
+        }
+
+        MultipartFile articleOfAssociationUpload = dto.getArticleOfAssociationUpload();
+        if (articleOfAssociationUpload != null && !articleOfAssociationUpload.isEmpty()) {
+            String contentType = articleOfAssociationUpload.getContentType();
+            if (!VALID_FILE_TYPES.contains(contentType)) {
+                throw new IllegalArgumentException("Invalid File Type: " + contentType);
+            }
+            profile.setArticleOfAssociationUpload(articleOfAssociationUpload.getBytes());
+        }
+
+        MultipartFile businessPlanUpload = dto.getBusinessPlanUpload();
+        if (businessPlanUpload != null && !businessPlanUpload.isEmpty()) {
+            String contentType = businessPlanUpload.getContentType();
+            if (!VALID_FILE_TYPES.contains(contentType)) {
+                throw new IllegalArgumentException("Invalid File Type: " + contentType);
+            }
+            profile.setBusinessPlanUpload(businessPlanUpload.getBytes());
+        }
+
+
+
         MultipartFile licenseUpload = dto.getLicenseUpload();
         if (licenseUpload != null && !licenseUpload.isEmpty()) {
             String contentType = licenseUpload.getContentType();
