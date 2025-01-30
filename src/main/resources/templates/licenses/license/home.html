@@ -20,7 +20,7 @@
       <div class="col-sm-4" sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_LICENSE')">
         <div class="custom-card text-center p-3">
           <a th:href="@{/licenses/license/registration/profile/license_new_profile}">
-            <img th:src="@{/images/license_new_applicant.png}" alt="License Management System" class="img-fluid"></a>
+            <img th:src="@{/images/New_application.png}" alt="License Management System" class="img-fluid"></a>
           <h4 class="license-link mt-2">
             <a th:href="@{/licenses/license/registration/profile/license_new_profile}" th:text="#{license_applicant}" style="font-size:20px;"></a>
           </h4>
@@ -85,7 +85,7 @@
     <div class="col-sm-4" sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_LICENSE')">
       <div class="custom-card text-center p-3" >
           <a th:href="@{/licenses/license/extension/extension_home}">
-            <img th:src="@{/images/extension.png}" alt="Codes Management System"></a>
+            <img th:src="@{/images/finance_extension.png}" alt="license Management System"></a>
           <h4 class="license-link" style="margin-top: 12px;">
             <a th:href="@{/licenses/license/extension/extension_home}"  style="font-size:20px;">License Fees Extension</a>
           </h4>
