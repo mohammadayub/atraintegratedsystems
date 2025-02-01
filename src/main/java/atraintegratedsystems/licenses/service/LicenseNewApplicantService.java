@@ -147,7 +147,6 @@ public class LicenseNewApplicantService {
         LocalDate expiryDate = dateConverter.jalaliToGregorian(dto.getExpiryDate().getYear(), dto.getExpiryDate().getMonthValue(), dto.getExpiryDate().getDayOfMonth());
         profile.setExpiryDate(expiryDate);
         profile.setApplicationFees(dto.getApplicationFees());
-        profile.setValidity(dto.getValidity());
         profile.setPlannedActivitiesAndServices(dto.getPlannedActivitiesAndServices());
         profile.setTotalNationalEmployees(dto.getTotalNationalEmployees());
         profile.setTotalInternationalEmployees(dto.getTotalInternationalEmployees());

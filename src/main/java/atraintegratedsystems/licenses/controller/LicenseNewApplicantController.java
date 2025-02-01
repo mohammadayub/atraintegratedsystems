@@ -87,6 +87,7 @@ public class LicenseNewApplicantController {
 
             MultipartFile licenseUpload=licenseApplicantDTO.getLicenseUpload();
             licenseApplicantDTO.setLicenseUpload(licenseUpload);
+
             licenseApplicantDTO.setTinNo(profile.getTinNo());
             MultipartFile tinUpload= licenseApplicantDTO.getTinUpload();
             licenseApplicantDTO.setTinUpload(tinUpload);
