@@ -21,26 +21,32 @@
             <!-- Hidden Fields -->
             <input type="hidden" th:field="*{id}">
             <input type="hidden" th:field="*{licenseApplicantId}">
+            <input type="hidden" name="licenseTypeId" th:value="*{licenseTypeId}">
             <div class="col-md-3 form-group">
-                <label for="licenseType" th:text="#{approval_license_approval_type}"
-                       th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">License Type:</label>
-                <select id="licenseType" name="licenseApplicantId" th:field="*{id}" class="form-control" onchange="updateLicenseApplicantId()"  style="border-left: 2px solid blue;" readonly>
-                    <option th:each="type : ${licenseApplicants}"
-                            th:value="${type.id}"
-                            th:text="${type.companyLicenseName}"
-                            th:selected="${type.id == id}"></option>
-                </select>
+                <label for="companyLicenseName"
+                       th:text="#{license_approval_license_fees}"
+                       th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
+                <input type="text" id="companyLicenseName" th:field="*{companyLicenseName}" class="form-control" required readonly>
             </div>
+
             <!-- License Type -->
             <div class="col-md-3 form-group">
-                <label for="licenseTypeId" th:text="#{approval_license_approval_type}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">License Type:</label>
-                <select id="licenseTypeId" name="licenseTypeId" th:field="*{licenseTypeId}" class="form-control"  style="border-left: 2px solid blue;">
+                <label for="licenseTypeId" th:text="#{approval_license_approval_type}"
+                       th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+                    License Type:
+                </label>
+                <select id="licenseTypeId" name="licenseTypeId" th:field="*{licenseTypeId}"
+                        class="form-control" style="border-left: 2px solid blue;" disabled>
                     <option th:each="type : ${licenseTypes}"
                             th:value="${type.id}"
                             th:text="${type.name}"
-                            th:selected="${type.id == licenseTypeId}"></option>
+                            th:selected="${type.id == licenseTypeId}">
+                    </option>
                 </select>
             </div>
+
+
+
             <div class="col-md-3 form-group">
                 <label for="currencyType"
                        th:text="#{license_approval_currency_type}"

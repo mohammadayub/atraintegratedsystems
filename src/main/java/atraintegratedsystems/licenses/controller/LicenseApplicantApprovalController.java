@@ -117,11 +117,9 @@ public class LicenseApplicantApprovalController {
 
             // Set LicenseApplicant ID (from LicenseApplicant directly)
             licenseApplicantDTO.setLicenseApplicantId(licenseApplicant.getId());  // <-- Ensure the ID is set here
-
             // Add DTO and other data to the model
             model.addAttribute("licenseApplicantDTO", licenseApplicantDTO);
             model.addAttribute("licenseTypes", licenseTypeService.findAll());
-            model.addAttribute("licenseApplicants", licenseApplicantService.getAllApplicants());
             model.addAttribute("licenseTypeId", licenseApplicantDTO.getLicenseTypeId());
 
         } catch (IllegalArgumentException e) {
