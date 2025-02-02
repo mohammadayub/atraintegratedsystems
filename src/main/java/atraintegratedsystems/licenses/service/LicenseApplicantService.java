@@ -91,13 +91,13 @@ public class LicenseApplicantService {
 
         profile.setTinNo(dto.getTinNo());
 
-        MultipartFile tinUpload=dto.getTinUpload();
-        if(tinUpload != null && !tinUpload.isEmpty()){
-            String contentType=tinUpload.getContentType();
+        MultipartFile identityFormUpload=dto.getIdentityFormUpload();
+        if(identityFormUpload != null && !identityFormUpload.isEmpty()){
+            String contentType=identityFormUpload.getContentType();
             if(!VALID_FILE_TYPES.contains(contentType)){
                 throw new IllegalArgumentException("Invalid File Type" +contentType);
             }
-            profile.setTinUpload(tinUpload.getBytes());
+            profile.setIdentityFormUpload(identityFormUpload.getBytes());
         }
         LocalDate yearEstablishmentDate = dateConverter.jalaliToGregorian(dto.getYearOfEstablishment().getYear(), dto.getYearOfEstablishment().getMonthValue(), dto.getYearOfEstablishment().getDayOfMonth());
         profile.setYearOfEstablishment(yearEstablishmentDate);
@@ -207,13 +207,13 @@ public class LicenseApplicantService {
             }
 
             profile.setTinNo(dto.getTinNo());
-            MultipartFile tinUpload=dto.getTinUpload();
-            if(tinUpload != null && !tinUpload.isEmpty()){
-                String contentType=tinUpload.getContentType();
+            MultipartFile identityFormUpload=dto.getIdentityFormUpload();
+            if(identityFormUpload != null && !identityFormUpload.isEmpty()){
+                String contentType=identityFormUpload.getContentType();
                 if(!VALID_FILE_TYPES.contains(contentType)){
                     throw new IllegalArgumentException("Invalid File Type" +contentType);
                 }
-                profile.setTinUpload(tinUpload.getBytes());
+                profile.setIdentityFormUpload(identityFormUpload.getBytes());
             }
             LocalDate yearEstablishmentDate = dateConverter.jalaliToGregorian(dto.getYearOfEstablishment().getYear(), dto.getYearOfEstablishment().getMonthValue(), dto.getYearOfEstablishment().getDayOfMonth());
             profile.setYearOfEstablishment(yearEstablishmentDate);

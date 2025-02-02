@@ -27,7 +27,7 @@ public class LicenseApplicantDTO {
     private String licenseNo;
     private MultipartFile licenseUpload;
     private String tinNo;
-    private MultipartFile tinUpload;
+    private MultipartFile identityFormUpload;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate yearOfEstablishment;
     @DateTimeFormat(pattern = "yyyy-MM-dd")

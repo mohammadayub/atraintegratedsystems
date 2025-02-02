@@ -81,10 +81,10 @@
             <input type="file" id="licenseUpload" th:field="*{licenseUpload}" class="form-control-file" accept=".pdf,.jpg,.jpeg,.png">
           </div>
           <div class="col-md-2 form-group">
-            <label for="tinUpload"
+            <label for="identityFormUpload"
                    th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">Identity Form
             </label>
-            <input type="file" id="tinUpload" th:field="*{tinUpload}" class="form-control-file" accept=".pdf,.jpg,.jpeg,.png" style="border-left: 2px solid blue;">
+            <input type="file" id="identityFormUpload" th:field="*{identityFormUpload}" class="form-control-file" accept=".pdf,.jpg,.jpeg,.png" style="border-left: 2px solid blue;">
           </div>
           <div class="col-md-2 form-group">
             <label for="bankStatementUpload" th:text="#{license_application_bank_statement_file}"

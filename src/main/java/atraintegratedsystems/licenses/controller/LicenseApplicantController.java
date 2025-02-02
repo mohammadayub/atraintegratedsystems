@@ -125,15 +125,15 @@ public class LicenseApplicantController {
                 .body(resource);
     }
 
-    @GetMapping("/licenses/license/registration/tinDownload/{id}")
+    @GetMapping("/licenses/license/registration/identityDownload/{id}")
     public ResponseEntity<ByteArrayResource> downloadTinFile(@PathVariable Long id) {
         Optional<LicenseApplicant> profileOpt = licenseService.getApplicantById(id);
         if (!profileOpt.isPresent()) {
             return ResponseEntity.notFound().build();
         }
         LicenseApplicant profile = profileOpt.get();
-        byte[] fileData = profile.getTinUpload();
-        String fileName =  getFileExtension(profile.getTinUpload());
+        byte[] fileData = profile.getIdentityFormUpload();
+        String fileName =  getFileExtension(profile.getIdentityFormUpload());
         String mimeType = getMimeType(fileData); // Get the correct MIME type
         HttpHeaders headers = new HttpHeaders();
         headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileName + "\"");

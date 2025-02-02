@@ -60,8 +60,8 @@ public class LicenseApplicant {
     private String tinNo;
 
     @Lob
-    @Column(name = "tin_upload")
-    private byte[] tinUpload;
+    @Column(name = "identity_form_upload")
+    private byte[] identityFormUpload;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "year_of_establishment")

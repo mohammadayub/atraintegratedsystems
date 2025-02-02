@@ -89,8 +89,8 @@ public class LicenseNewApplicantController {
             licenseApplicantDTO.setLicenseUpload(licenseUpload);
 
             licenseApplicantDTO.setTinNo(profile.getTinNo());
-            MultipartFile tinUpload= licenseApplicantDTO.getTinUpload();
-            licenseApplicantDTO.setTinUpload(tinUpload);
+            MultipartFile identityForm= licenseApplicantDTO.getIdentityFormUpload();
+            licenseApplicantDTO.setIdentityFormUpload(identityForm);
             licenseApplicantDTO.setYearOfEstablishment(profile.getYearOfEstablishment());
             licenseApplicantDTO.setExpiryDate(profile.getExpiryDate());
             licenseApplicantDTO.setPlannedActivitiesAndServices(profile.getPlannedActivitiesAndServices());
