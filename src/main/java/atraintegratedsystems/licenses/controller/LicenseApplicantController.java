@@ -170,6 +170,97 @@ public class LicenseApplicantController {
                 .body(resource);
     }
 
+    @GetMapping("/licenses/license/registration/nidDownload/{id}")
+    public ResponseEntity<ByteArrayResource> downloadNID(@PathVariable Long id) {
+        Optional<LicenseApplicant> profileOpt = licenseService.getApplicantById(id);
+        if (!profileOpt.isPresent()) {
+            return ResponseEntity.notFound().build();
+        }
+        LicenseApplicant profile = profileOpt.get();
+        byte[] fileData = profile.getEnidUpload();
+        String fileName =  getFileExtension(profile.getEnidUpload());
+        String mimeType = getMimeType(fileData); // Get the correct MIME type
+        HttpHeaders headers = new HttpHeaders();
+        headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileName + "\"");
+        headers.add(HttpHeaders.CONTENT_TYPE, mimeType);
+
+        ByteArrayResource resource = new ByteArrayResource(fileData);
+
+        return ResponseEntity.ok()
+                .headers(headers)
+                .contentLength(fileData.length)
+                .body(resource);
+    }
+
+
+    @GetMapping("/licenses/license/registration/articleOfAssociationDownload/{id}")
+    public ResponseEntity<ByteArrayResource> downloadArticleOfAssociation(@PathVariable Long id) {
+        Optional<LicenseApplicant> profileOpt = licenseService.getApplicantById(id);
+        if (!profileOpt.isPresent()) {
+            return ResponseEntity.notFound().build();
+        }
+        LicenseApplicant profile = profileOpt.get();
+        byte[] fileData = profile.getArticleOfAssociationUpload();
+        String fileName =  getFileExtension(profile.getArticleOfAssociationUpload());
+        String mimeType = getMimeType(fileData); // Get the correct MIME type
+        HttpHeaders headers = new HttpHeaders();
+        headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileName + "\"");
+        headers.add(HttpHeaders.CONTENT_TYPE, mimeType);
+
+        ByteArrayResource resource = new ByteArrayResource(fileData);
+
+        return ResponseEntity.ok()
+                .headers(headers)
+                .contentLength(fileData.length)
+                .body(resource);
+    }
+
+    @GetMapping("/licenses/license/registration/businessPlanDownload/{id}")
+    public ResponseEntity<ByteArrayResource> downloadBusinessPlan(@PathVariable Long id) {
+        Optional<LicenseApplicant> profileOpt = licenseService.getApplicantById(id);
+        if (!profileOpt.isPresent()) {
+            return ResponseEntity.notFound().build();
+        }
+        LicenseApplicant profile = profileOpt.get();
+        byte[] fileData = profile.getBusinessPlanUpload();
+        String fileName =  getFileExtension(profile.getBusinessPlanUpload());
+        String mimeType = getMimeType(fileData); // Get the correct MIME type
+        HttpHeaders headers = new HttpHeaders();
+        headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileName + "\"");
+        headers.add(HttpHeaders.CONTENT_TYPE, mimeType);
+
+        ByteArrayResource resource = new ByteArrayResource(fileData);
+
+        return ResponseEntity.ok()
+                .headers(headers)
+                .contentLength(fileData.length)
+                .body(resource);
+    }
+
+    @GetMapping("/licenses/license/registration/proposalDownload/{id}")
+    public ResponseEntity<ByteArrayResource> downloadProposal(@PathVariable Long id) {
+        Optional<LicenseApplicant> profileOpt = licenseService.getApplicantById(id);
+        if (!profileOpt.isPresent()) {
+            return ResponseEntity.notFound().build();
+        }
+        LicenseApplicant profile = profileOpt.get();
+        byte[] fileData = profile.getProposalUpload();
+        String fileName =  getFileExtension(profile.getProposalUpload());
+        String mimeType = getMimeType(fileData); // Get the correct MIME type
+        HttpHeaders headers = new HttpHeaders();
+        headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileName + "\"");
+        headers.add(HttpHeaders.CONTENT_TYPE, mimeType);
+
+        ByteArrayResource resource = new ByteArrayResource(fileData);
+
+        return ResponseEntity.ok()
+                .headers(headers)
+                .contentLength(fileData.length)
+                .body(resource);
+    }
+
+
+
     private String getFileExtension(byte[] fileData) {
         if (fileData == null || fileData.length < 4) {
             return ".bin"; // Default to binary if no data or too short
@@ -252,7 +343,7 @@ public class LicenseApplicantController {
         }
 
         try {
-            LicenseApplicant updatedProfile = licenseService.updateProfile(dto.getId(), dto);
+            LicenseApplicant updatedProfile = licenseService.SendToBoard(dto.getId(), dto);
 
             // Add success message
             model.addAttribute("message", "Profile updated successfully.");
@@ -261,11 +352,14 @@ public class LicenseApplicantController {
             return "redirect:/licenses/license/registration/license_applicants_profile";
 
         } catch (IllegalArgumentException ex) {
-            // Handle errors
             model.addAttribute("error", ex.getMessage());
+            return "licenses/license/registration/license_applicants_send_board";
+        } catch (IOException e) {
+            model.addAttribute("error", "File upload failed. Please try again.");
             return "licenses/license/registration/license_applicants_send_board";
         }
     }
+
 
 
 

@@ -134,6 +134,11 @@ public class LicenseApplicant {
     @Column(name="is_send")
     private String isSend;
 
+    @Lob
+    @Column(name = "proposal_upload")
+    private byte[] proposalUpload;
+
+
 
     public JalaliDate getRegDate() {
         if (reqDate == null) {

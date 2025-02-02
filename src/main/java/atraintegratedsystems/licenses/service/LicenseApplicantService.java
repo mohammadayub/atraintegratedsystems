@@ -150,16 +150,36 @@ public class LicenseApplicantService {
         return prefix + String.format("%04d", nextId);
     }
     @Transactional
-    public LicenseApplicant updateProfile(Long licenseId, LicenseApplicantDTO dto) {
+    public LicenseApplicant SendToBoard(Long licenseId, LicenseApplicantDTO dto) throws IOException {
         LicenseApplicant profile = repository.findById(licenseId)
                 .orElseThrow(() -> new IllegalArgumentException("Profile not found with ID: " + licenseId));
+
         DateConverter dateConverter = new DateConverter();
         // Convert Jalali date to Gregorian
-        LocalDate referToBoardDate = dateConverter.jalaliToGregorian(dto.getReferToBoardDate().getYear(), dto.getReferToBoardDate().getMonthValue(), dto.getReferToBoardDate().getDayOfMonth());
+        LocalDate referToBoardDate = dateConverter.jalaliToGregorian(dto.getReferToBoardDate().getYear(),
+                dto.getReferToBoardDate().getMonthValue(),
+                dto.getReferToBoardDate().getDayOfMonth());
         profile.setReferToBoardDate(referToBoardDate);
         profile.setIsSend(dto.getIsSend());
+
+        MultipartFile proposalUpload = dto.getProposalUpload();
+        if (proposalUpload != null && !proposalUpload.isEmpty()) {
+            String contentType = proposalUpload.getContentType();
+
+            if (!VALID_FILE_TYPES.contains(contentType)) {
+                throw new IllegalArgumentException("Invalid File Type: " + contentType);
+            }
+
+            try {
+                profile.setProposalUpload(proposalUpload.getBytes());
+            } catch (IOException e) {
+                throw new RuntimeException("Error processing file upload", e);
+            }
+        }
+
         return repository.save(profile);
     }
+
 
     @Transactional
     public LicenseApplicant updateCompleteProfile(Long id, LicenseApplicantDTO dto) throws IOException {

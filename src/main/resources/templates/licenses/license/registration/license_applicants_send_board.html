@@ -14,7 +14,7 @@
     <div class="container justify-content-center" style="margin-top: 50px;">
         <h3 style="text-align:center;font-weight:bold;margin:20px;" th:text="#{transfer_to_board}"></h3>
         <form th:action="@{/licenses/license/registration/license_applicants_send_board}"
-              th:object="${licenseApplicant}" method="post">
+              th:object="${licenseApplicant}" method="post" enctype="multipart/form-data">
             <div class="row">
                 <!-- Hidden Fields -->
                 <input type="hidden" th:field="*{id}">
@@ -38,7 +38,7 @@
                     <label for="proposalUpload"
                            th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">Proposal Upload
                     </label>
-                    <input type="file" id="proposalUpload" class="form-control-file" accept=".pdf,.jpg,.jpeg,.png" style="border-left: 2px solid blue;">
+                    <input type="file" id="proposalUpload" th:field="*{proposalUpload}" class="form-control-file" accept=".pdf,.jpg,.jpeg,.png" style="border-left: 2px solid blue;">
                 </div>
             </div>
 

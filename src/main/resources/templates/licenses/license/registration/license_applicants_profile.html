@@ -71,12 +71,16 @@
                 <th th:text="#{applicant_license_type}"></th>
                 <th th:text="#{applicant_license_currency}"></th>
                 <th>Name (Company,NGO,Organization)</th>
-                <th>Application Download</th>
+                <th>Application</th>
                 <th th:text="#{license_application_license_no}"></th>
                 <th th:text="#{license_application_upload}"></th>
                 <th th:text="#{license_application_tin}"></th>
                 <th th:text="#{license_application_tin_upload}"></th>
                 <th th:text="#{license_application_bank_statement_file}"></th>
+                <th>ENID</th>
+                <th>Article of Association</th>
+                <th>Business Plan</th>
+                <th>Proposal</th>
                 <th th:text="#{license_application_year_establishment}"></th>
                 <th th:text="#{license_application_expiry_date}"></th>
                 <th th:text="#{license_application_fee}"></th>
@@ -141,6 +145,54 @@
                         </a>
                     </div>
                     <div th:unless="${profile.bankStatementUpload}">
+                        <span>No File</span>
+                    </div>
+                </td>
+                <td>
+                    <div th:if="${profile.enidUpload}">
+                        <a th:href="@{/licenses/license/registration/nidDownload/{id}(id=${profile.id})}" class="btn btn-primary">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-download icon-small" viewBox="0 0 16 16">
+                                <path d="M8 0a.5.5 0 0 1 .5.5V8.707l2.854-2.854a.5.5 0 0 1 .707.707L8.5 9.207 5.939 6.646a.5.5 0 0 1 .707-.707L8 8.707V.5A.5.5 0 0 1 8 0zM2 14a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v.5a.5.5 0 0 1-.5.5H2.5a.5.5 0 0 1-.5-.5V14z"/>
+                            </svg>
+                        </a>
+                    </div>
+                    <div th:unless="${profile.enidUpload}">
+                        <span>No File</span>
+                    </div>
+                </td>
+                <td>
+                    <div th:if="${profile.articleOfAssociationUpload}">
+                        <a th:href="@{/licenses/license/registration/articleOfAssociationDownload/{id}(id=${profile.id})}" class="btn btn-primary">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-download icon-small" viewBox="0 0 16 16">
+                                <path d="M8 0a.5.5 0 0 1 .5.5V8.707l2.854-2.854a.5.5 0 0 1 .707.707L8.5 9.207 5.939 6.646a.5.5 0 0 1 .707-.707L8 8.707V.5A.5.5 0 0 1 8 0zM2 14a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v.5a.5.5 0 0 1-.5.5H2.5a.5.5 0 0 1-.5-.5V14z"/>
+                            </svg>
+                        </a>
+                    </div>
+                    <div th:unless="${profile.articleOfAssociationUpload}">
+                        <span>No File</span>
+                    </div>
+                </td>
+                <td>
+                    <div th:if="${profile.businessPlanUpload}">
+                        <a th:href="@{/licenses/license/registration/businessPlanDownload/{id}(id=${profile.id})}" class="btn btn-primary">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-download icon-small" viewBox="0 0 16 16">
+                                <path d="M8 0a.5.5 0 0 1 .5.5V8.707l2.854-2.854a.5.5 0 0 1 .707.707L8.5 9.207 5.939 6.646a.5.5 0 0 1 .707-.707L8 8.707V.5A.5.5 0 0 1 8 0zM2 14a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v.5a.5.5 0 0 1-.5.5H2.5a.5.5 0 0 1-.5-.5V14z"/>
+                            </svg>
+                        </a>
+                    </div>
+                    <div th:unless="${profile.businessPlanUpload}">
+                        <span>No File</span>
+                    </div>
+                </td>
+                <td>
+                    <div th:if="${profile.proposalUpload}">
+                        <a th:href="@{/licenses/license/registration/proposalDownload/{id}(id=${profile.id})}" class="btn btn-primary">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-download icon-small" viewBox="0 0 16 16">
+                                <path d="M8 0a.5.5 0 0 1 .5.5V8.707l2.854-2.854a.5.5 0 0 1 .707.707L8.5 9.207 5.939 6.646a.5.5 0 0 1 .707-.707L8 8.707V.5A.5.5 0 0 1 8 0zM2 14a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v.5a.5.5 0 0 1-.5.5H2.5a.5.5 0 0 1-.5-.5V14z"/>
+                            </svg>
+                        </a>
+                    </div>
+                    <div th:unless="${profile.proposalUpload}">
                         <span>No File</span>
                     </div>
                 </td>

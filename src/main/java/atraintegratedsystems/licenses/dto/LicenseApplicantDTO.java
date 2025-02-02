@@ -57,5 +57,6 @@ public class LicenseApplicantDTO {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate referToBoardDate;
     private String isSend;
+    private MultipartFile proposalUpload;
 
 }
