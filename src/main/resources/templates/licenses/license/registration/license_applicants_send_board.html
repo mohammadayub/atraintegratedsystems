@@ -18,7 +18,6 @@
             <div class="row">
                 <!-- Hidden Fields -->
                 <input type="hidden" th:field="*{id}">
-                <div class="col-md-1 form-group"></div>
                 <div class="col-md-3 form-group">
                     <label for="reqId" th:text="#{approval_request_id}"
                            th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
@@ -34,6 +33,12 @@
                     <select th:field="*{isSend}" id="isSend" class="form-control" readonly="readonly" style="border-left:1px solid blue;">
                         <option value="Yes" th:text="#{Yes}">Yes</option>
                     </select>
+                </div>
+                <div class="col-md-3 form-group">
+                    <label for="proposalUpload"
+                           th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">Proposal Upload
+                    </label>
+                    <input type="file" id="proposalUpload" class="form-control-file" accept=".pdf,.jpg,.jpeg,.png" style="border-left: 2px solid blue;">
                 </div>
             </div>
 

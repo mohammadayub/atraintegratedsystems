@@ -4,6 +4,7 @@
     <div th:replace="styles :: data-tables-styles"></div>
     <div th:replace="styles :: persian-datepicker-styles"></div>
     <div th:replace="styles :: select2-styles"></div>
+    <div th:replace="styles :: popup"></div>
     <div th:replace="styles :: common-css"></div>
     <div th:replace="styles :: commonfieldset"></div>
     <title>LMS</title>
@@ -23,7 +24,7 @@
             <div class="col-md-3 form-group">
                 <label for="licenseType" th:text="#{approval_license_approval_type}"
                        th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">License Type:</label>
-                <select id="licenseType" name="licenseApplicantId" th:field="*{id}" class="form-control" onchange="updateLicenseApplicantId()"  style="border-left: 2px solid blue;">
+                <select id="licenseType" name="licenseApplicantId" th:field="*{id}" class="form-control" onchange="updateLicenseApplicantId()"  style="border-left: 2px solid blue;" readonly>
                     <option th:each="type : ${licenseApplicants}"
                             th:value="${type.id}"
                             th:text="${type.companyLicenseName}"
@@ -51,7 +52,7 @@
                 <label for="licenseFees"
                        th:text="#{license_approval_license_fees}"
                        th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
-                <input type="text" id="licenseFees" th:field="*{licenseFees}" class="form-control" required >
+                <input type="text" id="licenseFees" th:field="*{licenseFees}" class="form-control" required readonly>
             </div>
 
 
@@ -159,7 +160,7 @@
         <!-- Submit Button -->
         <div class="row btn-center">
             <!-- Buttons -->
-            <button type="submit" class="btn btn-primary btn-sm" style="margin: 10px;" onclick="confirmSubmit(event)">
+            <button type="button" id="submitButton" class="btn btn-primary btn-sm" style="margin: 10px;">
                 <span class="fas fa-check"></span>
                 <span th:text="#{license_approval_confirm}"></span>
             </button>
@@ -167,6 +168,20 @@
                 <span class="fas fa-arrow-left"></span>
                 <span th:text="#{license_approval_back_to_list}"></span>
             </a>
+        </div>
+
+
+
+        <!-- Confirmation Popup -->
+        <div id="confirmationPopup" class="confirmation-popup" style="display: none;">
+            <div class="confirmation-popup-content">
+                <img th:src="@{/images/tariff_pic.png}" />
+                <h3>Are you sure you want to submit the form?</h3>
+                <div class="confirmation-buttons">
+                    <button id="confirmYesButton" class="confirm-btn yes-btn">Yes, Submit</button>
+                    <button id="confirmNoButton" class="confirm-btn no-btn">No, Stay</button>
+                </div>
+            </div>
         </div>
     </form>
     </fieldset>
@@ -182,7 +197,6 @@
 <div th:replace="scripts :: common-scripts"></div>
 <div th:replace="scripts :: persian-datepicker-scripts"></div>
 <div th:replace="scripts :: data-tables-scripts"></div>
-<div th:replace="scripts :: sweetalertjs"></div>
 <script>
     $('.hijrishamsi').persianDatepicker({
       format: 'YYYY-MM-DD',
@@ -517,30 +531,43 @@ function setApplicationFees() {
 
 
 }
-function confirmSubmit(event) {
-        event.preventDefault(); // Prevent default form submission
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "Do you want to Approve This License",
-            icon: 'question',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, Submit it!'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                const form = document.getElementById('licenseForm');
-                if (form) {
-                    form.submit();
-                } else {
-                    Swal.fire('Error', 'Form not found!', 'error');
-                }
-            }
-        });
-    }
+
 </script>
 <script>
+    //<!--popup for submit-->
 
+      document.addEventListener("DOMContentLoaded", function () {
+          // Get references to the buttons and the popup
+          const submitButton = document.getElementById("submitButton");
+          const confirmationPopup = document.getElementById("confirmationPopup");
+          const confirmYesButton = document.getElementById("confirmYesButton");
+          const confirmNoButton = document.getElementById("confirmNoButton");
+          const form = document.querySelector("form");
+
+          // Show the popup only if the form is valid
+          submitButton.addEventListener("click", function (event) {
+              // Check if the form is valid using browser's built-in validation
+              if (form.checkValidity()) {
+                  event.preventDefault(); // Prevent immediate form submission
+                  confirmationPopup.style.display = "flex"; // Show the confirmation popup
+              } else {
+                  // If form is invalid, show validation messages
+                  form.reportValidity();
+              }
+          });
+
+          // If the user clicks "Yes, Submit"
+          confirmYesButton.addEventListener("click", function () {
+              form.submit(); // Submit the form explicitly
+          });
+
+          // If the user clicks "No, Stay"
+          confirmNoButton.addEventListener("click", function () {
+              event.preventDefault();
+              confirmationPopup.style.display = "none"; // Hide the confirmation popup
+              // No form submission happens here
+          });
+      });
 </script>
 <div style="height:5vh;"></div>
 <footer th:replace="~{layout :: page_footer}"></footer>

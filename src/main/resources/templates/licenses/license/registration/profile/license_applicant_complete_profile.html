@@ -18,7 +18,7 @@
       <!-- Personal Information Section -->
       <fieldset style="border: 2px solid #DCAF45; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
         <legend style="width: auto; font-size: 1.2rem; color: #14438B; padding: 0 10px; font-weight: bold;">
-          License Information
+          License & Company Information
         </legend>
         <div class="row">
           <div class="col-md-3 form-group">
@@ -40,60 +40,6 @@
             <input type="text" id="tinNo" th:field="*{tinNo}" class="form-control" maxlength="50">
           </div>
         </div>
-      </fieldset>
-
-      <!-- Document Upload Section -->
-      <fieldset style="border: 2px solid #DCAF45; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
-        <legend style="width: auto; font-size: 1.2rem; color: #14438B; padding: 0 10px; font-weight: bold;">
-          Document Upload
-        </legend>
-        <div class="row">
-          <div class="col-md-3 form-group">
-            <label for="licenseUpload" th:text="#{license_application_upload}"
-                   th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
-            </label>
-            <input type="file" id="licenseUpload" th:field="*{licenseUpload}" class="form-control-file" accept=".pdf,.jpg,.jpeg,.png">
-          </div>
-          <div class="col-md-3 form-group">
-            <label for="tinUpload" th:text="#{license_application_tin_upload}"
-                   th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
-            </label>
-            <input type="file" id="tinUpload" th:field="*{tinUpload}" class="form-control-file" accept=".pdf,.jpg,.jpeg,.png" style="border-left: 2px solid blue;">
-          </div>
-          <div class="col-md-3 form-group">
-            <label for="bankStatementUpload" th:text="#{license_application_bank_statement_file}"
-                   th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
-            </label>
-            <input type="file" id="bankStatementUpload" th:field="*{bankStatementUpload}" class="form-control-file" accept=".pdf,.jpg,.jpeg,.png">
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-3 form-group">
-            <label for="enidUpload"
-                   th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">Electronic Tazkira(NID)
-            </label>
-            <input type="file" id="enidUpload" th:field="*{enidUpload}"  class="form-control-file" accept=".pdf,.jpg,.jpeg,.png">
-          </div>
-          <div class="col-md-3 form-group">
-            <label for="articleOfAssociationUpload"
-                   th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">Articales Of Association
-            </label>
-            <input type="file" id="articleOfAssociationUpload" th:field="*{articleOfAssociationUpload}" class="form-control-file" accept=".pdf,.jpg,.jpeg,.png" style="border-left: 2px solid blue;">
-          </div>
-          <div class="col-md-3 form-group">
-            <label for="businessPlanUpload"
-                   th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">Business Plan & evaluation
-            </label>
-            <input type="file" id="businessPlanUpload" th:field="*{businessPlanUpload}" class="form-control-file" accept=".pdf,.jpg,.jpeg,.png">
-          </div>
-        </div>
-      </fieldset>
-
-      <!-- Company Information Section -->
-      <fieldset style="border: 2px solid #DCAF45; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
-        <legend style="width: auto; font-size: 1.2rem; color: #14438B; padding: 0 10px; font-weight: bold;">
-          Company Information
-        </legend>
         <div class="row">
           <div class="col-md-3 form-group">
             <label for="yearOfEstablishment" th:text="#{license_application_year_establishment}"
@@ -121,6 +67,52 @@
           </div>
         </div>
       </fieldset>
+
+      <!-- Document Upload Section -->
+      <fieldset style="border: 2px solid #DCAF45; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+        <legend style="width: auto; font-size: 1.2rem; color: #14438B; padding: 0 10px; font-weight: bold;">
+          Document Upload
+        </legend>
+        <div class="row">
+          <div class="col-md-2 form-group">
+            <label for="licenseUpload" th:text="#{license_application_upload}"
+                   th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+            </label>
+            <input type="file" id="licenseUpload" th:field="*{licenseUpload}" class="form-control-file" accept=".pdf,.jpg,.jpeg,.png">
+          </div>
+          <div class="col-md-2 form-group">
+            <label for="tinUpload"
+                   th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">Identity Form
+            </label>
+            <input type="file" id="tinUpload" th:field="*{tinUpload}" class="form-control-file" accept=".pdf,.jpg,.jpeg,.png" style="border-left: 2px solid blue;">
+          </div>
+          <div class="col-md-2 form-group">
+            <label for="bankStatementUpload" th:text="#{license_application_bank_statement_file}"
+                   th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+            </label>
+            <input type="file" id="bankStatementUpload" th:field="*{bankStatementUpload}" class="form-control-file" accept=".pdf,.jpg,.jpeg,.png">
+          </div>
+          <div class="col-md-2 form-group">
+            <label for="enidUpload"
+                   th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">Electronic Tazkira(NID)
+            </label>
+            <input type="file" id="enidUpload" th:field="*{enidUpload}"  class="form-control-file" accept=".pdf,.jpg,.jpeg,.png">
+          </div>
+          <div class="col-md-2 form-group">
+            <label for="articleOfAssociationUpload"
+                   th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">Articales Of Association
+            </label>
+            <input type="file" id="articleOfAssociationUpload" th:field="*{articleOfAssociationUpload}" class="form-control-file" accept=".pdf,.jpg,.jpeg,.png" style="border-left: 2px solid blue;">
+          </div>
+          <div class="col-md-2 form-group">
+            <label for="businessPlanUpload"
+                   th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">Business Plan & evaluation
+            </label>
+            <input type="file" id="businessPlanUpload" th:field="*{businessPlanUpload}" class="form-control-file" accept=".pdf,.jpg,.jpeg,.png">
+          </div>
+        </div>
+      </fieldset>
+
       <fieldset style="border: 2px solid #DCAF45; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
         <legend style="width: auto; font-size: 1.2rem; color:#14438B; padding: 0 10px; font-weight: bold;">
           Activities
