@@ -10,11 +10,10 @@
 </head>
 <body>
 <nav th:replace="~{layout :: page_navbar}"></nav>
-<h3 style="text-align:center;margin-top:30px;font-weight:bolder;" th:text="#{license_application_confirmation}">License Application Confirmation</h3>
 <div class="container-fluid mt-4">
     <fieldset>
         <legend>License Fee Confirmation</legend>
-    <form th:action="@{/licenses/finance/mcit/license_fee_list/add}" th:object="${licenseApprovalDTO}" method="post">
+    <form id="licenseForm" th:action="@{/licenses/finance/mcit/license_fee_list/add}" th:object="${licenseApprovalDTO}" method="post">
         <div class="row">
             <!-- Hidden ID Field -->
             <input type="hidden" th:field="*{id}">
@@ -70,7 +69,7 @@
 
         <!-- Submit/Reset Buttons -->
         <div class="col-md-4 btn-group d-flex justify-content-center" style="margin-top: 15px; margin-bottom:80px; margin:0 auto;">
-            <button type="submit" class="btn btn-primary btn-sm" style="width: 100px;" th:text="#{confirmation_payment}">
+            <button type="submit" id="submitButton" class="btn btn-primary btn-sm" style="width: 100px;" th:text="#{confirmation_payment}">
                 <span class="fas fa-check"></span> Confirm Payment
             </button>
         </div>
@@ -78,7 +77,7 @@
         <div id="confirmationPopup" class="confirmation-popup" style="display: none;">
             <div class="confirmation-popup-content">
                 <img th:src="@{/images/tariff_pic.png}" />
-                <h3>Are you sure you want to submit License Fee?</h3>
+                <h3>Are You Sure You Want To Submit License Fee?</h3>
                 <div class="confirmation-buttons">
                     <button id="confirmYesButton" class="confirm-btn yes-btn">Yes, Submit</button>
                     <button id="confirmNoButton" class="confirm-btn no-btn">No, Stay</button>
@@ -100,6 +99,43 @@
 <div th:replace="scripts :: data-tables-scripts"></div>
 <div th:replace="scripts :: common-hijrishamsi-date"></div>
 
+
+<script>
+    //<!--popup for submit-->
+
+      document.addEventListener("DOMContentLoaded", function () {
+          // Get references to the buttons and the popup
+          const submitButton = document.getElementById("submitButton");
+          const confirmationPopup = document.getElementById("confirmationPopup");
+          const confirmYesButton = document.getElementById("confirmYesButton");
+          const confirmNoButton = document.getElementById("confirmNoButton");
+          const form = document.querySelector("form");
+
+          // Show the popup only if the form is valid
+          submitButton.addEventListener("click", function (event) {
+              // Check if the form is valid using browser's built-in validation
+              if (form.checkValidity()) {
+                  event.preventDefault(); // Prevent immediate form submission
+                  confirmationPopup.style.display = "flex"; // Show the confirmation popup
+              } else {
+                  // If form is invalid, show validation messages
+                  form.reportValidity();
+              }
+          });
+
+          // If the user clicks "Yes, Submit"
+          confirmYesButton.addEventListener("click", function () {
+              form.submit(); // Submit the form explicitly
+          });
+
+          // If the user clicks "No, Stay"
+          confirmNoButton.addEventListener("click", function () {
+              event.preventDefault();
+              confirmationPopup.style.display = "none"; // Hide the confirmation popup
+              // No form submission happens here
+          });
+      });
+</script>
 <div style="height:10vh;"></div>
 <footer th:replace="~{layout :: page_footer}"></footer>
 <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
