@@ -22,11 +22,7 @@
                 <th th:text="#{applicant_license_type}"></th>
                 <th th:text="#{license_application_validity}"></th>
                 <th th:text="#{applicant_license_currency}"></th>
-                <th th:text="#{applicant_license_finance_type}"></th>
                 <th th:text="#{license_application_company_license_name}"></th>
-                <th th:text="#{license_application_license_no}"></th>
-                <th th:text="#{license_application_year_establishment}"></th>
-                <th th:text="#{license_application_expiry_date}"></th>
                 <th th:text="#{license_application_fee}"></th>
                 <th th:text="#{license_application_tariff_print}"></th>
                 <th th:text="#{license_application_payment_confirmation}">Payment Confirmation</th>
@@ -39,11 +35,7 @@
                 <td th:text="${profile.licenseType.name}">name</td>
                 <td th:text="${profile.validity}">validity</td>
                 <td th:text="${profile.currencyType}">currencyType</td>
-                <td th:text="${profile.financeType}">financeType</td>
                 <td th:text="${profile.companyLicenseName}">companyLicenseName</td>
-                <td th:text="${profile.licenseNo}">licenseNo</td>
-                <td th:text="${profile.getEstablishmentYear()}">yearOfEstablishment</td>
-                <td th:text="${profile.getExpDate()}">expiryDate</td>
                 <td th:text="${profile.applicationFees}">applicationFees</td>
                 <td>
                     <a th:href="@{/licenses/finance/license_finance/application_fees/license_application_fee_list/print/{reqId}(reqId=${profile.reqId})}" class="btn btn-primary">

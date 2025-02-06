@@ -77,7 +77,7 @@ public class LicenseApplicant {
     @Column(name="validity")
     private Integer validity;
 
-    @Column(name = "planned_activities_services")
+    @Column(name = "planned_activities_services", length = 2000)
     private String plannedActivitiesAndServices;
 
     @Column(name = "total_national_employees")

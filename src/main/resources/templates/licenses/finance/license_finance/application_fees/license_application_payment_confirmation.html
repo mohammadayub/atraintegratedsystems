@@ -24,7 +24,7 @@
                 <label th:text="#{applicant_request_date}"
                        th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
                 </label>
-                <input type="text" th:field="*{reqDate}" class="form-control hijrishamsi" readonly>
+                <input type="text" th:field="*{reqDate}" class="form-control" readonly>
             </div>
 
             <!-- License Type -->
@@ -34,19 +34,18 @@
                     <option th:each="licenseType : ${licenseTypes}" th:value="${licenseType.id}" th:text="${licenseType.name}"></option>
                 </select>
             </div>
+            <!-- Application Fees -->
+            <div class="col-md-3 form-group">
+                <label th:text="#{license_application_fee}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
+
+                <input type="number" step="0.01" th:field="*{applicationFees}" class="form-control" readonly>
+            </div>
 
             <!-- Currency Type -->
             <div class="col-md-3 form-group">
                 <label th:text="#{applicant_license_currency}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
 
                 <input type="text" th:field="*{currencyType}" class="form-control"  readonly>
-            </div>
-
-            <!-- Finance Type -->
-            <div class="col-md-3 form-group">
-                <label th:text="#{applicant_license_finance_type}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
-
-                <input type="text" th:field="*{financeType}" class="form-control"  readonly>
             </div>
         </div>
 
@@ -56,13 +55,6 @@
                 <label th:text="#{license_application_company_license_name}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
 
                 <input type="text" th:field="*{companyLicenseName}" class="form-control"  readonly>
-            </div>
-
-            <!-- License Number -->
-            <div class="col-md-3 form-group">
-                <label th:text="#{license_application_license_no}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
-
-                <input type="text" th:field="*{licenseNo}" class="form-control"  readonly>
             </div>
 
             <!-- Year of Establishment -->
@@ -78,21 +70,15 @@
 
                 <input type="text" th:field="*{expiryDate}" class="form-control hijrishamsi"  readonly>
             </div>
-        </div>
-
-        <div class="row">
-            <!-- Application Fees -->
-            <div class="col-md-3 form-group">
-                <label th:text="#{license_application_fee}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
-
-                <input type="number" step="0.01" th:field="*{applicationFees}" class="form-control" readonly>
-            </div>
 
             <div class="col-md-3 form-group">
                 <label th:text="#{license_application_entry_voucher_date}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
 
                 <input type="text" th:field="*{entryApplicationFeeVoucherDate}" class="form-control hijrishamsi"  required>
             </div>
+        </div>
+
+        <div class="row">
 
             <!-- Bank Voucher -->
 <!--            <div class="col-md-3 form-group">-->
