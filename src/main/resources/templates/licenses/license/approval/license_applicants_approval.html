@@ -43,9 +43,6 @@
                     </option>
                 </select>
             </div>
-
-
-
             <div class="col-md-3 form-group">
                 <label for="currencyType"
                        th:text="#{license_approval_currency_type}"
@@ -71,8 +68,6 @@
                        th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
                 <input type="text" id="licensePaymentOffice" th:field="*{licensePaymentOffice}" class="form-control" required  readonly>
             </div>
-
-
             <!-- Administrative Yearly Fees -->
             <div class="col-md-3 form-group">
                 <label for="adminFees"
@@ -80,7 +75,6 @@
                        th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
                 <input type="text" id="adminFees" th:field="*{administrativeYearlyFees}" class="form-control" required readonly>
             </div>
-
             <!-- Administrative Yearly Fees Payment Office -->
             <div class="col-md-3 form-group">
                 <label for="adminFeesPaymentOffice"
@@ -88,16 +82,13 @@
                        th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
                 <input type="text" id="adminFeesPaymentOffice" th:field="*{adminstrivateYearlyFeesPaymentOffice}" class="form-control" required  readonly>
             </div>
-
             <div class="col-md-3 form-group">
                 <label for="guaranteeFees"
                        th:text="#{license_approval_guarantee_fees}"
                        th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
                 <input type="text" id="guaranteeFees" th:field="*{guaranteeFees}" class="form-control" required  readonly>
             </div>
-
         </div>
-
         <div class="row">
             <div class="col-md-3 form-group">
                 <label for="guaranteeFees"
@@ -118,7 +109,6 @@
                        th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
                 <input type="text" id="databaseMaintenanceFees" th:field="*{databaseYearlyMaintainanceFees}" class="form-control" required readonly>
             </div>
-
             <!-- Database Maintenance Fees Payment Office -->
             <div class="col-md-3 form-group">
                 <label for="databaseMaintenanceFeesPaymentOffice"
@@ -126,7 +116,6 @@
                        th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
                 <input type="text" id="databaseMaintenanceFeesPaymentOffice" th:field="*{databaseYearlyMaintainanceFeesPaymentOffice}" class="form-control" required  readonly>
             </div>
-
         </div>
         <div class="row">
             <!-- Approval Date -->
@@ -135,7 +124,6 @@
                        th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
                 <input type="text" id="approvalDate" th:field="*{approvalDate}" class="form-control hijrishamsi" required>
             </div>
-
             <!-- Approval Status -->
             <div class="col-md-3 form-group">
                 <label for="approvalStatus"
@@ -152,7 +140,6 @@
                        th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
                 <input type="text" id="boardDecisionNumber" th:field="*{boardDecisionNumber}" class="form-control" required>
             </div>
-
             <div class="col-md-3 form-group">
                 <label for="boardDecisions"
                        th:text="#{license_approval_boardDecisions}"
@@ -160,8 +147,6 @@
                 <textarea type="text" id="boardDecisions" th:field="*{boardDecisions}" class="form-control" required  style="border-left: 2px solid blue;" />
             </div>
         </div>
-
-
         <!-- Submit Button -->
         <div class="row btn-center">
             <!-- Buttons -->
@@ -174,9 +159,6 @@
                 <span th:text="#{license_approval_back_to_list}"></span>
             </a>
         </div>
-
-
-
         <!-- Confirmation Popup -->
         <div id="confirmationPopup" class="confirmation-popup" style="display: none;">
             <div class="confirmation-popup-content">
@@ -194,9 +176,7 @@
         <a th:href="@{/licenses/license/approval/license_applicants_approval_list}" class="btn" style="margin-top:20px;color:white;background-color:#3066be;">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6" style="width:20px;height:20px;">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
-            </svg>
-            Back to Page</a>
-
+            </svg> Back to Page </a>
 </div>
 
 <div th:replace="scripts :: common-scripts"></div>
