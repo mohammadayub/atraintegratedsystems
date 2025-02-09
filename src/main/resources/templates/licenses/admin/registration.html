@@ -14,7 +14,7 @@
     }
   </style>
 </head>
-<body onload="setApplicationFees()">
+<body>
 <nav th:replace="~{layout :: page_navbar}"></nav>
 <h2 class="text-center bg-primary pt-2 pb-2" th:text="#{user_registration_Form}" style="color:white; margin-top:10px;"></h2>
 
@@ -22,7 +22,7 @@
   <div class="row justify-content-center">
     <div class="col-md-8">
       <div class="form-container mx-auto">
-        <form th:action="@{/licenses/admin/registration/add}" th:object="${user}" method="post">
+        <form th:action="@{/licenses/admin/registration}" th:object="${user}" method="post">
           <div class="form-group">
             <label for="firstName" th:text="#{user_first_name}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
             <input type="text" id="firstName" th:field="*{firstName}" class="form-control" />

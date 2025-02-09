@@ -61,7 +61,8 @@ public class UserController {
         model.addAttribute("organizations", organizations);
         userService.registerUser(userDTO);
         model.addAttribute("successMessage", "User registered successfully!");
-        return "licenses/admin/registration";
+        return "redirect:/licenses/admin/userlists";
+
     }
 
 
