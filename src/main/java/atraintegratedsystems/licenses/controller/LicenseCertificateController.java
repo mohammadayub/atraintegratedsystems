@@ -1,6 +1,7 @@
 package atraintegratedsystems.licenses.controller;
 
 import atraintegratedsystems.licenses.dto.LicenseAdminFeesExtensionDTO;
+import atraintegratedsystems.licenses.dto.LicenseApplicantDTO;
 import atraintegratedsystems.licenses.dto.LicenseApprovalDTO;
 import atraintegratedsystems.licenses.model.LicenseAdminFeesExtension;
 import atraintegratedsystems.licenses.model.LicenseApproval;
@@ -29,13 +30,14 @@ public class LicenseCertificateController {
         LicenseApproval licenseApproval = licenseCertificateService.getApprovalByApplicantId(id)
                 .orElseThrow(() -> new RuntimeException("License Approval not found for applicantId: " + id));
         LicenseApprovalDTO licenseApprovalDTO = new LicenseApprovalDTO();
-        // Map fields from licenseApplicant to licenseApplicantDTO
+
         licenseApprovalDTO.setId(licenseApproval.getId());
         licenseApprovalDTO.setApprovalId(licenseApproval.getApprovalId());
         licenseApprovalDTO.setApplicantLicenseCompanyName(licenseApproval.getLicenseApplicant().getCompanyLicenseName());
         licenseApprovalDTO.setLicenseTypeName(licenseApproval.getLicenseType().getName());
         licenseApprovalDTO.setApprovalDate(licenseApproval.getApprovalDate());
         licenseApprovalDTO.setLicenseFeeExpiryDate(licenseApproval.getLicenseFeeExpiryDate());
+
         model.addAttribute("licenseApprovalDTO", licenseApprovalDTO);
         return "licenses/license/certificate/license_applicant_certificate_print";
     }
