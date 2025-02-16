@@ -38,6 +38,14 @@ public class LicenseCertificateController {
         licenseApprovalDTO.setApprovalDate(licenseApproval.getApprovalDate());
         licenseApprovalDTO.setLicenseFeeExpiryDate(licenseApproval.getLicenseFeeExpiryDate());
 
+        LicenseApplicantDTO licenseApplicantDTO = new LicenseApplicantDTO();
+
+        licenseApplicantDTO.setYearOfEstablishment(licenseApproval.getLicenseApplicant().getYearOfEstablishment());
+        licenseApplicantDTO.setCompanyAddress(licenseApproval.getLicenseApplicant().getCompanyAddress());
+        licenseApplicantDTO.setContactNo(licenseApproval.getLicenseApplicant().getContactNo());
+        licenseApplicantDTO.setLicenseNo(licenseApproval.getLicenseApplicant().getLicenseNo());
+
+        model.addAttribute("licenseApplicantDTO", licenseApplicantDTO);
         model.addAttribute("licenseApprovalDTO", licenseApprovalDTO);
         return "licenses/license/certificate/license_applicant_certificate_print";
     }
