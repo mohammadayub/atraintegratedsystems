@@ -12,47 +12,6 @@
 </head>
 <body style="margin:5px;font-size:12px;font-family:Arabic Typesetting;font-weight:bold;">
 <nav th:replace="~{layout :: page_navbar}" id="pagnav"></nav>
-<!--<div class="certificate-container">-->
-<!--  <div class="certificate-header">-->
-<!--    <img th:src="@{/images/tariff_pic.png}" alt="Logo">-->
-<!--    <h1>CERTIFICATE</h1>-->
-<!--    <h2>OF ACHIEVEMENT</h2>-->
-<!--    <h2>THIS CERTIFICATE IS PRESENTED TO</h2>-->
-<!--    <h2>-->
-<!--      <input type="text" th:field="${licenseApprovalDTO.applicantLicenseCompanyName}" readonly>-->
-<!--    </h2>-->
-<!--    <h5>In recognition of their efforts in completing the License Type:</h5>-->
-<!--    <h5>-->
-<!--      <input type="text" th:field="${licenseApprovalDTO.licenseTypeName}" readonly>-->
-<!--    </h5>-->
-<!--    <div class="dates">-->
-<!--      <h4>-->
-<!--        Date of Issue:-->
-<!--        <input type="text" th:field="${licenseApprovalDTO.approvalDate}" readonly>-->
-<!--      </h4>-->
-<!--      <h4>-->
-<!--        Date of Expiration:-->
-<!--        <input type="text" th:field="${licenseApprovalDTO.licenseFeeExpiryDate}" readonly>-->
-<!--      </h4>-->
-<!--    </div>-->
-<!--    <div class="approvalId">-->
-<!--      <h4>-->
-<!--        Approval ID:-->
-<!--        <input type="text" th:field="${licenseApprovalDTO.approvalId}" readonly>-->
-<!--      </h4>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--  <div class="signature-section">CEO Signature</div>-->
-<!--  <div class="buttons">-->
-<!--    <button class="btn btn-primary" onclick="doPrint();" id="prn">Print</button>-->
-<!--    <a th:href="@{/licenses/license/certificate/license_applicants_certificate_list}" id="backtopage" class="btn btn-primary">-->
-<!--      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width:20px;height:20px;">-->
-<!--        <path stroke-linecap="round" stroke-linejoin="round" d="M9 15L3 9m0 0L9 3m-6 6h12a6 6 0 1 1 0 12h-3" />-->
-<!--      </svg>-->
-<!--      Back to Page-->
-<!--    </a>-->
-<!--  </div>-->
-<!--</div>-->
 <div style="border: 6px solid #DCAF45;border-radius:4px;">
 <div class="container-fluid " style="border: 3px solid #14438B;">
 
@@ -135,37 +94,27 @@
 
       <span>Issued On: <span th:text="${licenseApprovalDTO.approvalDate}" style="border:0px; background-color:transparent; font-size:15px;color:#14438B;"></span></span><br>
       <span>Expires On: <span th:text="${licenseApprovalDTO.licenseFeeExpiryDate}" style="border:0px; background-color:transparent; font-size:15px;color:#14438B;"></span></span><br>
-      <span>Established On: <span style="color:#14438B;"><span th:text="${licenseApplicantDTO.yearOfEstablishment}"></span></span></span><br>
+      <span>Established On: <span style="color:#14438B;"><span th:text="${licenseApprovalDTO.yearOfEstablishment}"></span></span></span><br>
       <span>The Attached Terms & Conditions and the related annexes are considered as part of the License.</span><br>
       <span>For Verification of Validity and terms & conditions of the License,please refer to <a href="https://verification.atra.gov.af" target="_blank">https://verification.atra.gov.af</a></span><br>
-      <span>Physical Address:<span  disabled style="border:0px; background-color:transparent; font-size:15px;color:#14438B;"><span th:text="${licenseApplicantDTO.companyAddress}"></span></span></span><br>
-      <span>Contact No: <span  disabled style="border:0px; background-color:transparent; font-size:15px;color:#14438B;"><span th:text="${licenseApplicantDTO.contactNo}"></span></span></span><br>
-      <span>Number Of License Issued By Ministry of Commerce & Industries : <span  disabled style="border:0px; background-color:transparent; font-size:15px;color:#14438B;"><span th:text="${licenseApplicantDTO.licenseNo}"></span></span></span>
-
-
-
+      <span>Physical Address:<span  disabled style="border:0px; background-color:transparent; font-size:15px;color:#14438B;"><span th:text="${licenseApprovalDTO.companyAddress}"></span></span></span><br>
+      <span>Contact No: <span  disabled style="border:0px; background-color:transparent; font-size:15px;color:#14438B;"><span th:text="${licenseApprovalDTO.contactNo}"></span></span></span><br>
+      <span>Number Of License Issued By Ministry of Commerce & Industries : <span  disabled style="border:0px; background-color:transparent; font-size:15px;color:#14438B;"><span th:text="${licenseApprovalDTO.licenseNo}"></span></span></span>
     </div>
-
     <!-- English Text -->
     <div id="center_third" class="col-2 d-flex justify-content-center align-items-center flex-column p-2" style="font-size:14px;font-weight:bolder;">
-
       <span class="mt-4">د اترا د مقام لاسلیک او مهر
-
       </span>
     </div>
-
-
-
-
     <div id="right_third" class="col-5 d-flex flex-column justify-content-right align-items-right text-right" dir="rtl">
           <span>د صدور نیټه: <span th:text="${licenseApprovalDTO.approvalDate}" style="border:0px; background-color:transparent; font-size:15px;color:#14438B;"></span></span><br>
           <span>د پاي نیټه: <span th:text="${licenseApprovalDTO.licenseFeeExpiryDate}" style="border:0px; background-color:transparent; font-size:15px;color:#14438B;"></span></span><br>
-          <span>د تاسیس نیټه: <span style="color:#14438B;"><span th:text="${licenseApplicantDTO.yearOfEstablishment}"></span></span></span><br>
+          <span>د تاسیس نیټه: <span style="color:#14438B;"><span th:text="${licenseApprovalDTO.yearOfEstablishment}"></span></span></span><br>
           <span>د جواز سره مل د جواز شرایط او اړوند ضمایم د جواز برخي ګڼل کیږي.</span><br>
           <span>د جواز د اعتبار او شرایطو د تاییدۍ لپاره <a href="https://verification.atra.gov.af" target="_blank">https://verification.atra.gov.af</a> ته مراجعه وکړۍ. </span><br>
-          <span>فزیکي آدرس : <span style="color:#14438B;"><span th:text="${licenseApplicantDTO.companyAddress}"></span></span></span><br>
-      <span>شماره: <span style="color:#14438B;"><span th:text="${licenseApplicantDTO.contactNo}"></span></span></span>
-          <span>په صنعت او سوداګرۍ وزارت (مرکزي ثبت) کي د جواز شمیره : <span style="color:#14438B;"><span th:text="${licenseApplicantDTO.licenseNo}"></span></span></span>
+          <span>فزیکي آدرس : <span style="color:#14438B;"><span th:text="${licenseApprovalDTO.companyAddress}"></span></span></span><br>
+      <span>شماره: <span style="color:#14438B;"><span th:text="${licenseApprovalDTO.contactNo}"></span></span></span>
+          <span>په صنعت او سوداګرۍ وزارت (مرکزي ثبت) کي د جواز شمیره : <span style="color:#14438B;"><span th:text="${licenseApprovalDTO.licenseNo}"></span></span></span>
     </div>
 
   </div>

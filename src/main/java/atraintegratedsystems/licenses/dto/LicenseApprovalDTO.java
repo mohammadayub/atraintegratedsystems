@@ -81,4 +81,13 @@ public class LicenseApprovalDTO {
      private JalaliDate adFeesExpireDate;
 
 
+    //Certificate Need Columns
+
+    private String companyAddress;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate yearOfEstablishment;
+    private String contactNo;
+    private String licenseNo;
+
+
 }

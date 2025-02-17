@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -35,6 +36,7 @@ public class LicenseApplicantController {
     @Autowired
     private LicenseTypeService licenseTypeService;
 
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_LICENSE')")
     @GetMapping("/licenses/license/registration/license_applicants_profile")
     public String showApplicationProfile(Model model) {
         List<LicenseApplicant> profiles = licenseService.getAllApplicants();
@@ -43,41 +45,6 @@ public class LicenseApplicantController {
         return "licenses/license/registration/license_applicants_profile";
     }
 
-
-//    @GetMapping("/licenses/license/registration/license_new_applicant")
-//    public String showRegistrationForm(Model model) {
-//        model.addAttribute("profile", new LicenseApplicantDTO());
-//        model.addAttribute("licenseTypes", licenseTypeService.findAll());
-//        return "licenses/license/registration/license_new_applicant";
-//    }
-
-//    @PostMapping("/licenses/license/registration/license_new_applicant")
-//    public String saveProfile(@ModelAttribute("profile") @Valid LicenseApplicantDTO dto,
-//                              BindingResult bindingResult,
-//                              Model model,
-//                              RedirectAttributes redirectAttributes) {
-//        if (bindingResult.hasErrors()) {
-//            // If the reqDate is null, set it to the current date as a LocalDate
-//                dto.setReqDate(LocalDate.now());  // Using LocalDate.now() to set the current date
-//                dto.setExpiryDate(LocalDate.now());
-//                dto.setYearOfEstablishment(LocalDate.now());
-//            model.addAttribute("licenseTypes", licenseTypeService.findAll());
-//            return "licenses/license/registration/license_new_applicant";
-//        }
-//
-//        try {
-//            licenseService.saveProfile(dto);
-//            redirectAttributes.addFlashAttribute("successMessage", "Profile registered successfully!");
-//            return "redirect:/licenses/license/registration/license_applicants_profile";
-//        } catch (Exception e) {
-//            model.addAttribute("errorMessage", e instanceof IOException
-//                    ? "An error occurred while saving the profile. Please try again."
-//                    : e.getMessage());
-//            model.addAttribute("profile", dto);
-//            model.addAttribute("licenseTypes", licenseTypeService.findAll());
-//            return "licenses/license/registration/license_new_applicant";
-//        }
-//    }
 
 
 

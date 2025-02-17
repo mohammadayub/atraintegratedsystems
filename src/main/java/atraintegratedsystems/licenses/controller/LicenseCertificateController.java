@@ -7,6 +7,7 @@ import atraintegratedsystems.licenses.model.LicenseAdminFeesExtension;
 import atraintegratedsystems.licenses.model.LicenseApproval;
 import atraintegratedsystems.licenses.service.LicenseCertificateService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +18,7 @@ import java.util.List;
 public class LicenseCertificateController {
     @Autowired
     private LicenseCertificateService licenseCertificateService;
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_LICENSE')")
     @GetMapping("/licenses/license/certificate/license_applicants_certificate_list")
     public String showApplicationProfile(Model model) {
         List<LicenseApproval> profiles = licenseCertificateService.getAllPaid();
@@ -25,6 +27,7 @@ public class LicenseCertificateController {
     }
 
 
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_LICENSE')")
     @GetMapping("/licenses/license/certificate/license_applicants_certificate_list/print/{id}")
     public String GetTariff(@PathVariable Long id, Model model){
         LicenseApproval licenseApproval = licenseCertificateService.getApprovalByApplicantId(id)
@@ -37,15 +40,10 @@ public class LicenseCertificateController {
         licenseApprovalDTO.setLicenseTypeName(licenseApproval.getLicenseType().getName());
         licenseApprovalDTO.setApprovalDate(licenseApproval.getApprovalDate());
         licenseApprovalDTO.setLicenseFeeExpiryDate(licenseApproval.getLicenseFeeExpiryDate());
-
-        LicenseApplicantDTO licenseApplicantDTO = new LicenseApplicantDTO();
-
-        licenseApplicantDTO.setYearOfEstablishment(licenseApproval.getLicenseApplicant().getYearOfEstablishment());
-        licenseApplicantDTO.setCompanyAddress(licenseApproval.getLicenseApplicant().getCompanyAddress());
-        licenseApplicantDTO.setContactNo(licenseApproval.getLicenseApplicant().getContactNo());
-        licenseApplicantDTO.setLicenseNo(licenseApproval.getLicenseApplicant().getLicenseNo());
-
-        model.addAttribute("licenseApplicantDTO", licenseApplicantDTO);
+        licenseApprovalDTO.setCompanyAddress(licenseApproval.getLicenseApplicant().getCompanyAddress());
+        licenseApprovalDTO.setYearOfEstablishment(licenseApproval.getLicenseApplicant().getYearOfEstablishment());
+        licenseApprovalDTO.setContactNo(licenseApproval.getLicenseApplicant().getContactNo());
+        licenseApprovalDTO.setLicenseNo(licenseApproval.getLicenseApplicant().getLicenseNo());
         model.addAttribute("licenseApprovalDTO", licenseApprovalDTO);
         return "licenses/license/certificate/license_applicant_certificate_print";
     }
