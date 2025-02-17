@@ -31,12 +31,16 @@ public class LicenseFeeMCITController {
         model.addAttribute("profiles", profiles);
         return "licenses/finance/license_finance/mcit/license_fee_list";
     }
+
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_MINISTRY')")
     @GetMapping("/licenses/finance/mcit/license_fee_list/add")
     public String PaymentConfirmationAdd(Model model){
         model.addAttribute("licenseApprovalDTO",new LicenseApprovalDTO());
         model.addAttribute("licenseTypes", licenseTypeService.findAll());
         return "licenses/finance/mcit/license_fee_payment_confirmation";
     }
+
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_MINISTRY')")
     @PostMapping("/licenses/finance/mcit/license_fee_list/add")
     public String updateLicenseApproval(@ModelAttribute LicenseApprovalDTO licenseApprovalDTO) {
         // Fetch the existing entity from the database
@@ -54,6 +58,8 @@ public class LicenseFeeMCITController {
         return "redirect:/licenses/finance/mcit/license_fee_list";
     }
 
+
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_MINISTRY')")
     @GetMapping("/licenses/finance/mcit/license_fee_list/update/{id}")
     public String UpdateMcitFee(@PathVariable Long id, Model model){
         LicenseApproval licenseApproval = licenseFeeMCITService.findById(id);
@@ -74,6 +80,8 @@ public class LicenseFeeMCITController {
 
     }
 
+
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_MINISTRY')")
     @GetMapping("/licenses/finance/mcit/license_fee_list/print/{id}")
     public String GetTariff(@PathVariable Long id, Model model){
         LicenseApproval licenseApproval = licenseFeeMCITService.findById(id);

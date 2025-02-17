@@ -9,6 +9,7 @@ import atraintegratedsystems.licenses.service.LicenseApprovalService;
 import atraintegratedsystems.licenses.service.LicenseTypeService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -32,6 +33,7 @@ public class LicenseApplicantApprovalController {
     /**
      * Displays the list of license applicants with paid status.
      */
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_LICENSE_APPROVAL')")
     @GetMapping("/license_applicants_approval_list")
     public String showApplicationProfile(Model model) {
         List<LicenseApplicantApprovalDTO> profiles = licenseApplicantService.getAllLicenseApplicantApprovalDetails();
@@ -40,6 +42,7 @@ public class LicenseApplicantApprovalController {
         return "licenses/license/approval/license_applicants_approval_list";
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_LICENSE_APPROVAL')")
     @GetMapping("/license_applicants_approval_list/add")
     public String paymentConfirmationAdd(Model model) {
         model.addAttribute("licenseApplicantDTO", new LicenseApplicantDTO());
@@ -49,6 +52,7 @@ public class LicenseApplicantApprovalController {
         return "licenses/license/approval/license_applicants_approval";
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_LICENSE_APPROVAL')")
     @PostMapping("/license_applicants_approval")
     public String saveApproval(@ModelAttribute("licenseApprovalDTO") LicenseApprovalDTO dto, RedirectAttributes redirectAttributes) {
         log.info("LicenseApprovalDTO: {}", dto);  // Check the entire DTO to ensure ID is present
@@ -61,6 +65,7 @@ public class LicenseApplicantApprovalController {
         }
         return "redirect:/licenses/license/approval/license_applicants_approval_list";
     }
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_LICENSE_APPROVAL')")
     @GetMapping("/license_applicants_approval_list/update/{id}")
     public String updateApplicantGet(@PathVariable Long id, Model model) {
         try {

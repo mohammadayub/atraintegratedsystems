@@ -6,6 +6,7 @@ import atraintegratedsystems.licenses.service.LicenseApplicantFinanceService;
 import atraintegratedsystems.licenses.service.LicenseTypeService;
 import atraintegratedsystems.utils.DateConverter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -27,6 +28,7 @@ public class LicenseApplicationFeesFinanceController {
     @Autowired
     private LicenseTypeService licenseTypeService;
 
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_FINANCE')")
     @GetMapping("/licenses/finance/license_finance/application_fees/license_application_fee_list")
     public String showApplicationProfile(Model model) {
         model.addAttribute("licenseTypes", licenseTypeService.findAll());
@@ -35,6 +37,7 @@ public class LicenseApplicationFeesFinanceController {
         return "licenses/finance/license_finance/application_fees/license_application_fee_list";
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_FINANCE')")
     @GetMapping("/licenses/finance/license_finance/application_fees/license_application_fee_list/add")
     public String PaymentConfirmationAdd(Model model){
         model.addAttribute("licenseApplicantDTO",new LicenseApplicantDTO());
@@ -43,6 +46,7 @@ public class LicenseApplicationFeesFinanceController {
     }
 
 
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_FINANCE')")
     @PostMapping("/licenses/finance/license_finance/application_fees/license_application_fee_list/add")
     public String updateBankVoucherNoAndPaymentStatus(@Valid @ModelAttribute("licenseApplicantDTO") LicenseApplicantDTO licenseApplicantDTO, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
@@ -64,6 +68,7 @@ public class LicenseApplicationFeesFinanceController {
 
 
 
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_FINANCE')")
     @GetMapping("/licenses/finance/license_finance/application_fees/license_application_fee_list/update/{reqId}")
     public String updateApplicantGet(@PathVariable String reqId, Model model) throws Exception {
         LicenseApplicant licenseApplicant = licenseApplicantFinanceService.getApplicantByReqId(reqId)
@@ -89,6 +94,7 @@ public class LicenseApplicationFeesFinanceController {
         return "licenses/finance/license_finance/application_fees/license_application_payment_confirmation";
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_FINANCE')")
     @GetMapping("/licenses/finance/license_finance/application_fees/license_application_fee_list/print/{reqId}")
     public String GetTariff(@PathVariable String reqId, Model model){
         LicenseApplicant licenseApplicant = licenseApplicantFinanceService.getApplicantByReqId(reqId)

@@ -7,6 +7,7 @@ import atraintegratedsystems.licenses.service.LicenseGuaranteeFeeService;
 import atraintegratedsystems.licenses.service.LicenseTypeService;
 import atraintegratedsystems.utils.DateConverter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,6 +27,7 @@ public class LicenseGuaranteeFeesController {
     @Autowired
     private LicenseGuaranteeFeeService licenseGuaranteeFeeService;
 
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_FINANCE')")
     @GetMapping("/licenses/finance/license_finance/guarantee_fees/license_guarantee_fee_list")
     public String showApplicationProfile(Model model) {
         List<LicenseApproval> profiles = licenseGuaranteeFeeService.getAllApplicantsUnPaidGuarantee();
@@ -33,6 +35,7 @@ public class LicenseGuaranteeFeesController {
         return "/licenses/finance/license_finance/guarantee_fees/license_guarantee_fee_list";
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_FINANCE')")
     @GetMapping("/licenses/finance/license_finance/guarantee_fees/license_guarantee_fee_list/add")
     public String PaymentConfirmationAdd(Model model){
         model.addAttribute("licenseApprovalDTO",new LicenseApprovalDTO());
@@ -41,6 +44,7 @@ public class LicenseGuaranteeFeesController {
     }
 
 
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_FINANCE')")
     @PostMapping("/licenses/finance/license_finance/guarantee_fees/license_guarantee_fee_list/add")
     public String updateLicenseApproval(@ModelAttribute LicenseApprovalDTO licenseApprovalDTO) {
         // Fetch the existing entity from the database
@@ -70,6 +74,7 @@ public class LicenseGuaranteeFeesController {
     }
 
 
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_FINANCE')")
     @GetMapping("/licenses/finance/license_finance/guarantee_fees/license_guarantee_fee_list/update/{id}")
     public String UpdateGuaranteeFee(@PathVariable Long id, Model model){
         LicenseApproval licenseApproval = licenseGuaranteeFeeService.findById(id);
@@ -92,6 +97,7 @@ public class LicenseGuaranteeFeesController {
         return "licenses/finance/license_finance/guarantee_fees/license_guarantee_fee_payment_confirmation";
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_FINANCE')")
     @GetMapping("/licenses/finance/license_finance/guarantee_fees/license_guarantee_fee_list/print/{id}")
     public String GetTariff(@PathVariable Long id, Model model){
         LicenseApproval licenseApproval = licenseGuaranteeFeeService.findById(id);

@@ -8,6 +8,7 @@ import atraintegratedsystems.licenses.service.LicenseAdminFeesExtensionService;
 import atraintegratedsystems.licenses.service.LicenseApprovalService;
 import atraintegratedsystems.licenses.service.LicenseDatabaseFeesExtensionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,6 +30,7 @@ public class LicenseApprovalAndAdminFeesExtensionController {
     @Autowired
     private LicenseAdminFeesExtensionService extensionService;
 
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_LICENSE') or hasRole('ROLE_LICENSE_ENTRY')")
     @GetMapping("/licenses/license/extension/license_admin_fees_profile")
     public String getLicenseDetails(Model model) {
         List<LicenseApprovalDTO> approvals = approvalService.getAllForAdminFeesExtension();
@@ -37,7 +39,7 @@ public class LicenseApprovalAndAdminFeesExtensionController {
         model.addAttribute("extensions", extensions);
         return "licenses/license/extension/license_admin_fees_profile"; // Thymeleaf template
     }
-
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_LICENSE') or hasRole('ROLE_LICENSE_ENTRY')")
     @PostMapping("/licenses/license/extension/license_admin_fees_profile/update-status")
     public String updateExtendStatus(@RequestParam Long id, @RequestParam String extendStatus, RedirectAttributes redirectAttributes) {
         try {

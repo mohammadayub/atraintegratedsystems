@@ -5,6 +5,7 @@ import atraintegratedsystems.licenses.model.LicenseApproval;
 import atraintegratedsystems.licenses.service.LicenseGeneralReportService;
 import atraintegratedsystems.licenses.service.LicenseTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +20,7 @@ public class LicenseGeneralReportController {
     @Autowired
     private LicenseGeneralReportService licenseGeneralReportService;
 
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_LICENSE')")
     @GetMapping("/licenses/license/report/license_general_report")
     public String showApplicationProfile(Model model) {
         List<LicenseApproval> profiles = licenseGeneralReportService.getAllApprovals();

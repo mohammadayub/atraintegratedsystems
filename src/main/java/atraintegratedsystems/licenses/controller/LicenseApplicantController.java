@@ -36,7 +36,7 @@ public class LicenseApplicantController {
     @Autowired
     private LicenseTypeService licenseTypeService;
 
-    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_LICENSE')")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_LICENSE') or hasRole('ROLE_LICENSE_ENTRY')")
     @GetMapping("/licenses/license/registration/license_applicants_profile")
     public String showApplicationProfile(Model model) {
         List<LicenseApplicant> profiles = licenseService.getAllApplicants();
@@ -48,6 +48,7 @@ public class LicenseApplicantController {
 
 
 
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_LICENSE') or hasRole('ROLE_LICENSE_ENTRY')")
     @GetMapping("/licenses/license/registration/applicationDownload/{id}")
     public ResponseEntity<ByteArrayResource> downloadApplicationFile(@PathVariable Long id) {
         Optional<LicenseApplicant> profileOpt = licenseService.getApplicantById(id);
@@ -70,6 +71,7 @@ public class LicenseApplicantController {
                 .body(resource);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_LICENSE') or hasRole('ROLE_LICENSE_ENTRY')")
     @GetMapping("/licenses/license/registration/licenseDownload/{id}")
     public ResponseEntity<ByteArrayResource> downloadFile(@PathVariable Long id) {
         Optional<LicenseApplicant> profileOpt = licenseService.getApplicantById(id);
@@ -92,6 +94,7 @@ public class LicenseApplicantController {
                 .body(resource);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_LICENSE') or hasRole('ROLE_LICENSE_ENTRY')")
     @GetMapping("/licenses/license/registration/identityDownload/{id}")
     public ResponseEntity<ByteArrayResource> downloadTinFile(@PathVariable Long id) {
         Optional<LicenseApplicant> profileOpt = licenseService.getApplicantById(id);
@@ -115,6 +118,7 @@ public class LicenseApplicantController {
     }
 
 
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_LICENSE') or hasRole('ROLE_LICENSE_ENTRY')")
     @GetMapping("/licenses/license/registration/bankDownload/{id}")
     public ResponseEntity<ByteArrayResource> downloadBank(@PathVariable Long id) {
         Optional<LicenseApplicant> profileOpt = licenseService.getApplicantById(id);
@@ -137,6 +141,7 @@ public class LicenseApplicantController {
                 .body(resource);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_LICENSE') or hasRole('ROLE_LICENSE_ENTRY')")
     @GetMapping("/licenses/license/registration/nidDownload/{id}")
     public ResponseEntity<ByteArrayResource> downloadNID(@PathVariable Long id) {
         Optional<LicenseApplicant> profileOpt = licenseService.getApplicantById(id);
@@ -160,6 +165,7 @@ public class LicenseApplicantController {
     }
 
 
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_LICENSE') or hasRole('ROLE_LICENSE_ENTRY')")
     @GetMapping("/licenses/license/registration/articleOfAssociationDownload/{id}")
     public ResponseEntity<ByteArrayResource> downloadArticleOfAssociation(@PathVariable Long id) {
         Optional<LicenseApplicant> profileOpt = licenseService.getApplicantById(id);
@@ -182,6 +188,7 @@ public class LicenseApplicantController {
                 .body(resource);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_LICENSE') or hasRole('ROLE_LICENSE_ENTRY')")
     @GetMapping("/licenses/license/registration/businessPlanDownload/{id}")
     public ResponseEntity<ByteArrayResource> downloadBusinessPlan(@PathVariable Long id) {
         Optional<LicenseApplicant> profileOpt = licenseService.getApplicantById(id);
@@ -204,6 +211,7 @@ public class LicenseApplicantController {
                 .body(resource);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_LICENSE') or hasRole('ROLE_LICENSE_ENTRY')")
     @GetMapping("/licenses/license/registration/proposalDownload/{id}")
     public ResponseEntity<ByteArrayResource> downloadProposal(@PathVariable Long id) {
         Optional<LicenseApplicant> profileOpt = licenseService.getApplicantById(id);
@@ -277,6 +285,7 @@ public class LicenseApplicantController {
 
     //Refer to Board for Approval
 
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_LICENSE') or hasRole('ROLE_LICENSE_ENTRY')")
     @GetMapping("/licenses/license/registration/license_applicants_send_board/{id}")
     public String referToBoard(@PathVariable Long id, Model model) {
         Optional<LicenseApplicant> profileOpt = licenseService.getApplicantById(id);
@@ -299,6 +308,7 @@ public class LicenseApplicantController {
     }
 
 
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_LICENSE') or hasRole('ROLE_LICENSE_ENTRY')")
     @PostMapping("/licenses/license/registration/license_applicants_send_board")
     public String updateProfile(
             @ModelAttribute("licenseApplicant") LicenseApplicantDTO dto,
