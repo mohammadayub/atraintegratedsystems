@@ -20,7 +20,7 @@
             <table class="table table-borderless">
             <tr>
             <td>
-                <div class="custom-card" sec:authorize="hasRole('ROLE_LICENSE')">
+                <div class="custom-card" sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_LICENSE') or hasRole('ROLE_LICENSE_ENTRY') or hasRole('ROLE_LICENSE_APPROVAL')">
                     <a th:href="@{/licenses/license/home}">
                         <img th:src="@{/images/license_management.png}" alt="License Management System">
                     </a>
@@ -30,7 +30,7 @@
                 </div>
             </td>
             <td>
-                <div class="custom-card"  sec:authorize="hasRole('ROLE_FINANCE') or hasRole('ROLE_MINISTRY')">
+                <div class="custom-card"  sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_FINANCE') or hasRole('ROLE_MINISTRY')">
                     <a th:href="@{/licenses/finance/home}">
                         <img th:src="@{/images/finance.png}" class="rounded" style="width:100px;height:100px;" alt="LMS">
                     </a>
@@ -47,12 +47,12 @@
     <table class="table table-borderless">
         <tr>
             <td>
-                <div class="custom-card">
-                    <a th:href="@{/}">
+                <div class="custom-card" sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_LICENSE')">
+                    <a th:href="@{/licenses/license/report}">
                         <img th:src="@{/images/reports.png}" alt="Codes Management System">
                     </a>
                     <h4 class="license-link" style="margin-top: 12px;">
-                        <a th:href="@{/}" th:text="#{reports}"></a>
+                        <a th:href="@{/licenses/license/report}" th:text="#{reports}"></a>
                     </h4>
                 </div>
             </td>
@@ -64,12 +64,12 @@
     <table class="table table-borderless">
         <tr>
             <td>
-                <div class="custom-card">
-                    <a th:href="@{/}">
+                <div class="custom-card" sec:authorize="hasRole('ROLE_ADMIN')">
+                    <a th:href="@{/licenses/admin/userlists}">
                         <img class="rounded" th:src="@{/images/user.gif}" alt="lms" style="height:100px;width:100px;">
                     </a>
                     <h4 class="license-link" style="margin-top: 12px;">
-                        <a th:href="@{/}">User Management</a>
+                        <a th:href="@{/licenses/admin/userlists}">User Management</a>
                     </h4>
                 </div>
             </td>

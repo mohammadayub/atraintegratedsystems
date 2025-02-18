@@ -33,6 +33,7 @@ public class LicenseApplicantApprovalController {
     /**
      * Displays the list of license applicants with paid status.
      */
+
     @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_LICENSE_APPROVAL')")
     @GetMapping("/license_applicants_approval_list")
     public String showApplicationProfile(Model model) {
