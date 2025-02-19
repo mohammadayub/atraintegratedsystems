@@ -41,10 +41,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/licenses/license/**").access("hasRole('ROLE_LICENSE_APPROVAL') or hasRole('ROLE_ADMIN')")
                 .antMatchers("/licenses/license/**").access("hasRole('ROLE_LICENSE_ENTRY') or hasRole('ROLE_ADMIN')")
                 // Finance-related paths - only accessible by specific roles
-                .antMatchers("/licenses/finance/license_finance/administration_fees/**").access("hasRole('ROLE_FINANCE') or hasRole('ROLE_ADMIN')")
-                .antMatchers("/licenses/finance/license_finance/application_fees/**").access("hasRole('ROLE_FINANCE') or hasRole('ROLE_ADMIN')")
-                .antMatchers("/licenses/finance/license_finance/database_maintainance_fees/**").access("hasRole('ROLE_FINANCE') or hasRole('ROLE_ADMIN')")
-                .antMatchers("/licenses/finance/license_finance/guarantee_fees/**").access("hasRole('ROLE_FINANCE') or hasRole('ROLE_ADMIN')")
+                .antMatchers("/licenses/finance/**").access("hasRole('ROLE_FINANCE') or hasRole('ROLE_ADMIN')")
                 // Ministry-related paths - only accessible by specific roles
                 .antMatchers("/licenses/finance/license_finance/**").access("hasRole('ROLE_MINISTRY') or hasRole('ROLE_ADMIN')")
 
