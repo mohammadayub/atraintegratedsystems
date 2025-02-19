@@ -19,7 +19,7 @@
   <table class="table table-borderless">
     <tr>
       <td>
-      <div class="custom-card" sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_FINANCE')">
+      <div class="custom-card" sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_FINANCE') or hasRole('ROLE_MINISTRY')">
         <a th:href="@{/licenses/finance/license_finance}">
           <img th:src="@{/images/finance_Home.png}" alt="Image Not Display"></a>
         <h4 class="license-link" style="margin-top: 12px;">
@@ -31,12 +31,12 @@
     </tr>
   </table>
   </fieldset>
-  <fieldset>
+  <fieldset sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_FINANCE')">
     <legend>License Fees Extension Section</legend>
   <table class="table table-borderless">
     <tr>
       <td>
-        <div class="custom-card" sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_FINANCE')">
+        <div class="custom-card">
           <a th:href="@{/licenses/finanace/extension/home}">
             <img th:src="@{/images/license_finance_extension.png}" alt="Codes Management System"></a>
           <h4 class="license-link" style="margin-top: 12px;">
