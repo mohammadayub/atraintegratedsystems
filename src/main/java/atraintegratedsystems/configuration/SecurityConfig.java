@@ -37,7 +37,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/").authenticated()
 
                 // License-related paths - only accessible by specific roles
-                .antMatchers("/licenses/license/**").access("hasRole('ROLE_LICENSE') or hasRole('ROLE_ADMIN')")
+                .antMatchers("/licenses/license/**").access("hasRole('ROLE_LICENSE') or hasRole('ROLE_ADMIN') or hasRole('ROLE_LICENSE_APPROVAL') or hasRole('ROLE_LICENSE_ENTRY')" +
+                        "")
                 .antMatchers("/licenses/license/**").access("hasRole('ROLE_LICENSE_APPROVAL') or hasRole('ROLE_ADMIN')")
                 .antMatchers("/licenses/license/**").access("hasRole('ROLE_LICENSE_ENTRY') or hasRole('ROLE_ADMIN')")
                 // Finance-related paths - only accessible by specific roles

@@ -77,4 +77,5 @@ public class RouteController {
 
         return "licenses/finance/extension/home";
     }
+
 }
