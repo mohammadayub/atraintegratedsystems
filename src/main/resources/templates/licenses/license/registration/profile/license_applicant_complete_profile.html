@@ -22,8 +22,9 @@
         </legend>
         <div class="row">
           <div class="col-md-3 form-group">
-            <label for="cash" th:text="#{license_application_cash}"
+            <label for="cash"
                    th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" style="color:#14438B;">
+            Cash (AFN)
             </label>
             <input type="number" id="cash" th:field="*{cash}" class="form-control">
           </div>

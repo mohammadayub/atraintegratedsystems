@@ -61,7 +61,7 @@
     <thead>
     <tr class="bg-primary">
       <th>ID</th>
-      <th>Approval ID</th>
+      <th>Applicant ID</th>
       <th>Company Name</th>
       <th>License Validity Years</th>
       <th>Database Fees</th>
@@ -94,9 +94,10 @@
     <thead>
     <tr class="bg-primary">
       <th>ID</th>
-      <th>Approval ID</th>
+      <th>Applicant ID</th>
       <th>Start Date</th>
       <th>Expire Date</th>
+      <th>Miladi Start Date</th>
       <th>Miladi Expire Date</th>
       <th>Database Fees</th>
       <th>Contract Extension</th>
@@ -107,7 +108,8 @@
       <td th:text="${extension.id}"></td>
       <td th:text="${extension.licenseApprovalId}"></td>
       <td th:text="${extension.extStartDate}"></td>
-      <td th:text="${extension.extExpireDate}"></td>
+      <td th:text="${extension.extStartDate}"></td>
+      <td th:text="${extension.extensionExpireDate}"></td>
       <td th:text="${extension.extensionExpireDate}" class="expireDate"></td>
       <td th:text="${extension.extensionDatabaseFees}"></td>
       <td>

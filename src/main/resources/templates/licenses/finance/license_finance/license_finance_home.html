@@ -16,9 +16,9 @@
     <fieldset>
         <legend>Fees & Tariffs Section</legend>
     <table class="table table-borderless">
-        <tr style="border-bottom:1px solid darkgray;">
+        <tr style="border-bottom:1px solid darkgray;" sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_FINANCE')">
             <td class="text-center">
-                <div class="custom-card" sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_FINANCE')">
+                <div class="custom-card">
                     <a th:href="@{/licenses/finance/license_finance/application_fees/license_application_fee_list}">
                     <img th:src="@{/images/application_fees.png}" alt="License Management System"></a>
                     <h4 class="license-link" style="margin-top: 12px;">
@@ -28,17 +28,7 @@
             </td>
             </td>
             <td class="text-center">
-                <div class="custom-card" style="margin-top:-23px;" sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_MINISTRY')">
-                    <a th:href="@{/licenses/finance/mcit/license_fee_list}">
-                        <img th:src="@{/images/mcit.png}" alt="MCIT"></a>
-                    <h4 class="license-link" style="margin-top: 12px;">
-                        <a th:href="@{/licenses/finance/mcit/license_fee_list}" th:text="#{mcit}"  style="font-size:20px;"></a>
-                    </h4>
-
-                </div>
-            </td>
-            <td class="text-center">
-                <div class="custom-card" sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_FINANCE')">
+                <div class="custom-card">
                     <a th:href="@{/licenses/finance/license_finance/administration_fees/license_administration_fee_list}">
                         <img th:src="@{/images/AdministrationFees.png}" alt="License Management System"></a>
                     <h4 class="license-link" style="margin-top: 12px;">
@@ -48,10 +38,10 @@
             </td>
         </tr>
         <!--   This is Today changes  -->
-        <tr  style="border-bottom:1px solid darkgray;">
+        <tr  style="border-bottom:1px solid darkgray;" sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_FINANCE')">
 
             <td class="text-center">
-                <div class="custom-card" sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_FINANCE')">
+                <div class="custom-card">
 
                     <a th:href="@{/licenses/finance/license_finance/database_maintainance_fees/license_database_fee_list}">
                         <img th:src="@{/images/database_maintainence_fees.png}"></a>
@@ -63,11 +53,24 @@
             </td>
 
             <td class="text-center">
-                <div class="custom-card" sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_FINANCE')">
+                <div class="custom-card">
                     <a th:href="@{/licenses/finance/license_finance/guarantee_fees/license_guarantee_fee_list}">
                         <img th:src="@{/images/guarantee_fees.png}" alt="Guarantee"></a>
                     <h4 class="license-link" style="margin-top: 12px;">
                         <a th:href="@{/licenses/finance/license_finance/guarantee_fees/license_guarantee_fee_list}" th:text="#{guarantee_fees}"  style="font-size:20px;"></a>
+                    </h4>
+
+                </div>
+            </td>
+        </tr>
+        <tr style="border-bottom:1px solid darkgray;" sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_MINISTRY')">
+
+            <td class="text-center">
+                <div class="custom-card" style="margin-top:-23px;">
+                    <a th:href="@{/licenses/finance/mcit/license_fee_list}">
+                        <img th:src="@{/images/mcit.png}" alt="MCIT"></a>
+                    <h4 class="license-link" style="margin-top: 12px;">
+                        <a th:href="@{/licenses/finance/mcit/license_fee_list}" th:text="#{mcit}"  style="font-size:20px;"></a>
                     </h4>
 
                 </div>
