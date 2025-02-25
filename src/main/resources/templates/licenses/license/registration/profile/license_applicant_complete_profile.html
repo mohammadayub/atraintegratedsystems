@@ -22,26 +22,12 @@
         </legend>
         <div class="row">
           <div class="col-md-3 form-group">
-            <label for="cash"
-                   th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" style="color:#14438B;">
-            Cash (AFN)
-            </label>
-            <input type="number" id="cash" th:field="*{cash}" class="form-control">
-          </div>
-          <div class="col-md-3 form-group">
             <label for="licenseNo" th:text="#{license_application_license_no}"
                    th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" style="color:#14438B;">
             </label>
             <input type="text" id="licenseNo" th:field="*{licenseNo}" class="form-control" maxlength="50">
           </div>
-          <div class="col-md-3 form-group">
-            <label for="tinNo" th:text="#{license_application_tin}"
-                   th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" style="color:#14438B;">
-            </label>
-            <input type="text" id="tinNo" th:field="*{tinNo}" class="form-control" maxlength="50">
-          </div>
-        </div>
-        <div class="row">
+
           <div class="col-md-3 form-group">
             <label for="yearOfEstablishment" th:text="#{license_application_year_establishment}"
                    th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
@@ -55,6 +41,19 @@
             <input type="text" id="expiryDate" th:field="*{expiryDate}" class="form-control hijrishamsi">
           </div>
           <div class="col-md-3 form-group">
+            <label for="tinNo" th:text="#{license_application_tin}"
+                   th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" style="color:#14438B;">
+            </label>
+            <input type="text" id="tinNo" th:field="*{tinNo}" class="form-control" maxlength="50">
+          </div>
+          <div class="col-md-3 form-group">
+            <label for="cash"
+                   th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" style="color:#14438B;">
+              Cash (AFN)
+            </label>
+            <input type="number" id="cash" th:field="*{cash}" class="form-control">
+          </div>
+          <div class="col-md-3 form-group">
             <label for="totalNationalEmployees" th:text="#{license_application_national_employee}"
                    th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
             </label>
@@ -66,6 +65,16 @@
             </label>
             <input type="number" id="totalInternationalEmployees" th:field="*{totalInternationalEmployees}" class="form-control" maxlength="10">
           </div>
+
+
+
+
+
+
+
+
+
+
         </div>
       </fieldset>
 
@@ -77,37 +86,37 @@
         <div class="row">
           <div class="col-md-2 form-group">
             <label for="licenseUpload" th:text="#{license_application_upload}"
-                   th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+                   th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" style="font-size:13px;">
             </label>
             <input type="file" id="licenseUpload" th:field="*{licenseUpload}" class="form-control-file" accept=".pdf,.jpg,.jpeg,.png">
           </div>
           <div class="col-md-2 form-group">
             <label for="identityFormUpload"
-                   th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">Identity Form
+                   th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" style="font-size:13px;">Identity Form
             </label>
             <input type="file" id="identityFormUpload" th:field="*{identityFormUpload}" class="form-control-file" accept=".pdf,.jpg,.jpeg,.png" style="border-left: 2px solid blue;">
           </div>
           <div class="col-md-2 form-group">
             <label for="bankStatementUpload" th:text="#{license_application_bank_statement_file}"
-                   th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+                   th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" style="font-size:13px;">
             </label>
             <input type="file" id="bankStatementUpload" th:field="*{bankStatementUpload}" class="form-control-file" accept=".pdf,.jpg,.jpeg,.png">
           </div>
           <div class="col-md-2 form-group">
             <label for="enidUpload"
-                   th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">Electronic Tazkira(NID)
+                   th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" style="font-size:13px;">Electronic Tazkira(NID)
             </label>
             <input type="file" id="enidUpload" th:field="*{enidUpload}"  class="form-control-file" accept=".pdf,.jpg,.jpeg,.png">
           </div>
           <div class="col-md-2 form-group">
             <label for="articleOfAssociationUpload"
-                   th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">Articales Of Association
+                   th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" style="font-size:13px;">Articales Of Association
             </label>
             <input type="file" id="articleOfAssociationUpload" th:field="*{articleOfAssociationUpload}" class="form-control-file" accept=".pdf,.jpg,.jpeg,.png" style="border-left: 2px solid blue;">
           </div>
           <div class="col-md-2 form-group">
             <label for="businessPlanUpload"
-                   th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">Business Plan & evaluation
+                   th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" style="font-size:13px;">Business Plan & evaluation
             </label>
             <input type="file" id="businessPlanUpload" th:field="*{businessPlanUpload}" class="form-control-file" accept=".pdf,.jpg,.jpeg,.png">
           </div>
