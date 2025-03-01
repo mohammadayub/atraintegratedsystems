@@ -46,6 +46,14 @@ public class LicenseApplicantController {
     }
 
 
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_LICENSE') or hasRole('ROLE_LICENSE_APPLICANT_ENTRY')")
+    @GetMapping("/licenses/license/registration/license_applicants_list")
+    public String showListProfile(Model model) {
+        List<LicenseApplicant> profiles = licenseService.getAllApplicants();
+        model.addAttribute("profiles", profiles);
+        model.addAttribute("licenseTypes", licenseTypeService.findAll());
+        return "licenses/license/registration/license_applicants_list";
+    }
 
 
     @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_LICENSE') or hasRole('ROLE_LICENSE_ENTRY')")
