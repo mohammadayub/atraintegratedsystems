@@ -14,18 +14,18 @@
 <nav th:replace="~{layout :: page_navbar}"></nav>
 <div class="container mt-5">
   <fieldset sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_LICENSE') or hasRole('ROLE_LICENSE_ENTRY')">
-    <legend>License Management Section</legend>
+    <legend>License Applicant Management Section</legend>
     <div class="row g-4">
-<!--      &lt;!&ndash; Card 1 &ndash;&gt;-->
-<!--      <div class="col-sm-4">-->
-<!--        <div class="custom-card text-center p-3">-->
-<!--          <a th:href="@{/licenses/license/registration/profile/license_new_profile}">-->
-<!--            <img th:src="@{/images/applicant_entry.png}" alt="License Management System" class="img-fluid"></a>-->
-<!--          <h4 class="license-link mt-2">-->
-<!--            <a th:href="@{/licenses/license/registration/profile/license_new_profile}" th:text="#{license_applicant}" style="font-size:20px;"></a>-->
-<!--          </h4>-->
-<!--        </div>-->
-<!--      </div>-->
+      <!--      &lt;!&ndash; Card 1 &ndash;&gt;-->
+      <!--      <div class="col-sm-4">-->
+      <!--        <div class="custom-card text-center p-3">-->
+      <!--          <a th:href="@{/licenses/license/registration/profile/license_new_profile}">-->
+      <!--            <img th:src="@{/images/applicant_entry.png}" alt="License Management System" class="img-fluid"></a>-->
+      <!--          <h4 class="license-link mt-2">-->
+      <!--            <a th:href="@{/licenses/license/registration/profile/license_new_profile}" th:text="#{license_applicant}" style="font-size:20px;"></a>-->
+      <!--          </h4>-->
+      <!--        </div>-->
+      <!--      </div>-->
 
       <div class="col-sm-4">
         <div class="custom-card text-center p-3">
@@ -51,6 +51,12 @@
           </h4>
         </div>
       </div>
+    </div>
+  </fieldset>
+  <fieldset sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_LICENSE') or hasRole('ROLE_LICENSE_ENTRY')">
+    <legend>License Management Section</legend>
+    <div class="row g-4">
+
       <div class="col-sm-4" sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_LICENSE') or hasRole('ROLE_LICENSE_ENTRY')">
         <div class="custom-card text-center p-3">
           <a th:href="@{/licenses/license/registration/profile/license_applicants_profile}">
