@@ -28,7 +28,7 @@ public class LicenseNewApplicantController {
     @Autowired
     private LicenseTypeService licenseTypeService;
 
-    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_LICENSE') or hasRole('ROLE_LICENSE_ENTRY')")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_LICENSE') or hasRole('ROLE_LICENSE_ENTRY') or hasRole('ROLE_LICENSE_APPLICANT_ENTRY')")
     @GetMapping("/licenses/license/registration/profile/license_applicants_profile")
     public String showApplicationProfile(Model model) {
         List<LicenseApplicant> profiles = licenseService.getAllApplicants();
@@ -37,7 +37,7 @@ public class LicenseNewApplicantController {
         return "licenses/license/registration/profile/license_applicants_profile";
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_LICENSE') or hasRole('ROLE_LICENSE_ENTRY')")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_LICENSE') or hasRole('ROLE_LICENSE_ENTRY') or hasRole('ROLE_LICENSE_APPLICANT_ENTRY')")
     @GetMapping("/licenses/license/registration/profile/license_new_profile")
     public String showRegistrationForm(Model model) {
         model.addAttribute("profile", new LicenseApplicantDTO());
@@ -45,7 +45,7 @@ public class LicenseNewApplicantController {
         return "licenses/license/registration/profile/license_new_profile";
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_LICENSE') or hasRole('ROLE_LICENSE_ENTRY')")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_LICENSE') or hasRole('ROLE_LICENSE_ENTRY') or hasRole('ROLE_LICENSE_APPLICANT_ENTRY')")
     @PostMapping("/licenses/license/registration/profile/license_new_profile")
     public String saveProfile(@ModelAttribute("profile")  LicenseApplicantDTO dto,
                               BindingResult bindingResult,

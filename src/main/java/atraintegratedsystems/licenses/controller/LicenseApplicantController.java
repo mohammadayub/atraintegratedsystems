@@ -36,7 +36,7 @@ public class LicenseApplicantController {
     @Autowired
     private LicenseTypeService licenseTypeService;
 
-    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_LICENSE') or hasRole('ROLE_LICENSE_ENTRY')")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_LICENSE') or hasRole('ROLE_LICENSE_ENTRY') or hasRole('ROLE_LICENSE_APPLICANT_ENTRY')")
     @GetMapping("/licenses/license/registration/license_applicants_profile")
     public String showApplicationProfile(Model model) {
         List<LicenseApplicant> profiles = licenseService.getAllApplicants();

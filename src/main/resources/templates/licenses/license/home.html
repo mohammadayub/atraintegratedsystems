@@ -13,7 +13,7 @@
 <body>
 <nav th:replace="~{layout :: page_navbar}"></nav>
 <div class="container mt-5">
-  <fieldset sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_LICENSE') or hasRole('ROLE_LICENSE_ENTRY')">
+  <fieldset sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_LICENSE') or hasRole('ROLE_LICENSE_ENTRY') or hasRole('ROLE_LICENSE_APPLICANT_ENTRY')">
     <legend>License Applicant Management Section</legend>
     <div class="row g-4">
       <!--      &lt;!&ndash; Card 1 &ndash;&gt;-->
@@ -42,7 +42,7 @@
 
 
       <!-- Card 2 -->
-      <div class="col-sm-4" sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_LICENSE') or hasRole('ROLE_LICENSE_ENTRY')">
+      <div class="col-sm-4" sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_LICENSE') or hasRole('ROLE_LICENSE_ENTRY') or hasRole('ROLE_LICENSE_APPLICANT_ENTRY')">
         <div class="custom-card text-center p-3">
           <a th:href="@{/licenses/license/registration/license_applicants_list}">
             <img th:src="@{/images/license_applicants_list.png}" alt="Finance Revenue Management System" class="img-fluid"></a>

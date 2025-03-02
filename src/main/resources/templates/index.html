@@ -20,7 +20,7 @@
             <table class="table table-borderless">
             <tr>
             <td>
-                <div class="custom-card" sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_LICENSE') or hasRole('ROLE_LICENSE_ENTRY') or hasRole('ROLE_LICENSE_APPROVAL')">
+                <div class="custom-card" sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_LICENSE') or hasRole('ROLE_LICENSE_ENTRY') or hasRole('ROLE_LICENSE_APPROVAL') or hasRole('ROLE_LICENSE_APPLICANT_ENTRY')">
                     <a th:href="@{/licenses/license/home}">
                         <img th:src="@{/images/license_management.png}" alt="License Management System">
                     </a>
