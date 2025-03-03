@@ -21,7 +21,7 @@ public class LicenseVisualizeReportController {
     private LicenseGeneralReportService licenseGeneralReportService;
 
     // Backend: Controller
-    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_LICENSE') or hasRole('ROLE_LICENSE_ENTRY')")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_LICENSE') or hasRole('ROLE_LICENSE_COMPLETION_PROFILE')")
     @GetMapping("/licenses/license/report/license_visualize_report")
     public String showApplicationProfile(Model model) {
         List<LicenseApproval> profiles = licenseGeneralReportService.getAllApprovals();

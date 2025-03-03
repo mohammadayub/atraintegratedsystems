@@ -92,8 +92,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 "ROLE_ADMIN > ROLE_LICENSE \n" +
                         "ROLE_ADMIN > ROLE_FINANCE \n" +
                         "ROLE_ADMIN > ROLE_MINISTRY \n" +
-                        "ROLE_ADMIN > ROLE_LICENSE_APPLICANT_ENTRY \n" +
-                        "ROLE_ADMIN > ROLE_LICENSE_ENTRY \n" +
+                        "ROLE_ADMIN > ROLE_LICENSE_PROFILE_ENTRY \n" +
+                        "ROLE_ADMIN > ROLE_LICENSE_COMPLETION_PROFILE \n" +
                         "ROLE_ADMIN > ROLE_LICENSE_APPROVAL"
 
         );
