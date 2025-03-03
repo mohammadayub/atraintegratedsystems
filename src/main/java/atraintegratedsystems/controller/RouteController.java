@@ -23,19 +23,16 @@ public class RouteController {
     public String getHome(){
         return "licenses/license/home";
     }
-
     @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_FINANCE') or hasRole('ROLE_MINISTRY')")
     @GetMapping("/licenses/finance/home")
     public String getfinanceHome(){
         return "licenses/finance/home";
     }
-
     @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_LICENSE') or hasRole('ROLE_LICENSE_ENTRY') or hasRole('ROLE_LICENSE_APPLICANT_ENTRY')")
     @GetMapping("/licenses/new-applicant")
     public String getlicense_applicant(){
         return "licenses/license/license_new_applicant";
     }
-
     @GetMapping("licenses/finance/application/license_application_print_tariffs")
     public String licenseApplicationPrintTariff()
     {

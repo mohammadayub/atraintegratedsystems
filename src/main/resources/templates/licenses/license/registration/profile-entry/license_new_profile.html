@@ -12,7 +12,7 @@
 <nav th:replace="~{layout :: page_navbar}"></nav>
 <div class="container-fluid mt-4" >
   <div>
-    <form th:action="@{/licenses/license/registration/profile/license_new_profile}" th:object="${profile}" method="post" enctype="multipart/form-data">
+    <form th:action="@{/licenses/license/registration/profile-entry/license_new_profile}" th:object="${profile}" method="post" enctype="multipart/form-data">
       <!-- Fieldset for Basic Information -->
       <fieldset style="border: 2px solid #DCAF45; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
         <legend style="width: auto; font-size: 1.2rem; color: #14438B; padding: 0 10px; font-weight: bold;">Basic Information</legend>

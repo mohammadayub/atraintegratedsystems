@@ -104,7 +104,7 @@
                     </td>
                     <td th:text="${profile.paymentStatus}"></td>
                     <td>
-                        <a th:href="@{/licenses/license/registration/profile/license_applicant_complete_profile/{id}(id=${profile.id})}"
+                        <a th:href="@{/licenses/license/registration/completion-profile/license_applicant_complete_profile/{id}(id=${profile.id})}"
                            th:classappend="${profile.paymentStatus != 'Paid'} ? 'disabled' : ''"
                            th:attr="aria-disabled=${profile.paymentStatus != 'Paid'}"
                            class="btn btn-primary">

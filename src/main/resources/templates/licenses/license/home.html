@@ -16,38 +16,22 @@
   <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_LICENSE', 'ROLE_LICENSE_COMPLETION_PROFILE', 'ROLE_LICENSE_PROFILE_ENTRY')">
     <legend>License Applicant Management Section</legend>
     <div class="row g-4">
-      <!--      &lt;!&ndash; Card 1 &ndash;&gt;-->
-      <!--      <div class="col-sm-4">-->
-      <!--        <div class="custom-card text-center p-3">-->
-      <!--          <a th:href="@{/licenses/license/registration/profile/license_new_profile}">-->
-      <!--            <img th:src="@{/images/applicant_entry.png}" alt="License Management System" class="img-fluid"></a>-->
-      <!--          <h4 class="license-link mt-2">-->
-      <!--            <a th:href="@{/licenses/license/registration/profile/license_new_profile}" th:text="#{license_applicant}" style="font-size:20px;"></a>-->
-      <!--          </h4>-->
-      <!--        </div>-->
-      <!--      </div>-->
-
       <div class="col-sm-4">
         <div class="custom-card text-center p-3">
-          <a th:href="@{/licenses/license/registration/profile/license_new_profile}">
+          <a th:href="@{/licenses/license/registration/profile-entry/license_new_profile}">
             <img th:src="@{/images/New_application.png}" alt="License Management System" class="img-fluid"></a>
           <h4 class="license-link mt-2">
-            <a th:href="@{/licenses/license/registration/profile/license_new_profile}" th:text="#{license_applicant}" style="font-size:20px;"></a>
+            <a th:href="@{/licenses/license/registration/profile-entry/license_new_profile}" th:text="#{license_applicant}" style="font-size:20px;"></a>
           </h4>
         </div>
       </div>
-
-
-
-
-
       <!-- Card 2 -->
       <div class="col-sm-4">
         <div class="custom-card text-center p-3">
-          <a th:href="@{/licenses/license/registration/license_applicants_list}">
+          <a th:href="@{/licenses/license/registration/profile-entry/license_new_profile_list}">
             <img th:src="@{/images/license_applicants_list.png}" alt="Finance Revenue Management System" class="img-fluid"></a>
           <h4 class="license-link mt-2">
-            <a th:href="@{/licenses/license/registration/license_applicants_list}"   style="font-size:20px;">List Profiles</a>
+            <a th:href="@{/licenses/license/registration/profile-entry/license_new_profile_list}"   style="font-size:20px;">List Profiles</a>
           </h4>
         </div>
       </div>
@@ -59,10 +43,10 @@
 
       <div class="col-sm-4">
         <div class="custom-card text-center p-3">
-          <a th:href="@{/licenses/license/registration/profile/license_applicants_profile}">
+          <a th:href="@{/licenses/license/registration/completion-profile/license_applicant_profile_list}">
             <img th:src="@{/images/applicant.png}" alt="Finance Revenue Management System" class="img-fluid"></a>
           <h4 class="license-link mt-2">
-            <a th:href="@{/licenses/license/registration/profile/license_applicants_profile}"   style="font-size:20px;">List Of All Applicants</a>
+            <a th:href="@{/licenses/license/registration/completion-profile/license_applicant_profile_list}"   style="font-size:20px;">List Of All Applicants</a>
           </h4>
         </div>
       </div>

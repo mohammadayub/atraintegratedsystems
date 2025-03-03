@@ -29,24 +29,24 @@ public class LicenseNewApplicantController {
     private LicenseTypeService licenseTypeService;
 
     @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_LICENSE') or hasRole('ROLE_LICENSE_COMPLETION_PROFILE') or hasRole('ROLE_LICENSE_PROFILE_ENTRY')")
-    @GetMapping("/licenses/license/registration/profile/license_applicants_profile")
+    @GetMapping("/licenses/license/registration/profile-entry/license_new_profile_list")
     public String showApplicationProfile(Model model) {
         List<LicenseApplicant> profiles = licenseService.getAllApplicants();
         model.addAttribute("profiles", profiles);
         model.addAttribute("licenseTypes", licenseTypeService.findAll());
-        return "licenses/license/registration/profile/license_applicants_profile";
+        return "licenses/license/registration/profile-entry/license_new_profile_list";
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_LICENSE') or hasRole('ROLE_LICENSE_COMPLETION_PROFILE') or hasRole('ROLE_LICENSE_PROFILE_ENTRY')")
-    @GetMapping("/licenses/license/registration/profile/license_new_profile")
+    @GetMapping("/licenses/license/registration/profile-entry/license_new_profile")
     public String showRegistrationForm(Model model) {
         model.addAttribute("profile", new LicenseApplicantDTO());
         model.addAttribute("licenseTypes", licenseTypeService.findAll());
-        return "licenses/license/registration/profile/license_new_profile";
+        return "licenses/license/registration/profile-entry/license_new_profile";
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_LICENSE') or hasRole('ROLE_LICENSE_COMPLETION_PROFILE') or hasRole('ROLE_LICENSE_PROFILE_ENTRY')")
-    @PostMapping("/licenses/license/registration/profile/license_new_profile")
+    @PostMapping("/licenses/license/registration/profile-entry/license_new_profile")
     public String saveProfile(@ModelAttribute("profile")  LicenseApplicantDTO dto,
                               BindingResult bindingResult,
                               Model model,
@@ -54,25 +54,25 @@ public class LicenseNewApplicantController {
         if (bindingResult.hasErrors()) {
             // If the reqDate is null, set it to the current date as a LocalDate
             model.addAttribute("licenseTypes", licenseTypeService.findAll());
-            return "licenses/license/registration/profile/license_new_profile";
+            return "licenses/license/registration/profile-entry/license_new_profile";
         }
         try {
             licenseService.saveProfile(dto);
             redirectAttributes.addFlashAttribute("successMessage", "Profile registered successfully!");
-            return "redirect:/licenses/license/registration/profile/license_applicants_profile";
+            return "redirect:/licenses/license/registration/profile-entry/license_new_profile_list";
         } catch (Exception e) {
             model.addAttribute("errorMessage", e instanceof IOException
                     ? "An error occurred while saving the profile. Please try again."
                     : e.getMessage());
             model.addAttribute("profile", dto);
             model.addAttribute("licenseTypes", licenseTypeService.findAll());
-            return "licenses/license/registration/profile/license_new_profile";
+            return "licenses/license/registration/profile-entry/license_new_profile";
         }
     }
 
     //Refer to Complete Profile
     @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_LICENSE') or hasRole('ROLE_LICENSE_COMPLETION_PROFILE')")
-    @GetMapping("/licenses/license/registration/profile/license_applicant_complete_profile/{id}")
+    @GetMapping("/licenses/license/registration/completion-profile/license_applicant_complete_profile/{id}")
     public String completeProfile(@PathVariable Long id, Model model) {
         Optional<LicenseApplicant> profileOpt = licenseService.getApplicantById(id);
         if (profileOpt.isPresent()) {
@@ -111,19 +111,19 @@ public class LicenseNewApplicantController {
             return "error-page";
         }
 
-        return "licenses/license/registration/profile/license_applicant_complete_profile";
+        return "licenses/license/registration/completion-profile/license_applicant_complete_profile";
     }
 
 
     @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_LICENSE') or hasRole('ROLE_LICENSE_COMPLETION_PROFILE')")
-    @PostMapping("/licenses/license/registration/profile/license_applicant_complete_profile")
+    @PostMapping("/licenses/license/registration/completion-profile/license_applicant_complete_profile")
     public String updateCompleteProfile(
             @ModelAttribute("licenseApplicant") LicenseApplicantDTO dto,
             BindingResult bindingResult,
             Model model) {
 
         if (bindingResult.hasErrors()) {
-            return "licenses/license/registration/profile/license_applicant_complete_profile"; // View for re-editing
+            return "licenses/license/registration/completion-profile/license_applicant_complete_profile"; // View for re-editing
         }
 
         try {
@@ -131,12 +131,12 @@ public class LicenseNewApplicantController {
             // Add success message
             model.addAttribute("message", "Profile updated successfully.");
             // Redirect to a success page
-            return "redirect:/licenses/license/registration/license_applicants_profile";
+            return "redirect:/licenses/license/registration/send-profile-board/license_applicant_profile_send_board_list";
 
         } catch (IllegalArgumentException ex) {
             // Handle errors
             model.addAttribute("error", ex.getMessage());
-            return "licenses/license/registration/profile/license_applicant_complete_profile";
+            return "licenses/license/registration/completion-profile/license_applicant_complete_profile";
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

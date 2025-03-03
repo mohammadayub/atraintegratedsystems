@@ -15,14 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import javax.validation.Valid;
 import java.io.IOException;
-import java.time.LocalDate;
-import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,22 +30,20 @@ public class LicenseApplicantController {
     private LicenseTypeService licenseTypeService;
 
     @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_LICENSE') or hasRole('ROLE_LICENSE_COMPLETION_PROFILE') or hasRole('ROLE_LICENSE_PROFILE_ENTRY')")
-    @GetMapping("/licenses/license/registration/profile-entry/license_new_profile_list")
+    @GetMapping("/licenses/license/registration/completion-profile/license_applicant_profile_list")
     public String showApplicationProfile(Model model) {
         List<LicenseApplicant> profiles = licenseService.getAllApplicants();
         model.addAttribute("profiles", profiles);
         model.addAttribute("licenseTypes", licenseTypeService.findAll());
-        return "/licenses/license/registration/profile-entry/license_new_profile_list";
+        return "/licenses/license/registration/completion-profile/license_applicant_profile_list";
     }
-
-
     @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_LICENSE') or hasRole('ROLE_LICENSE_PROFILE_ENTRY')")
-    @GetMapping("/licenses/license/registration/license_applicants_list")
+    @GetMapping("/licenses/license/registration/send-profile-board/license_applicant_profile_send_board_list")
     public String showListProfile(Model model) {
         List<LicenseApplicant> profiles = licenseService.getAllApplicants();
         model.addAttribute("profiles", profiles);
         model.addAttribute("licenseTypes", licenseTypeService.findAll());
-        return "licenses/license/registration/license_applicants_list";
+        return "licenses/license/registration/send-profile-board/license_applicant_profile_send_board_list";
     }
 
 
@@ -242,8 +233,6 @@ public class LicenseApplicantController {
                 .body(resource);
     }
 
-
-
     private String getFileExtension(byte[] fileData) {
         if (fileData == null || fileData.length < 4) {
             return ".bin"; // Default to binary if no data or too short
@@ -294,7 +283,7 @@ public class LicenseApplicantController {
     //Refer to Board for Approval
 
     @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_LICENSE') or hasRole('ROLE_LICENSE_COMPLETION_PROFILE')")
-    @GetMapping("/licenses/license/registration/license_applicants_send_board/{id}")
+    @GetMapping("/licenses/license/registration/send-profile-board/license_applicants_send_board/{id}")
     public String referToBoard(@PathVariable Long id, Model model) {
         Optional<LicenseApplicant> profileOpt = licenseService.getApplicantById(id);
 
@@ -312,19 +301,19 @@ public class LicenseApplicantController {
             return "error-page";
         }
 
-        return "licenses/license/registration/license_applicants_send_board";
+        return "licenses/license/registration/send-profile-board/license_applicants_send_board";
     }
 
 
     @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_LICENSE') or hasRole('ROLE_LICENSE_COMPLETION_PROFILE')")
-    @PostMapping("/licenses/license/registration/license_applicants_send_board")
+    @PostMapping("/licenses/license/registration/send-profile-board/license_applicants_send_board")
     public String updateProfile(
             @ModelAttribute("licenseApplicant") LicenseApplicantDTO dto,
             BindingResult bindingResult,
             Model model) {
 
         if (bindingResult.hasErrors()) {
-            return "licenses/license/registration/license_applicants_send_board"; // View for re-editing
+            return "licenses/license/registration/send-profile-board/license_applicants_send_board"; // View for re-editing
         }
 
         try {
@@ -334,14 +323,14 @@ public class LicenseApplicantController {
             model.addAttribute("message", "Profile updated successfully.");
 
             // Redirect to a success page
-            return "redirect:/licenses/license/registration/license_applicants_profile";
+            return "redirect:/licenses/license/registration/send-profile-board/license_applicant_profile_send_board_list";
 
         } catch (IllegalArgumentException ex) {
             model.addAttribute("error", ex.getMessage());
-            return "licenses/license/registration/license_applicants_send_board";
+            return "licenses/license/registration/send-profile-board/license_applicants_send_board";
         } catch (IOException e) {
             model.addAttribute("error", "File upload failed. Please try again.");
-            return "licenses/license/registration/license_applicants_send_board";
+            return "licenses/license/registration/send-profile-board/license_applicants_send_board";
         }
     }
 

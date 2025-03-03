@@ -205,7 +205,7 @@
                 <td th:text="${profile.isSend != null ? profile.isSend : 'No'}"></td> <!-- Handle null as 'No' -->
 
                 <td class="hide-print">
-                    <a th:href="@{/licenses/license/registration/license_applicants_send_board/{id}(id=${profile.id})}"
+                    <a th:href="@{/licenses/license/registration/send-profile-board/license_applicants_send_board/{id}(id=${profile.id})}"
                        class="btn btn-primary"
                        th:classappend="${!(profile.paymentStatus == 'Paid' && (profile.isSend == null || profile.isSend != 'Yes')) ? ' disabled' : ''}"
                        th:attr="aria-disabled=${!(profile.paymentStatus == 'Paid' && (profile.isSend == null || profile.isSend != 'Yes'))}">
