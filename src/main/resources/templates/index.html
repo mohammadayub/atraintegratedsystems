@@ -15,12 +15,12 @@
 <div th:replace="styles :: commonfieldset"></div>
 <nav th:replace="~{layout :: page_navbar}"></nav>
 <div class="container mt-5">
-    <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE','ROLE_LICENSE_COMPLETION_PROFILE','ROLE_LICENSE_APPROVAL','ROLE_LICENSE_PROFILE_ENTRY','ROLE_FINANCE')">
+    <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE','ROLE_MINISTRY','ROLE_LICENSE_COMPLETION_PROFILE','ROLE_LICENSE_APPROVAL','ROLE_LICENSE_PROFILE_ENTRY','ROLE_FINANCE')">
         <legend>License Section</legend>
         <table class="table table-borderless">
             <tr>
                 <td>
-                    <div class="custom-card">
+                    <div class="custom-card" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE','ROLE_LICENSE_COMPLETION_PROFILE','ROLE_LICENSE_APPROVAL','ROLE_LICENSE_PROFILE_ENTRY')">
                         <a th:href="@{/licenses/license/home}">
                             <img th:src="@{/images/license_management.png}" alt="License Management System">
                         </a>
@@ -30,7 +30,7 @@
                     </div>
                 </td>
                 <td>
-                    <div class="custom-card">
+                    <div class="custom-card" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_FINANCE','ROLE_MINISTRY')">
                         <a th:href="@{/licenses/finance/home}">
                             <img th:src="@{/images/finance.png}" class="rounded" style="width:100px;height:100px;" alt="Finance Management">
                         </a>
@@ -79,7 +79,6 @@
         </table>
     </fieldset>
 </div>
-
 <div th:replace="scripts :: common-scripts"></div>
 <div style="height:10vh;"></div>
 <footer th:replace="~{layout :: page_footer}"></footer>

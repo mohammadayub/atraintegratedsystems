@@ -13,10 +13,10 @@
 <body>
 <nav th:replace="~{layout :: page_navbar}"></nav>
 <div class="container mt-5">
-  <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_LICENSE', 'ROLE_LICENSE_COMPLETION_PROFILE', 'ROLE_LICENSE_PROFILE_ENTRY')">
+  <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_LICENSE', 'ROLE_LICENSE_PROFILE_ENTRY')">
     <legend>License Applicant Management Section</legend>
     <div class="row g-4">
-      <div class="col-sm-4">
+      <div class="col-sm-4"  >
         <div class="custom-card text-center p-3">
           <a th:href="@{/licenses/license/registration/profile-entry/license_new_profile}">
             <img th:src="@{/images/New_application.png}" alt="License Management System" class="img-fluid"></a>
@@ -31,7 +31,7 @@
           <a th:href="@{/licenses/license/registration/profile-entry/license_new_profile_list}">
             <img th:src="@{/images/license_applicants_list.png}" alt="Finance Revenue Management System" class="img-fluid"></a>
           <h4 class="license-link mt-2">
-            <a th:href="@{/licenses/license/registration/profile-entry/license_new_profile_list}"   style="font-size:20px;">List Profiles</a>
+            <a th:href="@{/licenses/license/registration/profile-entry/license_new_profile_list}"   style="font-size:20px;">List Of All Profiles</a>
           </h4>
         </div>
       </div>
@@ -46,17 +46,17 @@
           <a th:href="@{/licenses/license/registration/completion-profile/license_applicant_profile_list}">
             <img th:src="@{/images/applicant.png}" alt="Finance Revenue Management System" class="img-fluid"></a>
           <h4 class="license-link mt-2">
-            <a th:href="@{/licenses/license/registration/completion-profile/license_applicant_profile_list}"   style="font-size:20px;">List Of All Applicants</a>
+            <a th:href="@{/licenses/license/registration/completion-profile/license_applicant_profile_list}"   style="font-size:20px;">Completion Profiles</a>
           </h4>
         </div>
       </div>
 
       <div class="col-sm-4">
         <div class="custom-card text-center p-3">
-          <a th:href="@{/licenses/license/registration/license_applicants_profile}">
+          <a th:href="@{/licenses/license/registration/send-profile-board/license_applicant_profile_send_board_list}">
             <img th:src="@{/images/send_to_board.png}" alt="LMS" class="img-fluid"></a>
           <h4 class="license-link mt-2">
-            <a th:href="@{/licenses/license/registration/license_applicants_profile}"  style="font-size:20px;">Send To Board</a>
+            <a th:href="@{/licenses/license/registration/send-profile-board/license_applicant_profile_send_board_list}"  style="font-size:20px;">Send To Board</a>
           </h4>
         </div>
       </div>
