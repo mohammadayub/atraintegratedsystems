@@ -18,7 +18,7 @@ public class RouteController {
     public String getIndex(){
         return "index";
     }
-    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_LICENSE') or hasRole('ROLE_LICENSE_ENTRY') or hasRole('ROLE_LICENSE_APPROVAL') or hasRole('ROLE_LICENSE_APPLICANT_ENTRY')")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_LICENSE') or hasRole('ROLE_LICENSE_COMPLETION_PROFILE') or hasRole('ROLE_LICENSE_APPROVAL') or hasRole('ROLE_LICENSE_PROFILE_ENTRY')")
     @GetMapping("/licenses/license/home")
     public String getHome(){
         return "licenses/license/home";
@@ -28,7 +28,7 @@ public class RouteController {
     public String getfinanceHome(){
         return "licenses/finance/home";
     }
-    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_LICENSE') or hasRole('ROLE_LICENSE_ENTRY') or hasRole('ROLE_LICENSE_APPLICANT_ENTRY')")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_LICENSE') or hasRole('ROLE_LICENSE_COMPLETION_PROFILE') or hasRole('ROLE_LICENSE_PROFILE_ENTRY')")
     @GetMapping("/licenses/new-applicant")
     public String getlicense_applicant(){
         return "licenses/license/license_new_applicant";
@@ -60,7 +60,7 @@ public class RouteController {
         return "licenses/license/report/home";
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_LICENSE') or hasRole('ROLE_LICENSE_ENTRY')")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_LICENSE') or hasRole('ROLE_LICENSE_COMPLETION_PROFILE')")
     @GetMapping("licenses/license/extension/extension_home")
     public String extension_home()
     {

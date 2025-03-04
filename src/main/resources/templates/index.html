@@ -15,7 +15,7 @@
 <div th:replace="styles :: commonfieldset"></div>
 <nav th:replace="~{layout :: page_navbar}"></nav>
 <div class="container mt-5">
-    <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE','ROLE_LICENSE_COMPLETION_PROFILE','ROLE_LICENSE_APPROVAL','ROLE_LICENSE_PROFILE_ENTRY')">
+    <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE','ROLE_LICENSE_COMPLETION_PROFILE','ROLE_LICENSE_APPROVAL','ROLE_LICENSE_PROFILE_ENTRY','ROLE_FINANCE')">
         <legend>License Section</legend>
         <table class="table table-borderless">
             <tr>
