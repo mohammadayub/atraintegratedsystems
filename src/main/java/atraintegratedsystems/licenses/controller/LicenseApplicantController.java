@@ -37,7 +37,7 @@ public class LicenseApplicantController {
         model.addAttribute("licenseTypes", licenseTypeService.findAll());
         return "/licenses/license/registration/completion-profile/license_applicant_profile_list";
     }
-    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_LICENSE') or hasRole('ROLE_LICENSE_PROFILE_ENTRY')")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_LICENSE') or hasRole('ROLE_LICENSE_PROFILE_ENTRY') or hasRole('ROLE_LICENSE_COMPLETION_PROFILE')")
     @GetMapping("/licenses/license/registration/send-profile-board/license_applicant_profile_send_board_list")
     public String showListProfile(Model model) {
         List<LicenseApplicant> profiles = licenseService.getAllApplicants();
