@@ -18,20 +18,20 @@
             <!-- Hidden ID Field -->
             <input type="hidden" th:field="*{id}">
             <div class="col-md-2 form-group">
-                <lable th:text="#{approval_id}"></lable>
+                <label th:text="#{approval_id}"></label>
                 <input type="text" th:field="*{approvalId}" class="form-control" readonly>
             </div>
             <div class="col-md-3 form-group">
-               <lable th:text="#{admin_fee_entry_voucher_date}"></lable>
+               <label th:text="#{admin_fee_entry_voucher_date}"></label>
                 <input type="text" th:field="*{administrationFeeEntryVoucherDate}" class="form-control hijrishamsi">
             </div>
             <!-- Currency Type -->
             <div class="col-md-3 form-group">
-                <label style="margin:0px;" th:text="#{admin_fee_bank_voucher_no}"></label>
+                <label th:text="#{admin_fee_bank_voucher_no}"></label>
                 <input type="text" th:field="*{administrationFeeBankVoucherNo}" class="form-control" >
             </div>
             <div class="col-md-3 form-group">
-                <lable th:text="#{admin_fee_bank_voucher_submission_date}"></lable>
+                <label>Admin Fee Bank Voucher Submission Date</label>
                 <input type="text" th:field="*{administrationFeeEntryVoucherDate}" class="form-control hijrishamsi">
             </div>
             <!-- Payment Status -->
