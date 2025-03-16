@@ -52,6 +52,12 @@
             background-color:#8B0000;
         }
 
+    .duplicate {
+        background-color: #ffc107;
+        color: #000;
+        font-weight: bold;
+}
+
         /* Styling for fieldset and legend */
 
         /* Optional: Add some responsiveness */
@@ -84,7 +90,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="profile : ${profiles}">
+                <tr th:each="profile : ${profiles}" th:attr="data-licensetype=${profile.licenseType.name}, data-companyname=${profile.companyLicenseName}">
                     <td th:text="${profile.reqId}"></td>
                     <td th:text="${profile.getRegDate()}"></td>
                     <td th:text="${profile.licenseType.name}"></td>
@@ -127,7 +133,6 @@
         Back to Page
     </a>
 </div>
-
 <!-- Common scripts -->
 <div th:replace="scripts :: common-scripts"></div>
 <div th:replace="scripts :: persian-datepicker-scripts"></div>
@@ -159,7 +164,27 @@
         });
     });
 </script>
+//Color license company name when licensetype and license company name are duplicates.
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const rows = document.querySelectorAll('#profileTable tbody tr');
+        const seen = {};
 
+        rows.forEach(row => {
+            const licenseType = row.getAttribute('data-licensetype');
+            const companyName = row.getAttribute('data-companyname');
+            const key = `${licenseType}-${companyName}`;
+
+            if (seen[key]) {
+                // If already seen, add the 'duplicate' class
+                row.querySelector('td:nth-child(5)').classList.add('duplicate');
+            } else {
+                // Mark the current combination as seen
+                seen[key] = true;
+            }
+        });
+    });
+</script>
 <div style="height:15vh;"></div>
 <footer th:replace="~{layout :: page_footer}"></footer>
 <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
