@@ -9,11 +9,14 @@ import atraintegratedsystems.licenses.repository.LicenseApplicantRepository;
 import atraintegratedsystems.licenses.repository.LicenseTypeRepository;
 import atraintegratedsystems.utils.DateConverter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -74,6 +77,22 @@ public class LicenseNewApplicantService {
 
             profile.setApplicationUpload(applicationUpload.getBytes());
         }
+
+
+
+        //Profile Entered By
+
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        if (principal instanceof UserDetails) {
+            String username = ((UserDetails) principal).getUsername();
+            profile.setProfileEnteredBy(username);
+        } else {
+            profile.setProfileEnteredBy(principal.toString());
+        }
+
+        profile.setProfileEnteredCreatedDate(LocalDateTime.now());
+
         return repository.save(profile);
     }
 
@@ -162,6 +181,22 @@ public class LicenseNewApplicantService {
         profile.setEmail(dto.getEmail());
         profile.setWebsite(dto.getWebsite());
         profile.setPostAddress(dto.getPostAddress());
+
+
+        //Profile Completed By
+
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        if (principal instanceof UserDetails) {
+            String username = ((UserDetails) principal).getUsername();
+            profile.setCompleteProfileEnteredBy(username);
+        } else {
+            profile.setCompleteProfileEnteredBy(principal.toString());
+        }
+
+        profile.setCompletedProfileCreatedDate(LocalDateTime.now());
+
+
         return repository.save(profile);
     }
 }

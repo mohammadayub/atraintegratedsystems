@@ -8,6 +8,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 public class LicenseApplicantDTO {
@@ -58,5 +59,11 @@ public class LicenseApplicantDTO {
     private LocalDate referToBoardDate;
     private String isSend;
     private MultipartFile proposalUpload;
+
+    //Audit for Profile
+    private String profileEnteredBy;
+    private LocalDateTime profileEnteredCreatedDate;
+    private String completeProfileEnteredBy;
+    private LocalDateTime completedProfileCreatedDate;
 
 }

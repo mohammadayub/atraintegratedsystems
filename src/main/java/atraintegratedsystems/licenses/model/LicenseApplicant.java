@@ -5,9 +5,10 @@ import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 @Entity
 @Table(name = "license_applicants")
 @Data
@@ -24,10 +25,7 @@ public class LicenseApplicant {
     @ManyToOne
     @JoinColumn(name = "license_type_id")
     private LicenseType licenseType; // Link to LicenseType entity
-
-
     private String currencyType;
-
     private String financeType;
     @Column(name = "company_license_name")
     @NotBlank(message = "Please enter Company Name")
@@ -137,6 +135,17 @@ public class LicenseApplicant {
     @Lob
     @Column(name = "proposal_upload")
     private byte[] proposalUpload;
+
+
+    //Audit
+    @Column(name="profile_entered_by")
+    private String profileEnteredBy;
+    @Column(name="profile_entered_created_date")
+    private LocalDateTime profileEnteredCreatedDate;
+    @Column(name="complete_profile_entered_by")
+    private String completeProfileEnteredBy;
+    @Column(name="completed_profile_created_date")
+    private LocalDateTime completedProfileCreatedDate;
 
 
 
