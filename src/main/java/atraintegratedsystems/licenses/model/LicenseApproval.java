@@ -8,6 +8,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "license_approvals")
@@ -119,6 +120,40 @@ public class LicenseApproval {
     private String formattedApprovalDate; // For yyyy-MM-dd formatted dates
     @Transient
     private String formattedLicenseFeeExpiryDate; // For yyyy-MM-dd formatted dates
+
+
+    //Audit for Approval
+    @Column(name="approval_entered_by")
+    private String approvalEnteredBy;
+    @Column(name="approval_created_date")
+    private LocalDateTime approvalCreatedDate;
+
+
+    //Audit for Administration Fees
+    @Column(name="administration_fees_entered_by")
+    private String administrationFeesEnteredBy;
+    @Column(name="administration_fees_created_date")
+    private LocalDateTime administrationFeesCreatedDate;
+
+    //Audit for Datebase Maintainance Fees
+
+    @Column(name="database_maintainance_fees_entered_by")
+    private String databaseMaintainanceFeesEnteredBy;
+    @Column(name="database_maintainance_fees_created_date")
+    private LocalDateTime databaseMaintainanceFeesCreatedDate;
+
+
+    //Audit For Guaranteee Fees
+    @Column(name="guarantee_fees_entered_by")
+    private String guaranteeFeesEnteredBy;
+    @Column(name="guarantee_fees_created_date")
+    private LocalDateTime guaranteeFeesCreatedDate;
+
+    //Audit for License Fees
+    @Column(name="license_fees_entered_by")
+    private String licenseFeesEnteredBy;
+    @Column(name="license_fees_created_date")
+    private LocalDateTime licenseFeesCreatedDate;
 
 
 

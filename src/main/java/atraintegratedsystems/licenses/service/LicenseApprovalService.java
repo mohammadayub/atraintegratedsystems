@@ -6,10 +6,13 @@ import atraintegratedsystems.licenses.repository.*;
 import atraintegratedsystems.utils.DateConverter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -156,6 +159,16 @@ public class LicenseApprovalService {
             profile.setLicenseApplicant(licenseApplicant);
         } else {
             throw new IllegalArgumentException("License Applicant ID is required.");
+        }
+
+        // Set sendToBoardEnteredBy to the logged-in user
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String enteredBy = (principal instanceof UserDetails) ? ((UserDetails) principal).getUsername() : "Unknown";
+        profile.setApprovalEnteredBy(enteredBy);
+
+        // If sendToBoardCreatedDate is null, set it to the current time
+        if (profile.getApprovalCreatedDate() == null) {
+            profile.setApprovalCreatedDate(LocalDateTime.now());
         }
 
         // Save LicenseApproval entity

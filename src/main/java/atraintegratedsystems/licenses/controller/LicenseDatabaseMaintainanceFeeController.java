@@ -2,12 +2,13 @@ package atraintegratedsystems.licenses.controller;
 
 import atraintegratedsystems.licenses.dto.LicenseApprovalDTO;
 import atraintegratedsystems.licenses.model.LicenseApproval;
-import atraintegratedsystems.licenses.service.LicenseAdministrationFeeService;
 import atraintegratedsystems.licenses.service.LicenseDatabaseMaintainanceFeeService;
 import atraintegratedsystems.licenses.service.LicenseTypeService;
 import atraintegratedsystems.utils.DateConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
@@ -44,7 +46,6 @@ public class LicenseDatabaseMaintainanceFeeController {
         return "licenses/finance/license_finance/database_maintainance_fees/license_database_fee_payment_confirmation";
     }
 
-
     @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_FINANCE')")
     @PostMapping("/licenses/finance/license_finance/database_maintainance_fees/license_database_fee_list/add")
     public String updateLicenseApproval(@ModelAttribute LicenseApprovalDTO licenseApprovalDTO) {
@@ -67,6 +68,15 @@ public class LicenseDatabaseMaintainanceFeeController {
         existingLicenseApproval.setDatabasemaintainanceFeeBankVoucherSubmissionDate(databasemaintainanceSubmissionVoucherDate);
         existingLicenseApproval.setDatabaseMaintianenceFeeBankVoucherNo(licenseApprovalDTO.getDatabaseMaintianenceFeeBankVoucherNo());
         existingLicenseApproval.setDatabaseMaintianenceFeePaymentStatus(licenseApprovalDTO.getDatabaseMaintianenceFeePaymentStatus());
+        // Set applicationFeeEnteredBy to the logged-in user
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String enteredBy = (principal instanceof UserDetails) ? ((UserDetails) principal).getUsername() : "Unknown";
+        existingLicenseApproval.setDatabaseMaintainanceFeesEnteredBy(enteredBy);
+
+        // If applicationFeeCreatedDate is null, set it to the current time
+        if (existingLicenseApproval.getDatabaseMaintainanceFeesCreatedDate() == null) {
+            existingLicenseApproval.setDatabaseMaintainanceFeesCreatedDate(LocalDateTime.now());
+        }
 
         // Save the updated entity
         licenseDatabaseMaintainanceFeeService.save(existingLicenseApproval);

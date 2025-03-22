@@ -2,10 +2,6 @@ package atraintegratedsystems.licenses.dto;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
-
-import javax.persistence.Column;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -65,5 +61,13 @@ public class LicenseApplicantDTO {
     private LocalDateTime profileEnteredCreatedDate;
     private String completeProfileEnteredBy;
     private LocalDateTime completedProfileCreatedDate;
+    //Audit for Application Fee
+    private String applicationFeeEnteredBy;
+    private LocalDateTime applicationFeeCreatedDate;
+
+    //Audit for Send to Board
+    private String sendToBoardEnteredBy;
+    private LocalDateTime sendToBoardCreatedDate;
+
 
 }

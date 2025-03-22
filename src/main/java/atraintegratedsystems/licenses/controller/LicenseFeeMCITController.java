@@ -6,6 +6,8 @@ import atraintegratedsystems.licenses.service.LicenseTypeService;
 import atraintegratedsystems.utils.DateConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 @Controller
 public class LicenseFeeMCITController {
@@ -53,6 +56,15 @@ public class LicenseFeeMCITController {
         existingLicenseApproval.setLicenseFeeBankVoucherSubmissionDate(licenseFeeVoucherSubmissionDate);
         existingLicenseApproval.setLicenseFeeBankVoucherNo(licenseApprovalDTO.getLicenseFeeBankVoucherNo());
         existingLicenseApproval.setLicenseFeePaymentStatus(licenseApprovalDTO.getLicenseFeePaymentStatus());
+        // Set applicationFeeEnteredBy to the logged-in user
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String enteredBy = (principal instanceof UserDetails) ? ((UserDetails) principal).getUsername() : "Unknown";
+        existingLicenseApproval.setLicenseFeesEnteredBy(enteredBy);
+
+        // If applicationFeeCreatedDate is null, set it to the current time
+        if (existingLicenseApproval.getLicenseFeesCreatedDate() == null) {
+            existingLicenseApproval.setLicenseFeesCreatedDate(LocalDateTime.now());
+        }
         // Save the updated entity
         licenseFeeMCITService.save(existingLicenseApproval);
         return "redirect:/licenses/finance/mcit/license_fee_list";

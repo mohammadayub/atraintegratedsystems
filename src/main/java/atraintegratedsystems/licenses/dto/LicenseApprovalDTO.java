@@ -2,8 +2,11 @@ package atraintegratedsystems.licenses.dto;
 import atraintegratedsystems.utils.JalaliDate;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.persistence.Column;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 public class LicenseApprovalDTO {
@@ -88,6 +91,31 @@ public class LicenseApprovalDTO {
     private LocalDate yearOfEstablishment;
     private String contactNo;
     private String licenseNo;
+
+
+    //Audit for Approval
+    private String approvalEnteredBy;
+    private LocalDateTime approvalCreatedDate;
+
+
+
+    //Audit for Administration Fees
+    private String administrationFeesEnteredBy;
+    private LocalDateTime administrationFeesCreatedDate;
+
+    //Audit for Datebase Maintainance Fees
+    private String databaseMaintainanceFeesEnteredBy;
+    private LocalDateTime databaseMaintainanceFeesCreatedDate;
+
+
+    //Audit For Guaranteee Fees
+    private String guaranteeFeesEnteredBy;
+    private LocalDateTime guaranteeFeesCreatedDate;
+
+    //Audit for License Fees
+    private String licenseFeesEnteredBy;
+    private LocalDateTime licenseFeesCreatedDate;
+
 
 
 }

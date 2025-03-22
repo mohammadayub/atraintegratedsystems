@@ -9,11 +9,14 @@ import atraintegratedsystems.licenses.repository.LicenseApplicantRepository;
 import atraintegratedsystems.licenses.repository.LicenseTypeRepository;
 import atraintegratedsystems.utils.DateConverter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -176,6 +179,20 @@ public class LicenseApplicantService {
                 throw new RuntimeException("Error processing file upload", e);
             }
         }
+
+
+
+        // Set sendToBoardEnteredBy to the logged-in user
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String enteredBy = (principal instanceof UserDetails) ? ((UserDetails) principal).getUsername() : "Unknown";
+        profile.setSendToBoardEnteredBy(enteredBy);
+
+        // If sendToBoardCreatedDate is null, set it to the current time
+        if (profile.getSendToBoardCreatedDate() == null) {
+            profile.setSendToBoardCreatedDate(LocalDateTime.now());
+        }
+
+
 
         return repository.save(profile);
     }

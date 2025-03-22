@@ -7,6 +7,8 @@ import atraintegratedsystems.licenses.service.LicenseTypeService;
 import atraintegratedsystems.utils.DateConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
@@ -62,6 +65,18 @@ public class LicenseApplicationFeesFinanceController {
         licenseApplicant.setApplicationFeeBankVoucherSubmissionDate(entrySubmissionDate);
         licenseApplicant.setBankVoucher(licenseApplicantDTO.getBankVoucher());
         licenseApplicant.setPaymentStatus(licenseApplicantDTO.getPaymentStatus());
+
+
+        // Set applicationFeeEnteredBy to the logged-in user
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String enteredBy = (principal instanceof UserDetails) ? ((UserDetails) principal).getUsername() : "Unknown";
+        licenseApplicant.setApplicationFeeEnteredBy(enteredBy);
+
+        // If applicationFeeCreatedDate is null, set it to the current time
+        if (licenseApplicant.getApplicationFeeCreatedDate() == null) {
+            licenseApplicant.setApplicationFeeCreatedDate(LocalDateTime.now());
+        }
+
         licenseApplicantFinanceService.PaymentSave(licenseApplicant);
         return "redirect:/licenses/finance/license_finance/application_fees/license_application_fee_list";
     }

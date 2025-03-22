@@ -137,7 +137,7 @@ public class LicenseApplicant {
     private byte[] proposalUpload;
 
 
-    //Audit
+    //Audit for Profile
     @Column(name="profile_entered_by")
     private String profileEnteredBy;
     @Column(name="profile_entered_created_date")
@@ -146,6 +146,18 @@ public class LicenseApplicant {
     private String completeProfileEnteredBy;
     @Column(name="completed_profile_created_date")
     private LocalDateTime completedProfileCreatedDate;
+
+    //Audit for Application Fee
+    @Column(name="application_fee_entered_by")
+    private String applicationFeeEnteredBy;
+    @Column(name="application_fee_created_date")
+    private LocalDateTime applicationFeeCreatedDate;
+
+    //Audit for Send to Board
+    @Column(name="send_to_board_entered_by")
+    private String sendToBoardEnteredBy;
+    @Column(name="send_to_board_created_date")
+    private LocalDateTime sendToBoardCreatedDate;
 
 
 
