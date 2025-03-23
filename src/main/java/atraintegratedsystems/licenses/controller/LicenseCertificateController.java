@@ -18,7 +18,7 @@ import java.util.List;
 public class LicenseCertificateController {
     @Autowired
     private LicenseCertificateService licenseCertificateService;
-    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_LICENSE')")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_LICENSE_ADMIN') or hasRole('ROLE_LICENSE')")
     @GetMapping("/licenses/license/certificate/license_applicants_certificate_list")
     public String showApplicationProfile(Model model) {
         List<LicenseApproval> profiles = licenseCertificateService.getAllPaid();
@@ -27,7 +27,7 @@ public class LicenseCertificateController {
     }
 
 
-    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_LICENSE')")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_LICENSE_ADMIN') or hasRole('ROLE_LICENSE')")
     @GetMapping("/licenses/license/certificate/license_applicants_certificate_list/print/{id}")
     public String GetTariff(@PathVariable Long id, Model model){
         LicenseApproval licenseApproval = licenseCertificateService.getApprovalByApplicantId(id)

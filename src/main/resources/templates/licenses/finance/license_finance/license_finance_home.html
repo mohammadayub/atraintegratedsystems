@@ -16,7 +16,7 @@
     <fieldset>
         <legend>Fees & Tariffs Section</legend>
     <table class="table table-borderless">
-        <tr style="border-bottom:1px solid darkgray;" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_FINANCE')">
+        <tr style="border-bottom:1px solid darkgray;" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_FINANCE')">
             <td class="text-center">
                 <div class="custom-card">
                     <a th:href="@{/licenses/finance/license_finance/application_fees/license_application_fee_list}">
@@ -38,7 +38,7 @@
             </td>
         </tr>
         <!--   This is Today changes  -->
-        <tr  style="border-bottom:1px solid darkgray;" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_FINANCE')">
+        <tr  style="border-bottom:1px solid darkgray;" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_FINANCE')">
 
             <td class="text-center">
                 <div class="custom-card">
@@ -63,7 +63,7 @@
                 </div>
             </td>
         </tr>
-        <tr style="border-bottom:1px solid darkgray;" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_MINISTRY')">
+        <tr style="border-bottom:1px solid darkgray;" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_MINISTRY')">
 
             <td class="text-center">
                 <div class="custom-card" style="margin-top:-23px;">

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" th:lang="#{lang}" th:dir="${#locale.language == 'ps' ? 'rtl' : 'ltr'}"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head th:replace="~{layout :: page_head}">
+    <div th:replace="styles :: commonfieldset"></div>
+    <title>LMS</title>
+    <style>
+        h4 a {
+            color: #14438B;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+<div th:replace="styles :: commonfieldset"></div>
+<nav th:replace="~{layout :: page_navbar}"></nav>
+<div class="container mt-5">
+    <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_LICENSE','ROLE_MINISTRY','ROLE_LICENSE_COMPLETION_PROFILE','ROLE_LICENSE_APPROVAL','ROLE_LICENSE_PROFILE_ENTRY','ROLE_FINANCE')">
+        <legend>License Section</legend>
+        <table class="table table-borderless">
+            <tr>
+                <td>
+                    <div class="custom-card" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_LICENSE','ROLE_LICENSE_COMPLETION_PROFILE','ROLE_LICENSE_APPROVAL','ROLE_LICENSE_PROFILE_ENTRY')">
+                        <a th:href="@{/licenses/license/home}">
+                            <img th:src="@{/images/license_management.png}" alt="License Management System">
+                        </a>
+                        <h4 class="license-link" style="margin-top: 12px;">
+                            <a th:href="@{/licenses/license/home}" th:text="#{lms}"></a>
+                        </h4>
+                    </div>
+                </td>
+                <td>
+                    <div class="custom-card" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_FINANCE','ROLE_MINISTRY')">
+                        <a th:href="@{/licenses/finance/home}">
+                            <img th:src="@{/images/finance.png}" class="rounded" style="width:100px;height:100px;" alt="Finance Management">
+                        </a>
+                        <h4 class="license-link" style="margin-top: 12px;">
+                            <a th:href="@{/licenses/finance/home}" th:text="#{frms}"></a>
+                        </h4>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </fieldset>
+    <fieldset style="border: 2px solid #DCAF45; padding: 15px; border-radius: 8px; margin-bottom: 20px;"
+              sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_LICENSE')">
+        <legend style="width: auto; font-size: 1.2rem; color: #14438B; padding: 0 10px; font-weight: bold;">Report Section</legend>
+        <table class="table table-borderless">
+            <tr>
+                <td>
+                    <div class="custom-card">
+                        <a th:href="@{/licenses/license/report}">
+                            <img th:src="@{/images/reports.png}" alt="Reports Section">
+                        </a>
+                        <h4 class="license-link" style="margin-top: 12px;">
+                            <a th:href="@{/licenses/license/report}" th:text="#{reports}"></a>
+                        </h4>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </fieldset>
+    <fieldset style="border: 2px solid #DCAF45; padding: 15px; border-radius: 8px; margin-bottom: 20px;"
+              sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN')">
+        <legend style="width: auto; font-size: 1.2rem; color: #14438B; padding: 0 10px; font-weight: bold;">User Management Section</legend>
+        <table class="table table-borderless">
+            <tr>
+                <td>
+                    <div class="custom-card">
+                        <a th:href="@{/licenses/admin/userlists}">
+                            <img class="rounded" th:src="@{/images/user.gif}" alt="User Management" style="height:100px;width:100px;">
+                        </a>
+                        <h4 class="license-link" style="margin-top: 12px;">
+                            <a th:href="@{/licenses/admin/userlists}">User Management</a>
+                        </h4>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </fieldset>
+</div>
+<div th:replace="scripts :: common-scripts"></div>
+<div style="height:10vh;"></div>
+<footer th:replace="~{layout :: page_footer}"></footer>
+
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

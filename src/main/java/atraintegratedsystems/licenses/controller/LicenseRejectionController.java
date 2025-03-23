@@ -11,7 +11,7 @@ import java.util.List;
 public class LicenseRejectionController {
     @Autowired
     private LicenseRejectionService licenseRejectionService;
-    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_LICENSE_APPROVAL')")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_LICENSE_ADMIN') or hasRole('ROLE_LICENSE_APPROVAL')")
     @GetMapping("/licenses/license/rejection/license_applicants_rejection_list")
     public String showRejectionProfile(Model model) {
         List<LicenseApproval> profiles = licenseRejectionService.getAllRejection();

@@ -14,7 +14,7 @@
 <body>
 <nav th:replace="~{layout :: page_navbar}"></nav>
 <div class="container mt-5">
-  <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_FINANCE','ROLE_MINISTRY')">
+  <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_FINANCE','ROLE_MINISTRY')">
     <legend>License Revenue Section</legend>
   <table class="table table-borderless">
     <tr>
@@ -31,7 +31,7 @@
     </tr>
   </table>
   </fieldset>
-  <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_FINANCE')">
+  <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_FINANCE')">
     <legend>License Fees Extension Section</legend>
   <table class="table table-borderless">
     <tr>

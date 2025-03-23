@@ -21,7 +21,7 @@ public class LicenseDatabaseFeeExtensionFinanceController {
     @Autowired
     private LicenseDatabaseFeesExtensionFinanceService licenseDatabaseFeesExtensionFinanceService;
 
-    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_FINANCE')")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_LICENSE_ADMIN') or hasRole('ROLE_FINANCE')")
     @GetMapping("/licenses/finance/extension/database_fees_extension/license_database_fees")
     public String showApplicationProfile(Model model) {
         List<LicenseDatabaseFeesExtension> profiles = licenseDatabaseFeesExtensionFinanceService.getAllDatabaseFeesExtension();
@@ -30,14 +30,14 @@ public class LicenseDatabaseFeeExtensionFinanceController {
     }
 
 
-    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_FINANCE')")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_LICENSE_ADMIN') or hasRole('ROLE_FINANCE')")
     @GetMapping("/licenses/finance/extension/database_fees_extension/license_database_fees/add")
     public String PaymentConfirmationAdd(Model model){
         model.addAttribute("licenseDatabaseFeesExtensionDTO",new LicenseDatabaseFeesExtensionDTO());
         return "/licenses/finance/extension/database_fees_extension/license_database_fees_confirmation";
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_FINANCE')")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_LICENSE_ADMIN') or hasRole('ROLE_FINANCE')")
     @PostMapping("/licenses/finance/extension/database_fees_extension/license_database_fees/add")
     public String updateLicenseApproval(@ModelAttribute LicenseDatabaseFeesExtensionDTO licenseDatabaseFeesExtensionDTO) {
         // Fetch the existing entity from the database
@@ -65,7 +65,7 @@ public class LicenseDatabaseFeeExtensionFinanceController {
         return "redirect:/licenses/finance/extension/database_fees_extension/license_database_fees";
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_FINANCE')")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_LICENSE_ADMIN') or hasRole('ROLE_FINANCE')")
     @GetMapping("/licenses/finance/extension/database_fees_extension/license_database_fees/print/{id}")
     public String GetTariff(@PathVariable Long id, Model model){
         LicenseDatabaseFeesExtension licenseDatabaseFeesExtension = licenseDatabaseFeesExtensionFinanceService.findById(id);
@@ -83,7 +83,7 @@ public class LicenseDatabaseFeeExtensionFinanceController {
         return "licenses/finance/extension/database_fees_extension/license_database_fees_print_tariff";
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_FINANCE')")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_LICENSE_ADMIN') or hasRole('ROLE_FINANCE')")
     @GetMapping("/licenses/finance/extension/database_fees_extension/license_database_fees/update/{id}")
     public String DatabaseFeesGet(@PathVariable Long id, Model model){
         LicenseDatabaseFeesExtension licenseDatabaseFeesExtension = licenseDatabaseFeesExtensionFinanceService.findById(id);

@@ -37,13 +37,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/").authenticated()
 
                 // License-related paths - only accessible by specific roles
-                .antMatchers("/licenses/license/**").access("hasRole('ROLE_LICENSE') or hasRole('ROLE_ADMIN') or hasRole('ROLE_LICENSE_APPROVAL') or hasRole('ROLE_LICENSE_PROFILE_ENTRY') or hasRole('ROLE_LICENSE_COMPLETION_PROFILE')")
-                .antMatchers("/licenses/finance/**").access("hasRole('ROLE_FINANCE') or hasRole('ROLE_ADMIN') or hasRole('ROLE_MINISTRY')")
+                .antMatchers("/licenses/license/**").access("hasRole('ROLE_LICENSE') or hasRole('ROLE_LICENSE_ADMIN') or hasRole('ROLE_ADMIN') or hasRole('ROLE_LICENSE_APPROVAL') or hasRole('ROLE_LICENSE_PROFILE_ENTRY') or hasRole('ROLE_LICENSE_COMPLETION_PROFILE')")
+                .antMatchers("/licenses/finance/**").access("hasRole('ROLE_FINANCE') or hasRole('ROLE_LICENSE_ADMIN') or hasRole('ROLE_ADMIN') or hasRole('ROLE_MINISTRY')")
                 // Ministry-related paths - only accessible by specific roles
-                .antMatchers("/licenses/finance/license_finance/**").access("hasRole('ROLE_MINISTRY') or hasRole('ROLE_ADMIN')")
+                .antMatchers("/licenses/finance/license_finance/**").access("hasRole('ROLE_MINISTRY') or hasRole('ROLE_LICENSE_ADMIN') or hasRole('ROLE_ADMIN')")
 
                 // Admin-only paths - only accessible by the admin role
-                .antMatchers("/licenses/admin/**").access("hasRole('ROLE_ADMIN')")
+                .antMatchers("/licenses/admin/**").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_LICENSE_ADMIN')")
+                //Codes Management Section
+                .antMatchers("/Codes/**").access("hasRole('ROLE_CODES_ADMIN')")
+
                 // Require authentication for all other pages
                 .anyRequest().authenticated()
 
@@ -94,7 +97,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "ROLE_ADMIN > ROLE_MINISTRY \n" +
                         "ROLE_ADMIN > ROLE_LICENSE_PROFILE_ENTRY \n" +
                         "ROLE_ADMIN > ROLE_LICENSE_COMPLETION_PROFILE \n" +
-                        "ROLE_ADMIN > ROLE_LICENSE_APPROVAL"
+                        "ROLE_ADMIN > ROLE_LICENSE_APPROVAL \n"+
+                        "ROLE_ADMIN > ROLE_LICENSE_ADMIN \n"+
+                        "ROLE_ADMIN > ROLE_CODES_ADMIN"
 
         );
         return roleHierarchy;

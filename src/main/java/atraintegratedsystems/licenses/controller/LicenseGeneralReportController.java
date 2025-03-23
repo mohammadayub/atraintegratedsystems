@@ -20,7 +20,7 @@ public class LicenseGeneralReportController {
     @Autowired
     private LicenseGeneralReportService licenseGeneralReportService;
 
-    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_LICENSE')")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_LICENSE_ADMIN') or hasRole('ROLE_LICENSE')")
     @GetMapping("/licenses/license/report/license_general_report")
     public String showApplicationProfile(Model model) {
         List<LicenseApproval> profiles = licenseGeneralReportService.getAllApprovals();

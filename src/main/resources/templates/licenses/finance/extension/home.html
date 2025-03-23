@@ -14,8 +14,8 @@
 </head>
 <body>
 <nav th:replace="~{layout :: page_navbar}"></nav>
-<div class="container mt-5" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_FINANCE')">
-    <fieldset sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_FINANCE')">
+<div class="container mt-5" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_FINANCE')">
+    <fieldset sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_FINANCE') or hasRole('ROLE_LICENSE_ADMIN')">
         <legend>Admin Fee Extension</legend>
 
     <table class="table table-borderless">
@@ -33,7 +33,7 @@
         </tr>
     </table>
     </fieldset>
-    <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_FINANCE')">
+    <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_FINANCE')">
         <legend>Database Fees Extension</legend>
     <table class="table table-borderless">
         <tr>

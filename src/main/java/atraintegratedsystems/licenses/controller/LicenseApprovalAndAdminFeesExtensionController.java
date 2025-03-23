@@ -30,7 +30,7 @@ public class LicenseApprovalAndAdminFeesExtensionController {
     @Autowired
     private LicenseAdminFeesExtensionService extensionService;
 
-    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_LICENSE') or hasRole('ROLE_LICENSE_COMPLETION_PROFILE')")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_LICENSE_ADMIN') or hasRole('ROLE_LICENSE') or hasRole('ROLE_LICENSE_COMPLETION_PROFILE')")
     @GetMapping("/licenses/license/extension/license_admin_fees_profile")
     public String getLicenseDetails(Model model) {
         List<LicenseApprovalDTO> approvals = approvalService.getAllForAdminFeesExtension();
@@ -39,7 +39,7 @@ public class LicenseApprovalAndAdminFeesExtensionController {
         model.addAttribute("extensions", extensions);
         return "licenses/license/extension/license_admin_fees_profile"; // Thymeleaf template
     }
-    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_LICENSE') or hasRole('ROLE_LICENSE_COMPLETION_PROFILE')")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_LICENSE_ADMIN') or hasRole('ROLE_LICENSE') or hasRole('ROLE_LICENSE_COMPLETION_PROFILE')")
     @PostMapping("/licenses/license/extension/license_admin_fees_profile/update-status")
     public String updateExtendStatus(@RequestParam Long id, @RequestParam String extendStatus, RedirectAttributes redirectAttributes) {
         try {
