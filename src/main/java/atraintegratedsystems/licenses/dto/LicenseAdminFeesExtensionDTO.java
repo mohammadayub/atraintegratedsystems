@@ -7,6 +7,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.Column;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 public class LicenseAdminFeesExtensionDTO {
@@ -27,7 +28,6 @@ public class LicenseAdminFeesExtensionDTO {
     private LocalDate extensionAdministrationFeeBankVoucherDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate extensionAdministrationFeeBankVoucherSubmissionDate;
-
     private String extensionAdministrationPaymentStatus;
 
 
@@ -41,4 +41,10 @@ public class LicenseAdminFeesExtensionDTO {
     //Status
     @Column(name="extend_status")
     private String extendStatus;
+
+    //Audit for Admin
+    private String extendStatusCreatedBy;
+    private LocalDateTime extendStatusCreatedDate;
+    private String extensionAdministrationPaymentStatusCreatedBy;
+    private LocalDateTime extensionAdministrationPaymentStatusCreatedDate;
 }

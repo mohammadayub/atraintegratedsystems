@@ -2,10 +2,9 @@ package atraintegratedsystems.licenses.dto;
 import atraintegratedsystems.utils.JalaliDate;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
-
-import javax.persistence.Column;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 public class LicenseDatabaseFeesExtensionDTO {
@@ -33,4 +32,10 @@ public class LicenseDatabaseFeesExtensionDTO {
     private String extensionDatabasePaymentStatus;
     //Status
     private String extendStatus;
+
+    //Audit for Database
+    private String extendStatusCreatedBy;
+    private LocalDateTime extendStatusCreatedDate;
+    private String extensionDatabasePaymentStatusCreatedBy;
+    private LocalDateTime extensionDatabasePaymentStatusCreatedDate;
 }

@@ -1,19 +1,15 @@
 package atraintegratedsystems.licenses.service;
-
 import atraintegratedsystems.licenses.dto.LicenseAdminFeesExtensionDTO;
-import atraintegratedsystems.licenses.dto.LicenseDatabaseFeesExtensionDTO;
 import atraintegratedsystems.licenses.model.LicenseAdminFeesExtension;
-import atraintegratedsystems.licenses.model.LicenseApproval;
-import atraintegratedsystems.licenses.model.LicenseDatabaseFeesExtension;
 import atraintegratedsystems.licenses.repository.LicenseAdminFeesExtensionRepository;
 import atraintegratedsystems.licenses.repository.LicenseApprovalRepository;
-import atraintegratedsystems.licenses.repository.LicenseDatabaseFeesExtensionRepository;
-import atraintegratedsystems.utils.DateConverter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -46,6 +42,16 @@ public class LicenseAdminFeesExtensionService {
         LicenseAdminFeesExtension entity = licenseAdminFeesExtensionRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid ID: " + id));
         entity.setExtendStatus(extendStatus);
+
+        // Set Admin ExtendStatusEnteredBy to the logged-in user
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String enteredBy = (principal instanceof UserDetails) ? ((UserDetails) principal).getUsername() : "Unknown";
+        entity.setExtendStatusCreatedBy(enteredBy);
+
+        // If extendStatusCreatedDate is null, set it to the current time
+        if (entity.getExtendStatusCreatedDate() == null) {
+            entity.setExtendStatusCreatedDate(LocalDateTime.now());
+        }
         licenseAdminFeesExtensionRepository.save(entity);
     }
 }

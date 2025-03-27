@@ -8,6 +8,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "license_admin_fees_extension")
@@ -49,6 +50,16 @@ public class LicenseAdminFeesExtension {
     //Status
     @Column(name="extend_status")
     private String extendStatus;
+
+    //Audit for Admin
+    @Column(name="extend_status_created_by")
+    private String extendStatusCreatedBy;
+    @Column(name="extend_status_created_date")
+    private LocalDateTime extendStatusCreatedDate;
+    @Column(name="extension_administration_payment_status_created_by")
+    private String extensionAdministrationPaymentStatusCreatedBy;
+    @Column(name="extension_administration_payment_status_created_date")
+    private LocalDateTime extensionAdministrationPaymentStatusCreatedDate;
 
 
     public JalaliDate getExtentStartDate() {

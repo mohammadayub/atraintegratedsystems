@@ -6,6 +6,8 @@ import atraintegratedsystems.licenses.service.LicenseDatabaseFeesExtensionFinanc
 import atraintegratedsystems.utils.DateConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
@@ -28,7 +31,6 @@ public class LicenseDatabaseFeeExtensionFinanceController {
         model.addAttribute("profiles", profiles);
         return "licenses/finance/extension/database_fees_extension/license_database_fees";
     }
-
 
     @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_LICENSE_ADMIN') or hasRole('ROLE_FINANCE')")
     @GetMapping("/licenses/finance/extension/database_fees_extension/license_database_fees/add")
@@ -60,6 +62,15 @@ public class LicenseDatabaseFeeExtensionFinanceController {
         existingLicenseDatabaseFeesExtension.setExtensionDatabaseFeeBankVoucherNo(licenseDatabaseFeesExtensionDTO.getExtensionDatabaseFeeBankVoucherNo());
         existingLicenseDatabaseFeesExtension.setExtensionDatabasePaymentStatus(licenseDatabaseFeesExtensionDTO.getExtensionDatabasePaymentStatus());
 
+        // Set Database extensionDatabasePaymentStatusEnteredBy to the logged-in user
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String enteredBy = (principal instanceof UserDetails) ? ((UserDetails) principal).getUsername() : "Unknown";
+        existingLicenseDatabaseFeesExtension.setExtensionDatabasePaymentStatusCreatedBy(enteredBy);
+
+        // If extensionDatabasePaymentStatusCreatedDate is null, set it to the current time
+        if (existingLicenseDatabaseFeesExtension.getExtensionDatabasePaymentStatusCreatedDate() == null) {
+            existingLicenseDatabaseFeesExtension.setExtensionDatabasePaymentStatusCreatedDate(LocalDateTime.now());
+        }
         // Save the updated entity
         licenseDatabaseFeesExtensionFinanceService.save(existingLicenseDatabaseFeesExtension);
         return "redirect:/licenses/finance/extension/database_fees_extension/license_database_fees";

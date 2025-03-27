@@ -6,6 +6,8 @@ import atraintegratedsystems.licenses.service.LicenseAdminFeesExtensionFinanceSe
 import atraintegratedsystems.utils.DateConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
@@ -59,6 +62,18 @@ public class LicenseAdministrationFeeExtensionFinanceController {
         existingLicenseAdminFeesExtension.setExtensionAdministrationFeeBankVoucherSubmissionDate(adminSubmissionVoucherDate);
         existingLicenseAdminFeesExtension.setExtensionAdministrationFeeBankVoucherNo(licenseAdminFeesExtensionDTO.getExtensionAdministrationFeeBankVoucherNo());
         existingLicenseAdminFeesExtension.setExtensionAdministrationPaymentStatus(licenseAdminFeesExtensionDTO.getExtensionAdministrationPaymentStatus());
+
+        // Set Admin extensionAdministrationPaymentStatusEnteredBy to the logged-in user
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String enteredBy = (principal instanceof UserDetails) ? ((UserDetails) principal).getUsername() : "Unknown";
+        existingLicenseAdminFeesExtension.setExtensionAdministrationPaymentStatusCreatedBy(enteredBy);
+
+        // If extensionAdministrationPaymentStatusCreatedDate is null, set it to the current time
+        if (existingLicenseAdminFeesExtension.getExtensionAdministrationPaymentStatusCreatedDate() == null) {
+            existingLicenseAdminFeesExtension.setExtensionAdministrationPaymentStatusCreatedDate(LocalDateTime.now());
+        }
+
+
 
         // Save the updated entity
         licenseAdminFeesExtensionFinanceService.save(existingLicenseAdminFeesExtension);
