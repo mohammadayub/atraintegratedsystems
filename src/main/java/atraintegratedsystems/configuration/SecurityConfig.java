@@ -45,7 +45,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // Admin-only paths - only accessible by the admin role
                 .antMatchers("/licenses/admin/**").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_LICENSE_ADMIN')")
                 //Codes Management Section
-                .antMatchers("/Codes/**").access("hasRole('ROLE_CODES_ADMIN')")
+                .antMatchers("/codes/**").access("hasRole('ROLE_CODES_ADMIN')")
+                .antMatchers("/typeofapprovals/**").access("hasRole('ROLE_typeofapprovals_ADMIN') or hasRole('ROLE_ADMIN')")
 
                 // Require authentication for all other pages
                 .anyRequest().authenticated()
@@ -99,7 +100,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "ROLE_ADMIN > ROLE_LICENSE_COMPLETION_PROFILE \n" +
                         "ROLE_ADMIN > ROLE_LICENSE_APPROVAL \n"+
                         "ROLE_ADMIN > ROLE_LICENSE_ADMIN \n"+
-                        "ROLE_ADMIN > ROLE_CODES_ADMIN"
+                        "ROLE_ADMIN > ROLE_CODES_ADMIN \n"+
+                        "ROLE_ADMIN > ROLE_typeofapprovals_ADMIN"
 
         );
         return roleHierarchy;

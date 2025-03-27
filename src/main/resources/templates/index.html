@@ -41,6 +41,17 @@
                         </h4>
                     </div>
                 </td>
+
+                <td>
+                    <div class="custom-card" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_typeofapprovals_ADMIN')">
+                        <a th:href="@{/typeofapprovals}">
+                            <img th:src="@{/images/typeofApprovals.png}" alt="Finance Management">
+                        </a>
+                        <h4 class="license-link" style="margin-top: 10px;">
+                            <a th:href="@{/typeofapprovals}">Type Of Approvals</a>
+                        </h4>
+                    </div>
+                </td>
             </tr>
         </table>
     </fieldset>

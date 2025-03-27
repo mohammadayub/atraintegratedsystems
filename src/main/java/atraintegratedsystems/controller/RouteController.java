@@ -85,7 +85,15 @@ public class RouteController {
     @GetMapping("/Codes")
     public String codes_home()
     {
-        return "Codes/index";
+        return "codes/index";
+    }
+
+//    Type of Approval Management Section  typeofapprovals
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_typeofapprovals_ADMIN')")
+    @GetMapping("/typeofapprovals")
+    public String typeofapprovals_home()
+    {
+        return "typeofapprovals/index";
     }
 
 }
