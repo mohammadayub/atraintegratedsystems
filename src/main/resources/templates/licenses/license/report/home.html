@@ -33,26 +33,56 @@
 
         </div>
       </td>
+      <td>
+        <div class="custom-card" >
+          <!-- Report Link       licenses/license/report/license_general_report -->
+          <a th:href="@{#}">
+            <img th:src="@{/images/visualize_report.png}" alt="Codes Management System"></a>
+          <h4 class="license-link" style="margin-top: 12px;">
+            <a th:href="@{#}" > License Visualize Report</a>
+          </h4>
+
+        </div>
+      </td>
     </tr>
   </table>
   </fieldset>
   <fieldset>
-    <legend>Visualize Report</legend>
+    <legend>License Report</legend>
   <table class="table table-borderless">
-    <tr style="border-bottom:1px solid darkgray;">
+    <tr>
       <td>
-      <div class="custom-card" >
+      <div class="custom-card">
 <!-- Report Link       licenses/license/report/license_general_report -->
-        <a th:href="@{#}">
-          <img th:src="@{/images/visualize_report.png}" alt="Codes Management System"></a>
+        <a th:href="@{/finance/finance-report}">
+          <img th:src="@{/images/finance_report.png}" alt="LMS-finance"></a>
         <h4 class="license-link" style="margin-top: 12px;">
-          <a th:href="@{#}" > License Visualize Report</a>
+          <a th:href="@{/finance/finance-report}" >Finance Report</a>
         </h4>
 
       </div>
       </td>
     </tr>
   </table>
+  </fieldset>
+
+  <fieldset>
+    <legend>License Report</legend>
+    <table class="table table-borderless">
+      <tr>
+        <td>
+          <div class="custom-card">
+            <!-- Report Link       licenses/license/report/license_general_report -->
+            <a th:href="@{/license/license-report}">
+              <img th:src="@{/images/license_Report_Icon.png}"></a>
+            <h4 class="license-link" style="margin-top: 12px;">
+              <a th:href="@{/license/license-report}" >License Report</a>
+            </h4>
+
+          </div>
+        </td>
+      </tr>
+    </table>
   </fieldset>
   <a th:href="@{/}" class="btn btn-primary" style="margin-top:20px; margin-left:0px;">
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6" style="width:20px;height:20px;">

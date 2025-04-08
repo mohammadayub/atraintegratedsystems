@@ -96,4 +96,16 @@ public class RouteController {
         return "typeofapprovals/index";
     }
 
+    @GetMapping("/finance/finance-report")
+    public String finance()
+    {
+        return "licenses/license/report/finance/home";
+    }
+
+    @GetMapping("/license/license-report")
+    public String license_report()
+    {
+        return "licenses/license/report/license/home";
+    }
+
 }
