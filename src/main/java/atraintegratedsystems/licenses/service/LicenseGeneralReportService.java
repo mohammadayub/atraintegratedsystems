@@ -15,7 +15,7 @@ public class LicenseGeneralReportService {
     private LicenseApprovalRepository licenseApprovalRepository;
 
     @Transactional
-    public List<LicenseApproval> getAllApprovals(){
-        return licenseApprovalRepository.findApprovedAndPaidLicenses();
+    public List<LicenseApproval> getAllLicenses(){
+        return licenseApprovalRepository.findAllLicenses();
     }
 }

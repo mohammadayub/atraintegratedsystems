@@ -3,86 +3,232 @@
 <head th:replace="~{layout :: page_head}">
     <div th:replace="styles :: data-tables-styles"></div>
     <!-- DataTables CSS -->
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css">
-    <div th:replace="styles :: select2-styles"></div>
-    <title>LMS</title>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/scroller/2.3.0/css/scroller.dataTables.min.css">
+    <style>
+        table.dataTable th,
+        table.dataTable td {
+            font-size: 12px !important;
+            padding: 8px;
+            border: 1px solid #ddd;
+        }
 
+        tfoot td {
+            font-weight: bold;
+            font-size: 12px;
+        }
+
+        .grand-total td {
+            font-size: 14px !important;
+            font-weight: bold;
+            color: #000;
+        }
+
+        @media print {
+            @page {
+                size: A4 landscape;
+                margin: 10mm;
+            }
+
+            body {
+                font-size: 10px !important;
+                color: #000;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            table {
+                border-collapse: collapse !important;
+                width: 100% !important;
+                font-size: 10px !important;
+            }
+
+            table th, table td {
+                border: 1px solid #000 !important;
+                padding: 4px 6px !important;
+            }
+
+            tfoot td {
+                font-weight: bold;
+                font-size: 14px !important;
+            }
+
+            .grand-total td {
+                font-weight: bold;
+                font-size: 16px !important;
+            }
+        }
+    </style>
+
+    <title>LMS - Report</title>
 </head>
 <body>
 <nav th:replace="~{layout :: page_navbar}"></nav>
+
 <div class="container-fluid">
+    <h3 class="my-3 text-center text-primary">General Report of the License</h3>
     <div class="table-container">
-        <table class="table table-bordered" id="profileTable">
-            <thead>
-            <tr class="bg-primary">
-                <th>Approval Id</th>
-                <th>Approval Date</th>
-                <th>Approval Status</th>
-                <th>Board Decision Number</th>
-                <th>Board Decisions</th>
+        <table class="table table-bordered table-striped table-hover" id="profileTable">
+            <thead class="table-primary text-center">
+            <tr>
+                <th>Id</th>
+                <th>Req Id</th>
                 <th>License Type Name</th>
-                <th>Currency Type</th>
+                <th>License Company Name</th>
+                <th>Profile Entered By</th>
+                <th>Profile Entered Created Date</th>
+                <th>Application Fees</th>
+                <th>Payment Status</th>
+                <th>Approval Date</th>
+                <th>License Fees Entered By</th>
+                <th>License Fees Created Date</th>
                 <th>License Fees</th>
-                <th>License Payment Office</th>
-                <th>Admin Yearly Fees</th>
-                <th>Admin Fees Payment Office</th>
-                <th>Guarantee Fee Type</th>
+                <th>License Fees Status</th>
+                <th>Administration Fee Entered By</th>
+                <th>Administration Fee Created Date</th>
+                <th>Administration Fee</th>
+                <th>Administration Fee Payment Status</th>
+                <th>Database Fees Entered By</th>
+                <th>Database Fees Created Date</th>
+                <th>Database Fees</th>
+                <th>Database Fees Payment Status</th>
+                <th>Guarantee Fees Entered By</th>
+                <th>Guarantee Fees Created Date</th>
                 <th>Guarantee Fees</th>
-                <th>Guarantee Fees Payment Office</th>
-                <th>Database Maintainance Fees</th>
-                <th>Database Maint Fees Payment Office</th>
-                <th>License Fees Expiry Date</th>
-                <th>Guarantee Fees Expiry Date</th>
-                <th>Database Maintainance Fees Expiry Date</th>
-                <th>Admininstrative Fees Expiry Date</th>
+                <th>Guarantee Fees Payment Status</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="profile : ${profiles}">
-                <td th:text="${profile.approvalId}"></td>
-                <td th:text="${profile.getAppDate()}"></td>
-                <td th:text="${profile.approvalStatus}"></td>
-                <td th:text="${profile.boardDecisionNumber}"></td>
-                <td th:text="${profile.boardDecisions}"></td>
+                <td th:text="${profile.licenseApplicant.id}"></td>
+                <td th:text="${profile.licenseApplicant.reqId}"></td>
                 <td th:text="${profile.licenseType.name}"></td>
-                <td th:text="${profile.currencyType}"></td>
+                <td th:text="${profile.licenseApplicant.companyLicenseName}"></td>
+                <td th:text="${profile.licenseApplicant.profileEnteredBy}"></td>
+                <td th:text="${profile.licenseApplicant.profileEnteredCreatedDate}"></td>
+                <td th:text="${profile.licenseApplicant.applicationFees}"></td>
+                <td th:text="${profile.licenseApplicant.paymentStatus}"></td>
+                <td th:text="${profile.getAppDate()}"></td>
+                <td th:text="${profile.licenseFeesEnteredBy}"></td>
+                <td th:text="${profile.licenseFeesCreatedDate}"></td>
                 <td th:text="${profile.licenseFees}"></td>
-                <td th:text="${profile.licensePaymentOffice}"></td>
+                <td th:text="${profile.licenseFeePaymentStatus}"></td>
+                <td th:text="${profile.administrationFeesEnteredBy}"></td>
+                <td th:text="${profile.administrationFeesCreatedDate}"></td>
                 <td th:text="${profile.administrativeYearlyFees}"></td>
-                <td th:text="${profile.adminstrivateYearlyFeesPaymentOffice}"></td>
-                <td th:text="${profile.guaranteeFeesType}"></td>
-                <td th:text="${profile.guaranteeFees}"></td>
-                <td th:text="${profile.guaranteeFeesPaymentOffice}"></td>
+                <td th:text="${profile.administrationFeePaymentStatus}"></td>
+                <td th:text="${profile.databaseMaintainanceFeesEnteredBy}"></td>
+                <td th:text="${profile.databaseMaintainanceFeesCreatedDate}"></td>
                 <td th:text="${profile.databaseYearlyMaintainanceFees}"></td>
-                <td th:text="${profile.databaseYearlyMaintainanceFeesPaymentOffice}"></td>
-                <td th:text="${profile.getLicenseFeeExpiryDate()}"></td>
-                <td th:text="${profile.getguaranteeFeeExpiryDate()}"></td>
-                <td th:text="${profile.getdatabaseMaintianenceFeeExpiryDate()}"></td>
-                <td th:text="${profile.getadministrationFeeExpiryDate()}"></td>
+                <td th:text="${profile.databaseMaintianenceFeePaymentStatus}"></td>
+                <td th:text="${profile.guaranteeFeesEnteredBy}"></td>
+                <td th:text="${profile.guaranteeFeesCreatedDate}"></td>
+                <td th:text="${profile.guaranteeFees}"></td>
+                <td th:text="${profile.guaranteeFeePaymentStatus}"></td>
             </tr>
             </tbody>
+            <tfoot class="grand-total text-end">
+            <tr>
+                <td colspan="3" class="text-end">Grand Totals:</td>
+                <td id="applicationFeesTotal"></td>
+                <td colspan="4"></td>
+                <td id="licenseFeesTotal"></td>
+                <td colspan="6"></td>
+                <td id="adminFeesTotal"></td>
+                <td colspan="4"></td>
+                <td id="dbFeesTotal"></td>
+                <td colspan="1"></td>
+                <td id="guaranteeFeesTotal"></td>
+                <td colspan="1"></td>
+            </tr>
+            </tfoot>
         </table>
-        <br>
     </div>
-    <a th:href="@{/licenses/license/report}" class="btn" style="margin-top:20px;color:white;background-color:#0dcaf0;">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6" style="width:20px;height:20px;">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
-        </svg>
-        Back to Page</a>
+
+    <a th:href="@{/licenses/license/report}" class="btn btn-info mt-3 text-white">
+        <!-- Back button -->
+        Back to Page
+    </a>
 </div>
 
-<!-- Common scripts -->
+<!-- Scripts -->
 <div th:replace="scripts :: common-scripts"></div>
 <div th:replace="scripts :: persian-datepicker-scripts"></div>
-
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
-<div th:replace="scripts :: common-datatable"></div>
+
+<script>
+    $(document).ready(function () {
+        const table = $('#profileTable').DataTable({
+            scrollX: true,
+            dom: 'Bfrtip',
+            pageLength: 25,
+            buttons: [
+                {
+                    extend: 'excelHtml5',
+                    text: 'Export to Excel',
+                    footer: true,
+                    exportOptions: {
+                        columns: ':visible'
+                    },
+                    customize: function (xlsx) {
+                        let sheet = xlsx.xl.worksheets['sheet1.xml'];
+                        let row = $('row', sheet).last();
+                        $('c', row).each(function () {
+                            $(this).attr('s', '52');
+                        });
+
+                        // Remove the grand total rows for the export to excel
+                        $('row', sheet).filter(function () {
+                            return $(this).find('c').text() === 'Grand Totals:';
+                        }).remove();
+
+                        // Set column widths
+                        $('col', sheet).each(function () {
+                            $(this).attr('width', '30');
+                        });
+                    }
+                }
+            ],
+            footerCallback: function (row, data, start, end, display) {
+                let api = this.api();
+
+                let intVal = function (i) {
+                    return typeof i === 'string'
+                        ? parseFloat(i.replace(/[,]/g, '')) || 0
+                        : typeof i === 'number'
+                            ? i
+                            : 0;
+                };
+
+                let formatNumber = function (num) {
+                    return num.toLocaleString(undefined, {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2
+                    });
+                };
+
+                // Grand totals
+                let applicationFeesTotal = api.column(6).data().reduce((a, b) => intVal(a) + intVal(b), 0);
+                let licenseFeesTotal = api.column(11).data().reduce((a, b) => intVal(a) + intVal(b), 0);
+                let adminFeesTotal = api.column(15).data().reduce((a, b) => intVal(a) + intVal(b), 0);
+                let dbFeesTotal = api.column(19).data().reduce((a, b) => intVal(a) + intVal(b), 0);
+                let guaranteeFeesTotal = api.column(23).data().reduce((a, b) => intVal(a) + intVal(b), 0);
+
+                // Set totals in footer with names
+                $(api.column(6).footer()).html('Application Fees: ' + formatNumber(applicationFeesTotal));
+                $(api.column(11).footer()).html('License Fees: ' + formatNumber(licenseFeesTotal));
+                $(api.column(15).footer()).html('Admin Fees: ' + formatNumber(adminFeesTotal));
+                $(api.column(19).footer()).html('DB Fees: ' + formatNumber(dbFeesTotal));
+                $(api.column(23).footer()).html('Guarantee Fees: ' + formatNumber(guaranteeFeesTotal));
+            }
+        });
+    });
+</script>
 
 <footer th:replace="~{layout :: page_footer}"></footer>
 <script th:src="@{/js/bootstrap.bundle.min.js}"></script>

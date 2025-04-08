@@ -24,7 +24,7 @@ public class LicenseVisualizeReportController {
     @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_LICENSE_ADMIN') or hasRole('ROLE_LICENSE') or hasRole('ROLE_LICENSE_COMPLETION_PROFILE')")
     @GetMapping("/licenses/license/report/license_visualize_report")
     public String showApplicationProfile(Model model) {
-        List<LicenseApproval> profiles = licenseGeneralReportService.getAllApprovals();
+        List<LicenseApproval> profiles = licenseGeneralReportService.getAllLicenses();
 
         // Format dates to yyyy-MM-dd for consistency
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
