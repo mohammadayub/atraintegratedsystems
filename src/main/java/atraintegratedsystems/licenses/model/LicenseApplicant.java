@@ -221,7 +221,7 @@ public class LicenseApplicant {
     }
 
 //  Submission Section
-public JalaliDate getapplicationFeeBankVoucherSubmissionDate(){
+public JalaliDate getappFeeBankVoucherSubmissionDate(){
     if (applicationFeeBankVoucherSubmissionDate == null) {
         return null; // Return null if issueLicenseDate is null
     }

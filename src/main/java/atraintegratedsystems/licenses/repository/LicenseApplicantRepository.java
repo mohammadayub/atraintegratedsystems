@@ -36,7 +36,8 @@ public interface LicenseApplicantRepository extends JpaRepository<LicenseApplica
     List<LicenseApplicantApprovalDTO> findAllLicenseApplicantApprovalDetails();
 
 
-
+    @Query(value = "SELECT * FROM license_applicants WHERE payment_status = 'Paid'", nativeQuery = true)
+    List<LicenseApplicant> listAllApplicationFeesPaid();
 
 
 

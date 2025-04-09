@@ -38,7 +38,7 @@
           <td th:text="${applicant.companyLicenseName}"></td>
           <td th:text="${applicant.licenseType.name}"></td>
           <td th:text="${applicant.applicationFees}"></td>
-          <td >has problem</td>
+          <td th:text="${applicant.getappFeeBankVoucherSubmissionDate()}"></td>
           <td th:text="${applicant.bankVoucher}"></td>
           <td th:text="${applicant.currencyType}"></td>
           <td th:text="${applicant.licenseNo}"></td>
