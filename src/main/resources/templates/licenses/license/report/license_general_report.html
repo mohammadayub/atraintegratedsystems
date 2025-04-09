@@ -2,64 +2,12 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head th:replace="~{layout :: page_head}">
     <div th:replace="styles :: data-tables-styles"></div>
+    <div th:replace="styles :: commonReportscss"></div>
     <!-- DataTables CSS -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/scroller/2.3.0/css/scroller.dataTables.min.css">
-    <style>
-        table.dataTable th,
-        table.dataTable td {
-            font-size: 12px !important;
-            padding: 8px;
-            border: 1px solid #ddd;
-        }
+<!--    <link rel="stylesheet" href="https://cdn.datatables.net/scroller/2.3.0/css/scroller.dataTables.min.css">-->
 
-        tfoot td {
-            font-weight: bold;
-            font-size: 12px;
-        }
-
-        .grand-total td {
-            font-size: 14px !important;
-            font-weight: bold;
-            color: #000;
-        }
-
-        @media print {
-            @page {
-                size: A4 landscape;
-                margin: 10mm;
-            }
-
-            body {
-                font-size: 10px !important;
-                color: #000;
-                -webkit-print-color-adjust: exact !important;
-                print-color-adjust: exact !important;
-            }
-
-            table {
-                border-collapse: collapse !important;
-                width: 100% !important;
-                font-size: 10px !important;
-            }
-
-            table th, table td {
-                border: 1px solid #000 !important;
-                padding: 4px 6px !important;
-            }
-
-            tfoot td {
-                font-weight: bold;
-                font-size: 14px !important;
-            }
-
-            .grand-total td {
-                font-weight: bold;
-                font-size: 16px !important;
-            }
-        }
-    </style>
 
     <title>LMS - Report</title>
 </head>
@@ -155,80 +103,19 @@
 
 <!-- Scripts -->
 <div th:replace="scripts :: common-scripts"></div>
-<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
+<script th:src="@{/js/reportsJqueryDataTable.js}"></script>
+<script th:src="@{/js/reporstDataTableButtons.js}"></script>
+<script th:src="@{/js/reportsDataTableButtonsHTML5.js}"></script>
+<script th:src="@{/js/jszip.min.js}"></script>
 
-<script>
-    $(document).ready(function () {
-        const table = $('#profileTable').DataTable({
-            scrollX: true,
-            dom: 'Bfrtip',
-            pageLength: 25,
-            buttons: [
-                {
-                    extend: 'excelHtml5',
-                    text: 'Export to Excel',
-                    footer: true,
-                    exportOptions: {
-                        columns: ':visible'
-                    },
-                    customize: function (xlsx) {
-                        let sheet = xlsx.xl.worksheets['sheet1.xml'];
-                        let row = $('row', sheet).last();
-                        $('c', row).each(function () {
-                            $(this).attr('s', '52');
-                        });
+<script th:src="@{/js/reportsCommonjs.js}"></script>
 
-                        // Remove the grand total rows for the export to excel
-                        $('row', sheet).filter(function () {
-                            return $(this).find('c').text() === 'Grand Totals:';
-                        }).remove();
+<!--<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>-->
+<!--<script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>-->
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>-->
+<!--<script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>-->
 
-                        // Set column widths
-                        $('col', sheet).each(function () {
-                            $(this).attr('width', '30');
-                        });
-                    }
-                }
-            ],
-            footerCallback: function (row, data, start, end, display) {
-                let api = this.api();
-
-                let intVal = function (i) {
-                    return typeof i === 'string'
-                        ? parseFloat(i.replace(/[,]/g, '')) || 0
-                        : typeof i === 'number'
-                            ? i
-                            : 0;
-                };
-
-                let formatNumber = function (num) {
-                    return num.toLocaleString(undefined, {
-                        minimumFractionDigits: 2,
-                        maximumFractionDigits: 2
-                    });
-                };
-
-                // Grand totals
-                let applicationFeesTotal = api.column(6).data().reduce((a, b) => intVal(a) + intVal(b), 0);
-                let licenseFeesTotal = api.column(11).data().reduce((a, b) => intVal(a) + intVal(b), 0);
-                let adminFeesTotal = api.column(15).data().reduce((a, b) => intVal(a) + intVal(b), 0);
-                let dbFeesTotal = api.column(19).data().reduce((a, b) => intVal(a) + intVal(b), 0);
-                let guaranteeFeesTotal = api.column(23).data().reduce((a, b) => intVal(a) + intVal(b), 0);
-
-                // Set totals in footer with names
-                $(api.column(6).footer()).html('Application Fees: ' + formatNumber(applicationFeesTotal));
-                $(api.column(11).footer()).html('License Fees: ' + formatNumber(licenseFeesTotal));
-                $(api.column(15).footer()).html('Admin Fees: ' + formatNumber(adminFeesTotal));
-                $(api.column(19).footer()).html('DB Fees: ' + formatNumber(dbFeesTotal));
-                $(api.column(23).footer()).html('Guarantee Fees: ' + formatNumber(guaranteeFeesTotal));
-            }
-        });
-    });
-</script>
-
+<div style="height:5vh;"></div>
 <footer th:replace="~{layout :: page_footer}"></footer>
 <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
 </body>
