@@ -36,10 +36,24 @@
             text-align: right;
         }
 
-        #licenseTypeCount {
-            text-align: right;
-            padding-top: 10px;
-            font-weight: bold;
+        #licenseTypeCountTable {
+            width: 50%;
+            margin-top: 20px;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: left;
+            border-collapse: collapse;
+        }
+
+        #licenseTypeCountTable td, #licenseTypeCountTable th {
+            padding: 10px;
+            border: 1px solid #ddd;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        #licenseTypeCountTable th {
+            background-color: #f0f0f0;
         }
 
         @media print {
@@ -162,24 +176,23 @@
             </tr>
             </tfoot>
         </table>
-        <div id="licenseTypeCount" class="text-end mt-3" dir="rtl">
-            <div class="card border-info" style="width: 18rem; margin-left: auto;">
-                <div class="card-header text-center text-white bg-info">
-                    <strong>License Type Count</strong>
-                </div>
-                <div class="card-body">
-                    <div id="licenseTypeCountData" class="text-end">
-                        <p class="card-text">
-                            <strong>Total Number of License Types:</strong> <span id="licenseTypeCountTotal"></span><br>
-                        <div id="licenseTypeDetails">
-                            <!-- License Type Details will be injected here -->
-                        </div>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
+        <table id="licenseTypeCountTable">
+            <thead>
+            <tr>
+                <th>License Type Name</th>
+                <th>Count</th>
+            </tr>
+            </thead>
+            <tbody id="licenseTypeDetails">
+            <!-- License Type Details will be injected here -->
+            </tbody>
+            <tfoot>
+            <tr>
+                <td><strong>Grand Total</strong></td>
+                <td id="licenseTypeGrandTotal"></td>
+            </tr>
+            </tfoot>
+        </table>
     </div>
 
     <a th:href="@{/licenses/license/report}" class="btn btn-info mt-3 text-white">
@@ -247,9 +260,11 @@
                     }
                 });
 
-                let licenseTypeCountHtml = '<strong>Total Number of License Types: ' + Object.keys(licenseTypeMap).length + '</strong><br>';
+                let licenseTypeCountHtml = '';
+                let totalLicenseTypes = 0;
                 for (let type in licenseTypeMap) {
-                    licenseTypeCountHtml += type + ': ' + licenseTypeMap[type] + '<br>';
+                    licenseTypeCountHtml += '<tr><td>' + type + '</td><td>' + licenseTypeMap[type] + '</td></tr>';
+                    totalLicenseTypes += licenseTypeMap[type];
                 }
 
                 // Update totals
@@ -259,8 +274,9 @@
                 $(api.column(19).footer()).html('DB Fees Grand Total: ' + formatNumber(dbFeesTotal));
                 $(api.column(23).footer()).html('Guarantee Fees Grand Total: ' + formatNumber(guaranteeFeesTotal));
 
-                // Show license type count summary
-                $('#licenseTypeCount').html(licenseTypeCountHtml);
+                // Show license type count table
+                $('#licenseTypeDetails').html(licenseTypeCountHtml);
+                $('#licenseTypeGrandTotal').text(totalLicenseTypes);
             }
         });
     });
