@@ -1,16 +1,85 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
 <head th:replace="~{layout :: page_head}">
+    <meta charset="UTF-8">
     <div th:replace="styles :: data-tables-styles"></div>
-    <div th:replace="styles :: commonReportscss"></div>
-    <!-- DataTables CSS -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css">
-<!--    <link rel="stylesheet" href="https://cdn.datatables.net/scroller/2.3.0/css/scroller.dataTables.min.css">-->
-
-
     <title>LMS - Report</title>
+    <style>
+        table.dataTable th, table.dataTable td {
+            font-size: 12px;
+            padding: 8px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        tfoot td {
+            font-weight: bold;
+            font-size: 12px;
+            text-align: right;
+        }
+
+        .grand-total td {
+            font-size: 14px;
+            font-weight: bold;
+            color: #000;
+            width: 150px;
+            text-align: right;
+        }
+
+        .license-type-count td {
+            font-size: 13px;
+            font-weight: bold;
+            color: #0d6efd;
+            text-align: right;
+        }
+
+        #licenseTypeCount {
+            text-align: right;
+            padding-top: 10px;
+            font-weight: bold;
+        }
+
+        @media print {
+            @page {
+                size: A4 landscape;
+                margin: 10mm;
+            }
+
+            body {
+                font-size: 10px;
+                color: #000;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            table {
+                border-collapse: collapse;
+                width: 100%;
+                font-size: 10px;
+            }
+
+            table th, table td {
+                border: 1px solid #000;
+                padding: 4px 6px;
+            }
+
+            tfoot td {
+                font-weight: bold;
+                font-size: 14px;
+            }
+
+            .grand-total td {
+                font-weight: bold;
+                font-size: 16px;
+                text-align: right;
+            }
+        }
+    </style>
 </head>
+
 <body>
 <nav th:replace="~{layout :: page_navbar}"></nav>
 
@@ -76,8 +145,8 @@
                 <td th:text="${profile.guaranteeFeePaymentStatus}"></td>
             </tr>
             </tbody>
-            <tfoot class="grand-total text-end">
-            <tr>
+            <tfoot>
+            <tr class="grand-total">
                 <td class="text-end">Grand Totals:</td>
                 <td colspan="5"></td>
                 <td id="applicationFeesTotal"></td>
@@ -93,10 +162,27 @@
             </tr>
             </tfoot>
         </table>
+        <div id="licenseTypeCount" class="text-end mt-3" dir="rtl">
+            <div class="card border-info" style="width: 18rem; margin-left: auto;">
+                <div class="card-header text-center text-white bg-info">
+                    <strong>License Type Count</strong>
+                </div>
+                <div class="card-body">
+                    <div id="licenseTypeCountData" class="text-end">
+                        <p class="card-text">
+                            <strong>Total Number of License Types:</strong> <span id="licenseTypeCountTotal"></span><br>
+                        <div id="licenseTypeDetails">
+                            <!-- License Type Details will be injected here -->
+                        </div>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 
     <a th:href="@{/licenses/license/report}" class="btn btn-info mt-3 text-white">
-        <!-- Back button -->
         Back to Page
     </a>
 </div>
@@ -104,18 +190,82 @@
 <!-- Scripts -->
 <div th:replace="scripts :: common-scripts"></div>
 <script th:src="@{/js/reportsJqueryDataTable.js}"></script>
-<script th:src="@{/js/reporstDataTableButtons.js}"></script>
+<script th:src="@{/js/reportsDataTableButtons.js}"></script>
 <script th:src="@{/js/reportsDataTableButtonsHTML5.js}"></script>
 <script th:src="@{/js/jszip.min.js}"></script>
+<script>
+    $(document).ready(function () {
+        const table = $('#profileTable').DataTable({
+            scrollX: true,
+            dom: 'Bfrtip',
+            pageLength: 25,
+            buttons: [
+                {
+                    extend: 'excelHtml5',
+                    text: 'Export to Excel',
+                    footer: true,
+                    exportOptions: {
+                        columns: ':visible'
+                    },
+                    customize: function (xlsx) {
+                        let sheet = xlsx.xl.worksheets['sheet1.xml'];
+                        $('col', sheet).attr('width', '30');
+                    }
+                }
+            ],
+            footerCallback: function (row, data, start, end, display) {
+                const api = this.api();
 
-<script th:src="@{/js/reportsCommonjs.js}"></script>
+                const intVal = function (i) {
+                    return typeof i === 'string'
+                        ? parseFloat(i.replace(/[,]/g, '')) || 0
+                        : typeof i === 'number'
+                            ? i
+                            : 0;
+                };
 
-<!--<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>-->
-<!--<script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>-->
-<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>-->
-<!--<script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>-->
+                const formatNumber = function (num) {
+                    return num.toLocaleString(undefined, {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2
+                    });
+                };
 
-<div style="height:5vh;"></div>
+                let applicationFeesTotal = api.column(6, { search: 'applied' }).data().reduce((a, b) => intVal(a) + intVal(b), 0);
+                let licenseFeesTotal = api.column(11, { search: 'applied' }).data().reduce((a, b) => intVal(a) + intVal(b), 0);
+                let adminFeesTotal = api.column(15, { search: 'applied' }).data().reduce((a, b) => intVal(a) + intVal(b), 0);
+                let dbFeesTotal = api.column(19, { search: 'applied' }).data().reduce((a, b) => intVal(a) + intVal(b), 0);
+                let guaranteeFeesTotal = api.column(23, { search: 'applied' }).data().reduce((a, b) => intVal(a) + intVal(b), 0);
+
+                // Count License Types
+                let licenseTypeMap = {};
+                api.column(2, { search: 'applied' }).data().each(function (d) {
+                    if (licenseTypeMap[d]) {
+                        licenseTypeMap[d]++;
+                    } else {
+                        licenseTypeMap[d] = 1;
+                    }
+                });
+
+                let licenseTypeCountHtml = '<strong>Total Number of License Types: ' + Object.keys(licenseTypeMap).length + '</strong><br>';
+                for (let type in licenseTypeMap) {
+                    licenseTypeCountHtml += type + ': ' + licenseTypeMap[type] + '<br>';
+                }
+
+                // Update totals
+                $(api.column(6).footer()).html('Application Fees Grand Total: ' + formatNumber(applicationFeesTotal));
+                $(api.column(11).footer()).html('License Fees Grand Total : ' + formatNumber(licenseFeesTotal));
+                $(api.column(15).footer()).html('Admin Fees Grand Total:  ' + formatNumber(adminFeesTotal));
+                $(api.column(19).footer()).html('DB Fees Grand Total: ' + formatNumber(dbFeesTotal));
+                $(api.column(23).footer()).html('Guarantee Fees Grand Total: ' + formatNumber(guaranteeFeesTotal));
+
+                // Show license type count summary
+                $('#licenseTypeCount').html(licenseTypeCountHtml);
+            }
+        });
+    });
+</script>
+
 <footer th:replace="~{layout :: page_footer}"></footer>
 <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
 </body>
