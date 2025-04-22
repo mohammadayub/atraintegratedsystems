@@ -120,9 +120,9 @@
         <div class="row">
             <!-- Approval Date -->
             <div class="col-md-3 form-group">
-                <label for="approvalDate" th:text="#{approval_license_date}"
+                <label for="approvalDateJalali" th:text="#{approval_license_date}"
                        th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
-                <input type="text" id="approvalDate" th:field="*{approvalDate}" class="form-control hijrishamsi" required>
+                <input type="text" id="approvalDateJalali" th:field="*{approvalDateJalali}" class="form-control hijrishamsi" required>
             </div>
             <!-- Approval Status -->
             <div class="col-md-3 form-group">

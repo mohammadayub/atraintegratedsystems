@@ -8,6 +8,7 @@ import atraintegratedsystems.licenses.model.LicenseType;
 import atraintegratedsystems.licenses.repository.LicenseApplicantRepository;
 import atraintegratedsystems.licenses.repository.LicenseTypeRepository;
 import atraintegratedsystems.utils.DateConverter;
+import atraintegratedsystems.utils.PersianCalendarUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -47,10 +48,27 @@ public class LicenseNewApplicantService {
     public LicenseApplicant saveProfile(LicenseApplicantDTO dto) throws Exception {
         LicenseApplicant profile = new LicenseApplicant();
         profile.setReqId(generateRequestId());
-        DateConverter dateConverter = new DateConverter();
-        // Convert Jalali date to Gregorian
-        LocalDate requestDate = dateConverter.jalaliToGregorian(dto.getReqDate().getYear(), dto.getReqDate().getMonthValue(), dto.getReqDate().getDayOfMonth());
-        profile.setReqDate(requestDate);
+
+
+
+//        DateConverter dateConverter = new DateConverter();
+//        // Convert Jalali date to Gregorian
+//        LocalDate requestDate = dateConverter.jalaliToGregorian(dto.getReqDate().getYear(), dto.getReqDate().getMonthValue(), dto.getReqDate().getDayOfMonth());
+//        profile.setReqDate(requestDate);
+
+        String[] parts = dto.getReqDateJalali().split("-");
+        int jYear = Integer.parseInt(parts[0]);
+        int jMonth = Integer.parseInt(parts[1]);
+        int jDay = Integer.parseInt(parts[2]);
+
+        PersianCalendarUtils converter = new PersianCalendarUtils();
+        LocalDate reqDate = converter.jalaliToGregorian(jYear, jMonth, jDay);
+        profile.setReqDate(reqDate);
+
+
+
+
+
 
         // Set the LicenseType based on the provided licenseTypeId
         if (dto.getLicenseTypeId() != null) {

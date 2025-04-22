@@ -1,64 +1,390 @@
 <!doctype html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{layout :: page_head}">
-  <div th:replace="styles :: data-tables-styles"></div>
-  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
-  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css">
-  <div th:replace="styles :: common-css"></div>
-  <title>LMS</title>
-
+    <div th:replace="styles :: common-css"></div>
+    <title>LMS</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+        canvas {
+          width: 100% !important;
+          height: auto !important;
+          max-width: 650px;
+          max-height: 400px;
+          display: block;
+          margin: auto;
+        }
+    </style>
 </head>
 <body>
 <nav th:replace="~{layout :: page_navbar}"></nav>
-<div class="container-fluid">
-  <div class="table-container">
-    <table class="table table-bordered" id="profileTable">
-      <thead>
-      <tr class="bg-primary">
-        <th>Approval Id</th>
-        <th>Approval Date</th>
-        <th>Approval Status</th>
-        <th>Board Decision Number</th>
-        <th>Board Decisions</th>
-        <th>License Type Name</th>
-        <th>Currency Type</th>
-        <th>License Fees</th>
-        <th>License Fees Expiry Date</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr th:each="profile : ${profiles}">
-        <td th:text="${profile.approvalId}"></td>
-        <td th:text="${profile.formattedApprovalDate}"></td>
-        <td th:text="${profile.approvalStatus}"></td>
-        <td th:text="${profile.boardDecisionNumber}"></td>
-        <td th:text="${profile.boardDecisions}"></td>
-        <td th:text="${profile.licenseType.name}"></td>
-        <td th:text="${profile.currencyType}"></td>
-        <td>
-          <span th:text="${profile.licenseFees}"></span>
-          <div class="chart-container">
-            <canvas id="chart-licenseFees-[[${profile.approvalId}]]"
-                    th:data-approval-date="${profile.formattedApprovalDate}"
-                    th:data-license-fee-expiry-date="${profile.formattedLicenseFeeExpiryDate}"></canvas>
-          </div>
-        </td>
-        <td th:text="${profile.formattedLicenseFeeExpiryDate}"></td>
-      </tr>
-      </tbody>
-    </table>
-  </div>
+
+<!-- License Type Revenue Chart + Table -->
+<div class="mt-5" id="revenueChartWrapper">
+    <h4 class="mb-4 ml-4">License Type Information With Application Fees Revenue</h4>
+    <div class="row">
+        <div class="col-md-6">
+            <canvas id="licenseTypeRevenueChart"></canvas>
+        </div>
+        <div class="col-md-6">
+            <table class="table table-bordered table-striped mt-3">
+                <thead>
+                <tr>
+                    <th>License Type</th>
+                    <th>Currency Type</th>
+                    <th>Total Application Fees Revenue</th>
+                </tr>
+                </thead>
+                <tbody id="licenseTypeRevenueTable"></tbody>
+                <tfoot>
+                <tr>
+                    <th colspan="2" class="text-right">Grand Total:</th>
+                    <th id="grandTotalCell"></th>
+                </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+    <button id="downloadRevenueChart" class="btn btn-primary mt-4">Download Total Application Fees Revenue Chart & Table</button>
 </div>
 
-<!-- Scripts -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<div th:replace="scripts :: report-chart"></div>
+
+<!-- License Type Revenue Chart + Table -->
+<div class="mt-5" id="licenseFeesChartWrapper">
+    <h4 class="mb-4 ml-4">License Type Information With License Fees Revenue</h4>
+    <div class="row">
+        <div class="col-md-6">
+            <canvas id="licenseFeesRevenueChart"></canvas>
+        </div>
+        <div class="col-md-6">
+            <table class="table table-bordered table-striped mt-3">
+                <thead>
+                <tr>
+                    <th>License Type</th>
+                    <th>Currency Type</th>
+                    <th>Total License Fees Revenue</th>
+                </tr>
+                </thead>
+                <tbody id="licenseFeesRevenueTable"></tbody>
+                <tfoot>
+                <tr>
+                    <th colspan="2" class="text-right">Grand Total:</th>
+                    <th id="grandTotalLicenseFeesCell"></th>
+                </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+    <button id="downloadLicenseFeesRevenueChart" class="btn btn-primary mt-4">Download Total License Fees Revenue Chart & Table</button>
+</div>
+
+
+
+
+
+
+
+
+
+<!-- License Duration Chart + Table -->
+<div class="mt-5" id="durationChartWrapper">
+    <h4 class="mb-4 ml-4">Licenses Duration Left From Today</h4>
+    <div class="row">
+        <div class="col-md-6">
+            <canvas id="approvalExpiryChart"></canvas>
+        </div>
+        <div class="col-md-6">
+            <table class="table table-bordered table-striped mt-3">
+                <thead>
+                <tr>
+                    <th>Company</th>
+                    <th>Approval Date</th>
+                    <th>Expiry Date</th>
+                    <th>Days Left</th>
+                </tr>
+                </thead>
+                <tbody id="licenseDurationTable"></tbody>
+            </table>
+        </div>
+    </div>
+    <button id="downloadDurationChart" class="btn btn-success mt-4">Download Duration Chart & Table</button>
+</div>
+
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    const profiles = [[${profiles}]];
+
+    const revenueData = {};
+    let grandTotal = 0;
+    profiles.forEach(profile => {
+      const licenseType = profile.licenseType?.name || 'Unknown';
+      const currencyType = profile.licenseApplicant?.currencyType || 'Unknown';
+      const fee = parseFloat(profile.licenseApplicant?.applicationFees || 0);
+
+      if (!revenueData[licenseType]) revenueData[licenseType] = {};
+      if (!revenueData[licenseType][currencyType]) revenueData[licenseType][currencyType] = 0;
+      revenueData[licenseType][currencyType] += fee;
+      grandTotal += fee;
+    });
+
+    const chartLabels = [];
+    const chartData = [];
+    const chartColors = [];
+    const revenueTableBody = document.getElementById('licenseTypeRevenueTable');
+
+    Object.entries(revenueData).forEach(([type, currencyObj]) => {
+      Object.entries(currencyObj).forEach(([currency, total]) => {
+        const label = `${type}`;
+        chartLabels.push(label);
+        chartData.push(total);
+        chartColors.push(`hsl(${Math.random() * 360}, 60%, 65%)`);
+
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${type}</td>
+          <td>${currency}</td>
+          <td>${total.toLocaleString()}</td>
+        `;
+        revenueTableBody.appendChild(tr);
+      });
+    });
+
+    document.getElementById("grandTotalCell").innerText = grandTotal.toLocaleString();
+
+    new Chart(document.getElementById('licenseTypeRevenueChart'), {
+      type: 'pie',
+      data: {
+        labels: chartLabels,
+        datasets: [{
+          label: 'Revenue',
+          data: chartData,
+          backgroundColor: chartColors
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { position: 'bottom' },
+          datalabels: {
+            formatter: (value, ctx) => {
+              const sum = ctx.chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
+              const percentage = (value * 100 / sum).toFixed(1);
+              return `${percentage}%`;
+            },
+            color: '#fff',
+            font: { weight: 'bold' }
+          },
+          tooltip: {
+            callbacks: {
+              label: function(ctx) {
+                return `${ctx.label}: ${ctx.parsed.toLocaleString()}`;
+              }
+            }
+          }
+        }
+      },
+      plugins: [ChartDataLabels]
+    });
+
+    document.getElementById("downloadRevenueChart").addEventListener("click", function () {
+      html2canvas(document.getElementById("revenueChartWrapper")).then(canvas => {
+        const link = document.createElement("a");
+        link.href = canvas.toDataURL("image/png");
+        link.download = "license_type_revenue_chart_and_table.png";
+        link.click();
+      });
+    });
+
+
+
+
+
+<!--License Fees Chart-->
+
+
+const revenueLicenseFeesData = {};
+    let grandTotalLicenseFees = 0;
+    profiles.forEach(profile => {
+      const licenseType = profile.licenseType?.name || 'Unknown';
+      const currencyType = profile.licenseApplicant?.currencyType || 'Unknown';
+      const fee = parseFloat(profile.licenseFees || 0);
+
+      if (!revenueLicenseFeesData[licenseType]) revenueLicenseFeesData[licenseType] = {};
+      if (!revenueLicenseFeesData[licenseType][currencyType]) revenueLicenseFeesData[licenseType][currencyType] = 0;
+      revenueLicenseFeesData[licenseType][currencyType] += fee;
+      grandTotalLicenseFees += fee;
+    });
+
+    const chartLicenseFeesLabels = [];
+    const chartLicenseData = [];
+    const chartLicenseFeesColors = [];
+    const revenueLicenseFeesTableBody = document.getElementById('licenseFeesRevenueTable');
+
+    Object.entries(revenueLicenseFeesData).forEach(([type, currencyObj]) => {
+      Object.entries(currencyObj).forEach(([currency, total]) => {
+        const label = `${type}`;
+        chartLicenseFeesLabels.push(label);
+        chartLicenseData.push(total);
+        chartLicenseFeesColors.push(`hsl(${Math.random() * 360}, 60%, 65%)`);
+
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${type}</td>
+          <td>${currency}</td>
+          <td>${total.toLocaleString()}</td>
+        `;
+        revenueLicenseFeesTableBody.appendChild(tr);
+      });
+    });
+
+    document.getElementById("grandTotalLicenseFeesCell").innerText = grandTotalLicenseFees.toLocaleString();
+
+    new Chart(document.getElementById('licenseFeesRevenueChart'), {
+      type: 'pie',
+      data: {
+        labels: chartLabels,
+        datasets: [{
+          label: 'Revenue',
+          data: chartData,
+          backgroundColor: chartColors
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { position: 'bottom' },
+          datalabels: {
+            formatter: (value, ctx) => {
+              const sum = ctx.chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
+              const percentage = (value * 100 / sum).toFixed(1);
+              return `${percentage}%`;
+            },
+            color: '#fff',
+            font: { weight: 'bold' }
+          },
+          tooltip: {
+            callbacks: {
+              label: function(ctx) {
+                return `${ctx.label}: ${ctx.parsed.toLocaleString()}`;
+              }
+            }
+          }
+        }
+      },
+      plugins: [ChartDataLabels]
+    });
+
+    document.getElementById("downloadLicenseFeesRevenueChart").addEventListener("click", function () {
+      html2canvas(document.getElementById("licenseFeesChartWrapper")).then(canvas => {
+        const link = document.createElement("a");
+        link.href = canvas.toDataURL("image/png");
+        link.download = "license_type_revenue_chart_and_table.png";
+        link.click();
+      });
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // === License Duration Chart ===
+    const durationLabels = [];
+    const durationData = [];
+    const durationColors = [];
+    const durationTableBody = document.getElementById('licenseDurationTable');
+    const today = new Date();
+
+    profiles.forEach(profile => {
+      const company = profile.licenseApplicant?.companyLicenseName || 'Unknown';
+      const approvalDateStr = profile.formattedApprovalDate;
+      const expiryDateStr = profile.formattedLicenseFeeExpiryDate;
+
+      const approvalDate = new Date(approvalDateStr);
+      const expiryDate = new Date(expiryDateStr);
+      const diffDaysLeft = Math.max(0, Math.floor((expiryDate - today) / (1000 * 60 * 60 * 24)));
+
+      const label = `${company} | Expires on ${expiryDateStr}`;
+      durationLabels.push(label);
+      durationData.push(diffDaysLeft || 1);
+      durationColors.push(`hsl(${Math.random() * 360}, 70%, 70%)`);
+
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td>${company}</td>
+        <td>${approvalDateStr}</td>
+        <td>${expiryDateStr}</td>
+        <td>${diffDaysLeft}</td>
+      `;
+      durationTableBody.appendChild(tr);
+    });
+
+    new Chart(document.getElementById('approvalExpiryChart'), {
+      type: 'pie',
+      data: {
+        labels: durationLabels,
+        datasets: [{
+          label: 'Days Left',
+          data: durationData,
+          backgroundColor: durationColors
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { position: 'bottom' },
+          datalabels: {
+            formatter: (value, ctx) => {
+              const sum = ctx.chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
+              const percentage = (value * 100 / sum).toFixed(1);
+              return `${percentage}%`;
+            },
+            color: '#000',
+            font: { weight: 'bold' }
+          },
+          tooltip: {
+            callbacks: {
+              label: function(ctx) {
+                return `${ctx.label} - ${ctx.parsed} days`;
+              }
+            }
+          }
+        }
+      },
+      plugins: [ChartDataLabels]
+    });
+
+    document.getElementById("downloadDurationChart").addEventListener("click", function () {
+      html2canvas(document.getElementById("durationChartWrapper")).then(canvas => {
+        const link = document.createElement("a");
+        link.href = canvas.toDataURL("image/png");
+        link.download = "license_duration_left_chart_and_table.png";
+        link.click();
+      });
+    });
+    /*]]>*/
+</script>
 
 <div style="height:10vh;"></div>
 <footer th:replace="~{layout :: page_footer}"></footer>

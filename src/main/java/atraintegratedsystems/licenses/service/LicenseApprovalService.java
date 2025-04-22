@@ -1,9 +1,8 @@
 package atraintegratedsystems.licenses.service;
-import atraintegratedsystems.licenses.dto.LicenseApplicantDTO;
 import atraintegratedsystems.licenses.dto.LicenseApprovalDTO;
 import atraintegratedsystems.licenses.model.*;
 import atraintegratedsystems.licenses.repository.*;
-import atraintegratedsystems.utils.DateConverter;
+import atraintegratedsystems.utils.PersianCalendarUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -103,12 +102,21 @@ public class LicenseApprovalService {
 
         // Convert Jalali date to Gregorian
         try {
-            DateConverter dateConverter = new DateConverter();
-            LocalDate approvalDate = dateConverter.jalaliToGregorian(
-                    dto.getApprovalDate().getYear(),
-                    dto.getApprovalDate().getMonthValue(),
-                    dto.getApprovalDate().getDayOfMonth()
-            );
+//            DateConverter dateConverter = new DateConverter();
+//            LocalDate approvalDate = dateConverter.jalaliToGregorian(
+//                    dto.getApprovalDate().getYear(),
+//                    dto.getApprovalDate().getMonthValue(),
+//                    dto.getApprovalDate().getDayOfMonth()
+//            );
+//            profile.setApprovalDate(approvalDate);
+
+            String[] parts = dto.getApprovalDateJalali().split("-");
+            int jYear = Integer.parseInt(parts[0]);
+            int jMonth = Integer.parseInt(parts[1]);
+            int jDay = Integer.parseInt(parts[2]);
+
+            PersianCalendarUtils converter = new PersianCalendarUtils();
+            LocalDate approvalDate = converter.jalaliToGregorian(jYear, jMonth, jDay);
             profile.setApprovalDate(approvalDate);
 
             // Fetch the LicenseApplicant

@@ -3,7 +3,6 @@ import atraintegratedsystems.utils.JalaliDate;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Column;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -12,6 +11,7 @@ import java.time.LocalDateTime;
 public class LicenseApprovalDTO {
     private Long id;
     private String approvalId;
+    private String approvalDateJalali; // the raw input from form
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate approvalDate;
     private String approvalStatus;
@@ -115,6 +115,8 @@ public class LicenseApprovalDTO {
     //Audit for License Fees
     private String licenseFeesEnteredBy;
     private LocalDateTime licenseFeesCreatedDate;
+
+
 
 
 

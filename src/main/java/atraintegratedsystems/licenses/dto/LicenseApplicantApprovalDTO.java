@@ -26,8 +26,12 @@ public class LicenseApplicantApprovalDTO {
     // LicenseApproval Model
     private Long appId;
     private String approvalId;
+
+    private String approvalDateJalali; // the raw input from form
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate approvalDate;
+
+
     private String approvalStatus;
     private String boardDecisions;
     private String boardDecisionNumber;

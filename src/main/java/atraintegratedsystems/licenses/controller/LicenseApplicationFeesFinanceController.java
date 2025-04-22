@@ -5,6 +5,7 @@ import atraintegratedsystems.licenses.model.LicenseApplicant;
 import atraintegratedsystems.licenses.service.LicenseApplicantFinanceService;
 import atraintegratedsystems.licenses.service.LicenseTypeService;
 import atraintegratedsystems.utils.DateConverter;
+import atraintegratedsystems.utils.PersianCalendarUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -57,12 +58,33 @@ public class LicenseApplicationFeesFinanceController {
         }
         LicenseApplicant licenseApplicant = licenseApplicantFinanceService.getApplicantByReqId(licenseApplicantDTO.getReqId()).orElseThrow(() -> new IllegalArgumentException("Invalid code ID: " + licenseApplicantDTO.getReqId()));
         // Update only the editable fields
-        DateConverter dateConverter = new DateConverter();
-        // Convert Jalali date to Gregorian
-        LocalDate entryDate = dateConverter.jalaliToGregorian(licenseApplicantDTO.getEntryApplicationFeeVoucherDate().getYear(), licenseApplicantDTO.getEntryApplicationFeeVoucherDate().getMonthValue(), licenseApplicantDTO.getEntryApplicationFeeVoucherDate().getDayOfMonth());
-        LocalDate entrySubmissionDate = dateConverter.jalaliToGregorian(licenseApplicantDTO.getApplicationFeeBankVoucherSubmissionDate().getYear(), licenseApplicantDTO.getApplicationFeeBankVoucherSubmissionDate().getMonthValue(), licenseApplicantDTO.getApplicationFeeBankVoucherSubmissionDate().getDayOfMonth());
-        licenseApplicant.setEntryApplicationFeeVoucherDate(entryDate);
-        licenseApplicant.setApplicationFeeBankVoucherSubmissionDate(entrySubmissionDate);
+//        DateConverter dateConverter = new DateConverter();
+//        // Convert Jalali date to Gregorian
+//        LocalDate entryDate = dateConverter.jalaliToGregorian(licenseApplicantDTO.getEntryApplicationFeeVoucherDate().getYear(), licenseApplicantDTO.getEntryApplicationFeeVoucherDate().getMonthValue(), licenseApplicantDTO.getEntryApplicationFeeVoucherDate().getDayOfMonth());
+//        LocalDate entrySubmissionDate = dateConverter.jalaliToGregorian(licenseApplicantDTO.getApplicationFeeBankVoucherSubmissionDate().getYear(), licenseApplicantDTO.getApplicationFeeBankVoucherSubmissionDate().getMonthValue(), licenseApplicantDTO.getApplicationFeeBankVoucherSubmissionDate().getDayOfMonth());
+//        licenseApplicant.setEntryApplicationFeeVoucherDate(entryDate);
+//        licenseApplicant.setApplicationFeeBankVoucherSubmissionDate(entrySubmissionDate);
+
+        String[] partsEntry = licenseApplicantDTO.getEntryApplicationFeeVoucherDateJalali().split("-");
+        int jYear = Integer.parseInt(partsEntry[0]);
+        int jMonth = Integer.parseInt(partsEntry[1]);
+        int jDay = Integer.parseInt(partsEntry[2]);
+
+        PersianCalendarUtils converter = new PersianCalendarUtils();
+        LocalDate entryApplicationFeeVoucherDate = converter.jalaliToGregorian(jYear, jMonth, jDay);
+        licenseApplicant.setEntryApplicationFeeVoucherDate(entryApplicationFeeVoucherDate);
+
+        String[] partsSubmission = licenseApplicantDTO.getApplicationFeeBankVoucherSubmissionDateJalali().split("-");
+        int jYearSubmission = Integer.parseInt(partsSubmission[0]);
+        int jMonthSubmission = Integer.parseInt(partsSubmission[1]);
+        int jDaySubmission = Integer.parseInt(partsSubmission[2]);
+
+        LocalDate applicationFeeSubmissionDate = converter.jalaliToGregorian(jYearSubmission, jMonthSubmission, jDaySubmission);
+        licenseApplicant.setApplicationFeeBankVoucherSubmissionDate(applicationFeeSubmissionDate);
+
+
+
+
         licenseApplicant.setBankVoucher(licenseApplicantDTO.getBankVoucher());
         licenseApplicant.setPaymentStatus(licenseApplicantDTO.getPaymentStatus());
 

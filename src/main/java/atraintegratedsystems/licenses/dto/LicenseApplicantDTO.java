@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 public class LicenseApplicantDTO {
     private Long id;
     private String reqId;
+    private String reqDateJalali;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate reqDate;
     private Long licenseTypeId; // Foreign key reference
@@ -43,9 +44,11 @@ public class LicenseApplicantDTO {
     private String email;
     private String website;
     private String postAddress;
+    private String entryApplicationFeeVoucherDateJalali;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate entryApplicationFeeVoucherDate;
     private String bankVoucher;
+    private String applicationFeeBankVoucherSubmissionDateJalali;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate applicationFeeBankVoucherSubmissionDate;
     private String paymentStatus;

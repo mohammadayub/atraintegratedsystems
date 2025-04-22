@@ -1,12 +1,4 @@
-/*!
- *
- * persian-date -  1.1.0
- * Reza Babakhani <babakhani.reza@gmail.com>
- * http://babakhani.github.io/PersianWebToolkit/docs/persian-date/
- * Under MIT license
- *
- *
- */
+
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory();
@@ -130,12 +122,6 @@ var Helpers = function () {
             });
         }
 
-        /**
-         * @param number
-         * @param targetLength
-         * @returns {string}
-         */
-
     }, {
         key: 'leftZeroFill',
         value: function leftZeroFill(number, targetLength) {
@@ -145,11 +131,6 @@ var Helpers = function () {
             }
             return output;
         }
-
-        /**
-         * @description normalize duration params and return valid param
-         * @return {{unit: *, value: *}}
-         */
 
     }, {
         key: 'normalizeDuration',
@@ -186,11 +167,7 @@ var Helpers = function () {
             };
         }
 
-        /**
-         *
-         * @param number
-         * @returns {number}
-         */
+
 
     }, {
         key: 'absRound',
@@ -329,10 +306,6 @@ var PersianDateClass = function () {
             return new syncedCelander(input);
         }
 
-        /**
-         * @param inputgDate
-         * @private
-         */
 
     }, {
         key: '_gDateToCalculators',
@@ -340,22 +313,10 @@ var PersianDateClass = function () {
             this.algorithms.calcGregorian([inputgDate.getFullYear(), inputgDate.getMonth(), inputgDate.getDate(), inputgDate.getHours(), inputgDate.getMinutes(), inputgDate.getSeconds(), inputgDate.getMilliseconds()]);
         }
 
-        /**
-         * @since 1.0.0
-         * @description Helper method that return date range name like week days name, month names, month days names (specially in persian calendar).
-         * @static
-         * @return {*}
-         */
 
     }, {
         key: 'rangeName',
 
-
-        /**
-         * @since 1.0.0
-         * @description Helper method that return date range name like week days name, month names, month days names (specially in persian calendar).
-         * @return {*}
-         */
         value: function rangeName() {
             var t = this.calendarType;
             if (this.localType === 'fa') {
@@ -373,12 +334,6 @@ var PersianDateClass = function () {
             }
         }
 
-        /**
-         * @since 1.0.0
-         * @param input
-         * @return {PersianDateClass}
-         */
-
     }, {
         key: 'toLeapYearMode',
         value: function toLeapYearMode(input) {
@@ -392,44 +347,18 @@ var PersianDateClass = function () {
             return this;
         }
 
-        /**
-         * @since 1.0.0
-         * @static
-         * @param input
-         * @return {PersianDateClass}
-         */
-
     }, {
         key: 'toCalendar',
 
-
-        /**
-         * @since 1.0.0
-         * @param input
-         * @return {PersianDateClass}
-         */
         value: function toCalendar(input) {
             this.calendarType = input;
             this.algorithms.updateFromGregorian();
             return this;
         }
 
-        /**
-         * @since 1.0.0
-         * @static
-         * @param input
-         * @return {PersianDateClass}
-         */
-
     }, {
         key: 'toLocale',
 
-
-        /**
-         * @since 1.0.0
-         * @param input
-         * @return {PersianDateClass}
-         */
         value: function toLocale(input) {
             this.localType = input;
             if (this.localType !== 'fa') {
@@ -439,11 +368,6 @@ var PersianDateClass = function () {
             }
             return this;
         }
-
-        /**
-         * @return {*}
-         * @private
-         */
 
     }, {
         key: '_locale',
@@ -463,22 +387,11 @@ var PersianDateClass = function () {
                 }
             }
         }
-
-        /**
-         * @param input
-         * @private
-         */
-
     }, {
         key: '_weekName',
         value: function _weekName(input) {
             return this._locale().weekdays[input - 1];
         }
-
-        /**
-         * @param input
-         * @private
-         */
 
     }, {
         key: '_weekNameShort',
@@ -486,22 +399,12 @@ var PersianDateClass = function () {
             return this._locale().weekdaysShort[input - 1];
         }
 
-        /**
-         * @param input
-         * @private
-         */
 
     }, {
         key: '_weekNameMin',
         value: function _weekNameMin(input) {
             return this._locale().weekdaysMin[input - 1];
         }
-
-        /**
-         * @param input
-         * @return {*}
-         * @private
-         */
 
     }, {
         key: '_dayName',
@@ -520,49 +423,25 @@ var PersianDateClass = function () {
             return this._locale().months[input - 1];
         }
 
-        /**
-         * @param input
-         * @private
-         */
-
     }, {
         key: '_monthNameShort',
         value: function _monthNameShort(input) {
             return this._locale().monthsShort[input - 1];
         }
 
-        /**
-         * @param obj
-         * @returns {boolean}
-         */
 
     }, {
         key: 'isPersianDate',
 
-
-        /**
-         * @param obj
-         * @return {boolean}
-         */
         value: function isPersianDate(obj) {
             return obj instanceof PersianDateClass;
         }
-
-        /**
-         * @returns {PersianDate}
-         */
 
     }, {
         key: 'clone',
         value: function clone() {
             return this._getSyncedClass(this.State.gDate);
         }
-
-        /**
-         * @since 1.0.0
-         * @param dateArray
-         * @return {*}
-         */
 
     }, {
         key: 'algorithmsCalc',
@@ -580,11 +459,6 @@ var PersianDateClass = function () {
             }
         }
 
-        /**
-         * @since 1.0.0
-         * @return {*}
-         */
-
     }, {
         key: 'calendar',
         value: function calendar() {
@@ -601,61 +475,24 @@ var PersianDateClass = function () {
             return this.State[key];
         }
 
-        /**
-         * @description return Duration object
-         * @param input
-         * @param key
-         * @returns {Duration}
-         */
-
     }, {
         key: 'duration',
 
-
-        /**
-         * @description return Duration object
-         * @param input
-         * @param key
-         * @returns {Duration}
-         */
         value: function duration(input, key) {
             return new Duration(input, key);
         }
 
-        /**
-         * @description check if passed object is duration
-         * @param obj
-         * @returns {boolean}
-         */
-
     }, {
         key: 'isDuration',
-
-
-        /**
-         * @description check if passed object is duration
-         * @param obj
-         * @returns {boolean}
-         */
         value: function isDuration(obj) {
             return obj instanceof Duration;
         }
-
-        /**
-         * @param input
-         * @returns {*}
-         */
 
     }, {
         key: 'years',
         value: function years(input) {
             return this.year(input);
         }
-
-        /**
-         * @param input
-         * @returns {*}
-         */
 
     }, {
         key: 'year',
@@ -668,11 +505,6 @@ var PersianDateClass = function () {
             }
         }
 
-        /**
-         * @param input
-         * @returns {*}
-         */
-
     }, {
         key: 'month',
         value: function month(input) {
@@ -684,20 +516,11 @@ var PersianDateClass = function () {
             }
         }
 
-        /**
-         * Day of week
-         * @returns {Function|Date.toJSON.day|date_json.day|PersianDate.day|day|output.day|*}
-         */
-
     }, {
         key: 'days',
         value: function days() {
             return this.day();
         }
-
-        /**
-         * @returns {Function|Date.toJSON.day|date_json.day|PersianDate.day|day|output.day|*}
-         */
 
     }, {
         key: 'day',
@@ -705,22 +528,11 @@ var PersianDateClass = function () {
             return this.calendar().weekday;
         }
 
-        /**
-         * Day of Months
-         * @param input
-         * @returns {*}
-         */
-
     }, {
         key: 'dates',
         value: function dates(input) {
             return this.date(input);
         }
-
-        /**
-         * @param input
-         * @returns {*}
-         */
 
     }, {
         key: 'date',
@@ -732,22 +544,11 @@ var PersianDateClass = function () {
                 return this.calendar().day;
             }
         }
-
-        /**
-         * @param input
-         * @returns {*}
-         */
-
     }, {
         key: 'hour',
         value: function hour(input) {
             return this.hours(input);
         }
-
-        /**
-         * @param input
-         * @returns {*}
-         */
 
     }, {
         key: 'hours',
@@ -774,10 +575,6 @@ var PersianDateClass = function () {
             return this.minutes(input);
         }
 
-        /**
-         * @param input
-         * @returns {*}
-         */
 
     }, {
         key: 'minutes',
