@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: page_head}">
+    <meta charset="UTF-8">
+    <title>LMS - Report</title>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            font-size: 12px;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container-fluid {
+            max-width: 95%;
+            margin: auto;
+            padding: 20px;
+        }
+
+        h3 {
+            font-weight: 600;
+        }
+
+        .table-container {
+            background: #ffffff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        #profileTable {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        #profileTable thead {
+            background-color: #007bff;
+            color: white;
+        }
+
+        #profileTable th {
+            font-size: 12px;
+            text-align: center;
+            padding: 8px;
+            white-space: nowrap;
+        }
+
+        #profileTable td {
+            font-size: 11px;
+            text-align: center;
+            padding: 6px;
+        }
+
+        #profileTable tbody tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        #profileTable tbody tr:hover {
+            background-color: #e0e0e0;
+        }
+
+        .btn-back {
+            margin-top: 20px;
+        }
+
+        .dt-buttons {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+<nav th:replace="~{layout :: page_navbar}"></nav>
+
+<div class="container-fluid">
+    <h3 class="text-center text-primary mb-4">License Process Follow-Up Report</h3>
+
+    <div class="table-container table-responsive">
+        <table id="profileTable" class="display nowrap table table-bordered table-striped">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Request ID</th>
+                <th th:text="#{applicant_license_type}">License Type</th>
+                <th th:text="#{license_application_company_license_name}">Company License Name</th>
+                <th>Request Date</th>
+                <th>Voucher Submission Date</th>
+                <th>Total Days (1 Process)</th>
+                <th>Complete Profile Date</th>
+                <th>Total Days (2 Process)</th>
+                <th>Refer to Board Date</th>
+                <th>Approval Date</th>
+                <th>Total Days (3 Process)</th>
+                <th>License Fees Voucher Sub Date</th>
+                <th>Admin Fees Voucher Sub Date</th>
+                <th>Db Fees Voucher Sub Date</th>
+                <th>Guarantee Fees Voucher Sub Date</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="profile : ${profiles}">
+                <td th:text="${profile.licenseApplicant.id}"></td>
+                <td th:text="${profile.licenseApplicant.reqId}"></td>
+                <td th:text="${profile.licenseType.name}"></td>
+                <td th:text="${profile.licenseApplicant.companyLicenseName}"></td>
+                <td th:text="${profile.licenseApplicant.reqDate}" class="req-date"></td>
+                <td th:text="${profile.licenseApplicant.applicationFeeBankVoucherSubmissionDate}" class="voucher-date"></td>
+                <td class="process1-days"></td>
+                <td th:text="${profile.licenseApplicant.referToBoardDate}" class="refer-date"></td>
+                <td class="process2-days"></td>
+                <td th:text="${profile.licenseApplicant.referToBoardDate}"></td>
+                <td th:text="${profile.approvalDate}" class="approval-date"></td>
+                <td class="process3-days"></td>
+                <td th:text="${profile.licenseFeeBankVoucherSubmissionDate}" class="license-fee-voucher-date"></td>
+                <td th:text="${profile.administrationFeeBankVoucherSubmissionDate}"></td>
+                <td th:text="${profile.databasemaintainanceFeeBankVoucherSubmissionDate}"></td>
+                <td th:text="${profile.guaranteeFeeBankVoucherSubmissionDate}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="text-center btn-back">
+        <a th:href="@{/licenses/license/report}" class="btn btn-info text-white">Back to Page</a>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
+<script src="/js/jszip.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#profileTable').DataTable({
+            scrollX: true,
+            scrollY: "400px",
+            scrollCollapse: true,
+            paging: true,
+            pageLength: 10,
+            dom: 'Bfrtip',
+            buttons: [
+                {
+                    extend: 'excelHtml5',
+                    text: 'Export to Excel',
+                    className: 'btn btn-sm btn-success',
+                    exportOptions: {
+                        columns: ':visible'
+                    }
+                }
+            ]
+        });
+
+        $('#profileTable tbody tr').each(function () {
+            const reqDate = new Date($(this).find('.req-date').text().trim());
+            const voucherDate = new Date($(this).find('.voucher-date').text().trim());
+            const referDate = new Date($(this).find('.refer-date').text().trim());
+            const approvalDate = new Date($(this).find('.approval-date').text().trim());
+
+            const process1Cell = $(this).find('.process1-days');
+            const process2Cell = $(this).find('.process2-days');
+            const process3Cell = $(this).find('.process3-days');
+
+            if (!isNaN(voucherDate) && !isNaN(reqDate)) {
+                process1Cell.text(Math.ceil((voucherDate - reqDate) / (1000 * 60 * 60 * 24)) + " days");
+            } else {
+                process1Cell.text("N/A");
+            }
+
+            if (!isNaN(referDate) && !isNaN(voucherDate)) {
+                process2Cell.text(Math.ceil((referDate - voucherDate) / (1000 * 60 * 60 * 24)) + " days");
+            } else {
+                process2Cell.text("N/A");
+            }
+
+            if (!isNaN(approvalDate) && !isNaN(referDate)) {
+                process3Cell.text(Math.ceil((approvalDate - referDate) / (1000 * 60 * 60 * 24)) + " days");
+            } else {
+                process3Cell.text("N/A");
+            }
+        });
+    });
+</script>
+
+<footer th:replace="~{layout :: page_footer}"></footer>
+</body>
+</html>

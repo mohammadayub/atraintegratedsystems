@@ -221,7 +221,7 @@ public class LicenseApproval {
 
 
 //    Submission section
-public JalaliDate getlicenseFeeBankVoucherSubmissionDate() {
+public JalaliDate getlicFeeBankVoucherSubmissionDate() {
     if (licenseFeeBankVoucherSubmissionDate == null) {
         return null; // Return null if issueLicenseDate is null
     }
@@ -230,7 +230,7 @@ public JalaliDate getlicenseFeeBankVoucherSubmissionDate() {
     return jalalilicenseFeeBankVoucherSubmissionDate;
 }
 
-    public JalaliDate getdatabasemaintainanceFeeBankVoucherSubmissionDate() {
+    public JalaliDate getdbmaintainanceFeeBankVoucherSubmissionDate() {
         if (databasemaintainanceFeeBankVoucherSubmissionDate == null) {
             return null; // Return null if issueLicenseDate is null
         }
@@ -239,7 +239,7 @@ public JalaliDate getlicenseFeeBankVoucherSubmissionDate() {
         return jalalidatabasemaintainanceFeeBankVoucherSubmissionDate;
     }
 
-    public JalaliDate getguaranteeFeeBankVoucherSubmissionDate() {
+    public JalaliDate getguaranteFeeBankVoucherSubmissionDate() {
         if (guaranteeFeeBankVoucherSubmissionDate == null) {
             return null; // Return null if issueLicenseDate is null
         }
@@ -247,7 +247,7 @@ public JalaliDate getlicenseFeeBankVoucherSubmissionDate() {
         JalaliDate jalaliguaranteeFeeBankVoucherSubmissionDate=dateConverter.gregorianToJalali(guaranteeFeeBankVoucherSubmissionDate.getYear(),guaranteeFeeBankVoucherSubmissionDate.getMonthValue(),guaranteeFeeBankVoucherSubmissionDate.getDayOfMonth());
         return jalaliguaranteeFeeBankVoucherSubmissionDate;
     }
-    public JalaliDate getadministrationFeeBankVoucherSubmissionDate() {
+    public JalaliDate getadminFeeBankVoucherSubmissionDate() {
         if (administrationFeeBankVoucherSubmissionDate == null) {
             return null; // Return null if issueLicenseDate is null
         }
