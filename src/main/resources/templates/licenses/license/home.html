@@ -21,7 +21,7 @@
           <a th:href="@{/licenses/license/registration/profile-entry/license_new_profile}">
             <img th:src="@{/images/New_application.png}" alt="License Management System" class="img-fluid"></a>
           <h4 class="license-link mt-2">
-            <a th:href="@{/licenses/license/registration/profile-entry/license_new_profile}" th:text="#{license_applicant}" style="font-size:20px;"></a>
+            <a th:href="@{/licenses/license/registration/profile-entry/license_new_profile}" th:text="#{new_applicant}" style="font-size:20px;"></a>
           </h4>
         </div>
       </div>
@@ -31,7 +31,7 @@
           <a th:href="@{/licenses/license/registration/profile-entry/license_new_profile_list}">
             <img th:src="@{/images/license_applicants_list.png}" alt="Finance Revenue Management System" class="img-fluid"></a>
           <h4 class="license-link mt-2">
-            <a th:href="@{/licenses/license/registration/profile-entry/license_new_profile_list}"   style="font-size:20px;">List Of All Profiles</a>
+            <a th:href="@{/licenses/license/registration/profile-entry/license_new_profile_list}" th:text="#{list_of_applicants}"   style="font-size:20px;"></a>
           </h4>
         </div>
       </div>
@@ -46,7 +46,7 @@
           <a th:href="@{/licenses/license/registration/completion-profile/license_applicant_profile_list}">
             <img th:src="@{/images/applicant.png}" alt="Finance Revenue Management System" class="img-fluid"></a>
           <h4 class="license-link mt-2">
-            <a th:href="@{/licenses/license/registration/completion-profile/license_applicant_profile_list}"   style="font-size:20px;">Completion Profiles</a>
+            <a th:href="@{/licenses/license/registration/completion-profile/license_applicant_profile_list}" th:text="#{complete_profile}" style="font-size:20px;"></a>
           </h4>
         </div>
       </div>
@@ -56,7 +56,7 @@
           <a th:href="@{/licenses/license/registration/send-profile-board/license_applicant_profile_send_board_list}">
             <img th:src="@{/images/send_to_board.png}" alt="LMS" class="img-fluid"></a>
           <h4 class="license-link mt-2">
-            <a th:href="@{/licenses/license/registration/send-profile-board/license_applicant_profile_send_board_list}"  style="font-size:20px;">Send To Board</a>
+            <a th:href="@{/licenses/license/registration/send-profile-board/license_applicant_profile_send_board_list}" th:text="#{send_to_board}" style="font-size:20px;"></a>
           </h4>
         </div>
       </div>
@@ -74,7 +74,7 @@
             <img th:src="@{/images/licenseapproval.png}" alt="License Management System" class="img-fluid">
           </a>
           <h4 class="license-link mt-2">
-            <a th:href="@{/licenses/license/approval/license_applicants_approval_list}" th:text="#{license_approval}"  style="font-size:20px;"></a>
+            <a th:href="@{/licenses/license/approval/license_applicants_approval_list}" th:text="#{application_approval}"  style="font-size:20px;"></a>
           </h4>
         </div>
       </div>
@@ -86,7 +86,7 @@
             <img th:src="@{/images/rejection.png}" alt="License Management System" class="img-fluid">
           </a>
           <h4 class="license-link mt-2">
-            <a th:href="@{/licenses/license/rejection/license_applicants_rejection_list}" th:text="#{rejected_license}"  style="font-size:20px;"></a>
+            <a th:href="@{/licenses/license/rejection/license_applicants_rejection_list}" th:text="#{rejecttion}"  style="font-size:20px;"></a>
           </h4>
         </div>
       </div>
@@ -101,7 +101,7 @@
         <a th:href="@{/licenses/license/extension/extension_home}">
           <img th:src="@{/images/finance_extension.png}" alt="license Management System"></a>
         <h4 class="license-link" style="margin-top: 12px;">
-          <a th:href="@{/licenses/license/extension/extension_home}"  style="font-size:20px;">License Fees Extension</a>
+          <a th:href="@{/licenses/license/extension/extension_home}" th:text="#{license_fee_extension}" style="font-size:20px;">License Fees Extension</a>
         </h4>
       </div>
     </div>
@@ -114,7 +114,7 @@
         <a th:href="@{#}">
           <img th:src="@{/images/certificate.png}" alt="Codes Management System"></a>
         <h4 class="license-link" style="margin-top: 12px;">
-          <a th:href="@{#}"  style="font-size:20px;">Certificate Management</a>
+          <a th:href="@{#}" th:text="#{license_certificate}"  style="font-size:20px;">Certificate Management</a>
         </h4>
       </div>
     </div>

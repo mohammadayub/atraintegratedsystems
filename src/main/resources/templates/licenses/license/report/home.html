@@ -39,7 +39,7 @@
           <a th:href="@{#}">
             <img th:src="@{/images/visualize_report.png}" alt="Codes Management System"></a>
           <h4 class="license-link" style="margin-top: 12px;">
-            <a th:href="@{/licenses/license/report/license_visualize_report}" > License Visualize Report</a>
+            <a th:href="@{/licenses/license/report/license_visualize_report}" th:text="#{visualize_report}"></a>
           </h4>
 
         </div>
@@ -57,7 +57,7 @@
         <a th:href="@{/finance/finance-report}">
           <img th:src="@{/images/finance_report.png}" alt="LMS-finance"></a>
         <h4 class="license-link" style="margin-top: 12px;">
-          <a th:href="@{/finance/finance-report}" >Finance Report</a>
+          <a th:href="@{/finance/finance-report}" th:text="#{finance_report}"></a>
         </h4>
 
       </div>
@@ -76,7 +76,7 @@
             <a th:href="@{/license/license-report}">
               <img th:src="@{/images/license_Report_Icon.png}"></a>
             <h4 class="license-link" style="margin-top: 12px;">
-              <a th:href="@{/license/license-report}" >License Report</a>
+              <a th:href="@{/license/license-report}" th:text="#{license_report}"></a>
             </h4>
 
           </div>
@@ -90,7 +90,9 @@
     </svg>
     Back to Page</a>
 </div>
+<div th:replace="scripts :: common-scripts"></div>
 <div style="height:10vh;"></div>
+
 <footer th:replace="~{layout :: page_footer}"></footer>
 <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
 </body>

@@ -18,7 +18,7 @@
 <div class="container mt-5">
 
     <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_CODES_ADMIN','ROLE_LICENSE','ROLE_MINISTRY','ROLE_LICENSE_COMPLETION_PROFILE','ROLE_LICENSE_APPROVAL','ROLE_LICENSE_PROFILE_ENTRY','ROLE_FINANCE')">
-        <legend>Projects Section</legend>
+        <legend th:text="#{project_section}">Projects Section</legend>
         <table class="table table-borderless">
             <tr>
                 <td>
@@ -27,7 +27,7 @@
                             <img th:src="@{/images/license_management_system.png}" alt="License Management System">
                         </a>
                         <h4 class="license-link" style="margin-top: 12px;">
-                            <a th:href="@{/licenses/index}">License Management System</a>
+                            <a th:href="@{/licenses/index}" th:text="#{license_management_system}">License Management System</a>
                         </h4>
                     </div>
                 </td>
@@ -37,7 +37,7 @@
                             <img th:src="@{/images/Codes_management_system.png}" alt="Finance Management">
                         </a>
                         <h4 class="license-link" style="margin-top: 10px;">
-                            <a th:href="@{/Codes}">Codes Management System</a>
+                            <a th:href="@{/Codes}" th:text="#{codes_management_system}">Codes Management System</a>
                         </h4>
                     </div>
                 </td>
@@ -48,7 +48,7 @@
                             <img th:src="@{/images/typeofApprovals.png}" alt="Finance Management">
                         </a>
                         <h4 class="license-link" style="margin-top: 10px;">
-                            <a th:href="@{/typeofapprovals}">Type Of Approvals</a>
+                            <a th:href="@{/typeofapprovals}" th:text="#{typeof_approvals}">Type Of Approvals</a>
                         </h4>
                     </div>
                 </td>
@@ -58,7 +58,7 @@
 
 
 </div>
-
+<div th:replace="scripts :: common-scripts"></div>
 
 <footer th:replace="~{layout :: page_footer}"></footer>
 

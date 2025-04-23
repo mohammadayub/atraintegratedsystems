@@ -36,24 +36,10 @@
             text-align: right;
         }
 
-        #licenseTypeCountTable {
-            width: 50%;
-            margin-top: 20px;
-            margin-left: auto;
-            margin-right: auto;
-            text-align: left;
-            border-collapse: collapse;
-        }
-
-        #licenseTypeCountTable td, #licenseTypeCountTable th {
-            padding: 10px;
-            border: 1px solid #ddd;
-            font-size: 14px;
-            text-align: center;
-        }
-
-        #licenseTypeCountTable th {
-            background-color: #f0f0f0;
+        #licenseTypeCount {
+            text-align: right;
+            padding-top: 10px;
+            font-weight: bold;
         }
 
         @media print {
@@ -104,29 +90,29 @@
             <thead class="table-primary text-center">
             <tr>
                 <th>Id</th>
-                <th>Req Id</th>
-                <th>License Type Name</th>
-                <th>License Company Name</th>
+                <th th:text="#{applicant_request_date}"></th>
+                <th th:text="#{applicant_license_type}"></th>
+                <th th:text="#{license_application_company_license_name}"></th>
                 <th>Profile Entered By</th>
                 <th>Profile Entered Created Date</th>
-                <th>Application Fees</th>
+                <th th:text="#{license_application_fee}"></th>
                 <th>Payment Status</th>
-                <th>Approval Date</th>
+                <th th:text="#{approval_license_date}"></th>
                 <th>License Fees Entered By</th>
                 <th>License Fees Created Date</th>
-                <th>License Fees</th>
+                <th th:text="#{license_approval_license_fees}"></th>
                 <th>License Fees Status</th>
                 <th>Administration Fee Entered By</th>
                 <th>Administration Fee Created Date</th>
-                <th>Administration Fee</th>
+                <th th:text="#{license_approval_admin_yearly_fees}"></th>
                 <th>Administration Fee Payment Status</th>
                 <th>Database Fees Entered By</th>
                 <th>Database Fees Created Date</th>
-                <th>Database Fees</th>
+                <th th:text="#{license_approval_database_yearly_maintenance_fees}"></th>
                 <th>Database Fees Payment Status</th>
                 <th>Guarantee Fees Entered By</th>
                 <th>Guarantee Fees Created Date</th>
-                <th>Guarantee Fees</th>
+                <th th:text="#{license_approval_guarantee_fees}"></th>
                 <th>Guarantee Fees Payment Status</th>
             </tr>
             </thead>
@@ -176,23 +162,24 @@
             </tr>
             </tfoot>
         </table>
-        <table id="licenseTypeCountTable">
-            <thead>
-            <tr>
-                <th>License Type Name</th>
-                <th>Count</th>
-            </tr>
-            </thead>
-            <tbody id="licenseTypeDetails">
-            <!-- License Type Details will be injected here -->
-            </tbody>
-            <tfoot>
-            <tr>
-                <td><strong>Grand Total</strong></td>
-                <td id="licenseTypeGrandTotal"></td>
-            </tr>
-            </tfoot>
-        </table>
+        <div id="licenseTypeCount" class="text-end mt-3" dir="rtl">
+            <div class="card border-info" style="width: 18rem; margin-left: auto;">
+                <div class="card-header text-center text-white bg-info">
+                    <strong>License Type Count</strong>
+                </div>
+                <div class="card-body">
+                    <div id="licenseTypeCountData" class="text-end">
+                        <p class="card-text">
+                            <strong>Total Number of License Types:</strong> <span id="licenseTypeCountTotal"></span><br>
+                        <div id="licenseTypeDetails">
+                            <!-- License Type Details will be injected here -->
+                        </div>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 
     <a th:href="@{/licenses/license/report}" class="btn btn-info mt-3 text-white">
@@ -260,11 +247,9 @@
                     }
                 });
 
-                let licenseTypeCountHtml = '';
-                let totalLicenseTypes = 0;
+                let licenseTypeCountHtml = '<strong>Total Number of License Types: ' + Object.keys(licenseTypeMap).length + '</strong><br>';
                 for (let type in licenseTypeMap) {
-                    licenseTypeCountHtml += '<tr><td>' + type + '</td><td>' + licenseTypeMap[type] + '</td></tr>';
-                    totalLicenseTypes += licenseTypeMap[type];
+                    licenseTypeCountHtml += type + ': ' + licenseTypeMap[type] + '<br>';
                 }
 
                 // Update totals
@@ -274,9 +259,8 @@
                 $(api.column(19).footer()).html('DB Fees Grand Total: ' + formatNumber(dbFeesTotal));
                 $(api.column(23).footer()).html('Guarantee Fees Grand Total: ' + formatNumber(guaranteeFeesTotal));
 
-                // Show license type count table
-                $('#licenseTypeDetails').html(licenseTypeCountHtml);
-                $('#licenseTypeGrandTotal').text(totalLicenseTypes);
+                // Show license type count summary
+                $('#licenseTypeCount').html(licenseTypeCountHtml);
             }
         });
     });

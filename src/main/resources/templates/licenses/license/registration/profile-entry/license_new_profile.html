@@ -46,9 +46,8 @@
             <input type="text" id="validity" th:field="*{validity}" class="form-control" required readonly="readonly">
           </div>
           <div class="col-md-3 form-group">
-            <label for="companyLicenseName"
-                   th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
-            Name (Company, NGO, Organization)</label>
+            <label for="companyLicenseName" th:text="#{license_application_company_license_name}"
+                   th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
             <input type="text" id="companyLicenseName"
                    th:field="*{companyLicenseName}"
                    class="form-control"
@@ -63,7 +62,7 @@
 
           <div class="row">
             <div class="col-md-6">
-              <label for="applicationUpload" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"> Application Upload</label>
+              <label for="applicationUpload" th:text="#{license_application_upload}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
               <input type="file" id="applicationUpload" th:field="*{applicationUpload}" class="form-control-file" accept=".pdf,.jpg,.jpeg,.png" />
             </div>
           </div>

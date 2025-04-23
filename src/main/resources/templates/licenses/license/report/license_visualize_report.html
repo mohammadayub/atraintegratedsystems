@@ -31,8 +31,8 @@
             <table class="table table-bordered table-striped mt-3">
                 <thead>
                 <tr>
-                    <th>License Type</th>
-                    <th>Currency Type</th>
+                    <th th:text="#{applicant_license_type}">License Type</th>
+                    <th th:text="#{applicant_license_currency}">Currency Type</th>
                     <th>Total Application Fees Revenue</th>
                 </tr>
                 </thead>
@@ -61,8 +61,8 @@
             <table class="table table-bordered table-striped mt-3">
                 <thead>
                 <tr>
-                    <th>License Type</th>
-                    <th>Currency Type</th>
+                    <th th:text="#{applicant_license_type}">License Type</th>
+                    <th th:text="#{applicant_license_currency}">Currency Type</th>
                     <th>Total License Fees Revenue</th>
                 </tr>
                 </thead>
@@ -98,9 +98,9 @@
             <table class="table table-bordered table-striped mt-3">
                 <thead>
                 <tr>
-                    <th>Company</th>
-                    <th>Approval Date</th>
-                    <th>Expiry Date</th>
+                    <th th:text="#{license_application_company_license_name}">Company</th>
+                    <th th:text="#{approval_license_date}">Approval Date</th>
+                    <th th:text="#{license_application_expiry_date}">Expiry Date</th>
                     <th>Days Left</th>
                 </tr>
                 </thead>
@@ -385,7 +385,7 @@ const revenueLicenseFeesData = {};
     });
     /*]]>*/
 </script>
-
+<div th:replace="scripts :: common-scripts"></div>
 <div style="height:10vh;"></div>
 <footer th:replace="~{layout :: page_footer}"></footer>
 </body>
