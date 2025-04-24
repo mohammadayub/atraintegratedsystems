@@ -1,7 +1,11 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
 <head th:replace="~{layout :: page_head}">
     <meta charset="UTF-8">
+    <div th:replace="styles :: data-tables-styles"></div>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css">
     <title>LMS - Report</title>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css">
@@ -22,27 +26,25 @@
         <table id="profileTable" class="display nowrap table table-bordered table-striped">
             <thead>
             <tr>
-                <th>Id</th>
-                <th>Request ID</th>
+                <th th:text="#{license_request_id}">Request ID</th>
                 <th th:text="#{applicant_license_type}">License Type</th>
                 <th th:text="#{license_application_company_license_name}">Company License Name</th>
-                <th>Request Date</th>
-                <th>Voucher Submission Date</th>
-                <th>Total Days (1 Process)</th>
-                <th>Complete Profile Date</th>
-                <th>Total Days (2 Process)</th>
-                <th>Refer to Board Date</th>
-                <th>Approval Date</th>
-                <th>Total Days (3 Process)</th>
-                <th>License Fees Voucher Sub Date</th>
-                <th>Admin Fees Voucher Sub Date</th>
-                <th>Db Fees Voucher Sub Date</th>
-                <th>Guarantee Fees Voucher Sub Date</th>
+                <th th:text="#{applicant_request_date}">Request Date</th>
+                <th th:text="#{applicant_fee_submission_bank_voucher_date}">Voucher Submission Date</th>
+                <th th:text="#{total_day_one_process}">Total Days (1 Process)</th>
+                <th th:text="#{complete_profile_date}">Complete Profile Date</th>
+                <th th:text="#{total_day_two_process}">Total Days (2 Process)</th>
+                <th th:text="#{refer_to_board_date}">Refer to Board Date</th>
+                <th th:text="#{mcit_license_approval_date}">Approval Date</th>
+                <th th:text="#{total_day_three_process}">Total Days (3 Process)</th>
+                <th th:text="#{license_fee_bank_voucher_submission_date}">License Fees Voucher Sub Date</th>
+                <th th:text="#{admin_fee_bank_voucher_submission_date}">Admin Fees Voucher Sub Date</th>
+                <th th:text="#{database_fee_bank_voucher_submission_date}">Db Fees Voucher Sub Date</th>
+                <th th:text="#{guarantee_fee_bank_voucher_submission_date}">Guarantee Fees Voucher Sub Date</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="profile : ${profiles}">
-                <td th:text="${profile.licenseApplicant.id}"></td>
                 <td th:text="${profile.licenseApplicant.reqId}"></td>
                 <td th:text="${profile.licenseType.name}"></td>
                 <td th:text="${profile.licenseApplicant.companyLicenseName}"></td>
@@ -73,7 +75,11 @@
 <script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
 <script src="/js/jszip.min.js"></script>
-
+<div th:replace="scripts :: common-scripts"></div>
+<script th:src="@{/js/reportsJqueryDataTable.js}"></script>
+<script th:src="@{/js/reportsDataTableButtons.js}"></script>
+<script th:src="@{/js/reportsDataTableButtonsHTML5.js}"></script>
+<script th:src="@{/js/jszip.min.js}"></script>
 <script>
     $(document).ready(function () {
         $('#profileTable').DataTable({
@@ -128,7 +134,7 @@
         });
     });
 </script>
-<div th:replace="scripts :: common-scripts"></div>
+
 <div style="height:10vh;"></div>
 
 <footer th:replace="~{layout :: page_footer}"></footer>
