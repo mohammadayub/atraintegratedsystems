@@ -17,7 +17,7 @@
 <nav th:replace="~{layout :: page_navbar}"></nav>
 <div class="container mt-5">
     <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_LICENSE','ROLE_MINISTRY','ROLE_LICENSE_COMPLETION_PROFILE','ROLE_LICENSE_APPROVAL','ROLE_LICENSE_PROFILE_ENTRY','ROLE_FINANCE')">
-        <legend>License Section</legend>
+        <legend th:text="#{license_section}"></legend>
         <table class="table table-borderless">
             <tr>
                 <td>
@@ -45,7 +45,7 @@
     </fieldset>
     <fieldset style="border: 2px solid #DCAF45; padding: 15px; border-radius: 8px; margin-bottom: 20px;"
               sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_LICENSE')">
-        <legend style="width: auto; font-size: 1.2rem; color: #14438B; padding: 0 10px; font-weight: bold;">Report Section</legend>
+        <legend style="width: auto; font-size: 1.2rem; color: #14438B; padding: 0 10px; font-weight: bold;" th:text="#{report_section}"></legend>
         <table class="table table-borderless">
             <tr>
                 <td>
@@ -63,7 +63,7 @@
     </fieldset>
     <fieldset style="border: 2px solid #DCAF45; padding: 15px; border-radius: 8px; margin-bottom: 20px;"
               sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN')">
-        <legend style="width: auto; font-size: 1.2rem; color: #14438B; padding: 0 10px; font-weight: bold;">User Management Section</legend>
+        <legend style="width: auto; font-size: 1.2rem; color: #14438B; padding: 0 10px; font-weight: bold;" th:text="#{user_management_section}"></legend>
         <table class="table table-borderless">
             <tr>
                 <td>

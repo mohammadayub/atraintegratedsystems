@@ -17,9 +17,7 @@
       <input type="hidden" id="id" th:field="*{id}" class="form-control">
       <!-- Personal Information Section -->
       <fieldset style="border: 2px solid #DCAF45; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
-        <legend style="width: auto; font-size: 1.2rem; color: #14438B; padding: 0 10px; font-weight: bold;">
-          Company Information
-        </legend>
+        <legend style="width: auto; font-size: 1.2rem; color: #14438B; padding: 0 10px; font-weight: bold;" th:text="#{company_information}"></legend>
         <div class="row">
           <div class="col-md-3 form-group">
             <label for="licenseNo" th:text="#{license_application_license_no}"
@@ -47,7 +45,7 @@
             <input type="text" id="tinNo" th:field="*{tinNo}" class="form-control" maxlength="50">
           </div>
           <div class="col-md-3 form-group">
-            <label for="cash"
+            <label for="cash" th:text="#{license_application_cash}"
                    th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" style="color:#14438B;">
               Cash (AFN)
             </label>
@@ -70,42 +68,40 @@
 
       <!-- Document Upload Section -->
       <fieldset style="border: 2px solid #DCAF45; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
-        <legend style="width: auto; font-size: 1.2rem; color: #14438B; padding: 0 10px; font-weight: bold;">
-          Document Upload
-        </legend>
+        <legend style="width: auto; font-size: 1.2rem; color: #14438B; padding: 0 10px; font-weight: bold;" th:text="#{document_upload}"></legend>
         <div class="row">
           <div class="col-md-2 form-group">
-            <label for="licenseUpload" th:text="#{license_application_upload}"
+            <label for="licenseUpload" th:text="#{license_business_activity_upload}"
                    th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" style="font-size:13px;">
             </label>
             <input type="file" id="licenseUpload" th:field="*{licenseUpload}" class="form-control-file" accept=".pdf,.jpg,.jpeg,.png">
           </div>
           <div class="col-md-2 form-group">
-            <label for="identityFormUpload"
+            <label for="identityFormUpload" th:text="#{identity_form}"
                    th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" style="font-size:13px;">Identity Form
             </label>
             <input type="file" id="identityFormUpload" th:field="*{identityFormUpload}" class="form-control-file" accept=".pdf,.jpg,.jpeg,.png" style="border-left: 2px solid blue;">
           </div>
           <div class="col-md-2 form-group">
-            <label for="bankStatementUpload" th:text="#{license_application_bank_statement_file}"
+            <label for="bankStatementUpload" th:text="#{profile_bank_statement_upload}"
                    th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" style="font-size:13px;">
             </label>
             <input type="file" id="bankStatementUpload" th:field="*{bankStatementUpload}" class="form-control-file" accept=".pdf,.jpg,.jpeg,.png">
           </div>
           <div class="col-md-2 form-group">
-            <label for="enidUpload"
+            <label for="enidUpload" th:text="#{electronic_tazkira}"
                    th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" style="font-size:13px;">Electronic Tazkira(NID)
             </label>
             <input type="file" id="enidUpload" th:field="*{enidUpload}"  class="form-control-file" accept=".pdf,.jpg,.jpeg,.png">
           </div>
           <div class="col-md-2 form-group">
-            <label for="articleOfAssociationUpload"
+            <label for="articleOfAssociationUpload" th:text="#{article_of_association}"
                    th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" style="font-size:13px;">Articales Of Association
             </label>
             <input type="file" id="articleOfAssociationUpload" th:field="*{articleOfAssociationUpload}" class="form-control-file" accept=".pdf,.jpg,.jpeg,.png" style="border-left: 2px solid blue;">
           </div>
           <div class="col-md-2 form-group">
-            <label for="businessPlanUpload"
+            <label for="businessPlanUpload" th:text="#{business_plan_evaluation}"
                    th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" style="font-size:13px;">Business Plan & evaluation
             </label>
             <input type="file" id="businessPlanUpload" th:field="*{businessPlanUpload}" class="form-control-file" accept=".pdf,.jpg,.jpeg,.png">
@@ -114,9 +110,7 @@
       </fieldset>
 
       <fieldset style="border: 2px solid #DCAF45; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
-        <legend style="width: auto; font-size: 1.2rem; color:#14438B; padding: 0 10px; font-weight: bold;">
-          Activities
-        </legend>
+        <legend style="width: auto; font-size: 1.2rem; color:#14438B; padding: 0 10px; font-weight: bold;" th:text="#{activities}"></legend>
         <div class="row">
           <div class="col-md-3 form-group">
             <label for="plannedActivitiesAndServices" th:text="#{license_application_plan_active_Service}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
@@ -129,9 +123,7 @@
         </div>
       </fieldset>
       <fieldset style="border: 2px solid #DCAF45; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
-        <legend style="width: auto; font-size: 1.2rem; color: #14438B; padding: 0 10px; font-weight: bold;">
-          Company Address
-        </legend>
+        <legend style="width: auto; font-size: 1.2rem; color: #14438B; padding: 0 10px; font-weight: bold;" th:text="#{license_company_address}"></legend>
         <div class="row">
           <div class="col-md-3 form-group">
             <label for="companyAddress" th:text="#{license_application_company_address}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>

@@ -22,7 +22,7 @@
 
 <!-- License Type Revenue Chart + Table -->
 <div class="mt-5" id="revenueChartWrapper">
-    <h4 class="mb-4 ml-4">License Type Information With Application Fees Revenue</h4>
+    <h4 class="mb-4 ml-4" th:text="#{visualize_report_header_applicant_fee}">License Type Information With Application Fees Revenue</h4>
     <div class="row">
         <div class="col-md-6">
             <canvas id="licenseTypeRevenueChart"></canvas>
@@ -33,7 +33,7 @@
                 <tr>
                     <th th:text="#{applicant_license_type}">License Type</th>
                     <th th:text="#{applicant_license_currency}">Currency Type</th>
-                    <th>Total Application Fees Revenue</th>
+                    <th th:text="#{total_application_fee_revenue}">Total Application Fees Revenue</th>
                 </tr>
                 </thead>
                 <tbody id="licenseTypeRevenueTable"></tbody>
@@ -52,7 +52,7 @@
 
 <!-- License Type Revenue Chart + Table -->
 <div class="mt-5" id="licenseFeesChartWrapper">
-    <h4 class="mb-4 ml-4">License Type Information With License Fees Revenue</h4>
+    <h4 class="mb-4 ml-4" th:text="#{visualize_report_header_license_fee_revenue}">License Type Information With License Fees Revenue</h4>
     <div class="row">
         <div class="col-md-6">
             <canvas id="licenseFeesRevenueChart"></canvas>
@@ -63,7 +63,7 @@
                 <tr>
                     <th th:text="#{applicant_license_type}">License Type</th>
                     <th th:text="#{applicant_license_currency}">Currency Type</th>
-                    <th>Total License Fees Revenue</th>
+                    <th th:text="#{total_license_fee_revenue}">Total License Fees Revenue</th>
                 </tr>
                 </thead>
                 <tbody id="licenseFeesRevenueTable"></tbody>
@@ -89,7 +89,7 @@
 
 <!-- License Duration Chart + Table -->
 <div class="mt-5" id="durationChartWrapper">
-    <h4 class="mb-4 ml-4">Licenses Duration Left From Today</h4>
+    <h4 class="mb-4 ml-4" th:text="#{visualize_report_header_license_duration}">Licenses Duration Left From Today</h4>
     <div class="row">
         <div class="col-md-6">
             <canvas id="approvalExpiryChart"></canvas>
@@ -101,7 +101,7 @@
                     <th th:text="#{license_application_company_license_name}">Company</th>
                     <th th:text="#{approval_license_date}">Approval Date</th>
                     <th th:text="#{license_application_expiry_date}">Expiry Date</th>
-                    <th>Days Left</th>
+                    <th th:text="#{total_days_left}">Days Left</th>
                 </tr>
                 </thead>
                 <tbody id="licenseDurationTable"></tbody>

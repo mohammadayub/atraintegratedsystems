@@ -84,36 +84,36 @@
 <nav th:replace="~{layout :: page_navbar}"></nav>
 
 <div class="container-fluid">
-    <h3 class="my-3 text-center text-primary">General Report of the License</h3>
+    <h3 class="my-3 text-center text-primary" th:text="#{general_report_heading}">General Report of the License</h3>
     <div class="table-container">
         <table class="table table-bordered table-striped table-hover" id="profileTable">
             <thead class="table-primary text-center">
             <tr>
-                <th>Id</th>
+                <th th:text="#{id}"></th>
                 <th th:text="#{applicant_request_date}"></th>
                 <th th:text="#{applicant_license_type}"></th>
                 <th th:text="#{license_application_company_license_name}"></th>
-                <th>Profile Entered By</th>
-                <th>Profile Entered Created Date</th>
+                <th th:text="#{profile_entered_by}">Profile Entered By</th>
+                <th th:text="#{profile_entered_date}">Profile Entered Created Date</th>
                 <th th:text="#{license_application_fee}"></th>
-                <th>Payment Status</th>
+                <th th:text="#{applicant_payment_status}">Payment Status</th>
                 <th th:text="#{approval_license_date}"></th>
-                <th>License Fees Entered By</th>
-                <th>License Fees Created Date</th>
+                <th th:text="#{license_fee_entered_by}">License Fees Entered By</th>
+                <th th:text="#{license_fee_created_date}">License Fees Created Date</th>
                 <th th:text="#{license_approval_license_fees}"></th>
-                <th>License Fees Status</th>
-                <th>Administration Fee Entered By</th>
-                <th>Administration Fee Created Date</th>
+                <th th:text="#{licenses_fee_payment_status}">License Fees Status</th>
+                <th th:text="#{administration_fee_entered_by}">Administration Fee Entered By</th>
+                <th th:text="#{administration_fee_created_date}">Administration Fee Created Date</th>
                 <th th:text="#{license_approval_admin_yearly_fees}"></th>
-                <th>Administration Fee Payment Status</th>
-                <th>Database Fees Entered By</th>
-                <th>Database Fees Created Date</th>
+                <th th:text="#{administration_fee_payment_status}">Administration Fee Payment Status</th>
+                <th th:text="#{database_fee_entered_by}">Database Fees Entered By</th>
+                <th th:text="#{database_fee_created_date}">Database Fees Created Date</th>
                 <th th:text="#{license_approval_database_yearly_maintenance_fees}"></th>
-                <th>Database Fees Payment Status</th>
-                <th>Guarantee Fees Entered By</th>
-                <th>Guarantee Fees Created Date</th>
+                <th th:text="#{database_fee_paymente_status}">Database Fees Payment Status</th>
+                <th th:text="#{guarantee_fee_created_date}">Guarantee Fees Entered By</th>
+                <th th:text="#{guarantee_fee_payment_status}">Guarantee Fees Created Date</th>
                 <th th:text="#{license_approval_guarantee_fees}"></th>
-                <th>Guarantee Fees Payment Status</th>
+                <th th:text="#{guarantee_fee_payment_status}">Guarantee Fees Payment Status</th>
             </tr>
             </thead>
             <tbody>
@@ -266,6 +266,7 @@
     });
 </script>
 
+<div style="height:10vh;"></div>
 <footer th:replace="~{layout :: page_footer}"></footer>
 <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
 </body>

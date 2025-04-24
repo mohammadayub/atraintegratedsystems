@@ -21,7 +21,7 @@
 <nav th:replace="~{layout :: page_navbar}"></nav>
 <div class="container mt-5">
     <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN')">
-        <legend>License Report</legend>
+        <legend th:text="#{general_license_reports}"></legend>
         <table class="table table-borderless">
             <tr>
                 <td style="text-align:center">
