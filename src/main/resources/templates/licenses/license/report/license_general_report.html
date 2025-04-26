@@ -14,7 +14,7 @@
     <div th:replace="styles :: data-tables-styles"></div>
     <div th:replace="styles :: select2-styles"></div>
     <div th:replace="styles :: commonfieldset-with-legend-border"></div>
-    <div th:replace="styles :: common-css"></div>
+    <div th:replace="styles :: common-report-css"></div>
 </head>
 
 <body>
@@ -27,7 +27,7 @@
             <thead class="text-center">
             <tr>
                 <th th:text="#{id}"></th>
-                <th th:text="#{applicant_request_date}"></th>
+                <th th:text="#{applicant_request_id}"></th>
                 <th th:text="#{applicant_license_type}"></th>
                 <th th:text="#{license_application_company_license_name}"></th>
                 <th th:text="#{profile_entered_by}">Profile Entered By</th>
@@ -47,8 +47,8 @@
                 <th th:text="#{database_fee_created_date}">Database Fees Created Date</th>
                 <th th:text="#{license_approval_database_yearly_maintenance_fees}"></th>
                 <th th:text="#{database_fee_paymente_status}">Database Fees Payment Status</th>
-                <th th:text="#{guarantee_fee_created_date}">Guarantee Fees Entered By</th>
-                <th th:text="#{guarantee_fee_payment_status}">Guarantee Fees Created Date</th>
+                <th th:text="#{guarantee_fee_entered_by}">Guarantee Fees Entered By</th>
+                <th th:text="#{guarantee_fee_created_date}">Guarantee Fees Created Date</th>
                 <th th:text="#{license_approval_guarantee_fees}"></th>
                 <th th:text="#{guarantee_fee_payment_status}">Guarantee Fees Payment Status</th>
             </tr>

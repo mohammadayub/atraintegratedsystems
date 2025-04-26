@@ -14,13 +14,13 @@
     <div th:replace="styles :: data-tables-styles"></div>
     <div th:replace="styles :: select2-styles"></div>
     <div th:replace="styles :: commonfieldset-with-legend-border"></div>
-    <div th:replace="styles :: common-css"></div>
+    <div th:replace="styles :: common-report-css"></div>
 </head>
 <body>
 <nav th:replace="~{layout :: page_navbar}"></nav>
 
 <div class="container-fluid">
-    <h3 class="text-center text-primary mb-4 mt-4">License Process Follow-Up Report</h3>
+    <h3 class="text-center text-primary mb-4 mt-4 b-4" th:text="#{license_process_followup_report_heading}">License Process Follow-Up Report</h3>
 
     <div class="table-container table-responsive">
         <table id="profileTable" class="display nowrap table table-bordered table-striped">

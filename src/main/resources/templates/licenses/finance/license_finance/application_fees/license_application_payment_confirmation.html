@@ -1,13 +1,18 @@
 <!doctype html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
-      xmlns="http://www.w3.org/1999/html" th:lang="${session.lang}" th:attr="dir=${session.dir}">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
 <head th:replace="~{layout :: page_head}">
+    <meta charset="UTF-8">
     <div th:replace="styles :: data-tables-styles"></div>
-    <div th:replace="styles :: persian-datepicker-styles"></div>
+    <title>LMS - Report</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+
+    <div th:replace="styles :: data-tables-styles"></div>
     <div th:replace="styles :: select2-styles"></div>
-    <div th:replace="styles :: popup"></div>
     <div th:replace="styles :: commonfieldset"></div>
-    <title>LMS</title>
+    <div th:replace="styles :: common-css"></div>
+    <div th:replace="styles :: persian-datepicker-styles"></div>
+    <div th:replace="styles :: popup"></div>
 </head>
 <body>
 <nav th:replace="~{layout :: page_navbar}"></nav>
@@ -98,7 +103,7 @@
 <div th:replace="scripts :: persian-datepicker-scripts"></div>
 <div th:replace="scripts :: data-tables-scripts"></div>
 <div th:replace="scripts :: alert"></div>
-<div th:replace="scripts :: applicationfees"></div>
+<!--<div th:replace="scripts :: applicationfees"></div>-->
 <div th:replace="scripts :: common-hijrishamsi-date"></div>
 
 

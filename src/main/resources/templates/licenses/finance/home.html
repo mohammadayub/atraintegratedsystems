@@ -1,9 +1,16 @@
 <!doctype html>
-<html lang="en" th:lang="#{lang}" th:dir="${#locale.language == 'ps' ? 'rtl' : 'ltr'}"
-      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
 <head th:replace="~{layout :: page_head}">
+  <meta charset="UTF-8">
+  <div th:replace="styles :: data-tables-styles"></div>
+  <title>LMS - Report</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+
+  <div th:replace="styles :: data-tables-styles"></div>
+  <div th:replace="styles :: select2-styles"></div>
   <div th:replace="styles :: commonfieldset"></div>
-  <title>LMIS</title>
+  <div th:replace="styles :: common-css"></div>
   <style>
     h4 a {
         color: #14438B;

@@ -1,10 +1,20 @@
-<!DOCTYPE html>
-<html lang="en" th:lang="#{lang}" th:dir="${#locale.language == 'ps' ? 'rtl' : 'ltr'}"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
 <head th:replace="~{layout :: page_head}">
+    <meta charset="UTF-8">
+    <div th:replace="styles :: data-tables-styles"></div>
+<!--    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">-->
+<!--    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css">-->
+    <title>LMS - Report</title>
+<!--    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">-->
+<!--    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css">-->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+
+    <div th:replace="styles :: data-tables-styles"></div>
+    <div th:replace="styles :: select2-styles"></div>
     <div th:replace="styles :: commonfieldset"></div>
-    <title>LMS</title>
+    <div th:replace="styles :: common-css"></div>
     <style>
         h4 a {
             color: #14438B;
@@ -13,7 +23,6 @@
     </style>
 </head>
 <body>
-<div th:replace="styles :: commonfieldset"></div>
 <nav th:replace="~{layout :: page_navbar}"></nav>
 <div class="container mt-5">
 
