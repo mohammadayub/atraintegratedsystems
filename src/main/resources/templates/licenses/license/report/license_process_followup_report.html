@@ -7,15 +7,12 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css">
     <title>LMS - Report</title>
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-
-    <div th:replace="styles :: data-tables-styles"></div>
     <div th:replace="styles :: select2-styles"></div>
     <div th:replace="styles :: commonfieldset-with-legend-border"></div>
     <div th:replace="styles :: common-report-css"></div>
 </head>
+
 <body>
 <nav th:replace="~{layout :: page_navbar}"></nav>
 
@@ -37,6 +34,7 @@
                 <th th:text="#{refer_to_board_date}">Refer to Board Date</th>
                 <th th:text="#{approval_license_date}">Approval Date</th>
                 <th th:text="#{total_day_three_process}">Total Days (3 Process)</th>
+                <th th:text="#{total_all_process}">Total All Process Days</th> <!-- NEW COLUMN -->
                 <th th:text="#{license_fee_bank_voucher_submission_date}">License Fees Voucher Sub Date</th>
                 <th th:text="#{admin_fee_bank_voucher_submission_date}">Admin Fees Voucher Sub Date</th>
                 <th th:text="#{database_fee_bank_voucher_submission_date}">Db Fees Voucher Sub Date</th>
@@ -50,12 +48,13 @@
                 <td th:text="${profile.licenseApplicant.companyLicenseName}"></td>
                 <td th:text="${profile.licenseApplicant.reqDate}" class="req-date"></td>
                 <td th:text="${profile.licenseApplicant.applicationFeeBankVoucherSubmissionDate}" class="voucher-date"></td>
-                <td class="process1-days"></td>
+                <td class="process1-days" style="background-color: #d1e7dd;"></td>
                 <td th:text="${profile.licenseApplicant.referToBoardDate}" class="refer-date"></td>
-                <td class="process2-days"></td>
+                <td class="process2-days" style="background-color: #cff4fc;"></td>
                 <td th:text="${profile.licenseApplicant.referToBoardDate}"></td>
                 <td th:text="${profile.approvalDate}" class="approval-date"></td>
-                <td class="process3-days"></td>
+                <td class="process3-days" style="background-color: #ffe5d9;"></td>
+                <td class="total-days" style="background-color: white; font-weight:bold;"></td> <!-- NEW COLUMN -->
                 <td th:text="${profile.licenseFeeBankVoucherSubmissionDate}" class="license-fee-voucher-date"></td>
                 <td th:text="${profile.administrationFeeBankVoucherSubmissionDate}"></td>
                 <td th:text="${profile.databasemaintainanceFeeBankVoucherSubmissionDate}"></td>
@@ -80,6 +79,7 @@
 <script th:src="@{/js/reportsDataTableButtons.js}"></script>
 <script th:src="@{/js/reportsDataTableButtonsHTML5.js}"></script>
 <script th:src="@{/js/jszip.min.js}"></script>
+
 <script>
     $(document).ready(function () {
         $('#profileTable').DataTable({
@@ -88,10 +88,7 @@
             scrollCollapse: true,
             paging: true,
             pageLength: 10,
-
-            // Custom layout to split buttons and search bar
             dom: '<"d-flex justify-content-between align-items-center mb-2"Bf>rtip',
-
             buttons: [
                 {
                     extend: 'excelHtml5',
@@ -113,23 +110,38 @@
             const process1Cell = $(this).find('.process1-days');
             const process2Cell = $(this).find('.process2-days');
             const process3Cell = $(this).find('.process3-days');
+            const totalDaysCell = $(this).find('.total-days');
+
+            let process1Days = 0;
+            let process2Days = 0;
+            let process3Days = 0;
 
             if (!isNaN(voucherDate) && !isNaN(reqDate)) {
-                process1Cell.text(Math.ceil((voucherDate - reqDate) / (1000 * 60 * 60 * 24)) + " days");
+                process1Days = Math.ceil((voucherDate - reqDate) / (1000 * 60 * 60 * 24));
+                process1Cell.text(process1Days);
             } else {
                 process1Cell.text("N/A");
             }
 
             if (!isNaN(referDate) && !isNaN(voucherDate)) {
-                process2Cell.text(Math.ceil((referDate - voucherDate) / (1000 * 60 * 60 * 24)) + " days");
+                process2Days = Math.ceil((referDate - voucherDate) / (1000 * 60 * 60 * 24));
+                process2Cell.text(process2Days);
             } else {
                 process2Cell.text("N/A");
             }
 
             if (!isNaN(approvalDate) && !isNaN(referDate)) {
-                process3Cell.text(Math.ceil((approvalDate - referDate) / (1000 * 60 * 60 * 24)) + " days");
+                process3Days = Math.ceil((approvalDate - referDate) / (1000 * 60 * 60 * 24));
+                process3Cell.text(process3Days);
             } else {
                 process3Cell.text("N/A");
+            }
+
+            if (!isNaN(process1Days) && !isNaN(process2Days) && !isNaN(process3Days)) {
+                const totalDays = process1Days + process2Days + process3Days;
+                totalDaysCell.text(totalDays);
+            } else {
+                totalDaysCell.text("N/A");
             }
         });
     });

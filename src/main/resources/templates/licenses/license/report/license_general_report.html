@@ -22,8 +22,8 @@
 
 <div class="container-fluid">
     <h3 class="my-3 text-center text-primary" th:text="#{general_report_heading}">General Report of the License</h3>
-    <div class="table-container">
-        <table class="table table-bordered table-striped table-hover" id="profileTable">
+    <div class="table-container table-responsive">
+        <table class="display nowrap table table-bordered table-striped" id="profileTable">
             <thead class="text-center">
             <tr>
                 <th th:text="#{id}"></th>
@@ -135,7 +135,7 @@
         const table = $('#profileTable').DataTable({
             scrollX: true,
             dom: 'Bfrtip',
-            pageLength: 25,
+            pageLength: 10,
             buttons: [
                 {
                     extend: 'excelHtml5',
