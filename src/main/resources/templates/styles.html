@@ -362,120 +362,126 @@
 <div th:fragment="common-report-css">
     <style>
         .label-rtl {
-            color: black !important;
-            font-weight: bolder !important;
-            width: 100% !important;
-            direction: rtl !important;
-            text-align: right; /* Ensures text alignment in RTL */
-        }
-        .label-ltr {
-            color: black !important;
-            font-weight: bolder !important;
-            width: 100% !important;
-            direction: ltr !important;
-            text-align: left;
-        }
-        input[type="text"],input[type="number"],input[type="file"],input[type="website"],input[type="email"]{
-        border-left: 2px solid blue;
-        }
-            .chart-container {
-        width: 100%;
-        max-width: 300px;  /* Adjust the max width */
-        height: 300px;     /* Set the height */
-        margin-top: 10px;
-        margin-left: auto;
-        margin-right: auto;
+    color: black !important;
+    font-weight: bolder !important;
+    width: 100% !important;
+    direction: rtl !important;
+    text-align: right; /* Ensures text alignment in RTL */
+}
+
+.label-ltr {
+    color: black !important;
+    font-weight: bolder !important;
+    width: 100% !important;
+    direction: ltr !important;
+    text-align: left;
+}
+
+input[type="text"], input[type="number"], input[type="file"], input[type="website"], input[type="email"] {
+    border-left: 2px solid blue;
+}
+
+.chart-container {
+    width: 100%;
+    max-width: 300px;  /* Adjust the max width */
+    height: 300px;     /* Set the height */
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+canvas {
+    width: 100% !important;  /* Make the canvas fill the container */
+    height: 100% !important; /* Make the canvas fill the container */
+}
+
+/* Basic Table Styling */
+.table-container {
+    max-height: 800px; /* Set a maximum height for the table container */
+    overflow-y: auto;   /* Enable vertical scrolling */
+    overflow-x: auto;   /* Enable horizontal scrolling if needed */
+    border: 1px solid #ddd; /* Optional: Add a border around the table */
+}
+
+#profileTable {
+    width: 90%; /* Full width for the table */
+    border-collapse: collapse;
+    font-size: 0.9em; /* General smaller font for the table */
+}
+
+#profileTable th, #profileTable td {
+    text-align: center;
+    vertical-align: right;
+    font-size: 0.8em; /* Small font size for headers and cells */
+    border: 1px solid #ddd;
+}
+
+#profileTable thead th {
+    color: white;
+    background-color: #4CAF50; /* Optional: Set background color for headers */
+    font-size: 16px; /* Slightly larger font for headers */
+}
+
+#profileTable tbody tr:nth-child(even) {
+    background-color: #f2f2f2; /* Optional: Alternate row background color */
+}
+
+#profileTable td a.btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px;
+}
+
+#profileTable .icon-small {
+    width: 16px;
+    height: 16px;
+}
+
+/* Optional: Add some responsiveness */
+@media (max-width: 768px) {
+    #profileTable th, #profileTable td {
+        font-size: 0.7em; /* Smaller font size for mobile view */
     }
-    canvas {
-        width: 100% !important;  /* Make the canvas fill the container */
-        height: 100% !important; /* Make the canvas fill the container */
-    }
+}
 
+#profileTable th {
+    white-space: nowrap;
+}
 
+body {
+    background-color: #f9f9f9;
+}
 
-          /* Basic Table Styling */
-        .table-container {
-            max-height: 800px; /* Set a maximum height for the table container */
-            overflow-y: auto;   /* Enable vertical scrolling */
-            border: 1px solid #ddd; /* Optional: Add a border around the table */
-            overflow-x: auto;
-        }
+.table-container {
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
+    height: 100%;
+}
 
-        #profileTable {
-            width: 100%; /* Full width for the table */
-            border-collapse: collapse;
-            font-size: 0.9em; /* General smaller font for the table */
-        }
+#profileTable, #extensionTable {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.8em;
+}
 
-        #profileTable th, #profileTable td {
-            padding: 6px;
-            text-align: center;
-            vertical-align: middle;
-            font-size: 0.8em; /* Small font size for headers and cells */
-            border: 1px solid #ddd;
-        }
+#profileTable th, #profileTable td, #extensionTable th, #extensionTable td {
+    padding: 6px;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 0.8em;
+}
 
-        #profileTable thead th {
-            color: white;
-            font-size: 16px; /* Slightly larger font for headers */
-        }
-        #profileTable tbody tr:nth-child(even), #extensionTable tbody tr:nth-child(even) {
-<!--        background-color: #f2f2f2;-->
-    }
+#profileTable td a.btn-primary, #extensionTable td a.btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
 
-
-        #profileTable td a.btn-primary {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 4px;
-        }
-
-        #profileTable .icon-small {
-            width: 16px;
-            height: 16px;
-        }
-
-        /* Optional: Add some responsiveness */
-        @media (max-width: 768px) {
-            #profileTable th, #profileTable td {
-                font-size: 0.7em; /* Smaller font size for mobile view */
-<!--                padding: 4px;-->
-            }
-        }
-        #profileTable th {
-        white-space: nowrap;
-    }
-
-        body {
-            background-color: #f9f9f9;
-        }
-        .table-container {
-            border: 1px solid #ddd;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            background-color: #f9f9f9;
-            height:100%;
-        }
-        #profileTable, #extensionTable {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.8em;
-        }
-        #profileTable th, #profileTable td, #extensionTable th, #extensionTable td {
-            padding: 6px;
-            text-align: center;
-            vertical-align: middle;
-            font-size: 0.8em;
-        }
-        #profileTable td a.btn-primary, #extensionTable td a.btn-primary {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-
-        }
-        #profileTable th, #extensionTable th {
-            white-space: nowrap;
-        }
+#profileTable th, #extensionTable th {
+    white-space: nowrap;
+}
 
     </style>
 </div>

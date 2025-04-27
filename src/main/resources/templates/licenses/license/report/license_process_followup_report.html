@@ -10,8 +10,24 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <div th:replace="styles :: select2-styles"></div>
     <div th:replace="styles :: commonfieldset-with-legend-border"></div>
-    <div th:replace="styles :: common-report-css"></div>
+
+    <style>
+        /* Custom styles for small font and nice border */
+        .table-sm th, .table-sm td {
+            font-size: 0.7em; /* Smaller font size */
+            padding: 0.4rem; /* Adjusted padding for a compact look */
+        }
+        .table-bordered th, .table-bordered td {
+            border: 1px solid #dee2e6; /* Light border color */
+            text-align:center;
+        }
+        .table-bordered {
+            border-collapse: collapse;
+        }
+    </style>
 </head>
+
+
 
 <body>
 <nav th:replace="~{layout :: page_navbar}"></nav>
@@ -19,8 +35,8 @@
 <div class="container-fluid">
     <h3 class="text-center text-primary mb-4 mt-4 b-4" th:text="#{license_process_followup_report_heading}">License Process Follow-Up Report</h3>
 
-    <div class="table-container table-responsive">
-        <table id="profileTable" class="display nowrap table table-bordered table-striped">
+    <div>
+        <table id="profileTable" class="table table-sm table-bordered">
             <thead>
             <tr>
                 <th th:text="#{id}">Request ID</th>
