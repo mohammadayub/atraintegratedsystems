@@ -14,7 +14,21 @@
     <div th:replace="styles :: data-tables-styles"></div>
     <div th:replace="styles :: select2-styles"></div>
     <div th:replace="styles :: commonfieldset-with-legend-border"></div>
-    <div th:replace="styles :: common-report-css"></div>
+
+    <style>
+        /* Custom styles for small font and nice border */
+        .table-sm th, .table-sm td {
+            font-size: 0.7em; /* Smaller font size */
+            padding: 0.4rem; /* Adjusted padding for a compact look */
+        }
+        .table-bordered th, .table-bordered td {
+            border: 1px solid #dee2e6; /* Light border color */
+            text-align:center;
+        }
+        .table-bordered {
+            border-collapse: collapse;
+        }
+    </style>
 </head>
 
 <body>
@@ -23,7 +37,7 @@
 <div class="container-fluid">
     <h3 class="my-3 text-center text-primary" th:text="#{general_report_heading}">General Report of the License</h3>
     <div class="table-container table-responsive">
-        <table class="display nowrap table table-bordered table-striped" id="profileTable">
+        <table class="table table-sm table-bordered" id="profileTable">
             <thead class="text-center">
             <tr>
                 <th th:text="#{id}"></th>
