@@ -18,8 +18,8 @@
     <style>
         /* Custom styles for small font and nice border */
         .table-sm th, .table-sm td {
-            font-size: 0.7em; /* Smaller font size */
-            padding: 0.4rem; /* Adjusted padding for a compact look */
+            font-size: 0.6em; /* Smaller font size */
+            padding: 0.3rem; /* Adjusted padding for a compact look */
         }
         .table-bordered th, .table-bordered td {
             border: 1px solid #dee2e6; /* Light border color */
@@ -28,6 +28,10 @@
         .table-bordered {
             border-collapse: collapse;
         }
+
+        #licenseTypeCount {
+    height: 50vh; /* Or any desired height */
+}
     </style>
 </head>
 
@@ -75,24 +79,24 @@
                 <td th:text="${profile.licenseApplicant.companyLicenseName}"></td>
                 <td th:text="${profile.licenseApplicant.profileEnteredBy}"></td>
                 <td th:text="${profile.licenseApplicant.profileEnteredCreatedDate}"></td>
-                <td th:text="${profile.licenseApplicant.applicationFees}"></td>
+                <td th:text="${profile.licenseApplicant.applicationFees}" style="background-color:#FCEFCB"></td>
                 <td th:text="${profile.licenseApplicant.paymentStatus}"></td>
                 <td th:text="${profile.getAppDate()}"></td>
                 <td th:text="${profile.licenseFeesEnteredBy}"></td>
                 <td th:text="${profile.licenseFeesCreatedDate}"></td>
-                <td th:text="${profile.licenseFees}"></td>
+                <td th:text="${profile.licenseFees}" style="background-color:#E9A319"></td>
                 <td th:text="${profile.licenseFeePaymentStatus}"></td>
                 <td th:text="${profile.administrationFeesEnteredBy}"></td>
                 <td th:text="${profile.administrationFeesCreatedDate}"></td>
-                <td th:text="${profile.administrativeYearlyFees}"></td>
+                <td th:text="${profile.administrativeYearlyFees}" style="background-color:#A86523"></td>
                 <td th:text="${profile.administrationFeePaymentStatus}"></td>
                 <td th:text="${profile.databaseMaintainanceFeesEnteredBy}"></td>
                 <td th:text="${profile.databaseMaintainanceFeesCreatedDate}"></td>
-                <td th:text="${profile.databaseYearlyMaintainanceFees}"></td>
+                <td th:text="${profile.databaseYearlyMaintainanceFees}" style="background-color:#FF9B17"></td>
                 <td th:text="${profile.databaseMaintianenceFeePaymentStatus}"></td>
                 <td th:text="${profile.guaranteeFeesEnteredBy}"></td>
                 <td th:text="${profile.guaranteeFeesCreatedDate}"></td>
-                <td th:text="${profile.guaranteeFees}"></td>
+                <td th:text="${profile.guaranteeFees}"  style="background-color:#F16767" ></td>
                 <td th:text="${profile.guaranteeFeePaymentStatus}"></td>
             </tr>
             </tbody>
@@ -113,23 +117,34 @@
             </tr>
             </tfoot>
         </table>
-        <div id="licenseTypeCount" class="text-end mt-3" dir="rtl">
-            <div class="card border-info" style="width: 18rem; margin-left: auto;">
+        <div id="licenseTypeCount" class="d-flex justify-content-center align-items-center">
+            <div class="card border-info" style="width: 18rem;">
                 <div class="card-header text-center text-white bg-info">
-                    <strong>License Type Count</strong>
+                    <strong>License Types Count</strong>
                 </div>
                 <div class="card-body">
-                    <div id="licenseTypeCountData" class="text-end">
+                    <div id="licenseTypeCountData">
                         <p class="card-text">
                             <strong>Total Number of License Types:</strong> <span id="licenseTypeCountTotal"></span><br>
                         <div id="licenseTypeDetails">
-                            <!-- License Type Details will be injected here -->
+                            <table class="table table-sm table-bordered" id="licenseTypeTable">
+                                <thead>
+                                <tr>
+                                    <th>License Type</th>
+                                    <th>Count</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <!-- License Type Details will be dynamically populated here -->
+                                </tbody>
+                            </table>
                         </div>
                         </p>
                     </div>
                 </div>
             </div>
         </div>
+
 
     </div>
 
@@ -199,8 +214,9 @@
                 });
 
                 let licenseTypeCountHtml = '<strong>Total Number of License Types: ' + Object.keys(licenseTypeMap).length + '</strong><br>';
+                let licenseTypeDetailsHtml = '';
                 for (let type in licenseTypeMap) {
-                    licenseTypeCountHtml += type + ': ' + licenseTypeMap[type] + '<br>';
+                    licenseTypeDetailsHtml += `<tr><td>${type}</td><td>${licenseTypeMap[type]}</td></tr>`;
                 }
 
                 // Update totals
@@ -210,8 +226,9 @@
                 $(api.column(19).footer()).html('DB Fees Grand Total: ' + formatNumber(dbFeesTotal));
                 $(api.column(23).footer()).html('Guarantee Fees Grand Total: ' + formatNumber(guaranteeFeesTotal));
 
-                // Show license type count summary
-                $('#licenseTypeCount').html(licenseTypeCountHtml);
+                // Show license type count summary and populate table
+                $('#licenseTypeCountTotal').html(Object.keys(licenseTypeMap).length);
+                $('#licenseTypeDetails tbody').html(licenseTypeDetailsHtml);
             }
         });
     });
