@@ -13,13 +13,12 @@
 <nav th:replace="~{layout :: page_navbar}"></nav>
 <div class="container-fluid">
     <fieldset>
-        <legend>Approval Section</legend>
+        <legend th:text="#{approval_section}"></legend>
     <div class="table-container">
 
         <table  class="slip" id="profileTable">
             <thead>
             <tr class="bg-primary">
-                <th th:text="#{applicant_id}">Applicant ID</th>
                 <th th:text="#{applicant_request_id}">Request ID</th>
                 <th th:text="#{applicant_request_date}">Request Date</th>
                 <th th:text="#{applicant_license_type}">License Type Name</th>
@@ -38,7 +37,6 @@
             </thead>
             <tbody>
             <tr th:each="item : ${profiles}">
-                <td th:text="${item.id}"></td>
                 <td th:text="${item.reqId}"></td>
                 <td th:text="${item.getRegDate()}"></td>
                 <td th:text="${item.licenseTypeName}"></td>

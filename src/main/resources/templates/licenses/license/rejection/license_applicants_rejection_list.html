@@ -17,18 +17,16 @@
         <table  class="slip" id="profileTable">
             <thead>
             <tr class="bg-primary">
-                 <th>Id</th>
-                 <th>Company Name</th>
-                 <th>License Type</th>
-                <th>Rejection Date</th>
-                <th>Status</th>
-                <th>Board Decision Number</th>
-                <th>Board Decisions</th>
+                 <th th:text="#{license_application_company_license_name}">Company Name</th>
+                 <th th:text="#{approval_license_type}">License Type</th>
+                 <th th:text="#{rejected_date}">Rejection Date</th>
+                 <th th:text="#{approval_status}">Status</th>
+                 <th th:text="#{boardDecisionNumber}">Board Decision Number</th>
+                 <th th:text="#{license_approval_boardDecisions}">Board Decisions</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="item : ${profiles}">
-                <td th:text="${item.id}"></td>
                 <td th:text="${item.licenseApplicant.companyLicenseName}"></td>
                 <td th:text="${item.licenseType.name}"></td>
                 <td th:text="${item.getAppDate()}"></td>

@@ -104,15 +104,15 @@
             <tr class="grand-total">
                 <td class="text-end">Grand Totals:</td>
                 <td colspan="5"></td>
-                <td id="applicationFeesTotal"></td>
+                <td id="applicationFeesTotal" th:text="#{application_fees_total}"></td>
                 <td colspan="4"></td>
-                <td id="licenseFeesTotal"></td>
+                <td id="licenseFeesTotal" th:text="#{license_fees_total}"></td>
                 <td colspan="3"></td>
-                <td id="adminFeesTotal"></td>
+                <td id="adminFeesTotal" th:text="#{admin_fees_total}"></td>
                 <td colspan="3"></td>
-                <td id="dbFeesTotal"></td>
+                <td id="dbFeesTotal" th:text="#{db_fees_total}"></td>
                 <td colspan="3"></td>
-                <td id="guaranteeFeesTotal"></td>
+                <td id="guaranteeFeesTotal" th:text="#{guarantee_fees_total}"></td>
                 <td></td>
             </tr>
             </tfoot>
@@ -120,18 +120,18 @@
         <div id="licenseTypeCount" class="d-flex justify-content-center align-items-center">
             <div class="card border-info" style="width: 18rem;">
                 <div class="card-header text-center text-white bg-info">
-                    <strong>License Types Count</strong>
+                    <strong th:text="#{license_type_count}">License Types Count</strong>
                 </div>
                 <div class="card-body">
                     <div id="licenseTypeCountData">
                         <p class="card-text">
-                            <strong>Total Number of License Types:</strong> <span id="licenseTypeCountTotal"></span><br>
+                            <strong th:text="#{total_number_of_license_types}">Total Number of License Types:</strong> <span id="licenseTypeCountTotal"></span><br>
                         <div id="licenseTypeDetails">
                             <table class="table table-sm table-bordered" id="licenseTypeTable">
                                 <thead>
                                 <tr>
-                                    <th>License Type</th>
-                                    <th>Count</th>
+                                    <th th:text="#{approval_license_type}">License Type</th>
+                                    <th th:text="#{count}">Count</th>
                                 </tr>
                                 </thead>
                                 <tbody>

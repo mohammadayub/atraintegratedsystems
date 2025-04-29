@@ -22,7 +22,7 @@
 <nav th:replace="~{layout :: page_navbar}"></nav>
 <div class="container mt-5">
   <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_FINANCE','ROLE_MINISTRY')">
-    <legend>License Revenue Section</legend>
+    <legend th:text="#{license_revenue_section}">License Revenue Section</legend>
   <table class="table table-borderless">
     <tr>
       <td>
@@ -39,15 +39,15 @@
   </table>
   </fieldset>
   <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_FINANCE')">
-    <legend>License Fees Extension Section</legend>
+    <legend th:text="#{license_fees_extension_section}">License Fees Extension Section</legend>
   <table class="table table-borderless">
     <tr>
       <td>
         <div class="custom-card">
           <a th:href="@{/licenses/finanace/extension/home}">
-            <img th:src="@{/images/license_finance_extension.png}" alt="Codes Management System"></a>
+            <img th:src="@{/images/license_finance_extension.png}" alt="Image Not Display"></a>
           <h4 class="license-link" style="margin-top: 12px;">
-            <a th:href="@{/licenses/finanace/extension/home}"  style="font-size:20px;">License Extension Finance management</a>
+            <a th:href="@{/licenses/finanace/extension/home}"  style="font-size:20px;" th:text="#{license_extension_finance_management}">License Extension Finance management</a>
           </h4>
 
         </div>
