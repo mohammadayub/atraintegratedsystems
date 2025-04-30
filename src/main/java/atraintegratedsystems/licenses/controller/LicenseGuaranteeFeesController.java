@@ -6,6 +6,7 @@ import atraintegratedsystems.licenses.service.LicenseAdministrationFeeService;
 import atraintegratedsystems.licenses.service.LicenseGuaranteeFeeService;
 import atraintegratedsystems.licenses.service.LicenseTypeService;
 import atraintegratedsystems.utils.DateConverter;
+import atraintegratedsystems.utils.PersianCalendarUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -53,21 +54,46 @@ public class LicenseGuaranteeFeesController {
         // Fetch the existing entity from the database
         LicenseApproval existingLicenseApproval = licenseGuaranteeFeeService.findById(licenseApprovalDTO.getId());
 
-        DateConverter dateConverter = new DateConverter();
-        LocalDate guaranteeEntryVoucherDate = dateConverter.jalaliToGregorian(
-                licenseApprovalDTO.getGuaranteeFeeEntryVoucherDate().getYear(),
-                licenseApprovalDTO.getGuaranteeFeeEntryVoucherDate().getMonthValue(),
-                licenseApprovalDTO.getGuaranteeFeeEntryVoucherDate().getDayOfMonth()
-        );
-        // Update only the required fields
+
+//        DateConverter dateConverter = new DateConverter();
+//        LocalDate guaranteeEntryVoucherDate = dateConverter.jalaliToGregorian(
+//                licenseApprovalDTO.getGuaranteeFeeEntryVoucherDate().getYear(),
+//                licenseApprovalDTO.getGuaranteeFeeEntryVoucherDate().getMonthValue(),
+//                licenseApprovalDTO.getGuaranteeFeeEntryVoucherDate().getDayOfMonth()
+//        );
+//        // Update only the required fields
+//        existingLicenseApproval.setGuaranteeFeeEntryVoucherDate(guaranteeEntryVoucherDate);
+//
+//        LocalDate guaranteeEntrySubmissionVoucherDate = dateConverter.jalaliToGregorian(
+//                licenseApprovalDTO.getGuaranteeFeeBankVoucherSubmissionDate().getYear(),
+//                licenseApprovalDTO.getGuaranteeFeeBankVoucherSubmissionDate().getMonthValue(),
+//                licenseApprovalDTO.getGuaranteeFeeBankVoucherSubmissionDate().getDayOfMonth()
+//        );
+//        existingLicenseApproval.setGuaranteeFeeBankVoucherSubmissionDate(guaranteeEntrySubmissionVoucherDate);
+
+
+
+        String[] parts = licenseApprovalDTO.getGuaranteeFeeEntryVoucherDateJalaliDate().split("-");
+        int jYear = Integer.parseInt(parts[0]);
+        int jMonth = Integer.parseInt(parts[1]);
+        int jDay = Integer.parseInt(parts[2]);
+
+        PersianCalendarUtils converter = new PersianCalendarUtils();
+        LocalDate guaranteeEntryVoucherDate = converter.jalaliToGregorian(jYear, jMonth, jDay);
         existingLicenseApproval.setGuaranteeFeeEntryVoucherDate(guaranteeEntryVoucherDate);
 
-        LocalDate guaranteeEntrySubmissionVoucherDate = dateConverter.jalaliToGregorian(
-                licenseApprovalDTO.getGuaranteeFeeBankVoucherSubmissionDate().getYear(),
-                licenseApprovalDTO.getGuaranteeFeeBankVoucherSubmissionDate().getMonthValue(),
-                licenseApprovalDTO.getGuaranteeFeeBankVoucherSubmissionDate().getDayOfMonth()
-        );
-        existingLicenseApproval.setGuaranteeFeeBankVoucherSubmissionDate(guaranteeEntrySubmissionVoucherDate);
+
+        String[] subParts = licenseApprovalDTO.getGuaranteeFeeBankVoucherSubmissionDateJalaliDate().split("-");
+        int jSubYear = Integer.parseInt(subParts[0]);
+        int jSubMonth = Integer.parseInt(subParts[1]);
+        int jSubDay = Integer.parseInt(subParts[2]);
+
+        LocalDate guaranteeSubmissionDate = converter.jalaliToGregorian(jSubYear, jSubMonth, jSubDay);
+        existingLicenseApproval.setGuaranteeFeeBankVoucherSubmissionDate(guaranteeSubmissionDate);
+
+
+
+
         existingLicenseApproval.setGuaranteeFeeBankVoucherNo(licenseApprovalDTO.getGuaranteeFeeBankVoucherNo());
         existingLicenseApproval.setGuaranteeFeePaymentStatus(licenseApprovalDTO.getGuaranteeFeePaymentStatus());
 

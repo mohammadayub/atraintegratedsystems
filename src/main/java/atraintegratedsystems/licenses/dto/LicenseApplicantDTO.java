@@ -54,6 +54,7 @@ public class LicenseApplicantDTO {
     private String paymentStatus;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate applicationFeeExpiryDate;
+    private String jalaliReferToBoardDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate referToBoardDate;
     private String isSend;

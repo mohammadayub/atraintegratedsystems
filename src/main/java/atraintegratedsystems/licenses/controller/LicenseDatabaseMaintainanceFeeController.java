@@ -5,6 +5,7 @@ import atraintegratedsystems.licenses.model.LicenseApproval;
 import atraintegratedsystems.licenses.service.LicenseDatabaseMaintainanceFeeService;
 import atraintegratedsystems.licenses.service.LicenseTypeService;
 import atraintegratedsystems.utils.DateConverter;
+import atraintegratedsystems.utils.PersianCalendarUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -51,21 +52,47 @@ public class LicenseDatabaseMaintainanceFeeController {
     public String updateLicenseApproval(@ModelAttribute LicenseApprovalDTO licenseApprovalDTO) {
         // Fetch the existing entity from the database
         LicenseApproval existingLicenseApproval = licenseDatabaseMaintainanceFeeService.findById(licenseApprovalDTO.getId());
-        DateConverter dateConverter = new DateConverter();
-        LocalDate databasemaintainanceEntryVoucherDate = dateConverter.jalaliToGregorian(
-                licenseApprovalDTO.getDatabaseMaintianenceFeeEntryVoucherDate().getYear(),
-                licenseApprovalDTO.getDatabaseMaintianenceFeeEntryVoucherDate().getMonthValue(),
-                licenseApprovalDTO.getDatabaseMaintianenceFeeEntryVoucherDate().getDayOfMonth()
-        );
 
-        LocalDate databasemaintainanceSubmissionVoucherDate = dateConverter.jalaliToGregorian(
-                licenseApprovalDTO.getDatabasemaintainanceFeeBankVoucherSubmissionDate().getYear(),
-                licenseApprovalDTO.getDatabasemaintainanceFeeBankVoucherSubmissionDate().getMonthValue(),
-                licenseApprovalDTO.getDatabasemaintainanceFeeBankVoucherSubmissionDate().getDayOfMonth()
-        );
+//        DateConverter dateConverter = new DateConverter();
+//        LocalDate databasemaintainanceEntryVoucherDate = dateConverter.jalaliToGregorian(
+//                licenseApprovalDTO.getDatabaseMaintianenceFeeEntryVoucherDate().getYear(),
+//                licenseApprovalDTO.getDatabaseMaintianenceFeeEntryVoucherDate().getMonthValue(),
+//                licenseApprovalDTO.getDatabaseMaintianenceFeeEntryVoucherDate().getDayOfMonth()
+//        );
+//
+//        LocalDate databasemaintainanceSubmissionVoucherDate = dateConverter.jalaliToGregorian(
+//                licenseApprovalDTO.getDatabasemaintainanceFeeBankVoucherSubmissionDate().getYear(),
+//                licenseApprovalDTO.getDatabasemaintainanceFeeBankVoucherSubmissionDate().getMonthValue(),
+//                licenseApprovalDTO.getDatabasemaintainanceFeeBankVoucherSubmissionDate().getDayOfMonth()
+//        );
+//
+//        existingLicenseApproval.setDatabaseMaintianenceFeeEntryVoucherDate(databasemaintainanceEntryVoucherDate);
+//        existingLicenseApproval.setDatabasemaintainanceFeeBankVoucherSubmissionDate(databasemaintainanceSubmissionVoucherDate);
+
+
+        String[] parts = licenseApprovalDTO.getDatabaseMaintianenceFeeEntryVoucherDateJalaliDate().split("-");
+        int jYear = Integer.parseInt(parts[0]);
+        int jMonth = Integer.parseInt(parts[1]);
+        int jDay = Integer.parseInt(parts[2]);
+
+        PersianCalendarUtils converter = new PersianCalendarUtils();
+        LocalDate databaseEntryVoucherDate = converter.jalaliToGregorian(jYear, jMonth, jDay);
+        existingLicenseApproval.setDatabaseMaintianenceFeeEntryVoucherDate(databaseEntryVoucherDate);
+
+
+        String[] subParts = licenseApprovalDTO.getDatabasemaintainanceFeeBankVoucherSubmissionDateJalaliDate().split("-");
+        int jSubYear = Integer.parseInt(subParts[0]);
+        int jSubMonth = Integer.parseInt(subParts[1]);
+        int jSubDay = Integer.parseInt(subParts[2]);
+
+        LocalDate databaseSubmissionDate = converter.jalaliToGregorian(jSubYear, jSubMonth, jSubDay);
+        existingLicenseApproval.setDatabasemaintainanceFeeBankVoucherSubmissionDate(databaseSubmissionDate);
+
+
+
+
         // Update only the required fields
-        existingLicenseApproval.setDatabaseMaintianenceFeeEntryVoucherDate(databasemaintainanceEntryVoucherDate);
-        existingLicenseApproval.setDatabasemaintainanceFeeBankVoucherSubmissionDate(databasemaintainanceSubmissionVoucherDate);
+
         existingLicenseApproval.setDatabaseMaintianenceFeeBankVoucherNo(licenseApprovalDTO.getDatabaseMaintianenceFeeBankVoucherNo());
         existingLicenseApproval.setDatabaseMaintianenceFeePaymentStatus(licenseApprovalDTO.getDatabaseMaintianenceFeePaymentStatus());
         // Set applicationFeeEnteredBy to the logged-in user

@@ -25,8 +25,8 @@
                 </div>
 
                 <div class="col-md-3 form-group">
-                    <label for="referToBoardDate" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" th:text="#{refer_to_board_date}"></label>
-                    <input type="text" id="referToBoardDate" th:field="*{referToBoardDate}" class="form-control hijrishamsi" required style="border-left:1px solid blue;">
+                    <label for="jalaliReferToBoardDate" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" th:text="#{refer_to_board_date}"></label>
+                    <input type="text" id="jalaliReferToBoardDate" th:field="*{jalaliReferToBoardDate}" class="form-control hijrishamsi" required style="border-left:1px solid blue;">
                 </div>
                 <div class="col-md-3 form-group">
                     <label for="isSend" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" th:text="#{is_send}"></label>

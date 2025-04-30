@@ -8,6 +8,7 @@ import atraintegratedsystems.licenses.model.LicenseType;
 import atraintegratedsystems.licenses.repository.LicenseApplicantRepository;
 import atraintegratedsystems.licenses.repository.LicenseTypeRepository;
 import atraintegratedsystems.utils.DateConverter;
+import atraintegratedsystems.utils.PersianCalendarUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -157,12 +158,26 @@ public class LicenseApplicantService {
         LicenseApplicant profile = repository.findById(licenseId)
                 .orElseThrow(() -> new IllegalArgumentException("Profile not found with ID: " + licenseId));
 
-        DateConverter dateConverter = new DateConverter();
-        // Convert Jalali date to Gregorian
-        LocalDate referToBoardDate = dateConverter.jalaliToGregorian(dto.getReferToBoardDate().getYear(),
-                dto.getReferToBoardDate().getMonthValue(),
-                dto.getReferToBoardDate().getDayOfMonth());
+//        DateConverter dateConverter = new DateConverter();
+//        // Convert Jalali date to Gregorian
+//        LocalDate referToBoardDate = dateConverter.jalaliToGregorian(dto.getReferToBoardDate().getYear(),
+//                dto.getReferToBoardDate().getMonthValue(),
+//                dto.getReferToBoardDate().getDayOfMonth());
+//        profile.setReferToBoardDate(referToBoardDate);
+
+
+        String[] parts = dto.getJalaliReferToBoardDate().split("-");
+        int jYear = Integer.parseInt(parts[0]);
+        int jMonth = Integer.parseInt(parts[1]);
+        int jDay = Integer.parseInt(parts[2]);
+
+        PersianCalendarUtils converter = new PersianCalendarUtils();
+        LocalDate referToBoardDate = converter.jalaliToGregorian(jYear, jMonth, jDay);
         profile.setReferToBoardDate(referToBoardDate);
+
+
+
+
         profile.setIsSend(dto.getIsSend());
 
         MultipartFile proposalUpload = dto.getProposalUpload();

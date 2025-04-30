@@ -32,36 +32,46 @@ public class LicenseApprovalDTO {
     private Long licenseApplicantId;
     private String applicantLicenseCompanyName;
     private int  licenseValidity;
+
+    private String licenseFeeEntryVoucherDateJalaliDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate licenseFeeEntryVoucherDate;
     private String licenseFeeBankVoucherNo;
+    private String licenseFeeBankVoucherSubmissionDateJalaliDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate licenseFeeBankVoucherSubmissionDate;
     private String licenseFeePaymentStatus;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate licenseFeeExpiryDate;
 
+    private String databaseMaintianenceFeeEntryVoucherDateJalaliDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate databaseMaintianenceFeeEntryVoucherDate;
     private String databaseMaintianenceFeeBankVoucherNo;
+    private String databasemaintainanceFeeBankVoucherSubmissionDateJalaliDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate databasemaintainanceFeeBankVoucherSubmissionDate;
     private String databaseMaintianenceFeePaymentStatus;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate databaseMaintianenceFeeExpiryDate;
 
+    private String administrationFeeEntryVoucherDateJalaliDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate administrationFeeEntryVoucherDate;
     private String administrationFeeBankVoucherNo;
+    private String administrationFeeBankVoucherSubmissionDateJalaliDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate administrationFeeBankVoucherSubmissionDate;
     private String administrationFeePaymentStatus;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate administrationFeeExpiryDate;
 
+    private String guaranteeFeeEntryVoucherDateJalaliDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate guaranteeFeeEntryVoucherDate;
     private String guaranteeFeeBankVoucherNo;
+
+    private String guaranteeFeeBankVoucherSubmissionDateJalaliDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate guaranteeFeeBankVoucherSubmissionDate;
     private String guaranteeFeePaymentStatus;

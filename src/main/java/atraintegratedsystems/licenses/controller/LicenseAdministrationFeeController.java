@@ -6,6 +6,7 @@ import atraintegratedsystems.licenses.model.LicenseApproval;
 import atraintegratedsystems.licenses.service.LicenseAdministrationFeeService;
 import atraintegratedsystems.licenses.service.LicenseTypeService;
 import atraintegratedsystems.utils.DateConverter;
+import atraintegratedsystems.utils.PersianCalendarUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -53,15 +54,38 @@ public class LicenseAdministrationFeeController {
 
         // Update only the required fields
 
-        DateConverter dateConverter = new DateConverter();
-        LocalDate administrationEntryVoucherDate = dateConverter.jalaliToGregorian(
-                licenseApprovalDTO.getAdministrationFeeEntryVoucherDate().getYear(),
-                licenseApprovalDTO.getAdministrationFeeEntryVoucherDate().getMonthValue(),
-                licenseApprovalDTO.getAdministrationFeeEntryVoucherDate().getDayOfMonth()
-        );
+//        DateConverter dateConverter = new DateConverter();
+//        LocalDate administrationEntryVoucherDate = dateConverter.jalaliToGregorian(
+//                licenseApprovalDTO.getAdministrationFeeEntryVoucherDate().getYear(),
+//                licenseApprovalDTO.getAdministrationFeeEntryVoucherDate().getMonthValue(),
+//                licenseApprovalDTO.getAdministrationFeeEntryVoucherDate().getDayOfMonth()
+//        );
+//        existingLicenseApproval.setAdministrationFeeEntryVoucherDate(administrationEntryVoucherDate);
+
+
+
+        String[] parts = licenseApprovalDTO.getAdministrationFeeEntryVoucherDateJalaliDate().split("-");
+        int jYear = Integer.parseInt(parts[0]);
+        int jMonth = Integer.parseInt(parts[1]);
+        int jDay = Integer.parseInt(parts[2]);
+
+        PersianCalendarUtils converter = new PersianCalendarUtils();
+        LocalDate administrationEntryVoucherDate = converter.jalaliToGregorian(jYear, jMonth, jDay);
         existingLicenseApproval.setAdministrationFeeEntryVoucherDate(administrationEntryVoucherDate);
+
         existingLicenseApproval.setAdministrationFeeBankVoucherNo(licenseApprovalDTO.getAdministrationFeeBankVoucherNo());
         existingLicenseApproval.setAdministrationFeePaymentStatus(licenseApprovalDTO.getAdministrationFeePaymentStatus());
+
+
+        String[] subParts = licenseApprovalDTO.getAdministrationFeeBankVoucherSubmissionDateJalaliDate().split("-");
+        int jSubYear = Integer.parseInt(subParts[0]);
+        int jSubMonth = Integer.parseInt(subParts[1]);
+        int jSubDay = Integer.parseInt(subParts[2]);
+
+        LocalDate administrationSubmissionDate = converter.jalaliToGregorian(jSubYear, jSubMonth, jSubDay);
+        existingLicenseApproval.setAdministrationFeeBankVoucherSubmissionDate(administrationSubmissionDate);
+
+
 
 
         // Set applicationFeeEnteredBy to the logged-in user
