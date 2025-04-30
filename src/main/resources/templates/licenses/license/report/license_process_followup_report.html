@@ -12,22 +12,19 @@
     <div th:replace="styles :: commonfieldset-with-legend-border"></div>
 
     <style>
-        /* Custom styles for small font and nice border */
         .table-sm th, .table-sm td {
-            font-size: 0.7em; /* Smaller font size */
-            padding: 0.4rem; /* Adjusted padding for a compact look */
+            font-size: 0.7em;
+            padding: 0.4rem;
         }
         .table-bordered th, .table-bordered td {
-            border: 1px solid #dee2e6; /* Light border color */
-            text-align:center;
+            border: 1px solid #dee2e6;
+            text-align: center;
         }
         .table-bordered {
             border-collapse: collapse;
         }
     </style>
 </head>
-
-
 
 <body>
 <nav th:replace="~{layout :: page_navbar}"></nav>
@@ -50,7 +47,7 @@
                 <th th:text="#{refer_to_board_date}">Refer to Board Date</th>
                 <th th:text="#{approval_license_date}">Approval Date</th>
                 <th th:text="#{total_day_three_process}">Total Days (3 Process)</th>
-                <th th:text="#{total_all_process}">Total All Process Days</th> <!-- NEW COLUMN -->
+                <th th:text="#{total_all_process}">Total All Process Days</th>
                 <th th:text="#{license_fee_bank_voucher_submission_date}">License Fees Voucher Sub Date</th>
                 <th th:text="#{admin_fee_bank_voucher_submission_date}">Admin Fees Voucher Sub Date</th>
                 <th th:text="#{database_fee_bank_voucher_submission_date}">Db Fees Voucher Sub Date</th>
@@ -70,7 +67,7 @@
                 <td th:text="${profile.licenseApplicant.referToBoardDate}"></td>
                 <td th:text="${profile.approvalDate}" class="approval-date"></td>
                 <td class="process3-days" style="background-color: #ffe5d9;"></td>
-                <td class="total-days" style="background-color: white; font-weight:bold;"></td> <!-- NEW COLUMN -->
+                <td class="total-days" style="background-color: white; font-weight: bold;"></td>
                 <td th:text="${profile.licenseFeeBankVoucherSubmissionDate}" class="license-fee-voucher-date"></td>
                 <td th:text="${profile.administrationFeeBankVoucherSubmissionDate}"></td>
                 <td th:text="${profile.databasemaintainanceFeeBankVoucherSubmissionDate}"></td>
@@ -85,20 +82,57 @@
     </div>
 </div>
 
+<!-- Scripts -->
 <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
 <script src="/js/jszip.min.js"></script>
-<div th:replace="scripts :: common-scripts"></div>
-<script th:src="@{/js/reportsJqueryDataTable.js}"></script>
-<script th:src="@{/js/reportsDataTableButtons.js}"></script>
-<script th:src="@{/js/reportsDataTableButtonsHTML5.js}"></script>
-<script th:src="@{/js/jszip.min.js}"></script>
 
+<!-- JS to calculate and persist total days -->
 <script>
+    function calculateProcessDays() {
+        $('#profileTable tbody tr').each(function () {
+            const $row = $(this);
+            const reqDate = new Date($row.find('.req-date').text().trim());
+            const voucherDate = new Date($row.find('.voucher-date').text().trim());
+            const referDate = new Date($row.find('.refer-date').text().trim());
+            const approvalDate = new Date($row.find('.approval-date').text().trim());
+
+            let process1Days = NaN, process2Days = NaN, process3Days = NaN, total = NaN;
+
+            if (!isNaN(reqDate) && !isNaN(voucherDate)) {
+                process1Days = Math.ceil((voucherDate - reqDate) / (1000 * 60 * 60 * 24));
+                $row.find('.process1-days').text(process1Days);
+            } else {
+                $row.find('.process1-days').text("N/A");
+            }
+
+            if (!isNaN(voucherDate) && !isNaN(referDate)) {
+                process2Days = Math.ceil((referDate - voucherDate) / (1000 * 60 * 60 * 24));
+                $row.find('.process2-days').text(process2Days);
+            } else {
+                $row.find('.process2-days').text("N/A");
+            }
+
+            if (!isNaN(referDate) && !isNaN(approvalDate)) {
+                process3Days = Math.ceil((approvalDate - referDate) / (1000 * 60 * 60 * 24));
+                $row.find('.process3-days').text(process3Days);
+            } else {
+                $row.find('.process3-days').text("N/A");
+            }
+
+            if (!isNaN(process1Days) && !isNaN(process2Days) && !isNaN(process3Days)) {
+                total = process1Days + process2Days + process3Days;
+                $row.find('.total-days').text(total);
+            } else {
+                $row.find('.total-days').text("N/A");
+            }
+        });
+    }
+
     $(document).ready(function () {
-        $('#profileTable').DataTable({
+        const table = $('#profileTable').DataTable({
             scrollX: true,
             scrollY: "400px",
             scrollCollapse: true,
@@ -112,59 +146,32 @@
                     className: 'btn btn-sm btn-success',
                     exportOptions: {
                         columns: ':visible'
+                    },
+                    customizeData: function (data) {
+                        // This ensures the table is recalculated before export
+                        calculateProcessDays();
+                        // Re-read DOM for updated values
+                        const updatedData = [];
+                        $('#profileTable tbody tr:visible').each(function () {
+                            const cells = $(this).find('td').map(function () {
+                                return $(this).text().trim();
+                            }).get();
+                            updatedData.push(cells);
+                        });
+                        data.body = updatedData;
                     }
                 }
             ]
         });
 
-        $('#profileTable tbody tr').each(function () {
-            const reqDate = new Date($(this).find('.req-date').text().trim());
-            const voucherDate = new Date($(this).find('.voucher-date').text().trim());
-            const referDate = new Date($(this).find('.refer-date').text().trim());
-            const approvalDate = new Date($(this).find('.approval-date').text().trim());
-
-            const process1Cell = $(this).find('.process1-days');
-            const process2Cell = $(this).find('.process2-days');
-            const process3Cell = $(this).find('.process3-days');
-            const totalDaysCell = $(this).find('.total-days');
-
-            let process1Days = 0;
-            let process2Days = 0;
-            let process3Days = 0;
-
-            if (!isNaN(voucherDate) && !isNaN(reqDate)) {
-                process1Days = Math.ceil((voucherDate - reqDate) / (1000 * 60 * 60 * 24));
-                process1Cell.text(process1Days);
-            } else {
-                process1Cell.text("N/A");
-            }
-
-            if (!isNaN(referDate) && !isNaN(voucherDate)) {
-                process2Days = Math.ceil((referDate - voucherDate) / (1000 * 60 * 60 * 24));
-                process2Cell.text(process2Days);
-            } else {
-                process2Cell.text("N/A");
-            }
-
-            if (!isNaN(approvalDate) && !isNaN(referDate)) {
-                process3Days = Math.ceil((approvalDate - referDate) / (1000 * 60 * 60 * 24));
-                process3Cell.text(process3Days);
-            } else {
-                process3Cell.text("N/A");
-            }
-
-            if (!isNaN(process1Days) && !isNaN(process2Days) && !isNaN(process3Days)) {
-                const totalDays = process1Days + process2Days + process3Days;
-                totalDaysCell.text(totalDays);
-            } else {
-                totalDaysCell.text("N/A");
-            }
+        calculateProcessDays();
+        table.on('draw', function () {
+            calculateProcessDays();
         });
     });
 </script>
 
 <div style="height:10vh;"></div>
-
 <footer th:replace="~{layout :: page_footer}"></footer>
 </body>
 </html>
