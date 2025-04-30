@@ -12,13 +12,13 @@
 <nav th:replace="~{layout :: page_navbar}"></nav>
 <div class="container-fluid">
     <fieldset>
-        <legend>License Administration Fee List</legend>
+        <legend th:text="#{license_administration_fee_list}">License Administration Fee List</legend>
     <div class="table-container">
         <table class="slip" id="profileTable" >
             <thead>
             <tr class="bg-primary">
                  <th th:text="#{mcit_license_approval_id}"></th>
-                 <th th:text="#{mcit_compmay_license_Name}"></th>
+                 <th th:text="#{license_application_company_license_name}"></th>
                  <th th:text="#{mcit_license_Type}"></th>
                  <th th:text="#{mcit_license_approval_date}"></th>
                 <th  th:text="#{mcit_license_board_descision_no}"></th>
@@ -26,7 +26,7 @@
                 <th  th:text="#{mcit_license_approval_currency}"></th>
                 <th th:text="#{administration_fees}"></th>
                 <th  th:text="#{mcit_license_prints_tariff}"></th>
-                <th th:text="#{mcit_license_confirmation_payment}"></th>
+                <th th:text="#{payment_confirmation}"></th>
 
             </tr>
             </thead>

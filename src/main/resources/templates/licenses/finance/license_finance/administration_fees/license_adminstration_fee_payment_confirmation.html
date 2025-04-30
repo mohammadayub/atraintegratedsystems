@@ -18,13 +18,13 @@
 <nav th:replace="~{layout :: page_navbar}"></nav>
 <div class="container-fluid mt-4">
     <fieldset>
-        <legend>License Administration Fee Confirmation</legend>
+        <legend th:text="#{license_administration_fee_confirmation}">License Administration Fee Confirmation</legend>
     <form th:action="@{/licenses/finance/license_finance/administration_fees/license_administration_fee_list/add}" th:object="${licenseApprovalDTO}" method="post">
         <div class="row">
             <!-- Hidden ID Field -->
             <input type="hidden" th:field="*{id}">
             <div class="col-md-2 form-group">
-                <label th:text="#{approval_id}"></label>
+                <label th:text="#{mcit_license_approval_id}"></label>
                 <input type="text" th:field="*{approvalId}" class="form-control" readonly>
             </div>
             <div class="col-md-3 form-group">
@@ -33,11 +33,11 @@
             </div>
             <!-- Currency Type -->
             <div class="col-md-3 form-group">
-                <label th:text="#{admin_fee_bank_voucher_no}"></label>
+                <label th:text="#{bank_voucher}"></label>
                 <input type="text" th:field="*{administrationFeeBankVoucherNo}" class="form-control" >
             </div>
             <div class="col-md-3 form-group">
-                <label>Admin Fee Bank Voucher Submission Date</label>
+                <label th:text="#{admin_fee_bank_voucher_submission_date}">Admin Fee Bank Voucher Submission Date</label>
                 <input type="text" th:field="*{administrationFeeEntryVoucherDate}" class="form-control hijrishamsi">
             </div>
             <!-- Payment Status -->
@@ -58,7 +58,7 @@
         ">
                 &nbsp;&nbsp;
                 <label
-                        th:text="#{license_fee_payment_status}"
+                        th:text="#{payment_status}"
                         for="administrationFeePaymentStatus"
                         class="form-check-label me-2"
                         style="cursor: pointer;">

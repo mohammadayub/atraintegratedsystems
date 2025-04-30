@@ -14,7 +14,7 @@
 <nav th:replace="~{layout :: page_navbar}"></nav>
 <div class="container mt-5">
     <fieldset>
-        <legend>Fees & Tariffs Section</legend>
+        <legend th:text="#{fees_tariffs_section}">Fees & Tariffs Section</legend>
     <table class="table table-borderless">
         <tr style="border-bottom:1px solid darkgray;" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_FINANCE')">
             <td class="text-center">

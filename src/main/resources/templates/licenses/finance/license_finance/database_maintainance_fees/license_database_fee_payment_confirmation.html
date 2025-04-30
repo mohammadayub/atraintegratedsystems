@@ -18,13 +18,13 @@
 <nav th:replace="~{layout :: page_navbar}"></nav>
 <div class="container-fluid mt-4">
     <fieldset>
-        <legend>License Database Fee Confirmation</legend>
+        <legend th:text="#{license_database_fee_confirmation}">License Database Fee Confirmation</legend>
     <form th:action="@{/licenses/finance/license_finance/database_maintainance_fees/license_database_fee_list/add}" th:object="${licenseApprovalDTO}" method="post">
         <div class="row">
             <!-- Hidden ID Field -->
             <input type="hidden" th:field="*{id}">
             <div class="col-md-2 form-group">
-                <label th:text="#{approval_id}"></label>
+                <label th:text="#{mcit_license_approval_id}"></label>
                 <input type="text" th:field="*{approvalId}" class="form-control" readonly>
             </div>
             <div class="col-md-3 form-group">
@@ -58,7 +58,7 @@
         ">
                 &nbsp;&nbsp;
                 <label
-                        th:text="#{license_fee_payment_status}"
+                        th:text="#{payment_status}"
                         for="databaseMaintianenceFeePaymentStatus"
                         class="form-check-label me-2"
                         style="cursor: pointer;">
