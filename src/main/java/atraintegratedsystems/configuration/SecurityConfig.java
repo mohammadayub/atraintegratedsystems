@@ -26,51 +26,54 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
 
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                // Allow login page and resources to be accessible without login
+                // Allow login page and static resources without authentication
                 .antMatchers("/login", "/login/**", "/resources/**", "/static/**", "/images/**", "/css/**", "/js/**").permitAll()
-                // Allow the index page for all authenticated users
+
+                // ✅ ALLOW INTEGRATION API PUBLICLY (no auth needed)
+                .antMatchers("/api/integration/**").permitAll()
+
+                // Index page
                 .antMatchers("/").authenticated()
 
-                // License-related paths - only accessible by specific roles
+                // License-related paths
                 .antMatchers("/licenses/license/**").access("hasRole('ROLE_LICENSE') or hasRole('ROLE_LICENSE_ADMIN') or hasRole('ROLE_ADMIN') or hasRole('ROLE_LICENSE_APPROVAL') or hasRole('ROLE_LICENSE_PROFILE_ENTRY') or hasRole('ROLE_LICENSE_COMPLETION_PROFILE')")
                 .antMatchers("/licenses/finance/**").access("hasRole('ROLE_FINANCE') or hasRole('ROLE_LICENSE_ADMIN') or hasRole('ROLE_ADMIN') or hasRole('ROLE_MINISTRY')")
-                // Ministry-related paths - only accessible by specific roles
                 .antMatchers("/licenses/finance/license_finance/**").access("hasRole('ROLE_MINISTRY') or hasRole('ROLE_LICENSE_ADMIN') or hasRole('ROLE_ADMIN')")
 
-                // Admin-only paths - only accessible by the admin role
+                // Admin-only paths
                 .antMatchers("/licenses/admin/**").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_LICENSE_ADMIN')")
-                //Codes Management Section
                 .antMatchers("/codes/**").access("hasRole('ROLE_CODES_ADMIN')")
                 .antMatchers("/typeofapprovals/**").access("hasRole('ROLE_typeofapprovals_ADMIN') or hasRole('ROLE_ADMIN')")
 
-                // Require authentication for all other pages
+                // All other requests need authentication
                 .anyRequest().authenticated()
-
                 .and()
                 .formLogin()
-                .loginPage("/login") // Custom login page
-                .permitAll()  // Allow everyone to access the login page
-                .successHandler(customAuthenticationSuccessHandler)  // Redirect after successful login
-                .failureUrl("/login?error")  // Redirect to login page if authentication fails
-                .usernameParameter("email")  // Custom username parameter (email)
-                .passwordParameter("password")  // Custom password parameter
+                .loginPage("/login")
+                .permitAll()
+                .successHandler(customAuthenticationSuccessHandler)
+                .failureUrl("/login?error")
+                .usernameParameter("email")
+                .passwordParameter("password")
                 .and()
                 .logout()
-                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))  // Handle logout request
-                .logoutSuccessUrl("/login")  // Redirect after logout
-                .invalidateHttpSession(true)  // Invalidate session on logout
-                .deleteCookies("JSESSIONID")  // Delete session cookies on logout
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .logoutSuccessUrl("/login")
+                .invalidateHttpSession(true)
+                .deleteCookies("JSESSIONID")
                 .and()
                 .exceptionHandling()
-                .accessDeniedPage("/access-denied")  // Redirects to /access-denied
+                .accessDeniedPage("/access-denied")
                 .and()
-                .csrf().disable();  // Disable CSRF for simplicity (use with caution)
+                // Disable CSRF only for integration APIs
+                .csrf()
+                .ignoringAntMatchers("/api/integration/**");
     }
+
 
 
     @Bean

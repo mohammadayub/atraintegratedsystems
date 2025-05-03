@@ -198,7 +198,7 @@ public class LicenseApproval {
 //    End of My Code
 
 
-    public JalaliDate getLicenseFeeEntryVoucherDate() {
+    public JalaliDate getLicFeeEntryVoucherDate() {
         if (licenseFeeEntryVoucherDate == null) {
             return null; // Return null if issueLicenseDate is null
         }
