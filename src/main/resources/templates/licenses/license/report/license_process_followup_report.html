@@ -98,7 +98,7 @@
 
 <script>
     $(document).ready(function () {
-        $('#profileTable').DataTable({
+        const table = $('#profileTable').DataTable({
             scrollX: true,
             scrollY: "400px",
             scrollCollapse: true,
@@ -112,56 +112,93 @@
                     className: 'btn btn-sm btn-success',
                     exportOptions: {
                         columns: ':visible'
+                    },
+                    customizeData: function (data) {
+                        data.body.forEach((row, index) => {
+                            const reqDate = new Date(row[3]);      // Request Date
+                            const voucherDate = new Date(row[4]);  // Voucher Submission Date
+                            const referDate = new Date(row[6]);    // Complete Profile Date
+                            const approvalDate = new Date(row[8]); // Approval Date
+
+                            let process1Days = "N/A";
+                            let process2Days = "N/A";
+                            let process3Days = "N/A";
+                            let totalDays = "N/A";
+
+                            if (!isNaN(voucherDate) && !isNaN(reqDate)) {
+                                process1Days = Math.ceil((voucherDate - reqDate) / (1000 * 60 * 60 * 24));
+                                row[5] = process1Days;
+                            }
+
+                            if (!isNaN(referDate) && !isNaN(voucherDate)) {
+                                process2Days = Math.ceil((referDate - voucherDate) / (1000 * 60 * 60 * 24));
+                                row[7] = process2Days;
+                            }
+
+                            if (!isNaN(approvalDate) && !isNaN(referDate)) {
+                                process3Days = Math.ceil((approvalDate - referDate) / (1000 * 60 * 60 * 24));
+                                row[9] = process3Days;
+                            }
+
+                            if (!isNaN(process1Days) && !isNaN(process2Days) && !isNaN(process3Days)) {
+                                totalDays = process1Days + process2Days + process3Days;
+                                row[10] = totalDays;
+                            } else {
+                                row[10] = "N/A";
+                            }
+                        });
                     }
                 }
-            ]
-        });
+            ],
+            drawCallback: function () {
+                $('#profileTable tbody tr').each(function () {
+                    const reqDate = new Date($(this).find('.req-date').text().trim());
+                    const voucherDate = new Date($(this).find('.voucher-date').text().trim());
+                    const referDate = new Date($(this).find('.refer-date').text().trim());
+                    const approvalDate = new Date($(this).find('.approval-date').text().trim());
 
-        $('#profileTable tbody tr').each(function () {
-            const reqDate = new Date($(this).find('.req-date').text().trim());
-            const voucherDate = new Date($(this).find('.voucher-date').text().trim());
-            const referDate = new Date($(this).find('.refer-date').text().trim());
-            const approvalDate = new Date($(this).find('.approval-date').text().trim());
+                    const process1Cell = $(this).find('.process1-days');
+                    const process2Cell = $(this).find('.process2-days');
+                    const process3Cell = $(this).find('.process3-days');
+                    const totalDaysCell = $(this).find('.total-days');
 
-            const process1Cell = $(this).find('.process1-days');
-            const process2Cell = $(this).find('.process2-days');
-            const process3Cell = $(this).find('.process3-days');
-            const totalDaysCell = $(this).find('.total-days');
+                    let process1Days = 0;
+                    let process2Days = 0;
+                    let process3Days = 0;
 
-            let process1Days = 0;
-            let process2Days = 0;
-            let process3Days = 0;
+                    if (!isNaN(voucherDate) && !isNaN(reqDate)) {
+                        process1Days = Math.ceil((voucherDate - reqDate) / (1000 * 60 * 60 * 24));
+                        process1Cell.text(process1Days);
+                    } else {
+                        process1Cell.text("N/A");
+                    }
 
-            if (!isNaN(voucherDate) && !isNaN(reqDate)) {
-                process1Days = Math.ceil((voucherDate - reqDate) / (1000 * 60 * 60 * 24));
-                process1Cell.text(process1Days);
-            } else {
-                process1Cell.text("N/A");
-            }
+                    if (!isNaN(referDate) && !isNaN(voucherDate)) {
+                        process2Days = Math.ceil((referDate - voucherDate) / (1000 * 60 * 60 * 24));
+                        process2Cell.text(process2Days);
+                    } else {
+                        process2Cell.text("N/A");
+                    }
 
-            if (!isNaN(referDate) && !isNaN(voucherDate)) {
-                process2Days = Math.ceil((referDate - voucherDate) / (1000 * 60 * 60 * 24));
-                process2Cell.text(process2Days);
-            } else {
-                process2Cell.text("N/A");
-            }
+                    if (!isNaN(approvalDate) && !isNaN(referDate)) {
+                        process3Days = Math.ceil((approvalDate - referDate) / (1000 * 60 * 60 * 24));
+                        process3Cell.text(process3Days);
+                    } else {
+                        process3Cell.text("N/A");
+                    }
 
-            if (!isNaN(approvalDate) && !isNaN(referDate)) {
-                process3Days = Math.ceil((approvalDate - referDate) / (1000 * 60 * 60 * 24));
-                process3Cell.text(process3Days);
-            } else {
-                process3Cell.text("N/A");
-            }
-
-            if (!isNaN(process1Days) && !isNaN(process2Days) && !isNaN(process3Days)) {
-                const totalDays = process1Days + process2Days + process3Days;
-                totalDaysCell.text(totalDays);
-            } else {
-                totalDaysCell.text("N/A");
+                    if (!isNaN(process1Days) && !isNaN(process2Days) && !isNaN(process3Days)) {
+                        const totalDays = process1Days + process2Days + process3Days;
+                        totalDaysCell.text(totalDays);
+                    } else {
+                        totalDaysCell.text("N/A");
+                    }
+                });
             }
         });
     });
 </script>
+
 
 <div style="height:10vh;"></div>
 
