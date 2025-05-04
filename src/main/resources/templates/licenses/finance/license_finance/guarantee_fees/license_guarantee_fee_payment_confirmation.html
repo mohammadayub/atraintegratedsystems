@@ -18,7 +18,7 @@
 <nav th:replace="~{layout :: page_navbar}"></nav>
 <div class="container-fluid mt-4">
     <fieldset>
-        <legend th:text="#{license_guarantee_fee_confirmation}">License Guarantee Fee Confirmation</legend>
+        <legend th:text="#{guarantee_fee_confirmation}">License Guarantee Fee Confirmation</legend>
     <form th:action="@{/licenses/finance/license_finance/guarantee_fees/license_guarantee_fee_list/add}" th:object="${licenseApprovalDTO}" method="post">
         <div class="row">
             <!-- Hidden ID Field -->
@@ -33,7 +33,7 @@
             </div>
             <!-- Currency Type -->
             <div class="col-md-3">
-                <label  th:text="#{guarantee_fee_bank_voucher_no}"></label>
+                <label  th:text="#{bank_voucher}"></label>
                 <input type="text" th:field="*{guaranteeFeeBankVoucherNo}" class="form-control" >
             </div>
             <div class="col-md-3 form-group">
