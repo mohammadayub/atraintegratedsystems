@@ -1,5 +1,6 @@
 package atraintegratedsystems.licenses.controller;
-import atraintegratedsystems.licenses.service.LicenseFeesSendToExternalSystemApiService;
+import atraintegratedsystems.licenses.dto.LicenseFeeIntegrationDTO;
+import atraintegratedsystems.licenses.service.LicenseFeesIntegrationSendService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,10 +14,12 @@ import java.util.List;
 public class LicenseFeeMCITAPIController {
 
     @Autowired
-    private LicenseFeesSendToExternalSystemApiService licenseFeesSendToExternalSystemApiService;
-//    @GetMapping("/unpaid-mcit")
-//    public ResponseEntity<List<LicenseApprovalMcitFeesAPIDTO>> getPendingPayments() {
-//        List<LicenseApprovalMcitFeesAPIDTO> pendingPayments = licenseFeesSendToExternalSystemApiService.getAPIData();
-//        return ResponseEntity.ok(pendingPayments);
-//    }
+    private LicenseFeesIntegrationSendService licenseFeesIntegrationSendService;
+
+    @GetMapping("/unpaid-mcit")
+    public ResponseEntity<List<LicenseFeeIntegrationDTO>> getPendingPayments() {
+        List<LicenseFeeIntegrationDTO> pendingPayments = licenseFeesIntegrationSendService.getLicenseUnPaidList();
+        return ResponseEntity.ok(pendingPayments);
+    }
 }
+

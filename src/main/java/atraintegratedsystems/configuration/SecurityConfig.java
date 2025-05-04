@@ -36,6 +36,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // ✅ ALLOW INTEGRATION API PUBLICLY (no auth needed)
                 .antMatchers("/api/integration/**").permitAll()
 
+                // ✅ ADD THIS LINE TO ALLOW UNPAID API PUBLICLY
+                .antMatchers("/api/licenses/unpaid-mcit").permitAll()
+
                 // Index page
                 .antMatchers("/").authenticated()
 
@@ -71,8 +74,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 // Disable CSRF only for integration APIs
                 .csrf()
-                .ignoringAntMatchers("/api/integration/**");
+                .ignoringAntMatchers("/api/integration/**", "/api/licenses/unpaid-mcit"); // ✅ Include here to disable CSRF for Postman POST if needed
     }
+
 
 
 

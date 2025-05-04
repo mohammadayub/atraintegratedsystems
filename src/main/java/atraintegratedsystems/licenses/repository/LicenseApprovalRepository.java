@@ -52,21 +52,16 @@ public interface LicenseApprovalRepository extends JpaRepository<LicenseApproval
     List<LicenseApproval> findAllLicenses();
 
 
-
-
-
-
-
-
-
-
-
-
     @Query(value = "SELECT * FROM License_Approvals WHERE approval_status = 'Reject' " ,nativeQuery = true)
     List<LicenseApproval>findAllRejection();
 
 
 
+    @Query(value = "SELECT * FROM License_Approvals " +
+            "WHERE approval_status = 'Approve' " +
+            "AND (license_fee_mcit_payment_status != 'Paid' OR license_fee_mcit_payment_status IS NULL)",
+            nativeQuery = true)
+    List<LicenseApproval> findUnpaidLicenseFees();
 
 
 
