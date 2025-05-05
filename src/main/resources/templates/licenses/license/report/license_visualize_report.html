@@ -88,28 +88,50 @@
 
 
 <!-- License Duration Chart + Table -->
-<div class="mt-5" id="durationChartWrapper">
+<!--<div class="container-fluid" id="durationChartWrapper">-->
+<!--    <h4 class="mb-4 ml-4" th:text="#{visualize_report_header_license_duration}">Licenses Duration Left From Today</h4>-->
+<!--&lt;!&ndash;    <div class="row">&ndash;&gt;-->
+<!--&lt;!&ndash;        <div class="col-md-6">&ndash;&gt;-->
+<!--&lt;!&ndash;            <canvas id="approvalExpiryChart"></canvas>&ndash;&gt;-->
+<!--&lt;!&ndash;        </div>&ndash;&gt;-->
+<!--        <div class="col-md-6">-->
+<!--            <table class="table table-bordered table-striped mt-3" style="width:100%">-->
+<!--                <thead>-->
+<!--                <tr>-->
+<!--                    <th th:text="#{license_application_company_license_name}">Company</th>-->
+<!--                    <th th:text="#{approval_license_date}">Approval Date</th>-->
+<!--                    <th th:text="#{license_application_expiry_date}">Expiry Date</th>-->
+<!--                    <th th:text="#{total_days_left}">Days Left</th>-->
+<!--                </tr>-->
+<!--                </thead>-->
+<!--                <tbody id="licenseDurationTable"></tbody>-->
+<!--            </table>-->
+<!--        </div>-->
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+<!--    <button id="downloadDurationChart" class="btn btn-success mt-4">Download Duration Chart & Table</button>-->
+<!--</div>-->
+
+<br>
+<div class="container-fluid" id="durationChartWrapper">
     <h4 class="mb-4 ml-4" th:text="#{visualize_report_header_license_duration}">Licenses Duration Left From Today</h4>
-    <div class="row">
-        <div class="col-md-6">
-            <canvas id="approvalExpiryChart"></canvas>
-        </div>
-        <div class="col-md-6">
-            <table class="table table-bordered table-striped mt-3">
-                <thead>
-                <tr>
-                    <th th:text="#{license_application_company_license_name}">Company</th>
-                    <th th:text="#{approval_license_date}">Approval Date</th>
-                    <th th:text="#{license_application_expiry_date}">Expiry Date</th>
-                    <th th:text="#{total_days_left}">Days Left</th>
-                </tr>
-                </thead>
-                <tbody id="licenseDurationTable"></tbody>
-            </table>
-        </div>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped mt-3 w-100">
+            <thead>
+            <tr>
+                <th th:text="#{license_application_company_license_name}">Company</th>
+                <th th:text="#{approval_license_date}">Approval Date</th>
+                <th th:text="#{license_application_expiry_date}">Expiry Date</th>
+                <th th:text="#{total_days_left}">Days Left</th>
+            </tr>
+            </thead>
+            <tbody id="licenseDurationTable"></tbody>
+        </table>
     </div>
-    <button id="downloadDurationChart" class="btn btn-success mt-4">Download Duration Chart & Table</button>
+
+    <button id="downloadDurationChart" class="btn btn-success mt-4">Download Duration Table</button>
 </div>
+
 
 <script th:inline="javascript">
     /*<![CDATA[*/
@@ -242,7 +264,7 @@ const revenueLicenseFeesData = {};
     document.getElementById("grandTotalLicenseFeesCell").innerText = grandTotalLicenseFees.toLocaleString();
 
     new Chart(document.getElementById('licenseFeesRevenueChart'), {
-      type: 'pie',
+      type: 'bar',
       data: {
         labels: chartLabels,
         datasets: [{
