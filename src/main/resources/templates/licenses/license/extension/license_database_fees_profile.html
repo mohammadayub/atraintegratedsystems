@@ -99,7 +99,7 @@
       <th th:text="#{license_application_expiry_date}">Expire Date</th>
       <th th:text="#{miladi_start_date}">Miladi Start Date</th>
       <th th:text="#{miladi_expiry_date}">Miladi Expire Date</th>
-      <th th:text="#{mcit_license_approval_date}">Database Fees</th>
+      <th th:text="#{database_fees}">Database Fees</th>
       <th th:text="#{contrack_extension}">Contract Extension</th>
     </tr>
     </thead>
@@ -109,7 +109,7 @@
       <td th:text="${extension.licenseApprovalId}"></td>
       <td th:text="${extension.extStartDate}"></td>
       <td th:text="${extension.extExpireDate}"></td>
-      <td th:text="${extension.extensionExpireDate}"></td>
+      <td th:text="${extension.extensionStartDate}"></td>
       <td th:text="${extension.extensionExpireDate}" class="expireDate"></td>
       <td th:text="${extension.extensionDatabaseFees}"></td>
       <td>
