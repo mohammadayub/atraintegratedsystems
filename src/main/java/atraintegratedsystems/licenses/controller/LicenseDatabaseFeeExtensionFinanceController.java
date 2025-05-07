@@ -4,6 +4,7 @@ import atraintegratedsystems.licenses.dto.LicenseDatabaseFeesExtensionDTO;
 import atraintegratedsystems.licenses.model.LicenseDatabaseFeesExtension;
 import atraintegratedsystems.licenses.service.LicenseDatabaseFeesExtensionFinanceService;
 import atraintegratedsystems.utils.DateConverter;
+import atraintegratedsystems.utils.PersianCalendarUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -44,21 +45,38 @@ public class LicenseDatabaseFeeExtensionFinanceController {
     public String updateLicenseApproval(@ModelAttribute LicenseDatabaseFeesExtensionDTO licenseDatabaseFeesExtensionDTO) {
         // Fetch the existing entity from the database
         LicenseDatabaseFeesExtension existingLicenseDatabaseFeesExtension = licenseDatabaseFeesExtensionFinanceService.findById(licenseDatabaseFeesExtensionDTO.getId());
-        DateConverter dateConverter = new DateConverter();
-        LocalDate databaseEntryVoucherDate = dateConverter.jalaliToGregorian(
-                licenseDatabaseFeesExtensionDTO.getExtensionDatabaseFeeBankVoucherDate().getYear(),
-                licenseDatabaseFeesExtensionDTO.getExtensionDatabaseFeeBankVoucherDate().getMonthValue(),
-                licenseDatabaseFeesExtensionDTO.getExtensionDatabaseFeeBankVoucherDate().getDayOfMonth()
-        );
+//        DateConverter dateConverter = new DateConverter();
+//        LocalDate databaseEntryVoucherDate = dateConverter.jalaliToGregorian(
+//                licenseDatabaseFeesExtensionDTO.getExtensionDatabaseFeeBankVoucherDate().getYear(),
+//                licenseDatabaseFeesExtensionDTO.getExtensionDatabaseFeeBankVoucherDate().getMonthValue(),
+//                licenseDatabaseFeesExtensionDTO.getExtensionDatabaseFeeBankVoucherDate().getDayOfMonth()
+//        );
+//
+//        LocalDate databaseSubmissionVoucherDate = dateConverter.jalaliToGregorian(
+//                licenseDatabaseFeesExtensionDTO.getExtensionDatabaseFeeBankVoucherSubmissionDate().getYear(),
+//                licenseDatabaseFeesExtensionDTO.getExtensionDatabaseFeeBankVoucherSubmissionDate().getMonthValue(),
+//                licenseDatabaseFeesExtensionDTO.getExtensionDatabaseFeeBankVoucherSubmissionDate().getDayOfMonth()
+//        );
 
-        LocalDate databaseSubmissionVoucherDate = dateConverter.jalaliToGregorian(
-                licenseDatabaseFeesExtensionDTO.getExtensionDatabaseFeeBankVoucherSubmissionDate().getYear(),
-                licenseDatabaseFeesExtensionDTO.getExtensionDatabaseFeeBankVoucherSubmissionDate().getMonthValue(),
-                licenseDatabaseFeesExtensionDTO.getExtensionDatabaseFeeBankVoucherSubmissionDate().getDayOfMonth()
-        );
+
+        String[] partsEntry = licenseDatabaseFeesExtensionDTO.getExtensionDatabaseFeeBankVoucherJalaliDate().split("-");
+        int jYear = Integer.parseInt(partsEntry[0]);
+        int jMonth = Integer.parseInt(partsEntry[1]);
+        int jDay = Integer.parseInt(partsEntry[2]);
+        PersianCalendarUtils converter = new PersianCalendarUtils();
+        LocalDate licenseDatabaseVoucherDate = converter.jalaliToGregorian(jYear, jMonth, jDay);
+        licenseDatabaseFeesExtensionDTO.setExtensionDatabaseFeeBankVoucherDate(licenseDatabaseVoucherDate);
+
+
+
+        String[] partsSub = licenseDatabaseFeesExtensionDTO.getExtensionDatabaseFeeBankVoucehrSubmissionJalaliDate().split("-");
+        int jSubYear = Integer.parseInt(partsSub[0]);
+        int jSubMonth = Integer.parseInt(partsSub[1]);
+        int jSubDay = Integer.parseInt(partsSub[2]);
+        LocalDate licenseDataseSubmissionDate = converter.jalaliToGregorian(jSubYear, jSubMonth, jSubDay);
+        licenseDatabaseFeesExtensionDTO.setExtensionDatabaseFeeBankVoucherSubmissionDate(licenseDataseSubmissionDate);
+
         // Update only the required fields
-        existingLicenseDatabaseFeesExtension.setExtensionDatabaseFeeBankVoucherDate(databaseSubmissionVoucherDate);
-        existingLicenseDatabaseFeesExtension.setExtensionDatabaseFeeBankVoucherSubmissionDate(databaseSubmissionVoucherDate);
         existingLicenseDatabaseFeesExtension.setExtensionDatabaseFeeBankVoucherNo(licenseDatabaseFeesExtensionDTO.getExtensionDatabaseFeeBankVoucherNo());
         existingLicenseDatabaseFeesExtension.setExtensionDatabasePaymentStatus(licenseDatabaseFeesExtensionDTO.getExtensionDatabasePaymentStatus());
 

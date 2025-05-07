@@ -24,8 +24,11 @@ public class LicenseAdminFeesExtensionDTO {
     //    Add bank voucher date,submission,Fees
     private BigDecimal extensionAdministrationFees;
     private String extensionAdministrationFeeBankVoucherNo;
+    private String extensionAdministrationFeeBankVoucherJalaliDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate extensionAdministrationFeeBankVoucherDate;
+
+    private String extensionAdministrationFeeBankVoucherSubmissionJalaliDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate extensionAdministrationFeeBankVoucherSubmissionDate;
     private String extensionAdministrationPaymentStatus;
@@ -47,4 +50,6 @@ public class LicenseAdminFeesExtensionDTO {
     private LocalDateTime extendStatusCreatedDate;
     private String extensionAdministrationPaymentStatusCreatedBy;
     private LocalDateTime extensionAdministrationPaymentStatusCreatedDate;
+
+
 }

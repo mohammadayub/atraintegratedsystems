@@ -65,6 +65,19 @@ public interface LicenseApprovalRepository extends JpaRepository<LicenseApproval
 
 
 
+    //Finance Report for License Fee ,  Paid and Approved.
+
+    @Query(value = "SELECT * FROM license_approvals " +
+            "WHERE approval_status = 'Approve' " +
+            "AND license_fee_mcit_payment_status = 'Paid'",
+            nativeQuery = true)
+    List<LicenseApproval> findLicenseFeesPaidReport();
+
+
+
+
+
+
 
 
 

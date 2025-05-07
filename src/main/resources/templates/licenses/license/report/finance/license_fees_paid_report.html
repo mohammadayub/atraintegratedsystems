@@ -1,0 +1,60 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head th:replace="~{layout :: page_head}">
+  <div th:replace="styles :: data-tables-styles"></div>
+  <div th:replace="styles :: persian-datepicker-styles"></div>
+  <div th:replace="styles :: select2-styles"></div>
+  <div th:replace="styles :: commonfieldset-with-legend-border"></div>
+  <div th:replace="styles :: common-css"></div>
+  <title>LMS</title>
+</head>
+<body>
+<nav th:replace="~{layout :: page_navbar}"></nav>
+<div class="container-fluid">
+  <fieldset>
+    <legend>License Application Fee Report</legend>
+    <div class="table-container">
+      <table class="slip" id="profileTable" >
+        <thead>
+        <tr>
+          <th>Requested ID</th>
+          <th>Requested Date</th>
+          <th>Company Name</th>
+          <th>License Type</th>
+          <th>License Fees</th>
+
+          <!-- Add more columns as needed -->
+        </tr>
+        </thead>
+
+        <tr th:each="approval : ${approvals}">
+          <td th:text="${approval.licenseApplicant.reqId}"></td>
+          <td th:text="${approval.licenseApplicant.reqDate}"></td>
+          <td th:text="${approval.licenseApplicant.companyLicenseName}"></td>
+          <td th:text="${approval.licenseType.name}"></td>
+          <td th:text="${approval.licenseFees}"></td>
+
+
+          <!-- Add more data fields based on your LicenseApplicant model -->
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </fieldset>
+  <a th:href="@{/finance/finance-report}" class="btn btn-primary" style="margin-top:20px;">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6" style="width:20px;height:20px;">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
+    </svg>
+    Back to Page</a>
+</div>
+<!-- Common scripts -->
+<div th:replace="scripts :: common-scripts"></div>
+<div th:replace="scripts :: persian-datepicker-scripts"></div>
+<div th:replace="scripts :: data-tables-scripts"></div>
+<div th:replace="scripts :: common-datatable"></div>
+
+<div style="height:10vh"></div>
+<footer th:replace="~{layout :: page_footer}"></footer>
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>
