@@ -48,7 +48,7 @@ public interface LicenseApprovalRepository extends JpaRepository<LicenseApproval
     List<LicenseApproval> findApprovedAndPaidLicenses();
 
 
-    @Query(value = "SELECT * FROM license_approvals ", nativeQuery = true)
+    @Query(value = "SELECT * FROM license_approvals WHERE approval_status = 'Approve'", nativeQuery = true)
     List<LicenseApproval> findAllLicenses();
 
 
@@ -72,6 +72,36 @@ public interface LicenseApprovalRepository extends JpaRepository<LicenseApproval
             "AND license_fee_mcit_payment_status = 'Paid'",
             nativeQuery = true)
     List<LicenseApproval> findLicenseFeesPaidReport();
+
+
+
+    //Finance Report for admin Fee ,  Paid and Approved.
+
+    @Query(value = "SELECT * FROM license_approvals " +
+            "WHERE approval_status = 'Approve' " +
+            "AND administration_fee_payment_status = 'Paid'",
+            nativeQuery = true)
+    List<LicenseApproval> findAdminFeesPaidReport();
+
+
+    //Finance Report for database maintainance Fee ,  Paid and Approved.
+
+    @Query(value = "SELECT * FROM license_approvals " +
+            "WHERE approval_status = 'Approve' " +
+            "AND database_maintainance_fee_payment_status = 'Paid'",
+            nativeQuery = true)
+    List<LicenseApproval> findDbFeesPaidReport();
+
+
+    //Finance Report for database Guarantee Fee ,  Paid and Approved.
+
+    @Query(value = "SELECT * FROM license_approvals " +
+            "WHERE approval_status = 'Approve' " +
+            "AND guarantee_fee_payment_status = 'Paid'",
+            nativeQuery = true)
+    List<LicenseApproval> findGuaranteeFeesPaidReport();
+
+
 
 
 

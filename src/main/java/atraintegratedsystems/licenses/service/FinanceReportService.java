@@ -28,4 +28,23 @@ public class FinanceReportService {
     {
         return licenseApprovalRepository.findLicenseFeesPaidReport();
     }
+
+    @Transactional
+    public List<LicenseApproval> getAdminFeesPaidReport()
+    {
+        return licenseApprovalRepository.findAdminFeesPaidReport();
+    }
+
+    @Transactional
+    public List<LicenseApproval> getDatabaseFeesPaidReport()
+    {
+        return licenseApprovalRepository.findDbFeesPaidReport();
+    }
+
+    @Transactional
+    public List<LicenseApproval> getGuaranteeFeesPaidReport()
+    {
+        return licenseApprovalRepository.findGuaranteeFeesPaidReport();
+    }
+
 }
