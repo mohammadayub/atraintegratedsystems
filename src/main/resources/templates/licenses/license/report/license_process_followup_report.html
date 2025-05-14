@@ -12,22 +12,19 @@
     <div th:replace="styles :: commonfieldset-with-legend-border"></div>
 
     <style>
-        /* Custom styles for small font and nice border */
         .table-sm th, .table-sm td {
-            font-size: 0.7em; /* Smaller font size */
-            padding: 0.4rem; /* Adjusted padding for a compact look */
+            font-size: 0.7em;
+            padding: 0.4rem;
         }
         .table-bordered th, .table-bordered td {
-            border: 1px solid #dee2e6; /* Light border color */
-            text-align:center;
+            border: 1px solid #dee2e6;
+            text-align: center;
         }
         .table-bordered {
             border-collapse: collapse;
         }
     </style>
 </head>
-
-
 
 <body>
 <nav th:replace="~{layout :: page_navbar}"></nav>
@@ -50,7 +47,7 @@
                 <th th:text="#{refer_to_board_date}">Refer to Board Date</th>
                 <th th:text="#{approval_license_date}">Approval Date</th>
                 <th th:text="#{total_day_three_process}">Total Days (3 Process)</th>
-                <th th:text="#{total_all_process}">Total All Process Days</th> <!-- NEW COLUMN -->
+                <th th:text="#{total_all_process}">Total All Process Days</th>
                 <th th:text="#{license_fee_bank_voucher_submission_date}">License Fees Voucher Sub Date</th>
                 <th th:text="#{admin_fee_bank_voucher_submission_date}">Admin Fees Voucher Sub Date</th>
                 <th th:text="#{database_fee_bank_voucher_submission_date}">Db Fees Voucher Sub Date</th>
@@ -70,7 +67,7 @@
                 <td th:text="${profile.licenseApplicant.referToBoardDate}"></td>
                 <td th:text="${profile.approvalDate}" class="approval-date"></td>
                 <td class="process3-days" style="background-color: #ffe5d9;"></td>
-                <td class="total-days" style="background-color: white; font-weight:bold;"></td> <!-- NEW COLUMN -->
+                <td class="total-days" style="background-color: white; font-weight:bold;"></td>
                 <td th:text="${profile.licenseFeeBankVoucherSubmissionDate}" class="license-fee-voucher-date"></td>
                 <td th:text="${profile.administrationFeeBankVoucherSubmissionDate}"></td>
                 <td th:text="${profile.databasemaintainanceFeeBankVoucherSubmissionDate}"></td>
@@ -104,7 +101,11 @@
             scrollCollapse: true,
             paging: true,
             pageLength: 10,
-            dom: '<"d-flex justify-content-between align-items-center mb-2"Bf>rtip',
+            lengthMenu: [
+                [10, 25, 50, 100, -1],
+                [10, 25, 50, 100, "All"]
+            ],
+            dom: '<"d-flex justify-content-between align-items-center mb-2"Bfl>rtip',
             buttons: [
                 {
                     extend: 'excelHtml5',
@@ -115,10 +116,10 @@
                     },
                     customizeData: function (data) {
                         data.body.forEach((row, index) => {
-                            const reqDate = new Date(row[3]);      // Request Date
-                            const voucherDate = new Date(row[4]);  // Voucher Submission Date
-                            const referDate = new Date(row[6]);    // Complete Profile Date
-                            const approvalDate = new Date(row[8]); // Approval Date
+                            const reqDate = new Date(row[3]);
+                            const voucherDate = new Date(row[4]);
+                            const referDate = new Date(row[6]);
+                            const approvalDate = new Date(row[8]);
 
                             let process1Days = "N/A";
                             let process2Days = "N/A";
@@ -198,7 +199,6 @@
         });
     });
 </script>
-
 
 <div style="height:10vh;"></div>
 
