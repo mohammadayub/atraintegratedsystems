@@ -1,8 +1,6 @@
 package atraintegratedsystems.typeofapproval.model;
-
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
-
 import javax.persistence.*;
 import java.util.List;
 
@@ -29,6 +27,9 @@ public class TypeOfApprovalApplicant {
     private String enteredBy;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private String enteredDate;
+
+    @OneToMany(mappedBy = "applicant", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<TypeOfApprovalManufacturerDetail> manufacturers;
 
 
 

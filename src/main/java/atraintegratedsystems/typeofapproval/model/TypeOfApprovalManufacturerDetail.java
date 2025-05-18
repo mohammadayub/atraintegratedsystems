@@ -7,9 +7,7 @@ import javax.persistence.*;
 
 @Data
 @Entity
-
 public class TypeOfApprovalManufacturerDetail {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

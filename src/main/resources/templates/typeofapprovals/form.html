@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Type of Approval Form</title>
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    function addManufacturer() {
+        const table = document.getElementById("manufacturerTableBody");
+        const index = table.rows.length;
+        const template = document.getElementById("manufacturerTemplate").innerHTML;
+        const newRow = document.createElement("tr");
+        newRow.innerHTML = template.replace(/__INDEX__/g, index);
+        table.appendChild(newRow);
+    }
+
+    function removeRow(button) {
+        const row = button.closest("tr");
+        row.parentNode.removeChild(row);
+    }
+  </script>
+</head>
+<body class="bg-light">
+
+<div class="container mt-4">
+  <h2 class="mb-4">Online Application</h2>
+  <form th:action="@{/typeofapprovals/submit}" method="post" th:object="${form}">
+    <div class="card mb-4">
+      <div class="card-header">Applicant Details</div>
+      <div class="card-body row g-3">
+        <div class="col-md-6">
+          <label>Manufacturer</label>
+          <input type="text" class="form-control" th:field="*{applicant.manufacturer}"/>
+        </div>
+        <div class="col-md-6">
+          <label>Person</label>
+          <input type="text" class="form-control" th:field="*{applicant.person}"/>
+        </div>
+        <div class="col-md-6">
+          <label>License Operator</label>
+          <input type="text" class="form-control" th:field="*{applicant.licenseOperator}"/>
+        </div>
+        <div class="col-md-6">
+          <label>Authorized Importer</label>
+          <input type="text" class="form-control" th:field="*{applicant.authorizedImporter}"/>
+        </div>
+        <div class="col-md-6">
+          <label>Import Registration No</label>
+          <input type="text" class="form-control" th:field="*{applicant.importRegistrationNo}"/>
+        </div>
+        <div class="col-md-6">
+          <label>Company Name</label>
+          <input type="text" class="form-control" th:field="*{applicant.companyName}"/>
+        </div>
+        <div class="col-md-6">
+          <label>Contact Person</label>
+          <input type="text" class="form-control" th:field="*{applicant.contactPerson}"/>
+        </div>
+        <div class="col-md-6">
+          <label>Address</label>
+          <input type="text" class="form-control" th:field="*{applicant.address}"/>
+        </div>
+        <div class="col-md-6">
+          <label>P.O. Box</label>
+          <input type="text" class="form-control" th:field="*{applicant.P_O_Box}"/>
+        </div>
+        <div class="col-md-6">
+          <label>Telephone</label>
+          <input type="text" class="form-control" th:field="*{applicant.telephone}"/>
+        </div>
+        <div class="col-md-6">
+          <label>Mobile</label>
+          <input type="text" class="form-control" th:field="*{applicant.mobile}"/>
+        </div>
+        <div class="col-md-6">
+          <label>Email</label>
+          <input type="email" class="form-control" th:field="*{applicant.email}"/>
+        </div>
+        <div class="col-md-6">
+          <label>Entered By</label>
+          <input type="text" class="form-control" th:field="*{applicant.enteredBy}"/>
+        </div>
+        <div class="col-md-6">
+          <label>Entered Date</label>
+          <input type="date" class="form-control" th:field="*{applicant.enteredDate}"/>
+        </div>
+      </div>
+    </div>
+
+    <div class="card mb-4">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <span>Manufacturer Details</span>
+        <button type="button" class="btn btn-sm btn-success" onclick="addManufacturer()">Add Manufacturer</button>
+      </div>
+      <div class="card-body">
+        <table class="table table-bordered">
+          <thead class="table-light">
+          <tr>
+            <th>Company Name</th>
+            <th>Authorized Importer</th>
+            <th>Contact Person</th>
+            <th>Address</th>
+            <th>P.O. Box</th>
+            <th>Telephone</th>
+            <th>Mobile</th>
+            <th>Email</th>
+            <th>Entered By</th>
+            <th>Entered Date</th>
+            <th>Action</th>
+          </tr>
+          </thead>
+          <tbody id="manufacturerTableBody">
+          <tr th:each="man, iterStat : *{manufacturers}">
+            <td><input type="text" class="form-control" th:field="*{manufacturers[__${iterStat.index}__].companyName}"/></td>
+            <td><input type="text" class="form-control" th:field="*{manufacturers[__${iterStat.index}__].authorizedImporter}"/></td>
+            <td><input type="text" class="form-control" th:field="*{manufacturers[__${iterStat.index}__].contactPerson}"/></td>
+            <td><input type="text" class="form-control" th:field="*{manufacturers[__${iterStat.index}__].address}"/></td>
+            <td><input type="text" class="form-control" th:field="*{manufacturers[__${iterStat.index}__].manufacturer_P_O_Box}"/></td>
+            <td><input type="text" class="form-control" th:field="*{manufacturers[__${iterStat.index}__].manufacturer_telephone}"/></td>
+            <td><input type="text" class="form-control" th:field="*{manufacturers[__${iterStat.index}__].manufacturer_mobile}"/></td>
+            <td><input type="email" class="form-control" th:field="*{manufacturers[__${iterStat.index}__].manufacturer_email}"/></td>
+            <td><input type="text" class="form-control" th:field="*{manufacturers[__${iterStat.index}__].enteredBy}"/></td>
+            <td><input type="date" class="form-control" th:field="*{manufacturers[__${iterStat.index}__].enteredDate}"/></td>
+            <td><button type="button" class="btn btn-danger btn-sm" onclick="removeRow(this)">Remove</button></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="text-end">
+      <button type="submit" class="btn btn-primary">Submit Application</button>
+    </div>
+  </form>
+</div>
+
+<!-- Hidden Template for JS cloning -->
+<script type="text/template" id="manufacturerTemplate">
+  <td><input type="text" name="manufacturers[__INDEX__].companyName" class="form-control"/></td>
+  <td><input type="text" name="manufacturers[__INDEX__].authorizedImporter" class="form-control"/></td>
+  <td><input type="text" name="manufacturers[__INDEX__].contactPerson" class="form-control"/></td>
+  <td><input type="text" name="manufacturers[__INDEX__].address" class="form-control"/></td>
+  <td><input type="text" name="manufacturers[__INDEX__].manufacturer_P_O_Box" class="form-control"/></td>
+  <td><input type="text" name="manufacturers[__INDEX__].manufacturer_telephone" class="form-control"/></td>
+  <td><input type="text" name="manufacturers[__INDEX__].manufacturer_mobile" class="form-control"/></td>
+  <td><input type="email" name="manufacturers[__INDEX__].manufacturer_email" class="form-control"/></td>
+  <td><input type="text" name="manufacturers[__INDEX__].enteredBy" class="form-control"/></td>
+  <td><input type="date" name="manufacturers[__INDEX__].enteredDate" class="form-control"/></td>
+  <td><button type="button" class="btn btn-danger btn-sm" onclick="removeRow(this)">Remove</button></td>
+</script>
+
+</body>
+</html>
