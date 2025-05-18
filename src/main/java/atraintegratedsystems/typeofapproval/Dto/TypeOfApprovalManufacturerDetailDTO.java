@@ -1,4 +1,4 @@
-package atraintegratedsystems.typeofapproval.Dto;
+package atraintegratedsystems.typeofapproval.dto;
 
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -17,5 +17,5 @@ public class TypeOfApprovalManufacturerDetailDTO {
     private String manufacturer_email;
     private String enteredBy;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private String enterdDate;
+    private String enteredDate;
 }

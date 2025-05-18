@@ -10,7 +10,6 @@ import javax.persistence.*;
 
 public class TypeOfApprovalManufacturerDetail {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -24,9 +23,10 @@ public class TypeOfApprovalManufacturerDetail {
     private String manufacturer_email;
     private String enteredBy;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private String enterdDate;
-
+    private String enteredDate;
     @ManyToOne
     @JoinColumn(name = "type_of_approval_applicant_id")
     private TypeOfApprovalApplicant applicant;
+
+
 }

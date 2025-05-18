@@ -3,5 +3,5 @@ package atraintegratedsystems.typeofapproval.repository;
 import atraintegratedsystems.typeofapproval.model.TypeOfApprovalManufacturerDetail;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface TypeOfApprovalManufacturerDetail_Repository extends JpaRepository<TypeOfApprovalManufacturerDetail,Long> {
+public interface TypeOfApprovalManufacturerDetailRepository extends JpaRepository<TypeOfApprovalManufacturerDetail,Long> {
 }

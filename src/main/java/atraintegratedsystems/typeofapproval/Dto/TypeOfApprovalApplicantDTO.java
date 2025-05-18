@@ -1,4 +1,4 @@
-package atraintegratedsystems.typeofapproval.Dto;
+package atraintegratedsystems.typeofapproval.dto;
 
 import lombok.Data;
 
@@ -18,4 +18,5 @@ public class TypeOfApprovalApplicantDTO {
     private String mobile;
     private String email;
     private String enteredBy;
+
 }

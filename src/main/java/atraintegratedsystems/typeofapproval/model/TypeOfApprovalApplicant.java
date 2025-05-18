@@ -4,6 +4,7 @@ import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "typeofapproval_applicants")
@@ -27,11 +28,8 @@ public class TypeOfApprovalApplicant {
     private String email;
     private String enteredBy;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private String enterdDate;
+    private String enteredDate;
 
-    // For Now i comment Bellow Code
-//    @OneToMany(mappedBy = "applicant", cascade = CascadeType.ALL, orphanRemoval = true)
-//    private List<TypeOfApprovalManufacturerDetail> manufacturerDetails;
 
 
 
