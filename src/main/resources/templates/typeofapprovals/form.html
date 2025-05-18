@@ -21,22 +21,76 @@
         row.parentNode.removeChild(row);
     }
   </script>
+  <div th:replace="styles :: common-css"></div>
+  <style>
+    body {
+        font-family: "Roboto", sans-serif;
+        font-weight: 500;
+        background-color: #f5f5f5;
+    }
+    .navbar {
+        background-color: #f8f9fa; /* Light gray background */
+        padding: 10px 20px;
+        opacity: 0.9; /* Slight transparency */
+        border-radius: 8px; /* Smooth rounded corners */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+        transition: background-color 0.3s ease; /* Smooth color transition */
+    }
+    .navbar-brand img {
+        height: 50px;
+        margin-right: 10px;
+    }
+    .navbar h3 {
+        color: black;
+        font-weight: bold;
+        margin: 0;
+    }
+    .navbar-toggler {
+        border: none;
+    }
+    .language-dropdown {
+        margin-left: 0; /* Remove margin */
+    }
+    /* Adjustments for RTL layout */
+    [dir="rtl"] .navbar-nav.ms-auto {
+        margin-left: 0;
+        margin-right: auto;
+    }
+    [dir="rtl"] .form-select {
+        text-align: right;
+    }
+
+    /* Adjustments for LTR layout */
+    [dir="ltr"] .navbar-nav.ms-auto {
+        margin-left: auto;
+        margin-right: 0;
+    }
+  </style>
 </head>
 <body class="bg-light">
 
-<div class="container mt-4">
-  <h2 class="mb-4">Online Application</h2>
+<nav th:replace="~{typeofApproval_layout :: page_navbar}"></nav>
+<div class="container-fluid mt-4">
+  <h3 class="mb-4" style="text-align:center;">Online Application</h3>
   <form th:action="@{/typeofapprovals/submit}" method="post" th:object="${form}">
     <div class="card mb-4">
       <div class="card-header">Applicant Details</div>
       <div class="card-body row g-3">
         <div class="col-md-6">
           <label>Manufacturer</label>
-          <input type="text" class="form-control" th:field="*{applicant.manufacturer}"/>
+<!--          <input type="text" class="form-control" th:field="*{applicant.manufacturer}"/>-->
+          <select class="form-select" th:field="*{applicant.manufacturer}">
+            <option value="Local">Local</option>
+            <option value="International">International</option>
+          </select>
         </div>
         <div class="col-md-6">
           <label>Person</label>
-          <input type="text" class="form-control" th:field="*{applicant.person}"/>
+<!--          <input type="text" class="form-control" th:field="*{applicant.person}"/>-->
+          <select class="form-select" th:field="*{applicant.person}">
+            <option value="Individual">Individual</option>
+            <option value="Company">Company</option>
+          </select>
         </div>
         <div class="col-md-6">
           <label>License Operator</label>
@@ -78,15 +132,6 @@
           <label>Email</label>
           <input type="email" class="form-control" th:field="*{applicant.email}"/>
         </div>
-        <div class="col-md-6">
-          <label>Entered By</label>
-          <input type="text" class="form-control" th:field="*{applicant.enteredBy}"/>
-        </div>
-        <div class="col-md-6">
-          <label>Entered Date</label>
-          <input type="date" class="form-control" th:field="*{applicant.enteredDate}"/>
-        </div>
-      </div>
     </div>
 
     <div class="card mb-4">
@@ -106,8 +151,6 @@
             <th>Telephone</th>
             <th>Mobile</th>
             <th>Email</th>
-            <th>Entered By</th>
-            <th>Entered Date</th>
             <th>Action</th>
           </tr>
           </thead>
@@ -121,8 +164,6 @@
             <td><input type="text" class="form-control" th:field="*{manufacturers[__${iterStat.index}__].manufacturer_telephone}"/></td>
             <td><input type="text" class="form-control" th:field="*{manufacturers[__${iterStat.index}__].manufacturer_mobile}"/></td>
             <td><input type="email" class="form-control" th:field="*{manufacturers[__${iterStat.index}__].manufacturer_email}"/></td>
-            <td><input type="text" class="form-control" th:field="*{manufacturers[__${iterStat.index}__].enteredBy}"/></td>
-            <td><input type="date" class="form-control" th:field="*{manufacturers[__${iterStat.index}__].enteredDate}"/></td>
             <td><button type="button" class="btn btn-danger btn-sm" onclick="removeRow(this)">Remove</button></td>
           </tr>
           </tbody>
@@ -151,5 +192,14 @@
   <td><button type="button" class="btn btn-danger btn-sm" onclick="removeRow(this)">Remove</button></td>
 </script>
 
+
+<!-- Common scripts -->
+<div th:replace="scripts :: common-scripts"></div>
+<div th:replace="scripts :: persian-datepicker-scripts"></div>
+<div th:replace="scripts :: data-tables-scripts"></div>
+<div th:replace="scripts :: common-datatable"></div>
+
+<div style="height:10vh"></div>
+<footer th:replace="~{typeofApproval_layout :: page_footer}"></footer>
 </body>
 </html>

@@ -1,4 +1,4 @@
-package atraintegratedsystems.typeofapproval.dto;
+package atraintegratedsystems.typeofapproval.Dto;
 
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;

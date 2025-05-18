@@ -1,4 +1,4 @@
-package atraintegratedsystems.typeofapproval.dto;
+package atraintegratedsystems.typeofapproval.Dto;
 
 import lombok.Data;
 

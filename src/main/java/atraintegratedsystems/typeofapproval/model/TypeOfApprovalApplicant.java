@@ -2,6 +2,7 @@ package atraintegratedsystems.typeofapproval.model;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -12,6 +13,8 @@ public class TypeOfApprovalApplicant {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate requestDate;
     private String manufacturer;
     private String person;
     private String licenseOperator;
