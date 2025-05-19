@@ -41,9 +41,6 @@ public class TypeOfApprovalAttachment {
     @Column(name="test_reports_issued_by_accredited_testing")
     private byte[] testReportsIssuedByAccreditedTesting ;
 
-    @ManyToOne
-    @JoinColumn(name = "type_of_approval_applicant_id")
-    private TypeOfApprovalApplicant applicant;
 
     private String enteredBy;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
