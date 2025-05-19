@@ -29,10 +29,13 @@ public class TypeOfApprovalApplicant {
     private String email;
     private String enteredBy;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private String enteredDate;
+    private LocalDate enteredDate;
 
     @OneToMany(mappedBy = "applicant", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<TypeOfApprovalManufacturerDetail> manufacturers;
+
+    @OneToMany(mappedBy = "approvalApplicant", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<TypeOfApprovalAttachment> attachments;
 
 
 

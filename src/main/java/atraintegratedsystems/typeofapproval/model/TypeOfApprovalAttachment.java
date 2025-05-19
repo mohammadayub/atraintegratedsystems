@@ -1,8 +1,10 @@
 package atraintegratedsystems.typeofapproval.model;
 
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Data
 @Entity
@@ -42,6 +44,14 @@ public class TypeOfApprovalAttachment {
     @ManyToOne
     @JoinColumn(name = "type_of_approval_applicant_id")
     private TypeOfApprovalApplicant applicant;
+
+    private String enteredBy;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate enteredDate;
+
+    @ManyToOne
+    @JoinColumn(name = "type_of_approval_applicant_id")
+    private TypeOfApprovalApplicant approvalApplicant;
 
 
 }
