@@ -2,8 +2,7 @@ package atraintegratedsystems.typeofapproval.controller;
 
 import atraintegratedsystems.typeofapproval.dto.TypeOfApprovalFormDTO;
 import atraintegratedsystems.typeofapproval.model.TypeOfApprovalManufacturerDetail;
-import atraintegratedsystems.typeofapproval.repository.TypeOfApprovalApplicantRepository;
-import atraintegratedsystems.typeofapproval.repository.TypeOfApprovalManufacturerDetailRepository;
+import atraintegratedsystems.typeofapproval.service.TypeOfApprovalService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -12,13 +11,10 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/typeofapprovals")
 public class TypeOfApprovalController {
 
-    private final TypeOfApprovalApplicantRepository applicantRepository;
-    private final TypeOfApprovalManufacturerDetailRepository manufacturerRepository;
+    private final TypeOfApprovalService approvalService;
 
-    public TypeOfApprovalController(TypeOfApprovalApplicantRepository applicantRepository,
-                                    TypeOfApprovalManufacturerDetailRepository manufacturerRepository) {
-        this.applicantRepository = applicantRepository;
-        this.manufacturerRepository = manufacturerRepository;
+    public TypeOfApprovalController(TypeOfApprovalService approvalService) {
+        this.approvalService = approvalService;
     }
 
     @GetMapping("/form")
@@ -31,14 +27,7 @@ public class TypeOfApprovalController {
 
     @PostMapping("/submit")
     public String submitForm(@ModelAttribute TypeOfApprovalFormDTO form) {
-        var applicant = form.getApplicant();
-        var savedApplicant = applicantRepository.save(applicant);
-
-        for (TypeOfApprovalManufacturerDetail manufacturer : form.getManufacturers()) {
-            manufacturer.setApplicant(savedApplicant);
-            manufacturerRepository.save(manufacturer);
-        }
-
+        approvalService.submitForm(form);
         return "redirect:/typeofapprovals/success";
     }
 
