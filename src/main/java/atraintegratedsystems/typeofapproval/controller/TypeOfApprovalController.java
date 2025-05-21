@@ -1,6 +1,6 @@
 package atraintegratedsystems.typeofapproval.controller;
 
-import atraintegratedsystems.typeofapproval.Dto.TypeOfApprovalFormDTO;
+import atraintegratedsystems.typeofapproval.dto.TypeOfApprovalFormDTO;
 import atraintegratedsystems.typeofapproval.model.TypeOfApprovalManufacturerDetail;
 import atraintegratedsystems.typeofapproval.service.TypeOfApprovalService;
 import org.springframework.stereotype.Controller;
@@ -26,10 +26,17 @@ public class TypeOfApprovalController {
     }
 
     @PostMapping("/submit")
-    public String submitForm(@ModelAttribute TypeOfApprovalFormDTO form) {
-        approvalService.submitForm(form);
-        return "redirect:/typeofapprovals/success";
+    public String submitForm(@ModelAttribute TypeOfApprovalFormDTO form, Model model) {
+        try {
+            approvalService.submitForm(form);
+            return "redirect:/typeofapprovals/success";
+        } catch (IllegalArgumentException ex) {
+            model.addAttribute("form", form);
+            model.addAttribute("errorMessage", ex.getMessage());
+            return "typeofapprovals/form";
+        }
     }
+
 
     @GetMapping("/success")
     public String successPage() {

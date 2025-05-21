@@ -20,6 +20,7 @@ public class TypeOfApprovalApplicant {
     private String licenseOperator;
     private String authorizedImporter;
     private String importRegistrationNo;
+    @Column(unique = true, nullable = false)
     private String companyName;
     private String contactPerson;
     private String address;

@@ -92,7 +92,7 @@
 
 <div class="container-fluid mt-4">
   <h3 class="mb-4 text-center"  style="font-family: 'Playwrite DK Loopet', cursive;" th:text="#{online_application}"></h3>
-
+  <div th:if="${errorMessage}" class="alert alert-danger" th:text="${errorMessage}"></div>
   <form th:action="@{/typeofapprovals/submit}" method="post" th:object="${form}" enctype="multipart/form-data">
     <!-- Applicant Details -->
     <div class="card mb-4">

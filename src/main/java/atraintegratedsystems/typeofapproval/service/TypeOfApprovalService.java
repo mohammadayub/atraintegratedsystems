@@ -1,6 +1,6 @@
 package atraintegratedsystems.typeofapproval.service;
 
-import atraintegratedsystems.typeofapproval.Dto.TypeOfApprovalFormDTO;
+import atraintegratedsystems.typeofapproval.dto.TypeOfApprovalFormDTO;
 import atraintegratedsystems.typeofapproval.model.TypeOfApprovalAttachment;
 import atraintegratedsystems.typeofapproval.model.TypeOfApprovalManufacturerDetail;
 import atraintegratedsystems.typeofapproval.repository.TypeOfApprovalApplicantRepository;
@@ -31,6 +31,12 @@ public class TypeOfApprovalService {
     @Transactional
     public void submitForm(TypeOfApprovalFormDTO form) {
         var applicant = form.getApplicant();
+
+        // Check uniqueness
+        if (applicantRepository.existsByCompanyName(applicant.getCompanyName())) {
+            throw new IllegalArgumentException("Company name already exists.");
+        }
+
         var savedApplicant = applicantRepository.save(applicant);
 
         for (TypeOfApprovalManufacturerDetail manufacturer : form.getManufacturers()) {
@@ -54,9 +60,10 @@ public class TypeOfApprovalService {
 
             attachmentRepository.save(attachment);
         } catch (IOException e) {
-            e.printStackTrace(); // You should use proper logging here
+            e.printStackTrace(); // Use logging
         }
     }
+
 
     @Transactional
     private void setAttachmentField(ThrowingConsumer<byte[]> setter, MultipartFile file) throws IOException {

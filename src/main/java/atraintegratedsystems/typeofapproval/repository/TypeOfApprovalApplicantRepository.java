@@ -7,5 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface TypeOfApprovalApplicantRepository extends JpaRepository<TypeOfApprovalApplicant,Long> {
 
+    boolean existsByCompanyName(String companyName);
 
 }
