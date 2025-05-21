@@ -27,7 +27,7 @@ public class TypeOfApprovalAttachment {
 
     @Lob
     @Column(name="Circuit_diagram_PCB")
-    private byte[] CircuitDiagramPCB;
+    private byte[] circuitDiagramPCB;
 
     @Lob
     @Column(name="photographs")

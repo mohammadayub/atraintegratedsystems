@@ -1,6 +1,6 @@
 package atraintegratedsystems.typeofapproval.service;
 
-import atraintegratedsystems.typeofapproval.dto.TypeOfApprovalFormDTO;
+import atraintegratedsystems.typeofapproval.Dto.TypeOfApprovalFormDTO;
 import atraintegratedsystems.typeofapproval.model.TypeOfApprovalAttachment;
 import atraintegratedsystems.typeofapproval.model.TypeOfApprovalManufacturerDetail;
 import atraintegratedsystems.typeofapproval.repository.TypeOfApprovalApplicantRepository;

@@ -1,6 +1,6 @@
 package atraintegratedsystems.typeofapproval.controller;
 
-import atraintegratedsystems.typeofapproval.dto.TypeOfApprovalFormDTO;
+import atraintegratedsystems.typeofapproval.Dto.TypeOfApprovalFormDTO;
 import atraintegratedsystems.typeofapproval.model.TypeOfApprovalManufacturerDetail;
 import atraintegratedsystems.typeofapproval.service.TypeOfApprovalService;
 import org.springframework.stereotype.Controller;
