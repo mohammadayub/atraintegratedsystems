@@ -194,7 +194,7 @@
     </div>
 
     <div class="card mb-4">
-      <div class="card-header b-4" th:text="#{attachments}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">Attachments</div>
+      <div class="card-header b-4" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" title="Only Allowed PDF File">Attachments <span style="color:red;font-size:12px;">Only Allowed (.PDF) <img  th:src="@{/images/pdf.png}" width="30px" height="30px"></span></div>
       <div class="card-body row g-3">
         <div class="col-md-6">
           <label th:text="#{declaration_of_Conformity}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">Declaration of Conformity issued by the manufacturer of the RCE</label>
