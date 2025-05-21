@@ -8,7 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/typeofapprovals")
 public class TypeOfApprovalController {
 
     private final TypeOfApprovalService approvalService;
@@ -17,29 +16,29 @@ public class TypeOfApprovalController {
         this.approvalService = approvalService;
     }
 
-    @GetMapping("/form")
+    @GetMapping("/typeofapprovals/onlineapplicationform/form")
     public String showForm(Model model) {
         TypeOfApprovalFormDTO form = new TypeOfApprovalFormDTO();
         form.getManufacturers().add(new TypeOfApprovalManufacturerDetail()); // Add one empty row
         model.addAttribute("form", form);
-        return "typeofapprovals/form";
+        return "typeofapprovals/onlineapplicationform/form";
     }
 
     @PostMapping("/submit")
     public String submitForm(@ModelAttribute TypeOfApprovalFormDTO form, Model model) {
         try {
             approvalService.submitForm(form);
-            return "redirect:/typeofapprovals/success";
+            return "redirect:/typeofapprovals/onlineapplicationform/success";
         } catch (IllegalArgumentException ex) {
             model.addAttribute("form", form);
             model.addAttribute("errorMessage", ex.getMessage());
-            return "typeofapprovals/form";
+            return "typeofapprovals/onlineapplicationform/form";
         }
     }
 
 
     @GetMapping("/success")
     public String successPage() {
-        return "typeofapprovals/success";
+        return "typeofapprovals/onlineapplicationform/success";
     }
 }

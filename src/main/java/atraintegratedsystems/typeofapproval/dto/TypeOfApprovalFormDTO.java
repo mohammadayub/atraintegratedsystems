@@ -1,4 +1,4 @@
-package atraintegratedsystems.typeofapproval.Dto;
+package atraintegratedsystems.typeofapproval.dto;
 
 import atraintegratedsystems.typeofapproval.model.TypeOfApprovalApplicant;
 import atraintegratedsystems.typeofapproval.model.TypeOfApprovalManufacturerDetail;

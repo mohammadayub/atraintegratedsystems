@@ -1,0 +1,38 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head th:replace="~{layout :: page_head}">
+  <div th:replace="styles :: commonfieldset"></div>
+  <title>LMS</title>
+  <style>
+    h4 a {
+        color: #14438B;
+        font-size: 20px;
+    }
+  </style>
+</head>
+<body>
+<nav th:replace="~{typeofApproval_layout :: page_navbar}"></nav>
+<div class="container mt-5">
+  <fieldset  sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_typeofapprovals_ADMIN')">
+    <legend th:text="#{typeof_approval_management_section}"></legend>
+    <div class="row g-4">
+      <div class="col-sm-4">
+        <div class="custom-card text-center p-3">
+          <a th:href="@{/typeofapprovals/onlineapplicationform/form}">
+            <img th:src="@{/images/typeofapproval_Form.png}" alt="Type of Approval" class="img-fluid"></a>
+          <h4 class="license-link mt-2">
+            <a th:href="@{/typeofapprovals/onlineapplicationform/form}" th:text="#{typeof_approvals}" style="font-size:20px;"></a>
+          </h4>
+        </div>
+      </div>
+    </div>
+  </fieldset>
+</div>
+<!-- Common scripts -->
+<div th:replace="scripts :: common-scripts"></div>
+
+<div style="height:10vh;"></div>
+<footer th:replace="~{layout :: page_footer}"></footer>
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

@@ -53,11 +53,11 @@
 
                 <td>
                     <div class="custom-card" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_typeofapprovals_ADMIN')">
-                        <a th:href="@{/typeofapprovals}">
+                        <a th:href="@{/typeofapprovals/home}">
                             <img th:src="@{/images/typeofApprovals.png}" alt="Finance Management">
                         </a>
                         <h4 class="license-link" style="margin-top: 10px;">
-                            <a th:href="@{/typeofapprovals}" th:text="#{typeof_approvals}">Type Of Approvals</a>
+                            <a th:href="@{/typeofapprovals/home}" th:text="#{typeof_approvals}">Type Of Approvals</a>
                         </h4>
                     </div>
                 </td>
