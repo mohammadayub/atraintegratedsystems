@@ -1,10 +1,15 @@
 package atraintegratedsystems.typeofapproval.dto;
 
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.time.LocalDate;
 
 @Data
 public class TypeOfApprovalApplicantDTO {
     private long id;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate requestDate;
     private String manufacturer;
     private String person;
     private String licenseOperator;

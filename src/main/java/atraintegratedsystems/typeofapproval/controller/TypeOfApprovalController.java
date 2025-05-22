@@ -28,7 +28,7 @@ public class TypeOfApprovalController {
     public String submitForm(@ModelAttribute TypeOfApprovalFormDTO form, Model model) {
         try {
             approvalService.submitForm(form);
-            return "redirect:/typeofapprovals/onlineapplicationform/success";
+            return "redirect:typeofapprovals/onlineapplicationform/success";
         } catch (IllegalArgumentException ex) {
             model.addAttribute("form", form);
             model.addAttribute("errorMessage", ex.getMessage());

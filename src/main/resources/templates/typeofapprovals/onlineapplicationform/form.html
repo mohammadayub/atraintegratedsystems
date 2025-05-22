@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>Type of Approval Form</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link th:href="@{/images/favicon.png}" rel="icon" type="image/png">
+  <title>Type of Approval</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"/>
   <link href="https://fonts.googleapis.com/css2?family=Playwrite+DK+Loopet&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -93,67 +95,140 @@
 <div class="container-fluid mt-4">
   <h3 class="mb-4 text-center"  style="font-family: 'Playwrite DK Loopet', cursive;" th:text="#{online_application}"></h3>
   <div th:if="${errorMessage}" class="alert alert-danger" th:text="${errorMessage}"></div>
-  <form th:action="@{/typeofapprovals/submit}" method="post" th:object="${form}" enctype="multipart/form-data">
+  <form th:action="@{/typeofapprovals/onlineapplicationform/submit}" method="post" th:object="${form}" enctype="multipart/form-data">
     <!-- Applicant Details -->
     <div class="card mb-4">
-      <div class="card-header fw-bolder" th:text="#{applicant_details}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></div>
+      <div class="card-header fw-bolder"
+           th:text="#{applicant_details}"
+           th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+      </div>
+
       <div class="card-body row g-3">
-        <div class="col-md-6">
-          <label th:text="#{manufacturer}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
+        <div class="col-md-4">
+          <label th:text="#{requestDate}"
+                 th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+          </label>
+          <input type="date" class="form-control"
+                 th:field="*{applicant.requestDate}"
+                 th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" />
+        </div>
+
+        <div class="col-md-4">
+          <label th:text="#{manufacturer}"
+                 th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+          </label>
           <select class="form-select" th:field="*{applicant.manufacturer}">
-            <option value="Local" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">Local</option>
-            <option value="International" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">International</option>
+            <option value="Local"
+                    th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">Local</option>
+            <option value="International"
+                    th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">International</option>
           </select>
         </div>
-        <div class="col-md-6">
-          <label th:text="#{person}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
+
+        <div class="col-md-4">
+          <label th:text="#{person}"
+                 th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+          </label>
           <select class="form-select" th:field="*{applicant.person}">
-            <option value="Individual" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">Individual</option>
-            <option value="Company" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">Company</option>
+            <option value="Individual"
+                    th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">Individual</option>
+            <option value="Company"
+                    th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">Company</option>
           </select>
         </div>
-        <div class="col-md-6">
-          <label th:text="#{license_operator}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
-          <input type="text" class="form-control" th:field="*{applicant.licenseOperator}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" />
+
+        <div class="col-md-4">
+          <label th:text="#{license_operator}"
+                 th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+          </label>
+          <input type="text" class="form-control"
+                 th:field="*{applicant.licenseOperator}"
+                 th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" />
         </div>
-        <div class="col-md-6">
-          <label th:text="#{authorized_importer}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
-          <input type="text" class="form-control" th:field="*{applicant.authorizedImporter}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" />
+
+        <div class="col-md-4">
+          <label th:text="#{authorized_importer}"
+                 th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+          </label>
+          <input type="text" class="form-control"
+                 th:field="*{applicant.authorizedImporter}"
+                 th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" />
         </div>
-        <div class="col-md-6">
-          <label th:text="#{import_registration_no}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
-          <input type="text" class="form-control" th:field="*{applicant.importRegistrationNo}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" />
+
+        <div class="col-md-4">
+          <label th:text="#{import_registration_no}"
+                 th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+          </label>
+          <input type="text" class="form-control"
+                 th:field="*{applicant.importRegistrationNo}"
+                 th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" />
         </div>
-        <div class="col-md-6">
-          <label th:text="#{company_name}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
-          <input type="text" class="form-control" th:field="*{applicant.companyName}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" />
+
+        <div class="col-md-4">
+          <label th:text="#{company_name}"
+                 th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+          </label>
+          <input type="text" class="form-control"
+                 th:field="*{applicant.companyName}"
+                 th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" />
         </div>
-        <div class="col-md-6">
-          <label th:text="#{contact_person}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
-          <input type="text" class="form-control" th:field="*{applicant.contactPerson}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" />
+
+        <div class="col-md-4">
+          <label th:text="#{contact_person}"
+                 th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+          </label>
+          <input type="text" class="form-control"
+                 th:field="*{applicant.contactPerson}"
+                 th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" />
         </div>
-        <div class="col-md-6">
-          <label th:text="#{address}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
-          <input type="text" class="form-control" th:field="*{applicant.address}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" />
+
+        <div class="col-md-4">
+          <label th:text="#{address}"
+                 th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+          </label>
+          <input type="text" class="form-control"
+                 th:field="*{applicant.address}"
+                 th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" />
         </div>
-        <div class="col-md-6">
-          <label th:text="#{p_o_box}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
-          <input type="text" class="form-control" th:field="*{applicant.P_O_Box}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" />
+
+        <div class="col-md-4">
+          <label th:text="#{p_o_box}"
+                 th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+          </label>
+          <input type="text" class="form-control"
+                 th:field="*{applicant.P_O_Box}"
+                 th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" />
         </div>
-        <div class="col-md-6">
-          <label th:text="#{telephone}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
-          <input type="text" class="form-control" th:field="*{applicant.telephone}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" />
+
+        <div class="col-md-4">
+          <label th:text="#{telephone}"
+                 th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+          </label>
+          <input type="text" class="form-control"
+                 th:field="*{applicant.telephone}"
+                 th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" />
         </div>
-        <div class="col-md-6">
-          <label th:text="#{mobile}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
-          <input type="text" class="form-control" th:field="*{applicant.mobile}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" />
+
+        <div class="col-md-4">
+          <label th:text="#{mobile}"
+                 th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+          </label>
+          <input type="text" class="form-control"
+                 th:field="*{applicant.mobile}"
+                 th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" />
         </div>
-        <div class="col-md-6">
-          <label th:text="#{email}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"></label>
-          <input type="email" class="form-control" th:field="*{applicant.email}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" />
+
+        <div class="col-md-4">
+          <label th:text="#{email}"
+                 th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+          </label>
+          <input type="email" class="form-control"
+                 th:field="*{applicant.email}"
+                 th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" />
         </div>
       </div>
     </div>
+
 
     <!-- Manufacturer Details -->
     <div class="card mb-4">
@@ -161,7 +236,7 @@
         <span class="fw-bolder" th:text="#{manufacturer_details}"></span>
         <button type="button" class="btn btn-sm btn-success" onclick="addManufacturer()" th:text="#{add_manufacturer}"></button>
       </div>
-      <div class="card-body">
+      <div class="table-responsive">
         <table class="table table-bordered" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
           <thead class="table-light">
           <tr>

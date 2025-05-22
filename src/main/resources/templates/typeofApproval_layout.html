@@ -1,6 +1,6 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org" th:lang="${session.lang}" th:attr="dir=${session.dir}">
-<head th:fragment="page_head">
+<head th:replace="~{layout :: page_head}">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link th:href="@{/images/favicon.png}" rel="icon" type="image/png">
@@ -77,13 +77,13 @@
 <!-- Start Navbar -->
 <nav class="navbar navbar-expand-lg navbar-light border-bottom" th:fragment="page_navbar" style="opacity:1;" id="pagnav">
     <div class="container-fluid">
-        <a th:href="@{/}" class="navbar-brand"><img th:src="@{/images/favicon.png}" alt="Image Not Displayed" style="height:60px;"></a>
+        <a th:href="@{/typeofapprovals/home}" class="navbar-brand"><img th:src="@{/images/favicon.png}" alt="Image Not Displayed" style="height:60px;"></a>
         <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav">
-                <a th:href="@{/}" style="text-decoration:none;"><h3 style="margin:15px;">Type Of Approval Management System</h3></a>
+                <a th:href="@{/typeofapprovals/home}" style="text-decoration:none;"><h3 style="margin:15px;" th:text="#{type_of_approval_management_system}"></h3></a>
             </div>
             <div class="navbar-nav ms-auto">
 
