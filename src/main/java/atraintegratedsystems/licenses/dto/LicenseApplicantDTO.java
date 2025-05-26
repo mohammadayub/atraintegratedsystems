@@ -28,8 +28,11 @@ public class LicenseApplicantDTO {
     private MultipartFile identityFormUpload;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate yearOfEstablishment;
+    private String jalaliYearOfEstablishment;
+
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate expiryDate;
+    private String jalaliExpiryDate;
     private BigDecimal applicationFees;
     private int validity;
     private String plannedActivitiesAndServices;

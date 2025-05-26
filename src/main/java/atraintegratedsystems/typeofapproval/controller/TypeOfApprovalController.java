@@ -24,11 +24,11 @@ public class TypeOfApprovalController {
         return "typeofapprovals/onlineapplicationform/form";
     }
 
-    @PostMapping("/submit")
+    @PostMapping("/typeofapprovals/onlineapplicationform/submit")
     public String submitForm(@ModelAttribute TypeOfApprovalFormDTO form, Model model) {
         try {
             approvalService.submitForm(form);
-            return "redirect:typeofapprovals/onlineapplicationform/success";
+            return "redirect:/typeofapprovals/onlineapplicationform/success";
         } catch (IllegalArgumentException ex) {
             model.addAttribute("form", form);
             model.addAttribute("errorMessage", ex.getMessage());
@@ -36,8 +36,7 @@ public class TypeOfApprovalController {
         }
     }
 
-
-    @GetMapping("/success")
+    @GetMapping("/typeofapprovals/onlineapplicationform/success")
     public String successPage() {
         return "typeofapprovals/onlineapplicationform/success";
     }

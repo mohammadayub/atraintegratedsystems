@@ -103,10 +103,35 @@ public class LicenseApplicantService {
             }
             profile.setIdentityFormUpload(identityFormUpload.getBytes());
         }
-        LocalDate yearEstablishmentDate = dateConverter.jalaliToGregorian(dto.getYearOfEstablishment().getYear(), dto.getYearOfEstablishment().getMonthValue(), dto.getYearOfEstablishment().getDayOfMonth());
-        profile.setYearOfEstablishment(yearEstablishmentDate);
-        LocalDate expiryDate = dateConverter.jalaliToGregorian(dto.getExpiryDate().getYear(), dto.getExpiryDate().getMonthValue(), dto.getExpiryDate().getDayOfMonth());
+
+
+        String[] parts = dto.getJalaliYearOfEstablishment().split("-");
+        int jYear = Integer.parseInt(parts[0]);
+        int jMonth = Integer.parseInt(parts[1]);
+        int jDay = Integer.parseInt(parts[2]);
+
+        PersianCalendarUtils converter = new PersianCalendarUtils();
+        LocalDate yearOfEstablishmentDate = converter.jalaliToGregorian(jYear, jMonth, jDay);
+        profile.setYearOfEstablishment(yearOfEstablishmentDate);
+
+//        LocalDate yearEstablishmentDate = dateConverter.jalaliToGregorian(dto.getYearOfEstablishment().getYear(), dto.getYearOfEstablishment().getMonthValue(), dto.getYearOfEstablishment().getDayOfMonth());
+//        profile.setYearOfEstablishment(yearEstablishmentDate);
+
+
+        String[] subParts = dto.getJalaliExpiryDate().split("-");
+        int jSubYear = Integer.parseInt(subParts[0]);
+        int jSubMonth = Integer.parseInt(subParts[1]);
+        int jSubDay = Integer.parseInt(subParts[2]);
+
+        LocalDate expiryDate = converter.jalaliToGregorian(jSubYear, jSubMonth, jSubDay);
         profile.setExpiryDate(expiryDate);
+
+//        LocalDate expiryDate = dateConverter.jalaliToGregorian(dto.getExpiryDate().getYear(), dto.getExpiryDate().getMonthValue(), dto.getExpiryDate().getDayOfMonth());
+//        profile.setExpiryDate(expiryDate);
+
+
+
+
         profile.setApplicationFees(dto.getApplicationFees());
         profile.setValidity(dto.getValidity());
         profile.setPlannedActivitiesAndServices(dto.getPlannedActivitiesAndServices());
@@ -217,7 +242,7 @@ public class LicenseApplicantService {
     public LicenseApplicant updateCompleteProfile(Long id, LicenseApplicantDTO dto) throws IOException {
         LicenseApplicant profile = repository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Profile not found with ID: " + id));
-            DateConverter dateConverter = new DateConverter();
+//            DateConverter dateConverter = new DateConverter();
             profile.setLicenseNo(dto.getLicenseNo());
 
         MultipartFile enidUpload = dto.getEnidUpload();
@@ -267,10 +292,34 @@ public class LicenseApplicantService {
                 }
                 profile.setIdentityFormUpload(identityFormUpload.getBytes());
             }
-            LocalDate yearEstablishmentDate = dateConverter.jalaliToGregorian(dto.getYearOfEstablishment().getYear(), dto.getYearOfEstablishment().getMonthValue(), dto.getYearOfEstablishment().getDayOfMonth());
-            profile.setYearOfEstablishment(yearEstablishmentDate);
-            LocalDate expiryDate = dateConverter.jalaliToGregorian(dto.getExpiryDate().getYear(), dto.getExpiryDate().getMonthValue(), dto.getExpiryDate().getDayOfMonth());
-            profile.setExpiryDate(expiryDate);
+
+
+        String[] parts = dto.getJalaliYearOfEstablishment().split("-");
+        int jYear = Integer.parseInt(parts[0]);
+        int jMonth = Integer.parseInt(parts[1]);
+        int jDay = Integer.parseInt(parts[2]);
+
+        PersianCalendarUtils converter = new PersianCalendarUtils();
+        LocalDate yearOfEstablishmentDate = converter.jalaliToGregorian(jYear, jMonth, jDay);
+        profile.setYearOfEstablishment(yearOfEstablishmentDate);
+//            LocalDate yearEstablishmentDate = dateConverter.jalaliToGregorian(dto.getYearOfEstablishment().getYear(), dto.getYearOfEstablishment().getMonthValue(), dto.getYearOfEstablishment().getDayOfMonth());
+//            profile.setYearOfEstablishment(yearEstablishmentDate);
+
+
+
+
+        String[] subParts = dto.getJalaliExpiryDate().split("-");
+        int jSubYear = Integer.parseInt(subParts[0]);
+        int jSubMonth = Integer.parseInt(subParts[1]);
+        int jSubDay = Integer.parseInt(subParts[2]);
+
+        LocalDate expiryDate = converter.jalaliToGregorian(jSubYear, jSubMonth, jSubDay);
+        profile.setExpiryDate(expiryDate);
+//            LocalDate expiryDate = dateConverter.jalaliToGregorian(dto.getExpiryDate().getYear(), dto.getExpiryDate().getMonthValue(), dto.getExpiryDate().getDayOfMonth());
+//            profile.setExpiryDate(expiryDate);
+
+
+
             profile.setApplicationFees(dto.getApplicationFees());
             profile.setValidity(dto.getValidity());
             profile.setPlannedActivitiesAndServices(dto.getPlannedActivitiesAndServices());

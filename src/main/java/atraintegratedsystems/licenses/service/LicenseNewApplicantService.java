@@ -176,10 +176,34 @@ public class LicenseNewApplicantService {
             }
             profile.setIdentityFormUpload(identityFormUpload.getBytes());
         }
-        LocalDate yearEstablishmentDate = dateConverter.jalaliToGregorian(dto.getYearOfEstablishment().getYear(), dto.getYearOfEstablishment().getMonthValue(), dto.getYearOfEstablishment().getDayOfMonth());
-        profile.setYearOfEstablishment(yearEstablishmentDate);
-        LocalDate expiryDate = dateConverter.jalaliToGregorian(dto.getExpiryDate().getYear(), dto.getExpiryDate().getMonthValue(), dto.getExpiryDate().getDayOfMonth());
+
+
+        String[] parts = dto.getJalaliYearOfEstablishment().split("-");
+        int jYear = Integer.parseInt(parts[0]);
+        int jMonth = Integer.parseInt(parts[1]);
+        int jDay = Integer.parseInt(parts[2]);
+
+        PersianCalendarUtils converter = new PersianCalendarUtils();
+        LocalDate yearOfEstablishmentDate = converter.jalaliToGregorian(jYear, jMonth, jDay);
+        profile.setYearOfEstablishment(yearOfEstablishmentDate);
+
+//        LocalDate yearEstablishmentDate = dateConverter.jalaliToGregorian(dto.getYearOfEstablishment().getYear(), dto.getYearOfEstablishment().getMonthValue(), dto.getYearOfEstablishment().getDayOfMonth());
+//        profile.setYearOfEstablishment(yearEstablishmentDate);
+
+
+        String[] subParts = dto.getJalaliExpiryDate().split("-");
+        int jSubYear = Integer.parseInt(subParts[0]);
+        int jSubMonth = Integer.parseInt(subParts[1]);
+        int jSubDay = Integer.parseInt(subParts[2]);
+
+        LocalDate expiryDate = converter.jalaliToGregorian(jSubYear, jSubMonth, jSubDay);
         profile.setExpiryDate(expiryDate);
+
+//        LocalDate expiryDate = dateConverter.jalaliToGregorian(dto.getExpiryDate().getYear(), dto.getExpiryDate().getMonthValue(), dto.getExpiryDate().getDayOfMonth());
+//        profile.setExpiryDate(expiryDate);
+
+
+
         profile.setPlannedActivitiesAndServices(dto.getPlannedActivitiesAndServices());
         profile.setTotalNationalEmployees(dto.getTotalNationalEmployees());
         profile.setTotalInternationalEmployees(dto.getTotalInternationalEmployees());

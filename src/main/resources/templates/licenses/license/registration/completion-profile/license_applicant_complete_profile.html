@@ -27,16 +27,17 @@
           </div>
 
           <div class="col-md-3 form-group">
-            <label for="yearOfEstablishment" th:text="#{license_application_year_establishment}"
+            <label  th:text="#{license_application_year_establishment}"
                    th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
             </label>
-            <input type="text" id="yearOfEstablishment" th:field="*{yearOfEstablishment}" class="form-control hijrishamsi">
+            <input type="text" id="jalaliYearOfEstablishment" th:field="*{jalaliYearOfEstablishment}" class="form-control hijrishamsi">
           </div>
+
           <div class="col-md-3 form-group">
-            <label for="expiryDate" th:text="#{license_application_expiry_date}"
+            <label  th:text="#{license_application_expiry_date}"
                    th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
             </label>
-            <input type="text" id="expiryDate" th:field="*{expiryDate}" class="form-control hijrishamsi">
+            <input type="text" id="jalaliExpiryDate" th:field="*{jalaliExpiryDate}" class="form-control hijrishamsi">
           </div>
           <div class="col-md-3 form-group">
             <label for="tinNo" th:text="#{license_application_tin}"
