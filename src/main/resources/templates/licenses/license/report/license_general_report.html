@@ -1,37 +1,31 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
-
 <head th:replace="~{layout :: page_head}">
     <meta charset="UTF-8">
     <div th:replace="styles :: data-tables-styles"></div>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css">
     <title>LMS - Report</title>
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-
     <div th:replace="styles :: data-tables-styles"></div>
     <div th:replace="styles :: select2-styles"></div>
     <div th:replace="styles :: commonfieldset-with-legend-border"></div>
 
     <style>
-        /* Custom styles for small font and nice border */
         .table-sm th, .table-sm td {
-            font-size: 0.6em; /* Smaller font size */
-            padding: 0.3rem; /* Adjusted padding for a compact look */
+          font-size: 0.6em;
+          padding: 0.3rem;
         }
         .table-bordered th, .table-bordered td {
-            border: 1px solid #dee2e6; /* Light border color */
-            text-align:center;
+          border: 1px solid #dee2e6;
+          text-align: center;
         }
         .table-bordered {
-            border-collapse: collapse;
+          border-collapse: collapse;
         }
-
         #licenseTypeCount {
-    height: 50vh; /* Or any desired height */
-}
+          height: 50vh;
+        }
     </style>
 </head>
 
@@ -96,7 +90,7 @@
                 <td th:text="${profile.databaseMaintianenceFeePaymentStatus}"></td>
                 <td th:text="${profile.guaranteeFeesEnteredBy}"></td>
                 <td th:text="${profile.guaranteeFeesCreatedDate}"></td>
-                <td th:text="${profile.guaranteeFees}"  style="background-color:#F16767" ></td>
+                <td th:text="${profile.guaranteeFees}" style="background-color:#F16767"></td>
                 <td th:text="${profile.guaranteeFeePaymentStatus}"></td>
             </tr>
             </tbody>
@@ -117,13 +111,14 @@
             </tr>
             </tfoot>
         </table>
-        <div id="licenseTypeCount" class="d-flex justify-content-center align-items-center">
-            <div class="card border-info" style="width: 18rem;">
+
+        <div id="licenseTypeCount" style="margin: 0 auto; text-align: center;" class="my-3">
+            <div class="card border-info" style="width: 18rem; display: inline-block;">
                 <div class="card-header text-center text-white bg-info">
                     <strong th:text="#{license_type_count}">License Types Count</strong>
                 </div>
                 <div class="card-body">
-                    <div id="licenseTypeCountData">
+                    <div id="licenseTypeCountData" class="mt-4">
                         <p class="card-text">
                             <strong th:text="#{total_number_of_license_types}">Total Number of License Types:</strong> <span id="licenseTypeCountTotal"></span><br>
                         <div id="licenseTypeDetails">
@@ -144,8 +139,6 @@
                 </div>
             </div>
         </div>
-
-
     </div>
 
     <a th:href="@{/licenses/license/report}" class="btn btn-info mt-3 text-white">
@@ -153,7 +146,6 @@
     </a>
 </div>
 
-<!-- Scripts -->
 <div th:replace="scripts :: common-scripts"></div>
 <script th:src="@{/js/reportsJqueryDataTable.js}"></script>
 <script th:src="@{/js/reportsDataTableButtons.js}"></script>
@@ -161,76 +153,72 @@
 <script th:src="@{/js/jszip.min.js}"></script>
 <script>
     $(document).ready(function () {
-        const table = $('#profileTable').DataTable({
-            scrollX: true,
-            dom: 'Bfrtip',
-            pageLength: 10,
-            buttons: [
-                {
-                    extend: 'excelHtml5',
-                    text: 'Export to Excel',
-                    footer: true,
-                    exportOptions: {
-                        columns: ':visible'
-                    },
-                    customize: function (xlsx) {
-                        let sheet = xlsx.xl.worksheets['sheet1.xml'];
-                        $('col', sheet).attr('width', '30');
-                    }
-                }
-            ],
-            footerCallback: function (row, data, start, end, display) {
-                const api = this.api();
-
-                const intVal = function (i) {
-                    return typeof i === 'string'
-                        ? parseFloat(i.replace(/[,]/g, '')) || 0
-                        : typeof i === 'number'
-                            ? i
-                            : 0;
-                };
-
-                const formatNumber = function (num) {
-                    return num.toLocaleString(undefined, {
-                        minimumFractionDigits: 2,
-                        maximumFractionDigits: 2
-                    });
-                };
-
-                let applicationFeesTotal = api.column(6, { search: 'applied' }).data().reduce((a, b) => intVal(a) + intVal(b), 0);
-                let licenseFeesTotal = api.column(11, { search: 'applied' }).data().reduce((a, b) => intVal(a) + intVal(b), 0);
-                let adminFeesTotal = api.column(15, { search: 'applied' }).data().reduce((a, b) => intVal(a) + intVal(b), 0);
-                let dbFeesTotal = api.column(19, { search: 'applied' }).data().reduce((a, b) => intVal(a) + intVal(b), 0);
-                let guaranteeFeesTotal = api.column(23, { search: 'applied' }).data().reduce((a, b) => intVal(a) + intVal(b), 0);
-
-                // Count License Types
-                let licenseTypeMap = {};
-                api.column(2, { search: 'applied' }).data().each(function (d) {
-                    if (licenseTypeMap[d]) {
-                        licenseTypeMap[d]++;
-                    } else {
-                        licenseTypeMap[d] = 1;
-                    }
-                });
-
-                let licenseTypeCountHtml = '<strong>Total Number of License Types: ' + Object.keys(licenseTypeMap).length + '</strong><br>';
-                let licenseTypeDetailsHtml = '';
-                for (let type in licenseTypeMap) {
-                    licenseTypeDetailsHtml += `<tr><td>${type}</td><td>${licenseTypeMap[type]}</td></tr>`;
-                }
-
-                // Update totals
-                $(api.column(6).footer()).html('Application Fees Grand Total: ' + formatNumber(applicationFeesTotal));
-                $(api.column(11).footer()).html('License Fees Grand Total : ' + formatNumber(licenseFeesTotal));
-                $(api.column(15).footer()).html('Admin Fees Grand Total:  ' + formatNumber(adminFeesTotal));
-                $(api.column(19).footer()).html('DB Fees Grand Total: ' + formatNumber(dbFeesTotal));
-                $(api.column(23).footer()).html('Guarantee Fees Grand Total: ' + formatNumber(guaranteeFeesTotal));
-
-                // Show license type count summary and populate table
-                $('#licenseTypeCountTotal').html(Object.keys(licenseTypeMap).length);
-                $('#licenseTypeDetails tbody').html(licenseTypeDetailsHtml);
+      const table = $('#profileTable').DataTable({
+        scrollX: true,
+        dom: 'Bfrtip',
+        pageLength: 10,
+        buttons: [
+          {
+            extend: 'excelHtml5',
+            text: 'Export to Excel',
+            footer: true,
+            exportOptions: { columns: ':visible' },
+            customize: function (xlsx) {
+              let sheet = xlsx.xl.worksheets['sheet1.xml'];
+              $('col', sheet).attr('width', '30');
             }
-        });
+          }
+        ],
+        footerCallback: function (row, data, start, end, display) {
+          const api = this.api();
+          const intVal = function (i) {
+            return typeof i === 'string'
+              ? parseFloat(i.replace(/[,]/g, '')) || 0
+              : typeof i === 'number' ? i : 0;
+          };
+          const formatNumber = function (num) {
+            return num.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+          };
+          let applicationFeesTotal = api.column(6, { search: 'applied' }).data().reduce((a, b) => intVal(a) + intVal(b), 0);
+          let licenseFeesTotal = api.column(11, { search: 'applied' }).data().reduce((a, b) => intVal(a) + intVal(b), 0);
+          let adminFeesTotal = api.column(15, { search: 'applied' }).data().reduce((a, b) => intVal(a) + intVal(b), 0);
+          let dbFeesTotal = api.column(19, { search: 'applied' }).data().reduce((a, b) => intVal(a) + intVal(b), 0);
+          let guaranteeFeesTotal = api.column(23, { search: 'applied' }).data().reduce((a, b) => intVal(a) + intVal(b), 0);
+
+          // Count License Types
+          let licenseTypeMap = {};
+          api.column(2, { search: 'applied' }).data().each(function (d) {
+            if (licenseTypeMap[d]) {
+              licenseTypeMap[d]++;
+            } else {
+              licenseTypeMap[d] = 1;
+            }
+          });
+
+          // Create the table rows
+          let licenseTypeDetailsHtml = '';
+          for (let type in licenseTypeMap) {
+            licenseTypeDetailsHtml += `<tr><td>${type}</td><td>${licenseTypeMap[type]}</td></tr>`;
+          }
+
+          // Calculate the total of all counts
+          let totalOfAllCounts = Object.values(licenseTypeMap).reduce((sum, count) => sum + count, 0);
+
+          // Add a row for the total
+          licenseTypeDetailsHtml += `<tr><td><strong>Total of All Counts:</strong></td><td>${totalOfAllCounts}</td></tr>`;
+
+          // Update totals
+          $(api.column(6).footer()).html('Application Fees Grand Total: ' + formatNumber(applicationFeesTotal));
+          $(api.column(11).footer()).html('License Fees Grand Total: ' + formatNumber(licenseFeesTotal));
+          $(api.column(15).footer()).html('Admin Fees Grand Total: ' + formatNumber(adminFeesTotal));
+          $(api.column(19).footer()).html('DB Fees Grand Total: ' + formatNumber(dbFeesTotal));
+          $(api.column(23).footer()).html('Guarantee Fees Grand Total: ' + formatNumber(guaranteeFeesTotal));
+
+          // Show license type count summary and populate table
+          $('#licenseTypeCountTotal').html(Object.keys(licenseTypeMap).length);
+          $('#licenseTypeDetails tbody').html(licenseTypeDetailsHtml);
+        }
+      });
     });
 </script>
 
