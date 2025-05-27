@@ -57,4 +57,8 @@ public class TypeOfApprovalTechnicalDetails {
     private String enteredBy;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate enteredDate;
+
+    @ManyToOne
+    @JoinColumn(name = "type_of_approval_applicant_id")
+    private TypeOfApprovalApplicant technicalDetail;
 }

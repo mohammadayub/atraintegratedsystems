@@ -38,6 +38,11 @@ public class TypeOfApprovalApplicant {
     @OneToMany(mappedBy = "approvalApplicant", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<TypeOfApprovalAttachment> attachments;
 
+    @OneToMany(mappedBy = "technicalDetail", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<TypeOfApprovalTechnicalDetails> technicalDetail;
+
+
+
 
 
 }
