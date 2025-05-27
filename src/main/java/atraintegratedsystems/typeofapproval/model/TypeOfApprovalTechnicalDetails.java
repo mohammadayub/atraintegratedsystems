@@ -7,9 +7,9 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "typeofapproval_technical_detailsofthe_equipment")
+@Table(name = "typeofapproval_technical_details")
 @Data
-public class TypeOfApprovalTechnicalDetailsOfTheEquipment {
+public class TypeOfApprovalTechnicalDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;

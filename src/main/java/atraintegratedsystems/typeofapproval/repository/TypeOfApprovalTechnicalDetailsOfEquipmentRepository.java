@@ -1,10 +1,10 @@
 package atraintegratedsystems.typeofapproval.repository;
 
-import atraintegratedsystems.typeofapproval.model.TypeOfApprovalTechnicalDetailsOfTheEquipment;
+import atraintegratedsystems.typeofapproval.model.TypeOfApprovalTechnicalDetails;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public interface TypeOfApprovalTechnicalDetailsOfEquipmentRepository
-        extends JpaRepository<TypeOfApprovalTechnicalDetailsOfTheEquipment, Long> {
+        extends JpaRepository<TypeOfApprovalTechnicalDetails, Long> {
 }
