@@ -6,11 +6,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.time.LocalDate;
 
 @Data
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
-public class TypeOfApprovalTechnicalDetailOfEquipmentDTO {
+public class TypeOfApprovalTechnicalDetailDTO {
     private long id;
     private String gsm;
     private String cdma;

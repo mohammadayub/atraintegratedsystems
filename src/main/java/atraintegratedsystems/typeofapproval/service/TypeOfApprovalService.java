@@ -1,11 +1,12 @@
 package atraintegratedsystems.typeofapproval.service;
-
 import atraintegratedsystems.typeofapproval.dto.TypeOfApprovalFormDTO;
 import atraintegratedsystems.typeofapproval.model.TypeOfApprovalAttachment;
 import atraintegratedsystems.typeofapproval.model.TypeOfApprovalManufacturerDetail;
+import atraintegratedsystems.typeofapproval.model.TypeOfApprovalTechnicalDetail;
 import atraintegratedsystems.typeofapproval.repository.TypeOfApprovalApplicantRepository;
 import atraintegratedsystems.typeofapproval.repository.TypeOfApprovalAttachmentRepository;
 import atraintegratedsystems.typeofapproval.repository.TypeOfApprovalManufacturerDetailRepository;
+import atraintegratedsystems.typeofapproval.repository.TypeOfApprovalTechnicalDetailsRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -19,13 +20,16 @@ public class TypeOfApprovalService {
     private final TypeOfApprovalApplicantRepository applicantRepository;
     private final TypeOfApprovalManufacturerDetailRepository manufacturerRepository;
     private final TypeOfApprovalAttachmentRepository attachmentRepository;
+    private final TypeOfApprovalTechnicalDetailsRepository technicalDetailsRepository;
 
     public TypeOfApprovalService(TypeOfApprovalApplicantRepository applicantRepository,
                                  TypeOfApprovalManufacturerDetailRepository manufacturerRepository,
-                                 TypeOfApprovalAttachmentRepository attachmentRepository) {
+                                 TypeOfApprovalAttachmentRepository attachmentRepository,
+                                 TypeOfApprovalTechnicalDetailsRepository technicalDetailsRepository) {
         this.applicantRepository = applicantRepository;
         this.manufacturerRepository = manufacturerRepository;
         this.attachmentRepository = attachmentRepository;
+        this.technicalDetailsRepository = technicalDetailsRepository;
     }
 
     @Transactional
@@ -39,11 +43,19 @@ public class TypeOfApprovalService {
 
         var savedApplicant = applicantRepository.save(applicant);
 
+        // Save manufacturers
         for (TypeOfApprovalManufacturerDetail manufacturer : form.getManufacturers()) {
             manufacturer.setApplicant(savedApplicant);
             manufacturerRepository.save(manufacturer);
         }
 
+        //Save technicalDetails
+        for(TypeOfApprovalTechnicalDetail details :form.getDetails()){
+            details.setTechnicalDetails(savedApplicant);
+            technicalDetailsRepository.save(details);
+        }
+
+        // Save attachments
         try {
             TypeOfApprovalAttachment attachment = new TypeOfApprovalAttachment();
             attachment.setApprovalApplicant(savedApplicant);
@@ -60,10 +72,10 @@ public class TypeOfApprovalService {
 
             attachmentRepository.save(attachment);
         } catch (IOException e) {
-            e.printStackTrace(); // Use logging
+            // Preferably use a logger here
+            e.printStackTrace();
         }
     }
-
 
     @Transactional
     private void setAttachmentField(ThrowingConsumer<byte[]> setter, MultipartFile file) throws IOException {
@@ -81,10 +93,8 @@ public class TypeOfApprovalService {
         }
     }
 
-
     @FunctionalInterface
     private interface ThrowingConsumer<T> {
         void accept(T t) throws IOException;
     }
 }
-
