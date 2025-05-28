@@ -307,299 +307,169 @@
 
 
 
-
-
-
     <div class="card mt-4">
-      <div class="card-header b-4">Technical Detail Of The Equipment</div>
+      <div class="card-header mb-4">Technical Detail Of The Equipment</div>
+
       <div class="row g-3">
-
-        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
-          <div class="form-check">
-            <input th:field="*{gsm}" type="checkbox" value="yes" class="form-check-input" id="gsm">
-            <label class="form-check-label" for="gsm">GSM</label>
-          </div>
+        <div class="col">
+          <input th:field="*{gsm}" type="checkbox" value="yes" class="form-check-input" id="gsm">
+          <label for="gsm" class="form-check-label">GSM</label>
+        </div>
+        <div class="col">
+          <input th:field="*{cdma}" type="checkbox" value="yes" class="form-check-input" id="cdma">
+          <label for="cdma" class="form-check-label">CDMA</label>
         </div>
 
-        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
-          <div class="form-check">
-            <input th:field="*{cdma}" type="checkbox" value="yes" class="form-check-input" id="cdma">
-            <label class="form-check-label" for="cdma">CDMA</label>
-          </div>
+        <div class="col">
+          <input th:field="*{lte}" type="checkbox" value="yes" class="form-check-input" id="lte">
+          <label for="lte" class="form-check-label">LTE</label>
         </div>
-
-        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
-          <div class="form-check">
-            <input th:field="*{lte}" type="checkbox" value="yes" class="form-check-input" id="lte">
-            <label class="form-check-label" for="lte">LTE</label>
-          </div>
+        <div class="col">
+          <input th:field="*{tetra}" type="checkbox" value="yes" class="form-check-input" id="tetra">
+          <label for="tetra" class="form-check-label">TETRA</label>
         </div>
-
-        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
-          <div class="form-check">
-            <input th:field="*{tetra}" type="checkbox" value="yes" class="form-check-input" id="tetra">
-            <label class="form-check-label" for="tetra">TETRA</label>
-          </div>
+        <div class="col">
+          <input th:field="*{amateurRadio}" type="checkbox" value="yes" class="form-check-input" id="amateurRadio">
+          <label for="amateurRadio" class="form-check-label">Amateur Radio</label>
         </div>
-
-        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
-          <div class="form-check">
-            <input th:field="*{amateurRadio}" type="checkbox" value="yes" class="form-check-input" id="amateurRadio">
-            <label class="form-check-label" for="amateurRadio">Amateur Radio</label>
-          </div>
+        <div class="col">
+          <input th:field="*{privateMobileRadio}" type="checkbox" value="yes" class="form-check-input" id="privateMobileRadio">
+          <label for="privateMobileRadio" class="form-check-label">Private Mobile Radio</label>
         </div>
-
-        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
-          <div class="form-check">
-            <input th:field="*{privateMobileRadio}" type="checkbox" value="yes" class="form-check-input" id="privateMobileRadio">
-            <label class="form-check-label" for="privateMobileRadio">Private Mobile Radio</label>
-          </div>
+        <div class="col">
+          <input th:field="*{pmrRadio}" type="checkbox" value="yes" class="form-check-input" id="pmrRadio">
+          <label for="pmrRadio" class="form-check-label">PMR Radio</label>
         </div>
-
-        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
-          <div class="form-check">
-            <input th:field="*{pmrRadio}" type="checkbox" value="yes" class="form-check-input" id="pmrRadio">
-            <label class="form-check-label" for="pmrRadio">PMR Radio</label>
-          </div>
+        <div class="col">
+          <input th:field="*{radar}" type="checkbox" value="yes" class="form-check-input" id="radar">
+          <label for="radar" class="form-check-label">Radar</label>
         </div>
-
-        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
-          <div class="form-check">
-            <input th:field="*{radar}" type="checkbox" value="yes" class="form-check-input" id="radar">
-            <label class="form-check-label" for="radar">Radar</label>
-          </div>
+        <div class="col">
+          <input th:field="*{rlan}" type="checkbox" value="yes" class="form-check-input" id="rlan">
+          <label for="rlan" class="form-check-label">RLAN</label>
         </div>
-
-        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
-          <div class="form-check">
-            <input th:field="*{rlan}" type="checkbox" value="yes" class="form-check-input" id="rlan">
-            <label class="form-check-label" for="rlan">RLAN</label>
-          </div>
+        <div class="col">
+          <input th:field="*{wimax}" type="checkbox" value="yes" class="form-check-input" id="wimax">
+          <label for="wimax" class="form-check-label">WiMAX</label>
         </div>
-
-        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
-          <div class="form-check">
-            <input th:field="*{wimax}" type="checkbox" value="yes" class="form-check-input" id="wimax">
-            <label class="form-check-label" for="wimax">WiMAX</label>
-          </div>
+        <div class="col">
+          <input th:field="*{fwa}" type="checkbox" value="yes" class="form-check-input" id="fwa">
+          <label for="fwa" class="form-check-label">FWA</label>
         </div>
-
-        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
-          <div class="form-check">
-            <input th:field="*{fwa}" type="checkbox" value="yes" class="form-check-input" id="fwa">
-            <label class="form-check-label" for="fwa">FWA</label>
-          </div>
+        <div class="col">
+          <input th:field="*{microwave}" type="checkbox" value="yes" class="form-check-input" id="microwave">
+          <label for="microwave" class="form-check-label">Microwave</label>
         </div>
-
-        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
-          <div class="form-check">
-            <input th:field="*{microwave}" type="checkbox" value="yes" class="form-check-input" id="microwave">
-            <label class="form-check-label" for="microwave">Microwave</label>
-          </div>
+        <div class="col">
+          <input th:field="*{soundBroadcasting}" type="checkbox" value="yes" class="form-check-input" id="soundBroadcasting">
+          <label for="soundBroadcasting" class="form-check-label">Sound Broadcasting</label>
         </div>
-
-        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
-          <div class="form-check">
-            <input th:field="*{soundBroadcasting}" type="checkbox" value="yes" class="form-check-input" id="soundBroadcasting">
-            <label class="form-check-label" for="soundBroadcasting">Sound Broadcasting</label>
-          </div>
+        <div class="col">
+          <input th:field="*{tvBroadcasting}" type="checkbox" value="yes" class="form-check-input" id="tvBroadcasting">
+          <label for="tvBroadcasting" class="form-check-label">TV Broadcasting</label>
         </div>
-
-        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
-          <div class="form-check">
-            <input th:field="*{tvBroadcasting}" type="checkbox" value="yes" class="form-check-input" id="tvBroadcasting">
-            <label class="form-check-label" for="tvBroadcasting">TV Broadcasting</label>
-          </div>
+        <div class="col">
+          <input th:field="*{cordlessPhone}" type="checkbox" value="yes" class="form-check-input" id="cordlessPhone">
+          <label for="cordlessPhone" class="form-check-label">Cordless Phone</label>
         </div>
-
-        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
-          <div class="form-check">
-            <input th:field="*{cordlessPhone}" type="checkbox" value="yes" class="form-check-input" id="cordlessPhone">
-            <label class="form-check-label" for="cordlessPhone">Cordless Phone</label>
-          </div>
+        <div class="col">
+          <input th:field="*{srd}" type="checkbox" value="yes" class="form-check-input" id="srd">
+          <label for="srd" class="form-check-label">SRD</label>
         </div>
-
-        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
-          <div class="form-check">
-            <input th:field="*{srd}" type="checkbox" value="yes" class="form-check-input" id="srd">
-            <label class="form-check-label" for="srd">SRD</label>
-          </div>
+        <div class="col">
+          <input th:field="*{rfid}" type="checkbox" value="yes" class="form-check-input" id="rfid">
+          <label for="rfid" class="form-check-label">RFID</label>
         </div>
-
-        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
-          <div class="form-check">
-            <input th:field="*{rfid}" type="checkbox" value="yes" class="form-check-input" id="rfid">
-            <label class="form-check-label" for="rfid">RFID</label>
-          </div>
+        <div class="col">
+          <input th:field="*{satelliteRadio}" type="checkbox" value="yes" class="form-check-input" id="satelliteRadio">
+          <label for="satelliteRadio" class="form-check-label">Satellite Radio</label>
         </div>
-
-        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
-          <div class="form-check">
-            <input th:field="*{satelliteRadio}" type="checkbox" value="yes" class="form-check-input" id="satelliteRadio">
-            <label class="form-check-label" for="satelliteRadio">Satellite Radio</label>
-          </div>
+        <div class="col">
+          <input th:field="*{radioNavigation}" type="checkbox" value="yes" class="form-check-input" id="radioNavigation">
+          <label for="radioNavigation" class="form-check-label">Radio Navigation</label>
         </div>
-
-        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
-          <div class="form-check">
-            <input th:field="*{radioNavigation}" type="checkbox" value="yes" class="form-check-input" id="radioNavigation">
-            <label class="form-check-label" for="radioNavigation">Radio Navigation</label>
-          </div>
+        <div class="col">
+          <input th:field="*{satelliteTv}" type="checkbox" value="yes" class="form-check-input" id="satelliteTv">
+          <label for="satelliteTv" class="form-check-label">Satellite TV</label>
         </div>
-
-        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
-          <div class="form-check">
-            <input th:field="*{satelliteTv}" type="checkbox" value="yes" class="form-check-input" id="satelliteTv">
-            <label class="form-check-label" for="satelliteTv">Satellite TV</label>
-          </div>
+        <div class="col">
+          <input th:field="*{vsat}" type="checkbox" value="yes" class="form-check-input" id="vsat">
+          <label for="vsat" class="form-check-label">VSAT</label>
         </div>
-
-        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
-          <div class="form-check">
-            <input th:field="*{vsat}" type="checkbox" value="yes" class="form-check-input" id="vsat">
-            <label class="form-check-label" for="vsat">VSAT</label>
-          </div>
+        <div class="col">
+          <input th:field="*{other}" type="checkbox" value="yes" class="form-check-input" id="other">
+          <label for="other" class="form-check-label">Other</label>
         </div>
-
-        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
-          <div class="form-check">
-            <input th:field="*{other}" type="checkbox" value="yes" class="form-check-input" id="other">
-            <label class="form-check-label" for="other">Other</label>
-          </div>
-        </div>
-
       </div>
 
       <div style="height: 5vh;"></div>
 
       <div class="row g-3">
-
-        <div class="col-12 col-md-4">
+        <div class="col">
           <label for="intendedUse" class="form-label">Intended Use</label>
           <input th:field="*{intendedUse}" type="text" class="form-control" id="intendedUse">
         </div>
-
-        <div class="col-12 col-md-4">
+        <div class="col">
           <label for="modelNumber" class="form-label">Model Number</label>
           <input th:field="*{modelNumber}" type="text" class="form-control" id="modelNumber">
         </div>
-
-        <div class="col-12 col-md-4">
+        <div class="col">
           <label for="brandName" class="form-label">Brand Name</label>
           <input th:field="*{brandName}" type="text" class="form-control" id="brandName">
         </div>
-
-        <div class="col-12 col-md-4">
+        <div class="col">
           <label for="typeNumber" class="form-label">Type Number</label>
           <input th:field="*{typeNumber}" type="text" class="form-control" id="typeNumber">
         </div>
-
-        <div class="col-12 col-md-4">
+        <div class="col">
           <label for="countryofOrigin" class="form-label">Country of Origin</label>
           <input th:field="*{countryofOrigin}" type="text" class="form-control" id="countryofOrigin">
         </div>
-
-        <div class="col-12 col-md-4">
+        <div class="col">
           <label for="frequencyrangeFromMHZ" class="form-label">Frequency Range From (MHz)</label>
           <input th:field="*{frequencyrangeFromMHZ}" type="text" class="form-control" id="frequencyrangeFromMHZ">
         </div>
-
-        <div class="col-12 col-md-4">
+        <div class="col">
           <label for="frequencyrangeToMHZ" class="form-label">Frequency Range To (MHz)</label>
           <input th:field="*{frequencyrangeToMHZ}" type="text" class="form-control" id="frequencyrangeToMHZ">
         </div>
-
-        <div class="col-12 col-md-4">
+        <div class="col">
           <label for="frequencyrangeFromGHZ" class="form-label">Frequency Range From (GHz)</label>
           <input th:field="*{frequencyrangeFromGHZ}" type="text" class="form-control" id="frequencyrangeFromGHZ">
         </div>
-
-        <div class="col-12 col-md-4">
+        <div class="col">
           <label for="frequencyrangeToGHZ" class="form-label">Frequency Range To (GHz)</label>
           <input th:field="*{frequencyrangeToGHZ}" type="text" class="form-control" id="frequencyrangeToGHZ">
         </div>
-
-        <div class="col-12 col-md-4">
+        <div class="col">
           <label for="outputPowerRadiatedConducted" class="form-label">Output Power Radiated Conducted</label>
           <input th:field="*{outputPowerRadiatedConducted}" type="text" class="form-control" id="outputPowerRadiatedConducted">
         </div>
-
-        <div class="col-12 col-md-4">
+        <div class="col">
           <label for="transmissionCapacity" class="form-label">Transmission Capacity</label>
           <input th:field="*{transmissionCapacity}" type="text" class="form-control" id="transmissionCapacity">
         </div>
-
-        <div class="col-12 col-md-4">
+        <div class="col">
           <label for="channelCapacity" class="form-label">Channel Capacity</label>
           <input th:field="*{channelCapacity}" type="text" class="form-control" id="channelCapacity">
         </div>
-
-        <div class="col-12 col-md-4">
+        <div class="col">
           <label for="channelSpacing" class="form-label">Channel Spacing</label>
           <input th:field="*{channelSpacing}" type="text" class="form-control" id="channelSpacing">
         </div>
-
-        <div class="col-12 col-md-4">
+        <div class="col">
           <label for="modulationType" class="form-label">Modulation Type</label>
           <input th:field="*{modulationType}" type="text" class="form-control" id="modulationType">
-        </div>
-
-        <div class="col-12 col-md-4">
-          <label for="antennaType" class="form-label">Antenna Type</label>
-          <input th:field="*{antennaType}" type="text" class="form-control" id="antennaType">
-        </div>
-
-        <div class="col-12 col-md-4">
-          <label for="antennaGain" class="form-label">Antenna Gain</label>
-          <input th:field="*{antennaGain}" type="text" class="form-control" id="antennaGain">
-        </div>
-
-        <div class="col-12 col-md-4">
-          <label for="technical_interface" class="form-label">Technical Interface</label>
-          <input th:field="*{technical_interface}" type="text" class="form-control" id="technical_interface">
-        </div>
-
-        <div class="col-12 col-md-4">
-          <label for="technicalVariants" class="form-label">Technical Variants</label>
-          <input th:field="*{technicalVariants}" type="text" class="form-control" id="technicalVariants">
-        </div>
-
-        <div class="col-12 col-md-4">
-          <label for="equipmentLicenseRequirement" class="form-label">Equipment License Requirement</label>
-          <input th:field="*{equipmentLicenseRequirement}" type="text" class="form-control" id="equipmentLicenseRequirement">
-        </div>
-
-        <div class="col-12 col-md-4">
-          <label for="enteredBy" class="form-label">Entered By</label>
-          <input th:field="*{enteredBy}" type="text" class="form-control" id="enteredBy">
-        </div>
-
-        <div class="col-12 col-md-4">
-          <label for="enteredDate" class="form-label">Entered Date</label>
-          <input th:field="*{enteredDate}" type="date" class="form-control" id="enteredDate">
         </div>
       </div>
     </div>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     <div class="text-end">
       <button type="submit" class="btn btn-primary" th:text="#{submit_application}">Submit Application</button>
     </div>
+
+
   </form>
 </div>
 

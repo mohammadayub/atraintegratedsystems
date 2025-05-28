@@ -7,6 +7,7 @@ import atraintegratedsystems.typeofapproval.repository.TypeOfApprovalApplicantRe
 import atraintegratedsystems.typeofapproval.repository.TypeOfApprovalAttachmentRepository;
 import atraintegratedsystems.typeofapproval.repository.TypeOfApprovalManufacturerDetailRepository;
 import atraintegratedsystems.typeofapproval.repository.TypeOfApprovalTechnicalDetailsRepository;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -49,12 +50,65 @@ public class TypeOfApprovalService {
             manufacturerRepository.save(manufacturer);
         }
 
-        //Save technicalDetails
-        for(TypeOfApprovalTechnicalDetail details :form.getDetails()){
-            details.setTechnicalDetails(savedApplicant);
-            technicalDetailsRepository.save(details);
-        }
+//        //Save technicalDetails
+//        for(TypeOfApprovalTechnicalDetail detail :form.getDetails()){
+//            detail.setTechnicalDetails(savedApplicant);
+//            technicalDetailsRepository.save(detail);
+//        }
+        //Save Technical Details
 
+        try{
+            TypeOfApprovalTechnicalDetail detail = new TypeOfApprovalTechnicalDetail();
+            detail.setTechnicalDetails(savedApplicant);
+            detail.setGsm(form.getGsm());
+            detail.setCdma(form.getCdma());
+            detail.setLte(form.getLte());
+            detail.setTetra(form.getTetra());
+            detail.setAmateurRadio(form.getAmateurRadio());
+            detail.setPrivateMobileRadio(form.getPrivateMobileRadio());
+            detail.setPmrRadio(form.getPmrRadio());
+            detail.setRadar(form.getRadar());
+            detail.setRlan(form.getRlan());
+            detail.setWimax(form.getWimax());
+            detail.setFwa(form.getFwa());
+            detail.setMicrowave(form.getMicrowave());
+            detail.setSoundBroadcasting(form.getSoundBroadcasting());
+            detail.setTvBroadcasting(form.getTvBroadcasting());
+            detail.setCordlessPhone(form.getCordlessPhone());
+            detail.setSrd(form.getSrd());
+            detail.setRfid(form.getRfid());
+            detail.setSatelliteRadio(form.getSatelliteRadio());
+            detail.setRadioNavigation(form.getRadioNavigation());
+            detail.setSatelliteRadio(form.getSatelliteRadio());
+            detail.setVsat(form.getVsat());
+            detail.setOther(form.getOther());
+            detail.setIntendedUse(form.getIntendedUse());
+            detail.setModelNumber(form.getModelNumber());
+            detail.setBrandName(form.getBrandName());
+            detail.setTypeNumber(form.getTypeNumber());
+            detail.setCountryofOrigin(form.getCountryofOrigin());
+            detail.setFrequencyrangeFromMHZ(form.getFrequencyrangeFromMHZ());
+            detail.setFrequencyrangeToMHZ(form.getFrequencyrangeToMHZ());
+            detail.setFrequencyrangeFromGHZ(form.getFrequencyrangeFromGHZ());
+            detail.setFrequencyrangeToGHZ(form.getFrequencyrangeToGHZ());
+            detail.setOutputPowerRadiatedConducted(form.getOutputPowerRadiatedConducted());
+            detail.setTransmissionCapacity(form.getTransmissionCapacity());
+            detail.setChannelCapacity(form.getChannelCapacity());
+            detail.setChannelSpacing(form.getChannelSpacing());
+            detail.setModulationType(form.getModulationType());
+            detail.setAntennaType(form.getAntennaType());
+            detail.setAntennaGain(form.getAntennaGain());
+            detail.setTechnicalInterface(form.getTechnicalInterface());
+            detail.setTechnicalVariants(form.getTechnicalVariants());
+            detail.setEquipmentLicenseRequirement(form.getEquipmentLicenseRequirement());
+            detail.setEnteredBy("Online Entry");
+            detail.setEnteredDate(LocalDate.now());
+            technicalDetailsRepository.save(detail);
+        }
+     catch (Exception e) {
+        // Preferably use a logger here
+        e.printStackTrace();
+    }
         // Save attachments
         try {
             TypeOfApprovalAttachment attachment = new TypeOfApprovalAttachment();

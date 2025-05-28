@@ -46,7 +46,7 @@ public class TypeOfApprovalTechnicalDetailDTO {
     private String modulationType;
     private String antennaType;
     private String antennaGain;
-    private String technical_interface;
+    private String technicalInterface;
     private String technicalVariants;
     private String equipmentLicenseRequirement;
     private String enteredBy;

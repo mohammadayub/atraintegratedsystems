@@ -39,7 +39,7 @@ public class TypeOfApprovalApplicant {
     private List<TypeOfApprovalAttachment> attachments;
 
     @OneToMany(mappedBy = "technicalDetails", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<TypeOfApprovalTechnicalDetail> technicalDetail;
+    private List<TypeOfApprovalTechnicalDetail> details;
 
 
 
