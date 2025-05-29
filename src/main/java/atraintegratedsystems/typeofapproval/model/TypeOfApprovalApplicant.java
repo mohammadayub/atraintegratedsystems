@@ -42,6 +42,8 @@ public class TypeOfApprovalApplicant {
     private List<TypeOfApprovalTechnicalDetail> details;
 
 
+    @OneToMany(mappedBy = "standardCompliant", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<TypeOfApprovalStandardCompliantWith> standardCompliant;
 
 
 

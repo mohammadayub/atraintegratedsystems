@@ -49,9 +49,10 @@ public class TypeOfApprovalTechnicalDetails {
     private String channelCapacity;
     private String channelSpacing;
     private String modulationType;
+    // Bellow Fields are not exist in thymeleaf file
     private String antennaType;
     private String antennaGain;
-    private String technical_interface;
+    private String technicalInterface;
     private String technicalVariants;
     private String equipmentLicenseRequirement;
     private String enteredBy;
