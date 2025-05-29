@@ -23,6 +23,13 @@
       const row = button.closest("tr");
       row.parentNode.removeChild(row);
     }
+  function resetRow(button) {
+  const row = button.closest("tr");
+  const inputs = row.querySelectorAll("input, select, textarea");
+  inputs.forEach(function (input) {
+    input.value = "";
+  });
+}
 
     function copyToManufacturerField(applicantSelector, manufacturerFieldName) {
       const table = document.getElementById("manufacturerTableBody");
@@ -108,7 +115,7 @@
           <label th:text="#{requestDate}"
                  th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
           </label>
-          <input type="date" class="form-control"
+          <input type="date" id="requestDateInput" class="form-control"
                  th:field="*{applicant.requestDate}"
                  th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" />
         </div>
@@ -248,7 +255,7 @@
             <th th:text="#{telephone}"></th>
             <th th:text="#{mobile}"></th>
             <th th:text="#{email}"></th>
-            <th th:text="#{action}"></th>
+            <th th:text="#{action}" colspan="2" style="text-align:center;"></th>
           </tr>
           </thead>
           <tbody id="manufacturerTableBody">
@@ -262,6 +269,8 @@
             <td><input type="text" class="form-control" th:field="*{manufacturers[__${iterStat.index}__].manufacturer_mobile}"/></td>
             <td><input type="email" class="form-control" th:field="*{manufacturers[__${iterStat.index}__].manufacturer_email}"/></td>
             <td><button type="button" class="btn btn-danger btn-sm" onclick="removeRow(this)">Remove</button></td>
+            <td><button type="button" class="btn btn-info btn-sm" onclick="resetRow(this)">Reset</button></td>
+
           </tr>
           </tbody>
         </table>
@@ -428,7 +437,7 @@
             <input th:field="*{modulationType}" type="text" class="form-control" id="modulationType">
           </div>
           <div class="col-12 col-sm-6 col-md-3">
-            <label>Antenna Type</label>
+            <label class="form-label">Antenna Type</label>
             <select class="form-select" th:field="*{antennaType}">
               <option value="Integral"
                       th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">Integral</option>
@@ -442,7 +451,7 @@
           </div>
 
           <div class="col-12 col-sm-6 col-md-3">
-            <label>Technical Interface</label>
+            <label class="form-label">Technical Interface</label>
             <select class="form-select" th:field="*{technicalInterface}">
               <option value="Power Source"
                       th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">Power Source</option>
@@ -459,8 +468,7 @@
             <input th:field="*{technicalVariants}" type="text" class="form-control" id="technicalVariants">
           </div>
           <div class="col-12 col-sm-6 col-md-3">
-
-            <label>Equipment License Requirement</label>
+            <label class="form-label">Equipment License Requirement</label>
             <select class="form-select" th:field="*{equipmentLicenseRequirement}">
               <option value="License required"
                       th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">License required</option>
@@ -550,13 +558,13 @@
 
     <!--    Signature of applicant -->
     <div class="card mb-4">
-      <div class="card-header b-4" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" title="Only Allowed PDF File">Standards compliant With</div>
+      <div class="card-header b-4" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" title="Only Allowed PDF File">Signature of applicant</div>
       <div class="card-body row g-3">
         <div class="col-md-6">
-          <label th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">Name (Printed):</label>
+          <label th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"><pre>Name (                           )</pre></label>
         </div>
         <div class="col-md-6">
-          <label th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">Date:</label>
+          <label th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">Date:--------------</label>
         </div>
         <div class="col-md-12">
           <label th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">Authorized Signature of Applicant:</label>
@@ -584,7 +592,25 @@
   <td><input type="text" name="manufacturers[__INDEX__].manufacturer_mobile" class="form-control"/></td>
   <td><input type="email" name="manufacturers[__INDEX__].manufacturer_email" class="form-control"/></td>
   <td><button type="button" class="btn btn-danger btn-sm" onclick="removeRow(this)">Remove</button></td>
+  <td><button type="button" class="btn btn-info btn-sm" onclick="resetRow(this)">Reset</button></td>
 </script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const dateInput = document.getElementById("requestDateInput");
+
+    // Trigger native calendar on focus or click
+    dateInput.addEventListener("click", function () {
+      this.showPicker && this.showPicker(); // modern browsers (Chrome, Edge)
+    });
+
+    // Or trigger focus programmatically to ensure the picker opens
+    dateInput.addEventListener("click", function () {
+      this.focus();
+    });
+  });
+</script>
+
 
 <!-- Optional script includes -->
 <div th:replace="scripts :: common-scripts"></div>
