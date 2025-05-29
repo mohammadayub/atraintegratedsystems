@@ -2,11 +2,9 @@ package atraintegratedsystems.typeofapproval.service;
 import atraintegratedsystems.typeofapproval.dto.TypeOfApprovalFormDTO;
 import atraintegratedsystems.typeofapproval.model.TypeOfApprovalAttachment;
 import atraintegratedsystems.typeofapproval.model.TypeOfApprovalManufacturerDetail;
+import atraintegratedsystems.typeofapproval.model.TypeOfApprovalStandardCompliant;
 import atraintegratedsystems.typeofapproval.model.TypeOfApprovalTechnicalDetail;
-import atraintegratedsystems.typeofapproval.repository.TypeOfApprovalApplicantRepository;
-import atraintegratedsystems.typeofapproval.repository.TypeOfApprovalAttachmentRepository;
-import atraintegratedsystems.typeofapproval.repository.TypeOfApprovalManufacturerDetailRepository;
-import atraintegratedsystems.typeofapproval.repository.TypeOfApprovalTechnicalDetailsRepository;
+import atraintegratedsystems.typeofapproval.repository.*;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,15 +20,18 @@ public class TypeOfApprovalService {
     private final TypeOfApprovalManufacturerDetailRepository manufacturerRepository;
     private final TypeOfApprovalAttachmentRepository attachmentRepository;
     private final TypeOfApprovalTechnicalDetailsRepository technicalDetailsRepository;
+    private final TypeOfApprovalStandardComplaintRepository standardComplaintRepository;
 
     public TypeOfApprovalService(TypeOfApprovalApplicantRepository applicantRepository,
                                  TypeOfApprovalManufacturerDetailRepository manufacturerRepository,
                                  TypeOfApprovalAttachmentRepository attachmentRepository,
-                                 TypeOfApprovalTechnicalDetailsRepository technicalDetailsRepository) {
+                                 TypeOfApprovalTechnicalDetailsRepository technicalDetailsRepository ,
+                                 TypeOfApprovalStandardComplaintRepository standardComplaintRepository) {
         this.applicantRepository = applicantRepository;
         this.manufacturerRepository = manufacturerRepository;
         this.attachmentRepository = attachmentRepository;
         this.technicalDetailsRepository = technicalDetailsRepository;
+        this.standardComplaintRepository=standardComplaintRepository;
     }
 
     @Transactional
@@ -129,6 +130,34 @@ public class TypeOfApprovalService {
             // Preferably use a logger here
             e.printStackTrace();
         }
+
+
+        //Save TypeOfApprovalStandardComplaint
+
+        try{
+            TypeOfApprovalStandardCompliant standardCompliant = new TypeOfApprovalStandardCompliant();
+            standardCompliant.setStandardCompliant(savedApplicant);
+            setAttachmentField(standardCompliant::setEmc,form.getEmc());
+            standardCompliant.setEmcTestReportNo(form.getEmcTestReportNo());
+            setAttachmentField(standardCompliant::setRadio,form.getRadio());
+            standardCompliant.setRadioTestReportNo(form.getRadioTestReportNo());
+            setAttachmentField(standardCompliant::setHealthAndSafety,form.getHealthAndSafety());
+            standardCompliant.setHealthAndSafetyTestReportNo(form.getHealthAndSafetyTestReportNo());
+            setAttachmentField(standardCompliant::setTechnologySpecific,form.getTechnologySpecific());
+            standardCompliant.setTechnologySpecificTestReportNo(form.getTechnologySpecificTestReportNo());
+            standardComplaintRepository.save(standardCompliant);
+        } catch(IOException e){
+            e.printStackTrace();
+        }
+
+
+
+
+
+
+
+
+
     }
 
     @Transactional

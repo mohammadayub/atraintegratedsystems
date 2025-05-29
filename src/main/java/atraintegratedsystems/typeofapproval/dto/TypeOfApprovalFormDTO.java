@@ -2,11 +2,9 @@ package atraintegratedsystems.typeofapproval.dto;
 
 import atraintegratedsystems.typeofapproval.model.TypeOfApprovalApplicant;
 import atraintegratedsystems.typeofapproval.model.TypeOfApprovalManufacturerDetail;
-import atraintegratedsystems.typeofapproval.model.TypeOfApprovalTechnicalDetail;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,9 +22,7 @@ public class TypeOfApprovalFormDTO {
     private MultipartFile label;
     private MultipartFile testReportsIssuedByAccreditedTesting;
 
-
  //   TypeOfApprovalTechnicalDetail
-
     private String gsm;
     private String cdma;
     private String lte;
@@ -71,6 +67,17 @@ public class TypeOfApprovalFormDTO {
     private String enteredBy;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate enteredDate;
+
+
+    //TypeOfApprovalStandandComplaint
+   private MultipartFile emc;
+   private String emcTestReportNo;
+   private MultipartFile radio;
+   private String radioTestReportNo;
+   private MultipartFile healthAndSafety;
+   private String healthAndSafetyTestReportNo;
+   private MultipartFile technologySpecific;
+   private String technologySpecificTestReportNo;
 
 
 

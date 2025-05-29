@@ -2,11 +2,10 @@ package atraintegratedsystems.typeofapproval.dto;
 
 import lombok.Data;
 
-import javax.persistence.Column;
 import javax.persistence.Lob;
 
 @Data
-public class TypeOfApprovalStandardCompliantWithDTO {
+public class TypeOfApprovalStandardCompliantDTO {
     private Long id;
 
     @Lob

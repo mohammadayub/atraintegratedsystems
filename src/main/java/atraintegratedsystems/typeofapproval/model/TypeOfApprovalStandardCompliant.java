@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 @Data
 @Entity
-public class TypeOfApprovalStandardCompliantWith {
+public class TypeOfApprovalStandardCompliant {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

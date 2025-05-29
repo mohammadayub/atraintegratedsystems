@@ -494,7 +494,7 @@
       <div class="card-body row g-3">
         <div class="col-md-6">
           <label th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">EMC</label>
-          <input type="file" name="EMC" class="form-control" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+          <input type="file" name="emc" class="form-control" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
         </div>
         <div class="col-md-6">
           <label th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">Test Report No:</label>
@@ -502,7 +502,7 @@
         </div>
         <div class="col-md-6">
           <label th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">Radio</label>
-          <input type="file" name="Radio" class="form-control" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+          <input type="file" name="radio" class="form-control" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
         </div>
         <div class="col-md-6">
           <label th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">Test Report No:</label>
@@ -560,16 +560,12 @@
       </div>
     </div>
 
-
-
-
-
     <div class="text-end">
 <!--      <button type="submit" class="btn btn-primary" th:text="#{submit_application}">Submit Application & Print Form</button>-->
-      <button type="submit" class="btn btn-primary" onclick="window.print();">Submit Application & Print Form</button>
+      <button type="submit" class="btn btn-primary">Submit Application & Print Form</button>
     </div>
 
-
+    </div>
   </form>
 </div>
 
