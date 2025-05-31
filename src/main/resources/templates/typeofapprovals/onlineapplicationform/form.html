@@ -241,7 +241,7 @@
     <div class="card mb-4">
       <div class="card-header d-flex justify-content-between align-items-center">
         <span class="fw-bolder" th:text="#{manufacturer_details}"></span>
-        <button type="button" class="btn btn-sm btn-success" onclick="addManufacturer()" th:text="#{add_manufacturer}"></button>
+        <button type="button" class="btn btn-sm btn-success" onclick="addManufacturer()" th:text="#{add_manufacturer}" id="addManufacturer"></button>
       </div>
       <div class="table-responsive">
         <table class="table table-bordered" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
@@ -255,7 +255,7 @@
             <th th:text="#{telephone}"></th>
             <th th:text="#{mobile}"></th>
             <th th:text="#{email}"></th>
-            <th th:text="#{action}" colspan="2" style="text-align:center;"></th>
+            <th th:text="#{action}" colspan="2" style="text-align:center;" id="actions"></th>
           </tr>
           </thead>
           <tbody id="manufacturerTableBody">
@@ -268,8 +268,8 @@
             <td><input type="text" class="form-control" th:field="*{manufacturers[__${iterStat.index}__].manufacturer_telephone}"/></td>
             <td><input type="text" class="form-control" th:field="*{manufacturers[__${iterStat.index}__].manufacturer_mobile}"/></td>
             <td><input type="email" class="form-control" th:field="*{manufacturers[__${iterStat.index}__].manufacturer_email}"/></td>
-            <td><button type="button" class="btn btn-danger btn-sm" onclick="removeRow(this)">Remove</button></td>
-            <td><button type="button" class="btn btn-info btn-sm" onclick="resetRow(this)">Reset</button></td>
+            <td  id="actionRemove"><button type="button" class="btn btn-danger btn-sm" onclick="removeRow(this)">Remove</button></td>
+            <td id="actionReset"><button type="button" class="btn btn-info btn-sm" onclick="resetRow(this)">Reset</button></td>
 
           </tr>
           </tbody>
@@ -561,10 +561,10 @@
       <div class="card-header b-4" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" title="Only Allowed PDF File">Signature of applicant</div>
       <div class="card-body row g-3">
         <div class="col-md-6">
-          <label th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"><pre>Name (                           )</pre></label>
+          <label th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"><pre>Name (                         )</pre></label>
         </div>
         <div class="col-md-6">
-          <label th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">Date:--------------</label>
+          <label th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">Date:-----------------</label>
         </div>
         <div class="col-md-12">
           <label th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">Authorized Signature of Applicant:</label>
@@ -574,11 +574,14 @@
 
 
     <div class="text-end">
-      <button type="submit" class="btn btn-primary" th:text="#{submit_application}">Submit Application</button>
+      <button class="btn btn-primary" onclick="doPrint();" style="float:left;" id="prn1">Print</button>
+      <button type="submit" class="btn btn-primary" th:text="#{submit_application}" id="submit">Submit Application</button>
     </div>
 
     </div>
   </form>
+  <button class="btn btn-primary mt-2" onclick="doPrint();" style="float:right;" id="prn">Print</button>
+
 </div>
 
 <!-- Manufacturer Template for JavaScript -->
@@ -611,6 +614,13 @@
   });
 </script>
 
+<script>
+  function doPrint() {
+
+    window.print();
+  }
+</script>
+
 
 <!-- Optional script includes -->
 <div th:replace="scripts :: common-scripts"></div>
@@ -618,7 +628,7 @@
 <div th:replace="scripts :: data-tables-scripts"></div>
 <div th:replace="scripts :: common-datatable"></div>
 
-<div style="height:10vh"></div>
+<div style="height:15vh"></div>
 <footer th:replace="~{typeofApproval_layout :: page_footer}"></footer>
 </body>
 </html>
