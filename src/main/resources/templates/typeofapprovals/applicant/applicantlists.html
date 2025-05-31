@@ -1,0 +1,152 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head th:replace="~{layout :: page_head}">
+    <div th:replace="styles :: data-tables-styles"></div>
+    <div th:replace="styles :: persian-datepicker-styles"></div>
+    <div th:replace="styles :: select2-styles"></div>
+    <div th:replace="styles :: commonfieldset-with-legend-border"></div>
+    <title>LMS</title>
+    <style>
+        /* Basic Table Styling */
+        .table-container {
+            max-height: 800px; /* Set a maximum height for the table container */
+            overflow-y: auto; /* Enable vertical scrolling */
+            border: 1px solid #ddd; /* Optional: Add a border around the table */
+            margin-top: 15px;
+        }
+
+        #profileTable {
+            width: 100%; /* Full width for the table */
+            border-collapse: collapse;
+            font-size: 0.9em; /* General smaller font for the table */
+        }
+
+        #profileTable th, #profileTable td {
+            padding: 6px;
+            text-align: center;
+            vertical-align: middle;
+            font-size: 0.8em; /* Small font size for headers and cells */
+        }
+
+        #profileTable thead th {
+            color: white;
+            font-size: 16px; /* Slightly larger font for headers */
+        }
+
+        #profileTable tbody tr:nth-child(even) {
+            background-color: #f2f2f2; /* Zebra stripes for rows */
+        }
+        #profileTable td a.btn-primary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4px;
+        }
+        #profileTable .icon-small {
+            width: 16px;
+            height: 16px;
+        }
+
+        #profileTable th {
+            white-space: nowrap;
+            background-color:#8B0000;
+        }
+
+    .duplicate {
+        background-color: #ffc107;
+        color: #000;
+        font-weight: bold;
+}
+
+        /* Styling for fieldset and legend */
+
+        /* Optional: Add some responsiveness */
+        @media (max-width: 768px) {
+            #profileTable th, #profileTable td {
+                font-size: 0.7em; /* Smaller font size for mobile view */
+                padding: 4px;
+            }
+        }
+    </style>
+</head>
+<body>
+<nav th:replace="~{layout :: page_navbar}"></nav>
+<div class="container-fluid">
+    <br>
+    <fieldset>
+        <legend th:text="#{applicant_license_requests}"></legend>
+        <div class="table-container">
+            <table class="table table-bordered" id="profileTable">
+                <thead class="bg-primary">
+                <tr>
+                    <th>Id</th>
+                    <th>Contact Person</th>
+                    <th>Mobile Number</th>
+                    <th>Email Address</th>
+                    <th>Company Name</th>
+                    <th>Manufacturer Company Name</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="profile : ${applicants}">
+                    <td th:text="${profile.id}"></td>
+                    <td th:text="${profile.contactPerson}"></td>
+                    <td th:text="${profile.mobile}"></td>
+                    <td th:text="${profile.email}"></td>
+                    <td th:text="${profile.companyName}"></td>
+                    <td>
+                        <ul style="list-style: none; margin: 0; padding: 0;">
+                            <li th:each="m : ${profile.manufacturers}" th:text="${m.companyName}"></li>
+                        </ul>
+                    </td>
+
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </fieldset>
+
+    <a th:href="@{/licenses/license/home}" class="btn btn-primary" style="margin-top:20px;">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6" style="width:20px;height:20px;">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
+        </svg>
+        Back to Page
+    </a>
+</div>
+<!-- Common scripts -->
+<div th:replace="scripts :: common-scripts"></div>
+<div th:replace="scripts :: persian-datepicker-scripts"></div>
+<div th:replace="scripts :: data-tables-scripts"></div>
+
+<script>
+    $(document).ready(function () {
+        // Initialize DataTable with individual column search
+        let table = $('#profileTable').DataTable({
+            initComplete: function () {
+                this.api().columns().every(function () {
+                    var column = this;
+                    var header = $(column.header());
+                    var columnText = header.text(); // Get the existing header text
+                    header.empty().append('<div>' + columnText + '</div>'); // Keep the header text and add a wrapper
+
+                    // Append the search input below the header text
+                    $('<input type="text" placeholder="Search" style="width: 100%; margin-top: 5px;"/>')
+                        .appendTo(header)
+                        .on('keyup change clear', function () {
+                            if (column.search() !== this.value) {
+                                column
+                                    .search(this.value)
+                                    .draw();
+                            }
+                        });
+                });
+            }
+        });
+    });
+</script>
+
+<div style="height:15vh;"></div>
+<footer th:replace="~{layout :: page_footer}"></footer>
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>
