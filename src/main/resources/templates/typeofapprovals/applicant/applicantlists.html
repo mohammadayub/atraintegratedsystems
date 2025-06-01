@@ -49,14 +49,9 @@
 
         #profileTable th {
             white-space: nowrap;
-            background-color:#8B0000;
-        }
+<!--            background-color:#8B0000;-->
 
-    .duplicate {
-        background-color: #ffc107;
-        color: #000;
-        font-weight: bold;
-}
+        }
 
         /* Styling for fieldset and legend */
 
@@ -70,30 +65,46 @@
     </style>
 </head>
 <body>
-<nav th:replace="~{layout :: page_navbar}"></nav>
+<nav th:replace="~{typeofApproval_layout :: page_navbar}"></nav>
 <div class="container-fluid">
     <br>
     <fieldset>
-        <legend th:text="#{applicant_license_requests}"></legend>
+        <legend>Type Of Approvals List</legend>
         <div class="table-container">
             <table class="table table-bordered" id="profileTable">
                 <thead class="bg-primary">
                 <tr>
-                    <th>Id</th>
+                    <th>Request Date</th>
+                    <th>Type Of Approval Manufacturer</th>
+                    <th>Person</th>
+                    <th>license Operator</th>
+                    <th>Authorized Importer</th>
+                    <th>Import Registration No</th>
+                    <th>Company Name</th>
                     <th>Contact Person</th>
+                    <th>Address</th>
+                    <th>P.O.Box</th>
+                    <th>Telephone</th>
                     <th>Mobile Number</th>
                     <th>Email Address</th>
-                    <th>Company Name</th>
                     <th>Manufacturer Company Name</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:each="profile : ${applicants}">
-                    <td th:text="${profile.id}"></td>
+                    <td th:text="${profile.requestDate}"></td>
+                    <td th:text="${profile.manufacturer}"></td>
+                    <td th:text="${profile.person}"></td>
+                    <td th:text="${profile.licenseOperator}"></td>
+                    <td th:text="${profile.authorizedImporter}"></td>
+                    <td th:text="${profile.importRegistrationNo}"></td>
+                    <td th:text="${profile.companyName}"></td>
                     <td th:text="${profile.contactPerson}"></td>
+                    <td th:text="${profile.address}"></td>
+                    <td th:text="${profile.P_O_Box}"></td>
+                    <td th:text="${profile.telephone}"></td>
                     <td th:text="${profile.mobile}"></td>
                     <td th:text="${profile.email}"></td>
-                    <td th:text="${profile.companyName}"></td>
                     <td>
                         <ul style="list-style: none; margin: 0; padding: 0;">
                             <li th:each="m : ${profile.manufacturers}" th:text="${m.companyName}"></li>

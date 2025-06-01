@@ -7,6 +7,7 @@
   <title>Type of Approval</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"/>
   <link href="https://fonts.googleapis.com/css2?family=Playwrite+DK+Loopet&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap" />
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <div th:replace="styles :: common-css"></div>
   <script>
@@ -71,8 +72,10 @@
 
   <style>
     body {
-      font-family: "Roboto", sans-serif;
+
       background-color: #f5f5f5;
+      font-family: 'EB Garamond', serif;
+      font-weight:bold;
     }
 
     .navbar {
@@ -92,12 +95,15 @@
       color: black;
       font-weight: bold;
     }
+
+
   </style>
 </head>
 
 <body class="bg-light">
 
 <nav th:replace="~{typeofApproval_layout :: page_navbar}"></nav>
+<div style="display:none;font-weight:bolder;font-family: 'EB Garamond', serif;" id="printHeader"><h1 class="text-center">Type Of Approval Print Form</h1></div>
 
 <div class="container-fluid mt-4">
   <h3 class="mb-4 text-center"  style="font-family: 'Playwrite DK Loopet', cursive;" th:text="#{online_application}"></h3>
@@ -238,6 +244,7 @@
 
 
     <!-- Manufacturer Details -->
+    <div style="height:20vh;display:none;" id="space1"></div>
     <div class="card mb-4">
       <div class="card-header d-flex justify-content-between align-items-center">
         <span class="fw-bolder" th:text="#{manufacturer_details}"></span>
@@ -517,7 +524,8 @@
     </div>
 
 <!--    Standards compliant With -->
-    <div class="card mb-4">
+      <div style="height:20vh;display:none;" id="space2"></div>
+    <div class="card">
       <div class="card-header b-4" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" title="Only Allowed PDF File">Standards compliant With</div>
       <div class="card-body row g-3">
         <div class="col-md-6">
@@ -561,7 +569,7 @@
       <div class="card-header b-4" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" title="Only Allowed PDF File">Signature of applicant</div>
       <div class="card-body row g-3">
         <div class="col-md-6">
-          <label th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"><pre>Name (                         )</pre></label>
+          <label th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">Name<pre style="display:inline"> (                         )</pre></label>
         </div>
         <div class="col-md-6">
           <label th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">Date:-----------------</label>
@@ -574,13 +582,21 @@
 
 
     <div class="text-end">
-      <button class="btn btn-primary" onclick="doPrint();" style="float:left;" id="prn1">Print</button>
       <button type="submit" class="btn btn-primary" th:text="#{submit_application}" id="submit">Submit Application</button>
     </div>
 
     </div>
   </form>
-  <button class="btn btn-primary mt-2" onclick="doPrint();" style="float:right;" id="prn">Print</button>
+  <div style="text-align: center; margin-top: 1rem; width: 50%; margin: auto;" id="prn">
+    <button class="btn btn-primary d-inline-flex align-items-center gap-1 mt-4" onclick="doPrint();" style="display: inline-flex; align-items: center; gap: 0.5rem;">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="height: 1.2em; width: 1.2em;">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6.72 13.829c-.24.03-.48.062-.72.096m.72-.096a42.415 42.415 0 0 1 10.56 0m-10.56 0L6.34 18m10.94-4.171c.24.03.48.062.72.096m-.72-.096L17.66 18m0 0 .229 2.523a1.125 1.125 0 0 1-1.12 1.227H7.231c-.662 0-1.18-.568-1.12-1.227L6.34 18m11.318 0h1.091A2.25 2.25 0 0 0 21 15.75V9.456c0-1.081-.768-2.015-1.837-2.175a48.055 48.055 0 0 0-1.913-.247M6.34 18H5.25A2.25 2.25 0 0 1 3 15.75V9.456c0-1.081.768-2.015 1.837-2.175a48.041 48.041 0 0 1 1.913-.247m10.5 0a48.536 48.536 0 0 0-10.5 0m10.5 0V3.375c0-.621-.504-1.125-1.125-1.125h-8.25c-.621 0-1.125.504-1.125 1.125v3.659M18 10.5h.008v.008H18V10.5Zm-3 0h.008v.008H15V10.5Z" />
+      </svg>
+      Print
+    </button>
+  </div>
+
+
 
 </div>
 
@@ -616,8 +632,23 @@
 
 <script>
   function doPrint() {
+  document.getElementById("pagfooter").style.display="none";
+  document.getElementById("prn").style.display="none";
+  document.getElementById("printHeader").style.display="block";
+  document.getElementById("header_navbar").style.display="none";
+  document.getElementById("space1").style.display="block";
+  document.getElementById("space2").style.display="block";
+
+
+
 
     window.print();
+    document.getElementById("printHeader").style.display="none";
+    document.getElementById("pagfooter").style.display="block";
+    document.getElementById("prn").style.display="block";
+    document.getElementById("header_navbar").style.display="block";
+    document.getElementById("space1").style.display="none";
+    document.getElementById("space2").style.display="none";
   }
 </script>
 
@@ -628,7 +659,7 @@
 <div th:replace="scripts :: data-tables-scripts"></div>
 <div th:replace="scripts :: common-datatable"></div>
 
-<div style="height:15vh"></div>
+<div style="height:25vh"></div>
 <footer th:replace="~{typeofApproval_layout :: page_footer}"></footer>
 </body>
 </html>
