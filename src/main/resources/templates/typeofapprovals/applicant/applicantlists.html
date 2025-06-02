@@ -1,12 +1,19 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head th:replace="~{layout :: page_head}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap" />
     <div th:replace="styles :: data-tables-styles"></div>
     <div th:replace="styles :: persian-datepicker-styles"></div>
     <div th:replace="styles :: select2-styles"></div>
     <div th:replace="styles :: commonfieldset-with-legend-border"></div>
     <title>LMS</title>
     <style>
+        body {
+
+      background-color: #f5f5f5;
+      font-family: 'EB Garamond', serif;
+      font-weight:bold;
+    }
         /* Basic Table Styling */
         .table-container {
             max-height: 800px; /* Set a maximum height for the table container */
@@ -117,7 +124,7 @@
         </div>
     </fieldset>
 
-    <a th:href="@{/licenses/license/home}" class="btn btn-primary" style="margin-top:20px;">
+    <a th:href="@{/typeofapprovals/home}" class="btn btn-primary" style="margin-top:20px;">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6" style="width:20px;height:20px;">
             <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
         </svg>

@@ -1,9 +1,17 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head th:replace="~{layout :: page_head}">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap" />
+
   <div th:replace="styles :: commonfieldset"></div>
   <title>LMS</title>
   <style>
+    body {
+
+      background-color: #f5f5f5;
+      font-family: 'EB Garamond', serif;
+      font-weight:bold;
+    }
     h4 a {
         color: #14438B;
         font-size: 20px;
@@ -22,6 +30,16 @@
             <img th:src="@{/images/typeofapproval_Form.png}" alt="Type of Approval" class="img-fluid"></a>
           <h4 class="license-link mt-2">
             <a th:href="@{/typeofapprovals/onlineapplicationform/form}" th:text="#{typeof_approvals}" style="font-size:20px;"></a>
+          </h4>
+        </div>
+      </div>
+
+      <div class="col-sm-4">
+        <div class="custom-card text-center p-3">
+          <a th:href="@{/typeofapprovals/applicant/applicantlists}">
+            <img th:src="@{/images/typeOfApprovalList.png}" alt="Type of Approval" class="img-fluid"></a>
+          <h4 class="license-link mt-2">
+            <a th:href="@{/typeofapprovals/applicant/applicantlists}" style="font-size:20px;">List Of All Applicants</a>
           </h4>
         </div>
       </div>
