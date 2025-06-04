@@ -35,7 +35,11 @@ public class TypeOfApprovalApplicant {
     @OneToMany(mappedBy = "applicant", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<TypeOfApprovalManufacturerDetail> manufacturers;
 
-    @OneToMany(mappedBy = "approvalApplicant", cascade = CascadeType.ALL, orphanRemoval = true)
+//    @OneToMany(mappedBy = "approvalApplicant", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private List<TypeOfApprovalAttachment> attachments;
+
+
+    @OneToMany(mappedBy = "approvalApplicant", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<TypeOfApprovalAttachment> attachments;
 
     @OneToMany(mappedBy = "technicalDetails", cascade = CascadeType.ALL, orphanRemoval = true)

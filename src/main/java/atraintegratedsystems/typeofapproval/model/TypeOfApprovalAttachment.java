@@ -14,6 +14,7 @@ public class TypeOfApprovalAttachment {
     private Long id;
 
     @Lob
+    @Basic(fetch = FetchType.LAZY)
     @Column(name="declaration_of_Conformity")
     private byte[] declarationOfConformity;
 
