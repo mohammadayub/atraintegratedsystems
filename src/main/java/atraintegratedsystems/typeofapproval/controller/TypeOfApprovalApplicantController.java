@@ -94,6 +94,152 @@ public class TypeOfApprovalApplicantController {
                 .body(new ByteArrayResource(fileData));
     }
 
+    @GetMapping("/typeofapprovals/applicant/applicationlists/testreportdownload/{id}")
+    public ResponseEntity<ByteArrayResource> testReportsFile(@PathVariable Long id) {
+        Optional<TypeOfApprovalAttachment> attachmentOpt = attachmentService.findById(id);
+
+        if (!attachmentOpt.isPresent()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        TypeOfApprovalAttachment attachment = attachmentOpt.get();
+
+        byte[] fileData = attachment.getTestReportsOfAccreditedLaboratory();
+
+        if (fileData == null || fileData.length == 0) {
+            return ResponseEntity.noContent().build();
+        }
+
+        String fileExtension = getFileExtension(fileData);
+        String mimeType = getMimeType(fileData);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"declaration" + fileExtension + "\"");
+        headers.add(HttpHeaders.CONTENT_TYPE, mimeType);
+
+        return ResponseEntity.ok()
+                .headers(headers)
+                .contentLength(fileData.length)
+                .body(new ByteArrayResource(fileData));
+    }
+
+
+    @GetMapping("/typeofapprovals/applicant/applicationlists/circuitdiagramdownload/{id}")
+    public ResponseEntity<ByteArrayResource> circuiteDiagramFile(@PathVariable Long id) {
+        Optional<TypeOfApprovalAttachment> attachmentOpt = attachmentService.findById(id);
+
+        if (!attachmentOpt.isPresent()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        TypeOfApprovalAttachment attachment = attachmentOpt.get();
+
+        byte[] fileData = attachment.getCircuitDiagramPCB();
+
+        if (fileData == null || fileData.length == 0) {
+            return ResponseEntity.noContent().build();
+        }
+
+        String fileExtension = getFileExtension(fileData);
+        String mimeType = getMimeType(fileData);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"declaration" + fileExtension + "\"");
+        headers.add(HttpHeaders.CONTENT_TYPE, mimeType);
+
+        return ResponseEntity.ok()
+                .headers(headers)
+                .contentLength(fileData.length)
+                .body(new ByteArrayResource(fileData));
+    }
+
+    @GetMapping("/typeofapprovals/applicant/applicationlists/photographdownload/{id}")
+    public ResponseEntity<ByteArrayResource> photographFile(@PathVariable Long id) {
+        Optional<TypeOfApprovalAttachment> attachmentOpt = attachmentService.findById(id);
+
+        if (!attachmentOpt.isPresent()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        TypeOfApprovalAttachment attachment = attachmentOpt.get();
+
+        byte[] fileData = attachment.getPhotographs();
+
+        if (fileData == null || fileData.length == 0) {
+            return ResponseEntity.noContent().build();
+        }
+
+        String fileExtension = getFileExtension(fileData);
+        String mimeType = getMimeType(fileData);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"declaration" + fileExtension + "\"");
+        headers.add(HttpHeaders.CONTENT_TYPE, mimeType);
+
+        return ResponseEntity.ok()
+                .headers(headers)
+                .contentLength(fileData.length)
+                .body(new ByteArrayResource(fileData));
+    }
+
+
+    @GetMapping("/typeofapprovals/applicant/applicationlists/labeldownload/{id}")
+    public ResponseEntity<ByteArrayResource> labelFile(@PathVariable Long id) {
+        Optional<TypeOfApprovalAttachment> attachmentOpt = attachmentService.findById(id);
+
+        if (!attachmentOpt.isPresent()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        TypeOfApprovalAttachment attachment = attachmentOpt.get();
+
+        byte[] fileData = attachment.getLabel();
+
+        if (fileData == null || fileData.length == 0) {
+            return ResponseEntity.noContent().build();
+        }
+
+        String fileExtension = getFileExtension(fileData);
+        String mimeType = getMimeType(fileData);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"declaration" + fileExtension + "\"");
+        headers.add(HttpHeaders.CONTENT_TYPE, mimeType);
+
+        return ResponseEntity.ok()
+                .headers(headers)
+                .contentLength(fileData.length)
+                .body(new ByteArrayResource(fileData));
+    }
+
+    @GetMapping("/typeofapprovals/applicant/applicationlists/testreprotsissueddownload/{id}")
+    public ResponseEntity<ByteArrayResource> testreprotsissuedFile(@PathVariable Long id) {
+        Optional<TypeOfApprovalAttachment> attachmentOpt = attachmentService.findById(id);
+
+        if (!attachmentOpt.isPresent()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        TypeOfApprovalAttachment attachment = attachmentOpt.get();
+
+        byte[] fileData = attachment.getTestReportsIssuedByAccreditedTesting();
+
+        if (fileData == null || fileData.length == 0) {
+            return ResponseEntity.noContent().build();
+        }
+
+        String fileExtension = getFileExtension(fileData);
+        String mimeType = getMimeType(fileData);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"declaration" + fileExtension + "\"");
+        headers.add(HttpHeaders.CONTENT_TYPE, mimeType);
+
+        return ResponseEntity.ok()
+                .headers(headers)
+                .contentLength(fileData.length)
+                .body(new ByteArrayResource(fileData));
+    }
 
 
 
