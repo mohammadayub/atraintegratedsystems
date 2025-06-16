@@ -40,18 +40,7 @@ public class TypeOfApprovalReferController {
         }
     }
 
-    @GetMapping("/typeofapprovals/refer/print/{id}")
-    public String printList(@PathVariable Long id, Model model) {
-        Optional<TypeOfApprovalApplicant> profileOpt = typeOfApprovalApplicantService.getById(id);
 
-        if (profileOpt.isPresent()) {
-            model.addAttribute("profile", profileOpt.get());
-            return "typeofapprovals/refer/referprint"; // This matches your HTML file name/path
-        } else {
-            // Handle not found case (redirect to list or show error)
-            return "redirect:/typeofapprovals/refer/referlists";
-        }
-    }
 
 
     @PostMapping("/typeofapprovals/refer/referfinance/save")
