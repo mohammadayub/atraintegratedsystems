@@ -1,0 +1,191 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head th:replace="~{layout :: page_head}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap" />
+    <div th:replace="styles :: data-tables-styles"></div>
+    <div th:replace="styles :: persian-datepicker-styles"></div>
+    <div th:replace="styles :: select2-styles"></div>
+    <div th:replace="styles :: commonfieldset-with-legend-border"></div>
+    <title>LMS</title>
+    <style>
+        body {
+
+      background-color: #f5f5f5;
+      font-family: 'EB Garamond', serif;
+      font-weight:bold;
+    }
+        /* Basic Table Styling */
+        .table-container {
+            max-height: 800px; /* Set a maximum height for the table container */
+            overflow-y: auto; /* Enable vertical scrolling */
+            border: 1px solid #ddd; /* Optional: Add a border around the table */
+            margin-top: 15px;
+        }
+
+        #profileTable {
+            width: 100%; /* Full width for the table */
+            border-collapse: collapse;
+            font-size: 0.9em; /* General smaller font for the table */
+        }
+
+        #profileTable th, #profileTable td {
+            padding: 6px;
+            text-align: center;
+            vertical-align: middle;
+            font-size: 0.8em; /* Small font size for headers and cells */
+        }
+
+        #profileTable thead th {
+            color: white;
+            font-size: 16px; /* Slightly larger font for headers */
+        }
+
+        #profileTable tbody tr:nth-child(even) {
+            background-color: #f2f2f2; /* Zebra stripes for rows */
+        }
+        #profileTable td a.btn-primary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4px;
+        }
+        #profileTable .icon-small {
+            width: 16px;
+            height: 16px;
+        }
+
+        #profileTable th {
+            white-space: nowrap;
+<!--            background-color:#8B0000;-->
+
+        }
+
+        /* Styling for fieldset and legend */
+
+        /* Optional: Add some responsiveness */
+        @media (max-width: 768px) {
+            #profileTable th, #profileTable td {
+                font-size: 0.7em; /* Smaller font size for mobile view */
+                padding: 4px;
+            }
+        }
+        .btn.btn-success {
+                margin-top: 10px;
+                margin-bottom: 10px;
+                          }
+
+    </style>
+</head>
+<body>
+<nav th:replace="~{typeofApproval_layout :: page_navbar}"></nav>
+<div class="container-fluid">
+    <br>
+    <fieldset>
+        <legend>Type Of Approvals List</legend>
+        <div class="table-container">
+            <table class="table table-bordered" id="profileTable">
+                <thead class="bg-primary">
+                <tr>
+                    <th>Request Date</th>
+                    <th>Type Of Approval Manufacturer</th>
+                    <th>Person</th>
+                    <th>Company Name</th>
+                    <th>Contact Person</th>
+                    <th>Mobile Number</th>
+                    <th>Email Address</th>
+                    <th>Manufacturer Company Name</th>
+                    <th>Refer Date</th>
+                    <th>Refer Status</th>
+                    <th>Refer to Finance</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="profile : ${applicants}">
+                    <td th:text="${profile.requestDate}"></td>
+                    <td th:text="${profile.manufacturer}"></td>
+                    <td th:text="${profile.person}"></td>
+                    <td th:text="${profile.companyName}"></td>
+                    <td th:text="${profile.contactPerson}"></td>
+                    <td th:text="${profile.mobile}"></td>
+                    <td th:text="${profile.email}"></td>
+                    <td th:text="${profile.referDate}"></td>
+                    <td th:text="${profile.referStatus}"></td>
+                    <td>
+                        <ul style="list-style: none; margin: 0; padding: 0;">
+                            <li th:each="m : ${profile.manufacturers}" th:text="${m.companyName}"></li>
+                        </ul>
+                    </td>
+                    <td>
+                        <a th:href="@{/typeofapprovals/refer/referfinance/{id}(id=${profile.id})}"
+                           class="btn btn-warning"
+                           th:attr="disabled=${profile.referStatus == 'Yes'}"
+                           th:classappend="${profile.referStatus == 'Yes'} ? ' disabled' : ''">
+                            Refer
+                        </a>
+                    </td>
+
+
+
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </fieldset>
+
+    <a th:href="@{/typeofapprovals/home}" class="btn btn-primary" style="margin-top:20px;">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6" style="width:20px;height:20px;">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
+        </svg>
+        Back to Page
+    </a>
+</div>
+<!-- Common scripts -->
+<div th:replace="scripts :: common-scripts"></div>
+<div th:replace="scripts :: persian-datepicker-scripts"></div>
+<div th:replace="scripts :: data-tables-scripts"></div>
+
+<!-- Required CSS for DataTables Buttons -->
+
+
+<!-- Required JS libraries -->
+<script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        let table = $('#profileTable').DataTable({
+            dom: 'Bfrtip', // Show buttons on top
+            buttons: [
+                {
+                    extend: 'excelHtml5',
+                    text: 'Export to Excel',
+                    className: 'btn btn-success' // Optional styling
+                }
+            ],
+            initComplete: function () {
+                this.api().columns().every(function () {
+                    var column = this;
+                    var header = $(column.header());
+                    var columnText = header.text();
+                    header.empty().append('<div>' + columnText + '</div>');
+
+                    $('<input type="text" placeholder="Search" style="width: 100%; margin-top: 5px;"/>')
+                        .appendTo(header)
+                        .on('keyup change clear', function () {
+                            if (column.search() !== this.value) {
+                                column.search(this.value).draw();
+                            }
+                        });
+                });
+            }
+        });
+    });
+</script>
+
+
+<div style="height:15vh;"></div>
+<footer th:replace="~{layout :: page_footer}"></footer>
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

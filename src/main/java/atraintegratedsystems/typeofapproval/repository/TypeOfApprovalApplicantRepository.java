@@ -16,4 +16,7 @@ public interface TypeOfApprovalApplicantRepository extends JpaRepository<TypeOfA
     @Query(value = "SELECT * FROM typeofapproval_applicants", nativeQuery = true)
     List<TypeOfApprovalApplicant> findAllApplicants();
 
+    @Query(value = "SELECT * FROM typeofapproval_applicants where refer_status='Yes'", nativeQuery = true)
+    List<TypeOfApprovalApplicant> findAllReferred();
+
 }

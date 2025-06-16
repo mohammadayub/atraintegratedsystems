@@ -45,10 +45,37 @@
       </div>
     </div>
   </fieldset>
+  <fieldset  sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_typeofapprovals_ADMIN')">
+    <legend > Refer Management Section</legend>
+    <div class="row g-4">
+      <div class="col-sm-4">
+        <div class="custom-card text-center p-3">
+          <a th:href="@{/typeofapprovals/refer/referlists}">
+            <img th:src="@{/images/typeOfApprovalList.png}" alt="Type of Approval" class="img-fluid"></a>
+          <h4 class="license-link mt-2">
+            <a th:href="@{/typeofapprovals/refer/referlists}"  style="font-size:20px;">Refer Lists</a>
+          </h4>
+        </div>
+      </div>
+    </div>
+  </fieldset>
+  <fieldset  sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_typeofapprovals_ADMIN')">
+    <legend >Finance Management</legend>
+    <div class="row g-4">
+      <div class="col-sm-4">
+        <div class="custom-card text-center p-3">
+          <a th:href="@{/typeofapprovals/refer/referlists}">
+            <img th:src="@{/images/typeOfApprovalList.png}" alt="Type of Approval" class="img-fluid"></a>
+          <h4 class="license-link mt-2">
+            <a th:href="@{/typeofapprovals/finance/paymentlists}"  style="font-size:20px;">Payment List</a>
+          </h4>
+        </div>
+      </div>
+    </div>
+  </fieldset>
 </div>
 <!-- Common scripts -->
 <div th:replace="scripts :: common-scripts"></div>
-
 <div style="height:10vh;"></div>
 <footer th:replace="~{layout :: page_footer}"></footer>
 <script th:src="@{/js/bootstrap.bundle.min.js}"></script>

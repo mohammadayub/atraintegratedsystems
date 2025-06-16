@@ -32,6 +32,22 @@ public class TypeOfApprovalApplicant {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate enteredDate;
 
+
+    //Refer to Finance Department
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate referDate;
+    private String referStatus;
+
+
+    //Finance Section
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate voucherDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate submissionVoucherDate;
+    private String paymentStatus;
+
+
+
     @OneToMany(mappedBy = "applicant", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<TypeOfApprovalManufacturerDetail> manufacturers;
 

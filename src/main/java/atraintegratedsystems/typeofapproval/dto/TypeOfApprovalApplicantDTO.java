@@ -24,4 +24,18 @@ public class TypeOfApprovalApplicantDTO {
     private String email;
     private String enteredBy;
 
+
+    //Refer to Finance Department
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate referDate;
+    private String referStatus;
+
+
+    //Finance Section
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate voucherDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate submissionVoucherDate;
+    private String paymentStatus;
+
 }
