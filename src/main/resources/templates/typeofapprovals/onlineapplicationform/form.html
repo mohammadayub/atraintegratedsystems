@@ -592,9 +592,21 @@
     </div>
 
 
-    <div class="text-end">
-      <button type="submit" class="btn btn-primary" th:text="#{submit_application}" id="submit">Submit Application</button>
-    </div>
+      <div class="d-flex justify-content-between align-items-center mt-3">
+        <!-- Left Button -->
+        <div id="left">
+
+          <a th:href="@{/typeofapprovals/home}" class="btn btn-primary">Back to Page</a>
+        </div>
+
+        <!-- Right Button -->
+        <div id="right">
+          <button type="submit" class="btn btn-primary" th:text="#{submit_application}" id="submit">
+            Submit Application
+          </button>
+        </div>
+      </div>
+
 
     </div>
   </form>

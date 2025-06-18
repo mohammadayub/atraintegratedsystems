@@ -2,6 +2,24 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{layout :: page_head}">
     <title>Refer To Finance</title>
+
+    <style>
+        .btn {
+            transition: all 0.3s ease-in-out;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-success:hover {
+            background-color: #1e7e34;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary:hover {
+            background-color: #545b62;
+            transform: translateY(-2px);
+        }
+    </style>
 </head>
 <body>
 <nav th:replace="~{typeofApproval_layout :: page_navbar}"></nav>
@@ -35,26 +53,25 @@
                     </div>
                     <div class="col-md-6">
                         <label class="form-label">Refer Date</label>
-                        <input type="date" th:field="*{referDate}" class="form-control"/>
+                        <input type="date" id="requestDateInput" th:field="*{referDate}" class="form-control"/>
                     </div>
                 </div>
 
                 <div class="row mb-4">
                     <div class="col-md-6">
                         <label class="form-label">Refer Status</label>
-                        <select th:field="*{referStatus}" class="form-select">
+                        <select th:field="*{referStatus}" class="form-select form-control">
                             <option value="" disabled>-- Select Status --</option>
                             <option value="Yes">Yes</option>
                             <option value="No">No</option>
                         </select>
                     </div>
                 </div>
-
-                <div class="d-flex justify-content-end gap-2">
-                    <button type="submit" class="btn btn-success">
+                <div class="d-flex justify-content-end gap-4 mt-4">
+                    <button type="submit" class="btn btn-success px-4 py-2">
                         <i class="bi bi-save"></i> Save
                     </button>
-                    <a th:href="@{/typeofapprovals/refer/referlists}" class="btn btn-secondary">
+                    <a th:href="@{/typeofapprovals/refer/referlists}" class="btn btn-secondary ml-1 px-4 py-2">
                         <i class="bi bi-x-circle"></i> Cancel
                     </a>
                 </div>
@@ -64,6 +81,21 @@
     </div>
 </div>
 
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const dateInput = document.getElementById("requestDateInput");
+
+      // Trigger native calendar on focus or click
+      dateInput.addEventListener("click", function () {
+        this.showPicker && this.showPicker(); // modern browsers (Chrome, Edge)
+      });
+
+      // Or trigger focus programmatically to ensure the picker opens
+      dateInput.addEventListener("click", function () {
+        this.focus();
+      });
+    });
+</script>
 
 <footer th:replace="~{layout :: page_footer}"></footer>
 <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
