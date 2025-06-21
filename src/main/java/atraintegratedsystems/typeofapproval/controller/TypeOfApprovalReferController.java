@@ -19,7 +19,6 @@ public class TypeOfApprovalReferController {
     @Autowired
     private TypeOfApprovalApplicantService typeOfApprovalApplicantService;
 
-
     @GetMapping("/typeofapprovals/refer/referlists")
     public String listTypeOfApprovalApplicants(Model model) {
         List<TypeOfApprovalApplicant> applicants = typeOfApprovalApplicantService.getAllTypeOfApprovalApplicants();
@@ -39,9 +38,6 @@ public class TypeOfApprovalReferController {
             return "redirect:/typeofapprovals/refer/referlists";
         }
     }
-
-
-
 
     @PostMapping("/typeofapprovals/refer/referfinance/save")
     public String saveReferFinance(@ModelAttribute("profile") TypeOfApprovalApplicant applicant) {

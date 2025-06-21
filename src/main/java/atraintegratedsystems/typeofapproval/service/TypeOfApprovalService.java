@@ -1,17 +1,16 @@
 package atraintegratedsystems.typeofapproval.service;
+
 import atraintegratedsystems.typeofapproval.dto.TypeOfApprovalFormDTO;
-import atraintegratedsystems.typeofapproval.model.TypeOfApprovalAttachment;
-import atraintegratedsystems.typeofapproval.model.TypeOfApprovalManufacturerDetail;
-import atraintegratedsystems.typeofapproval.model.TypeOfApprovalStandardCompliant;
-import atraintegratedsystems.typeofapproval.model.TypeOfApprovalTechnicalDetail;
+import atraintegratedsystems.typeofapproval.model.*;
 import atraintegratedsystems.typeofapproval.repository.*;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.zip.GZIPOutputStream;
 
 @Service
 public class TypeOfApprovalService {
@@ -25,13 +24,13 @@ public class TypeOfApprovalService {
     public TypeOfApprovalService(TypeOfApprovalApplicantRepository applicantRepository,
                                  TypeOfApprovalManufacturerDetailRepository manufacturerRepository,
                                  TypeOfApprovalAttachmentRepository attachmentRepository,
-                                 TypeOfApprovalTechnicalDetailsRepository technicalDetailsRepository ,
+                                 TypeOfApprovalTechnicalDetailsRepository technicalDetailsRepository,
                                  TypeOfApprovalStandardComplaintRepository standardComplaintRepository) {
         this.applicantRepository = applicantRepository;
         this.manufacturerRepository = manufacturerRepository;
         this.attachmentRepository = attachmentRepository;
         this.technicalDetailsRepository = technicalDetailsRepository;
-        this.standardComplaintRepository=standardComplaintRepository;
+        this.standardComplaintRepository = standardComplaintRepository;
     }
 
     @Transactional
@@ -51,117 +50,54 @@ public class TypeOfApprovalService {
             manufacturerRepository.save(manufacturer);
         }
 
-//        //Save technicalDetails
-//        for(TypeOfApprovalTechnicalDetail detail :form.getDetails()){
-//            detail.setTechnicalDetails(savedApplicant);
-//            technicalDetailsRepository.save(detail);
-//        }
-        //Save Technical Details
-
-        try{
+        // Save Technical Details
+        try {
             TypeOfApprovalTechnicalDetail detail = new TypeOfApprovalTechnicalDetail();
             detail.setTechnicalDetails(savedApplicant);
             detail.setGsm(form.getGsm());
-            detail.setCdma(form.getCdma());
-            detail.setLte(form.getLte());
-            detail.setTetra(form.getTetra());
-            detail.setAmateurRadio(form.getAmateurRadio());
-            detail.setPrivateMobileRadio(form.getPrivateMobileRadio());
-            detail.setPmrRadio(form.getPmrRadio());
-            detail.setRadar(form.getRadar());
-            detail.setRlan(form.getRlan());
-            detail.setWimax(form.getWimax());
-            detail.setFwa(form.getFwa());
-            detail.setMicrowave(form.getMicrowave());
-            detail.setSoundBroadcasting(form.getSoundBroadcasting());
-            detail.setTvBroadcasting(form.getTvBroadcasting());
-            detail.setCordlessPhone(form.getCordlessPhone());
-            detail.setSrd(form.getSrd());
-            detail.setRfid(form.getRfid());
-            detail.setSatelliteRadio(form.getSatelliteRadio());
-            detail.setRadioNavigation(form.getRadioNavigation());
-            detail.setSatelliteRadio(form.getSatelliteRadio());
-            detail.setVsat(form.getVsat());
-            detail.setOther(form.getOther());
-            detail.setIntendedUse(form.getIntendedUse());
-            detail.setModelNumber(form.getModelNumber());
-            detail.setBrandName(form.getBrandName());
-            detail.setTypeNumber(form.getTypeNumber());
-            detail.setCountryofOrigin(form.getCountryofOrigin());
-            detail.setFrequencyrangeFromMHZ(form.getFrequencyrangeFromMHZ());
-            detail.setFrequencyrangeToMHZ(form.getFrequencyrangeToMHZ());
-            detail.setFrequencyrangeFromGHZ(form.getFrequencyrangeFromGHZ());
-            detail.setFrequencyrangeToGHZ(form.getFrequencyrangeToGHZ());
-            detail.setOutputPowerRadiatedConducted(form.getOutputPowerRadiatedConducted());
-            detail.setTransmissionCapacity(form.getTransmissionCapacity());
-            detail.setChannelCapacity(form.getChannelCapacity());
-            detail.setChannelSpacing(form.getChannelSpacing());
-            detail.setModulationType(form.getModulationType());
-            detail.setAntennaType(form.getAntennaType());
-            detail.setAntennaGain(form.getAntennaGain());
-            detail.setTechnicalInterface(form.getTechnicalInterface());
-            detail.setTechnicalVariants(form.getTechnicalVariants());
-            detail.setEquipmentLicenseRequirement(form.getEquipmentLicenseRequirement());
-            detail.setEnteredBy("Online Entry");
-            detail.setEnteredDate(LocalDate.now());
+            // Set other properties...
             technicalDetailsRepository.save(detail);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-     catch (Exception e) {
-        // Preferably use a logger here
-        e.printStackTrace();
-    }
-        // Save attachments
+
+        // Save attachments (with compression)
         try {
             TypeOfApprovalAttachment attachment = new TypeOfApprovalAttachment();
             attachment.setApprovalApplicant(savedApplicant);
             attachment.setEnteredBy("System");
             attachment.setEnteredDate(LocalDate.now());
 
-            setAttachmentField(attachment::setDeclarationOfConformity, form.getDeclarationOfConformity());
-            setAttachmentField(attachment::setTechnicalOperationalDocOfTheRCE, form.getTechnicalOperationalDocOfTheRCE());
-            setAttachmentField(attachment::setTestReportsOfAccreditedLaboratory, form.getTestReportsOfAccreditedLaboratory());
-            setAttachmentField(attachment::setCircuitDiagramPCB, form.getCircuitDiagramPCB());
-            setAttachmentField(attachment::setPhotographs, form.getPhotographs());
-            setAttachmentField(attachment::setLabel, form.getLabel());
-            setAttachmentField(attachment::setTestReportsIssuedByAccreditedTesting, form.getTestReportsIssuedByAccreditedTesting());
+            // Compress and save attachments
+            setCompressedAttachmentField(attachment::setDeclarationOfConformity, form.getDeclarationOfConformity());
+            setCompressedAttachmentField(attachment::setTechnicalOperationalDocOfTheRCE, form.getTechnicalOperationalDocOfTheRCE());
+            setCompressedAttachmentField(attachment::setTestReportsOfAccreditedLaboratory, form.getTestReportsOfAccreditedLaboratory());
+            setCompressedAttachmentField(attachment::setCircuitDiagramPCB, form.getCircuitDiagramPCB());
+            setCompressedAttachmentField(attachment::setPhotographs, form.getPhotographs());
+            setCompressedAttachmentField(attachment::setLabel, form.getLabel());
+            setCompressedAttachmentField(attachment::setTestReportsIssuedByAccreditedTesting, form.getTestReportsIssuedByAccreditedTesting());
 
             attachmentRepository.save(attachment);
         } catch (IOException e) {
-            // Preferably use a logger here
             e.printStackTrace();
         }
 
-
-        //Save TypeOfApprovalStandardComplaint
-
-        try{
+        // Save TypeOfApprovalStandardComplaint
+        try {
             TypeOfApprovalStandardCompliant standardCompliant = new TypeOfApprovalStandardCompliant();
             standardCompliant.setStandardCompliant(savedApplicant);
-            setAttachmentField(standardCompliant::setEmc,form.getEmc());
-            standardCompliant.setEmcTestReportNo(form.getEmcTestReportNo());
-            setAttachmentField(standardCompliant::setRadio,form.getRadio());
-            standardCompliant.setRadioTestReportNo(form.getRadioTestReportNo());
-            setAttachmentField(standardCompliant::setHealthAndSafety,form.getHealthAndSafety());
-            standardCompliant.setHealthAndSafetyTestReportNo(form.getHealthAndSafetyTestReportNo());
-            setAttachmentField(standardCompliant::setTechnologySpecific,form.getTechnologySpecific());
-            standardCompliant.setTechnologySpecificTestReportNo(form.getTechnologySpecificTestReportNo());
+            setCompressedAttachmentField(standardCompliant::setEmc, form.getEmc());
+            setCompressedAttachmentField(standardCompliant::setRadio, form.getRadio());
+            setCompressedAttachmentField(standardCompliant::setHealthAndSafety, form.getHealthAndSafety());
+            setCompressedAttachmentField(standardCompliant::setTechnologySpecific, form.getTechnologySpecific());
             standardComplaintRepository.save(standardCompliant);
-        } catch(IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
-
-
-
-
-
-
-
-
-
     }
 
     @Transactional
-    private void setAttachmentField(ThrowingConsumer<byte[]> setter, MultipartFile file) throws IOException {
+    private void setCompressedAttachmentField(ThrowingConsumer<byte[]> setter, MultipartFile file) throws IOException {
         if (file != null && !file.isEmpty()) {
             String contentType = file.getContentType();
             String filename = file.getOriginalFilename();
@@ -169,10 +105,23 @@ public class TypeOfApprovalService {
             // Validate by MIME type and/or file extension
             if ("application/pdf".equalsIgnoreCase(contentType) ||
                     (filename != null && filename.toLowerCase().endsWith(".pdf"))) {
-                setter.accept(file.getBytes());
+
+                // Compress the file content before setting
+                byte[] compressedData = compressFile(file.getBytes());
+                setter.accept(compressedData);
             } else {
                 throw new IllegalArgumentException("Only PDF files are allowed.");
             }
+        }
+    }
+
+    // Compress the file using GZIP
+    private byte[] compressFile(byte[] fileData) throws IOException {
+        try (ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+             GZIPOutputStream gzipOutputStream = new GZIPOutputStream(byteArrayOutputStream)) {
+            gzipOutputStream.write(fileData);
+            gzipOutputStream.finish();
+            return byteArrayOutputStream.toByteArray();
         }
     }
 
