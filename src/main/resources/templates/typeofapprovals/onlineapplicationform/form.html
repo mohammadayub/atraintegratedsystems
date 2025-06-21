@@ -249,6 +249,49 @@
                  th:field="*{applicant.email}"
                  th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" />
         </div>
+        <div class="col-md-4">
+          <label
+                 th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+          Type
+          </label>
+          <select class="form-select"  th:field="*{applicant.typeSelect}" id="typeSelect">
+            <option value="standard"
+                    th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">Standard</option>
+            <option value="simplified"
+                    th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">Simplified</option>
+            <option value="temporary"
+                    th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">Temporary</option>
+          </select>
+        </div>
+
+        <div class="col-md-4">
+          <label
+                 th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+          Application Fee
+          </label>
+          <input type="text" th:field="*{applicant.applicationFee}"  class="form-control" id="applicationFee"
+
+                 th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" readonly/>
+        </div>
+        <div class="col-md-4">
+          <label
+                  th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+            Admin Fee
+          </label>
+          <input type="text" th:field="*{applicant.adminFee}" class="form-control" id="adminFee"
+                 th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" readonly/>
+        </div>
+        <div class="col-md-4">
+          <label
+                  th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+            Certificate Fee
+          </label>
+          <input type="text" th:field="*{applicant.certificateFee}" class="form-control" id="certificateFee"
+                 th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" readonly/>
+          <input type="hidden" value="atra" th:field="*{applicant.applicationFeeOrganizationName}" name="applicationFeeOrganizationName" id="applicationFeeOrganizationName">
+          <input type="hidden" value="atra" th:field="*{applicant.adminFeeOrganizationName}" name="adminFeeOrganizationName" id="adminFeeOrganizationName">
+          <input type="hidden" value="mcit" th:field="*{applicant.certificateFeeOrganizationName}" name="certificateFeeOrganizationName" id="certificateFeeOrganizationName">
+        </div>
       </div>
     </div>
 
@@ -674,6 +717,44 @@
     document.getElementById("space2").style.display="none";
   }
 </script>
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const typeSelect = document.getElementById("typeSelect");
+    const applicationFee = document.getElementById("applicationFee");
+    const adminFee = document.getElementById("adminFee");
+    const certificateFee = document.getElementById("certificateFee");
+
+    function updateFees() {
+      const selectedType = typeSelect.value;
+
+      if (selectedType === "standard") {
+        adminFee.value = 8000;
+        applicationFee.value = 9000;
+        certificateFee.value = 1000;
+      } else if (selectedType === "simplified") {
+        adminFee.value = 18000;
+        applicationFee.value = 19000;
+        certificateFee.value = 11000;
+      } else if (selectedType === "temporary") {
+        adminFee.value = 118000;
+        applicationFee.value = 119000;
+        certificateFee.value = 111000;
+      } else {
+        adminFee.value = "";
+        applicationFee.value = "";
+        certificateFee.value = "";
+      }
+    }
+
+    typeSelect.addEventListener("change", updateFees);
+
+    // Call once on page load to set the initial values
+    updateFees();
+  });
+</script>
+
 
 
 <!-- Optional script includes -->
