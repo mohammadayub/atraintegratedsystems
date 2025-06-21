@@ -28,6 +28,15 @@ public class TypeOfApprovalApplicant {
     private String telephone;
     private String mobile;
     private String email;
+    private String typeSelect;
+    private Double applicationFee;
+    private String applicationFeeOrganizationName;
+    private Double adminFee;
+    private String adminFeeOrganizationName;
+    private Double certificateFee;
+    private String certificateFeeOrganizationName;
+
+
     private String enteredBy;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate enteredDate;

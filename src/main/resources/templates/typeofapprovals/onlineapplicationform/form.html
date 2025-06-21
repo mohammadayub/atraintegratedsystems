@@ -288,9 +288,9 @@
           </label>
           <input type="text" th:field="*{applicant.certificateFee}" class="form-control" id="certificateFee"
                  th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" readonly/>
-          <input type="hidden" value="atra" th:field="*{applicant.applicationFeeOrganizationName}" name="applicationFeeOrganizationName" id="applicationFeeOrganizationName">
-          <input type="hidden" value="atra" th:field="*{applicant.adminFeeOrganizationName}" name="adminFeeOrganizationName" id="adminFeeOrganizationName">
-          <input type="hidden" value="mcit" th:field="*{applicant.certificateFeeOrganizationName}" name="certificateFeeOrganizationName" id="certificateFeeOrganizationName">
+          <input type="hidden" th:field="*{applicant.applicationFeeOrganizationName}" th:value="'atra'" />
+          <input type="hidden" th:field="*{applicant.adminFeeOrganizationName}" th:value="'atra'" />
+          <input type="hidden" th:field="*{applicant.certificateFeeOrganizationName}" th:value="'mcit'" />
         </div>
       </div>
     </div>
@@ -548,31 +548,31 @@
       <div class="card-body row g-3">
         <div class="col-md-6">
           <label th:text="#{declaration_of_Conformity}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">1. Declaration of Conformity issued by the manufacturer of the RCE</label>
-          <input type="file" name="declarationOfConformity" class="form-control" required th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+          <input type="file" name="declarationOfConformity" class="form-control" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
         </div>
         <div class="col-md-6">
           <label th:text="#{technical_operational_doc_of_the_RCE}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">2. ational doc of the RCE including user /installation manual</label>
-          <input type="file" name="technicalOperationalDocOfTheRCE" class="form-control" required th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+          <input type="file" name="technicalOperationalDocOfTheRCE" class="form-control" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
         </div>
         <div class="col-md-6">
           <label th:text="#{test_Reports_of_accredited_laboratory}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">3. Test Reports of accredited laboratory</label>
-          <input type="file" name="testReportsOfAccreditedLaboratory" class="form-control" required th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+          <input type="file" name="testReportsOfAccreditedLaboratory" class="form-control" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
         </div>
         <div class="col-md-6">
           <label th:text="#{Circuit_diagram_PCB}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">4. Circuit diagram,PCB layout,part lists and other relevant design information</label>
-          <input type="file" name="circuitDiagramPCB" class="form-control" required th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+          <input type="file" name="circuitDiagramPCB" class="form-control" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
         </div>
         <div class="col-md-6">
           <label th:text="#{photographs}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">5. Photographs</label>
-          <input type="file" name="photographs" class="form-control" required th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+          <input type="file" name="photographs" class="form-control" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
         </div>
         <div class="col-md-6">
           <label th:text="#{label}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">6. Label</label>
-          <input type="file" name="label" class="form-control" required th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+          <input type="file" name="label" class="form-control" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
         </div>
         <div class="col-md-6">
           <label th:text="#{test_reports_issued_by_accredited_testing}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">7. Test reports issued by accredited testing laboratories recognized by ATRA</label>
-          <input type="file" name="testReportsIssuedByAccreditedTesting" class="form-control" required th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+          <input type="file" name="testReportsIssuedByAccreditedTesting" class="form-control" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
         </div>
       </div>
     </div>
