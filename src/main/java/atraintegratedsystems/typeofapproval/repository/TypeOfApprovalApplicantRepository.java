@@ -13,10 +13,10 @@ public interface TypeOfApprovalApplicantRepository extends JpaRepository<TypeOfA
 
     boolean existsByCompanyName(String companyName);
 
-    @Query(value = "SELECT * FROM typeofapproval_applicants", nativeQuery = true)
+    @Query(value = "SELECT * FROM type_of_approval_applicant", nativeQuery = true)
     List<TypeOfApprovalApplicant> findAllApplicants();
 
-    @Query(value = "SELECT * FROM typeofapproval_applicants where refer_status='Yes'", nativeQuery = true)
+    @Query(value = "SELECT * FROM type_of_approval_applicant where refer_status='Yes'", nativeQuery = true)
     List<TypeOfApprovalApplicant> findAllReferred();
 
 }

@@ -1,35 +1,55 @@
-<!doctype html>
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head th:replace="~{layout :: page_head}">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap" />
-
-  <div th:replace="styles :: commonfieldset"></div>
   <title>LMS</title>
+
   <style>
     body {
-
       background-color: #f5f5f5;
       font-family: 'EB Garamond', serif;
-      font-weight:bold;
+      font-weight: bold;
     }
+
     h4 a {
-        color: #14438B;
-        font-size: 20px;
+      color: #14438B;
+      font-size: 20px;
+    }
+
+    .custom-card {
+      background-color: #fff;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      transition: box-shadow 0.3s;
+    }
+
+    .custom-card:hover {
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
     }
   </style>
 </head>
 <body>
+
+<!-- Injected styles properly -->
+<div th:replace="styles :: commonfieldset"></div>
+
+<!-- Navbar -->
 <nav th:replace="~{typeofApproval_layout :: page_navbar}"></nav>
+
 <div class="container mt-5">
-  <fieldset  sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_typeofapprovals_ADMIN')">
-    <legend th:text="#{typeof_approval_management_section}"></legend>
+
+  <!-- Section: Type of Approval Management -->
+  <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_typeofapprovals_ADMIN')">
+    <legend th:text="#{typeof_approval_management_section}">Type of Approval Management</legend>
     <div class="row g-4">
       <div class="col-sm-4">
         <div class="custom-card text-center p-3">
           <a th:href="@{/typeofapprovals/onlineapplicationform/form}">
-            <img th:src="@{/images/typeofapproval_Form.png}" alt="Type of Approval" class="img-fluid"></a>
+            <img th:src="@{/images/typeofapproval_Form.png}" alt="Online Application Form" class="img-fluid" />
+          </a>
           <h4 class="license-link mt-2">
-            <a th:href="@{/typeofapprovals/onlineapplicationform/form}" th:text="#{typeof_approvals}" style="font-size:20px;"></a>
+            <a th:href="@{/typeofapprovals/onlineapplicationform/form}" th:text="#{typeof_approvals}">Type of Approvals</a>
           </h4>
         </div>
       </div>
@@ -37,47 +57,57 @@
       <div class="col-sm-4">
         <div class="custom-card text-center p-3">
           <a th:href="@{/typeofapprovals/applicant/applicantlists}">
-            <img th:src="@{/images/typeOfApprovalList.png}" alt="Type of Approval" class="img-fluid"></a>
+            <img th:src="@{/images/typeOfApprovalList.png}" alt="Applicant List" class="img-fluid" />
+          </a>
           <h4 class="license-link mt-2">
-            <a th:href="@{/typeofapprovals/applicant/applicantlists}" style="font-size:20px;">List Of All Applicants</a>
+            <a th:href="@{/typeofapprovals/applicant/applicantlists}">List Of All Applicants</a>
           </h4>
         </div>
       </div>
     </div>
   </fieldset>
-  <fieldset  sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_typeofapprovals_ADMIN')">
-    <legend > Refer Management Section</legend>
+
+  <!-- Section: Refer Management -->
+  <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_typeofapprovals_ADMIN')">
+    <legend>Refer Management Section</legend>
     <div class="row g-4">
       <div class="col-sm-4">
         <div class="custom-card text-center p-3">
           <a th:href="@{/typeofapprovals/refer/referlists}">
-            <img th:src="@{/images/typeofapproval_referTofinance.png}" alt="Type of Approval" class="img-fluid"></a>
+            <img th:src="@{/images/typeofapproval_referTofinance.png}" alt="Refer to Finance" class="img-fluid" />
+          </a>
           <h4 class="license-link mt-2">
-            <a th:href="@{/typeofapprovals/refer/referlists}"  style="font-size:20px;">Refer Lists</a>
+            <a th:href="@{/typeofapprovals/refer/referlists}">Refer Lists</a>
           </h4>
         </div>
       </div>
     </div>
   </fieldset>
-  <fieldset  sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_typeofapprovals_ADMIN')">
-    <legend >Finance Management</legend>
+
+  <!-- Section: Finance Management -->
+  <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_typeofapprovals_ADMIN')">
+    <legend>Finance Management</legend>
     <div class="row g-4">
       <div class="col-sm-4">
         <div class="custom-card text-center p-3">
           <a th:href="@{/typeofapprovals/finance/paymentlists}">
-            <img th:src="@{/images/payment_list.png}" alt="Type of Approval" class="img-fluid"></a>
+            <img th:src="@{/images/payment_list.png}" alt="Payment List" class="img-fluid" />
+          </a>
           <h4 class="license-link mt-2">
-            <a th:href="@{/typeofapprovals/finance/paymentlists}"  style="font-size:20px;">Payment List</a>
+            <a th:href="@{/typeofapprovals/finance/paymentlists}">Payment List</a>
           </h4>
         </div>
       </div>
     </div>
   </fieldset>
+
 </div>
-<!-- Common scripts -->
+
+<!-- Footer -->
 <div th:replace="scripts :: common-scripts"></div>
 <div style="height:10vh;"></div>
 <footer th:replace="~{layout :: page_footer}"></footer>
+
 <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
 </body>
 </html>

@@ -100,6 +100,13 @@
                     <th>Mobile Number</th>
                     <th>Email Address</th>
                     <th>Manufacturer Company Name</th>
+                    <th>Declaration OF Confirmity</th>
+                    <th>Technical Operation Doc</th>
+                    <th>Test Report of Labratory</th>
+                    <th>Circuit Diagram PCB</th>
+                    <th>Photograph</th>
+                    <th>Label</th>
+                    <th>Test Report Issued</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -123,6 +130,129 @@
                         </ul>
                     </td>
 
+
+                    <td>
+                        <ul style="list-style: none; margin: 0; padding: 0;">
+                            <li th:each="attachment : ${profile.attachments}">
+                                <a th:href="@{/typeofapprovals/applicant/applicationlists/declarationdownload/{id}(id=${attachment.id})}"
+                                   class="btn btn-primary btn-sm" title="Download Declaration of Conformity">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-download icon-small"
+                                         viewBox="0 0 16 16">
+                                        <path
+                                                d="M8 0a.5.5 0 0 1 .5.5V8.707l2.854-2.854a.5.5 0 0 1 .707.707L8.5 9.207 5.939 6.646a.5.5 0 0 1 .707-.707L8 8.707V.5A.5.5 0 0 1 8 0zM2 14a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v.5a.5.5 0 0 1-.5.5H2.5a.5.5 0 0 1-.5-.5V14z"/>
+                                    </svg>
+                                </a>
+                            </li>
+                            <li th:if="${profile.attachments.size() == 0}">
+                                <span>No File</span>
+                            </li>
+                        </ul>
+                    </td>
+                    <td>
+                        <ul style="list-style: none; margin: 0; padding: 0;">
+                            <li th:each="attachment : ${profile.attachments}">
+                                <a th:href="@{/typeofapprovals/applicant/applicationlists/technicaloperation/{id}(id=${attachment.id})}"
+                                   class="btn btn-primary btn-sm" title="Download Technical Operation">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-download icon-small"
+                                         viewBox="0 0 16 16">
+                                        <path
+                                                d="M8 0a.5.5 0 0 1 .5.5V8.707l2.854-2.854a.5.5 0 0 1 .707.707L8.5 9.207 5.939 6.646a.5.5 0 0 1 .707-.707L8 8.707V.5A.5.5 0 0 1 8 0zM2 14a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v.5a.5.5 0 0 1-.5.5H2.5a.5.5 0 0 1-.5-.5V14z"/>
+                                    </svg>
+                                </a>
+                            </li>
+                            <li th:if="${profile.attachments.size() == 0}">
+                                <span>No File</span>
+                            </li>
+                        </ul>
+                    </td>
+                    <td>
+                        <ul style="list-style: none; margin: 0; padding: 0;">
+                            <li th:each="attachment : ${profile.attachments}">
+                                <a th:href="@{/typeofapprovals/applicant/applicationlists/testreportdownload/{id}(id=${attachment.id})}"
+                                   class="btn btn-primary btn-sm" title="Download Technical Operation">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-download icon-small"
+                                         viewBox="0 0 16 16">
+                                        <path
+                                                d="M8 0a.5.5 0 0 1 .5.5V8.707l2.854-2.854a.5.5 0 0 1 .707.707L8.5 9.207 5.939 6.646a.5.5 0 0 1 .707-.707L8 8.707V.5A.5.5 0 0 1 8 0zM2 14a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v.5a.5.5 0 0 1-.5.5H2.5a.5.5 0 0 1-.5-.5V14z"/>
+                                    </svg>
+                                </a>
+                            </li>
+                            <li th:if="${profile.attachments.size() == 0}">
+                                <span>No File</span>
+                            </li>
+                        </ul>
+                    </td>
+                    <td>
+                        <ul style="list-style: none; margin: 0; padding: 0;">
+                            <li th:each="attachment : ${profile.attachments}">
+                                <a th:href="@{/typeofapprovals/applicant/applicationlists/circuitdiagramdownload/{id}(id=${attachment.id})}"
+                                   class="btn btn-primary btn-sm" title="Download Technical Operation">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-download icon-small"
+                                         viewBox="0 0 16 16">
+                                        <path
+                                                d="M8 0a.5.5 0 0 1 .5.5V8.707l2.854-2.854a.5.5 0 0 1 .707.707L8.5 9.207 5.939 6.646a.5.5 0 0 1 .707-.707L8 8.707V.5A.5.5 0 0 1 8 0zM2 14a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v.5a.5.5 0 0 1-.5.5H2.5a.5.5 0 0 1-.5-.5V14z"/>
+                                    </svg>
+                                </a>
+                            </li>
+                            <li th:if="${profile.attachments.size() == 0}">
+                                <span>No File</span>
+                            </li>
+                        </ul>
+                    </td>
+
+                    <td>
+                        <ul style="list-style: none; margin: 0; padding: 0;">
+                            <li th:each="attachment : ${profile.attachments}">
+                                <a th:href="@{/typeofapprovals/applicant/applicationlists/photographdownload/{id}(id=${attachment.id})}"
+                                   class="btn btn-primary btn-sm" title="Download Technical Operation">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-download icon-small"
+                                         viewBox="0 0 16 16">
+                                        <path
+                                                d="M8 0a.5.5 0 0 1 .5.5V8.707l2.854-2.854a.5.5 0 0 1 .707.707L8.5 9.207 5.939 6.646a.5.5 0 0 1 .707-.707L8 8.707V.5A.5.5 0 0 1 8 0zM2 14a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v.5a.5.5 0 0 1-.5.5H2.5a.5.5 0 0 1-.5-.5V14z"/>
+                                    </svg>
+                                </a>
+                            </li>
+                            <li th:if="${profile.attachments.size() == 0}">
+                                <span>No File</span>
+                            </li>
+                        </ul>
+                    </td>
+
+                    <td>
+                        <ul style="list-style: none; margin: 0; padding: 0;">
+                            <li th:each="attachment : ${profile.attachments}">
+                                <a th:href="@{/typeofapprovals/applicant/applicationlists/labeldownload/{id}(id=${attachment.id})}"
+                                   class="btn btn-primary btn-sm" title="Download Technical Operation">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-download icon-small"
+                                         viewBox="0 0 16 16">
+                                        <path
+                                                d="M8 0a.5.5 0 0 1 .5.5V8.707l2.854-2.854a.5.5 0 0 1 .707.707L8.5 9.207 5.939 6.646a.5.5 0 0 1 .707-.707L8 8.707V.5A.5.5 0 0 1 8 0zM2 14a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v.5a.5.5 0 0 1-.5.5H2.5a.5.5 0 0 1-.5-.5V14z"/>
+                                    </svg>
+                                </a>
+                            </li>
+                            <li th:if="${profile.attachments.size() == 0}">
+                                <span>No File</span>
+                            </li>
+                        </ul>
+                    </td>
+
+                    <td>
+                        <ul style="list-style: none; margin: 0; padding: 0;">
+                            <li th:each="attachment : ${profile.attachments}">
+                                <a th:href="@{/typeofapprovals/applicant/applicationlists/testreprotsissueddownload/{id}(id=${attachment.id})}"
+                                   class="btn btn-primary btn-sm" title="Download Technical Operation">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-download icon-small"
+                                         viewBox="0 0 16 16">
+                                        <path
+                                                d="M8 0a.5.5 0 0 1 .5.5V8.707l2.854-2.854a.5.5 0 0 1 .707.707L8.5 9.207 5.939 6.646a.5.5 0 0 1 .707-.707L8 8.707V.5A.5.5 0 0 1 8 0zM2 14a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v.5a.5.5 0 0 1-.5.5H2.5a.5.5 0 0 1-.5-.5V14z"/>
+                                    </svg>
+                                </a>
+                            </li>
+                            <li th:if="${profile.attachments.size() == 0}">
+                                <span>No File</span>
+                            </li>
+                        </ul>
+                    </td>
                 </tr>
                 </tbody>
             </table>

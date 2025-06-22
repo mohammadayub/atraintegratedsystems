@@ -6,7 +6,6 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Entity
-@Table(name = "typeofapproval_applicants")
 @Data
 public class TypeOfApprovalApplicant {
 

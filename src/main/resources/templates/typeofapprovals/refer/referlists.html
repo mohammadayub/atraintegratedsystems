@@ -1,54 +1,63 @@
-<!doctype html>
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head th:replace="~{layout :: page_head}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap" />
+
+    <!-- DataTables + Buttons CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css">
+
+    <!-- Thymeleaf fragment styles -->
     <div th:replace="styles :: data-tables-styles"></div>
     <div th:replace="styles :: persian-datepicker-styles"></div>
     <div th:replace="styles :: select2-styles"></div>
     <div th:replace="styles :: commonfieldset-with-legend-border"></div>
+
     <title>LMS</title>
+
     <style>
         body {
+            background-color: #f5f5f5;
+            font-family: 'EB Garamond', serif;
+            font-weight: bold;
+        }
 
-      background-color: #f5f5f5;
-      font-family: 'EB Garamond', serif;
-      font-weight:bold;
-    }
-        /* Basic Table Styling */
         .table-container {
-            max-height: 800px; /* Set a maximum height for the table container */
-            overflow-y: auto; /* Enable vertical scrolling */
-            border: 1px solid #ddd; /* Optional: Add a border around the table */
+            max-height: 800px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
             margin-top: 15px;
         }
 
         #profileTable {
-            width: 100%; /* Full width for the table */
+            width: 100%;
             border-collapse: collapse;
-            font-size: 0.9em; /* General smaller font for the table */
+            font-size: 0.9em;
         }
 
         #profileTable th, #profileTable td {
             padding: 6px;
             text-align: center;
             vertical-align: middle;
-            font-size: 0.8em; /* Small font size for headers and cells */
+            font-size: 0.8em;
         }
 
         #profileTable thead th {
             color: white;
-            font-size: 16px; /* Slightly larger font for headers */
+            font-size: 16px;
         }
 
         #profileTable tbody tr:nth-child(even) {
-            background-color: #f2f2f2; /* Zebra stripes for rows */
+            background-color: #f2f2f2;
         }
+
         #profileTable td a.btn-primary {
             display: inline-flex;
             align-items: center;
             justify-content: center;
             padding: 4px;
         }
+
         #profileTable .icon-small {
             width: 16px;
             height: 16px;
@@ -56,28 +65,25 @@
 
         #profileTable th {
             white-space: nowrap;
-<!--            background-color:#8B0000;-->
-
         }
 
-        /* Styling for fieldset and legend */
-
-        /* Optional: Add some responsiveness */
         @media (max-width: 768px) {
             #profileTable th, #profileTable td {
-                font-size: 0.7em; /* Smaller font size for mobile view */
+                font-size: 0.7em;
                 padding: 4px;
             }
         }
-        .btn.btn-success {
-                margin-top: 10px;
-                margin-bottom: 10px;
-                          }
 
+        .btn.btn-success {
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <body>
+
 <nav th:replace="~{typeofApproval_layout :: page_navbar}"></nav>
+
 <div class="container-fluid">
     <br>
     <fieldset>
@@ -93,9 +99,9 @@
                     <th>Contact Person</th>
                     <th>Mobile Number</th>
                     <th>Email Address</th>
-                    <th>Manufacturer Company Name</th>
                     <th>Refer Date</th>
                     <th>Refer Status</th>
+                    <th>Manufacturer Company Name</th>
                     <th>Refer to Finance</th>
                 </tr>
                 </thead>
@@ -130,21 +136,23 @@
     </fieldset>
 
     <a th:href="@{/typeofapprovals/home}" class="btn btn-primary" style="margin-top:20px;">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6" style="width:20px;height:20px;">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+             class="size-6" style="width:20px;height:20px;">
+            <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3"/>
         </svg>
         Back to Page
     </a>
 </div>
-<!-- Common scripts -->
+
+<!-- Script Fragments -->
 <div th:replace="scripts :: common-scripts"></div>
 <div th:replace="scripts :: persian-datepicker-scripts"></div>
 <div th:replace="scripts :: data-tables-scripts"></div>
 
-<!-- Required CSS for DataTables Buttons -->
-
-
-<!-- Required JS libraries -->
+<!-- JS Libraries: jQuery, DataTables, Buttons (order matters) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
@@ -152,12 +160,12 @@
 <script>
     $(document).ready(function () {
         let table = $('#profileTable').DataTable({
-            dom: 'Bfrtip', // Show buttons on top
+            dom: 'Bfrtip',
             buttons: [
                 {
                     extend: 'excelHtml5',
                     text: 'Export to Excel',
-                    className: 'btn btn-success' // Optional styling
+                    className: 'btn btn-success'
                 }
             ],
             initComplete: function () {
@@ -179,7 +187,6 @@
         });
     });
 </script>
-
 
 <div style="height:15vh;"></div>
 <footer th:replace="~{layout :: page_footer}"></footer>
