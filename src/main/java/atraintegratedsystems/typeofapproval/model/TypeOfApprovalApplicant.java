@@ -63,7 +63,7 @@ public class TypeOfApprovalApplicant {
 //    private List<TypeOfApprovalAttachment> attachments;
 
 
-    @OneToMany(mappedBy = "approvalApplicant", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "approvalApplicant", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<TypeOfApprovalAttachment> attachments;
 
     @OneToMany(mappedBy = "technicalDetails", cascade = CascadeType.ALL, orphanRemoval = true)

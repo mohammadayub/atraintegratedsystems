@@ -21,7 +21,7 @@ public class TypeOfApprovalReferController {
 
     @GetMapping("/typeofapprovals/refer/referlists")
     public String listTypeOfApprovalApplicants(Model model) {
-        List<Object[]> applicants = typeOfApprovalApplicantService.getAllTypeOfApprovalApplicants();
+        List<TypeOfApprovalApplicant> applicants = typeOfApprovalApplicantService.getAllTypeofApproval();
         model.addAttribute("applicants", applicants);
         return "typeofapprovals/refer/referlists";
     }

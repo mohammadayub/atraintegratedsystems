@@ -26,6 +26,12 @@ public class TypeOfApprovalApplicantService {
     }
 
     @Transactional
+    public List<TypeOfApprovalApplicant>getAllTypeofApproval()
+    {
+        return typeOfApprovalApplicantRepository.findAllApplicants();
+    }
+
+    @Transactional
     public List<TypeOfApprovalApplicant> getAllReferred(){
         return typeOfApprovalApplicantRepository.findAllReferred();
     }
