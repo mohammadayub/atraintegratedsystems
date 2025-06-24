@@ -20,9 +20,9 @@ public class TypeOfApprovalApplicantService {
 
 
     @Transactional
-    public List<TypeOfApprovalApplicant> getAllTypeOfApprovalApplicants()
+    public List<Object[]> getAllTypeOfApprovalApplicants()
     {
-      return typeOfApprovalApplicantRepository.findAllApplicants();
+      return typeOfApprovalApplicantRepository.findAllApplicantDetails();
     }
 
     @Transactional
