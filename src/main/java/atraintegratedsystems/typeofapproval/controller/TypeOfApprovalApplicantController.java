@@ -25,6 +25,8 @@ public class TypeOfApprovalApplicantController {
     @Autowired
     private TypeOfApprovalAttachmentService attachmentService;
 
+
+
     @GetMapping("/typeofapprovals/applicant/applicantlists")
     public String listTypeOfApprovalApplicants(Model model) {
         model.addAttribute("applicants", typeOfApprovalApplicantService.getAllTypeOfApprovalApplicants());
