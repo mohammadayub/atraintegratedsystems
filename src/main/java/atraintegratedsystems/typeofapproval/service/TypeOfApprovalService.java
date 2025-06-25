@@ -37,11 +37,14 @@ public class TypeOfApprovalService {
     public void submitForm(TypeOfApprovalFormDTO form) {
         var applicant = form.getApplicant();
 
+
         // Check uniqueness
         if (applicantRepository.existsByCompanyName(applicant.getCompanyName())) {
             throw new IllegalArgumentException("Company name already exists.");
         }
-
+        applicant.setApplicationFeeOrganizationName("atra");
+        applicant.setAdminFeeOrganizationName("atra");
+        applicant.setCertificateFeeOrganizationName("mcit");
         var savedApplicant = applicantRepository.save(applicant);
 
         // Save manufacturers
