@@ -259,8 +259,8 @@
                     th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">Standard</option>
             <option value="simplified"
                     th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">Simplified</option>
-            <option value="temporary"
-                    th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">Temporary</option>
+            <option value="provisional"
+                    th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">Provisional</option>
           </select>
         </div>
 
@@ -730,17 +730,17 @@
       const selectedType = typeSelect.value;
 
       if (selectedType === "standard") {
-        adminFee.value = 8000;
-        applicationFee.value = 9000;
-        certificateFee.value = 1000;
+        adminFee.value = 4000;
+        applicationFee.value = 1000;
+        certificateFee.value = 20000;
       } else if (selectedType === "simplified") {
-        adminFee.value = 18000;
-        applicationFee.value = 19000;
-        certificateFee.value = 11000;
-      } else if (selectedType === "temporary") {
-        adminFee.value = 118000;
-        applicationFee.value = 119000;
-        certificateFee.value = 111000;
+        adminFee.value = 3000;
+        applicationFee.value = 750;
+        certificateFee.value = 15000;
+      } else if (selectedType === "provisional") {
+        adminFee.value = 1600;
+        applicationFee.value = 400;
+        certificateFee.value = 8000;
       } else {
         adminFee.value = "";
         applicationFee.value = "";
