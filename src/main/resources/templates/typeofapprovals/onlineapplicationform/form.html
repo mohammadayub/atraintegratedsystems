@@ -288,9 +288,7 @@
           </label>
           <input type="text" th:field="*{applicant.certificateFee}" class="form-control" id="certificateFee"
                  th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" readonly/>
-          <input type="hidden" th:field="*{applicant.applicationFeeOrganizationName}" th:value="'atra'" />
-          <input type="hidden" th:field="*{applicant.adminFeeOrganizationName}" th:value="'atra'" />
-          <input type="hidden" th:field="*{applicant.certificateFeeOrganizationName}" th:value="'mcit'" />
+
         </div>
       </div>
     </div>

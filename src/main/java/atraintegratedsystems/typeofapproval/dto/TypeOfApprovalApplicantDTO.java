@@ -24,10 +24,16 @@ public class TypeOfApprovalApplicantDTO {
     private String email;
     private String typeSelect;
     private Double applicationFee;
+    private String applicationFeeStatus;
+    private String applicationFeeConfirmationDate;
     private String applicationFeeOrganizationName;
     private Double adminFee;
+    private String adminFeeStatus;
+    private String adminFeeConfirmationDate;
     private String adminFeeOrganizationName;
     private Double certificateFee;
+    private String certificateFeeStatus;
+    private String certificateFeeConfirmationDate;
     private String certificateFeeOrganizationName;
     private String enteredBy;
 

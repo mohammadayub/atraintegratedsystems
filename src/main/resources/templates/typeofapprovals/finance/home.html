@@ -41,27 +41,27 @@
 
   <!-- Section: Type of Approval Management -->
   <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_typeofapprovals_ADMIN')">
-    <legend th:text="#{typeof_approval_management_section}">Type of Approval Management</legend>
+    <legend th:text="#{typeof_approval_management_section}">Type of Approval Management Finance Payments</legend>
     <div class="row g-4">
       <div class="col-sm-4">
         <div class="custom-card text-center p-3">
-          <a th:href="@{/typeofapprovals/onlineapplicationform/form}">
+          <a th:href="@{/typeofapprovals/finance/applicationfeelist}">
             <img th:src="@{/images/typeofapproval_Form.png}" alt="Online Application Form" class="img-fluid" />
           </a>
           <h4 class="license-link mt-2">
-            <a th:href="@{/typeofapprovals/onlineapplicationform/form}" th:text="#{typeof_approvals}" style="color: #14438B;
-            font-size: 18px;">Type of Approvals</a>
+            <a th:href="@{/typeofapprovals/finance/applicationfeelist}" style="color: #14438B;
+            font-size: 18px;">Application Fee</a>
           </h4>
         </div>
       </div>
 
       <div class="col-sm-4">
         <div class="custom-card text-center p-3">
-          <a th:href="@{/typeofapprovals/applicant/applicantlists}">
+          <a th:href="@{/typeofapprovals/finance/adminfeelist}">
             <img th:src="@{/images/typeOfApprovalList.png}" alt="Applicant List" class="img-fluid" />
           </a>
           <h4 class="license-link mt-2">
-            <a th:href="@{/typeofapprovals/applicant/applicantlists}" style="color: #14438B;font-size: 18px;">List Of All Applicants</a>
+            <a th:href="@{/typeofapprovals/finance/adminfeelist}" style="color: #14438B;font-size: 18px;">Admin Fee</a>
           </h4>
 
         </div>
@@ -69,47 +69,13 @@
 
       <div class="col-sm-4">
         <div class="custom-card text-center p-3">
-          <a th:href="@{/typeofapprovals/applicant/attachmentapplicantlists}">
+          <a th:href="@{/typeofapprovals/finance/certificatefeelist}">
             <img th:src="@{/images/typeofapproval_attachmentlist.png}" alt="Applicant List" class="img-fluid" />
           </a>
           <h4 class="license-link mt-2">
-            <a th:href="@{/typeofapprovals/applicant/attachmentapplicantlists}" style="color: #14438B;font-size: 18px;">List Of All Applicants with Attachments</a>
+            <a th:href="@{/typeofapprovals/finance/certificatefeelist}" style="color: #14438B;font-size: 18px;">Certificate Fee</a>
           </h4>
 
-        </div>
-      </div>
-    </div>
-  </fieldset>
-
-  <!-- Section: Refer Management -->
-  <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_typeofapprovals_ADMIN')">
-    <legend>Refer Management Section</legend>
-    <div class="row g-4">
-      <div class="col-sm-4">
-        <div class="custom-card text-center p-3">
-          <a th:href="@{/typeofapprovals/refer/referlists}">
-            <img th:src="@{/images/typeofapproval_referTofinance.png}" alt="Refer to Finance" class="img-fluid" />
-          </a>
-          <h4 class="license-link mt-2">
-            <a th:href="@{/typeofapprovals/refer/referlists}" style="color: #14438B;font-size: 18px;">Refer Lists</a>
-          </h4>
-        </div>
-      </div>
-    </div>
-  </fieldset>
-
-  <!-- Section: Finance Management -->
-  <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_typeofapprovals_ADMIN')">
-    <legend>Finance Management</legend>
-    <div class="row g-4">
-      <div class="col-sm-4">
-        <div class="custom-card text-center p-3">
-          <a th:href="@{/typeofapprovals/finance/home}">
-            <img th:src="@{/images/payment_list.png}" alt="Payment List" class="img-fluid" />
-          </a>
-          <h4 class="license-link mt-2">
-            <a th:href="@{/typeofapprovals/finance/home}" style="color: #14438B;font-size: 18px;">Finance</a>
-          </h4>
         </div>
       </div>
     </div>

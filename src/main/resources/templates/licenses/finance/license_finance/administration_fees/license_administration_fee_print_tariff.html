@@ -196,15 +196,7 @@
       </tr>
       </thead>
 
-      <tbody style="position:relative; z-index:1;">
-      <!-- Watermark inside tbody -->
-      <tr>
-        <td colspan="4" style="padding:0; border:none; position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); pointer-events:none; z-index:0;">
-          <div style="font-size:60px; color:rgba(0,0,0,0.4); transform:rotate(-30deg); white-space:nowrap;">
-            زنده باد افغانستان
-          </div>
-        </td>
-      </tr>
+      <tbody>
 
       <!-- Actual rows -->
       <tr>
@@ -220,22 +212,33 @@
       <tr style="background-color:gray;">
         <th style="text-align:center">مجموعه به افغانی</th>
         <th style="text-align:center"></th>
-        <td style="text-align:center">
-          <input type="text" th:field="${licenseApprovalDTO.administrativeYearlyFees}" disabled style="border:0px;background-color:gray;">
+        <td style="text-align:center; vertical-align:middle;">
+          <input type="text"
+                 th:field="${licenseApprovalDTO.administrativeYearlyFees}"
+                 disabled
+                 style="border:0px; background-color:inherit; text-align:center; width:100%;">
         </td>
-        <td style="text-align:center">
-          <input type="text" th:field="${licenseApprovalDTO.administrativeYearlyFees}" disabled style="border:0px;background-color:gray;">
+        <td style="text-align:center; vertical-align:middle;">
+          <input type="text"
+                 th:field="${licenseApprovalDTO.administrativeYearlyFees}"
+                 disabled
+                 style="border:0px; background-color:inherit; text-align:center; width:100%;">
         </td>
       </tr>
+
+
       </tbody>
     </table>
   </div>
 
   <div class="row">
-  <div class="col-6 ms-auto"><p style="float:right;margin-top:15px;">مسول جمع آوری عواید</p></div>
-  <div class="col-6 ms-auto"><p style="float:right;margin-top:15px;">آمریت کنترول</p></div>
+  <div class="col-6 ms-auto"><p style="float:right;margin-top:15px;">ترتیب کننده تعرفه:</p></div>
+  <div class="col-6 ms-auto"><p style="float:left;margin-top:15px;">چاپ کننده تعرفه (Printed by)</p></div>
 
 </div>
+  <div class="row">
+    <div style="margin:0 auto;">آمریت کنترول</div>
+  </div>
   <div class="row" style="margin-top:200px;">
   <div class="col-12 ms-auto"><p  style="float:right;">نوت: مشتری محترم درج مشخصات تعرفه در آویز بانکی ضروری ولازمی میباشد در غیر آن طی مراحل نخواهد ګردید.</p></div>
   </div>

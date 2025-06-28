@@ -8,115 +8,117 @@
 
 
 </head>
-<body dir="rtl">
+<body dir="rtl" style="background-color:white;">
 <nav th:replace="~{typeofApproval_layout :: page_navbar}"></nav>
 
-<div class="container mt-5">
-    <div class="card shadow rounded-4 p-4">
-        <!-- Header with Logos and Text -->
-        <div class="row align-items-center text-center">
-            <div class="col-2">
-                <img th:src="@{/images/atra_afghanistan.png}" alt="Logo" class="img-fluid">
+<div class="d-flex justify-content-center">
+    <div class="card shadow rounded-4 p-4 w-100 text-center">
+        <!-- Top Banner -->
+
+        <!-- Logos and Text -->
+        <div class="row justify-content-center align-items-center">
+            <!-- Left Logo + تاریخ -->
+            <div class="col-3 text-center">
+                <img th:src="@{/images/atra_afghanistan.png}" alt="Logo">
             </div>
-            <div class="col-4">
-                <p id="dari_text">
-                    امارت اسلامی افغانستان<br>
+
+            <!-- Center Text -->
+            <div class="col-6 mb-3 mb-md-0">
+                <p id="dari_text" class="m-0">
+                    <img th:src="@{/images/emarat_text.png}" alt="Logo">
+                    <br>
                     وزارت مخابرات و تکنالوژی معلوماتی<br>
-                    اداره تنظیم خدمات مخابراتی افغانستان
+                    اداره تنظیم خدمات مخابراتی افغانستان<br>
+                    ریاست مالي<br>
+                    آمریت عواید<br>
+                    تعرفه تحویلی
                 </p>
             </div>
-            <div class="col-4">
-                <p id="pashto_text">
-                    د افغانستان اسلامي امارت<br>
-                    دمخابراتو او معلوماتي تکنالوجي وزارت<br>
-                    د افغانستان د مخابراتي خدمتونو د تنظیم اداره
-                </p>
-            </div>
-            <div class="col-2">
-                <img th:src="@{/images/islami_emarat.png}" alt="Logo" class="img-fluid">
-            </div>
-        </div>
 
-        <!-- Company Info Card -->
-        <div class="card mt-4 shadow-sm">
-            <div class="card-header bg-primary text-white">
-                <h5 class="mb-0">تعرفه بانکي</h5>
-            </div>
-            <div class="card-body">
-                <table class="table table-bordered table-striped">
-                    <tbody>
-                    <tr>
-                        <th>Request Date</th>
-                        <td th:text="${profile.requestDate}">2025-06-15</td>
-                    </tr>
-                    <tr>
-                        <th>Person Name</th>
-                        <td th:text="${profile.person}">Company</td>
-                    </tr>
-                    <tr>
-                        <th>Company Name</th>
-                        <td th:text="${profile.companyName}">Company Name Day to Day</td>
-                    </tr>
-                    <tr>
-                        <th>Refer Date</th>
-                        <td th:text="${profile.referDate}"></td>
-                    </tr>
-                    <tr>
-                        <th>Refer Status</th>
-                        <td th:text="${profile.referStatus}"></td>
-                    </tr>
-                    </tbody>
-                </table>
-
-                <!-- Print Button -->
-                <div class="d-flex justify-content-between align-items-center mt-3">
-                    <!-- Left Button -->
-                    <div id="bring-to-left">
-                        <a th:href="@{/typeofapprovals/finance/paymentlists}" class="btn btn-primary" id="back">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                 stroke-width="1.5" stroke="currentColor"
-                                 class="size-6" style="width:20px;height:20px;">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                      d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3"/>
-                            </svg>
-                            Back to Page
-                        </a>
-                    </div>
-
-                    <!-- Right Button -->
-                    <div class="no-print" id="bring-to-right">
-                        <button class="btn btn-primary fw-bold" onclick="doPrint();" id="print">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                 fill="currentColor" class="bi bi-printer" viewBox="0 0 16 16">
-                                <path d="M2.5 8a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1"/>
-                                <path
-                                        d="M5 1a2 2 0 0 0-2 2v2H2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1v1a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1V3a2 2 0 0 0-2-2zM4 3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2H4zm1 5a2 2 0 0 0-2 2v1H2a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v-1a2 2 0 0 0-2-2zm7 2v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1"/>
-                            </svg>&nbsp;&nbsp;PRINT
-                        </button>
-                    </div>
-                </div>
-
-                <div class="container-fluid" dir="rtl">
-                    <!-- Black bar (visible) -->
-                    <div class="mt-1 mb-2" style="background-color: black; height: 4px;"></div>
-
-                    <!-- Table aligned to the right -->
-                    <div class="table-responsive mt-2">
-                        <table class="table table-bordered w-auto ms-auto">
-                            <tr>
-                                <th>مسلسل نمبر تعرفه:</th>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-
-
-
+            <!-- Right Logo + شماره -->
+            <div class="col-3 text-center">
+                <img th:src="@{/images/islami_emarat.png}" alt="Logo">
+                <div class="mt-2" dir="rtl">شماره: ..........</div>
             </div>
         </div>
     </div>
 </div>
 
+<div class="mb-2" style="background-color: black; height: 2px;"></div>
+
+<div style="display: flex; justify-content: center;">
+    <img th:src="@{/images/bismillah.png}" style="max-width: 100%; height: auto;">
+</div>
+
+<div class="m-4" style="display: flex; justify-content: right;" dir="rtl">
+    <h2>به ریاست محترم مالی !</h2>
+</div>
+<div style="display: flex; justify-content: center;">
+    <img th:src="@{/images/salaam.png}" style="max-width: 100%; height: auto;">
+</div>
+
+<div class="m-4" style="display: flex; justify-content: right;" dir="rtl">
+    <u><h3>موضوع: جدول سنجش فیس درخواست و اداری تایپ اپروول</h3></u>
+</div>
+
+<div class="m-4" style="display: flex; justify-content: right;" dir="rtl">
+    <h4>اختراما نګاشته میشود</h4>
+</div>
+
+<div class="m-4" style="display: flex; justify-content: right;" dir="rtl">
+    <p>لطف نموده برویت شماره (03) تعرفه تحویلی را که مشخصات آن در جدول میباشد را به مسولیت خویش ترتیب نموده بعد از ویزه کنترول</p>
+</div>
+<div class="m-4" style="display: flex; justify-content: right;" dir="rtl">
+    <p>صادر نمایند،البته در صورت پرداخت وجوه تعرفه از صورت تحویلی آن ذریعه کاپی آویز غرض اجرات بعدی به این ریاست اطمینان دهند.</p>
+
+</div>
+
+<div style="display: flex; justify-content: center;" dir="rtl">
+    <table class="table table-bordered" dir="rtl">
+        <caption dir="rtl" style="caption-side: top !important;
+        text-align: right;
+        font-weight: bold;
+        padding-bottom: 10px;"> 3- جدول سنجش فیس درخواست و اداری تایپ اپروول</caption>
+        <tr>
+            <th>شماره</th>
+            <th colspan="2">مشخصات تعرفه</th>
+            <th>ملاحظاب</th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>مرجع تحویلی تعرفه</td>
+            <td th:text="${profile.companyName}">Realtime International</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>مدرک تحویلی تعرفه</td>
+            <td>فیس درخواست و اداری</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>مودل</td>
+            <td>LANR41</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>نمبر حساب بانکی</td>
+            <td>حساب بانکی اداره</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td>مبلغ قابل پرداخت</td>
+            <td th:text="${profile.applicationFee}+${profile.adminFee}">admin fee + application fee</td>
+            <td></td>
+        </tr>
+    </table>
+</div>
+<div style="display: flex; justify-content: center;margin-top:15px;">
+    <h3>با احترام</h3>
+</div>
 <script>
     function doPrint() {
         document.getElementById("back").style.display = "none";
@@ -128,6 +130,7 @@
 </script>
 
 
+<div style="height:15vh;"></div>
 <footer th:replace="~{layout :: page_footer}"></footer>
 <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
 </body>

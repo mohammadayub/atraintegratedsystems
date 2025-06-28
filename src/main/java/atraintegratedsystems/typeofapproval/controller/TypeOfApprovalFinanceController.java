@@ -18,12 +18,82 @@ public class TypeOfApprovalFinanceController {
     private TypeOfApprovalApplicantService typeOfApprovalApplicantService;
 
 
+//    My code
+    @GetMapping("/typeofapprovals/finance/home")
+    public String listTypeOfApprovalFinanceHome(Model model) {
+        return "typeofapprovals/finance/home";
+    }
+    @GetMapping("/typeofapprovals/finance/applicationfeelist")
+    public String listTypeOfApprovalApplicantFee(Model model) {
+        List<TypeOfApprovalApplicant> applicants = typeOfApprovalApplicantService.getAllReferred();
+        model.addAttribute("applicants", applicants);
+        return "typeofapprovals/finance/applicationfeelist";
+    }
+    @GetMapping("/typeofapprovals/finance/adminfeelist")
+    public String listTypeOfApprovalAdminFee(Model model) {
+        List<TypeOfApprovalApplicant> applicants = typeOfApprovalApplicantService.getAllReferred();
+        model.addAttribute("applicants", applicants);
+        return "typeofapprovals/finance/adminfeelist";
+    }
+    @GetMapping("/typeofapprovals/finance/certificatefeelist")
+    public String listTypeOfApprovalCertificateFee(Model model) {
+        List<TypeOfApprovalApplicant> applicants = typeOfApprovalApplicantService.getAllReferred();
+        model.addAttribute("applicants", applicants);
+        return "typeofapprovals/finance/certificatefeelist";
+    }
+
+//    Payment Section
+    @GetMapping("/typeofapprovals/finance/feesconfirmation/adminfeeconfirmation/{id}")
+    public String listTypeOfApprovalAdminFeeConfirmation(@PathVariable Long id,Model model) {
+
+        Optional<TypeOfApprovalApplicant> profileOpt = typeOfApprovalApplicantService.getById(id);
+
+        if (profileOpt.isPresent()) {
+            model.addAttribute("profile", profileOpt.get());
+            return "/typeofapprovals/finance/feesconfirmation/adminfeeconfirmation";        }
+        else {
+            // Handle not found case (redirect to list or show error)
+            return "redirect:/typeofapprovals/finance/adminfeelist";
+        }
+
+    }
+
+    @GetMapping("/typeofapprovals/finance/feesconfirmation/applicationfeeconfirmation/{id}")
+    public String listTypeOfApprovalApplicationFeeConfirmation(@PathVariable Long id,Model model) {
+        Optional<TypeOfApprovalApplicant> profileOpt = typeOfApprovalApplicantService.getById(id);
+
+        if (profileOpt.isPresent()) {
+            model.addAttribute("profile", profileOpt.get());
+            return "/typeofapprovals/finance/feesconfirmation/applicationfeeconfirmation";        }
+        else {
+            // Handle not found case (redirect to list or show error)
+            return "redirect:/typeofapprovals/finance/applicationfeelist";
+        }
+
+    }
+
+    @GetMapping("/typeofapprovals/finance/feesconfirmation/certificatefeeconfirmation/{id}")
+    public String listTypeOfApprovalCertificateFeeConfirmation(@PathVariable Long id,Model model) {
+        Optional<TypeOfApprovalApplicant> profileOpt = typeOfApprovalApplicantService.getById(id);
+
+        if (profileOpt.isPresent()) {
+            model.addAttribute("profile", profileOpt.get());
+            return "/typeofapprovals/finance/feesconfirmation/certificatefeeconfirmation";        }
+        else {
+            // Handle not found case (redirect to list or show error)
+            return "redirect:/typeofapprovals/finance/certificatefeelist";
+        }
+
+    }
+
+//    End of My code
     @GetMapping("/typeofapprovals/finance/paymentlists")
     public String listTypeOfApprovalApplicants(Model model) {
         List<TypeOfApprovalApplicant> applicants = typeOfApprovalApplicantService.getAllReferred();
         model.addAttribute("applicants", applicants);
         return "typeofapprovals/finance/paymentlists";
     }
+
 
 
     @GetMapping("/typeofapprovals/finance/print/{id}")
