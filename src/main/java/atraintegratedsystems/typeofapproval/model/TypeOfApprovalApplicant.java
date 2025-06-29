@@ -36,6 +36,8 @@ public class TypeOfApprovalApplicant {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate applicationFeeBankVoucherSubmissionDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate confirmationApplicationVoucherDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate applicationFeeEnteryDate;
     private String applicationFeeEnteredBy;
     private Double adminFee;
@@ -46,6 +48,8 @@ public class TypeOfApprovalApplicant {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate adminFeeBankVoucherSubmissionDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate confirmationAdminFeeVoucherDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate adminFeeEnteryDate;
     private String adminFeeEnteredBy;
     private Double certificateFee;
@@ -55,6 +59,8 @@ public class TypeOfApprovalApplicant {
     private String certificateFeeBankVoucherNo;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate certificateFeeBankVoucherSubmissionDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate confirmationCertificateFeeVoucherDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate certificateFeeEnteryDate;
     private String certificateFeeEnteredBy;
