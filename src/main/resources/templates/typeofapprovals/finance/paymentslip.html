@@ -119,12 +119,12 @@
 <div style="display: flex; justify-content: center;margin-top:15px;">
     <h3>با احترام</h3>
 </div>
+<div style="float:right;"><button class="btn btn-primary m-4" onclick="doPrint();" id="print">Print</button> </div>
+
 <script>
     function doPrint() {
-        document.getElementById("back").style.display = "none";
         document.getElementById("print").style.display = "none";
         window.print();
-        document.getElementById("back").style.display = "inline";
         document.getElementById("print").style.display = "inline";
     }
 </script>

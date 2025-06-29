@@ -3,6 +3,7 @@ package atraintegratedsystems.typeofapproval.dto;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.persistence.Column;
 import java.time.LocalDate;
 
 @Data
@@ -15,6 +16,7 @@ public class TypeOfApprovalApplicantDTO {
     private String licenseOperator;
     private String authorizedImporter;
     private String importRegistrationNo;
+    @Column(unique = true, nullable = false)
     private String companyName;
     private String contactPerson;
     private String address;
@@ -27,14 +29,29 @@ public class TypeOfApprovalApplicantDTO {
     private String applicationFeeStatus;
     private String applicationFeeConfirmationDate;
     private String applicationFeeOrganizationName;
+    private String applicationFeeBankVoucherNo;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate applicationFeeBankVoucherSubmissionDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate applicationFeeEnteryDate;
     private Double adminFee;
     private String adminFeeStatus;
     private String adminFeeConfirmationDate;
     private String adminFeeOrganizationName;
+    private String adminFeeBankVoucherNo;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate adminFeeBankVoucherSubmissionDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate adminFeeEnteryDate;
     private Double certificateFee;
     private String certificateFeeStatus;
     private String certificateFeeConfirmationDate;
     private String certificateFeeOrganizationName;
+    private String certificateFeeBankVoucherNo;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate certificateFeeBankVoucherSubmissionDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate certificateFeeEnteryDate;
     private String enteredBy;
 
 
