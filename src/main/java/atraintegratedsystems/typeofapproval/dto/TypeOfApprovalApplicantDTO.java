@@ -27,19 +27,17 @@ public class TypeOfApprovalApplicantDTO {
     private String typeSelect;
     private Double applicationFee;
     private String applicationFeeStatus;
-    private String applicationFeeConfirmationDate;
     private String applicationFeeOrganizationName;
     private String applicationFeeBankVoucherNo;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate applicationFeeBankVoucherSubmissionDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate confirmationApplicationVoucherDate;
+    private LocalDate applicationFeeVoucherDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate applicationFeeEnteryDate;
+    private LocalDate applicationFeeEntryDate;
     private String applicationFeeEnteredBy;
     private Double adminFee;
     private String adminFeeStatus;
-    private String adminFeeConfirmationDate;
     private String adminFeeOrganizationName;
     private String adminFeeBankVoucherNo;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -47,7 +45,7 @@ public class TypeOfApprovalApplicantDTO {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate confirmationAdminFeeVoucherDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate adminFeeEnteryDate;
+    private LocalDate adminFeeEntryDate;
     private String adminFeeEnteredBy;
     private Double certificateFee;
     private String certificateFeeStatus;
@@ -70,11 +68,8 @@ public class TypeOfApprovalApplicantDTO {
     private String referStatus;
 
 
-    //Finance Section
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate voucherDate;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate submissionVoucherDate;
-    private String paymentStatus;
+
+
+
 
 }

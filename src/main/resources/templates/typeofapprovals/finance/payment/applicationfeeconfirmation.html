@@ -81,8 +81,10 @@
     <br>
     <fieldset>
         <legend>Application Fee Payments</legend>
-        <form>
+        <form th:action="@{/typeofapprovals/finance/payment/applicationfeeconfirmation/save}" method="post" th:object="${profile}">
             <!-- First Row -->
+            <!-- Hidden ID -->
+            <input type="hidden" th:field="*{id}"/>
             <div class="row">
                 <div class="col-md-3">
                     <label th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
@@ -169,25 +171,27 @@
                     <label th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
                         Application Fee
                     </label>
-                    <input type="text" class="form-control"
+                    <input  type="text" class="form-control"
                            th:value="${profile.applicationFee}" readonly
                            th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" />
                 </div>
                 <div class="col-md-3">
-                    <label th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+                    <label th:for="applicationFeeStatus"
+                           th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
                         Payment Confirmation
                     </label>
-                    <select class="form-control"
-                            th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
-                        <option>Yes</option>
-                        <option>No</option>
+                    <select th:field="*{applicationFeeStatus}" class="form-control"
+                            th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'text-end' : 'text-start'">
+                        <option th:value="Yes" >Yes</option>
+                        <option th:value="No" >No</option>
                     </select>
                 </div>
+
                 <div class="col-md-3">
                     <label th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
-                        Confirmation App Fee Voucher Date
+                        Application Fee Voucher Date
                     </label>
-                    <input type="date" class="form-control"
+                    <input type="date" th:field="*{applicationFeeVoucherDate}" class="form-control"
                            th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" />
                 </div>
             </div>
@@ -197,14 +201,14 @@
                     <label th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
                         Application Fee Bank Voucher No
                     </label>
-                    <input type="text" class="form-control"
+                    <input type="text"  th:field="*{applicationFeeBankVoucherNo}"     class="form-control"
                            th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" />
                 </div>
                 <div class="col-md-3">
                     <label th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
                         Application Fee Bank Submission Date
                     </label>
-                    <input type="date" class="form-control"
+                    <input type="date" th:field="*{applicationFeeBankVoucherSubmissionDate}" class="form-control"
                            th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" />
                 </div>
                 <div class="col-md-3">

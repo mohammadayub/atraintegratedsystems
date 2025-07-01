@@ -29,46 +29,54 @@ public class TypeOfApprovalApplicant {
     private String email;
     private String typeSelect;
     private Double applicationFee;
-    private String applicationFeeStatus;
-    private String applicationFeeConfirmationDate;
     private String applicationFeeOrganizationName;
+
+    //Application Fee Finance Section
+    private String applicationFeeStatus;
     private String applicationFeeBankVoucherNo;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate applicationFeeBankVoucherSubmissionDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate confirmationApplicationVoucherDate;
+    private LocalDate applicationFeeVoucherDate;
+
+    //Audit Section
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate applicationFeeEnteryDate;
+    private LocalDate applicationFeeEntryDate;
     private String applicationFeeEnteredBy;
+
+
     private Double adminFee;
-    private String adminFeeStatus;
-    private String adminFeeConfirmationDate;
     private String adminFeeOrganizationName;
+
+    //Admin Fee Finance Section
+    private String adminFeeStatus;
     private String adminFeeBankVoucherNo;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate adminFeeBankVoucherSubmissionDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate confirmationAdminFeeVoucherDate;
+    private LocalDate adminFeeVoucherDate;
+
+    //Audit Section
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate adminFeeEnteryDate;
+    private LocalDate adminFeeEntryDate;
     private String adminFeeEnteredBy;
+
+
     private Double certificateFee;
+
+    //Certificate Fee Section
     private String certificateFeeStatus;
-    private String certificateFeeConfirmationDate;
     private String certificateFeeOrganizationName;
     private String certificateFeeBankVoucherNo;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate certificateFeeBankVoucherSubmissionDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate confirmationCertificateFeeVoucherDate;
+    private LocalDate certificateFeeVoucherDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate certificateFeeEnteryDate;
+
+    //Audit Section
+    private LocalDate certificateFeeEntryDate;
     private String certificateFeeEnteredBy;
-
-
-    private String enteredBy;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate enteredDate;
 
 
     //Refer to Finance Department
@@ -77,20 +85,10 @@ public class TypeOfApprovalApplicant {
     private String referStatus;
 
 
-    //Finance Section
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate voucherDate;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate submissionVoucherDate;
-    private String paymentStatus;
-
-
 
     @OneToMany(mappedBy = "applicant", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<TypeOfApprovalManufacturerDetail> manufacturers;
 
-//    @OneToMany(mappedBy = "approvalApplicant", cascade = CascadeType.ALL, orphanRemoval = true)
-//    private List<TypeOfApprovalAttachment> attachments;
 
 
     @OneToMany(mappedBy = "approvalApplicant", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)

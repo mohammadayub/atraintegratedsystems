@@ -5,6 +5,7 @@ import atraintegratedsystems.typeofapproval.model.TypeOfApprovalAttachment;
 import atraintegratedsystems.typeofapproval.repository.TypeOfApprovalApplicantRepository;
 import atraintegratedsystems.typeofapproval.repository.TypeOfApprovalAttachmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -51,6 +52,25 @@ public class TypeOfApprovalApplicantService {
         // Do NOT touch or replace existing.getDetails() to avoid orphanRemoval issues
 
         typeOfApprovalApplicantRepository.save(existing);
+    }
+
+
+    public void updateApplicationFee(Long id, String applicationFeeStatus, String applicationFeeBankVoucherNo
+    , LocalDate applicationFeeVoucherDate , LocalDate applicationFeeSubmissionDate){
+        TypeOfApprovalApplicant appFee= typeOfApprovalApplicantRepository.findById(id)
+                .orElseThrow(()->new IllegalArgumentException("Applicant not found with ID: " + id));
+        String applicationFeeEnteredBy = SecurityContextHolder.getContext().getAuthentication().getName();
+        appFee.setApplicationFeeStatus(applicationFeeStatus);
+        appFee.setApplicationFeeBankVoucherNo(applicationFeeBankVoucherNo);
+        appFee.setApplicationFeeVoucherDate(applicationFeeVoucherDate);
+        appFee.setApplicationFeeEntryDate(LocalDate.now());
+        appFee.setApplicationFeeEnteredBy(applicationFeeEnteredBy);
+        appFee.setApplicationFeeBankVoucherSubmissionDate(applicationFeeSubmissionDate);
+
+        typeOfApprovalApplicantRepository.save(appFee);
+
+
+
     }
 
 
