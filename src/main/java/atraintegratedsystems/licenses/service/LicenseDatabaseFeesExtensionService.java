@@ -31,6 +31,7 @@ public class LicenseDatabaseFeesExtensionService {
             // Map relevant fields to DTO
             dto.setId(entity.getId());
             dto.setLicenseApprovalId(entity.getLicenseApproval().getId());
+            dto.setLicenseCompanyName(entity.getLicenseApproval().getLicenseApplicant().getCompanyLicenseName());
             dto.setExtensionStartDate(entity.getExtensionStartDate());
             dto.setExtStartDate(entity.getExtentStartDate());
             dto.setExtensionExpireDate(entity.getExtensionStartDate().plusYears(1));
