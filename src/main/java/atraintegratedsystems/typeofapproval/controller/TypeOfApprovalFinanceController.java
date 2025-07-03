@@ -51,6 +51,34 @@ public class TypeOfApprovalFinanceController {
         return "redirect:/typeofapprovals/finance/applicationfeelist";
     }
 
+    @PostMapping("/typeofapprovals/finance/payment/adminfeeconfirmation/save")
+    public String saveAdminFinance(@ModelAttribute("profile") TypeOfApprovalApplicant applicant) {
+        // Only pass the required fields
+        typeOfApprovalApplicantService.updateAdminFee(
+                applicant.getId(),
+                applicant.getAdminFeeStatus(),
+                applicant.getAdminFeeBankVoucherNo(),
+                applicant.getAdminFeeVoucherDate(),
+                applicant.getAdminFeeBankVoucherSubmissionDate()
+        );
+        return "redirect:/typeofapprovals/finance/adminfeelist";
+    }
+
+    @PostMapping("/typeofapprovals/finance/payment/certificatefeeconfirmation/save")
+    public String saveCertificateFinance(@ModelAttribute("profile") TypeOfApprovalApplicant applicant) {
+        // Only pass the required fields
+        typeOfApprovalApplicantService.updateCertificateFee(
+                applicant.getId(),
+                applicant.getCertificateFeeStatus(),
+                applicant.getCertificateFeeBankVoucherNo(),
+                applicant.getCertificateFeeVoucherDate(),
+                applicant.getCertificateFeeBankVoucherSubmissionDate()
+        );
+        return "redirect:/typeofapprovals/finance/certificatefeelist";
+    }
+
+
+
 
     @GetMapping("/typeofapprovals/finance/certificatefeelist")
     public String listTypeOfApprovalCertificateFee(Model model) {
@@ -60,14 +88,14 @@ public class TypeOfApprovalFinanceController {
     }
 
 //    Payment Section
-    @GetMapping("/typeofapprovals/finance/feesconfirmation/adminfeeconfirmation/{id}")
+    @GetMapping("/typeofapprovals/finance/payment/adminfeeconfirmation/{id}")
     public String listTypeOfApprovalAdminFeeConfirmation(@PathVariable Long id,Model model) {
 
         Optional<TypeOfApprovalApplicant> profileOpt = typeOfApprovalApplicantService.getById(id);
 
         if (profileOpt.isPresent()) {
             model.addAttribute("profile", profileOpt.get());
-            return "/typeofapprovals/finance/feesconfirmation/adminfeeconfirmation";        }
+            return "/typeofapprovals/finance/payment/adminfeeconfirmation";        }
         else {
             // Handle not found case (redirect to list or show error)
             return "redirect:/typeofapprovals/finance/adminfeelist";
@@ -89,13 +117,13 @@ public class TypeOfApprovalFinanceController {
 
     }
 
-    @GetMapping("/typeofapprovals/finance/feesconfirmation/certificatefeeconfirmation/{id}")
+    @GetMapping("/typeofapprovals/finance/payment/certificatefeeconfirmation/{id}")
     public String listTypeOfApprovalCertificateFeeConfirmation(@PathVariable Long id,Model model) {
         Optional<TypeOfApprovalApplicant> profileOpt = typeOfApprovalApplicantService.getById(id);
 
         if (profileOpt.isPresent()) {
             model.addAttribute("profile", profileOpt.get());
-            return "/typeofapprovals/finance/feesconfirmation/certificatefeeconfirmation";        }
+            return "/typeofapprovals/finance/payment/certificatefeeconfirmation";        }
         else {
             // Handle not found case (redirect to list or show error)
             return "redirect:/typeofapprovals/finance/certificatefeelist";

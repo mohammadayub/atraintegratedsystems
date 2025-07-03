@@ -73,6 +73,39 @@ public class TypeOfApprovalApplicantService {
 
     }
 
+    public void updateAdminFee(Long id, String adminFeeStatus, String adminFeeBankVoucherNo
+            , LocalDate adminFeeVoucherDate , LocalDate adminFeeSubmissionDate){
+        TypeOfApprovalApplicant adminFee= typeOfApprovalApplicantRepository.findById(id)
+                .orElseThrow(()->new IllegalArgumentException("Applicant not found with ID: " + id));
+        String adminFeeEnteredBy = SecurityContextHolder.getContext().getAuthentication().getName();
+        adminFee.setAdminFeeStatus(adminFeeStatus);
+        adminFee.setAdminFeeBankVoucherNo(adminFeeBankVoucherNo);
+        adminFee.setAdminFeeVoucherDate(adminFeeVoucherDate);
+        adminFee.setAdminFeeEntryDate(LocalDate.now());
+        adminFee.setAdminFeeEnteredBy(adminFeeEnteredBy);
+        adminFee.setAdminFeeBankVoucherSubmissionDate(adminFeeSubmissionDate);
+
+        typeOfApprovalApplicantRepository.save(adminFee);
+
+    }
+
+    public void updateCertificateFee(Long id, String certificateFeeStatus, String certificateFeeBankVoucherNo
+            , LocalDate certificateFeeVoucherDate , LocalDate certificateFeeSubmissionDate){
+        TypeOfApprovalApplicant certificateFee= typeOfApprovalApplicantRepository.findById(id)
+                .orElseThrow(()->new IllegalArgumentException("Applicant not found with ID: " + id));
+        String certificateFeeEnteredBy = SecurityContextHolder.getContext().getAuthentication().getName();
+        certificateFee.setCertificateFeeStatus(certificateFeeStatus);
+        certificateFee.setCertificateFeeBankVoucherNo(certificateFeeBankVoucherNo);
+        certificateFee.setCertificateFeeVoucherDate(certificateFeeVoucherDate);
+        certificateFee.setCertificateFeeEntryDate(LocalDate.now());
+        certificateFee.setCertificateFeeEnteredBy(certificateFeeEnteredBy);
+        certificateFee.setCertificateFeeBankVoucherSubmissionDate(certificateFeeSubmissionDate);
+
+        typeOfApprovalApplicantRepository.save(certificateFee);
+
+    }
+
+
 
 
 

@@ -16,7 +16,6 @@ public class TypeOfApprovalApplicantDTO {
     private String licenseOperator;
     private String authorizedImporter;
     private String importRegistrationNo;
-    @Column(unique = true, nullable = false)
     private String companyName;
     private String contactPerson;
     private String address;
@@ -26,40 +25,54 @@ public class TypeOfApprovalApplicantDTO {
     private String email;
     private String typeSelect;
     private Double applicationFee;
-    private String applicationFeeStatus;
     private String applicationFeeOrganizationName;
+
+    //Application Fee Finance Section
+    private String applicationFeeStatus;
     private String applicationFeeBankVoucherNo;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate applicationFeeBankVoucherSubmissionDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate applicationFeeVoucherDate;
+
+    //Audit Section
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate applicationFeeEntryDate;
     private String applicationFeeEnteredBy;
+
+
     private Double adminFee;
-    private String adminFeeStatus;
     private String adminFeeOrganizationName;
+
+    //Admin Fee Finance Section
+    private String adminFeeStatus;
     private String adminFeeBankVoucherNo;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate adminFeeBankVoucherSubmissionDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate confirmationAdminFeeVoucherDate;
+    private LocalDate adminFeeVoucherDate;
+
+    //Audit Section
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate adminFeeEntryDate;
     private String adminFeeEnteredBy;
+
+
     private Double certificateFee;
+
+    //Certificate Fee Section
     private String certificateFeeStatus;
-    private String certificateFeeConfirmationDate;
     private String certificateFeeOrganizationName;
     private String certificateFeeBankVoucherNo;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate certificateFeeBankVoucherSubmissionDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate confirmationCertificateFeeVoucherDate;
+    private LocalDate certificateFeeVoucherDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate certificateFeeEnteryDate;
+
+    //Audit Section
+    private LocalDate certificateFeeEntryDate;
     private String certificateFeeEnteredBy;
-    private String enteredBy;
 
 
     //Refer to Finance Department

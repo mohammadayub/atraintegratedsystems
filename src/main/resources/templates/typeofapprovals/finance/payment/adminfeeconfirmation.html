@@ -81,8 +81,10 @@
     <br>
     <fieldset>
         <legend>Admin Fee Payments</legend>
-        <form>
+        <form th:action="@{/typeofapprovals/finance/payment/adminfeeconfirmation/save}" method="post" th:object="${profile}">
             <!-- First Row -->
+            <!-- Hidden ID -->
+            <input type="hidden" th:field="*{id}"/>
             <div class="row">
                 <div class="col-md-3">
                     <label th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
@@ -174,41 +176,43 @@
                            th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" />
                 </div>
                 <div class="col-md-3">
-                    <label th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+                    <label th:for="adminFeeStatus"
+                           th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
                         Payment Confirmation
                     </label>
-                    <select class="form-control"
-                            th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
-                        <option>Yes</option>
-                        <option>No</option>
+                    <select th:field="*{adminFeeStatus}" class="form-control"
+                            th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'text-end' : 'text-start'">
+                        <option th:value="Yes" >Yes</option>
+                        <option th:value="No" >No</option>
                     </select>
                 </div>
+
                 <div class="col-md-3">
                     <label th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
-                        Confirmation Admin Voucher Date
+                        Admin Fee Voucher Date
                     </label>
-                    <input type="date" class="form-control"
+                    <input type="date" th:field="*{adminFeeVoucherDate}" class="form-control"
                            th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" />
                 </div>
             </div>
-<!--            Fourth Row -->
+            <!--            Fourth Row -->
             <div class="row">
                 <div class="col-md-3">
                     <label th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
                         Admin Fee Bank Voucher No
                     </label>
-                    <input type="text" class="form-control"
+                    <input type="text"  th:field="*{adminFeeBankVoucherNo}"     class="form-control"
                            th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" />
                 </div>
                 <div class="col-md-3">
                     <label th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
                         Admin Fee Bank Submission Date
                     </label>
-                    <input type="date" class="form-control"
+                    <input type="date" th:field="*{adminFeeBankVoucherSubmissionDate}" class="form-control"
                            th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" />
                 </div>
                 <div class="col-md-3">
-                    </div>
+                </div>
                 <div class="col-md-3">
                     <label th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
 
@@ -216,9 +220,8 @@
                     <div class="text-right my-3">
                         <button type="submit" class="btn btn-primary">Save</button>
                     </div>
-                  </div>
+                </div>
             </div>
-
         </form>
     </fieldset>
 
@@ -269,8 +272,6 @@
         });
     });
 </script>
-
-
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {

@@ -95,6 +95,7 @@
     <tr class="bg-primary">
       <th th:text="#{id}">ID</th>
       <th th:text="#{mcit_license_approval_id}">Applicant ID</th>
+      <th th:text="#{license_application_company_license_name}">License Company Name</th>
       <th th:text="#{extension_Start_date}">Start Date</th>
       <th th:text="#{license_application_expiry_date}">Expire Date</th>
       <th th:text="#{miladi_start_date}">Miladi Start Date</th>
@@ -107,6 +108,7 @@
     <tr th:each="extension : ${extensions}">
       <td th:text="${extension.id}"></td>
       <td th:text="${extension.licenseApprovalId}"></td>
+      <td th:text="${extension.licenseCompanyName}"></td>
       <td th:text="${extension.extStartDate}"></td>
       <td th:text="${extension.extExpireDate}"></td>
       <td th:text="${extension.extensionStartDate}"></td>

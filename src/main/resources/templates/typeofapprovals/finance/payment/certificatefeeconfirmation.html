@@ -81,8 +81,10 @@
     <br>
     <fieldset>
         <legend>Certificate Fee Payments</legend>
-        <form>
+        <form  th:action="@{/typeofapprovals/finance/payment/certificatefeeconfirmation/save}" method="post" th:object="${profile}">
             <!-- First Row -->
+            <!-- Hidden ID -->
+            <input type="hidden" th:field="*{id}"/>
             <div class="row">
                 <div class="col-md-3">
                     <label th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
@@ -174,20 +176,22 @@
                            th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" />
                 </div>
                 <div class="col-md-3">
-                    <label th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+                    <label th:for="applicationFeeStatus"
+                           th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
                         Payment Confirmation
                     </label>
-                    <select class="form-control"
-                            th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
-                        <option>Yes</option>
-                        <option>No</option>
+                    <select th:field="*{certificateFeeStatus}" class="form-control"
+                            th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'text-end' : 'text-start'">
+                        <option th:value="Yes" >Yes</option>
+                        <option th:value="No" >No</option>
                     </select>
                 </div>
+
                 <div class="col-md-3">
                     <label th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
-                        Confirmation Certificate voucher Date
+                        Certificate Fee Voucher Date
                     </label>
-                    <input type="date" class="form-control"
+                    <input type="date" th:field="*{certificateFeeVoucherDate}" class="form-control"
                            th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" />
                 </div>
             </div>
@@ -197,14 +201,14 @@
                     <label th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
                         Certificate Fee Bank Voucher No
                     </label>
-                    <input type="text" class="form-control"
+                    <input type="text"  th:field="*{certificateFeeBankVoucherNo}"     class="form-control"
                            th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" />
                 </div>
                 <div class="col-md-3">
                     <label th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
                         Certificate Fee Bank Submission Date
                     </label>
-                    <input type="date" class="form-control"
+                    <input type="date" th:field="*{certificateFeeBankVoucherSubmissionDate}" class="form-control"
                            th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" />
                 </div>
                 <div class="col-md-3">
