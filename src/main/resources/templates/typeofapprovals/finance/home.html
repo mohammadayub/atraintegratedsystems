@@ -41,7 +41,7 @@
 
   <!-- Section: Type of Approval Management -->
   <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_typeofapprovals_ADMIN')">
-    <legend th:text="#{typeof_approval_management_section}">Type of Approval Management Finance Payments</legend>
+    <legend>Type of Approval ATRA Finance Payments Section</legend>
     <div class="row g-4">
       <div class="col-sm-4">
         <div class="custom-card text-center p-3">
@@ -67,6 +67,12 @@
         </div>
       </div>
 
+
+    </div>
+  </fieldset>
+  <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_typeofapprovals_ADMIN')">
+    <legend>Type of Approval MCIT Finance Payments Section</legend>
+    <div class="row g-4">
       <div class="col-sm-4">
         <div class="custom-card text-center p-3">
           <a th:href="@{/typeofapprovals/finance/certificatefeelist}">
@@ -80,7 +86,6 @@
       </div>
     </div>
   </fieldset>
-
 </div>
 
 <!-- Footer -->

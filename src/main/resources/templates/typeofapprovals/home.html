@@ -55,6 +55,12 @@
         </div>
       </div>
 
+
+    </div>
+  </fieldset>
+  <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_typeofapprovals_ADMIN')">
+    <legend>Type of Approval Applicants Information</legend>
+    <div class="row g-4">
       <div class="col-sm-4">
         <div class="custom-card text-center p-3">
           <a th:href="@{/typeofapprovals/applicant/applicantlists}">
@@ -80,7 +86,6 @@
       </div>
     </div>
   </fieldset>
-
   <!-- Section: Refer Management -->
   <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_typeofapprovals_ADMIN')">
     <legend>Refer Management Section</legend>
