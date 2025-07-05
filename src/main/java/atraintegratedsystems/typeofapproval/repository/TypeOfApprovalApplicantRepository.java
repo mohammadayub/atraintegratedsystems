@@ -19,16 +19,22 @@ public interface TypeOfApprovalApplicantRepository extends JpaRepository<TypeOfA
     @Query(value = "SELECT * FROM type_of_approval_applicant", nativeQuery = true)
     List<TypeOfApprovalApplicant> findAllApplicants();
 
-    @Query(value = "SELECT * FROM type_of_approval_applicant where refer_status='Yes'", nativeQuery = true)
+    @Query(value = "SELECT * FROM type_of_approval_applicant where refer_status='Yes' AND application_fee_status IS NULL", nativeQuery = true)
     List<TypeOfApprovalApplicant> findAllReferred();
 
-    @Query(value = "SELECT * FROM type_of_approval_applicant where admin_fee_status='null'", nativeQuery = true)
+    @Query(value = "SELECT * FROM type_of_approval_applicant where refer_status='Yes' AND admin_fee_status IS NULL", nativeQuery = true)
     List<TypeOfApprovalApplicant> findAllUnPaidAddminFee();
 
-    @Query(value = "SELECT * FROM type_of_approval_applicant where application_fee_status='null'", nativeQuery = true)
+    @Query(value = "SELECT * FROM type_of_approval_applicant where refer_status='Yes' AND certificate_fee_status IS NULL", nativeQuery = true)
+    List<TypeOfApprovalApplicant> findAllUnPaidCertificateFee();
+
+//    @Query(value = "SELECT * FROM type_of_approval_applicant where admin_fee_status IS NULL", nativeQuery = true)
+//    List<TypeOfApprovalApplicant> findAllUnPaidAddminFee();
+
+    @Query(value = "SELECT * FROM type_of_approval_applicant where application_fee_status IS NULL", nativeQuery = true)
     List<TypeOfApprovalApplicant> findAllUnPaidApplicationFee();
 
-    @Query(value = "SELECT * FROM type_of_approval_applicant where certificate_fee_status='null'", nativeQuery = true)
-    List<TypeOfApprovalApplicant> findAllUnPaidCertificateFee();
+//    @Query(value = "SELECT * FROM type_of_approval_applicant where certificate_fee_status IS NULL", nativeQuery = true)
+//    List<TypeOfApprovalApplicant> findAllUnPaidCertificateFee();
 
 }

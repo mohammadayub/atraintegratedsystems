@@ -33,6 +33,15 @@ public class TypeOfApprovalApplicantService {
     }
 
     @Transactional
+    public List<TypeOfApprovalApplicant> findAllUnPaidAddminFee(){
+        return typeOfApprovalApplicantRepository.findAllUnPaidAddminFee();
+    }
+    @Transactional
+    public List<TypeOfApprovalApplicant> findAllUnPaidCertificateFee(){
+        return typeOfApprovalApplicantRepository.findAllUnPaidCertificateFee();
+    }
+
+    @Transactional
     public List<TypeOfApprovalApplicant> getAllReferred(){
         return typeOfApprovalApplicantRepository.findAllReferred();
     }

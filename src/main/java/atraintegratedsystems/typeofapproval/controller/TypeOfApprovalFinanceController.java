@@ -33,7 +33,7 @@ public class TypeOfApprovalFinanceController {
     }
     @GetMapping("/typeofapprovals/finance/adminfeelist")
     public String listTypeOfApprovalAdminFee(Model model) {
-        List<TypeOfApprovalApplicant> applicants = typeOfApprovalApplicantService.getAllReferred();
+        List<TypeOfApprovalApplicant> applicants = typeOfApprovalApplicantService.findAllUnPaidAddminFee();
         model.addAttribute("applicants", applicants);
         return "typeofapprovals/finance/adminfeelist";
     }
@@ -82,7 +82,7 @@ public class TypeOfApprovalFinanceController {
 
     @GetMapping("/typeofapprovals/finance/certificatefeelist")
     public String listTypeOfApprovalCertificateFee(Model model) {
-        List<TypeOfApprovalApplicant> applicants = typeOfApprovalApplicantService.getAllReferred();
+        List<TypeOfApprovalApplicant> applicants = typeOfApprovalApplicantService.findAllUnPaidCertificateFee();
         model.addAttribute("applicants", applicants);
         return "typeofapprovals/finance/certificatefeelist";
     }
