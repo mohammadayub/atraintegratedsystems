@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{layout :: page_head}">
+    <div th:replace="styles :: persian-datepicker-styles"></div>
     <title>Refer To Finance</title>
 
     <style>
@@ -53,7 +54,7 @@
                     </div>
                     <div class="col-md-6">
                         <label class="form-label">Refer Date</label>
-                        <input type="date" id="requestDateInput" th:field="*{referDate}" class="form-control"/>
+                        <input type="date" id="requestDateInput" th:field="*{referDate}" class="form-control hijrishamsi" />
                     </div>
                 </div>
 
@@ -81,21 +82,11 @@
     </div>
 </div>
 
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const dateInput = document.getElementById("requestDateInput");
 
-      // Trigger native calendar on focus or click
-      dateInput.addEventListener("click", function () {
-        this.showPicker && this.showPicker(); // modern browsers (Chrome, Edge)
-      });
-
-      // Or trigger focus programmatically to ensure the picker opens
-      dateInput.addEventListener("click", function () {
-        this.focus();
-      });
-    });
-</script>
+<div th:replace="scripts :: common-scripts"></div>
+<!-- Persian DatePicker scripts -->
+<div th:replace="scripts :: persian-datepicker-scripts"></div>
+<div th:replace="scripts :: common-hijrishamsi-date"></div>
 
 <footer th:replace="~{layout :: page_footer}"></footer>
 <script th:src="@{/js/bootstrap.bundle.min.js}"></script>

@@ -2,7 +2,6 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head th:replace="~{layout :: page_head}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap" />
-    <div th:replace="styles :: data-tables-styles"></div>
     <div th:replace="styles :: persian-datepicker-styles"></div>
     <div th:replace="styles :: select2-styles"></div>
     <div th:replace="styles :: commonfieldset-with-legend-border"></div>
@@ -191,7 +190,7 @@
                     <label th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
                         Certificate Fee Voucher Date
                     </label>
-                    <input type="date" th:field="*{certificateFeeVoucherDate}" class="form-control"
+                    <input type="text" th:field="*{certificateFeeVoucherDate}" class="form-control hijrishamsi"
                            th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" />
                 </div>
             </div>
@@ -208,7 +207,7 @@
                     <label th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
                         Certificate Fee Bank Submission Date
                     </label>
-                    <input type="date" th:field="*{certificateFeeBankVoucherSubmissionDate}" class="form-control"
+                    <input type="text" th:field="*{certificateFeeBankVoucherSubmissionDate}" class="form-control hijrishamsi"
                            th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" />
                 </div>
                 <div class="col-md-3">
@@ -242,51 +241,10 @@
 <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 
-<script>
-    $(document).ready(function () {
-        let table = $('#profileTable').DataTable({
-            dom: 'Bfrtip',
-            buttons: [
-                {
-                    extend: 'excelHtml5',
-                    text: 'Export to Excel',
-                    className: 'btn btn-success'
-                }
-            ],
-            initComplete: function () {
-                this.api().columns().every(function () {
-                    var column = this;
-                    var header = $(column.header());
-                    var columnText = header.text();
-                    header.empty().append('<div>' + columnText + '</div>');
-
-                    $('<input type="text" placeholder="Search" style="width: 100%; margin-top: 5px;"/>')
-                        .appendTo(header)
-                        .on('keyup change clear', function () {
-                            if (column.search() !== this.value) {
-                                column.search(this.value).draw();
-                            }
-                        });
-                });
-            }
-        });
-    });
-</script>
-
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const dateInputs = document.querySelectorAll('input[type="date"]');
-
-      dateInputs.forEach(function (dateInput) {
-        dateInput.addEventListener("click", function () {
-          // For modern browsers
-          this.showPicker && this.showPicker();
-          // Ensure focus triggers native picker
-          this.focus();
-        });
-      });
-    });
-</script>
+<div th:replace="scripts :: common-scripts"></div>
+<!-- Persian DatePicker scripts -->
+<div th:replace="scripts :: persian-datepicker-scripts"></div>
+<div th:replace="scripts :: common-hijrishamsi-date"></div>
 
 <div style="height:15vh;"></div>
 <footer th:replace="~{layout :: page_footer}"></footer>
