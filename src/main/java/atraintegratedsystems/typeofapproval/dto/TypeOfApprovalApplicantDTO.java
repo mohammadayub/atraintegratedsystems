@@ -78,6 +78,7 @@ public class TypeOfApprovalApplicantDTO {
     //Refer to Finance Department
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate referDate;
+    private String referDateJalali;
     private String referStatus;
 
 

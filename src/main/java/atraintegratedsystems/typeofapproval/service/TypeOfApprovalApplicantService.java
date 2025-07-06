@@ -1,9 +1,11 @@
 package atraintegratedsystems.typeofapproval.service;
 
+import atraintegratedsystems.typeofapproval.dto.TypeOfApprovalApplicantDTO;
 import atraintegratedsystems.typeofapproval.model.TypeOfApprovalApplicant;
 import atraintegratedsystems.typeofapproval.model.TypeOfApprovalAttachment;
 import atraintegratedsystems.typeofapproval.repository.TypeOfApprovalApplicantRepository;
 import atraintegratedsystems.typeofapproval.repository.TypeOfApprovalAttachmentRepository;
+import atraintegratedsystems.utils.PersianCalendarUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -51,14 +53,20 @@ public class TypeOfApprovalApplicantService {
         return typeOfApprovalApplicantRepository.findById(id);
     }
 
-    public void updateReferFinance(Long id, LocalDate referDate, String referStatus) {
+    public void updateReferFinance(Long id, String referDateJalali, String referStatus) {
         TypeOfApprovalApplicant existing = typeOfApprovalApplicantRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Applicant not found with ID: " + id));
 
+        String[] parts = referDateJalali.split("-");
+        int jYear = Integer.parseInt(parts[0]);
+        int jMonth = Integer.parseInt(parts[1]);
+        int jDay = Integer.parseInt(parts[2]);
+
+        PersianCalendarUtils converter = new PersianCalendarUtils();
+        LocalDate referDate = converter.jalaliToGregorian(jYear, jMonth, jDay);
+
         existing.setReferDate(referDate);
         existing.setReferStatus(referStatus);
-
-        // Do NOT touch or replace existing.getDetails() to avoid orphanRemoval issues
 
         typeOfApprovalApplicantRepository.save(existing);
     }

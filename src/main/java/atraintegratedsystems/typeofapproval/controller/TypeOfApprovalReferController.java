@@ -1,7 +1,9 @@
 package atraintegratedsystems.typeofapproval.controller;
 
+import atraintegratedsystems.typeofapproval.dto.TypeOfApprovalApplicantDTO;
 import atraintegratedsystems.typeofapproval.model.TypeOfApprovalApplicant;
 import atraintegratedsystems.typeofapproval.service.TypeOfApprovalApplicantService;
+import atraintegratedsystems.utils.PersianCalendarUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -44,7 +47,7 @@ public class TypeOfApprovalReferController {
         // Only pass the required fields
         typeOfApprovalApplicantService.updateReferFinance(
                 applicant.getId(),
-                applicant.getReferDate(),
+                applicant.getReferDateJalali(),
                 applicant.getReferStatus()
         );
         return "redirect:/typeofapprovals/refer/referlists";
