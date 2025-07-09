@@ -190,7 +190,7 @@
                     <label th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
                         Application Fee Voucher Date
                     </label>
-                    <input type="text" th:field="*{applicationFeeVoucherDate}" class="form-control hijrishamsi"
+                    <input type="text" th:field="*{applicationFeeVoucherDateJalali}" class="form-control hijrishamsi"
                            th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" />
                 </div>
             </div>
@@ -207,7 +207,7 @@
                     <label th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
                         Application Fee Bank Submission Date
                     </label>
-                    <input type="text" th:field="*{applicationFeeBankVoucherSubmissionDate}" class="form-control hijrishamsi"
+                    <input type="text" th:field="*{applicationFeeBankVoucherSubmissionDateJalali}" class="form-control hijrishamsi"
                            th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" />
                 </div>
                 <div class="col-md-3">

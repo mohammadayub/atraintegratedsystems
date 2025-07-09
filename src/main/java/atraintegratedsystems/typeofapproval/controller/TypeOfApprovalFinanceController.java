@@ -45,8 +45,8 @@ public class TypeOfApprovalFinanceController {
                 applicant.getId(),
                 applicant.getApplicationFeeStatus(),
                 applicant.getApplicationFeeBankVoucherNo(),
-                applicant.getApplicationFeeVoucherDate(),
-                applicant.getApplicationFeeBankVoucherSubmissionDate()
+                applicant.getApplicationFeeVoucherDateJalali(),
+                applicant.getApplicationFeeBankVoucherSubmissionDateJalali()
         );
         return "redirect:/typeofapprovals/finance/applicationfeelist";
     }

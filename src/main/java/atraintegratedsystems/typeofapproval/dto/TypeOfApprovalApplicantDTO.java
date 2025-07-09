@@ -30,8 +30,11 @@ public class TypeOfApprovalApplicantDTO {
     //Application Fee Finance Section
     private String applicationFeeStatus;
     private String applicationFeeBankVoucherNo;
+
+    private String applicationFeeBankVoucherSubmissionDateJalali;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate applicationFeeBankVoucherSubmissionDate;
+    private String applicationFeeVoucherDateJalali;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate applicationFeeVoucherDate;
 

@@ -73,15 +73,37 @@ public class TypeOfApprovalApplicantService {
 
 
     public void updateApplicationFee(Long id, String applicationFeeStatus, String applicationFeeBankVoucherNo
-    , LocalDate applicationFeeVoucherDate , LocalDate applicationFeeSubmissionDate){
+    , String applicationFeeVoucherDateJalali , String applicationFeeSubmissionDateJalali){
         TypeOfApprovalApplicant appFee= typeOfApprovalApplicantRepository.findById(id)
                 .orElseThrow(()->new IllegalArgumentException("Applicant not found with ID: " + id));
         String applicationFeeEnteredBy = SecurityContextHolder.getContext().getAuthentication().getName();
         appFee.setApplicationFeeStatus(applicationFeeStatus);
         appFee.setApplicationFeeBankVoucherNo(applicationFeeBankVoucherNo);
-        appFee.setApplicationFeeVoucherDate(applicationFeeVoucherDate);
+
+        String[] parts = applicationFeeVoucherDateJalali.split("-");
+        int jYear = Integer.parseInt(parts[0]);
+        int jMonth = Integer.parseInt(parts[1]);
+        int jDay = Integer.parseInt(parts[2]);
+
+        PersianCalendarUtils converter = new PersianCalendarUtils();
+        LocalDate applicationVoucherDate = converter.jalaliToGregorian(jYear, jMonth, jDay);
+
+        appFee.setApplicationFeeVoucherDate(applicationVoucherDate);
+
+
+
+
         appFee.setApplicationFeeEntryDate(LocalDate.now());
         appFee.setApplicationFeeEnteredBy(applicationFeeEnteredBy);
+
+
+
+        String[] subParts = applicationFeeVoucherDateJalali.split("-");
+        int jSubYear = Integer.parseInt(subParts[0]);
+        int jSubMonth = Integer.parseInt(subParts[1]);
+        int jSubDay = Integer.parseInt(subParts[2]);
+
+        LocalDate applicationFeeSubmissionDate = converter.jalaliToGregorian(jSubYear, jSubMonth, jSubDay);
         appFee.setApplicationFeeBankVoucherSubmissionDate(applicationFeeSubmissionDate);
 
         typeOfApprovalApplicantRepository.save(appFee);
