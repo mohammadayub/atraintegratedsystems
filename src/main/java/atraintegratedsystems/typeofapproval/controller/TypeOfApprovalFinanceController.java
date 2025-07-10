@@ -58,8 +58,8 @@ public class TypeOfApprovalFinanceController {
                 applicant.getId(),
                 applicant.getAdminFeeStatus(),
                 applicant.getAdminFeeBankVoucherNo(),
-                applicant.getAdminFeeVoucherDate(),
-                applicant.getAdminFeeBankVoucherSubmissionDate()
+                applicant.getAdminFeeVoucherDateJalali(),
+                applicant.getAdminFeeBankVoucherSubmissionDateJalali()
         );
         return "redirect:/typeofapprovals/finance/adminfeelist";
     }
@@ -71,8 +71,8 @@ public class TypeOfApprovalFinanceController {
                 applicant.getId(),
                 applicant.getCertificateFeeStatus(),
                 applicant.getCertificateFeeBankVoucherNo(),
-                applicant.getCertificateFeeVoucherDate(),
-                applicant.getCertificateFeeBankVoucherSubmissionDate()
+                applicant.getCertificateFeeVoucherDateJalali(),
+                applicant.getCertificateFeeBankVoucherSubmissionDateJalali()
         );
         return "redirect:/typeofapprovals/finance/certificatefeelist";
     }

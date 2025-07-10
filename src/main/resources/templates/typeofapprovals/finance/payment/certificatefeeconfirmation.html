@@ -190,7 +190,7 @@
                     <label th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
                         Certificate Fee Voucher Date
                     </label>
-                    <input type="text" th:field="*{certificateFeeVoucherDate}" class="form-control hijrishamsi"
+                    <input type="text" th:field="*{certificateFeeVoucherDateJalali}" class="form-control hijrishamsi"
                            th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" />
                 </div>
             </div>
@@ -207,7 +207,7 @@
                     <label th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
                         Certificate Fee Bank Submission Date
                     </label>
-                    <input type="text" th:field="*{certificateFeeBankVoucherSubmissionDate}" class="form-control hijrishamsi"
+                    <input type="text" th:field="*{certificateFeeBankVoucherSubmissionDateJalali}" class="form-control hijrishamsi"
                            th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" />
                 </div>
                 <div class="col-md-3">
