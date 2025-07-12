@@ -35,10 +35,8 @@ public class TypeOfApprovalApplicant {
     private String applicationFeeStatus;
     private String applicationFeeBankVoucherNo;
 
-    private String applicationFeeBankVoucherSubmissionDateJalali;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate applicationFeeBankVoucherSubmissionDate;
-    private String applicationFeeVoucherDateJalali;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate applicationFeeVoucherDate;
 
@@ -56,10 +54,8 @@ public class TypeOfApprovalApplicant {
     private String adminFeeStatus;
 
     private String adminFeeBankVoucherNo;
-    private String adminFeeBankVoucherSubmissionDateJalali;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate adminFeeBankVoucherSubmissionDate;
-    private String adminFeeVoucherDateJalali;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate adminFeeVoucherDate;
 
@@ -75,10 +71,8 @@ public class TypeOfApprovalApplicant {
     private String certificateFeeStatus;
     private String certificateFeeOrganizationName;
     private String certificateFeeBankVoucherNo;
-    private String certificateFeeBankVoucherSubmissionDateJalali;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate certificateFeeBankVoucherSubmissionDate;
-    private String certificateFeeVoucherDateJalali;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate certificateFeeVoucherDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -91,7 +85,6 @@ public class TypeOfApprovalApplicant {
     //Refer to Finance Department
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate referDate;
-    private String referDateJalali;
     private String referStatus;
 
 

@@ -1,7 +1,9 @@
 package atraintegratedsystems.typeofapproval.controller;
 
+import atraintegratedsystems.typeofapproval.dto.TypeOfApprovalApplicantDTO;
 import atraintegratedsystems.typeofapproval.model.TypeOfApprovalApplicant;
 import atraintegratedsystems.typeofapproval.service.TypeOfApprovalApplicantService;
+import atraintegratedsystems.utils.PersianCalendarUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -38,47 +41,6 @@ public class TypeOfApprovalFinanceController {
         return "typeofapprovals/finance/adminfeelist";
     }
 
-    @PostMapping("/typeofapprovals/finance/payment/applicationfeeconfirmation/save")
-    public String saveReferFinance(@ModelAttribute("profile") TypeOfApprovalApplicant applicant) {
-        // Only pass the required fields
-        typeOfApprovalApplicantService.updateApplicationFee(
-                applicant.getId(),
-                applicant.getApplicationFeeStatus(),
-                applicant.getApplicationFeeBankVoucherNo(),
-                applicant.getApplicationFeeVoucherDateJalali(),
-                applicant.getApplicationFeeBankVoucherSubmissionDateJalali()
-        );
-        return "redirect:/typeofapprovals/finance/applicationfeelist";
-    }
-
-    @PostMapping("/typeofapprovals/finance/payment/adminfeeconfirmation/save")
-    public String saveAdminFinance(@ModelAttribute("profile") TypeOfApprovalApplicant applicant) {
-        // Only pass the required fields
-        typeOfApprovalApplicantService.updateAdminFee(
-                applicant.getId(),
-                applicant.getAdminFeeStatus(),
-                applicant.getAdminFeeBankVoucherNo(),
-                applicant.getAdminFeeVoucherDateJalali(),
-                applicant.getAdminFeeBankVoucherSubmissionDateJalali()
-        );
-        return "redirect:/typeofapprovals/finance/adminfeelist";
-    }
-
-    @PostMapping("/typeofapprovals/finance/payment/certificatefeeconfirmation/save")
-    public String saveCertificateFinance(@ModelAttribute("profile") TypeOfApprovalApplicant applicant) {
-        // Only pass the required fields
-        typeOfApprovalApplicantService.updateCertificateFee(
-                applicant.getId(),
-                applicant.getCertificateFeeStatus(),
-                applicant.getCertificateFeeBankVoucherNo(),
-                applicant.getCertificateFeeVoucherDateJalali(),
-                applicant.getCertificateFeeBankVoucherSubmissionDateJalali()
-        );
-        return "redirect:/typeofapprovals/finance/certificatefeelist";
-    }
-
-
-
 
     @GetMapping("/typeofapprovals/finance/certificatefeelist")
     public String listTypeOfApprovalCertificateFee(Model model) {
@@ -87,49 +49,65 @@ public class TypeOfApprovalFinanceController {
         return "typeofapprovals/finance/certificatefeelist";
     }
 
-//    Payment Section
-    @GetMapping("/typeofapprovals/finance/payment/adminfeeconfirmation/{id}")
-    public String listTypeOfApprovalAdminFeeConfirmation(@PathVariable Long id,Model model) {
 
+
+    @GetMapping("/typeofapprovals/finance/payment/adminfeeconfirmation/{id}")
+    public String listTypeOfApprovalApplicationFeeConfirmation(@PathVariable Long id, Model model) {
         Optional<TypeOfApprovalApplicant> profileOpt = typeOfApprovalApplicantService.getById(id);
 
         if (profileOpt.isPresent()) {
-            model.addAttribute("profile", profileOpt.get());
-            return "/typeofapprovals/finance/payment/adminfeeconfirmation";        }
-        else {
-            // Handle not found case (redirect to list or show error)
+            TypeOfApprovalApplicant applicant = profileOpt.get();
+            // Map entity to DTO
+            TypeOfApprovalApplicantDTO dto = new TypeOfApprovalApplicantDTO();
+            dto.setId(applicant.getId());
+            dto.setAdminFeeStatus(applicant.getAdminFeeStatus());
+            dto.setAdminFeeBankVoucherNo(applicant.getAdminFeeBankVoucherNo());
+            dto.setAdminFeeVoucherDate(applicant.getAdminFeeVoucherDate());
+            dto.setAdminFeeBankVoucherSubmissionDate(applicant.getAdminFeeBankVoucherSubmissionDate());
+
+
+            model.addAttribute("profile", dto);  // pass DTO, not entity!
+            return "typeofapprovals/finance/payment/adminfeeconfirmation";
+        } else {
             return "redirect:/typeofapprovals/finance/adminfeelist";
         }
-
     }
 
-    @GetMapping("/typeofapprovals/finance/payment/applicationfeeconfirmation/{id}")
-    public String listTypeOfApprovalApplicationFeeConfirmation(@PathVariable Long id,Model model) {
-        Optional<TypeOfApprovalApplicant> profileOpt = typeOfApprovalApplicantService.getById(id);
+    @PostMapping("/typeofapprovals/finance/payment/adminfeeconfirmation/save")
+    public String paymentAdminFee(@ModelAttribute TypeOfApprovalApplicantDTO typeOfApprovalApplicantDTO) {
+        // Fetch the existing entity from the database
+        TypeOfApprovalApplicant referApplicant = typeOfApprovalApplicantService.findById(typeOfApprovalApplicantDTO.getId());
 
-        if (profileOpt.isPresent()) {
-            model.addAttribute("profile", profileOpt.get());
-            return "/typeofapprovals/finance/payment/applicationfeeconfirmation";        }
-        else {
-            // Handle not found case (redirect to list or show error)
-            return "redirect:/typeofapprovals/finance/applicationfeelist";
-        }
+        referApplicant.setAdminFeeBankVoucherNo(typeOfApprovalApplicantDTO.getAdminFeeBankVoucherNo());
 
+        String[] parts = typeOfApprovalApplicantDTO.getAdminFeeVoucherDateJalali().split("-");
+        int jYear = Integer.parseInt(parts[0]);
+        int jMonth = Integer.parseInt(parts[1]);
+        int jDay = Integer.parseInt(parts[2]);
+
+        PersianCalendarUtils converter = new PersianCalendarUtils();
+        LocalDate adminVoucherDate = converter.jalaliToGregorian(jYear, jMonth, jDay);
+        referApplicant.setAdminFeeVoucherDate(adminVoucherDate);
+
+       LocalDate adminSubmissionDate = converter.jalaliToGregorian(jYear, jMonth, jDay);
+       referApplicant.setAdminFeeBankVoucherSubmissionDate(adminSubmissionDate);
+
+
+        referApplicant.setAdminFeeStatus(typeOfApprovalApplicantDTO.getAdminFeeStatus());
+
+        // Save the updated entity
+        typeOfApprovalApplicantService.save(referApplicant);
+        return "redirect:/typeofapprovals/finance/adminfeelist";
     }
 
-    @GetMapping("/typeofapprovals/finance/payment/certificatefeeconfirmation/{id}")
-    public String listTypeOfApprovalCertificateFeeConfirmation(@PathVariable Long id,Model model) {
-        Optional<TypeOfApprovalApplicant> profileOpt = typeOfApprovalApplicantService.getById(id);
 
-        if (profileOpt.isPresent()) {
-            model.addAttribute("profile", profileOpt.get());
-            return "/typeofapprovals/finance/payment/certificatefeeconfirmation";        }
-        else {
-            // Handle not found case (redirect to list or show error)
-            return "redirect:/typeofapprovals/finance/certificatefeelist";
-        }
 
-    }
+
+
+
+
+
+
 
 //    End of My code
     @GetMapping("/typeofapprovals/finance/paymentlists")

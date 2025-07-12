@@ -85,96 +85,9 @@
             <!-- First Row -->
             <!-- Hidden ID -->
             <input type="hidden" th:field="*{id}"/>
-            <div class="row">
-                <div class="col-md-3">
-                    <label th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
-                        Request Date
-                    </label>
-                    <input class="form-control"
-                           th:value="${profile.requestDate}" readonly
-                           th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" />
-                </div>
-                <div class="col-md-3">
-                    <label th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
-                        Manufacturer
-                    </label>
-                    <input type="text" class="form-control"
-                           th:value="${profile.manufacturer}" readonly
-                           th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" />
-                </div>
-                <div class="col-md-3">
-                    <label th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
-                        Person
-                    </label>
-                    <input type="text" class="form-control"
-                           th:value="${profile.person}" readonly
-                           th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" />
-                </div>
-                <div class="col-md-3">
-                    <label th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
-                        License Operator
-                    </label>
-                    <input type="text" class="form-control"
-                           th:value="${profile.licenseOperator}" readonly
-                           th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" />
-                </div>
-            </div>
-
-            <!-- Second Row -->
-            <div class="row">
-                <div class="col-md-3">
-                    <label th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
-                        Authorize Importer
-                    </label>
-                    <input type="text" class="form-control"
-                           th:value="${profile.authorizedImporter}" readonly
-                           th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" />
-                </div>
-                <div class="col-md-3">
-                    <label th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
-                        Import Registeration
-                    </label>
-                    <input type="text" class="form-control"
-                           th:value="${profile.importRegistrationNo}" readonly
-                           th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" />
-                </div>
-                <div class="col-md-3">
-                    <label th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
-                        Company Name
-                    </label>
-                    <input type="text" class="form-control"
-                           th:value="${profile.companyName}" readonly
-                           th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" />
-                </div>
-                <div class="col-md-3">
-                    <label th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
-                        P.O.Box
-                    </label>
-                    <input type="text" class="form-control"
-                           th:value="${profile.P_O_Box}" readonly
-                           th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" />
-                </div>
-            </div>
-
             <!-- Third Row -->
             <div class="row">
-                <div class="col-md-3">
-                    <label th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
-                        Type of Approval Type
 
-                    </label>
-                    <input type="text" class="form-control"
-                           th:value="${profile.typeSelect}" readonly
-                           th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" />
-                </div>
-                <div class="col-md-3">
-                    <label th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
-                        Admin Fee
-                    </label>
-                    <input type="text" class="form-control"
-                           th:value="${profile.adminFee}" readonly
-                           th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" />
-                </div>
                 <div class="col-md-3">
                     <label th:for="adminFeeStatus"
                            th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
