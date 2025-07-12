@@ -89,8 +89,13 @@ public class TypeOfApprovalFinanceController {
         LocalDate adminVoucherDate = converter.jalaliToGregorian(jYear, jMonth, jDay);
         referApplicant.setAdminFeeVoucherDate(adminVoucherDate);
 
-       LocalDate adminSubmissionDate = converter.jalaliToGregorian(jYear, jMonth, jDay);
-       referApplicant.setAdminFeeBankVoucherSubmissionDate(adminSubmissionDate);
+        String[] subParts = typeOfApprovalApplicantDTO.getAdminFeeBankVoucherSubmissionDateJalali().split("-");
+        int jSubYear = Integer.parseInt(subParts[0]);
+        int jSubMonth = Integer.parseInt(subParts[1]);
+        int jSubDay = Integer.parseInt(subParts[2]);
+
+        LocalDate adminSubmissionDate = converter.jalaliToGregorian(jSubYear, jSubMonth, jSubDay);
+        referApplicant.setAdminFeeBankVoucherSubmissionDate(adminSubmissionDate);
 
 
         referApplicant.setAdminFeeStatus(typeOfApprovalApplicantDTO.getAdminFeeStatus());
