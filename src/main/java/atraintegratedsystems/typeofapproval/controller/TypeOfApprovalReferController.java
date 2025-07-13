@@ -6,6 +6,7 @@ import atraintegratedsystems.typeofapproval.dto.TypeOfApprovalApplicantDTO;
 import atraintegratedsystems.typeofapproval.model.TypeOfApprovalApplicant;
 import atraintegratedsystems.typeofapproval.service.TypeOfApprovalApplicantService;
 import atraintegratedsystems.utils.PersianCalendarUtils;
+import atraintegratedsystems.utils.SecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -72,7 +73,9 @@ public class TypeOfApprovalReferController {
         PersianCalendarUtils converter = new PersianCalendarUtils();
         LocalDate referDate = converter.jalaliToGregorian(jYear, jMonth, jDay);
         referApplicant.setReferDate(referDate);
-
+        referApplicant.setEntryReferDate(LocalDate.now());
+        String username = SecurityUtil.getCurrentUsername();
+        referApplicant.setUserEntered(username);
         referApplicant.setReferStatus(typeOfApprovalApplicantDTO.getReferStatus());
 
 

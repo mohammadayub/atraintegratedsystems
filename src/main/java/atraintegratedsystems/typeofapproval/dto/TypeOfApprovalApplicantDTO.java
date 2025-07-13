@@ -87,7 +87,9 @@ public class TypeOfApprovalApplicantDTO {
     private LocalDate referDate;
     private String referDateJalali;
     private String referStatus;
-
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate entryReferDate;
+    private String userEntered;
 
 
 

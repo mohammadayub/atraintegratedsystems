@@ -4,6 +4,7 @@ import atraintegratedsystems.typeofapproval.dto.TypeOfApprovalApplicantDTO;
 import atraintegratedsystems.typeofapproval.model.TypeOfApprovalApplicant;
 import atraintegratedsystems.typeofapproval.service.TypeOfApprovalApplicantService;
 import atraintegratedsystems.utils.PersianCalendarUtils;
+import atraintegratedsystems.utils.SecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -97,6 +98,9 @@ public class TypeOfApprovalFinanceController {
         LocalDate adminSubmissionDate = converter.jalaliToGregorian(jSubYear, jSubMonth, jSubDay);
         referApplicant.setAdminFeeBankVoucherSubmissionDate(adminSubmissionDate);
 
+        referApplicant.setAdminFeeEntryDate(LocalDate.now());
+        String username = SecurityUtil.getCurrentUsername();
+        referApplicant.setAdminFeeEnteredBy(username);
 
         referApplicant.setAdminFeeStatus(typeOfApprovalApplicantDTO.getAdminFeeStatus());
 
@@ -156,6 +160,10 @@ public class TypeOfApprovalFinanceController {
 
         referApplicant.setApplicationFeeStatus(typeOfApprovalApplicantDTO.getApplicationFeeStatus());
 
+        referApplicant.setApplicationFeeEntryDate(LocalDate.now());
+        String username = SecurityUtil.getCurrentUsername();
+        referApplicant.setApplicationFeeEnteredBy(username);
+
         // Save the updated entity
         typeOfApprovalApplicantService.save(referApplicant);
         return "redirect:/typeofapprovals/finance/applicationfeelist";
@@ -211,6 +219,10 @@ public class TypeOfApprovalFinanceController {
 
 
         referApplicant.setCertificateFeeStatus(typeOfApprovalApplicantDTO.getCertificateFeeStatus());
+
+        referApplicant.setCertificateFeeEntryDate(LocalDate.now());
+        String username = SecurityUtil.getCurrentUsername();
+        referApplicant.setCertificateFeeEnteredBy(username);
 
         // Save the updated entity
         typeOfApprovalApplicantService.save(referApplicant);
