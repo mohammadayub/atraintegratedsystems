@@ -73,6 +73,7 @@
         margin-top:15px;
         }
     </style>
+
 </head>
 <body>
 <nav th:replace="~{typeofApproval_layout :: page_navbar}"></nav>
@@ -80,147 +81,60 @@
     <br>
     <fieldset>
         <legend>Certificate Fee Payments</legend>
-        <form  th:action="@{/typeofapprovals/finance/payment/certificatefeeconfirmation/save}" method="post" th:object="${profile}">
-            <!-- First Row -->
-            <!-- Hidden ID -->
+        <form th:action="@{/typeofapprovals/finance/payment/certificatefeeconfirmation/save}" method="post" th:object="${profile}">
             <input type="hidden" th:field="*{id}"/>
-            <div class="row">
-                <div class="col-md-3">
-                    <label th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
-                        Request Date
-                    </label>
-                    <input class="form-control"
-                           th:value="${profile.requestDate}" readonly
-                           th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" />
-                </div>
-                <div class="col-md-3">
-                    <label th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
-                        Manufacturer
-                    </label>
-                    <input type="text" class="form-control"
-                           th:value="${profile.manufacturer}" readonly
-                           th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" />
-                </div>
-                <div class="col-md-3">
-                    <label th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
-                        Person
-                    </label>
-                    <input type="text" class="form-control"
-                           th:value="${profile.person}" readonly
-                           th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" />
-                </div>
-                <div class="col-md-3">
-                    <label th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
-                        License Operator
-                    </label>
-                    <input type="text" class="form-control"
-                           th:value="${profile.licenseOperator}" readonly
-                           th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" />
-                </div>
-            </div>
-
-            <!-- Second Row -->
-            <div class="row">
-                <div class="col-md-3">
-                    <label th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
-                        Authorize Importer
-                    </label>
-                    <input type="text" class="form-control"
-                           th:value="${profile.authorizedImporter}" readonly
-                           th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" />
-                </div>
-                <div class="col-md-3">
-                    <label th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
-                        Import Registeration
-                    </label>
-                    <input type="text" class="form-control"
-                           th:value="${profile.importRegistrationNo}" readonly
-                           th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" />
-                </div>
-                <div class="col-md-3">
-                    <label th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
-                        Company Name
-                    </label>
-                    <input type="text" class="form-control"
-                           th:value="${profile.companyName}" readonly
-                           th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" />
-                </div>
-                <div class="col-md-3">
-                    <label th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
-                        P.O.Box
-                    </label>
-                    <input type="text" class="form-control"
-                           th:value="${profile.P_O_Box}" readonly
-                           th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" />
-                </div>
-            </div>
-
             <!-- Third Row -->
-            <div class="row">
-                <div class="col-md-3">
-                    <label th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
-                        Type of Approval Type
-
-                    </label>
-                    <input type="text" class="form-control"
-                           th:value="${profile.typeSelect}" readonly
-                           th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" />
-                </div>
-                <div class="col-md-3">
-                    <label th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
-                        Certificate Fee
-                    </label>
-                    <input type="text" class="form-control"
-                           th:value="${profile.certificateFee}" readonly
-                           th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" />
-                </div>
-                <div class="col-md-3">
+            <div class="row align-items-end g-3">
+                <!-- Payment Confirmation -->
+                <div class="col-md-2">
                     <label th:for="applicationFeeStatus"
-                           th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+                           th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl fw-bold' : 'label-ltr fw-bold'"
+                           class="form-label">
                         Payment Confirmation
                     </label>
-                    <select th:field="*{certificateFeeStatus}" class="form-control"
+                    <select th:field="*{certificateFeeStatus}" class="form-control rounded"
                             th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'text-end' : 'text-start'">
-                        <option th:value="Yes" >Yes</option>
-                        <option th:value="No" >No</option>
+                        <option th:value="Yes">Yes</option>
+                        <option th:value="No">No</option>
                     </select>
                 </div>
 
-                <div class="col-md-3">
-                    <label th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+                <!-- Admin Fee Voucher Date -->
+                <div class="col-md-2">
+                    <label th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl fw-bold' : 'label-ltr fw-bold'"
+                           class="form-label">
                         Certificate Fee Voucher Date
                     </label>
-                    <input type="text" th:field="*{certificateFeeVoucherDateJalali}" class="form-control hijrishamsi"
+                    <input type="text" th:field="*{certificateFeeVoucherDateJalali}" class="form-control hijrishamsi rounded"
                            th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" />
                 </div>
-            </div>
-            <!--            Fourth Row -->
-            <div class="row">
-                <div class="col-md-3">
-                    <label th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
-                        Certificate Fee Bank Voucher No
-                    </label>
-                    <input type="text"  th:field="*{certificateFeeBankVoucherNo}"     class="form-control"
-                           th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" />
-                </div>
-                <div class="col-md-3">
-                    <label th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
-                        Certificate Fee Bank Submission Date
-                    </label>
-                    <input type="text" th:field="*{certificateFeeBankVoucherSubmissionDateJalali}" class="form-control hijrishamsi"
-                           th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" />
-                </div>
-                <div class="col-md-3">
-                </div>
-                <div class="col-md-3">
-                    <label th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
 
+                <!-- Admin Fee Bank Voucher No -->
+                <div class="col-md-2">
+                    <label th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl fw-bold' : 'label-ltr fw-bold'"
+                           class="form-label">
+                       Bank Voucher No
                     </label>
-                    <div class="text-right my-3">
-                        <button type="submit" class="btn btn-primary">Save</button>
-                    </div>
+                    <input type="text" th:field="*{certificateFeeBankVoucherNo}" class="form-control rounded"
+                           th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" />
+                </div>
+
+                <!-- Admin Fee Bank Submission Date -->
+                <div class="col-md-2">
+                    <label th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl fw-bold' : 'label-ltr fw-bold'"
+                           class="form-label">
+                        Bank Submission Date
+                    </label>
+                    <input type="text" th:field="*{certificateFeeBankVoucherSubmissionDateJalali}" class="form-control hijrishamsi rounded"
+                           th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" />
+                </div>
+
+                <!-- Save Button -->
+                <div class="col-md-3 text-end mt-4">
+                    <button type="submit" class="btn btn-primary w-100">Confirm Payment</button>
                 </div>
             </div>
+
         </form>
     </fieldset>
 
@@ -245,6 +159,7 @@
 <!-- Persian DatePicker scripts -->
 <div th:replace="scripts :: persian-datepicker-scripts"></div>
 <div th:replace="scripts :: common-hijrishamsi-date"></div>
+
 
 <div style="height:15vh;"></div>
 <footer th:replace="~{layout :: page_footer}"></footer>

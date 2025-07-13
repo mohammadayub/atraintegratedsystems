@@ -296,7 +296,7 @@
 
     <!-- Manufacturer Details -->
     <div style="height:20vh;display:none;" id="space1"></div>
-    <div class="card mb-4">
+    <div class="card mb-4" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
       <div class="card-header d-flex justify-content-between align-items-center">
         <span class="fw-bolder" th:text="#{manufacturer_details}"></span>
         <button type="button" class="btn btn-sm btn-success" th:text="#{add_manufacturer}" id="addManufacturer"></button>
@@ -336,11 +336,11 @@
       </div>
     </div>
 <!--    Technical Detail Section  -->
-    <div class="card mt-4">
-      <div class="card-header mb-4">Technical Detail Of The Equipment</div>
+    <div class="card mt-4" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+      <div class="card-header mb-4" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">Technical Detail Of The Equipment</div>
 
       <!-- Checkboxes: 6 per row -->
-      <div class="row g-3 p-2">
+      <div class="row g-3 p-2" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
         <div class="col-6 col-md-4 col-lg-2">
           <input th:field="*{gsm}" type="checkbox" value="yes" class="form-check-input" id="gsm">
           <label for="gsm" class="form-check-label">GSM</label>
@@ -434,69 +434,69 @@
       <div style="height: 5vh;"></div>
 
       <!-- Textboxes: 4 per row -->
-      <div class="container-fluid p-2">
+      <div class="container-fluid p-2" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
         <div class="row g-3">
           <div class="col-12 col-sm-6 col-md-3">
-            <label for="intendedUse" class="form-label">Intended Use</label>
+            <label for="intendedUse" class="form-label" th:text="#{intended_use}">Intended Use</label>
             <input th:field="*{intendedUse}" type="text" class="form-control" id="intendedUse">
           </div>
           <div class="col-12 col-sm-6 col-md-3">
-            <label for="modelNumber" class="form-label">Model Number</label>
+            <label for="modelNumber" class="form-label" th:text="#{model_number}">Model Number</label>
             <input th:field="*{modelNumber}" type="text" class="form-control" id="modelNumber">
           </div>
           <div class="col-12 col-sm-6 col-md-3">
-            <label for="brandName" class="form-label">Brand Name</label>
+            <label for="brandName" class="form-label" th:text="#{brand_name}">Brand Name</label>
             <input th:field="*{brandName}" type="text" class="form-control" id="brandName">
           </div>
           <div class="col-12 col-sm-6 col-md-3">
-            <label for="typeNumber" class="form-label">Type Number</label>
+            <label for="typeNumber" class="form-label" th:text="#{type_number}">Type Number</label>
             <input th:field="*{typeNumber}" type="text" class="form-control" id="typeNumber">
           </div>
 
           <div class="col-12 col-sm-6 col-md-3">
-            <label for="countryofOrigin" class="form-label">Country of Origin</label>
+            <label for="countryofOrigin" class="form-label" th:text="#{country_of_origin}">Country of Origin</label>
             <input th:field="*{countryofOrigin}" type="text" class="form-control" id="countryofOrigin">
           </div>
           <div class="col-12 col-sm-6 col-md-3">
-            <label for="frequencyrangeFromMHZ" class="form-label">Frequency Range From (MHz)</label>
+            <label for="frequencyrangeFromMHZ" class="form-label" th:text="#{frequency_range_from_MHZ}">Frequency Range From (MHz)</label>
             <input th:field="*{frequencyrangeFromMHZ}" type="text" class="form-control" id="frequencyrangeFromMHZ">
           </div>
           <div class="col-12 col-sm-6 col-md-3">
-            <label for="frequencyrangeToMHZ" class="form-label">Frequency Range To (MHz)</label>
+            <label for="frequencyrangeToMHZ" class="form-label" th:text="#{frequency_range_to_MHZ}">Frequency Range To (MHz)</label>
             <input th:field="*{frequencyrangeToMHZ}" type="text" class="form-control" id="frequencyrangeToMHZ">
           </div>
           <div class="col-12 col-sm-6 col-md-3">
-            <label for="frequencyrangeFromGHZ" class="form-label">Frequency Range From (GHz)</label>
+            <label for="frequencyrangeFromGHZ" class="form-label" th:text="#{frequency_range_from_GHZ}">Frequency Range From (GHz)</label>
             <input th:field="*{frequencyrangeFromGHZ}" type="text" class="form-control" id="frequencyrangeFromGHZ">
           </div>
 
           <div class="col-12 col-sm-6 col-md-3">
-            <label for="frequencyrangeToGHZ" class="form-label">Frequency Range To (GHz)</label>
+            <label for="frequencyrangeToGHZ" class="form-label" th:text="#{frequency_range_to_GHZ}">Frequency Range To (GHz)</label>
             <input th:field="*{frequencyrangeToGHZ}" type="text" class="form-control" id="frequencyrangeToGHZ">
           </div>
           <div class="col-12 col-sm-6 col-md-3">
-            <label for="outputPowerRadiatedConducted" class="form-label">Output Power Radiated Conducted</label>
+            <label for="outputPowerRadiatedConducted" class="form-label" th:text="#{output_power_radiated_conducted}">Output Power Radiated Conducted</label>
             <input th:field="*{outputPowerRadiatedConducted}" type="text" class="form-control" id="outputPowerRadiatedConducted">
           </div>
           <div class="col-12 col-sm-6 col-md-3">
-            <label for="transmissionCapacity" class="form-label">Transmission Capacity</label>
+            <label for="transmissionCapacity" class="form-label" th:text="#{transmission_capacity}">Transmission Capacity</label>
             <input th:field="*{transmissionCapacity}" type="text" class="form-control" id="transmissionCapacity">
           </div>
           <div class="col-12 col-sm-6 col-md-3">
-            <label for="channelCapacity" class="form-label">Channel Capacity</label>
+            <label for="channelCapacity" class="form-label" th:text="#{channel_capacity}">Channel Capacity</label>
             <input th:field="*{channelCapacity}" type="text" class="form-control" id="channelCapacity">
           </div>
 
           <div class="col-12 col-sm-6 col-md-3">
-            <label for="channelSpacing" class="form-label">Channel Spacing</label>
+            <label for="channelSpacing" class="form-label" th:text="#{channel_spacing}">Channel Spacing</label>
             <input th:field="*{channelSpacing}" type="text" class="form-control" id="channelSpacing">
           </div>
           <div class="col-12 col-sm-6 col-md-3">
-            <label for="modulationType" class="form-label">Modulation Type</label>
+            <label for="modulationType" class="form-label" th:text="#{modulation_type}">Modulation Type</label>
             <input th:field="*{modulationType}" type="text" class="form-control" id="modulationType">
           </div>
           <div class="col-12 col-sm-6 col-md-3">
-            <label class="form-label">Antenna Type</label>
+            <label class="form-label" th:text="#{antenna_type}">Antenna Type</label>
             <select class="form-select" th:field="*{antennaType}">
               <option value="Integral"
                       th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">Integral</option>
@@ -505,12 +505,12 @@
             </select>
           </div>
           <div class="col-12 col-sm-6 col-md-3">
-            <label for="antennaGain" class="form-label">Antenna Gain</label>
+            <label for="antennaGain" class="form-label" th:text="#{antenna_gain}">Antenna Gain</label>
             <input th:field="*{antennaGain}" type="text" class="form-control" id="antennaGain">
           </div>
 
           <div class="col-12 col-sm-6 col-md-3">
-            <label class="form-label">Technical Interface</label>
+            <label class="form-label" th:text="#{technical_interface}">Technical Interface</label>
             <select class="form-select" th:field="*{technicalInterface}">
               <option value="Power Source"
                       th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">Power Source</option>
@@ -523,11 +523,11 @@
             </select>
           </div>
           <div class="col-12 col-sm-6 col-md-3">
-            <label for="technicalVariants" class="form-label">Technical Variants</label>
+            <label for="technicalVariants" class="form-label" th:text="#{technical_variants}">Technical Variants</label>
             <input th:field="*{technicalVariants}" type="text" class="form-control" id="technicalVariants">
           </div>
           <div class="col-12 col-sm-6 col-md-3">
-            <label class="form-label">Equipment License Requirement</label>
+            <label class="form-label" th:text="#{equipment_license_requirement}">Equipment License Requirement</label>
             <select class="form-select" th:field="*{equipmentLicenseRequirement}">
               <option value="License required"
                       th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">License required</option>
@@ -541,7 +541,7 @@
 
 
       <!-- Attachment Section-->
-    <div class="card mb-4 mt-4">
+    <div class="card mb-4 mt-4" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
       <div class="card-header b-4" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" title="Only Allowed PDF File">Attachments <span style="color:red;font-size:12px;">Only Allowed (.PDF) <img  th:src="@{/images/pdf.png}" width="30px" height="30px"></span></div>
       <div class="card-body row g-3">
         <div class="col-md-6">
@@ -577,39 +577,39 @@
 
 <!--    Standards compliant With -->
       <div style="height:20vh;display:none;" id="space2"></div>
-    <div class="card">
+    <div class="card" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
       <div class="card-header b-4" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" title="Only Allowed PDF File">Standards compliant With</div>
       <div class="card-body row g-3">
         <div class="col-md-6">
-          <label th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">EMC</label>
+          <label th:text="#{emc}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">EMC</label>
           <input type="file" name="emc" th:field="*{emc}" class="form-control" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
         </div>
         <div class="col-md-6">
-          <label th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">Test Report No:</label>
+          <label th:text="#{emc_test_report_no}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">Test Report No:</label>
           <input type="text" class="form-control" th:field="*{emcTestReportNo}"  th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
         </div>
         <div class="col-md-6">
-          <label th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">Radio</label>
+          <label th:text="#{radio}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">Radio</label>
           <input type="file" name="radio" th:field="*{radio}" class="form-control" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
         </div>
         <div class="col-md-6">
-          <label th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">Test Report No:</label>
+          <label th:text="#{radio_test_report_no}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">Test Report No:</label>
           <input type="text" class="form-control" th:field="*{radioTestReportNo}"  th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
         </div>
         <div class="col-md-6">
-          <label th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">Health and Safety</label>
+          <label th:text="#{health_and_safety}">Health and Safety</label>
           <input type="file" name="Health and Safety" th:field="*{healthAndSafety}" class="form-control" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
         </div>
         <div class="col-md-6">
-          <label th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">Test Report No:</label>
+          <label th:text="#{health_and_safety_test_report_no}">Test Report No:</label>
           <input type="text" class="form-control" th:field="*{healthAndSafetyTestReportNo}"  th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
         </div>
         <div class="col-md-6">
-          <label th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">Technology Specific</label>
+          <label th:text="#{technology_specific}">Technology Specific</label>
           <input type="file" name="Technology_Safety" th:field="*{technologySpecific}" class="form-control" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
         </div>
         <div class="col-md-6">
-          <label th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">Test Report No:</label>
+          <label th:text="#{technology_specific_test_report_no}">Test Report No:</label>
           <input type="text" th:field="*{technologySpecificTestReportNo}" class="form-control"  th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
         </div>
       </div>
@@ -617,17 +617,17 @@
 
 
     <!--    Signature of applicant -->
-    <div class="card mb-4">
+    <div class="card mb-4" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
       <div class="card-header b-4" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" title="Only Allowed PDF File">Signature of applicant</div>
       <div class="card-body row g-3">
         <div class="col-md-6">
-          <label th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">Name<pre style="display:inline"> (                         )</pre></label>
+          <label th:text="#{name}">Name<pre style="display:inline"> (                         )</pre></label>
         </div>
         <div class="col-md-6">
-          <label th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">Date:-----------------</label>
+          <label th:text="#{date}">Date:-----------------</label>
         </div>
         <div class="col-md-12">
-          <label th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">Authorized Signature of Applicant:</label>
+          <label th:text="#{authorized_signature_of_application}">Authorized Signature of Applicant:</label>
         </div>
       </div>
     </div>

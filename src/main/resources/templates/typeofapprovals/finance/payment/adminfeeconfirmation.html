@@ -82,59 +82,59 @@
     <fieldset>
         <legend>Admin Fee Payments</legend>
         <form th:action="@{/typeofapprovals/finance/payment/adminfeeconfirmation/save}" method="post" th:object="${profile}">
-            <!-- First Row -->
-            <!-- Hidden ID -->
             <input type="hidden" th:field="*{id}"/>
             <!-- Third Row -->
-            <div class="row">
-
-                <div class="col-md-3">
+            <div class="row align-items-end g-3">
+                <!-- Payment Confirmation -->
+                <div class="col-md-2">
                     <label th:for="adminFeeStatus"
-                           th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+                           th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl fw-bold' : 'label-ltr fw-bold'"
+                           class="form-label">
                         Payment Confirmation
                     </label>
-                    <select th:field="*{adminFeeStatus}" class="form-control"
+                    <select th:field="*{adminFeeStatus}" class="form-control rounded"
                             th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'text-end' : 'text-start'">
-                        <option th:value="Yes" >Yes</option>
-                        <option th:value="No" >No</option>
+                        <option th:value="Yes">Yes</option>
+                        <option th:value="No">No</option>
                     </select>
                 </div>
 
-                <div class="col-md-3">
-                    <label th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+                <!-- Admin Fee Voucher Date -->
+                <div class="col-md-2">
+                    <label th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl fw-bold' : 'label-ltr fw-bold'"
+                           class="form-label">
                         Admin Fee Voucher Date
                     </label>
-                    <input type="text" th:field="*{adminFeeVoucherDateJalali}" class="form-control hijrishamsi"
+                    <input type="text" th:field="*{adminFeeVoucherDateJalali}" class="form-control hijrishamsi rounded"
                            th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" />
                 </div>
-            </div>
-            <!--            Fourth Row -->
-            <div class="row">
-                <div class="col-md-3">
-                    <label th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+
+                <!-- Admin Fee Bank Voucher No -->
+                <div class="col-md-2">
+                    <label th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl fw-bold' : 'label-ltr fw-bold'"
+                           class="form-label">
                         Admin Fee Bank Voucher No
                     </label>
-                    <input type="text"  th:field="*{adminFeeBankVoucherNo}"     class="form-control"
+                    <input type="text" th:field="*{adminFeeBankVoucherNo}" class="form-control rounded"
                            th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" />
                 </div>
-                <div class="col-md-3">
-                    <label th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
-                        Admin Fee Bank Submission Date
-                    </label>
-                    <input type="text" th:field="*{adminFeeBankVoucherSubmissionDateJalali}" class="form-control hijrishamsi"
-                           th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" />
-                </div>
-                <div class="col-md-3">
-                </div>
-                <div class="col-md-3">
-                    <label th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
 
+                <!-- Admin Fee Bank Submission Date -->
+                <div class="col-md-2">
+                    <label th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl fw-bold' : 'label-ltr fw-bold'"
+                           class="form-label">
+                        Bank Submission Date
                     </label>
-                    <div class="text-right my-3">
-                        <button type="submit" class="btn btn-primary">Save</button>
-                    </div>
+                    <input type="text" th:field="*{adminFeeBankVoucherSubmissionDateJalali}" class="form-control hijrishamsi rounded"
+                           th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" />
+                </div>
+
+                <!-- Save Button -->
+                <div class="col-md-3 text-end mt-4">
+                    <button type="submit" class="btn btn-primary w-100">Confirm Payment</button>
                 </div>
             </div>
+
         </form>
     </fieldset>
 
