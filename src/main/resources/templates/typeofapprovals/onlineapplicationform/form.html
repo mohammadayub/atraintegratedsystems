@@ -120,7 +120,7 @@
   <div th:if="${errorMessage}" class="alert alert-danger" th:text="${errorMessage}"></div>
   <form th:action="@{/typeofapprovals/onlineapplicationform/submit}" method="post" th:object="${form}" enctype="multipart/form-data">
     <!-- Applicant Details -->
-    <div class="card mb-4">
+    <div class="card mb-4" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
       <div class="card-header fw-bolder"
            th:text="#{applicant_details}"
            th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
@@ -251,6 +251,7 @@
         </div>
         <div class="col-md-4">
           <label
+                  th:text="#{type_select}"
                  th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
           Type
           </label>
@@ -266,6 +267,7 @@
 
         <div class="col-md-4">
           <label
+                  th:text="#{application_fee}"
                  th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
           Application Fee
           </label>
@@ -275,6 +277,7 @@
         </div>
         <div class="col-md-4">
           <label
+                  th:text="#{admin_fee}"
                   th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
             Admin Fee
           </label>
@@ -283,6 +286,7 @@
         </div>
         <div class="col-md-4">
           <label
+                  th:text="#{certificate_fee}"
                   th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
             Certificate Fee
           </label>

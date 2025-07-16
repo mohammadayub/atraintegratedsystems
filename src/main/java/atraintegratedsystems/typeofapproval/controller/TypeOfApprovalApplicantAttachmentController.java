@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,6 +27,7 @@ public class TypeOfApprovalApplicantAttachmentController {
     @Autowired
     private TypeOfApprovalAttachmentService attachmentService;
 
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_typeofapprovals_ADMIN') or hasRole('ROLE_typeofapprovals_STANDARD')")
     @GetMapping("/typeofapprovals/applicant/attachmentapplicantlists")
     public String listTypeOfApprovalApplicantsWithAttachment(Model model) {
         model.addAttribute("applicants", type.getTypeOfApprovalApplicantWithAttachment());

@@ -40,7 +40,7 @@
 <div class="container mt-5">
 
   <!-- Section: Type of Approval Management -->
-  <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_typeofapprovals_ADMIN')">
+  <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_typeofapprovals_ADMIN','ROLE_typeofapprovals_ONLINE_APPLICATION','ROLE_typeofapprovals_STANDARD')">
     <legend th:text="#{typeof_approval_management_section}">Type of Approval Management</legend>
     <div class="row g-4">
       <div class="col-sm-4">
@@ -58,8 +58,8 @@
 
     </div>
   </fieldset>
-  <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_typeofapprovals_ADMIN')">
-    <legend>Type of Approval Applicants Information</legend>
+  <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_typeofapprovals_ADMIN','ROLE_typeofapprovals_STANDARD')">
+    <legend th:text="#{typeofapproval_applicants_information}">Type of Approval Applicants Information</legend>
     <div class="row g-4">
       <div class="col-sm-4">
         <div class="custom-card text-center p-3">
@@ -67,7 +67,7 @@
             <img th:src="@{/images/typeOfApprovalList.png}" alt="Applicant List" class="img-fluid" />
           </a>
           <h4 class="license-link mt-2">
-            <a th:href="@{/typeofapprovals/applicant/applicantlists}" style="color: #14438B;font-size: 18px;">List Of All Applicants</a>
+            <a th:href="@{/typeofapprovals/applicant/applicantlists}" style="color: #14438B;font-size: 18px;" th:text="#{list_of_all_applicants}">List Of All Applicants</a>
           </h4>
 
         </div>
@@ -79,7 +79,7 @@
             <img th:src="@{/images/typeofapproval_attachmentlist.png}" alt="Applicant List" class="img-fluid" />
           </a>
           <h4 class="license-link mt-2">
-            <a th:href="@{/typeofapprovals/applicant/attachmentapplicantlists}" style="color: #14438B;font-size: 18px;">List Of All Applicants with Attachments</a>
+            <a th:href="@{/typeofapprovals/applicant/attachmentapplicantlists}" style="color: #14438B;font-size: 18px;" th:text="#{list_of_all_applicants_with_attachments}">List Of All Applicants with Attachments</a>
           </h4>
 
         </div>
@@ -87,8 +87,8 @@
     </div>
   </fieldset>
   <!-- Section: Refer Management -->
-  <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_typeofapprovals_ADMIN')">
-    <legend>Refer Management Section</legend>
+  <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_typeofapprovals_ADMIN','ROLE_typeofapprovals_STANDARD')">
+    <legend th:text="#{refer_management_section}">Refer Management Section</legend>
     <div class="row g-4">
       <div class="col-sm-4">
         <div class="custom-card text-center p-3">
@@ -96,7 +96,7 @@
             <img th:src="@{/images/typeofapproval_referTofinance.png}" alt="Refer to Finance" class="img-fluid" />
           </a>
           <h4 class="license-link mt-2">
-            <a th:href="@{/typeofapprovals/refer/referlists}" style="color: #14438B;font-size: 18px;">Refer Lists</a>
+            <a th:href="@{/typeofapprovals/refer/referlists}" style="color: #14438B;font-size: 18px;" th:text="#{refer_list}">Refer Lists</a>
           </h4>
         </div>
       </div>
@@ -104,8 +104,8 @@
   </fieldset>
 
   <!-- Section: Finance Management -->
-  <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_typeofapprovals_ADMIN')">
-    <legend>Finance Management</legend>
+  <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_typeofapprovals_ADMIN','ROLE_typeofapprovals_ATRA_FINANCE','ROLE_typeofapprovals_MCIT_FINANCE')">
+    <legend th:text="#{finance_management}">Finance Management</legend>
     <div class="row g-4">
       <div class="col-sm-4">
         <div class="custom-card text-center p-3">
@@ -113,7 +113,7 @@
             <img th:src="@{/images/payment_list.png}" alt="Payment List" class="img-fluid" />
           </a>
           <h4 class="license-link mt-2">
-            <a th:href="@{/typeofapprovals/finance/home}" style="color: #14438B;font-size: 18px;">Finance</a>
+            <a th:href="@{/typeofapprovals/finance/home}" style="color: #14438B;font-size: 18px;" th:text="#{finance}">Finance</a>
           </h4>
         </div>
       </div>

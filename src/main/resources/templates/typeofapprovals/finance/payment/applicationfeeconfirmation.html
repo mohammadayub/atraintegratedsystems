@@ -3,7 +3,6 @@
 <head th:replace="~{layout :: page_head}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap" />
     <div th:replace="styles :: persian-datepicker-styles"></div>
-    <div th:replace="styles :: select2-styles"></div>
     <div th:replace="styles :: commonfieldset-with-legend-border"></div>
     <title>LMS</title>
     <style>
@@ -13,64 +12,16 @@
             font-weight: bold;
         }
 
-        .table-container {
-            max-height: 800px;
-            overflow-y: auto;
-            border: 1px solid #ddd;
-            margin-top: 15px;
-        }
-
-        #profileTable {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.9em;
-        }
-
-        #profileTable th, #profileTable td {
-            padding: 6px;
-            text-align: center;
-            vertical-align: middle;
-            font-size: 0.8em;
-        }
-
-        #profileTable thead th {
-            color: white;
-            font-size: 16px;
-        }
-
-        #profileTable tbody tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-
-        #profileTable td a.btn-primary {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 4px;
-        }
-
-        #profileTable .icon-small {
-            width: 16px;
-            height: 16px;
-        }
-
-        #profileTable th {
-            white-space: nowrap;
-        }
-
-        @media (max-width: 768px) {
-            #profileTable th, #profileTable td {
-                font-size: 0.7em;
-                padding: 4px;
-            }
-        }
-
         .btn.btn-success {
             margin-top: 10px;
             margin-bottom: 10px;
         }
         .row{
         margin-top:15px;
+        }
+        label{
+        font-size:14px;
+
         }
     </style>
 
@@ -80,15 +31,17 @@
 <div class="container-fluid">
     <br>
     <fieldset>
-        <legend>Application Fee Payments</legend>
+        <legend th:text="#{application_fee_payments}">Application Fee Payments</legend>
         <form th:action="@{/typeofapprovals/finance/payment/applicationfeeconfirmation/save}" method="post" th:object="${profile}">
             <input type="hidden" th:field="*{id}"/>
             <!-- Third Row -->
             <div class="row align-items-end g-3">
                 <!-- Payment Confirmation -->
                 <div class="col-md-2">
-                    <label th:for="applicationFeeStatus"
-                           th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl fw-bold' : 'label-ltr fw-bold'"
+                    <label
+                            th:text="#{payment_confirmation}"
+                            th:for="applicationFeeStatus"
+                            th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl fw-bold' : 'label-ltr fw-bold'"
                            class="form-label">
                         Payment Confirmation
                     </label>
@@ -101,19 +54,23 @@
 
                 <!-- Admin Fee Voucher Date -->
                 <div class="col-md-2">
-                    <label th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl fw-bold' : 'label-ltr fw-bold'"
+                    <label
+                            th:text="#{application_fee_voucher_date}"
+                            th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl fw-bold' : 'label-ltr fw-bold'"
                            class="form-label">
-                        Admin Fee Voucher Date
+                        Application Fee Voucher Date
                     </label>
-                    <input type="text" th:field="*{applicationFeeVoucherDateJalali}" class="form-control hijrishamsi rounded"
+                    <input type="text" th:field="*{applicationFeeVoucherDateJalali}" class="form-control hijrishamsi"
                            th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" />
                 </div>
 
                 <!-- Admin Fee Bank Voucher No -->
                 <div class="col-md-2">
-                    <label th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl fw-bold' : 'label-ltr fw-bold'"
+                    <label
+                            th:text="#{application_fee_bank_voucher_no}"
+                            th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl fw-bold' : 'label-ltr fw-bold'"
                            class="form-label">
-                        Admin Fee Bank Voucher No
+                        Application Fee Bank Voucher No
                     </label>
                     <input type="text" th:field="*{applicationFeeBankVoucherNo}" class="form-control rounded"
                            th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" />
@@ -121,7 +78,9 @@
 
                 <!-- Admin Fee Bank Submission Date -->
                 <div class="col-md-2">
-                    <label th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl fw-bold' : 'label-ltr fw-bold'"
+                    <label
+                            th:text="#{bank_submission_date}"
+                            th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl fw-bold' : 'label-ltr fw-bold'"
                            class="form-label">
                         Bank Submission Date
                     </label>
@@ -131,7 +90,7 @@
 
                 <!-- Save Button -->
                 <div class="col-md-3 text-end mt-4">
-                    <button type="submit" class="btn btn-primary w-100">Confirm Payment</button>
+                    <button type="submit" class="btn btn-primary w-100" th:text="#{confirm_payment_button}">Confirm Payment</button>
                 </div>
             </div>
 
@@ -149,16 +108,8 @@
 <!-- Scripts -->
 <div th:replace="scripts :: common-scripts"></div>
 <div th:replace="scripts :: persian-datepicker-scripts"></div>
-<div th:replace="scripts :: data-tables-scripts"></div>
-
-<script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-
-<div th:replace="scripts :: common-scripts"></div>
-<!-- Persian DatePicker scripts -->
-<div th:replace="scripts :: persian-datepicker-scripts"></div>
 <div th:replace="scripts :: common-hijrishamsi-date"></div>
+
 
 
 <div style="height:15vh;"></div>

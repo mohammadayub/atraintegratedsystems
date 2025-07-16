@@ -26,7 +26,7 @@
 <nav th:replace="~{layout :: page_navbar}"></nav>
 <div class="container mt-5">
 
-    <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_CODES_ADMIN','ROLE_LICENSE','ROLE_MINISTRY','ROLE_LICENSE_COMPLETION_PROFILE','ROLE_LICENSE_APPROVAL','ROLE_LICENSE_PROFILE_ENTRY','ROLE_FINANCE')">
+    <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_CODES_ADMIN','ROLE_LICENSE','ROLE_MINISTRY','ROLE_LICENSE_COMPLETION_PROFILE','ROLE_LICENSE_APPROVAL','ROLE_LICENSE_PROFILE_ENTRY','ROLE_FINANCE','ROLE_FINANCE','ROLE_typeofapprovals_ADMIN','ROLE_typeofapprovals_ATRA_FINANCE','ROLE_typeofapprovals_MCIT_FINANCE','ROLE_typeofapprovals_STANDARD','ROLE_typeofapprovals_ONLINE_APPLICATION')">
         <legend th:text="#{project_section}">Projects Section</legend>
         <table class="table table-borderless">
             <tr>
@@ -52,7 +52,7 @@
                 </td>
 
                 <td>
-                    <div class="custom-card" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_typeofapprovals_ADMIN')">
+                    <div class="custom-card" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_typeofapprovals_ADMIN','ROLE_typeofapprovals_ATRA_FINANCE','ROLE_typeofapprovals_MCIT_FINANCE','ROLE_typeofapprovals_STANDARD','ROLE_typeofapprovals_ONLINE_APPLICATION')">
                         <a th:href="@{/typeofapprovals/home}">
                             <img th:src="@{/images/typeofApprovals.png}" alt="Finance Management">
                         </a>

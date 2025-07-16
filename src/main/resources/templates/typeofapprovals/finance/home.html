@@ -40,8 +40,8 @@
 <div class="container mt-5">
 
   <!-- Section: Type of Approval Management -->
-  <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_typeofapprovals_ADMIN')">
-    <legend>Type of Approval ATRA Finance Payments Section</legend>
+  <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_typeofapprovals_ADMIN','ROLE_typeofapprovals_ATRA_FINANCE')">
+    <legend th:text="#{typeofapproval_atra_finance_payments_section}">Type of Approval ATRA Finance Payments Section</legend>
     <div class="row g-4">
       <div class="col-sm-4">
         <div class="custom-card text-center p-3">
@@ -50,7 +50,7 @@
           </a>
           <h4 class="license-link mt-2">
             <a th:href="@{/typeofapprovals/finance/applicationfeelist}" style="color: #14438B;
-            font-size: 18px;">Application Fee</a>
+            font-size: 18px;" th:text="#{application_fee}">Application Fee</a>
           </h4>
         </div>
       </div>
@@ -61,7 +61,7 @@
             <img th:src="@{/images/typeOfApprovalList.png}" alt="Applicant List" class="img-fluid" />
           </a>
           <h4 class="license-link mt-2">
-            <a th:href="@{/typeofapprovals/finance/adminfeelist}" style="color: #14438B;font-size: 18px;">Admin Fee</a>
+            <a th:href="@{/typeofapprovals/finance/adminfeelist}" style="color: #14438B;font-size: 18px;" th:text="#{admin_fee}">Admin Fee</a>
           </h4>
 
         </div>
@@ -70,8 +70,8 @@
 
     </div>
   </fieldset>
-  <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_typeofapprovals_ADMIN')">
-    <legend>Type of Approval MCIT Finance Payments Section</legend>
+  <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_typeofapprovals_ADMIN','ROLE_typeofapprovals_MCIT_FINANCE')">
+    <legend th:text="#{typeofapproval_mcit_finance_payments_section}">Type of Approval MCIT Finance Payments Section</legend>
     <div class="row g-4">
       <div class="col-sm-4">
         <div class="custom-card text-center p-3">
@@ -79,7 +79,7 @@
             <img th:src="@{/images/typeofapproval_attachmentlist.png}" alt="Applicant List" class="img-fluid" />
           </a>
           <h4 class="license-link mt-2">
-            <a th:href="@{/typeofapprovals/finance/certificatefeelist}" style="color: #14438B;font-size: 18px;">Certificate Fee</a>
+            <a th:href="@{/typeofapprovals/finance/certificatefeelist}" style="color: #14438B;font-size: 18px;" th:text="#{certificate_fee}">Certificate Fee</a>
           </h4>
 
         </div>
