@@ -26,19 +26,19 @@ public class TypeOfApprovalFinanceController {
 
 
 //    My code
-    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_typeofapprovals_ADMIN') or hasRole('ROLE_typeofapprovals_ATRA_FINANCE') or hasRole('ROLE_typeofapprovals_MCIT_FINANCE')")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_TYPEOFAPPROVAL_ADMIN') or hasRole('ROLE_TYPEOFAPPROVAL_ATRA_FINANCE') or hasRole('ROLE_TYPEOFAPPROVAL_MCIT_FINANCE')")
     @GetMapping("/typeofapprovals/finance/home")
     public String listTypeOfApprovalFinanceHome(Model model) {
         return "typeofapprovals/finance/home";
     }
-    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_typeofapprovals_ADMIN') or hasRole('ROLE_typeofapprovals_ATRA_FINANCE')")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_TYPEOFAPPROVAL_ADMIN') or hasRole('ROLE_TYPEOFAPPROVAL_ATRA_FINANCE')")
     @GetMapping("/typeofapprovals/finance/applicationfeelist")
     public String listTypeOfApprovalApplicantFee(Model model) {
         List<TypeOfApprovalApplicant> applicants = typeOfApprovalApplicantService.getAllReferred();
         model.addAttribute("applicants", applicants);
         return "typeofapprovals/finance/applicationfeelist";
     }
-    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_typeofapprovals_ADMIN') or hasRole('ROLE_typeofapprovals_ATRA_FINANCE')")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_TYPEOFAPPROVAL_ADMIN') or hasRole('ROLE_TYPEOFAPPROVAL_ATRA_FINANCE')")
     @GetMapping("/typeofapprovals/finance/adminfeelist")
     public String listTypeOfApprovalAdminFee(Model model) {
         List<TypeOfApprovalApplicant> applicants = typeOfApprovalApplicantService.findAllUnPaidAddminFee();
@@ -46,8 +46,7 @@ public class TypeOfApprovalFinanceController {
         return "typeofapprovals/finance/adminfeelist";
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_typeofapprovals_ADMIN') or hasRole('ROLE_typeofapprovals_MCIT_FINANCE')")
-    @GetMapping("/typeofapprovals/finance/certificatefeelist")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_TYPEOFAPPROVAL_ADMIN') or hasRole('ROLE_TYPEOFAPPROVAL_MCIT_FINANCE')")    @GetMapping("/typeofapprovals/finance/certificatefeelist")
     public String listTypeOfApprovalCertificateFee(Model model) {
         List<TypeOfApprovalApplicant> applicants = typeOfApprovalApplicantService.findAllUnPaidCertificateFee();
         model.addAttribute("applicants", applicants);
@@ -56,7 +55,7 @@ public class TypeOfApprovalFinanceController {
 
 
 
-    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_typeofapprovals_ADMIN') or hasRole('ROLE_typeofapprovals_ATRA_FINANCE')")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_TYPEOFAPPROVAL_ADMIN') or hasRole('ROLE_TYPEOFAPPROVAL_ATRA_FINANCE')")
     @GetMapping("/typeofapprovals/finance/payment/adminfeeconfirmation/{id}")
     public String listTypeOfApprovalAdminFeeConfirmation(@PathVariable Long id, Model model) {
         Optional<TypeOfApprovalApplicant> profileOpt = typeOfApprovalApplicantService.getById(id);
@@ -79,7 +78,7 @@ public class TypeOfApprovalFinanceController {
         }
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_typeofapprovals_ADMIN') or hasRole('ROLE_typeofapprovals_ATRA_FINANCE')")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_TYPEOFAPPROVAL_ADMIN') or hasRole('ROLE_TYPEOFAPPROVAL_ATRA_FINANCE')")
     @PostMapping("/typeofapprovals/finance/payment/adminfeeconfirmation/save")
     public String paymentAdminFee(@ModelAttribute TypeOfApprovalApplicantDTO typeOfApprovalApplicantDTO) {
         // Fetch the existing entity from the database
@@ -115,7 +114,7 @@ public class TypeOfApprovalFinanceController {
         return "redirect:/typeofapprovals/finance/adminfeelist";
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_typeofapprovals_ADMIN') or hasRole('ROLE_typeofapprovals_ATRA_FINANCE')")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_TYPEOFAPPROVAL_ADMIN') or hasRole('ROLE_TYPEOFAPPROVAL_ATRA_FINANCE')")
     @GetMapping("/typeofapprovals/finance/payment/applicationfeeconfirmation/{id}")
     public String listTypeOfApprovalApplicationFeeConfirmation(@PathVariable Long id, Model model) {
         Optional<TypeOfApprovalApplicant> profileOpt = typeOfApprovalApplicantService.getById(id);
@@ -139,7 +138,7 @@ public class TypeOfApprovalFinanceController {
     }
 
 
-    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_typeofapprovals_ADMIN') or hasRole('ROLE_typeofapprovals_ATRA_FINANCE')")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_TYPEOFAPPROVAL_ADMIN') or hasRole('ROLE_TYPEOFAPPROVAL_ATRA_FINANCE')")
     @PostMapping("/typeofapprovals/finance/payment/applicationfeeconfirmation/save")
     public String paymentApplicationFee(@ModelAttribute TypeOfApprovalApplicantDTO typeOfApprovalApplicantDTO) {
         // Fetch the existing entity from the database
@@ -176,7 +175,7 @@ public class TypeOfApprovalFinanceController {
         return "redirect:/typeofapprovals/finance/applicationfeelist";
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_typeofapprovals_ADMIN') or hasRole('ROLE_typeofapprovals_MCIT_FINANCE')")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_TYPEOFAPPROVAL_ADMIN') or hasRole('ROLE_TYPEOFAPPROVAL_MCIT_FINANCE')")
     @GetMapping("/typeofapprovals/finance/payment/certificatefeeconfirmation/{id}")
     public String listTypeOfApprovalCertificateFeeConfirmation(@PathVariable Long id, Model model) {
         Optional<TypeOfApprovalApplicant> profileOpt = typeOfApprovalApplicantService.getById(id);
@@ -200,7 +199,7 @@ public class TypeOfApprovalFinanceController {
     }
 
 
-    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_typeofapprovals_ADMIN') or hasRole('ROLE_typeofapprovals_MCIT_FINANCE')")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_TYPEOFAPPROVAL_ADMIN') or hasRole('ROLE_TYPEOFAPPROVAL_MCIT_FINANCE')")
     @PostMapping("/typeofapprovals/finance/payment/certificatefeeconfirmation/save")
     public String paymentCertificateFee(@ModelAttribute TypeOfApprovalApplicantDTO typeOfApprovalApplicantDTO) {
         // Fetch the existing entity from the database

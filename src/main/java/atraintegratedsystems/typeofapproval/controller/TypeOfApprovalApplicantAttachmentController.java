@@ -27,7 +27,7 @@ public class TypeOfApprovalApplicantAttachmentController {
     @Autowired
     private TypeOfApprovalAttachmentService attachmentService;
 
-    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_typeofapprovals_ADMIN') or hasRole('ROLE_typeofapprovals_STANDARD')")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_TYPEOFAPPROVAL_ADMIN') or hasRole('ROLE_TYPEOFAPPROVAL_STANDARD')")
     @GetMapping("/typeofapprovals/applicant/attachmentapplicantlists")
     public String listTypeOfApprovalApplicantsWithAttachment(Model model) {
         model.addAttribute("applicants", type.getTypeOfApprovalApplicantWithAttachment());
