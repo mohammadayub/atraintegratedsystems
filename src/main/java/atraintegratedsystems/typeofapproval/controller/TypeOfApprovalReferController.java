@@ -29,7 +29,7 @@ public class TypeOfApprovalReferController {
     @Autowired
     private TypeOfApprovalApplicantService typeOfApprovalApplicantService;
 
-    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_typeofapprovals_ADMIN') or hasRole('ROLE_typeofapprovals_STANDARD')")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_TYPEOFAPPROVAL_ADMIN') or hasRole('ROLE_TYPEOFAPPROVAL_STANDARD')")
     @GetMapping("/typeofapprovals/refer/referlists")
     public String listTypeOfApprovalApplicants(Model model) {
         List<TypeOfApprovalApplicant> applicants = typeOfApprovalApplicantService.getAllTypeofApproval();
@@ -37,7 +37,7 @@ public class TypeOfApprovalReferController {
         return "typeofapprovals/refer/referlists";
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_typeofapprovals_ADMIN') or hasRole('ROLE_typeofapprovals_STANDARD')")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_TYPEOFAPPROVAL_ADMIN') or hasRole('ROLE_TYPEOFAPPROVAL_STANDARD')")
     @GetMapping("/typeofapprovals/refer/referfinance/{id}")
     public String referForm(@PathVariable Long id, Model model) {
         Optional<TypeOfApprovalApplicant> profileOpt = typeOfApprovalApplicantService.getById(id);
@@ -63,7 +63,7 @@ public class TypeOfApprovalReferController {
     }
 
 
-    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_typeofapprovals_ADMIN') or hasRole('ROLE_typeofapprovals_STANDARD')")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_TYPEOFAPPROVAL_ADMIN') or hasRole('ROLE_TYPEOFAPPROVAL_STANDARD')")
     @PostMapping("/typeofapprovals/refer/referfinance/save")
     public String updateRefer(@ModelAttribute TypeOfApprovalApplicantDTO typeOfApprovalApplicantDTO) {
         // Fetch the existing entity from the database

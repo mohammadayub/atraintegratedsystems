@@ -28,7 +28,7 @@ public class TypeOfApprovalApplicantController {
 
 
 
-    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_typeofapprovals_ADMIN') or hasRole('ROLE_typeofapprovals_STANDARD')")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_TYPEOFAPPROVAL_ADMIN') or hasRole('ROLE_TYPEOFAPPROVAL_STANDARD')")
     @GetMapping("/typeofapprovals/applicant/applicantlists")
     public String listTypeOfApprovalApplicants(Model model) {
         model.addAttribute("applicants", typeOfApprovalApplicantService.getAllTypeOfApprovalApplicants());

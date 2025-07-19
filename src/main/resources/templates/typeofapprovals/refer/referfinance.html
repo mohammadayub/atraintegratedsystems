@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{layout :: page_head}">
+    <div th:replace="styles :: common-css"></div>
     <div th:replace="styles :: persian-datepicker-styles"></div>
     <title>Refer To Finance</title>
 
@@ -25,8 +26,8 @@
 <body>
 <nav th:replace="~{typeofApproval_layout :: page_navbar}"></nav>
 
-<div class="container mt-5">
-    <div class="card shadow rounded-4">
+<div class="container mt-5" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+    <div class="card shadow rounded-4" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
         <div class="card-header bg-primary text-white">
             <h4 class="mb-0" th:text="#{refer_finance_header}">Refer To Finance Department For Payment</h4>
         </div>

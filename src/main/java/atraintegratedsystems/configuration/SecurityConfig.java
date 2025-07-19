@@ -51,7 +51,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/licenses/admin/**").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_LICENSE_ADMIN')")
                 .antMatchers("/codes/**").access("hasRole('ROLE_CODES_ADMIN')")
 //                .antMatchers("/typeofapprovals/**").access("hasRole('ROLE_typeofapprovals_ADMIN')  or hasRole('ROLE_ADMIN')")
-                .antMatchers("/typeofapprovals/home").access("hasRole('ROLE_typeofapprovals_ADMIN') or hasRole('ROLE_typeofapprovals_ATRA_FINANCE') or hasRole('ROLE_typeofapprovals_MCIT_FINANCE') or hasRole('ROLE_typeofapprovals_STANDARD') or hasRole('ROLE_typeofapprovals_ONLINE_APPLICATION') or hasRole('ROLE_ADMIN')")
+                .antMatchers("/typeofapprovals/home").access("hasRole('ROLE_TYPEOFAPPROVAL_ADMIN') or hasRole('ROLE_TYPEOFAPPROVAL_ATRA_FINANCE') or hasRole('ROLE_TYPEOFAPPROVAL_MCIT_FINANCE') or hasRole('ROLE_TYPEOFAPPROVAL_STANDARD') or hasRole('ROLE_TYPEOFAPPROVAL_ONLINE_APPLICATION') or hasRole('ROLE_ADMIN')")
 
                 // All other requests need authentication
                 .anyRequest().authenticated()
@@ -109,11 +109,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "ROLE_ADMIN > ROLE_LICENSE_APPROVAL \n"+
                         "ROLE_ADMIN > ROLE_LICENSE_ADMIN \n"+
                         "ROLE_ADMIN > ROLE_CODES_ADMIN \n"+
-                        "ROLE_ADMIN > ROLE_typeofapprovals_ADMIN \n"+
-                        "ROLE_ADMIN > ROLE_typeofapprovals_ATRA_FINANCE \n"+
-                        "ROLE_ADMIN > ROLE_typeofapprovals_MCIT_FINANCE \n"+
-                        "ROLE_ADMIN > ROLE_typeofapprovals_STANDARD \n"+
-                        "ROLE_ADMIN > ROLE_typeofapprovals_ONLINE_APPLICATION"
+                        "ROLE_ADMIN > ROLE_TYPEOFAPPROVAL_ADMIN \n"+
+                        "ROLE_ADMIN > ROLE_TYPEOFAPPROVAL_ATRA_FINANCE \n"+
+                        "ROLE_ADMIN > ROLE_TYPEOFAPPROVAL_MCIT_FINANCE \n"+
+                        "ROLE_ADMIN > ROLE_TYPEOFAPPROVAL_STANDARD \n"+
+                        "ROLE_ADMIN > ROLE_TYPEOFAPPROVAL_ONLINE_APPLICATION"
 
         );
         return roleHierarchy;

@@ -40,7 +40,7 @@
 <div class="container mt-5">
 
   <!-- Section: Type of Approval Management -->
-  <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_typeofapprovals_ADMIN','ROLE_typeofapprovals_ONLINE_APPLICATION','ROLE_typeofapprovals_STANDARD')">
+  <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_TYPEOFAPPROVAL_ADMIN','ROLE_TYPEOFAPPROVAL_ONLINE_APPLICATION','ROLE_TYPEOFAPPROVAL_STANDARD')">
     <legend th:text="#{typeof_approval_management_section}">Type of Approval Management</legend>
     <div class="row g-4">
       <div class="col-sm-4">
@@ -58,7 +58,7 @@
 
     </div>
   </fieldset>
-  <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_typeofapprovals_ADMIN','ROLE_typeofapprovals_STANDARD')">
+  <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_TYPEOFAPPROVAL_ADMIN','ROLE_TYPEOFAPPROVAL_STANDARD')">
     <legend th:text="#{typeofapproval_applicants_information}">Type of Approval Applicants Information</legend>
     <div class="row g-4">
       <div class="col-sm-4">
@@ -87,7 +87,7 @@
     </div>
   </fieldset>
   <!-- Section: Refer Management -->
-  <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_typeofapprovals_ADMIN','ROLE_typeofapprovals_STANDARD')">
+  <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_TYPEOFAPPROVAL_ADMIN','ROLE_TYPEOFAPPROVAL_STANDARD')">
     <legend th:text="#{refer_management_section}">Refer Management Section</legend>
     <div class="row g-4">
       <div class="col-sm-4">
@@ -104,7 +104,7 @@
   </fieldset>
 
   <!-- Section: Finance Management -->
-  <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_typeofapprovals_ADMIN','ROLE_typeofapprovals_ATRA_FINANCE','ROLE_typeofapprovals_MCIT_FINANCE')">
+  <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_TYPEOFAPPROVAL_ADMIN','ROLE_TYPEOFAPPROVAL_ATRA_FINANCE','ROLE_TYPEOFAPPROVAL_MCIT_FINANCE')">
     <legend th:text="#{finance_management}">Finance Management</legend>
     <div class="row g-4">
       <div class="col-sm-4">

@@ -1,10 +1,10 @@
-<!doctype html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{layout :: page_head}">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap" />
+    <div th:replace="styles :: common-css"></div>
     <div th:replace="styles :: persian-datepicker-styles"></div>
-    <div th:replace="styles :: commonfieldset-with-legend-border"></div>
-    <title>LMS</title>
+    <title th:text="#{admin_fee_payments}">Admin Fee Payments</title>
+
     <style>
         body {
             background-color: #f5f5f5;
@@ -12,97 +12,71 @@
             font-weight: bold;
         }
 
-        .btn.btn-success {
-            margin-top: 10px;
-            margin-bottom: 10px;
+        .btn {
+            transition: all 0.3s ease-in-out;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
-        .row{
-        margin-top:15px;
-        }
-        label{
-        font-size:14px;
 
+        .btn-primary:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary:hover {
+            background-color: #545b62;
+            transform: translateY(-2px);
         }
     </style>
-
 </head>
 <body>
 <nav th:replace="~{typeofApproval_layout :: page_navbar}"></nav>
-<div class="container-fluid">
-    <br>
-    <fieldset>
-        <legend th:text="#{application_fee_payments}">Application Fee Payments</legend>
-        <form th:action="@{/typeofapprovals/finance/payment/applicationfeeconfirmation/save}" method="post" th:object="${profile}">
-            <input type="hidden" th:field="*{id}"/>
-            <!-- Third Row -->
-            <div class="row align-items-end g-3">
-                <!-- Payment Confirmation -->
-                <div class="col-md-2">
-                    <label
-                            th:text="#{payment_confirmation}"
-                            th:for="applicationFeeStatus"
-                            th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl fw-bold' : 'label-ltr fw-bold'"
-                           class="form-label">
-                        Payment Confirmation
-                    </label>
-                    <select th:field="*{applicationFeeStatus}" class="form-control rounded"
-                            th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'text-end' : 'text-start'">
-                        <option th:value="Yes">Yes</option>
-                        <option th:value="No">No</option>
-                    </select>
+
+<div class="container mt-5" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+    <div class="card shadow rounded-4" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0" th:text="#{application_fee_payments}">application Fee Payments</h4>
+        </div>
+
+        <div class="card-body">
+            <form th:action="@{/typeofapprovals/finance/payment/applicationfeeconfirmation/save}" method="post" th:object="${profile}">
+                <input type="hidden" th:field="*{id}" />
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label class="form-label" th:text="#{application_fee_bank_voucher_no}">app Fee Bank Voucher No</label>
+                        <input type="text" th:field="*{applicationFeeBankVoucherNo}" class="form-control" />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label" th:text="#{application_fee_voucher_date}">app Fee Voucher Date</label>
+                        <input type="text" th:field="*{applicationFeeVoucherDateJalali}" class="form-control hijrishamsi" />
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label class="form-label" th:text="#{bank_submission_date}">Bank Submission Date</label>
+                        <input type="text" th:field="*{applicationFeeBankVoucherSubmissionDateJalali}" class="form-control hijrishamsi" />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label" th:text="#{payment_confirmation}">Payment Confirmation</label>
+                        <select th:field="*{applicationFeeStatus}" class="form-select form-control">
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
                 </div>
 
-                <!-- Admin Fee Voucher Date -->
-                <div class="col-md-2">
-                    <label
-                            th:text="#{application_fee_voucher_date}"
-                            th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl fw-bold' : 'label-ltr fw-bold'"
-                           class="form-label">
-                        Application Fee Voucher Date
-                    </label>
-                    <input type="text" th:field="*{applicationFeeVoucherDateJalali}" class="form-control hijrishamsi"
-                           th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" />
+                <div class="d-flex justify-content-end gap-4 mt-4">
+                    <button type="submit" class="btn btn-primary px-4 py-2" th:text="#{confirm_payment_button}">
+                        <i class="bi bi-check-circle"></i> Confirm
+                    </button>&nbsp;&nbsp;
+                    <a onclick="history.back()" class="btn btn-secondary px-4 py-2" th:text="#{type_approval_cancel}">
+                        <i class="bi bi-arrow-left-circle"></i> <span th:text="#{back_button}">Back</span>
+                    </a>
                 </div>
-
-                <!-- Admin Fee Bank Voucher No -->
-                <div class="col-md-2">
-                    <label
-                            th:text="#{application_fee_bank_voucher_no}"
-                            th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl fw-bold' : 'label-ltr fw-bold'"
-                           class="form-label">
-                        Application Fee Bank Voucher No
-                    </label>
-                    <input type="text" th:field="*{applicationFeeBankVoucherNo}" class="form-control rounded"
-                           th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" />
-                </div>
-
-                <!-- Admin Fee Bank Submission Date -->
-                <div class="col-md-2">
-                    <label
-                            th:text="#{bank_submission_date}"
-                            th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl fw-bold' : 'label-ltr fw-bold'"
-                           class="form-label">
-                        Bank Submission Date
-                    </label>
-                    <input type="text" th:field="*{applicationFeeBankVoucherSubmissionDateJalali}" class="form-control hijrishamsi rounded"
-                           th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" />
-                </div>
-
-                <!-- Save Button -->
-                <div class="col-md-3 text-end mt-4">
-                    <button type="submit" class="btn btn-primary w-100" th:text="#{confirm_payment_button}">Confirm Payment</button>
-                </div>
-            </div>
-
-        </form>
-    </fieldset>
-
-    <a class="btn btn-primary text-white" onclick="history.back()" style="margin-top:20px;">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6" style="width:20px;height:20px;">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
-        </svg>
-        Back to Page
-    </a>
+            </form>
+        </div>
+    </div>
 </div>
 
 <!-- Scripts -->
@@ -110,9 +84,6 @@
 <div th:replace="scripts :: persian-datepicker-scripts"></div>
 <div th:replace="scripts :: common-hijrishamsi-date"></div>
 
-
-
-<div style="height:15vh;"></div>
 <footer th:replace="~{layout :: page_footer}"></footer>
 <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
 </body>

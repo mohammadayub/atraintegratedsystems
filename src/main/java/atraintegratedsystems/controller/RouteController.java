@@ -89,7 +89,7 @@ public class RouteController {
     }
 
 //    Type of Approval Management Section  typeofapprovals
-    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_typeofapprovals_ADMIN') or hasRole('ROLE_typeofapprovals_ATRA_FINANCE') or hasRole('ROLE_typeofapprovals_MCIT_FINANCE') or hasRole('ROLE_typeofapprovals_STANDARD') or hasRole('ROLE_typeofapprovals_ONLINE_APPLICATION')")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_TYPEOFAPPROVAL_ADMIN') or hasRole('ROLE_TYPEOFAPPROVAL_ATRA_FINANCE') or hasRole('ROLE_TYPEOFAPPROVAL_MCIT_FINANCE') or hasRole('ROLE_TYPEOFAPPROVAL_STANDARD') or hasRole('ROLE_TYPEOFAPPROVAL_ONLINE_APPLICATION')")
     @GetMapping("typeofapprovals/home")
     public String typeofapprovals_home()
     {

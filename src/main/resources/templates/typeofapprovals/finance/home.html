@@ -40,7 +40,7 @@
 <div class="container mt-5">
 
   <!-- Section: Type of Approval Management -->
-  <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_typeofapprovals_ADMIN','ROLE_typeofapprovals_ATRA_FINANCE')">
+  <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_TYPEOFAPPROVAL_ADMIN','ROLE_TYPEOFAPPROVAL_ATRA_FINANCE')">
     <legend th:text="#{typeofapproval_atra_finance_payments_section}">Type of Approval ATRA Finance Payments Section</legend>
     <div class="row g-4">
       <div class="col-sm-4">
@@ -70,7 +70,7 @@
 
     </div>
   </fieldset>
-  <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_typeofapprovals_ADMIN','ROLE_typeofapprovals_MCIT_FINANCE')">
+  <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_TYPEOFAPPROVAL_ADMIN','ROLE_TYPEOFAPPROVAL_MCIT_FINANCE')">
     <legend th:text="#{typeofapproval_mcit_finance_payments_section}">Type of Approval MCIT Finance Payments Section</legend>
     <div class="row g-4">
       <div class="col-sm-4">

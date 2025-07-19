@@ -17,7 +17,7 @@ public class TypeOfApprovalController {
         this.approvalService = approvalService;
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_typeofapprovals_ADMIN') or hasRole('ROLE_typeofapprovals_ONLINE_APPLICATION') or hasRole('ROLE_typeofapprovals_STANDARD')")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_TYPEOFAPPROVAL_ADMIN') or hasRole('ROLE_TYPEOFAPPROVAL_ONLINE_APPLICATION') or hasRole('ROLE_TYPEOFAPPROVAL_STANDARD')")
     @GetMapping("/typeofapprovals/onlineapplicationform/form")
     public String showForm(Model model) {
         TypeOfApprovalFormDTO form = new TypeOfApprovalFormDTO();
@@ -26,7 +26,7 @@ public class TypeOfApprovalController {
         return "typeofapprovals/onlineapplicationform/form";
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_typeofapprovals_ADMIN') or hasRole('ROLE_typeofapprovals_ONLINE_APPLICATION') or hasRole('ROLE_typeofapprovals_STANDARD')")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_TYPEOFAPPROVAL_ADMIN') or hasRole('ROLE_TYPEOFAPPROVAL_ONLINE_APPLICATION') or hasRole('ROLE_TYPEOFAPPROVAL_STANDARD')")
     @PostMapping("/typeofapprovals/onlineapplicationform/submit")
     public String submitForm(@ModelAttribute TypeOfApprovalFormDTO form, Model model) {
         try {
@@ -39,7 +39,7 @@ public class TypeOfApprovalController {
         }
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_typeofapprovals_ADMIN') or hasRole('ROLE_typeofapprovals_ONLINE_APPLICATION')")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_TYPEOFAPPROVAL_ADMIN') or hasRole('ROLE_TYPEOFAPPROVAL_ONLINE_APPLICATION') or hasRole('ROLE_TYPEOFAPPROVAL_STANDARD')")
     @GetMapping("/typeofapprovals/onlineapplicationform/success")
     public String successPage() {
         return "typeofapprovals/onlineapplicationform/success";
