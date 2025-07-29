@@ -223,10 +223,7 @@ public class TypeOfApprovalFinanceController {
 
         LocalDate certificateSubmissionDate = converter.jalaliToGregorian(jSubYear, jSubMonth, jSubDay);
         referApplicant.setCertificateFeeBankVoucherSubmissionDate(certificateSubmissionDate);
-
-
         referApplicant.setCertificateFeeStatus(typeOfApprovalApplicantDTO.getCertificateFeeStatus());
-
         referApplicant.setCertificateFeeEntryDate(LocalDate.now());
         String username = SecurityUtil.getCurrentUsername();
         referApplicant.setCertificateFeeEnteredBy(username);

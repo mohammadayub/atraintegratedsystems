@@ -1,7 +1,4 @@
 package atraintegratedsystems.typeofapproval.controller;
-
-import atraintegratedsystems.licenses.dto.LicenseApprovalDTO;
-import atraintegratedsystems.licenses.model.LicenseApproval;
 import atraintegratedsystems.typeofapproval.dto.TypeOfApprovalApplicantDTO;
 import atraintegratedsystems.typeofapproval.model.TypeOfApprovalApplicant;
 import atraintegratedsystems.typeofapproval.service.TypeOfApprovalApplicantService;
@@ -9,8 +6,6 @@ import atraintegratedsystems.utils.PersianCalendarUtils;
 import atraintegratedsystems.utils.SecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +14,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -81,7 +75,6 @@ public class TypeOfApprovalReferController {
         String username = SecurityUtil.getCurrentUsername();
         referApplicant.setUserEntered(username);
         referApplicant.setReferStatus(typeOfApprovalApplicantDTO.getReferStatus());
-
 
         // Save the updated entity
         typeOfApprovalApplicantService.save(referApplicant);
