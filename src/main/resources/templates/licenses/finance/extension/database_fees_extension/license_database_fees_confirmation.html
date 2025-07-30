@@ -13,7 +13,7 @@
 <body>
 <nav th:replace="~{layout :: page_navbar}"></nav>
 <h3 style="text-align:center;margin-top:30px;font-weight:bolder;" th:text="#{license_application_confirmation}">License Extension Database Fees Confirmation</h3>
-<div class="container-fluid mt-4">
+<div class="container-fluid mt-4" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
     <fieldset>
         <legend>Database Fee Confirmation</legend>
     <form id="licenseForm" th:action="@{/licenses/finance/extension/database_fees_extension/license_database_fees/add}" th:object="${licenseDatabaseFeesExtensionDTO}" method="post">

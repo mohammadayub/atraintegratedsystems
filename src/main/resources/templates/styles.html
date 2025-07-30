@@ -235,6 +235,24 @@
    }
     </style>
 </div>
+<div th:fragment="ltr-to-rtl">
+    <style>
+        .label-rtl {
+            color: black !important;
+            font-weight: bolder !important;
+            width: 100% !important;
+            direction: rtl !important;
+            text-align: right; /* Ensures text alignment in RTL */
+        }
+        .label-ltr {
+            color: black !important;
+            font-weight: bolder !important;
+            width: 100% !important;
+            direction: ltr !important;
+            text-align: left;
+        }
+    </style>
+</div>
 <!-- Update Css -->
 <div th:fragment="common-css">
     <style>

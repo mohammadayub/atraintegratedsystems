@@ -48,8 +48,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/licenses/finance/license_finance/**").access("hasRole('ROLE_MINISTRY') or hasRole('ROLE_LICENSE_ADMIN') or hasRole('ROLE_ADMIN')")
 
                 // Admin-only paths
-                .antMatchers("/licenses/admin/**").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_LICENSE_ADMIN')")
-                .antMatchers("/codes/**").access("hasRole('ROLE_CODES_ADMIN')")
+                .antMatchers("/licenses/admin/**").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_LICENSE_ADMIN') or haseRole('ROLE_TYPEOFAPPROVAL_STANDARD')")
+                .antMatchers("/licenses/admin/**")
+                .access("hasRole('ROLE_TYPEOFAPPROVAL_STANDARD')")                .antMatchers("/codes/**").access("hasRole('ROLE_CODES_ADMIN')")
 //                .antMatchers("/typeofapprovals/**").access("hasRole('ROLE_typeofapprovals_ADMIN')  or hasRole('ROLE_ADMIN')")
                 .antMatchers("/typeofapprovals/home").access("hasRole('ROLE_TYPEOFAPPROVAL_ADMIN') or hasRole('ROLE_TYPEOFAPPROVAL_ATRA_FINANCE') or hasRole('ROLE_TYPEOFAPPROVAL_MCIT_FINANCE') or hasRole('ROLE_TYPEOFAPPROVAL_STANDARD') or hasRole('ROLE_TYPEOFAPPROVAL_ONLINE_APPLICATION') or hasRole('ROLE_ADMIN')")
 

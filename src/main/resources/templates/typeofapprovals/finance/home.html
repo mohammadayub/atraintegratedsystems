@@ -2,6 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head th:replace="~{layout :: page_head}">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap" />
+
+
   <title>LMS</title>
 
   <style>
@@ -28,16 +30,17 @@
       box-shadow: 0 4px 10px rgba(0,0,0,0.2);
     }
   </style>
+  <div th:replace="styles :: ltr-to-rtl"></div>
+  <div th:replace="styles :: commonfieldset"></div>
 </head>
 <body>
 
-<!-- Injected styles properly -->
-<div th:replace="styles :: commonfieldset"></div>
+
 
 <!-- Navbar -->
 <nav th:replace="~{typeofApproval_layout :: page_navbar}"></nav>
 
-<div class="container mt-5">
+<div class="container mt-5" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
 
   <!-- Section: Type of Approval Management -->
   <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_TYPEOFAPPROVAL_ADMIN','ROLE_TYPEOFAPPROVAL_ATRA_FINANCE')">

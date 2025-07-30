@@ -14,7 +14,7 @@
 </head>
 <body>
 <nav th:replace="~{layout :: page_navbar}"></nav>
-<div class="container mt-5" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_FINANCE')">
+<div class="container mt-5" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_FINANCE')" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
     <fieldset sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_FINANCE') or hasRole('ROLE_LICENSE_ADMIN')">
         <legend>Admin Fee Extension</legend>
 

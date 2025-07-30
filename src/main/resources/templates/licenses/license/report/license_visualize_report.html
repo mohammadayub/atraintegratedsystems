@@ -21,7 +21,7 @@
 <nav th:replace="~{layout :: page_navbar}"></nav>
 
 <!-- License Type Revenue Chart + Table -->
-<div class="mt-5" id="revenueChartWrapper">
+<div class="mt-5" id="revenueChartWrapper" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
     <h4 class="mb-4 ml-4" th:text="#{visualize_report_header_applicant_fee}">License Type Information With Application Fees Revenue</h4>
     <div class="row">
         <div class="col-md-6">

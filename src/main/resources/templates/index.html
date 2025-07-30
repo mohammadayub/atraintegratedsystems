@@ -24,7 +24,7 @@
 </head>
 <body>
 <nav th:replace="~{layout :: page_navbar}"></nav>
-<div class="container mt-5">
+<div class="container mt-5" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
 
     <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_CODES_ADMIN','ROLE_LICENSE','ROLE_MINISTRY','ROLE_LICENSE_COMPLETION_PROFILE','ROLE_LICENSE_APPROVAL','ROLE_LICENSE_PROFILE_ENTRY','ROLE_FINANCE','ROLE_FINANCE','ROLE_TYPEOFAPPROVAL_ADMIN','ROLE_TYPEOFAPPROVAL_ATRA_FINANCE','ROLE_TYPEOFAPPROVAL_MCIT_FINANCE','ROLE_TYPEOFAPPROVAL_STANDARD','ROLE_TYPEOFAPPROVAL_ONLINE_APPLICATION')">
         <legend th:text="#{project_section}">Projects Section</legend>
@@ -64,11 +64,29 @@
             </tr>
         </table>
     </fieldset>
-
+    <fieldset style="border: 2px solid #DCAF45; padding: 15px; border-radius: 8px; margin-bottom: 20px;"
+              sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN')">
+        <legend style="width: auto; font-size: 1.2rem; color: #14438B; padding: 0 10px; font-weight: bold;" th:text="#{user_management_section}"></legend>
+        <table class="table table-borderless">
+            <tr>
+                <td>
+                    <div class="custom-card">
+                        <a th:href="@{/licenses/admin/userlists}">
+                            <img class="rounded" th:src="@{/images/user.gif}" alt="User Management" style="height:100px;width:100px;">
+                        </a>
+                        <h4 class="license-link" style="margin-top: 12px;">
+                            <a th:href="@{/licenses/admin/userlists}">User Management</a>
+                        </h4>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </fieldset>
 
 </div>
 <div th:replace="scripts :: common-scripts"></div>
 
+<div style="height:10vh;"></div>
 <footer th:replace="~{layout :: page_footer}"></footer>
 
 <script th:src="@{/js/bootstrap.bundle.min.js}"></script>

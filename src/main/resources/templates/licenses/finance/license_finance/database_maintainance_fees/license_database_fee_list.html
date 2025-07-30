@@ -10,7 +10,7 @@
 </head>
 <body>
 <nav th:replace="~{layout :: page_navbar}"></nav>
-<div class="container-fluid">
+<div class="container-fluid" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
     <fieldset>
         <legend>License Database Fee List</legend>
     <div class="table-container">

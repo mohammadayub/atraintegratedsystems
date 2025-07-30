@@ -5,7 +5,7 @@
     <div th:replace="styles :: data-tables-styles"></div>
     <div th:replace="styles :: persian-datepicker-styles"></div>
     <div th:replace="styles :: select2-styles"></div>
-    <div th:replace="styles :: commonfieldset-with-legend-border"></div>
+
     <title>LMS</title>
     <style>
         body {
@@ -74,10 +74,12 @@
                 margin-bottom: 10px;
                           }
     </style>
+    <div th:replace="styles :: ltr-to-rtl"></div>
+    <div th:replace="styles :: commonfieldset-with-legend-border"></div>
 </head>
 <body>
 <nav th:replace="~{typeofApproval_layout :: page_navbar}"></nav>
-<div class="container-fluid">
+<div class="container-fluid" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
     <br>
     <fieldset>
         <legend th:text="#{application_fee_list}">Type Of Approvals List</legend>

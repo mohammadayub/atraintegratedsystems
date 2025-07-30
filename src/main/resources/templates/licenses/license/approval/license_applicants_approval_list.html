@@ -2,7 +2,6 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head th:replace="~{layout :: page_head}">
     <div th:replace="styles :: data-tables-styles"></div>
-    <div th:replace="styles :: persian-datepicker-styles"></div>
     <div th:replace="styles :: select2-styles"></div>
     <div th:replace="styles :: common-css"></div>
     <div th:replace="styles :: commonfieldset-with-legend-border"></div>
@@ -11,7 +10,7 @@
 </head>
 <body>
 <nav th:replace="~{layout :: page_navbar}"></nav>
-<div class="container-fluid">
+<div class="container-fluid" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
     <fieldset>
         <legend th:text="#{approval_section}"></legend>
     <div class="table-container">

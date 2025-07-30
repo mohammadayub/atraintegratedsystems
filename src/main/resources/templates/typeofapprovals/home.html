@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head th:replace="~{layout :: page_head}">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap" />
+
   <title>LMS</title>
 
   <style>
@@ -28,6 +29,7 @@
       box-shadow: 0 4px 10px rgba(0,0,0,0.2);
     }
   </style>
+  <div th:replace="styles :: ltr-to-rtl"></div>
 </head>
 <body>
 
@@ -37,7 +39,7 @@
 <!-- Navbar -->
 <nav th:replace="~{typeofApproval_layout :: page_navbar}"></nav>
 
-<div class="container mt-5">
+<div class="container mt-5" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
 
   <!-- Section: Type of Approval Management -->
   <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_TYPEOFAPPROVAL_ADMIN','ROLE_TYPEOFAPPROVAL_ONLINE_APPLICATION','ROLE_TYPEOFAPPROVAL_STANDARD')">
@@ -104,8 +106,8 @@
   </fieldset>
 
   <!-- Section: Finance Management -->
-  <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_TYPEOFAPPROVAL_ADMIN','ROLE_TYPEOFAPPROVAL_ATRA_FINANCE','ROLE_TYPEOFAPPROVAL_MCIT_FINANCE')">
-    <legend th:text="#{finance_management}">Finance Management</legend>
+    <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_TYPEOFAPPROVAL_ADMIN','ROLE_TYPEOFAPPROVAL_ATRA_FINANCE','ROLE_TYPEOFAPPROVAL_MCIT_FINANCE')">
+    <legend th:text="#{finance}"></legend>
     <div class="row g-4">
       <div class="col-sm-4">
         <div class="custom-card text-center p-3">
@@ -120,6 +122,21 @@
     </div>
   </fieldset>
 
+
+  <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_TYPEOFAPPROVAL_ADMIN','ROLE_TYPEOFAPPROVAL_STANDARD')">
+  <legend>User Management</legend>
+    <div class="row g-4">
+      <div class="col-sm-4">
+        <div class="custom-card text-center p-3">
+          <a th:href="@{/licenses/admin/change-password/14}">
+            <img class="rounded" th:src="@{/images/user.gif}" alt="User Management" style="height:100px;width:100px;">
+          </a>
+          <h4 class="license-link mt-2">
+            <a th:href="@{/licenses/admin/change-password/14}" style="color: #14438B;font-size: 18px;">User Management</a>          </h4>
+        </div>
+      </div>
+    </div>
+  </fieldset>
 </div>
 
 <!-- Footer -->

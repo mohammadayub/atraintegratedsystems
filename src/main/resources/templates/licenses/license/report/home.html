@@ -24,7 +24,7 @@
 </head>
 <body>
 <nav th:replace="~{layout :: page_navbar}"></nav>
-<div class="container mt-5">
+<div class="container mt-5" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
   <fieldset>
     <legend th:text="#{general_report}"></legend>
   <table class="table table-borderless">

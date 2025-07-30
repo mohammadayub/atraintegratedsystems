@@ -10,7 +10,7 @@
 </head>
 <body onload="setApplicationFees()">
 <nav th:replace="~{layout :: page_navbar}"></nav>
-<div class="container-fluid mt-4" >
+<div class="container-fluid mt-4" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
   <div>
     <form th:action="@{/licenses/license/registration/completion-profile/license_applicant_complete_profile}"
           th:object="${licenseApplicant}" method="post" enctype="multipart/form-data">

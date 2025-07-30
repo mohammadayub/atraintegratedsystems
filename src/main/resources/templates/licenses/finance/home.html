@@ -20,7 +20,7 @@
 </head>
 <body>
 <nav th:replace="~{layout :: page_navbar}"></nav>
-<div class="container mt-5">
+<div class="container mt-5" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
   <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_FINANCE','ROLE_MINISTRY')">
     <legend th:text="#{license_revenue_section}">License Revenue Section</legend>
   <table class="table table-borderless">

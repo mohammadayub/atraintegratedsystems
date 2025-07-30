@@ -16,7 +16,7 @@
 </head>
 <body>
 <nav th:replace="~{layout :: page_navbar}"></nav>
-<div class="container-fluid mt-4">
+<div class="container-fluid mt-4" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
     <fieldset>
         <legend th:text="#{guarantee_fee_confirmation}">License Guarantee Fee Confirmation</legend>
     <form th:action="@{/licenses/finance/license_finance/guarantee_fees/license_guarantee_fee_list/add}" th:object="${licenseApprovalDTO}" method="post">

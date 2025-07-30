@@ -11,7 +11,7 @@
 </head>
 <body  onload="setApplicationFees()">
 <nav th:replace="~{layout :: page_navbar}"></nav>
-<div class="container-fluid">
+<div class="container-fluid" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
     <!-- Form for License Approval -->
     <fieldset>
         <legend th:text="#{approval_section}"></legend>

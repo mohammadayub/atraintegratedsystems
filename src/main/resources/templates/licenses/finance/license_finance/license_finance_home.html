@@ -9,10 +9,11 @@
             font-size: 20px;
         }
     </style>
+    <div th:replace="styles :: ltr-to-rtl"></div>
 </head>
 <body>
 <nav th:replace="~{layout :: page_navbar}"></nav>
-<div class="container mt-5">
+<div class="container mt-5" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
     <fieldset>
         <legend th:text="#{fees_tariffs_section}">Fees & Tariffs Section</legend>
     <table class="table table-borderless">

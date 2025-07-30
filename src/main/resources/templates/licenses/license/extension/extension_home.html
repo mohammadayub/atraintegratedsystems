@@ -4,7 +4,7 @@
 <head th:replace="~{layout :: page_head}">
   <meta charset="UTF-8">
   <div th:replace="styles :: data-tables-styles"></div>
-  <title>LMS - Report</title>
+  <title>LMS - Extension</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 
   <div th:replace="styles :: data-tables-styles"></div>
@@ -20,7 +20,7 @@
 </head>
 <body>
 <nav th:replace="~{layout :: page_navbar}"></nav>
-<div class="container mt-5" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_LICENSE','ROLE_LICENSE_COMPLETION_PROFILE')">
+<div class="container mt-5" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_LICENSE','ROLE_LICENSE_COMPLETION_PROFILE')" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
   <fieldset>
     <legend th:text="#{database_fee_extension}">Database Fee Extension</legend>
   <table class="table table-borderless">

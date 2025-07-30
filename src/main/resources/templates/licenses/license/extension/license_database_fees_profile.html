@@ -48,12 +48,12 @@
         white-space: nowrap;
     }
   </style>
-
+  <div th:replace="styles :: ltr-to-rtl"></div>
 </head>
 <body>
 <nav th:replace="~{layout :: page_navbar}"></nav>
 
-<div class="table-container">
+<div class="table-container" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
   <fieldset class="mt-2">
     <legend>License Approvals Information</legend>
 
