@@ -83,43 +83,40 @@
     <fieldset>
         <legend th:text="#{list_of_all_applicants}"></legend>
         <div class="table-container">
+
             <table class="table table-bordered" id="profileTable">
-                <thead class="bg-primary">
+                <thead>
                 <tr>
-                    <th th:text="#{requestDate}">Request Date</th>
-                    <th th:text="#{manufacturer}">Type Of Approval Manufacturer</th>
-                    <th th:text="#{person}">Person</th>
-                    <th th:text="#{license_operator}">License Operator</th>
-                    <th th:text="#{authorized_importer}">Authorized Importer</th>
-                    <th th:text="#{import_registration_no}">Import Registration No</th>
-                    <th th:text="#{company_name}">Company Name</th>
-                    <th th:text="#{contact_person}">Contact Person</th>
-                    <th th:text="#{address}">Address</th>
-                    <th th:text="#{p_o_box}">P.O. Box</th>
-                    <th th:text="#{telephone}">Telephone</th>
-                    <th th:text="#{mobile}">Mobile Number</th>
-                    <th th:text="#{email}">Email Address</th>
+                    <th>ID</th>
+                    <th>Company Name</th>
+                    <th>Contact Person</th>
+                    <th>Mobile</th>
+                    <th>Email</th>
+                    <th>Type</th>
+                    <th>Application Fee</th>
+                    <th>Admin Fee</th>
+                    <th>Certificate Fee</th>
+                    <th>Actions</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="profile : ${applicants}">
-                    <td th:text="${profile[0]}"></td>
-                    <td th:text="${profile[1]}"></td>
-                    <td th:text="${profile[2]}"></td>
-                    <td th:text="${profile[3]}"></td>
-                    <td th:text="${profile[4]}"></td>
-                    <td th:text="${profile[5]}"></td>
-                    <td th:text="${profile[6]}"></td>
-                    <td th:text="${profile[7]}"></td>
-                    <td th:text="${profile[8]}"></td>
-                    <td th:text="${profile[9]}"></td>
-                    <td th:text="${profile[10]}"></td>
-                    <td th:text="${profile[11]}"></td>
-                    <td th:text="${profile[12]}"></td>
-
+                <tr th:each="applicant : ${applicants}">
+                    <td th:text="${applicant.applicant.id}">1</td>
+                    <td th:text="${applicant.applicant.companyName}">ABC Corp</td>
+                    <td th:text="${applicant.applicant.contactPerson}">John Doe</td>
+                    <td th:text="${applicant.applicant.mobile}">+2519...</td>
+                    <td th:text="${applicant.applicant.email}">email@example.com</td>
+                    <td th:text="${applicant.applicant.typeSelect}">Type A</td>
+                    <td th:text="${applicant.applicant.applicationFee}">1000</td>
+                    <td th:text="${applicant.applicant.adminFee}">500</td>
+                    <td th:text="${applicant.applicant.certificateFee}">300</td>
+                    <td>
+                        <a th:href="@{'/typeofapprovals/onlineapplicationform/edit/' + ${applicant.applicant.id}}">Edit</a>
+                    </td>
                 </tr>
                 </tbody>
             </table>
+
 
         </div>
     </fieldset>

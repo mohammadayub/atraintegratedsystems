@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link th:href="@{/images/favicon.png}" rel="icon" type="image/png">
+  <title>Type of Approval</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Playwrite+DK+Loopet&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap" />
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <div th:replace="styles :: common-css"></div>
+  <script>
+    function addManufacturer() {
+      const table = document.getElementById("manufacturerTableBody");
+      const index = table.rows.length;
+      const template = document.getElementById("manufacturerTemplate").innerHTML;
+      const newRow = document.createElement("tr");
+      newRow.innerHTML = template.replace(/__INDEX__/g, index);
+      table.appendChild(newRow);
+    }
+
+    function removeRow(button) {
+      const row = button.closest("tr");
+      row.parentNode.removeChild(row);
+    }
+
+    function resetRow(button) {
+      const row = button.closest("tr");
+      const inputs = row.querySelectorAll("input, select, textarea");
+      inputs.forEach(function (input) {
+        input.value = "";
+      });
+    }
+
+    function copyToManufacturerField(applicantSelector, manufacturerFieldName) {
+      const table = document.getElementById("manufacturerTableBody");
+      if (table.rows.length === 0) {
+        addManufacturer();
+      }
+      const row = table.rows[0];
+      const applicantInput = document.querySelector(`[name="${applicantSelector}"]`);
+      const manufacturerInput = row.querySelector(`[name^="manufacturers"][name$=".${manufacturerFieldName}"]`);
+      if (applicantInput && manufacturerInput) {
+        manufacturerInput.value = applicantInput.value;
+      }
+    }
+
+    function setupBlurCopy() {
+      const blurMap = {
+        "applicant.companyName": "companyName",
+        "applicant.authorizedImporter": "authorizedImporter",
+        "applicant.contactPerson": "contactPerson",
+        "applicant.address": "address",
+        "applicant.P_O_Box": "manufacturer_P_O_Box",
+        "applicant.telephone": "manufacturer_telephone",
+        "applicant.mobile": "manufacturer_mobile",
+        "applicant.email": "manufacturer_email"
+      };
+
+      for (let [applicantField, manufacturerField] of Object.entries(blurMap)) {
+        const input = document.querySelector(`[name="${applicantField}"]`);
+        if (input) {
+          input.addEventListener("blur", () => {
+            copyToManufacturerField(applicantField, manufacturerField);
+          });
+        }
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+      setupBlurCopy();
+
+      // 👇 Attach click handler to button safely
+      const addBtn = document.getElementById("addManufacturer");
+      if (addBtn) {
+        addBtn.addEventListener("click", addManufacturer);
+      }
+    });
+  </script>
+
+
+  <style>
+    body {
+
+      background-color: #f5f5f5;
+      font-family: 'EB Garamond', serif;
+      font-weight:bold;
+    }
+
+    .navbar {
+      background-color: #f8f9fa;
+      padding: 10px 20px;
+      opacity: 0.9;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .navbar-brand img {
+      height: 50px;
+      margin-right: 10px;
+    }
+
+    .navbar h3 {
+      color: black;
+      font-weight: bold;
+    }
+
+
+  </style>
+</head>
+
+<body class="bg-light">
+
+<nav th:replace="~{typeofApproval_layout :: page_navbar}"></nav>
+<div style="display:none;font-weight:bolder;font-family: 'EB Garamond', serif;" id="printHeader"><h1 class="text-center">Telecom Equipments Type Of Approval System</h1></div>
+
+<div class="container-fluid mt-4">
+  <h3 class="mb-4 text-center"  style="font-family: 'Playwrite DK Loopet', cursive;" th:text="#{online_application}"></h3>
+  <div th:if="${errorMessage}" class="alert alert-danger" th:text="${errorMessage}"></div>
+  <form th:action="@{${form.applicant.id} != null ? '/typeofapprovals/onlineapplicationform/edit' : '/typeofapprovals/onlineapplicationform/submit'}"
+        th:object="${form}"
+        method="post"
+        enctype="multipart/form-data">
+    <input type="hidden" th:field="*{applicant.id}" />
+    <!-- Applicant Details -->
+    <div class="card mb-4" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+      <div class="card-header fw-bolder"
+           th:text="#{applicant_details}"
+           th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+      </div>
+
+      <div class="card-body row g-3">
+        <div class="col-md-4">
+          <label th:text="#{requestDate}"
+                 th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+          </label>
+          <input type="date" id="requestDateInput" class="form-control"
+                 th:field="*{applicant.requestDate}"
+                 th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" />
+        </div>
+
+        <div class="col-md-4">
+          <label th:text="#{manufacturer}"
+                 th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+          </label>
+          <select class="form-select" th:field="*{applicant.manufacturer}">
+            <option value="Local"
+                    th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">Local</option>
+            <option value="International"
+                    th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">International</option>
+          </select>
+        </div>
+
+        <div class="col-md-4">
+          <label th:text="#{person}"
+                 th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+          </label>
+          <select class="form-select" th:field="*{applicant.person}">
+            <option value="Individual"
+                    th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">Individual</option>
+            <option value="Company"
+                    th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">Company</option>
+          </select>
+        </div>
+
+        <div class="col-md-4">
+          <label th:text="#{license_operator}"
+                 th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+          </label>
+          <input type="text" class="form-control"
+                 th:field="*{applicant.licenseOperator}"
+                 th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" />
+        </div>
+
+        <div class="col-md-4">
+          <label th:text="#{authorized_importer}"
+                 th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+          </label>
+          <input type="text" class="form-control"
+                 th:field="*{applicant.authorizedImporter}"
+                 th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" />
+        </div>
+
+        <div class="col-md-4">
+          <label th:text="#{import_registration_no}"
+                 th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+          </label>
+          <input type="text" class="form-control"
+                 th:field="*{applicant.importRegistrationNo}"
+                 th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" />
+        </div>
+
+        <div class="col-md-4">
+          <label th:text="#{company_name}"
+                 th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+          </label>
+          <input type="text" class="form-control"
+                 th:field="*{applicant.companyName}"
+                 th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" />
+        </div>
+
+        <div class="col-md-4">
+          <label th:text="#{contact_person}"
+                 th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+          </label>
+          <input type="text" class="form-control"
+                 th:field="*{applicant.contactPerson}"
+                 th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" />
+        </div>
+
+        <div class="col-md-4">
+          <label th:text="#{address}"
+                 th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+          </label>
+          <input type="text" class="form-control"
+                 th:field="*{applicant.address}"
+                 th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" />
+        </div>
+
+        <div class="col-md-4">
+          <label th:text="#{p_o_box}"
+                 th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+          </label>
+          <input type="text" class="form-control"
+                 th:field="*{applicant.P_O_Box}"
+                 th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" />
+        </div>
+
+        <div class="col-md-4">
+          <label th:text="#{telephone}"
+                 th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+          </label>
+          <input type="text" class="form-control"
+                 th:field="*{applicant.telephone}"
+                 th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" />
+        </div>
+
+        <div class="col-md-4">
+          <label th:text="#{mobile}"
+                 th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+          </label>
+          <input type="text" class="form-control"
+                 th:field="*{applicant.mobile}"
+                 th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" />
+        </div>
+
+        <div class="col-md-4">
+          <label th:text="#{email}"
+                 th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+          </label>
+          <input type="email" class="form-control"
+                 th:field="*{applicant.email}"
+                 th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" />
+        </div>
+        <div class="col-md-4">
+          <label
+                  th:text="#{type_select}"
+                 th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+          Type
+          </label>
+          <select class="form-select"  th:field="*{applicant.typeSelect}" id="typeSelect">
+            <option value="standard"
+                    th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">Standard</option>
+            <option value="simplified"
+                    th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">Simplified</option>
+            <option value="provisional"
+                    th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">Provisional</option>
+          </select>
+        </div>
+
+        <div class="col-md-4">
+          <label
+                  th:text="#{application_fee}"
+                 th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+          Application Fee
+          </label>
+          <input type="text" th:field="*{applicant.applicationFee}"  class="form-control" id="applicationFee"
+
+                 th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" readonly/>
+        </div>
+        <div class="col-md-4">
+          <label
+                  th:text="#{admin_fee}"
+                  th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+            Admin Fee
+          </label>
+          <input type="text" th:field="*{applicant.adminFee}" class="form-control" id="adminFee"
+                 th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" readonly/>
+        </div>
+        <div class="col-md-4">
+          <label
+                  th:text="#{certificate_fee}"
+                  th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+            Certificate Fee
+          </label>
+          <input type="text" th:field="*{applicant.certificateFee}" class="form-control" id="certificateFee"
+                 th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" readonly/>
+
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Manufacturer Details -->
+    <div style="height:20vh;display:none;" id="space1"></div>
+    <div class="card mb-4" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <span class="fw-bolder" th:text="#{manufacturer_details}"></span>
+        <button type="button" class="btn btn-sm btn-success" th:text="#{add_manufacturer}" id="addManufacturer"></button>
+
+      </div>
+      <div class="table-responsive">
+        <table class="table table-bordered" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+          <thead class="table-light">
+          <tr>
+            <th th:text="#{company_name}"></th>
+            <th th:text="#{authorized_importer}"></th>
+            <th th:text="#{contact_person}"></th>
+            <th th:text="#{address}"></th>
+            <th th:text="#{p_o_box}"></th>
+            <th th:text="#{telephone}"></th>
+            <th th:text="#{mobile}"></th>
+            <th th:text="#{email}"></th>
+            <th th:text="#{action}" colspan="2" style="text-align:center;" id="actions"></th>
+          </tr>
+          </thead>
+          <tbody id="manufacturerTableBody">
+          <tr th:each="man, iterStat : *{manufacturers}">
+            <td><input type="text" class="form-control" th:field="*{manufacturers[__${iterStat.index}__].companyName}"/></td>
+            <td><input type="text" class="form-control" th:field="*{manufacturers[__${iterStat.index}__].authorizedImporter}"/></td>
+            <td><input type="text" class="form-control" th:field="*{manufacturers[__${iterStat.index}__].contactPerson}"/></td>
+            <td><input type="text" class="form-control" th:field="*{manufacturers[__${iterStat.index}__].address}"/></td>
+            <td><input type="text" class="form-control" th:field="*{manufacturers[__${iterStat.index}__].manufacturer_P_O_Box}"/></td>
+            <td><input type="text" class="form-control" th:field="*{manufacturers[__${iterStat.index}__].manufacturer_telephone}"/></td>
+            <td><input type="text" class="form-control" th:field="*{manufacturers[__${iterStat.index}__].manufacturer_mobile}"/></td>
+            <td><input type="email" class="form-control" th:field="*{manufacturers[__${iterStat.index}__].manufacturer_email}"/></td>
+            <td  id="actionRemove"><button type="button" class="btn btn-danger btn-sm" onclick="removeRow(this)">Remove</button></td>
+            <td id="actionReset"><button type="button" class="btn btn-info btn-sm" onclick="resetRow(this)">Reset</button></td>
+
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+<!--    Technical Detail Section  -->
+    <div class="card mt-4" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+      <div class="card-header mb-4" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">Technical Detail Of The Equipment</div>
+
+      <!-- Checkboxes: 6 per row -->
+      <div class="row g-3 p-2" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+        <div class="col-6 col-md-4 col-lg-2">
+          <input th:field="*{gsm}" type="checkbox" value="yes" class="form-check-input" id="gsm">
+          <label for="gsm" class="form-check-label">GSM</label>
+        </div>
+        <div class="col-6 col-md-4 col-lg-2">
+          <input th:field="*{cdma}" type="checkbox" value="yes" class="form-check-input" id="cdma">
+          <label for="cdma" class="form-check-label">CDMA</label>
+        </div>
+        <div class="col-6 col-md-4 col-lg-2">
+          <input th:field="*{lte}" type="checkbox" value="yes" class="form-check-input" id="lte">
+          <label for="lte" class="form-check-label">LTE</label>
+        </div>
+        <div class="col-6 col-md-4 col-lg-2">
+          <input th:field="*{tetra}" type="checkbox" value="yes" class="form-check-input" id="tetra">
+          <label for="tetra" class="form-check-label">TETRA</label>
+        </div>
+        <div class="col-6 col-md-4 col-lg-2">
+          <input th:field="*{amateurRadio}" type="checkbox" value="yes" class="form-check-input" id="amateurRadio">
+          <label for="amateurRadio" class="form-check-label">Amateur Radio</label>
+        </div>
+        <div class="col-6 col-md-4 col-lg-2">
+          <input th:field="*{privateMobileRadio}" type="checkbox" value="yes" class="form-check-input" id="privateMobileRadio">
+          <label for="privateMobileRadio" class="form-check-label">Private Mobile Radio</label>
+        </div>
+        <div class="col-6 col-md-4 col-lg-2">
+          <input th:field="*{pmrRadio}" type="checkbox" value="yes" class="form-check-input" id="pmrRadio">
+          <label for="pmrRadio" class="form-check-label">PMR Radio</label>
+        </div>
+        <div class="col-6 col-md-4 col-lg-2">
+          <input th:field="*{radar}" type="checkbox" value="yes" class="form-check-input" id="radar">
+          <label for="radar" class="form-check-label">Radar</label>
+        </div>
+        <div class="col-6 col-md-4 col-lg-2">
+          <input th:field="*{rlan}" type="checkbox" value="yes" class="form-check-input" id="rlan">
+          <label for="rlan" class="form-check-label">RLAN</label>
+        </div>
+        <div class="col-6 col-md-4 col-lg-2">
+          <input th:field="*{wimax}" type="checkbox" value="yes" class="form-check-input" id="wimax">
+          <label for="wimax" class="form-check-label">WiMAX</label>
+        </div>
+        <div class="col-6 col-md-4 col-lg-2">
+          <input th:field="*{fwa}" type="checkbox" value="yes" class="form-check-input" id="fwa">
+          <label for="fwa" class="form-check-label">FWA</label>
+        </div>
+        <div class="col-6 col-md-4 col-lg-2">
+          <input th:field="*{microwave}" type="checkbox" value="yes" class="form-check-input" id="microwave">
+          <label for="microwave" class="form-check-label">Microwave</label>
+        </div>
+        <div class="col-6 col-md-4 col-lg-2">
+          <input th:field="*{soundBroadcasting}" type="checkbox" value="yes" class="form-check-input" id="soundBroadcasting">
+          <label for="soundBroadcasting" class="form-check-label">Sound Broadcasting</label>
+        </div>
+        <div class="col-6 col-md-4 col-lg-2">
+          <input th:field="*{tvBroadcasting}" type="checkbox" value="yes" class="form-check-input" id="tvBroadcasting">
+          <label for="tvBroadcasting" class="form-check-label">TV Broadcasting</label>
+        </div>
+        <div class="col-6 col-md-4 col-lg-2">
+          <input th:field="*{cordlessPhone}" type="checkbox" value="yes" class="form-check-input" id="cordlessPhone">
+          <label for="cordlessPhone" class="form-check-label">Cordless Phone</label>
+        </div>
+        <div class="col-6 col-md-4 col-lg-2">
+          <input th:field="*{srd}" type="checkbox" value="yes" class="form-check-input" id="srd">
+          <label for="srd" class="form-check-label">SRD</label>
+        </div>
+        <div class="col-6 col-md-4 col-lg-2">
+          <input th:field="*{rfid}" type="checkbox" value="yes" class="form-check-input" id="rfid">
+          <label for="rfid" class="form-check-label">RFID</label>
+        </div>
+        <div class="col-6 col-md-4 col-lg-2">
+          <input th:field="*{satelliteRadio}" type="checkbox" value="yes" class="form-check-input" id="satelliteRadio">
+          <label for="satelliteRadio" class="form-check-label">Satellite Radio</label>
+        </div>
+        <div class="col-6 col-md-4 col-lg-2">
+          <input th:field="*{radioNavigation}" type="checkbox" value="yes" class="form-check-input" id="radioNavigation">
+          <label for="radioNavigation" class="form-check-label">Radio Navigation</label>
+        </div>
+        <div class="col-6 col-md-4 col-lg-2">
+          <input th:field="*{satelliteTv}" type="checkbox" value="yes" class="form-check-input" id="satelliteTv">
+          <label for="satelliteTv" class="form-check-label">Satellite TV</label>
+        </div>
+        <div class="col-6 col-md-4 col-lg-2">
+          <input th:field="*{vsat}" type="checkbox" value="yes" class="form-check-input" id="vsat">
+          <label for="vsat" class="form-check-label">VSAT</label>
+        </div>
+        <div class="col-6 col-md-4 col-lg-2">
+          <input th:field="*{other}" type="checkbox" value="yes" class="form-check-input" id="other">
+          <label for="other" class="form-check-label">Other</label>
+        </div>
+      </div>
+
+      <div style="height: 5vh;"></div>
+
+      <!-- Textboxes: 4 per row -->
+      <div class="container-fluid p-2" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+        <div class="row g-3">
+          <div class="col-12 col-sm-6 col-md-3">
+            <label for="intendedUse" class="form-label" th:text="#{intended_use}">Intended Use</label>
+            <input th:field="*{intendedUse}" type="text" class="form-control" id="intendedUse">
+          </div>
+          <div class="col-12 col-sm-6 col-md-3">
+            <label for="modelNumber" class="form-label" th:text="#{model_number}">Model Number</label>
+            <input th:field="*{modelNumber}" type="text" class="form-control" id="modelNumber">
+          </div>
+          <div class="col-12 col-sm-6 col-md-3">
+            <label for="brandName" class="form-label" th:text="#{brand_name}">Brand Name</label>
+            <input th:field="*{brandName}" type="text" class="form-control" id="brandName">
+          </div>
+          <div class="col-12 col-sm-6 col-md-3">
+            <label for="typeNumber" class="form-label" th:text="#{type_number}">Type Number</label>
+            <input th:field="*{typeNumber}" type="text" class="form-control" id="typeNumber">
+          </div>
+
+          <div class="col-12 col-sm-6 col-md-3">
+            <label for="countryofOrigin" class="form-label" th:text="#{country_of_origin}">Country of Origin</label>
+            <input th:field="*{countryofOrigin}" type="text" class="form-control" id="countryofOrigin">
+          </div>
+          <div class="col-12 col-sm-6 col-md-3">
+            <label for="frequencyrangeFromMHZ" class="form-label" th:text="#{frequency_range_from_MHZ}">Frequency Range From (MHz)</label>
+            <input th:field="*{frequencyrangeFromMHZ}" type="text" class="form-control" id="frequencyrangeFromMHZ">
+          </div>
+          <div class="col-12 col-sm-6 col-md-3">
+            <label for="frequencyrangeToMHZ" class="form-label" th:text="#{frequency_range_to_MHZ}">Frequency Range To (MHz)</label>
+            <input th:field="*{frequencyrangeToMHZ}" type="text" class="form-control" id="frequencyrangeToMHZ">
+          </div>
+          <div class="col-12 col-sm-6 col-md-3">
+            <label for="frequencyrangeFromGHZ" class="form-label" th:text="#{frequency_range_from_GHZ}">Frequency Range From (GHz)</label>
+            <input th:field="*{frequencyrangeFromGHZ}" type="text" class="form-control" id="frequencyrangeFromGHZ">
+          </div>
+
+          <div class="col-12 col-sm-6 col-md-3">
+            <label for="frequencyrangeToGHZ" class="form-label" th:text="#{frequency_range_to_GHZ}">Frequency Range To (GHz)</label>
+            <input th:field="*{frequencyrangeToGHZ}" type="text" class="form-control" id="frequencyrangeToGHZ">
+          </div>
+          <div class="col-12 col-sm-6 col-md-3">
+            <label for="outputPowerRadiatedConducted" class="form-label" th:text="#{output_power_radiated_conducted}">Output Power Radiated Conducted</label>
+            <input th:field="*{outputPowerRadiatedConducted}" type="text" class="form-control" id="outputPowerRadiatedConducted">
+          </div>
+          <div class="col-12 col-sm-6 col-md-3">
+            <label for="transmissionCapacity" class="form-label" th:text="#{transmission_capacity}">Transmission Capacity</label>
+            <input th:field="*{transmissionCapacity}" type="text" class="form-control" id="transmissionCapacity">
+          </div>
+          <div class="col-12 col-sm-6 col-md-3">
+            <label for="channelCapacity" class="form-label" th:text="#{channel_capacity}">Channel Capacity</label>
+            <input th:field="*{channelCapacity}" type="text" class="form-control" id="channelCapacity">
+          </div>
+
+          <div class="col-12 col-sm-6 col-md-3">
+            <label for="channelSpacing" class="form-label" th:text="#{channel_spacing}">Channel Spacing</label>
+            <input th:field="*{channelSpacing}" type="text" class="form-control" id="channelSpacing">
+          </div>
+          <div class="col-12 col-sm-6 col-md-3">
+            <label for="modulationType" class="form-label" th:text="#{modulation_type}">Modulation Type</label>
+            <input th:field="*{modulationType}" type="text" class="form-control" id="modulationType">
+          </div>
+          <div class="col-12 col-sm-6 col-md-3">
+            <label class="form-label" th:text="#{antenna_type}">Antenna Type</label>
+            <select class="form-select" th:field="*{antennaType}">
+              <option value="Integral"
+                      th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">Integral</option>
+              <option value="External"
+                      th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">External</option>
+            </select>
+          </div>
+          <div class="col-12 col-sm-6 col-md-3">
+            <label for="antennaGain" class="form-label" th:text="#{antenna_gain}">Antenna Gain</label>
+            <input th:field="*{antennaGain}" type="text" class="form-control" id="antennaGain">
+          </div>
+
+          <div class="col-12 col-sm-6 col-md-3">
+            <label class="form-label" th:text="#{technical_interface}">Technical Interface</label>
+            <select class="form-select" th:field="*{technicalInterface}">
+              <option value="Power Source"
+                      th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">Power Source</option>
+              <option value="Connectors"
+                      th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">Connectors</option>
+              <option value="Software"
+                      th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">Software</option>
+              <option value="Others"
+                      th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">Others</option>
+            </select>
+          </div>
+          <div class="col-12 col-sm-6 col-md-3">
+            <label for="technicalVariants" class="form-label" th:text="#{technical_variants}">Technical Variants</label>
+            <input th:field="*{technicalVariants}" type="text" class="form-control" id="technicalVariants">
+          </div>
+          <div class="col-12 col-sm-6 col-md-3">
+            <label class="form-label" th:text="#{equipment_license_requirement}">Equipment License Requirement</label>
+            <select class="form-select" th:field="*{equipmentLicenseRequirement}">
+              <option value="License required"
+                      th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">License required</option>
+              <option value="License not required"
+                      th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">License not required</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+
+
+      <!-- Attachment Section-->
+    <div class="card mb-4 mt-4" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+      <div class="card-header b-4" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" title="Only Allowed PDF File">Attachments <span style="color:red;font-size:12px;">Only Allowed (.PDF) <img  th:src="@{/images/pdf.png}" width="30px" height="30px"></span></div>
+      <div class="card-body row g-3">
+        <div class="col-md-6">
+          <label th:text="#{declaration_of_Conformity}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">1. Declaration of Conformity issued by the manufacturer of the RCE</label>
+          <input type="file" name="declarationOfConformity" class="form-control" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+        </div>
+        <div class="col-md-6">
+          <label th:text="#{technical_operational_doc_of_the_RCE}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">2. ational doc of the RCE including user /installation manual</label>
+          <input type="file" name="technicalOperationalDocOfTheRCE" class="form-control" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+        </div>
+        <div class="col-md-6">
+          <label th:text="#{test_Reports_of_accredited_laboratory}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">3. Test Reports of accredited laboratory</label>
+          <input type="file" name="testReportsOfAccreditedLaboratory" class="form-control" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+        </div>
+        <div class="col-md-6">
+          <label th:text="#{Circuit_diagram_PCB}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">4. Circuit diagram,PCB layout,part lists and other relevant design information</label>
+          <input type="file" name="circuitDiagramPCB" class="form-control" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+        </div>
+        <div class="col-md-6">
+          <label th:text="#{photographs}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">5. Photographs</label>
+          <input type="file" name="photographs" class="form-control" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+        </div>
+        <div class="col-md-6">
+          <label th:text="#{label}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">6. Label</label>
+          <input type="file" name="label" class="form-control" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+        </div>
+        <div class="col-md-6">
+          <label th:text="#{test_reports_issued_by_accredited_testing}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">7. Test reports issued by accredited testing laboratories recognized by ATRA</label>
+          <input type="file" name="testReportsIssuedByAccreditedTesting" class="form-control" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+        </div>
+      </div>
+    </div>
+
+<!--    Standards compliant With -->
+      <div style="height:20vh;display:none;" id="space2"></div>
+    <div class="card" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+      <div class="card-header b-4" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" title="Only Allowed PDF File">Standards compliant With</div>
+      <div class="card-body row g-3">
+        <div class="col-md-6">
+          <label th:text="#{emc}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">EMC</label>
+          <input type="file" name="emc" th:field="*{emc}" class="form-control" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+        </div>
+        <div class="col-md-6">
+          <label th:text="#{emc_test_report_no}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">Test Report No:</label>
+          <input type="text" class="form-control" th:field="*{emcTestReportNo}"  th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+        </div>
+        <div class="col-md-6">
+          <label th:text="#{radio}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">Radio</label>
+          <input type="file" name="radio" th:field="*{radio}" class="form-control" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+        </div>
+        <div class="col-md-6">
+          <label th:text="#{radio_test_report_no}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">Test Report No:</label>
+          <input type="text" class="form-control" th:field="*{radioTestReportNo}"  th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+        </div>
+        <div class="col-md-6">
+          <label th:text="#{health_and_safety}">Health and Safety</label>
+          <input type="file" name="Health and Safety" th:field="*{healthAndSafety}" class="form-control" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+        </div>
+        <div class="col-md-6">
+          <label th:text="#{health_and_safety_test_report_no}">Test Report No:</label>
+          <input type="text" class="form-control" th:field="*{healthAndSafetyTestReportNo}"  th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+        </div>
+        <div class="col-md-6">
+          <label th:text="#{technology_specific}">Technology Specific</label>
+          <input type="file" name="Technology_Safety" th:field="*{technologySpecific}" class="form-control" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+        </div>
+        <div class="col-md-6">
+          <label th:text="#{technology_specific_test_report_no}">Test Report No:</label>
+          <input type="text" th:field="*{technologySpecificTestReportNo}" class="form-control"  th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+        </div>
+      </div>
+    </div>
+
+
+    <!--    Signature of applicant -->
+    <div class="card mb-4" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+      <div class="card-header b-4" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" title="Only Allowed PDF File">Signature of applicant</div>
+      <div class="card-body row g-3">
+        <div class="col-md-6">
+          <label th:text="#{name}">Name<pre style="display:inline"> (                         )</pre></label>
+        </div>
+        <div class="col-md-6">
+          <label th:text="#{date}">Date:-----------------</label>
+        </div>
+        <div class="col-md-12">
+          <label th:text="#{authorized_signature_of_application}">Authorized Signature of Applicant:</label>
+        </div>
+      </div>
+    </div>
+
+
+      <div class="d-flex justify-content-between align-items-center mt-3">
+        <!-- Left Button -->
+        <div id="left">
+
+          <a th:href="@{/typeofapprovals/home}" class="btn btn-primary">Back to Page</a>
+        </div>
+
+        <!-- Right Button -->
+        <div id="right">
+          <button type="submit" class="btn btn-primary" th:text="#{submit_application}" id="submit">
+            Submit Application
+          </button>
+        </div>
+      </div>
+
+
+    </div>
+  </form>
+  <div style="text-align: center; margin-top: 1rem; width: 50%; margin: auto;" id="prn">
+    <button class="btn btn-primary d-inline-flex align-items-center gap-1 mt-4" onclick="doPrint();" style="display: inline-flex; align-items: center; gap: 0.5rem;">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="height: 1.2em; width: 1.2em;">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6.72 13.829c-.24.03-.48.062-.72.096m.72-.096a42.415 42.415 0 0 1 10.56 0m-10.56 0L6.34 18m10.94-4.171c.24.03.48.062.72.096m-.72-.096L17.66 18m0 0 .229 2.523a1.125 1.125 0 0 1-1.12 1.227H7.231c-.662 0-1.18-.568-1.12-1.227L6.34 18m11.318 0h1.091A2.25 2.25 0 0 0 21 15.75V9.456c0-1.081-.768-2.015-1.837-2.175a48.055 48.055 0 0 0-1.913-.247M6.34 18H5.25A2.25 2.25 0 0 1 3 15.75V9.456c0-1.081.768-2.015 1.837-2.175a48.041 48.041 0 0 1 1.913-.247m10.5 0a48.536 48.536 0 0 0-10.5 0m10.5 0V3.375c0-.621-.504-1.125-1.125-1.125h-8.25c-.621 0-1.125.504-1.125 1.125v3.659M18 10.5h.008v.008H18V10.5Zm-3 0h.008v.008H15V10.5Z" />
+      </svg>
+      Print
+    </button>
+  </div>
+
+
+
+</div>
+
+<!-- Manufacturer Template for JavaScript -->
+<script type="text/template" id="manufacturerTemplate">
+  <td><input type="text" name="manufacturers[__INDEX__].companyName" class="form-control"/></td>
+  <td><input type="text" name="manufacturers[__INDEX__].authorizedImporter" class="form-control"/></td>
+  <td><input type="text" name="manufacturers[__INDEX__].contactPerson" class="form-control"/></td>
+  <td><input type="text" name="manufacturers[__INDEX__].address" class="form-control"/></td>
+  <td><input type="text" name="manufacturers[__INDEX__].manufacturer_P_O_Box" class="form-control"/></td>
+  <td><input type="text" name="manufacturers[__INDEX__].manufacturer_telephone" class="form-control"/></td>
+  <td><input type="text" name="manufacturers[__INDEX__].manufacturer_mobile" class="form-control"/></td>
+  <td><input type="email" name="manufacturers[__INDEX__].manufacturer_email" class="form-control"/></td>
+  <td><button type="button" class="btn btn-danger btn-sm" onclick="removeRow(this)">Remove</button></td>
+  <td><button type="button" class="btn btn-info btn-sm" onclick="resetRow(this)">Reset</button></td>
+</script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const dateInput = document.getElementById("requestDateInput");
+
+    // Trigger native calendar on focus or click
+    dateInput.addEventListener("click", function () {
+      this.showPicker && this.showPicker(); // modern browsers (Chrome, Edge)
+    });
+
+    // Or trigger focus programmatically to ensure the picker opens
+    dateInput.addEventListener("click", function () {
+      this.focus();
+    });
+  });
+</script>
+
+<script>
+  function doPrint() {
+  document.getElementById("pagfooter").style.display="none";
+  document.getElementById("prn").style.display="none";
+  document.getElementById("printHeader").style.display="block";
+  document.getElementById("header_navbar").style.display="none";
+  document.getElementById("space1").style.display="block";
+  document.getElementById("space2").style.display="block";
+
+
+
+
+    window.print();
+    document.getElementById("printHeader").style.display="none";
+    document.getElementById("pagfooter").style.display="block";
+    document.getElementById("prn").style.display="block";
+    document.getElementById("header_navbar").style.display="block";
+    document.getElementById("space1").style.display="none";
+    document.getElementById("space2").style.display="none";
+  }
+</script>
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const typeSelect = document.getElementById("typeSelect");
+    const applicationFee = document.getElementById("applicationFee");
+    const adminFee = document.getElementById("adminFee");
+    const certificateFee = document.getElementById("certificateFee");
+
+    function updateFees() {
+      const selectedType = typeSelect.value;
+
+      if (selectedType === "standard") {
+        adminFee.value = 4000;
+        applicationFee.value = 1000;
+        certificateFee.value = 20000;
+      } else if (selectedType === "simplified") {
+        adminFee.value = 3000;
+        applicationFee.value = 750;
+        certificateFee.value = 15000;
+      } else if (selectedType === "provisional") {
+        adminFee.value = 1600;
+        applicationFee.value = 400;
+        certificateFee.value = 8000;
+      } else {
+        adminFee.value = "";
+        applicationFee.value = "";
+        certificateFee.value = "";
+      }
+    }
+
+    typeSelect.addEventListener("change", updateFees);
+
+    // Call once on page load to set the initial values
+    updateFees();
+  });
+</script>
+
+
+
+<!-- Optional script includes -->
+<div th:replace="scripts :: common-scripts"></div>
+<div th:replace="scripts :: persian-datepicker-scripts"></div>
+<div th:replace="scripts :: data-tables-scripts"></div>
+<div th:replace="scripts :: common-datatable"></div>
+
+<div style="height:25vh"></div>
+<footer th:replace="~{typeofApproval_layout :: page_footer}"></footer>
+</body>
+</html>
