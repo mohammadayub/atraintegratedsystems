@@ -3,6 +3,7 @@ package atraintegratedsystems.typeofapproval.service;
 import atraintegratedsystems.typeofapproval.dto.TypeOfApprovalFormDTO;
 import atraintegratedsystems.typeofapproval.model.*;
 import atraintegratedsystems.typeofapproval.repository.*;
+import atraintegratedsystems.utils.ByteArrayMultipartFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -107,6 +108,40 @@ public class TypeOfApprovalService {
             form.setEquipmentLicenseRequirement(detail.getEquipmentLicenseRequirement());
             // Set other fields as needed...
         });
+
+
+        //Attachment
+
+        var attachment = attachmentRepository.findByApprovalApplicantId(id);
+        attachment.ifPresent(attach->{
+            MultipartFile declartion = new ByteArrayMultipartFile(attach.getDeclarationOfConformity(), "emc-file.pdf", "application/pdf");
+            form.setDeclarationOfConformity(declartion);
+
+
+
+
+
+
+        });
+
+        //StandardComplaint
+
+        var standardComplaint = standardComplaintRepository.findByStandardCompliantId(id);
+        standardComplaint.ifPresent(standard -> {
+            form.setEmcTestReportNo(standard.getEmcTestReportNo());
+            MultipartFile emcFile = new ByteArrayMultipartFile(standard.getEmc(), "emc-file.pdf", "application/pdf");
+            form.setEmc(emcFile);
+            form.setRadioTestReportNo(standard.getRadioTestReportNo());
+            MultipartFile radioFile= new ByteArrayMultipartFile(standard.getRadio() ,"emc-file.pdf", "application/pdf");
+            form.setRadio(radioFile);
+            form.setHealthAndSafetyTestReportNo(standard.getHealthAndSafetyTestReportNo());
+            MultipartFile healthFile = new ByteArrayMultipartFile(standard.getHealthAndSafety(), "emc-file.pdf", "application/pdf");
+            form.setHealthAndSafety(healthFile);
+            form.setTechnologySpecificTestReportNo(standard.getTechnologySpecificTestReportNo());
+            MultipartFile technologyFile= new ByteArrayMultipartFile(standard.getTechnologySpecific(), "emc-file.pdf", "application/pdf");
+            form.setTechnologySpecific(technologyFile);
+
+                });
 
         // You can also pre-load file metadata if needed (optional)
 
@@ -235,9 +270,13 @@ public class TypeOfApprovalService {
             TypeOfApprovalStandardCompliant standardCompliant = new TypeOfApprovalStandardCompliant();
             standardCompliant.setStandardCompliant(savedApplicant);
             setCompressedAttachmentField(standardCompliant::setEmc, form.getEmc());
+            standardCompliant.setEmcTestReportNo(form.getEmcTestReportNo());
             setCompressedAttachmentField(standardCompliant::setRadio, form.getRadio());
+            standardCompliant.setRadioTestReportNo(form.getRadioTestReportNo());
             setCompressedAttachmentField(standardCompliant::setHealthAndSafety, form.getHealthAndSafety());
+            standardCompliant.setHealthAndSafetyTestReportNo(form.getHealthAndSafetyTestReportNo());
             setCompressedAttachmentField(standardCompliant::setTechnologySpecific, form.getTechnologySpecific());
+            standardCompliant.setTechnologySpecificTestReportNo(form.getTechnologySpecificTestReportNo());
             standardComplaintRepository.save(standardCompliant);
         } catch (IOException e) {
             e.printStackTrace();
@@ -350,9 +389,13 @@ public class TypeOfApprovalService {
             standardCompliant.setStandardCompliant(existingApplicant);
 
             setCompressedAttachmentField(standardCompliant::setEmc, form.getEmc());
+            standardCompliant.setEmcTestReportNo(form.getEmcTestReportNo());
             setCompressedAttachmentField(standardCompliant::setRadio, form.getRadio());
+            standardCompliant.setRadioTestReportNo(form.getRadioTestReportNo());
             setCompressedAttachmentField(standardCompliant::setHealthAndSafety, form.getHealthAndSafety());
+            standardCompliant.setHealthAndSafetyTestReportNo(form.getHealthAndSafetyTestReportNo());
             setCompressedAttachmentField(standardCompliant::setTechnologySpecific, form.getTechnologySpecific());
+            standardCompliant.setTechnologySpecificTestReportNo(form.getTechnologySpecificTestReportNo());
 
             standardComplaintRepository.save(standardCompliant);
         } catch (IOException e) {
