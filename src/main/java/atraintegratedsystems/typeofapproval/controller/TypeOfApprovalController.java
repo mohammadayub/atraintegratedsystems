@@ -70,7 +70,7 @@ public class TypeOfApprovalController {
     public String editForm(@ModelAttribute TypeOfApprovalFormDTO form, Model model) {
         try {
             approvalService.editForm(form);
-            return "redirect:/typeofapprovals/onlineapplicationform/success";
+            return "redirect:/typeofapprovals/onlineapplicationform/list";
         } catch (IllegalArgumentException ex) {
             model.addAttribute("form", form);
             model.addAttribute("errorMessage", ex.getMessage());
