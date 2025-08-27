@@ -114,8 +114,28 @@ public class TypeOfApprovalService {
 
         var attachment = attachmentRepository.findByApprovalApplicantId(id);
         attachment.ifPresent(attach->{
-            MultipartFile declartion = new ByteArrayMultipartFile(attach.getDeclarationOfConformity(), "emc-file.pdf", "application/pdf");
+            MultipartFile declartion = new ByteArrayMultipartFile(attach.getDeclarationOfConformity(), "declaration-file.pdf", "application/pdf");
             form.setDeclarationOfConformity(declartion);
+
+            MultipartFile technicalOperationalDoc = new ByteArrayMultipartFile(attach.getTechnicalOperationalDocOfTheRCE(), "RCE-file.pdf", "application/pdf");
+            form.setTechnicalOperationalDocOfTheRCE(technicalOperationalDoc);
+
+            MultipartFile accreditedLaboratory = new ByteArrayMultipartFile(attach.getTestReportsIssuedByAccreditedTesting(), "accreditedLaboratory-file.pdf", "application/pdf");
+            form.setTestReportsOfAccreditedLaboratory(accreditedLaboratory);
+
+            MultipartFile circuiteDiagramPCB = new ByteArrayMultipartFile(attach.getCircuitDiagramPCB(), "circuiteDiagramPCB-file.pdf", "application/pdf");
+            form.setCircuitDiagramPCB(circuiteDiagramPCB);
+
+            MultipartFile photographs = new ByteArrayMultipartFile(attach.getPhotographs(), "photographs-file.pdf", "application/pdf");
+            form.setPhotographs(photographs);
+
+            MultipartFile Label = new ByteArrayMultipartFile(attach.getLabel(), "Label-file.pdf", "application/pdf");
+            form.setLabel(Label);
+
+            MultipartFile testReport = new ByteArrayMultipartFile(attach.getTestReportsIssuedByAccreditedTesting(), "testReport-file.pdf", "application/pdf");
+            form.setTestReportsIssuedByAccreditedTesting(testReport);
+
+
 
 
 
@@ -132,13 +152,13 @@ public class TypeOfApprovalService {
             MultipartFile emcFile = new ByteArrayMultipartFile(standard.getEmc(), "emc-file.pdf", "application/pdf");
             form.setEmc(emcFile);
             form.setRadioTestReportNo(standard.getRadioTestReportNo());
-            MultipartFile radioFile= new ByteArrayMultipartFile(standard.getRadio() ,"emc-file.pdf", "application/pdf");
+            MultipartFile radioFile= new ByteArrayMultipartFile(standard.getRadio() ,"radioFile-file.pdf", "application/pdf");
             form.setRadio(radioFile);
             form.setHealthAndSafetyTestReportNo(standard.getHealthAndSafetyTestReportNo());
-            MultipartFile healthFile = new ByteArrayMultipartFile(standard.getHealthAndSafety(), "emc-file.pdf", "application/pdf");
+            MultipartFile healthFile = new ByteArrayMultipartFile(standard.getHealthAndSafety(), "healthFile-file.pdf", "application/pdf");
             form.setHealthAndSafety(healthFile);
             form.setTechnologySpecificTestReportNo(standard.getTechnologySpecificTestReportNo());
-            MultipartFile technologyFile= new ByteArrayMultipartFile(standard.getTechnologySpecific(), "emc-file.pdf", "application/pdf");
+            MultipartFile technologyFile= new ByteArrayMultipartFile(standard.getTechnologySpecific(), "technologyFile-file.pdf", "application/pdf");
             form.setTechnologySpecific(technologyFile);
 
                 });
