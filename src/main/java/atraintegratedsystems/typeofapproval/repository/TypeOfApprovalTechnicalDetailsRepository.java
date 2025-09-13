@@ -11,4 +11,5 @@ public interface TypeOfApprovalTechnicalDetailsRepository
         extends JpaRepository<TypeOfApprovalTechnicalDetail, Long> {
 
     Optional<TypeOfApprovalTechnicalDetail> findByTechnicalDetailsId(Long applicantId);
+
 }

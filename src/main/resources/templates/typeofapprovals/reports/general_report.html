@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head th:replace="~{layout :: page_head}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap" />
+
+    <!-- DataTables + Buttons CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css">
+
+    <!-- Thymeleaf fragment styles -->
+    <div th:replace="styles :: data-tables-styles"></div>
+    <div th:replace="styles :: select2-styles"></div>
+    <title>General Report</title>
+
+    <style>
+        body {
+            background-color: #f5f5f5;
+            font-family: 'EB Garamond', serif;
+            font-weight: bold;
+        }
+
+        .table-container {
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            margin-top: 15px;
+        }
+
+        #profileTable {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9em;
+        }
+
+        #profileTable th, #profileTable td {
+            padding: 6px;
+            text-align: center;
+            vertical-align: middle;
+            font-size: 0.8em;
+        }
+
+        #profileTable thead th {
+            color: white;
+            font-size: 14px;
+        }
+
+        #profileTable tbody tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        #profileTable th {
+            white-space: nowrap;
+        }
+
+        @media (max-width: 768px) {
+            #profileTable th, #profileTable td {
+                font-size: 0.7em;
+                padding: 4px;
+            }
+        }
+
+        .btn.btn-success {
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        tfoot th {
+            background-color: #d9edf7;
+            font-weight: bold;
+        }
+        .dataTables_wrapper .dataTables_paginate .paginate_button {
+       margin: 0 2px;
+       padding: 5px 10px;
+       border-radius: 6px;
+   }
+
+   .dataTables_wrapper .dataTables_paginate .paginate_button.current {
+       background-color: #007bff !important;
+       color: white !important;
+       border: none !important;
+   }
+    </style>
+</head>
+<body>
+<nav th:replace="~{typeofApproval_layout :: page_navbar}"></nav>
+
+<div class="container-fluid mt-4">
+    <fieldset>
+        <legend>General Report</legend>
+        <div class="table-container">
+            <table class="table table-bordered" id="profileTable">
+                <thead class="bg-primary">
+                <tr>
+                    <th>Request Date</th>
+                    <th>Import Reg No</th>
+                    <th>Company Name</th>
+                    <th>Contact Person</th>
+                    <th>Type Select</th>
+                    <th>Application Fee</th>
+                    <th>App Fee Org</th>
+                    <th>App Fee Status</th>
+                    <th>App Fee Voucher No</th>
+                    <th>App Fee Voucher Date</th>
+                    <th>App Fee Submission Date</th>
+                    <th>App Fee Entry Date</th>
+                    <th>App Fee Entered By</th>
+                    <th>Admin Fee</th>
+                    <th>Admin Fee Org</th>
+                    <th>Admin Fee Status</th>
+                    <th>Admin Fee Voucher No</th>
+                    <th>Admin Fee Voucher Date</th>
+                    <th>Admin Fee Submission Date</th>
+                    <th>Admin Fee Entry Date</th>
+                    <th>Admin Fee Entered By</th>
+                    <th>Certificate Fee</th>
+                    <th>Cert Fee Org</th>
+                    <th>Cert Fee Status</th>
+                    <th>Cert Fee Voucher No</th>
+                    <th>Cert Fee Voucher Date</th>
+                    <th>Cert Fee Submission Date</th>
+                    <th>Cert Fee Entry Date</th>
+                    <th>Cert Fee Entered By</th>
+                    <th>Is Refered To Finance</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="applicant : ${applicants}">
+                    <td th:text="${applicant.requestDate ?: 'NOT'}"></td>
+                    <td th:text="${applicant.importRegistrationNo ?: 'NOT'}"></td>
+                    <td th:text="${applicant.companyName ?: 'NOT'}"></td>
+                    <td th:text="${applicant.contactPerson ?: 'NOT'}"></td>
+                    <td th:text="${applicant.typeSelect ?: 'NOT'}"></td>
+                    <td th:text="${applicant.applicationFee ?: '0'}" style="background-color:#FCEFCB"></td>
+                    <td th:text="${applicant.applicationFeeOrganizationName ?: 'NOT'}"></td>
+                    <td th:text="${applicant.applicationFeeStatus != null} ? 'Paid' : 'Unpaid'"></td>
+                    <td th:text="${applicant.applicationFeeBankVoucherNo ?: 'NOT'}"></td>
+                    <td th:text="${applicant.applicationFeeVoucherDate ?: 'NOT'}"></td>
+                    <td th:text="${applicant.applicationFeeBankVoucherSubmissionDate ?: 'NOT'}"></td>
+                    <td th:text="${applicant.applicationFeeEntryDate ?: 'NOT'}"></td>
+                    <td th:text="${applicant.applicationFeeEnteredBy ?: 'NOT'}"></td>
+                    <td th:text="${applicant.adminFee ?: '0'}" style="background-color:#E9A319"></td>
+                    <td th:text="${applicant.adminFeeOrganizationName ?: 'NOT'}"></td>
+                    <td th:text="${applicant.adminFeeStatus != null} ? 'Paid' : 'Unpaid'"></td>
+                    <td th:text="${applicant.adminFeeBankVoucherNo ?: 'NOT'}"></td>
+                    <td th:text="${applicant.adminFeeVoucherDate ?: 'NOT'}"></td>
+                    <td th:text="${applicant.adminFeeBankVoucherSubmissionDate ?: 'NOT'}"></td>
+                    <td th:text="${applicant.adminFeeEntryDate ?: 'NOT'}"></td>
+                    <td th:text="${applicant.adminFeeEnteredBy ?: 'NOT'}"></td>
+                    <td th:text="${applicant.certificateFee ?: '0'}" style="background-color:#FF9B17"></td>
+                    <td th:text="${applicant.certificateFeeOrganizationName ?: 'NOT'}"></td>
+                    <td th:text="${applicant.certificateFeeStatus != null} ? 'Paid' : 'Unpaid'"></td>
+                    <td th:text="${applicant.certificateFeeBankVoucherNo ?: 'NOT'}"></td>
+                    <td th:text="${applicant.certificateFeeVoucherDate ?: 'NOT'}"></td>
+                    <td th:text="${applicant.certificateFeeBankVoucherSubmissionDate ?: 'NOT'}"></td>
+                    <td th:text="${applicant.certificateFeeEntryDate ?: 'NOT'}"></td>
+                    <td th:text="${applicant.certificateFeeEnteredBy ?: 'NOT'}"></td>
+                    <td th:text="${applicant.referStatus != null} ? 'Yes' : 'Not Refered'"></td>
+                </tr>
+                </tbody>
+                <tfoot>
+                <tr>
+                    <th></th><th></th><th></th><th></th>
+                    <th style="text-align:right">Totals:</th>
+                    <th id="appFeeTotal"></th> <!-- Application Fee -->
+                    <th></th><th></th><th></th><th></th><th></th><th></th><th></th> <!-- 7 columns for App Fee details -->
+                    <th id="adminFeeTotal"></th> <!-- Admin Fee -->
+                    <th></th><th></th><th></th><th></th><th></th><th></th><th></th> <!-- 7 columns for Admin Fee details -->
+                    <th id="certFeeTotal"></th> <!-- Certificate Fee -->
+                    <th></th><th></th><th></th><th></th><th></th><th></th>
+                    <th>Grand Total:</th> <!-- 6 columns for Cert Fee details -->
+                    <th id="grandTotal"></th> <!-- Grand Total at the end -->
+                </tr>
+                </tfoot>
+
+
+            </table>
+        </div>
+    </fieldset>
+</div>
+
+<!-- Script Fragments -->
+<div th:replace="scripts :: common-scripts"></div>
+
+<!-- JS Libraries -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+
+<!--<script>-->
+<!--    $(document).ready(function () {-->
+<!--        let table = $('#profileTable').DataTable({-->
+<!--            dom: 'Bfrtip',-->
+<!--            pagingType: "full_numbers",-->
+<!--            buttons: [-->
+<!--                {-->
+<!--                    extend: 'excelHtml5',-->
+<!--                    text: 'Export to Excel',-->
+<!--                    className: 'btn btn-success',-->
+<!--                    footer: true, // ✅ include totals in Excel-->
+<!--                    customize: function (xlsx) {-->
+<!--                        let sheet = xlsx.xl.worksheets['sheet1.xml'];-->
+<!--                        // ✅ Make totals row bold in Excel-->
+<!--                        $('row:last c', sheet).attr('s', '2');-->
+<!--                    }-->
+<!--                }-->
+<!--            ],-->
+<!--            initComplete: function () {-->
+<!--                this.api().columns().every(function (colIdx) {-->
+<!--                    var column = this;-->
+<!--                    var header = $(column.header());-->
+<!--                    var columnText = header.text();-->
+<!--                    header.empty().append('<div>' + columnText + '</div>');-->
+
+<!--                    var input = $('<input type="text" placeholder="Search" style="width: 100%; margin-top: 5px;"/>')-->
+<!--                        .appendTo(header);-->
+
+<!--                    // ✅ Exact search for Status columns (7, 15, 23)-->
+<!--                    if (colIdx === 7 || colIdx === 15 || colIdx === 23) {-->
+<!--                        input.on('keyup change clear', function () {-->
+<!--                            if (column.search() !== this.value) {-->
+<!--                                column-->
+<!--                                    .search('^' + this.value + '$', true, false) // exact match-->
+<!--                                    .draw();-->
+<!--                            }-->
+<!--                        });-->
+<!--                    } else {-->
+<!--                        // ✅ Like search for all other columns-->
+<!--                        input.on('keyup change clear', function () {-->
+<!--                            if (column.search() !== this.value) {-->
+<!--                                column-->
+<!--                                    .search(this.value, true, false) // partial match-->
+<!--                                    .draw();-->
+<!--                            }-->
+<!--                        });-->
+<!--                    }-->
+<!--                });-->
+<!--            },-->
+<!--            footerCallback: function (row, data, start, end, display) {-->
+<!--                var api = this.api();-->
+
+<!--                // Helper to parse numbers-->
+<!--                var intVal = function (i) {-->
+<!--                    return typeof i === 'string'-->
+<!--                        ? i.replace(/[\$,]/g, '') * 1-->
+<!--                        : typeof i === 'number'-->
+<!--                            ? i : 0;-->
+<!--                };-->
+
+<!--                // Application Fee total-->
+<!--                var appFeeTotal = api-->
+<!--                    .column(5, { page: 'current' })-->
+<!--                    .data()-->
+<!--                    .reduce((a, b) => intVal(a) + intVal(b), 0);-->
+
+<!--                // Admin Fee total-->
+<!--                var adminFeeTotal = api-->
+<!--                    .column(13, { page: 'current' })-->
+<!--                    .data()-->
+<!--                    .reduce((a, b) => intVal(a) + intVal(b), 0);-->
+
+<!--                // Certificate Fee total-->
+<!--                var certFeeTotal = api-->
+<!--                    .column(21, { page: 'current' })-->
+<!--                    .data()-->
+<!--                    .reduce((a, b) => intVal(a) + intVal(b), 0);-->
+
+<!--                // Grand Total-->
+<!--                var grandTotal = appFeeTotal + adminFeeTotal + certFeeTotal;-->
+
+<!--                // ✅ Update footer cells-->
+<!--                $(api.column(5).footer()).html(appFeeTotal.toLocaleString());-->
+<!--                $(api.column(13).footer()).html(adminFeeTotal.toLocaleString());-->
+<!--                $(api.column(21).footer()).html(certFeeTotal.toLocaleString());-->
+<!--                $('#grandTotal').html(grandTotal.toLocaleString());-->
+<!--            }-->
+<!--        });-->
+<!--    });-->
+<!--</script>-->
+
+
+
+
+
+<div style="height:10vh;"></div>
+<footer th:replace="~{layout :: page_footer}"></footer>
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>
+
+
+<script>
+    $(document).ready(function () {
+        let table = $('#profileTable').DataTable({
+            dom: 'Bfrtip',
+            pagingType: "full_numbers",
+            buttons: [
+                {
+                    extend: 'excelHtml5',
+                    text: 'Export to Excel',
+                    className: 'btn btn-success',
+                    footer: true, // ✅ include totals in Excel
+                    customize: function (xlsx) {
+                        let sheet = xlsx.xl.worksheets['sheet1.xml'];
+                        // ✅ Make totals row bold in Excel
+                        $('row:last c', sheet).attr('s', '2');
+                    }
+                }
+            ],
+            initComplete: function () {
+                // Utility to escape regex special characters
+                var escapeRegex = $.fn.dataTable.util.escapeRegex;
+
+                this.api().columns().every(function (colIdx) {
+                    var column = this;
+                    var header = $(column.header());
+                    var columnText = header.text();
+                    header.empty().append('<div>' + columnText + '</div>');
+
+                    var input = $('<input type="text" placeholder="Search" style="width: 100%; margin-top: 5px;"/>')
+                        .appendTo(header);
+
+                    // Handle input events
+                    input.on('keyup change clear', function () {
+                        var raw = this.value;
+                        var val = $.trim(raw);
+
+                        // ✅ Exact search for Status columns
+                        if (colIdx === 7 || colIdx === 15 || colIdx === 23) {
+                            if (val === '') {
+                                // Reset search → show all data
+                                column.search('').draw();
+                            } else {
+                                var pattern = '^' + escapeRegex(val) + '$';
+                                column.search(pattern, true, false).draw();
+                            }
+                        } else {
+                            // ✅ Like search for other columns
+                            if (val === '') {
+                                column.search('').draw();
+                            } else {
+                                var pattern = escapeRegex(val);
+                                column.search(pattern, true, false).draw();
+                            }
+                        }
+                    });
+                });
+            },
+            footerCallback: function (row, data, start, end, display) {
+                var api = this.api();
+
+                // Helper to parse numbers
+                var intVal = function (i) {
+                    return typeof i === 'string'
+                        ? i.replace(/[\$,]/g, '') * 1
+                        : typeof i === 'number'
+                            ? i : 0;
+                };
+
+                // Application Fee total
+                var appFeeTotal = api
+                    .column(5, { page: 'current' })
+                    .data()
+                    .reduce((a, b) => intVal(a) + intVal(b), 0);
+
+                // Admin Fee total
+                var adminFeeTotal = api
+                    .column(13, { page: 'current' })
+                    .data()
+                    .reduce((a, b) => intVal(a) + intVal(b), 0);
+
+                // Certificate Fee total
+                var certFeeTotal = api
+                    .column(21, { page: 'current' })
+                    .data()
+                    .reduce((a, b) => intVal(a) + intVal(b), 0);
+
+                // Grand Total
+                var grandTotal = appFeeTotal + adminFeeTotal + certFeeTotal;
+
+                // ✅ Update footer cells
+                $(api.column(5).footer()).html(appFeeTotal.toLocaleString());
+                $(api.column(13).footer()).html(adminFeeTotal.toLocaleString());
+                $(api.column(21).footer()).html(certFeeTotal.toLocaleString());
+                $('#grandTotal').html(grandTotal.toLocaleString());
+            }
+        });
+    });
+</script>

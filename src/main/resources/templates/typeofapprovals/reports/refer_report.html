@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head th:replace="~{layout :: page_head}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap" />
+
+    <!-- DataTables + Buttons CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css">
+
+    <!-- Thymeleaf fragment styles -->
+    <div th:replace="styles :: data-tables-styles"></div>
+    <div th:replace="styles :: select2-styles"></div>
+    <title>Refered Report</title>
+
+    <style>
+        body {
+            background-color: #f5f5f5;
+            font-family: 'EB Garamond', serif;
+            font-weight: bold;
+        }
+
+        .table-container {
+            border: 1px solid #ddd;
+            margin-top: 15px;
+        }
+
+        #profileTable {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9em;
+        }
+
+        #profileTable th, #profileTable td {
+            padding: 6px;
+            text-align: center;
+            vertical-align: middle;
+            font-size: 0.8em;
+        }
+
+        #profileTable thead th {
+            color: white;
+            font-size: 14px;
+        }
+
+        #profileTable tbody tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        #profileTable th {
+            white-space: nowrap;
+        }
+
+        @media (max-width: 768px) {
+            #profileTable th, #profileTable td {
+                font-size: 0.7em;
+                padding: 4px;
+            }
+        }
+
+        .btn.btn-success {
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+<nav th:replace="~{typeofApproval_layout :: page_navbar}"></nav>
+
+<div class="container-fluid mt-4">
+    <fieldset>
+        <legend>Refered Report</legend>
+        <div class="table-container">
+            <table class="table table-bordered" id="profileTable">
+                <thead class="bg-primary">
+                <tr>
+                    <th>Request Date</th>
+                    <th>Company Name</th>
+                    <th>Type Select</th>
+                    <th>Refered Date</th>
+                    <th>Refered Status</th>
+                    <th>Differences (Request,Refered)</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="applicant : ${applicants}">
+                    <td th:text="${applicant.requestDate ?: 'N/A'}"></td>
+                    <td th:text="${applicant.companyName ?: 'N/A'}"></td>
+                    <td th:text="${applicant.typeSelect ?: 'N/A'}"></td>
+                    <td th:text="${applicant.referDate ?: 'N/A'}"></td>
+                    <td th:text="${applicant.referStatus != null} ? 'Yes' : 'Not Refered'"></td>
+                    <td class="diff-column"></td>
+
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </fieldset>
+</div>
+
+<!-- Script Fragments -->
+<div th:replace="scripts :: common-scripts"></div>
+
+<!-- JS Libraries -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+
+
+
+<style>
+    /* Google-style pagination */
+    .dataTables_wrapper .dataTables_paginate {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 15px;
+        font-family: 'EB Garamond', serif;
+    }
+
+    .dataTables_wrapper .dataTables_paginate .paginate_button {
+        border: none !important;
+        background: none !important;
+        padding: 6px 12px;
+        margin: 0 2px;
+        cursor: pointer;
+        border-radius: 50%;
+        font-weight: bold;
+        color: #007bff !important;
+    }
+
+    .dataTables_wrapper .dataTables_paginate .paginate_button.current {
+        background-color: #007bff !important;
+        color: white !important;
+        border-radius: 50%;
+    }
+
+    .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+        background-color: #e9ecef !important;
+        color: #007bff !important;
+    }
+
+    .dataTables_wrapper .dataTables_paginate .paginate_button.disabled {
+        color: #ccc !important;
+        cursor: not-allowed;
+    }
+</style>
+
+<script>
+    $(document).ready(function () {
+        let table = $('#profileTable').DataTable({
+            dom: 'Bfrtip',
+            pagingType: "simple_numbers", // Google-like (Prev / 1 2 3 ... Next)
+            buttons: [
+                {
+                    extend: 'excelHtml5',
+                    text: 'Export to Excel',
+                    className: 'btn btn-success'
+                }
+            ],
+            initComplete: function () {
+                var escapeRegex = $.fn.dataTable.util.escapeRegex;
+
+                this.api().columns().every(function (colIdx) {
+                    var column = this;
+                    var header = $(column.header());
+                    var columnText = header.text();
+                    header.empty().append('<div>' + columnText + '</div>');
+
+                    if (colIdx === 4) {
+                        // Dropdown for Refered Status
+                        var select = $('<select style="width: 100%; margin-top: 5px;">' +
+                            '<option value="">All</option>' +
+                            '<option value="Yes">Yes</option>' +
+                            '<option value="Not Refered">Not Refered</option>' +
+                            '</select>')
+                            .appendTo(header)
+                            .on('change', function () {
+                                var val = $(this).val();
+                                column.search(val ? '^' + escapeRegex(val) + '$' : '', true, false).draw();
+                            });
+                    } else {
+                        // Textbox for other columns
+                        var input = $('<input type="text" placeholder="Search" style="width: 100%; margin-top: 5px;"/>')
+                            .appendTo(header)
+                            .on('keyup change clear', function () {
+                                var val = $.trim(this.value);
+                                column.search(val ? escapeRegex(val) : '', true, false).draw();
+                            });
+                    }
+                });
+            }
+        });
+
+        // Function to calculate difference in days
+        function calculateDifferences() {
+            table.rows({ search: 'applied' }).every(function () {
+                var $row = $(this.node());
+                var requestDate = new Date($row.find('td').eq(0).text());
+                var referDate = new Date($row.find('td').eq(3).text());
+
+                if (!isNaN(requestDate) && !isNaN(referDate)) {
+                    var diffTime = referDate - requestDate;
+                    var diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                    $row.find('td').eq(5).text(diffDays + " day(s)");
+                } else {
+                    $row.find('td').eq(5).text("N/A");
+                }
+            });
+        }
+
+        // Initial calculation
+        calculateDifferences();
+
+        // Recalculate on table redraw
+        table.on('draw', function () {
+            calculateDifferences();
+        });
+    });
+</script>
+
+
+
+
+<div style="height:10vh;"></div>
+<footer th:replace="~{layout :: page_footer}"></footer>
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

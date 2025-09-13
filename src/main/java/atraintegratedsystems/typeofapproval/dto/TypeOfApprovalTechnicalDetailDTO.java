@@ -6,6 +6,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.time.LocalDate;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class TypeOfApprovalTechnicalDetailDTO {
     private long id;
     private String gsm;
@@ -52,4 +54,7 @@ public class TypeOfApprovalTechnicalDetailDTO {
     private String enteredBy;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate enteredDate;
+    private String companyName;
+
+
 }

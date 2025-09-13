@@ -133,6 +133,42 @@
     </div>
   </fieldset>
 
+  <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_TYPEOFAPPROVAL_ADMIN','ROLE_TYPEOFAPPROVAL_STANDARD')">
+    <legend>Reports Section</legend>
+    <div class="row g-4">
+      <div class="col-sm-4">
+        <div class="custom-card text-center p-3">
+          <a th:href="@{/typeofapprovals/reports/general_report}">
+            <img class="rounded" th:src="@{/images/typeofapproval_general_repots.png}" alt="User Management" style="height:100px;width:100px;">
+          </a>
+          <h4 class="license-link mt-2">
+            <a th:href="@{/typeofapprovals/reports/general_report}" style="color: #14438B;font-size: 18px;">General Report</a></h4>
+        </div>
+      </div>
+
+      <div class="col-sm-4">
+        <div class="custom-card text-center p-3">
+          <a th:href="@{/typeofapprovals/reports/refer_report}">
+            <img class="rounded" th:src="@{/images/Refer_Report.png}" alt="User Management" style="height:100px;width:100px;">
+          </a>
+          <h4 class="license-link mt-2">
+            <a th:href="@{/typeofapprovals/reports/refer_report}" style="color: #14438B;font-size: 18px;">Refer Report</a> </h4>
+        </div>
+      </div>
+
+      <div class="col-sm-4">
+        <div class="custom-card text-center p-3">
+          <a th:href="@{/typeofapprovals/reports/company-services}">
+            <img class="rounded" th:src="@{/images/services_Reports.png}" alt="User Management" style="height:100px;width:100px;">
+          </a>
+          <h4 class="license-link mt-2">
+            <a th:href="@{/typeofapprovals/reports/company-services}" style="color: #14438B;font-size: 18px;">Company Service Report</a> </h4>
+        </div>
+      </div>
+
+    </div>
+  </fieldset>
+
 
   <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_TYPEOFAPPROVAL_ADMIN','ROLE_TYPEOFAPPROVAL_STANDARD')">
   <legend>User Management</legend>

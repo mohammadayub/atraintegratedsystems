@@ -1,12 +1,16 @@
 package atraintegratedsystems.typeofapproval.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Column;
 import java.time.LocalDate;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class TypeOfApprovalApplicantDTO {
     private long id;
     @DateTimeFormat(pattern = "yyyy-MM-dd")

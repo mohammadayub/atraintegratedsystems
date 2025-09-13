@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head th:replace="~{layout :: page_head}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css">
+    <div th:replace="styles :: data-tables-styles"></div>
+    <div th:replace="styles :: select2-styles"></div>
+    <title>Approved Technical Details Report</title>
+
+    <style>
+        body {
+            background-color: #f5f5f5;
+            font-family: 'EB Garamond', serif;
+            font-weight: bold;
+        }
+
+        .table-container {
+            overflow-x: auto;   /* enable horizontal scroll */
+            overflow-y: hidden;
+            border: 1px solid #ddd;
+            margin-top: 15px;
+        }
+
+        #technicalTable {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9em;
+        }
+
+        #technicalTable th, #technicalTable td {
+            padding: 6px;
+            text-align: center;
+            vertical-align: middle;
+            font-size: 0.8em;
+        }
+
+        #technicalTable thead th {
+            color: white;
+            font-size: 14px;
+        }
+
+        #technicalTable tbody tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        #technicalTable th {
+            white-space: nowrap;
+        }
+
+        @media (max-width: 768px) {
+            #technicalTable th, #technicalTable td {
+                font-size: 0.7em;
+                padding: 4px;
+            }
+        }
+
+        tfoot th {
+            background-color: #d9edf7;
+            font-weight: bold;
+        }
+
+        .btn.btn-success {
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+        .dataTables_wrapper .dataTables_paginate .paginate_button {
+    border-radius: 50% !important;
+    margin: 0 2px;
+    padding: 5px 10px;
+    border: none !important;
+    background: none !important;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.current {
+    background: #4285f4 !important; /* Google Blue */
+    color: white !important;
+    border-radius: 50% !important;
+}
+
+    </style>
+</head>
+<body>
+<nav th:replace="~{typeofApproval_layout :: page_navbar}"></nav>
+
+<div class="container-fluid mt-4">
+    <fieldset>
+        <legend>Approved Technical Details Report</legend>
+        <div class="table-container">
+            <table class="table table-bordered" id="technicalTable">
+                <thead class="bg-primary">
+                <tr>
+                    <th>Company Name</th>
+                    <th>GSM</th>
+                    <th>CDMA</th>
+                    <th>LTE</th>
+                    <th>TETRA</th>
+                    <th>Amateur Radio</th>
+                    <th>Private Mobile Radio</th>
+                    <th>PMR Radio</th>
+                    <th>Radar</th>
+                    <th>RLAN</th>
+                    <th>WiMAX</th>
+                    <th>FWA</th>
+                    <th>Microwave</th>
+                    <th>Sound Broadcasting</th>
+                    <th>TV Broadcasting</th>
+                    <th>Cordless Phone</th>
+                    <th>SRD</th>
+                    <th>RFID</th>
+                    <th>Satellite Radio</th>
+                    <th>Radio Navigation</th>
+                    <th>Satellite TV</th>
+                    <th>VSAT</th>
+                    <th>Other</th>
+                    <th>Intended Use</th>
+                    <th>Model Number</th>
+                    <th>Brand Name</th>
+                    <th>Type Number</th>
+                    <th>Country of Origin</th>
+                    <th>Frequency Range (MHz)</th>
+                    <th>Frequency Range (GHz)</th>
+                    <th>Output Power</th>
+                    <th>Transmission Capacity</th>
+                    <th>Channel Capacity</th>
+                    <th>Channel Spacing</th>
+                    <th>Modulation Type</th>
+                    <th>Antenna Type</th>
+                    <th>Antenna Gain</th>
+                    <th>Technical Interface</th>
+                    <th>Technical Variants</th>
+                    <th>Equipment License Requirement</th>
+                    <th>Entered By</th>
+                    <th>Entered Date</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="detail : ${details}">
+                    <td th:text="${detail.companyName ?: 'NOT'}"></td>
+                    <td th:text="${detail.gsm ?: '0'}"></td>
+                    <td th:text="${detail.cdma ?: '0'}"></td>
+                    <td th:text="${detail.lte ?: '0'}"></td>
+                    <td th:text="${detail.tetra ?: '0'}"></td>
+                    <td th:text="${detail.amateurRadio ?: '0'}"></td>
+                    <td th:text="${detail.privateMobileRadio ?: '0'}"></td>
+                    <td th:text="${detail.pmrRadio ?: '0'}"></td>
+                    <td th:text="${detail.radar ?: '0'}"></td>
+                    <td th:text="${detail.rlan ?: '0'}"></td>
+                    <td th:text="${detail.wimax ?: '0'}"></td>
+                    <td th:text="${detail.fwa ?: '0'}"></td>
+                    <td th:text="${detail.microwave ?: '0'}"></td>
+                    <td th:text="${detail.soundBroadcasting ?: '0'}"></td>
+                    <td th:text="${detail.tvBroadcasting ?: '0'}"></td>
+                    <td th:text="${detail.cordlessPhone ?: '0'}"></td>
+                    <td th:text="${detail.srd ?: '0'}"></td>
+                    <td th:text="${detail.rfid ?: '0'}"></td>
+                    <td th:text="${detail.satelliteRadio ?: '0'}"></td>
+                    <td th:text="${detail.radioNavigation ?: '0'}"></td>
+                    <td th:text="${detail.satelliteTv ?: '0'}"></td>
+                    <td th:text="${detail.vsat ?: '0'}"></td>
+                    <td th:text="${detail.other ?: '0'}"></td>
+                    <td th:text="${detail.intendedUse ?: 'NOT'}"></td>
+                    <td th:text="${detail.modelNumber ?: 'NOT'}"></td>
+                    <td th:text="${detail.brandName ?: 'NOT'}"></td>
+                    <td th:text="${detail.typeNumber ?: 'NOT'}"></td>
+                    <td th:text="${detail.countryofOrigin ?: 'NOT'}"></td>
+                    <td th:text="${detail.frequencyrangeFromMHZ ?: '0'} + ' - ' + ${detail.frequencyrangeToMHZ ?: '0'}"></td>
+                    <td th:text="${detail.frequencyrangeFromGHZ ?: '0'} + ' - ' + ${detail.frequencyrangeToGHZ ?: '0'}"></td>
+                    <td th:text="${detail.outputPowerRadiatedConducted ?: '0'}"></td>
+                    <td th:text="${detail.transmissionCapacity ?: '0'}"></td>
+                    <td th:text="${detail.channelCapacity ?: '0'}"></td>
+                    <td th:text="${detail.channelSpacing ?: '0'}"></td>
+                    <td th:text="${detail.modulationType ?: 'NOT'}"></td>
+                    <td th:text="${detail.antennaType ?: 'NOT'}"></td>
+                    <td th:text="${detail.antennaGain ?: '0'}"></td>
+                    <td th:text="${detail.technicalInterface ?: 'NOT'}"></td>
+                    <td th:text="${detail.technicalVariants ?: 'NOT'}"></td>
+                    <td th:text="${detail.equipmentLicenseRequirement ?: 'NOT'}"></td>
+                    <td th:text="${detail.enteredBy ?: 'NOT'}"></td>
+                    <td th:text="${detail.enteredDate ?: 'NOT'}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </fieldset>
+</div>
+
+<div th:replace="scripts :: common-scripts"></div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+
+
+
+<script>
+    $(document).ready(function () {
+        let table = $('#technicalTable').DataTable({
+            dom: 'Bfrtip',
+            pagingType: "simple_numbers", // Google style (Previous 1 2 3 … Next)
+            pageLength: 10,
+            buttons: [
+                {
+                    extend: 'excelHtml5',
+                    text: 'Export to Excel',
+                    className: 'btn btn-success',
+                    footer: false
+                }
+            ],
+            initComplete: function () {
+                var escapeRegex = $.fn.dataTable.util.escapeRegex;
+                this.api().columns().every(function (colIdx) {
+                    var column = this;
+                    var header = $(column.header());
+                    var columnText = header.text();
+                    header.empty().append('<div>' + columnText + '</div>');
+                    var input = $('<input type="text" placeholder="Search" style="width:100%;margin-top:5px"/>')
+                        .appendTo(header);
+                    input.on('keyup change clear', function () {
+                        var val = $.trim(this.value);
+                        column.search(val ? escapeRegex(val) : '', true, false).draw();
+                    });
+                });
+            }
+        });
+    });
+</script>
+
+
+<div style="height:10vh;"></div>
+<footer th:replace="~{layout :: page_footer}"></footer>
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>
