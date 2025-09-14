@@ -1,0 +1,150 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head th:replace="~{layout :: page_head}">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap" />
+  <div th:replace="styles :: data-tables-styles"></div>
+  <div th:replace="styles :: select2-styles"></div>
+  <title>Manufacturer Details</title>
+  <style>
+    body {
+        background-color: #f5f5f5;
+        font-family: 'EB Garamond', serif;
+        font-weight: bold;
+    }
+
+    .table-container {
+        max-height: 800px;
+        overflow-y: auto;
+        border: 1px solid #ddd;
+        margin-top: 15px;
+    }
+
+    #manufacturerTable {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.9em;
+    }
+
+    #manufacturerTable th, #manufacturerTable td {
+        padding: 6px;
+        text-align: center;
+        vertical-align: middle;
+        font-size: 0.8em;
+    }
+
+    #manufacturerTable thead th {
+        color: white;
+        font-size: 16px;
+    }
+
+    #manufacturerTable tbody tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    #manufacturerTable th {
+        white-space: nowrap;
+    }
+
+    .btn.btn-success {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+  </style>
+  <div th:replace="styles :: ltr-to-rtl"></div>
+  <div th:replace="styles :: commonfieldset-with-legend-border"></div>
+</head>
+<body>
+<nav th:replace="~{typeofApproval_layout :: page_navbar}"></nav>
+
+<div class="container-fluid" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+  <br>
+  <fieldset>
+    <legend>All Manufacturers</legend>
+
+    <div class="table-container">
+      <table class="table table-bordered" id="manufacturerTable">
+        <thead class="bg-primary">
+        <tr>
+          <th th:text="#{id}">ID</th>
+          <th th:text="#{company_name}">Company Name</th>
+          <th th:text="#{authorized_importer}">Authorized Importer</th>
+          <th th:text="#{contact_person}">Contact Person</th>
+          <th th:text="#{address}">Address</th>
+          <th th:text="#{p_o_box}">P.O. Box</th>
+          <th th:text="#{telephone}">Telephone</th>
+          <th th:text="#{mobile}">Mobile</th>
+          <th th:text="#{email}">Email</th>
+          <th>Generate Tac Number</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="m : ${manufacturers}">
+          <td th:text="${m.id}"></td>
+          <td th:text="${m.companyName}"></td>
+          <td th:text="${m.authorizedImporter}"></td>
+          <td th:text="${m.contactPerson}"></td>
+          <td th:text="${m.address}"></td>
+          <td th:text="${m.manufacturer_P_O_Box}"></td>
+          <td th:text="${m.manufacturer_telephone}"></td>
+          <td th:text="${m.manufacturer_mobile}"></td>
+          <td th:text="${m.manufacturer_email}"></td>
+          <td><a th:href="@{'/typeofapprovals/tacnumber/add-tachnumber/edit/' + ${m.id}}" class="btn btn-primary btn-sm text-white">Add Tac Number</a> </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </fieldset>
+
+  <a th:href="@{/typeofapprovals/home}" class="btn btn-primary" style="margin-top:20px;">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width:20px;height:20px;">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
+    </svg>
+    <span>Back to Page</span>
+  </a>
+</div>
+
+<!-- Common scripts -->
+<div th:replace="scripts :: common-scripts"></div>
+<div th:replace="scripts :: data-tables-scripts"></div>
+
+<!-- Required JS libraries -->
+<script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+
+<script>
+  $(document).ready(function () {
+      let table = $('#manufacturerTable').DataTable({
+          dom: 'Bfrtip',
+          buttons: [
+              {
+                  extend: 'excelHtml5',
+                  text: 'Export to Excel',
+                  className: 'btn btn-success'
+              }
+          ],
+          initComplete: function () {
+              this.api().columns().every(function () {
+                  var column = this;
+                  var header = $(column.header());
+                  var columnText = header.text();
+                  header.empty().append('<div>' + columnText + '</div>');
+
+                  $('<input type="text" placeholder="Search" style="width: 100%; margin-top: 5px;"/>')
+                      .appendTo(header)
+                      .on('keyup change clear', function () {
+                          if (column.search() !== this.value) {
+                              column.search(this.value).draw();
+                          }
+                      });
+              });
+          }
+      });
+  });
+</script>
+
+<div style="height:15vh;"></div>
+<footer th:replace="~{layout :: page_footer}"></footer>
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

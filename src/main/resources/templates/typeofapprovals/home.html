@@ -116,6 +116,21 @@
     </div>
   </fieldset>
 
+  <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_TYPEOFAPPROVAL_ADMIN','ROLE_TYPEOFAPPROVAL_STANDARD')">
+    <legend>Tac Number Management Section</legend>
+    <div class="row g-4">
+      <div class="col-sm-4">
+        <div class="custom-card text-center p-3">
+          <a th:href="@{/typeofapprovals/tacnumber/manufacturerlist}">
+            <img th:src="@{/images/tac_number.png}" alt="Refer to Finance" class="img-fluid" />
+          </a>
+          <h4 class="license-link mt-2">
+            <a th:href="@{/typeofapprovals/tacnumber/manufacturerlist}" style="color: #14438B;font-size: 18px;">Tach Number</a>
+          </h4>
+        </div>
+      </div>
+    </div>
+  </fieldset>
   <!-- Section: Finance Management -->
     <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_TYPEOFAPPROVAL_ADMIN','ROLE_TYPEOFAPPROVAL_ATRA_FINANCE','ROLE_TYPEOFAPPROVAL_MCIT_FINANCE')">
     <legend th:text="#{finance}"></legend>
