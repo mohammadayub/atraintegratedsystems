@@ -27,12 +27,30 @@ public class TacNumberController {
         return "typeofapprovals/tacnumber/add-tachnumber-form";
     }
 
-    // Save TAC number
     @PostMapping("/save/{id}")
     public String saveTacNumbers(@PathVariable("id") Long manufacturerId,
                                  @RequestParam("from") int from,
-                                 @RequestParam("to") int to) {
-        tacNumberService.saveTacNumberRange(manufacturerId, from, to);
-        return "redirect:/typeofapprovals/tacnumber/add-tachnumber/edit/" + manufacturerId;
+                                 @RequestParam("to") int to,
+                                 Model model) {
+        try {
+            tacNumberService.saveTacNumberRange(manufacturerId, from, to);
+            return "redirect:/typeofapprovals/tacnumber/add-tachnumber/edit/" + manufacturerId;
+        } catch (RuntimeException e) {
+            TypeOfApprovalManufacturerDetail manufacturer = tacNumberService.getManufacturerById(manufacturerId);
+            model.addAttribute("manufacturer", manufacturer);
+            model.addAttribute("tacNumber", new TacNumber());
+            model.addAttribute("tacNumbers", manufacturer.getTacNumbers());
+
+            // ✅ Instead of showing raw SQL error, we show a clean message
+            if (e.getMessage().contains("Duplicate value")) {
+                model.addAttribute("errorMessage", "Duplicate value not allowed");
+            } else {
+                model.addAttribute("errorMessage", "Duplicate value not allowed.");
+            }
+
+            return "typeofapprovals/tacnumber/add-tachnumber-form";
+        }
     }
+
+
 }

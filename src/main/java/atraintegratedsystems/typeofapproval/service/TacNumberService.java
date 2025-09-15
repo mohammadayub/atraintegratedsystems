@@ -7,7 +7,6 @@ import atraintegratedsystems.typeofapproval.repository.TypeOfApprovalManufacture
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.Optional;
 
 @Service
 public class TacNumberService {
@@ -28,18 +27,23 @@ public class TacNumberService {
                         .orElseThrow(() -> new RuntimeException("Manufacturer not found with id: " + manufacturerId));
 
         for (int i = from; i <= to; i++) {
+            // ✅ use the correct repository method
+            boolean exists = tacNumberRepository
+                    .existsByTachNoAndTypeOfApprovalManufacturerDetail_Id(i, manufacturerId);
+
+            if (exists) {
+                throw new RuntimeException("TAC Number " + i + " already exists for this manufacturer!");
+            }
+
             TacNumber tacNumber = new TacNumber();
-            tacNumber.setId(null);
             tacNumber.setTachNo(i);
             tacNumber.setTypeOfApprovalManufacturerDetail(manufacturer);
 
             manufacturer.getTacNumbers().add(tacNumber);
         }
 
-        manufacturerRepository.save(manufacturer); // cascade will persist all
+        manufacturerRepository.save(manufacturer); // cascade saves TAC numbers too
     }
-
-
 
     public TypeOfApprovalManufacturerDetail getManufacturerById(Long id) {
         return manufacturerRepository.findById(id)

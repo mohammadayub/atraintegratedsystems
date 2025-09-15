@@ -23,6 +23,11 @@
 <body>
 <nav th:replace="~{typeofApproval_layout :: page_navbar}"></nav>
 
+<div th:if="${errorMessage}" class="alert alert-danger" role="alert">
+  <span th:text="${errorMessage}"></span>
+</div>
+
+
 <div class="container mt-4">
   <div class="form-container mt-4">
     <h3>Add TAC Number for: <span th:text="${manufacturer.companyName}"></span></h3>
