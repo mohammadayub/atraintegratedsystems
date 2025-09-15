@@ -79,6 +79,7 @@ public class TypeOfApprovalController {
     }
 
 
+
     @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_TYPEOFAPPROVAL_ADMIN') or hasRole('ROLE_TYPEOFAPPROVAL_ONLINE_APPLICATION') or hasRole('ROLE_TYPEOFAPPROVAL_STANDARD')")
     @GetMapping("/typeofapprovals/onlineapplicationform/success")
     public String successPage() {

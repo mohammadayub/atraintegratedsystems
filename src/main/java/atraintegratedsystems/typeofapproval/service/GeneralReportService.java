@@ -29,7 +29,7 @@ public class GeneralReportService {
 //    Company Service Report
 
     public List<TypeOfApprovalTechnicalDetailDTO> getAllApprovedTechnicalDetails() {
-        List<Object[]> results = technicalRepository.findAllApprovedTechnicalDetailsRaw();
+        List<Object[]> results = technicalRepository.findAllApprovedTechnicalDetailsRow();
         List<TypeOfApprovalTechnicalDetailDTO> details = new ArrayList<>();
 
         for (Object[] row : results) {

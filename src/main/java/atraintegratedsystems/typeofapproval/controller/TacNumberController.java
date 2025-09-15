@@ -43,9 +43,9 @@ public class TacNumberController {
 
             // ✅ Instead of showing raw SQL error, we show a clean message
             if (e.getMessage().contains("Duplicate value")) {
-                model.addAttribute("errorMessage", "Duplicate value not allowed");
+                model.addAttribute("errorMessage", "This TAC number has already been taken.");
             } else {
-                model.addAttribute("errorMessage", "Duplicate value not allowed.");
+                model.addAttribute("errorMessage", "These TAC numbers have already been taken");
             }
 
             return "typeofapprovals/tacnumber/add-tachnumber-form";

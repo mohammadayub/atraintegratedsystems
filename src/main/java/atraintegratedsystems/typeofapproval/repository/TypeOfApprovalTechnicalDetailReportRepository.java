@@ -26,5 +26,5 @@ public interface TypeOfApprovalTechnicalDetailReportRepository
             "AND app.admin_fee_status = 'Yes' " +
             "AND app.certificate_fee_status = 'Yes'",
             nativeQuery = true)
-    List<Object[]> findAllApprovedTechnicalDetailsRaw();
+    List<Object[]> findAllApprovedTechnicalDetailsRow();
 }
