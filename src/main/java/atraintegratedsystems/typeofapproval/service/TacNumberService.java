@@ -32,18 +32,26 @@ public class TacNumberService {
         TypeOfApprovalManufacturerDetail manufacturer = manufacturerRepository.findById(manufacturerId)
                 .orElseThrow(() -> new EntityNotFoundException("Manufacturer not found with ID: " + manufacturerId));
 
-        // Fetch all existing TAC numbers in the range for this manufacturer in a single DB query
-        List<Integer> existingTacNumbers = tacNumberRepository.findExistingTacNumbersInRange(manufacturerId, from, to);
+        // Generate formatted TAC numbers with prefix
+        List<String> formattedTacNumbers = new ArrayList<>();
+        for (int i = from; i <= to; i++) {
+            formattedTacNumbers.add("ATRA-TAC-" + i);
+        }
+
+        // Check if any of these already exist in DB
+        List<String> existingTacNumbers =
+                tacNumberRepository.findExistingTacNumbersInRange(manufacturerId, formattedTacNumbers);
 
         if (!existingTacNumbers.isEmpty()) {
             throw new IllegalStateException("The following TAC numbers already exist for this manufacturer: "
                     + existingTacNumbers);
         }
 
+        // Create new TacNumber entities
         List<TacNumber> newTacNumbers = new ArrayList<>();
-        for (int i = from; i <= to; i++) {
+        for (String tacNo : formattedTacNumbers) {
             TacNumber tacNumber = new TacNumber();
-            tacNumber.setTachNo(i);
+            tacNumber.setTachNo(tacNo);
             tacNumber.setTypeOfApprovalManufacturerDetail(manufacturer);
             newTacNumbers.add(tacNumber);
         }
@@ -58,4 +66,18 @@ public class TacNumberService {
         return manufacturerRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Manufacturer not found"));
     }
+
+    // finding last
+    public Integer getNextTacNo() {
+        String latestTac = tacNumberRepository.findLatestTacNo();
+        if (latestTac == null) {
+            return 1; // start from 1 if no TAC exists
+        }
+        int lastNumber = Integer.parseInt(latestTac.replace("ATRA-TAC-", ""));
+        return lastNumber + 1;
+    }
+
+
+
+
 }

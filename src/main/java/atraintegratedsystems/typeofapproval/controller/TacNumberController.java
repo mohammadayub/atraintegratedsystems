@@ -21,11 +21,18 @@ public class TacNumberController {
     @GetMapping("/add-tachnumber/edit/{id}")
     public String showAddTacNumberForm(@PathVariable("id") Long manufacturerId, Model model) {
         TypeOfApprovalManufacturerDetail manufacturer = tacNumberService.getManufacturerById(manufacturerId);
+
+        // ✅ Fetch next TAC number (last + 1)
+        Integer nextTacNo = tacNumberService.getNextTacNo();
+
         model.addAttribute("manufacturer", manufacturer);
         model.addAttribute("tacNumber", new TacNumber());
         model.addAttribute("tacNumbers", manufacturer.getTacNumbers()); // list of existing TACs
+        model.addAttribute("nextTacNo", nextTacNo); // pass to thymeleaf
+
         return "typeofapprovals/tacnumber/add-tachnumber-form";
     }
+
 
     @PostMapping("/save/{id}")
     public String saveTacNumbers(@PathVariable("id") Long manufacturerId,
@@ -37,11 +44,15 @@ public class TacNumberController {
             return "redirect:/typeofapprovals/tacnumber/add-tachnumber/edit/" + manufacturerId;
         } catch (RuntimeException e) {
             TypeOfApprovalManufacturerDetail manufacturer = tacNumberService.getManufacturerById(manufacturerId);
+
             model.addAttribute("manufacturer", manufacturer);
             model.addAttribute("tacNumber", new TacNumber());
             model.addAttribute("tacNumbers", manufacturer.getTacNumbers());
 
-            // ✅ Instead of showing raw SQL error, we show a clean message
+            // ✅ Fetch latest TAC number again (for error case too)
+            Integer nextTacNo = tacNumberService.getNextTacNo();
+            model.addAttribute("nextTacNo", nextTacNo);
+            // Show clean error message
             if (e.getMessage().contains("Duplicate value")) {
                 model.addAttribute("errorMessage", "This TAC number has already been taken.");
             } else {
@@ -51,6 +62,4 @@ public class TacNumberController {
             return "typeofapprovals/tacnumber/add-tachnumber-form";
         }
     }
-
-
 }

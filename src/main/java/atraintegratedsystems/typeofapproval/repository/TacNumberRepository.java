@@ -12,10 +12,17 @@ import java.util.List;
 public interface TacNumberRepository extends JpaRepository<TacNumber, Long> {
 
     // Check if TAC number already exists for a given manufacturer
-    boolean existsByTachNoAndTypeOfApprovalManufacturerDetail_Id(Integer tachNo, Long manufacturerId);
+    boolean existsByTachNoAndTypeOfApprovalManufacturerDetail_Id(String tachNo, Long manufacturerId);
 
-    @Query("SELECT t.tachNo FROM TacNumber t WHERE t.typeOfApprovalManufacturerDetail.id = :manufacturerId AND t.tachNo BETWEEN :from AND :to")
-    List<Integer> findExistingTacNumbersInRange(@Param("manufacturerId") Long manufacturerId,
-                                                @Param("from") int from,
-                                                @Param("to") int to);
+    // Find existing TAC numbers in a given range (passed as strings)
+    @Query("SELECT t.tachNo FROM TacNumber t " +
+            "WHERE t.typeOfApprovalManufacturerDetail.id = :manufacturerId " +
+            "AND t.tachNo IN :range")
+    List<String> findExistingTacNumbersInRange(@Param("manufacturerId") Long manufacturerId,
+                                               @Param("range") List<String> range);
+
+    // Today New Changes
+    @Query(value = "SELECT tach_no FROM tac_number ORDER BY id DESC LIMIT 1", nativeQuery = true)
+    String findLatestTacNo();
+
 }

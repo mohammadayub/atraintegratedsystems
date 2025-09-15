@@ -23,18 +23,19 @@
 <body>
 <nav th:replace="~{typeofApproval_layout :: page_navbar}"></nav>
 
-<div th:if="${errorMessage}" class="alert alert-danger" role="alert">
-  <span th:text="${errorMessage}"></span>
-</div>
 
 
 <div class="container mt-4">
+  <div th:if="${errorMessage}" class="alert alert-danger mt-4 mb-4" role="alert">
+    <span th:text="${errorMessage}"></span>
+  </div>
   <div class="form-container mt-4">
     <h3>Add TAC Number for: <span th:text="${manufacturer.companyName}"></span></h3>
     <form th:action="@{'/typeofapprovals/tacnumber/save/' + ${manufacturer.id}}" method="post">
       <div class="mb-3">
         <label for="from" class="form-label">From</label>
-        <input type="number" id="from" name="from" class="form-control" required>
+        <input type="text" id="from" name="from" class="form-control" th:value="${nextTacNo}"
+               readonly>
       </div>
       <div class="mb-3">
         <label for="to" class="form-label">To</label>
@@ -55,7 +56,7 @@
         </thead>
         <tbody>
         <tr th:each="t : ${tacNumbers}">
-          <td th:text="${'ATRA-TACNO-' +  t.tachNo}"></td>
+          <td th:text="${t.tachNo}"></td>
         </tr>
         <tr th:if="${#lists.isEmpty(tacNumbers)}">
           <td colspan="2">No TAC numbers added yet.</td>

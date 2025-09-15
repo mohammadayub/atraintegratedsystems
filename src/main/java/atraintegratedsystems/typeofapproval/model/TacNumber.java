@@ -13,7 +13,7 @@ public class TacNumber {
     private Long id;
 
     @Column(unique = true)
-    private Integer tachNo;
+    private String tachNo;
 
     private LocalDate createdAt=LocalDate.now();
 
