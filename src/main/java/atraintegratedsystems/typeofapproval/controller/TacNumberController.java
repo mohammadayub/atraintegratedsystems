@@ -8,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/typeofapprovals/tacnumber")
 public class TacNumberController {
@@ -64,24 +66,33 @@ public class TacNumberController {
         }
 
     }
+
+
     @GetMapping("/tacnumbers-list")
     public String getAllTacNumbers(@RequestParam(defaultValue = "0") int page,
                                    @RequestParam(defaultValue = "10") int size,
+                                   @RequestParam(required = false) String keyword,
                                    Model model) {
-        Page<TacNumber> tacNumbersPage = tacNumberService.getAllTacNumbersWithManufacturer(page, size);
 
-        model.addAttribute("tacNumbers", tacNumbersPage.getContent());
-        model.addAttribute("currentPage", page);
-        model.addAttribute("totalPages", tacNumbersPage.getTotalPages());
+        if (keyword != null && !keyword.trim().isEmpty()) {
+            // Search mode: fetch all results without pagination
+            List<TacNumber> results = tacNumberService.searchTacNumbers(keyword.trim());
+            model.addAttribute("tacNumbers", results);
+            model.addAttribute("isSearch", true);
+            model.addAttribute("keyword", keyword);
+        } else {
+            // Normal paginated mode
+            Page<TacNumber> tacNumbersPage = tacNumberService.getAllTacNumbersWithManufacturer(page, size);
+
+            model.addAttribute("tacNumbers", tacNumbersPage.getContent());
+            model.addAttribute("currentPage", page);
+            model.addAttribute("totalPages", tacNumbersPage.getTotalPages());
+            model.addAttribute("isSearch", false);
+            model.addAttribute("keyword", ""); // keep box empty
+        }
 
         return "typeofapprovals/tacnumber/tacnumbers-list";
     }
 
-
-//    @GetMapping("/tacnumbers-list-test")
-//    public String getAllTacNumbers_test(Model model) {
-//        model.addAttribute("tacNumbers", tacNumberService.getAllTacNumbersWithManufacturer());
-//        return "typeofapprovals/tacnumber/tacnumbers-list-test";
-//    }
 
 }

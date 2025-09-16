@@ -82,4 +82,9 @@ public class TacNumberService {
         Pageable pageable = PageRequest.of(page, size, Sort.by("id").descending());
         return tacNumberRepository.findAllWithManufacturer(pageable);
     }
+
+    public List<TacNumber> searchTacNumbers(String keyword) {
+        return tacNumberRepository.searchAll(keyword);
+    }
+
 }
