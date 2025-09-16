@@ -3,6 +3,7 @@ package atraintegratedsystems.typeofapproval.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.math.BigInteger;
 import java.time.LocalDate;
 
 @Data

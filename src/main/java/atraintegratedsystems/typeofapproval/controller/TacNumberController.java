@@ -61,5 +61,19 @@ public class TacNumberController {
 
             return "typeofapprovals/tacnumber/add-tachnumber-form";
         }
+
     }
+
+    @GetMapping("/tacnumbers-list")
+    public String getAllTacNumbers(Model model) {
+        model.addAttribute("tacNumbers", tacNumberService.getAllTacNumbersWithManufacturer());
+        return "typeofapprovals/tacnumber/tacnumbers-list";
+    }
+
+    @GetMapping("/tacnumbers-list-test")
+    public String getAllTacNumbers_test(Model model) {
+        model.addAttribute("tacNumbers", tacNumberService.getAllTacNumbersWithManufacturer());
+        return "typeofapprovals/tacnumber/tacnumbers-list-test";
+    }
+
 }

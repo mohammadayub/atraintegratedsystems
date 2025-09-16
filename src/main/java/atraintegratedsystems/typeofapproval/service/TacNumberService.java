@@ -29,25 +29,25 @@ public class TacNumberService {
             throw new IllegalArgumentException("'from' must be less than or equal to 'to'");
         }
 
+        // ✅ Load manufacturer
         TypeOfApprovalManufacturerDetail manufacturer = manufacturerRepository.findById(manufacturerId)
                 .orElseThrow(() -> new EntityNotFoundException("Manufacturer not found with ID: " + manufacturerId));
 
-        // Generate formatted TAC numbers with prefix
+        // ✅ Generate TAC numbers
         List<String> formattedTacNumbers = new ArrayList<>();
         for (int i = from; i <= to; i++) {
             formattedTacNumbers.add("ATRA-TAC-" + i);
         }
 
-        // Check if any of these already exist in DB
+        // ✅ Check duplicates in DB
         List<String> existingTacNumbers =
                 tacNumberRepository.findExistingTacNumbersInRange(manufacturerId, formattedTacNumbers);
 
         if (!existingTacNumbers.isEmpty()) {
-            throw new IllegalStateException("The following TAC numbers already exist for this manufacturer: "
-                    + existingTacNumbers);
+            throw new IllegalStateException("The following TAC numbers already exist: " + existingTacNumbers);
         }
 
-        // Create new TacNumber entities
+        // ✅ Create new TacNumbers
         List<TacNumber> newTacNumbers = new ArrayList<>();
         for (String tacNo : formattedTacNumbers) {
             TacNumber tacNumber = new TacNumber();
@@ -56,10 +56,8 @@ public class TacNumberService {
             newTacNumbers.add(tacNumber);
         }
 
-        // Add all new TAC numbers to the manufacturer (assuming cascade is set)
-        manufacturer.getTacNumbers().addAll(newTacNumbers);
-
-        manufacturerRepository.save(manufacturer); // Save manufacturer and cascade TAC numbers
+        // ✅ Save in batch directly (no cascade, no huge re-save of manufacturer)
+        tacNumberRepository.saveAll(newTacNumbers);
     }
 
     public TypeOfApprovalManufacturerDetail getManufacturerById(Long id) {
@@ -67,7 +65,6 @@ public class TacNumberService {
                 .orElseThrow(() -> new RuntimeException("Manufacturer not found"));
     }
 
-    // finding last
     public Integer getNextTacNo() {
         String latestTac = tacNumberRepository.findLatestTacNo();
         if (latestTac == null) {
@@ -77,7 +74,7 @@ public class TacNumberService {
         return lastNumber + 1;
     }
 
-
-
-
+    public List<Object[]> getAllTacNumbersWithManufacturer() {
+        return tacNumberRepository.findAllTacNumbersWithManufacturer();
+    }
 }

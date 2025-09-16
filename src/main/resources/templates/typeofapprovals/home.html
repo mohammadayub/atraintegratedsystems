@@ -3,7 +3,7 @@
 <head th:replace="~{layout :: page_head}">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap" />
 
-  <title>LMS</title>
+  <title>Type of Approval</title>
 
   <style>
     body {
@@ -128,6 +128,21 @@
             <a th:href="@{/typeofapprovals/tacnumber/manufacturerlist}" style="color: #14438B;font-size: 18px;">Tach Number</a>
           </h4>
         </div>
+
+
+      </div>
+
+      <div class="col-sm-4">
+        <div class="custom-card text-center p-3">
+          <a th:href="@{/typeofapprovals/tacnumber/tacnumbers-list}">
+            <img th:src="@{/images/tac_number_report.png}" alt="Refer to Finance" class="img-fluid" />
+          </a>
+          <h4 class="license-link mt-2">
+            <a th:href="@{/typeofapprovals/tacnumber/tacnumbers-list}" style="color: #14438B;font-size: 18px;">Tach Numbers List</a>
+          </h4>
+        </div>
+
+
       </div>
     </div>
   </fieldset>
