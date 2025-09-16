@@ -4,6 +4,10 @@ import atraintegratedsystems.typeofapproval.model.TacNumber;
 import atraintegratedsystems.typeofapproval.model.TypeOfApprovalManufacturerDetail;
 import atraintegratedsystems.typeofapproval.repository.TacNumberRepository;
 import atraintegratedsystems.typeofapproval.repository.TypeOfApprovalManufacturerDetailRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
@@ -74,7 +78,8 @@ public class TacNumberService {
         return lastNumber + 1;
     }
 
-    public List<Object[]> getAllTacNumbersWithManufacturer() {
-        return tacNumberRepository.findAllTacNumbersWithManufacturer();
+    public Page<TacNumber> getAllTacNumbersWithManufacturer(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by("id").descending());
+        return tacNumberRepository.findAllWithManufacturer(pageable);
     }
 }

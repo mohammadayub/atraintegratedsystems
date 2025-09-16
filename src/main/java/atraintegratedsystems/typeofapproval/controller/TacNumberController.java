@@ -3,6 +3,7 @@ package atraintegratedsystems.typeofapproval.controller;
 import atraintegratedsystems.typeofapproval.model.TacNumber;
 import atraintegratedsystems.typeofapproval.model.TypeOfApprovalManufacturerDetail;
 import atraintegratedsystems.typeofapproval.service.TacNumberService;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -63,17 +64,24 @@ public class TacNumberController {
         }
 
     }
-
     @GetMapping("/tacnumbers-list")
-    public String getAllTacNumbers(Model model) {
-        model.addAttribute("tacNumbers", tacNumberService.getAllTacNumbersWithManufacturer());
+    public String getAllTacNumbers(@RequestParam(defaultValue = "0") int page,
+                                   @RequestParam(defaultValue = "10") int size,
+                                   Model model) {
+        Page<TacNumber> tacNumbersPage = tacNumberService.getAllTacNumbersWithManufacturer(page, size);
+
+        model.addAttribute("tacNumbers", tacNumbersPage.getContent());
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", tacNumbersPage.getTotalPages());
+
         return "typeofapprovals/tacnumber/tacnumbers-list";
     }
 
-    @GetMapping("/tacnumbers-list-test")
-    public String getAllTacNumbers_test(Model model) {
-        model.addAttribute("tacNumbers", tacNumberService.getAllTacNumbersWithManufacturer());
-        return "typeofapprovals/tacnumber/tacnumbers-list-test";
-    }
+
+//    @GetMapping("/tacnumbers-list-test")
+//    public String getAllTacNumbers_test(Model model) {
+//        model.addAttribute("tacNumbers", tacNumberService.getAllTacNumbersWithManufacturer());
+//        return "typeofapprovals/tacnumber/tacnumbers-list-test";
+//    }
 
 }
