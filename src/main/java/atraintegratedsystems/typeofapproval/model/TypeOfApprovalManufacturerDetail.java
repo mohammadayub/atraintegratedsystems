@@ -28,8 +28,7 @@ public class TypeOfApprovalManufacturerDetail {
     @JoinColumn(name = "type_of_approval_applicant_id")
     private TypeOfApprovalApplicant applicant;
 
-    @OneToMany(mappedBy = "typeOfApprovalManufacturerDetail", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<TacNumber> tacNumbers;
+
 
 
 }

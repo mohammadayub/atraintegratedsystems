@@ -205,6 +205,7 @@ public class TypeOfApprovalService {
         applicant.setApplicationFeeOrganizationName("atra");
         applicant.setAdminFeeOrganizationName("atra");
         applicant.setCertificateFeeOrganizationName("mcit");
+        applicant.setTypeOfApprovalApplicantNumber(generateTypeOfApprovalId());
         var savedApplicant = applicantRepository.save(applicant);
 
         // Save manufacturers
@@ -453,6 +454,35 @@ public class TypeOfApprovalService {
     private interface ThrowingConsumer<T> {
         void accept(T t) throws IOException;
     }
+
+
+
+    private String generateTypeOfApprovalId() {
+        // Get current date
+        LocalDate today = LocalDate.now();
+        int day = today.getDayOfMonth();
+        int month = today.getMonthValue();
+        int year = today.getYear() % 100; // last two digits of year
+
+        // Format date as day-month-yy
+        String datePart = String.format("%02d-%02d-%02d", day, month, year);
+
+        // Get the max sequential ID for today
+        Long maxId = applicantRepository.findMaxIdByDate(today); // Implement repository method
+        Long nextId = (maxId == null) ? 1 : maxId + 1;
+
+        // Combine everything
+        String prefix = "ATRA";
+        return prefix + "-" + datePart + "-" + String.format("%02d", nextId);
+    }
+
+
+
+
+
+
+
+
 }
 
 

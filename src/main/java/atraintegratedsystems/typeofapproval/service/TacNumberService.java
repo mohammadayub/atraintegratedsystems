@@ -2,8 +2,9 @@ package atraintegratedsystems.typeofapproval.service;
 
 import atraintegratedsystems.typeofapproval.model.TacNumber;
 import atraintegratedsystems.typeofapproval.model.TypeOfApprovalManufacturerDetail;
+import atraintegratedsystems.typeofapproval.model.TypeOfApprovalTechnicalDetail;
 import atraintegratedsystems.typeofapproval.repository.TacNumberRepository;
-import atraintegratedsystems.typeofapproval.repository.TypeOfApprovalManufacturerDetailRepository;
+import atraintegratedsystems.typeofapproval.repository.TypeOfApprovalTechnicalDetailsRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -19,23 +20,26 @@ import java.util.List;
 public class TacNumberService {
 
     private final TacNumberRepository tacNumberRepository;
-    private final TypeOfApprovalManufacturerDetailRepository manufacturerRepository;
+    private final TypeOfApprovalTechnicalDetailsRepository technicalDetailRepository;
+
 
     public TacNumberService(TacNumberRepository tacNumberRepository,
-                            TypeOfApprovalManufacturerDetailRepository manufacturerRepository) {
+                            TypeOfApprovalTechnicalDetailsRepository technicalRepository ){
         this.tacNumberRepository = tacNumberRepository;
-        this.manufacturerRepository = manufacturerRepository;
+        this.technicalDetailRepository = technicalRepository;
     }
 
     @Transactional
-    public void saveTacNumberRange(Long manufacturerId, int from, int to) {
+    public void saveTacNumberRange(Long technicalId, int from, int to) {
         if (from > to) {
             throw new IllegalArgumentException("'from' must be less than or equal to 'to'");
         }
 
         // ✅ Load manufacturer
-        TypeOfApprovalManufacturerDetail manufacturer = manufacturerRepository.findById(manufacturerId)
-                .orElseThrow(() -> new EntityNotFoundException("Manufacturer not found with ID: " + manufacturerId));
+        TypeOfApprovalTechnicalDetail technicalDetail = technicalDetailRepository
+                .findById(technicalId)
+                .orElseThrow(() -> new EntityNotFoundException("Technical Detail not found with ID: " + technicalId));
+
 
         // ✅ Generate TAC numbers
         List<String> formattedTacNumbers = new ArrayList<>();
@@ -45,7 +49,7 @@ public class TacNumberService {
 
         // ✅ Check duplicates in DB
         List<String> existingTacNumbers =
-                tacNumberRepository.findExistingTacNumbersInRange(manufacturerId, formattedTacNumbers);
+                tacNumberRepository.findExistingTacNumbersInRange(technicalId, formattedTacNumbers);
 
         if (!existingTacNumbers.isEmpty()) {
             throw new IllegalStateException("The following TAC numbers already exist: " + existingTacNumbers);
@@ -55,8 +59,8 @@ public class TacNumberService {
         List<TacNumber> newTacNumbers = new ArrayList<>();
         for (String tacNo : formattedTacNumbers) {
             TacNumber tacNumber = new TacNumber();
-            tacNumber.setTachNo(tacNo);
-            tacNumber.setTypeOfApprovalManufacturerDetail(manufacturer);
+            tacNumber.setTacNo(tacNo);
+            tacNumber.setTypeOfApprovalTechnicalDetail(technicalDetail);
             newTacNumbers.add(tacNumber);
         }
 
@@ -64,9 +68,9 @@ public class TacNumberService {
         tacNumberRepository.saveAll(newTacNumbers);
     }
 
-    public TypeOfApprovalManufacturerDetail getManufacturerById(Long id) {
-        return manufacturerRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Manufacturer not found"));
+    public TypeOfApprovalTechnicalDetail getTechnicalDetailById(Long id) {
+        return technicalDetailRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Technical Detail not found"));
     }
 
     public Integer getNextTacNo() {
@@ -80,7 +84,7 @@ public class TacNumberService {
 
     public Page<TacNumber> getAllTacNumbersWithManufacturer(int page, int size) {
         Pageable pageable = PageRequest.of(page, size, Sort.by("id").descending());
-        return tacNumberRepository.findAllWithManufacturer(pageable);
+        return tacNumberRepository.findAllWithTechnicalDetail(pageable);
     }
 
     public List<TacNumber> searchTacNumbers(String keyword) {

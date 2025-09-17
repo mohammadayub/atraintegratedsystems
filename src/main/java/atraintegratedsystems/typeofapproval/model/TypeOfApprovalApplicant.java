@@ -14,6 +14,7 @@ public class TypeOfApprovalApplicant {
     private long id;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate requestDate;
+    private String typeOfApprovalApplicantNumber;
     private String manufacturer;
     private String person;
     private String licenseOperator;

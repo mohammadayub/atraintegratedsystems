@@ -14,11 +14,11 @@ public class TacNumber {
     private Long id;
 
     @Column(unique = true)
-    private String tachNo;
+    private String tacNo;
 
     private LocalDate createdAt=LocalDate.now();
 
     @ManyToOne
-    @JoinColumn(name = "manufacturer_detail_id")
-    private TypeOfApprovalManufacturerDetail typeOfApprovalManufacturerDetail;
+    @JoinColumn(name = "technical_detail_id")
+    private TypeOfApprovalTechnicalDetail typeOfApprovalTechnicalDetail;
 }

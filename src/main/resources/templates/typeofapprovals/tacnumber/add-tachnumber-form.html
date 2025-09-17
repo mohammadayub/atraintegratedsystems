@@ -56,7 +56,7 @@
         </thead>
         <tbody>
         <tr th:each="t : ${tacNumbers}">
-          <td th:text="${t.tachNo}"></td>
+          <td th:text="${t.tacNo}"></td>
         </tr>
         <tr th:if="${#lists.isEmpty(tacNumbers)}">
           <td colspan="2">No TAC numbers added yet.</td>

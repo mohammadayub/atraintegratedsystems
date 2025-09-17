@@ -2,45 +2,39 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head th:replace="~{layout :: page_head}">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap" />
-
   <title>Type of Approval</title>
-
   <style>
-    body {
-      background-color: #f5f5f5;
-      font-family: 'EB Garamond', serif;
-      font-weight: bold;
-    }
+                body {
+                      background-color: #f5f5f5;
+                      font-family: 'EB Garamond', serif;
+                      font-weight: bold;
+                }
 
-    h4 a {
-      color: #14438B;
-      font-size: 20px;
-    }
+                  h4 a {
+                      color: #14438B;
+                      font-size: 20px;
+                }
 
-    .custom-card {
-      background-color: #fff;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      transition: box-shadow 0.3s;
-    }
+                      .custom-card {
+                        background-color: #fff;
+                        border: 1px solid #ccc;
+                        border-radius: 6px;
+                        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+                        transition: box-shadow 0.3s;
+                }
 
-    .custom-card:hover {
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-    }
+                    .custom-card:hover {
+                      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+                }
   </style>
   <div th:replace="styles :: ltr-to-rtl"></div>
 </head>
 <body>
-
 <!-- Injected styles properly -->
 <div th:replace="styles :: commonfieldset"></div>
-
 <!-- Navbar -->
 <nav th:replace="~{typeofApproval_layout :: page_navbar}"></nav>
-
 <div class="container mt-5" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
-
   <!-- Section: Type of Approval Management -->
   <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_TYPEOFAPPROVAL_ADMIN','ROLE_TYPEOFAPPROVAL_ONLINE_APPLICATION','ROLE_TYPEOFAPPROVAL_STANDARD')">
     <legend th:text="#{typeof_approval_management_section}">Type of Approval Management</legend>
@@ -56,8 +50,6 @@
           </h4>
         </div>
       </div>
-
-
     </div>
   </fieldset>
   <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_TYPEOFAPPROVAL_ADMIN','ROLE_TYPEOFAPPROVAL_STANDARD')">
@@ -74,7 +66,6 @@
 
         </div>
       </div>
-
       <div class="col-sm-4">
         <div class="custom-card text-center p-3">
           <a th:href="@{/typeofapprovals/applicant/attachmentapplicantlists}">
@@ -83,7 +74,6 @@
           <h4 class="license-link mt-2">
             <a th:href="@{/typeofapprovals/applicant/attachmentapplicantlists}" style="color: #14438B;font-size: 18px;" th:text="#{list_of_all_applicants_with_attachments}">List Of All Applicants with Attachments</a>
           </h4>
-
         </div>
       </div>
       <div class="col-sm-4">
@@ -94,7 +84,6 @@
           <h4 class="license-link mt-2">
             <a th:href="@{/typeofapprovals/onlineapplicationform/list}" style="color: #14438B;font-size: 18px;">Edit Applicants</a>
           </h4>
-
         </div>
       </div>
     </div>
@@ -115,7 +104,6 @@
       </div>
     </div>
   </fieldset>
-
   <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_TYPEOFAPPROVAL_ADMIN','ROLE_TYPEOFAPPROVAL_STANDARD')">
     <legend>Tac Number Management Section</legend>
     <div class="row g-4">
@@ -125,24 +113,19 @@
             <img th:src="@{/images/tac_number.png}" alt="Refer to Finance" class="img-fluid" />
           </a>
           <h4 class="license-link mt-2">
-            <a th:href="@{/typeofapprovals/tacnumber/manufacturerlist}" style="color: #14438B;font-size: 18px;">Tach Number</a>
+            <a th:href="@{/typeofapprovals/tacnumber/manufacturerlist}" style="color: #14438B;font-size: 18px;">Tac Number</a>
           </h4>
         </div>
-
-
       </div>
-
       <div class="col-sm-4">
         <div class="custom-card text-center p-3">
           <a th:href="@{/typeofapprovals/tacnumber/tacnumbers-list}">
             <img th:src="@{/images/tac_number_report.png}" alt="Refer to Finance" class="img-fluid" />
           </a>
           <h4 class="license-link mt-2">
-            <a th:href="@{/typeofapprovals/tacnumber/tacnumbers-list}" style="color: #14438B;font-size: 18px;">Tach Numbers List</a>
+            <a th:href="@{/typeofapprovals/tacnumber/tacnumbers-list}" style="color: #14438B;font-size: 18px;">Tac Numbers List</a>
           </h4>
         </div>
-
-
       </div>
     </div>
   </fieldset>
@@ -162,7 +145,6 @@
       </div>
     </div>
   </fieldset>
-
   <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_TYPEOFAPPROVAL_ADMIN','ROLE_TYPEOFAPPROVAL_STANDARD')">
     <legend>Reports Section</legend>
     <div class="row g-4">
@@ -175,7 +157,6 @@
             <a th:href="@{/typeofapprovals/reports/general_report}" style="color: #14438B;font-size: 18px;">General Report</a></h4>
         </div>
       </div>
-
       <div class="col-sm-4">
         <div class="custom-card text-center p-3">
           <a th:href="@{/typeofapprovals/reports/refer_report}">
@@ -198,8 +179,6 @@
 
     </div>
   </fieldset>
-
-
   <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_TYPEOFAPPROVAL_ADMIN','ROLE_TYPEOFAPPROVAL_STANDARD')">
   <legend>User Management</legend>
     <div class="row g-4">
@@ -215,7 +194,6 @@
     </div>
   </fieldset>
 </div>
-
 <!-- Footer -->
 <div th:replace="scripts :: common-scripts"></div>
 <div style="height:10vh;"></div>

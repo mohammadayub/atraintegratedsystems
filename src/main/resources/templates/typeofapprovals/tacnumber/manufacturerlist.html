@@ -66,28 +66,16 @@
         <thead class="bg-primary">
         <tr>
           <th th:text="#{id}">ID</th>
-          <th th:text="#{company_name}">Company Name</th>
-          <th th:text="#{authorized_importer}">Authorized Importer</th>
-          <th th:text="#{contact_person}">Contact Person</th>
-          <th th:text="#{address}">Address</th>
-          <th th:text="#{p_o_box}">P.O. Box</th>
-          <th th:text="#{telephone}">Telephone</th>
-          <th th:text="#{mobile}">Mobile</th>
-          <th th:text="#{email}">Email</th>
+          <th >Model Number</th>
+          <th >Brand Name</th>
           <th>Generate Tac Number</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="m : ${manufacturers}">
+        <tr th:each="m : ${technicaldetails}">
           <td th:text="${m.id}"></td>
-          <td th:text="${m.companyName}"></td>
-          <td th:text="${m.authorizedImporter}"></td>
-          <td th:text="${m.contactPerson}"></td>
-          <td th:text="${m.address}"></td>
-          <td th:text="${m.manufacturer_P_O_Box}"></td>
-          <td th:text="${m.manufacturer_telephone}"></td>
-          <td th:text="${m.manufacturer_mobile}"></td>
-          <td th:text="${m.manufacturer_email}"></td>
+          <td th:text="${m.brandName}"></td>
+          <td th:text="${m.modelNumber}"></td>
           <td><a th:href="@{'/typeofapprovals/tacnumber/add-tachnumber/edit/' + ${m.id}}" class="btn btn-primary btn-sm text-white">Add Tac Number</a> </td>
         </tr>
         </tbody>

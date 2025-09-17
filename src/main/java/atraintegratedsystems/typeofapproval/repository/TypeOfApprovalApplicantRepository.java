@@ -3,8 +3,10 @@ package atraintegratedsystems.typeofapproval.repository;
 import atraintegratedsystems.typeofapproval.model.TypeOfApprovalApplicant;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -41,6 +43,9 @@ public interface TypeOfApprovalApplicantRepository extends JpaRepository<TypeOfA
 
     boolean existsByCompanyNameAndIdNot(String companyName, Long id);
 
+
+    @Query("SELECT MAX(a.id) FROM TypeOfApprovalApplicant a WHERE a.requestDate = :date")
+    Long findMaxIdByDate(@Param("date") LocalDate date);
 
 
 

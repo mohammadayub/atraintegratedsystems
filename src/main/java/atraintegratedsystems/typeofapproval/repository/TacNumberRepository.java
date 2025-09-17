@@ -14,33 +14,31 @@ import java.util.List;
 @Repository
 public interface TacNumberRepository extends JpaRepository<TacNumber, BigInteger> {
 
-    // Check if TAC number already exists for a given manufacturer
-    boolean existsByTachNoAndTypeOfApprovalManufacturerDetail_Id(String tachNo, Long manufacturerId);
+//    // Check if TAC number already exists for a given manufacturer
+//    boolean existsByTachNoAndTypeOfApprovalManufacturerDetail_Id(String tacNo, Long technicalId);
 
     // Find existing TAC numbers in a given range (passed as strings)
-    @Query("SELECT t.tachNo FROM TacNumber t " +
-            "WHERE t.typeOfApprovalManufacturerDetail.id = :manufacturerId " +
-            "AND t.tachNo IN :range")
-    List<String> findExistingTacNumbersInRange(@Param("manufacturerId") Long manufacturerId,
+    @Query("SELECT t.tacNo FROM TacNumber t " +
+            "WHERE t.typeOfApprovalTechnicalDetail.id = :technicalId " +
+            "AND t.tacNo IN :range")
+    List<String> findExistingTacNumbersInRange(@Param("technicalId") Long technicalId,
                                                @Param("range") List<String> range);
 
     // Today New Changes
-    @Query(value = "SELECT tach_no FROM tac_number ORDER BY id DESC LIMIT 1", nativeQuery = true)
+    @Query(value = "SELECT tac_no FROM tac_number ORDER BY id DESC LIMIT 1", nativeQuery = true)
     String findLatestTacNo();
 
 
 
 
-    @Query(value = "SELECT t FROM TacNumber t JOIN t.typeOfApprovalManufacturerDetail m",
+    @Query(value = "SELECT t FROM TacNumber t JOIN t.typeOfApprovalTechnicalDetail m",
             countQuery = "SELECT count(t) FROM TacNumber t")
-    Page<TacNumber> findAllWithManufacturer(Pageable pageable);
+    Page<TacNumber> findAllWithTechnicalDetail(Pageable pageable);
 
     @Query("SELECT t FROM TacNumber t " +
-            "JOIN t.typeOfApprovalManufacturerDetail m " +
-            "WHERE LOWER(m.companyName) LIKE LOWER(CONCAT('%', :keyword, '%')) " +
-            "   OR LOWER(m.authorizedImporter) LIKE LOWER(CONCAT('%', :keyword, '%')) " +
-            "   OR LOWER(m.contactPerson) LIKE LOWER(CONCAT('%', :keyword, '%')) " +
-            "   OR LOWER(t.tachNo) LIKE LOWER(CONCAT('%', :keyword, '%'))")
+            "JOIN t.typeOfApprovalTechnicalDetail m " +
+            "WHERE LOWER(m.brandName) LIKE LOWER(CONCAT('%', :keyword, '%')) " +
+            "   OR LOWER(m.modelNumber) LIKE LOWER(CONCAT('%', :keyword, '%')) " )
     List<TacNumber> searchAll(@Param("keyword") String keyword);
 
 

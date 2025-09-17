@@ -5,6 +5,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @Entity
@@ -60,4 +61,7 @@ public class TypeOfApprovalTechnicalDetail {
     @ManyToOne
     @JoinColumn(name = "type_of_approval_applicant_id")
     private TypeOfApprovalApplicant technicalDetails;
+
+    @OneToMany(mappedBy = "typeOfApprovalTechnicalDetail", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<TacNumber> tacNumbers;
 }
