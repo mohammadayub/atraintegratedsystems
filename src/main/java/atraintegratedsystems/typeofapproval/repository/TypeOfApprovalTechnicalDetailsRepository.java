@@ -14,6 +14,6 @@ public interface TypeOfApprovalTechnicalDetailsRepository
     Optional<TypeOfApprovalTechnicalDetail> findByTechnicalDetailsId(Long applicantId);
 
 
-    List<TypeOfApprovalTechnicalDetail> findByApplicantId(Long applicantId);
+    List<TypeOfApprovalTechnicalDetail> findByTechnicalDetails_Id(Long applicantId);
 
 }

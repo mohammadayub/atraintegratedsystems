@@ -1,12 +1,13 @@
 package atraintegratedsystems.typeofapproval.controller;
+
 import atraintegratedsystems.typeofapproval.model.TacNumber;
-import atraintegratedsystems.typeofapproval.model.TypeOfApprovalManufacturerDetail;
 import atraintegratedsystems.typeofapproval.model.TypeOfApprovalTechnicalDetail;
 import atraintegratedsystems.typeofapproval.service.TacNumberService;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @Controller
@@ -14,24 +15,26 @@ import java.util.List;
 public class TacNumberController {
 
     private final TacNumberService tacNumberService;
+
     public TacNumberController(TacNumberService tacNumberService) {
         this.tacNumberService = tacNumberService;
     }
 
-    // Open form for entering TAC number
+    // ✅ Open form for entering TAC number
     @GetMapping("/add-tachnumber/edit/{id}")
     public String showAddTacNumberForm(@PathVariable("id") Long technicalDetailId, Model model) {
         TypeOfApprovalTechnicalDetail technicalDetail = tacNumberService.getTechnicalDetailById(technicalDetailId);
 
         // ✅ Fetch next TAC number (last + 1)
         Integer nextTacNo = tacNumberService.getNextTacNo();
-        model.addAttribute("technicaldetails", technicalDetail);
+        model.addAttribute("detail", technicalDetail);
         model.addAttribute("tacNumber", new TacNumber());
         model.addAttribute("tacNumbers", technicalDetail.getTacNumbers()); // list of existing TACs
         model.addAttribute("nextTacNo", nextTacNo); // pass to thymeleaf
 
         return "typeofapprovals/tacnumber/add-tachnumber-form";
     }
+
     @PostMapping("/save/{id}")
     public String saveTacNumbers(@PathVariable("id") Long technicalDetailId,
                                  @RequestParam("from") int from,
@@ -50,17 +53,15 @@ public class TacNumberController {
             // ✅ Fetch latest TAC number again (for error case too)
             Integer nextTacNo = tacNumberService.getNextTacNo();
             model.addAttribute("nextTacNo", nextTacNo);
-            // Show clean error message
-            if (e.getMessage().contains("Duplicate value")) {
-                model.addAttribute("errorMessage", "This TAC number has already been taken.");
-            } else {
-                model.addAttribute("errorMessage", "These TAC numbers have already been taken");
-            }
+
+            // ✅ Show error message from exception
+            model.addAttribute("errorMessage", e.getMessage());
+
             return "typeofapprovals/tacnumber/add-tachnumber-form";
         }
     }
 
-
+    // ✅ TAC numbers list (with search + pagination)
     @GetMapping("/tacnumbers-list")
     public String getAllTacNumbers(@RequestParam(defaultValue = "0") int page,
                                    @RequestParam(defaultValue = "20") int size,
@@ -75,21 +76,15 @@ public class TacNumberController {
             model.addAttribute("keyword", keyword);
         } else {
             // Normal paginated mode
-            Page<TacNumber> tacNumbersPage = tacNumberService.getAllTacNumbersWithManufacturer(page, size);
+            Page<TacNumber> tacNumbersPage = tacNumberService.getAllTacNumbersWithTechnicalDetail(page, size);
 
             model.addAttribute("tacNumbers", tacNumbersPage.getContent());
             model.addAttribute("currentPage", page);
             model.addAttribute("totalPages", tacNumbersPage.getTotalPages());
             model.addAttribute("isSearch", false);
-            model.addAttribute("keyword", null); // <--- important
+            model.addAttribute("keyword", null);
         }
 
         return "typeofapprovals/tacnumber/tacnumbers-list";
     }
-
-
-
-
-
-
 }

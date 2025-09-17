@@ -1,7 +1,6 @@
 package atraintegratedsystems.typeofapproval.service;
 
 import atraintegratedsystems.typeofapproval.model.TacNumber;
-import atraintegratedsystems.typeofapproval.model.TypeOfApprovalManufacturerDetail;
 import atraintegratedsystems.typeofapproval.model.TypeOfApprovalTechnicalDetail;
 import atraintegratedsystems.typeofapproval.repository.TacNumberRepository;
 import atraintegratedsystems.typeofapproval.repository.TypeOfApprovalTechnicalDetailsRepository;
@@ -22,11 +21,10 @@ public class TacNumberService {
     private final TacNumberRepository tacNumberRepository;
     private final TypeOfApprovalTechnicalDetailsRepository technicalDetailRepository;
 
-
     public TacNumberService(TacNumberRepository tacNumberRepository,
-                            TypeOfApprovalTechnicalDetailsRepository technicalRepository ){
+                            TypeOfApprovalTechnicalDetailsRepository technicalDetailRepository) {
         this.tacNumberRepository = tacNumberRepository;
-        this.technicalDetailRepository = technicalRepository;
+        this.technicalDetailRepository = technicalDetailRepository;
     }
 
     @Transactional
@@ -35,16 +33,15 @@ public class TacNumberService {
             throw new IllegalArgumentException("'from' must be less than or equal to 'to'");
         }
 
-        // ✅ Load manufacturer
+        // ✅ Load technical detail
         TypeOfApprovalTechnicalDetail technicalDetail = technicalDetailRepository
                 .findById(technicalId)
                 .orElseThrow(() -> new EntityNotFoundException("Technical Detail not found with ID: " + technicalId));
 
-
-        // ✅ Generate TAC numbers
+// ✅ Generate TAC numbers with dashes
         List<String> formattedTacNumbers = new ArrayList<>();
         for (int i = from; i <= to; i++) {
-            formattedTacNumbers.add("ATRA-TAC-" + i);
+            formattedTacNumbers.add("Atra-" + technicalDetail.getBrandName() + "-" + technicalDetail.getModelNumber() + "-" + i);
         }
 
         // ✅ Check duplicates in DB
@@ -64,13 +61,13 @@ public class TacNumberService {
             newTacNumbers.add(tacNumber);
         }
 
-        // ✅ Save in batch directly (no cascade, no huge re-save of manufacturer)
+        // ✅ Save in batch
         tacNumberRepository.saveAll(newTacNumbers);
     }
 
     public TypeOfApprovalTechnicalDetail getTechnicalDetailById(Long id) {
         return technicalDetailRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Technical Detail not found"));
+                .orElseThrow(() -> new EntityNotFoundException("Technical Detail not found with ID: " + id));
     }
 
     public Integer getNextTacNo() {
@@ -82,7 +79,7 @@ public class TacNumberService {
         return lastNumber + 1;
     }
 
-    public Page<TacNumber> getAllTacNumbersWithManufacturer(int page, int size) {
+    public Page<TacNumber> getAllTacNumbersWithTechnicalDetail(int page, int size) {
         Pageable pageable = PageRequest.of(page, size, Sort.by("id").descending());
         return tacNumberRepository.findAllWithTechnicalDetail(pageable);
     }
@@ -90,5 +87,4 @@ public class TacNumberService {
     public List<TacNumber> searchTacNumbers(String keyword) {
         return tacNumberRepository.searchAll(keyword);
     }
-
 }

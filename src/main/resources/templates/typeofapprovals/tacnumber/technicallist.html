@@ -59,24 +59,29 @@
 <div class="container-fluid" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
   <br>
   <fieldset>
-    <legend>All Manufacturers</legend>
+    <legend>All Technical Details</legend>
 
     <div class="table-container">
       <table class="table table-bordered" id="manufacturerTable">
         <thead class="bg-primary">
         <tr>
           <th th:text="#{id}">ID</th>
-          <th >Model Number</th>
-          <th >Brand Name</th>
+          <th>Brand Name</th>
+          <th>Model Number</th>
           <th>Generate Tac Number</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="m : ${technicaldetails}">
+        <tr th:each="m : ${technicalDetails}">
           <td th:text="${m.id}"></td>
           <td th:text="${m.brandName}"></td>
           <td th:text="${m.modelNumber}"></td>
-          <td><a th:href="@{'/typeofapprovals/tacnumber/add-tachnumber/edit/' + ${m.id}}" class="btn btn-primary btn-sm text-white">Add Tac Number</a> </td>
+          <td>
+            <a th:href="@{'/typeofapprovals/tacnumber/add-tachnumber/edit/' + ${m.id}}"
+               class="btn btn-primary btn-sm text-white">
+              Add Tac Number
+            </a>
+          </td>
         </tr>
         </tbody>
       </table>
