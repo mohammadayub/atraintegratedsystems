@@ -45,7 +45,7 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label class="form-label" th:text="#{certificate_fee_bank_voucher_no}">Certificate Fee Bank Voucher No</label>
-                        <input type="text" th:field="*{certificateFeeBankVoucherNo}" class="form-control" />
+                        <input type="text" th:field="*{certificateFeeBankVoucherNo}" class="form-control" required/>
                     </div>
                     <div class="col-md-6">
                         <label class="form-label" th:text="#{certificate_fee_voucher_date}">Certificate Fee Voucher Date</label>
@@ -70,7 +70,7 @@
                     <button type="submit" class="btn btn-primary px-4 py-2" th:text="#{confirm_payment_button}">
                         <i class="bi bi-check-circle"></i> Confirm
                     </button>&nbsp;&nbsp;
-                    <a onclick="history.back()" class="btn btn-secondary px-4 py-2" th:text="#{type_approval_cancel}">
+                    <a th:href="@{/typeofapprovals/finance/home}" class="btn btn-secondary px-4 py-2" th:text="#{type_approval_cancel}">
                         <i class="bi bi-arrow-left-circle"></i> <span th:text="#{back_button}">Back</span>
                     </a>
                 </div>
