@@ -1,8 +1,11 @@
 package atraintegratedsystems.typeofapproval.controller;
 
 import atraintegratedsystems.typeofapproval.model.TacNumber;
+import atraintegratedsystems.typeofapproval.model.TypeOfApprovalApplicant;
 import atraintegratedsystems.typeofapproval.model.TypeOfApprovalTechnicalDetail;
 import atraintegratedsystems.typeofapproval.service.TacNumberService;
+import atraintegratedsystems.typeofapproval.service.TypeOfApprovalApplicantService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +18,8 @@ import java.util.List;
 public class TacNumberController {
 
     private final TacNumberService tacNumberService;
+    @Autowired
+    private TypeOfApprovalApplicantService typeOfApprovalApplicantService;
 
     public TacNumberController(TacNumberService tacNumberService) {
         this.tacNumberService = tacNumberService;
@@ -87,4 +92,13 @@ public class TacNumberController {
 
         return "typeofapprovals/tacnumber/tacnumbers-list";
     }
+
+    // Certificate Section
+    @GetMapping("/paid-companies")
+    public String viewPaidCompanies(Model model) {
+        List<TypeOfApprovalApplicant> companies = typeOfApprovalApplicantService.getAllPaidCompanies();
+        model.addAttribute("companies", companies);
+        return "typeofapprovals/certificate/paid_companies";
+    }
+
 }

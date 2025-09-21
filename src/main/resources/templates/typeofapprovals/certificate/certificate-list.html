@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: page_head}"></head>
+<body>
+
+<div class="container">
+  <!-- Logos Row -->
+  <div class="d-flex justify-content-between align-items-center m-0 p-0">
+    <!-- Left Image -->
+    <img th:src="@{/images/islami_emarat.png}" alt="Left Logo">
+
+    <!-- Right Image -->
+    <img th:src="@{/images/atra_afghanistan.png}" alt="Right Logo">
+  </div>
+
+  <!-- Text + Certificate Section -->
+  <div>
+    <div class="col-12 text-center">
+      <h5>Afghanistan Telecommunications Regulatory Authority</h5>
+      <h3>RADIO COMMUNICATIONS EQUIPMENT</h3>
+      <h3>TYPE APPROVAL CERTIFICATE</h3>
+      <h6>Radio Communications Equipment Type Approval Number</h6>
+
+      <!-- Centered Certificate Box -->
+      <div class="d-flex justify-content-center mt-3">
+        <div style="border:1px solid black;width:160px;height:60px; display:flex; align-items:center; justify-content:center;">
+          <div style="border:1px solid black; width:150px; height:55px; display:flex; align-items:center; justify-content:center;">
+            <div th:each="cert : ${certificates}">
+              <span th:text="${cert.applicantNumber}"></span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-4">
+    <div class="col-12 text-justify">
+      <p>
+        The Authority in the exercise of the powers conferred upon it by Article 6(1) of the
+        Telecommunications Services Regulation Law, the applicable radio regulations which remain currently in
+        force and subject to the terms and conditions set in the Type Approval Procedures, hereby issues a Radio
+        Communications Equipment Type Approval Certificate to the Applicant whose name and particulars are
+        listed below.
+      </p>
+
+      <h3>Applicant's Details</h3>
+      <table style="width:100%">
+        <tbody th:each="cert : ${certificates}">
+        <tr>
+          <th style="width:50%">Name</th>
+          <td style="width:50%" th:text="${cert.applicantName}"></td>
+        </tr>
+        <tr>
+          <th>Address</th>
+          <td th:text="${cert.address}"></td>
+        </tr>
+        <tr>
+          <th>Telephone</th>
+          <td th:text="${cert.telephone}"></td>
+        </tr>
+        <tr>
+          <th>E-mail</th>
+          <td th:text="${cert.email}"></td>
+        </tr>
+
+        <tr class="mt-4 mb-4">
+          <td colspan="2"><h3>Radio Communications Equipment Description</h3></td>
+        </tr>
+        <tr>
+          <th>Model Number</th>
+          <td th:text="${cert.modelNumber}"></td>
+        </tr>
+        <tr>
+          <th>Brand Name</th>
+          <td th:text="${cert.brandName}"></td>
+        </tr>
+        <tr>
+          <th>Type Number</th>
+          <td th:text="${cert.typeNumber}"></td>
+        </tr>
+        <tr>
+          <th>Country Of Origin</th>
+          <td th:text="${cert.countryOfOrigin}"></td>
+        </tr>
+        <tr>
+          <th>Frequency Range</th>
+          <td th:text="${cert.frequencyRange}"></td>
+        </tr>
+        <tr>
+          <th>Output Power</th>
+          <td th:text="${cert.outputPower}"></td>
+        </tr>
+        <tr>
+          <th>Transmission Capacity</th>
+          <td th:text="${cert.transmissionCapacity}"></td>
+        </tr>
+        <tr>
+          <th>TAC No#</th>
+          <td th:text="${'From   ' + cert.firstTacNumber + '    To   ' + cert.lastTacNumber}"></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="row mt-4">
+    <div class="col-12 text-justify">
+      <p>
+        Only the original or a certified copy of the Radio Communications Equipment
+        Type Approval Certificate shall be considered valid.
+      </p>
+    </div>
+
+    <div class="col-12 mt-3">
+      <h3>Standardization Manager</h3>
+    </div>
+
+    <div class="col-12 mt-2">
+      <h5>{Stamp Date}</h5>
+    </div>
+
+    <div class="col-12 mt-2">
+      <h5>{Stamp Seal}</h5>
+    </div>
+  </div>
+
+  <button class="btn btn-primary" onclick="doPrint()" id="prnt">Print</button>
+</div>
+
+<script>
+  function doPrint() {
+    document.getElementById("prnt").style.display = 'none';
+    window.print();
+    document.getElementById("prnt").style.display = 'inline-block';
+  }
+</script>
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

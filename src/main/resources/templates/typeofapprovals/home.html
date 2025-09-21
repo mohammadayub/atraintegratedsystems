@@ -180,6 +180,20 @@
     </div>
   </fieldset>
   <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_TYPEOFAPPROVAL_ADMIN','ROLE_TYPEOFAPPROVAL_STANDARD')">
+    <legend>Certificate Management</legend>
+    <div class="row g-4">
+      <div class="col-sm-4">
+        <div class="custom-card text-center p-3">
+          <a th:href="@{/typeofapprovals/tacnumber/paid-companies}">
+            <img class="rounded" th:src="@{/images/type_of_approval_certificate.png}" alt="Certificate Management" style="height:100px;width:100px;">
+          </a>
+          <h4 class="license-link mt-2">
+            <a th:href="@{/typeofapprovals/tacnumber/paid-companies}" style="color: #14438B;font-size: 18px;">Certificate List</a>          </h4>
+        </div>
+      </div>
+    </div>
+  </fieldset>
+  <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_TYPEOFAPPROVAL_ADMIN','ROLE_TYPEOFAPPROVAL_STANDARD')">
   <legend>User Management</legend>
     <div class="row g-4">
       <div class="col-sm-4">

@@ -30,6 +30,9 @@ public interface TypeOfApprovalApplicantRepository extends JpaRepository<TypeOfA
     @Query(value = "SELECT * FROM type_of_approval_applicant where refer_status='Yes' AND certificate_fee_status IS NULL", nativeQuery = true)
     List<TypeOfApprovalApplicant> findAllUnPaidCertificateFee();
 
+    @Query(value = "SELECT * FROM type_of_approval_applicant where refer_status='Yes' AND application_fee_status ='Yes' AND admin_fee_status='Yes' AND certificate_fee_status='Yes'", nativeQuery = true)
+    List<TypeOfApprovalApplicant> findAllPaidCompany();
+
 //    @Query(value = "SELECT * FROM type_of_approval_applicant where admin_fee_status IS NULL", nativeQuery = true)
 //    List<TypeOfApprovalApplicant> findAllUnPaidAddminFee();
 
@@ -49,6 +52,7 @@ public interface TypeOfApprovalApplicantRepository extends JpaRepository<TypeOfA
 
 
 
+//  print Certificate
 
 
 

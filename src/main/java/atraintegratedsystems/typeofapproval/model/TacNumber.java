@@ -13,7 +13,6 @@ public class TacNumber {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true)
     private String tacNo;
 
     private LocalDate createdAt=LocalDate.now();

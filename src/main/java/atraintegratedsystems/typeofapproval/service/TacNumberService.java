@@ -75,9 +75,19 @@ public class TacNumberService {
         if (latestTac == null) {
             return 1; // start from 1 if no TAC exists
         }
-        int lastNumber = Integer.parseInt(latestTac.replace("ATRA-TAC-", ""));
-        return lastNumber + 1;
+
+        try {
+            // e.g. "Atra-BrandName-ModelNumber-200"
+            String[] parts = latestTac.split("-");
+            String lastPart = parts[parts.length - 1]; // "200"
+            int lastNumber = Integer.parseInt(lastPart);
+            return lastNumber + 1;
+        } catch (NumberFormatException e) {
+            // fallback if something goes wrong with parsing
+            throw new IllegalStateException("Invalid TAC format found: " + latestTac, e);
+        }
     }
+
 
     public Page<TacNumber> getAllTacNumbersWithTechnicalDetail(int page, int size) {
         Pageable pageable = PageRequest.of(page, size, Sort.by("id").descending());
