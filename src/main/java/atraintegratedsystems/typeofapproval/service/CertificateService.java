@@ -30,8 +30,8 @@ public class CertificateService {
                         (String) r[9],   // frequencyRange
                         (String) r[10],  // outputPower
                         (String) r[11],  // transmissionCapacity
-                        r[0] + "-" + String.valueOf(r[12]), // applicantNumber + firstTacNumber
-                        r[0] + "-" + String.valueOf(r[13])  // applicantNumber + lastTacNumber
+                         String.valueOf(r[12]), // applicantNumber + firstTacNumber
+                         String.valueOf(r[13])  // applicantNumber + lastTacNumber
                 ))
                 .collect(Collectors.toList());
     }

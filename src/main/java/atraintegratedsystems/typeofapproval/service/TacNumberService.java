@@ -41,7 +41,7 @@ public class TacNumberService {
 // ✅ Generate TAC numbers with dashes
         List<String> formattedTacNumbers = new ArrayList<>();
         for (int i = from; i <= to; i++) {
-            formattedTacNumbers.add(technicalDetail.getBrandName() + "-" + technicalDetail.getModelNumber() + "-" + i);
+            formattedTacNumbers.add("-"+technicalDetail.getTechnicalDetails().getTypeOfApprovalApplicantNumber() + technicalDetail.getBrandName() + "-" + technicalDetail.getModelNumber() + "-" + i);
         }
 
         // ✅ Check duplicates in DB
