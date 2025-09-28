@@ -133,7 +133,7 @@
           </label>
           <input type="date" id="requestDateInput" class="form-control"
                  th:field="*{applicant.requestDate}"
-                 th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" />
+                 th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" required/>
         </div>
 
         <div class="col-md-4">
@@ -193,7 +193,7 @@
           </label>
           <input type="text" class="form-control"
                  th:field="*{applicant.companyName}"
-                 th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" />
+                 th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" required/>
         </div>
 
         <div class="col-md-4">
@@ -442,24 +442,24 @@
         <div class="row g-3">
           <div class="col-12 col-sm-6 col-md-3">
             <label for="intendedUse" class="form-label" th:text="#{intended_use}">Intended Use</label>
-            <input th:field="*{intendedUse}" type="text" class="form-control" id="intendedUse">
+            <input th:field="*{intendedUse}" type="text" class="form-control" id="intendedUse" required>
           </div>
           <div class="col-12 col-sm-6 col-md-3">
             <label for="modelNumber" class="form-label" th:text="#{model_number}">Model Number</label>
-            <input th:field="*{modelNumber}" type="text" class="form-control" id="modelNumber">
+            <input th:field="*{modelNumber}" type="text" class="form-control" id="modelNumber" required>
           </div>
           <div class="col-12 col-sm-6 col-md-3">
             <label for="brandName" class="form-label" th:text="#{brand_name}">Brand Name</label>
-            <input th:field="*{brandName}" type="text" class="form-control" id="brandName">
+            <input th:field="*{brandName}" type="text" class="form-control" id="brandName" required>
           </div>
           <div class="col-12 col-sm-6 col-md-3">
             <label for="typeNumber" class="form-label" th:text="#{type_number}">Type Number</label>
-            <input th:field="*{typeNumber}" type="text" class="form-control" id="typeNumber">
+            <input th:field="*{typeNumber}" type="text" class="form-control" id="typeNumber" required>
           </div>
 
           <div class="col-12 col-sm-6 col-md-3">
             <label for="countryofOrigin" class="form-label" th:text="#{country_of_origin}">Country of Origin</label>
-            <input th:field="*{countryofOrigin}" type="text" class="form-control" id="countryofOrigin">
+            <input th:field="*{countryofOrigin}" type="text" class="form-control" id="countryofOrigin" required>
           </div>
           <div class="col-12 col-sm-6 col-md-3">
             <label for="frequencyrangeFromMHZ" class="form-label" th:text="#{frequency_range_from_MHZ}">Frequency Range From (MHz)</label>
