@@ -38,4 +38,19 @@ public interface TacNumberRepository extends JpaRepository<TacNumber, Long> {
             "WHERE LOWER(m.brandName) LIKE LOWER(CONCAT('%', :keyword, '%')) " +
             "   OR LOWER(m.modelNumber) LIKE LOWER(CONCAT('%', :keyword, '%'))")
     List<TacNumber> searchAll(@Param("keyword") String keyword);
+
+    // ✅ Search TAC numbers by brand or model
+//    @Query("SELECT t FROM TacNumber t " +
+////            "JOIN t.typeOfApprovalTechnicalDetail m " +
+////            "WHERE LOWER(m.companyName) LIKE LOWER(CONCAT('%', :keyword, '%')) " +
+////            "   OR LOWER(m.modelNumber) LIKE LOWER(CONCAT('%', :keyword, '%'))")
+////    List<TacNumber> searchPrint(@Param("keyword") String keyword);
+
+    @Query("SELECT t FROM TacNumber t " +
+            "JOIN t.typeOfApprovalTechnicalDetail td " +
+            "JOIN td.technicalDetails applicant " +  // join to the applicant
+            "WHERE LOWER(applicant.companyName) LIKE LOWER(CONCAT('%', :keyword, '%')) " +
+            "   OR LOWER(t.tacNo) LIKE LOWER(CONCAT('%', :keyword, '%'))")
+    List<TacNumber> searchPrint(@Param("keyword") String keyword);
+
 }

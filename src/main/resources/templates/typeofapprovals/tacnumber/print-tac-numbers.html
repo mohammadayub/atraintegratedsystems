@@ -91,9 +91,9 @@
 
         <!-- Right: Search Form -->
         <div id="search-form">
-            <form th:action="@{/typeofapprovals/tacnumber/tacnumbers-list}" method="get" class="d-flex gap-2">
-                <input type="text" name="keyword" class="form-control"
-                       placeholder="Search..." th:value="${keyword}">
+            <form th:action="@{/typeofapprovals/tacnumber/tacnumbers-list-print-search}" method="get" class="d-flex gap-3">
+                <input type="text" placeholder="Company Name ...." name="keyword" class="form-control"
+                        th:value="${keyword}">
                 <button type="submit" class="btn btn-primary">Search</button>
             </form>
         </div>
@@ -166,25 +166,33 @@
     </div>
 </div>
 
+<div style="height:10vh;"></div>
 <footer th:replace="~{layout :: page_footer}"></footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script>
     document.querySelector("input[name='keyword']").addEventListener("input", function() {
         if (this.value.trim() === "") {
-            window.location.href = "/typeofapprovals/tacnumber/tacnumbers-list";
+            window.location.href = "/typeofapprovals/tacnumber/tacnumbers-list-print";
         }
     });
 
     function doPrint() {
-        document.getElementById("prnt").style.display = 'none';
-        document.getElementById("search-form").style.display = 'none';
-        document.getElementById("pagination_id").style.display = 'none';
-        window.print();
-        document.getElementById("prnt").style.display = 'inline-block';
-        document.getElementById("search-form").style.display = 'block';
-        document.getElementById("pagination_id").style.display = 'block';
-    }
+    const printBtn = document.getElementById("prnt");
+    const searchForm = document.getElementById("search-form");
+    const pagination = document.getElementById("pagination_id");
+
+    if (printBtn) printBtn.style.display = 'none';
+    if (searchForm) searchForm.style.display = 'none';
+    if (pagination) pagination.style.display = 'none';
+
+    window.print();
+
+    if (printBtn) printBtn.style.display = 'inline-block';
+    if (searchForm) searchForm.style.display = 'block';
+    if (pagination) pagination.style.display = 'block';
+}
+
 </script>
 </body>
 </html>

@@ -92,6 +92,31 @@ public class TacNumberController {
 
         return "typeofapprovals/tacnumber/tacnumbers-list";
     }
+    @GetMapping("/tacnumbers-list-print-search")
+    public String getAllTacNumbersPrintSearch(@RequestParam(defaultValue = "0") int page,
+                                   @RequestParam(defaultValue = "20") int size,
+                                   @RequestParam(required = false) String keyword,
+                                   Model model) {
+
+        if (keyword != null && !keyword.trim().isEmpty()) {
+            // Search mode: fetch all results (no pagination)
+            List<TacNumber> results = tacNumberService.searchTacNumbersPrint(keyword.trim());
+            model.addAttribute("tacNumbers", results);
+            model.addAttribute("isSearch", true);
+            model.addAttribute("keyword", keyword);
+        } else {
+            // Normal paginated mode
+            Page<TacNumber> tacNumbersPage = tacNumberService.getAllTacNumbersWithTechnicalDetail(page, size);
+
+            model.addAttribute("tacNumbers", tacNumbersPage.getContent());
+            model.addAttribute("currentPage", page);
+            model.addAttribute("totalPages", tacNumbersPage.getTotalPages());
+            model.addAttribute("isSearch", false);
+            model.addAttribute("keyword", null);
+        }
+
+        return "typeofapprovals/tacnumber/print-tac-numbers";
+    }
 
     // Certificate Section
     @GetMapping("/paid-companies")

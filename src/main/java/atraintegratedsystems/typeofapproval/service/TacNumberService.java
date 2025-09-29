@@ -41,7 +41,7 @@ public class TacNumberService {
 // ✅ Generate TAC numbers with dashes
         List<String> formattedTacNumbers = new ArrayList<>();
         for (int i = from; i <= to; i++) {
-            formattedTacNumbers.add("-"+technicalDetail.getTechnicalDetails().getTypeOfApprovalApplicantNumber() + technicalDetail.getBrandName() + "-" + technicalDetail.getModelNumber() + "-" + i);
+            formattedTacNumbers.add(technicalDetail.getTechnicalDetails().getTypeOfApprovalApplicantNumber() + technicalDetail.getBrandName() + "-" + technicalDetail.getModelNumber() + "-" + i);
         }
 
         // ✅ Check duplicates in DB
@@ -96,5 +96,10 @@ public class TacNumberService {
 
     public List<TacNumber> searchTacNumbers(String keyword) {
         return tacNumberRepository.searchAll(keyword);
+    }
+
+// For Print Page
+    public List<TacNumber> searchTacNumbersPrint(String keyword) {
+        return tacNumberRepository.searchPrint(keyword);
     }
 }
