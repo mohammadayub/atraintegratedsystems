@@ -131,13 +131,13 @@
                 <!-- First -->
                 <li class="page-item" th:classappend="${currentPage == 0} ? 'disabled'">
                     <a class="page-link"
-                       th:href="@{/typeofapprovals/tacnumber/tacnumbers-list-print(page=0, size=10)}">&laquo;</a>
+                       th:href="@{/typeofapprovals/tacnumber/tacnumbers-list-print(page=0, size=30)}">&laquo;</a>
                 </li>
 
                 <!-- Previous -->
                 <li class="page-item" th:classappend="${currentPage == 0} ? 'disabled'">
                     <a class="page-link"
-                       th:href="@{/typeofapprovals/tacnumber/tacnumbers-list-print(page=${currentPage-1}, size=10)}">&lsaquo;</a>
+                       th:href="@{/typeofapprovals/tacnumber/tacnumbers-list-print(page=${currentPage-1}, size=30)}">&lsaquo;</a>
                 </li>
 
                 <!-- Page numbers -->
@@ -146,20 +146,20 @@
                                              (currentPage+2 < totalPages-1 ? currentPage+2 : totalPages-1))}"
                     th:classappend="${i == currentPage} ? 'active'">
                     <a class="page-link"
-                       th:href="@{/typeofapprovals/tacnumber/tacnumbers-list-print(page=${i}, size=10)}"
+                       th:href="@{/typeofapprovals/tacnumber/tacnumbers-list-print(page=${i}, size=30)}"
                        th:text="${i+1}"></a>
                 </li>
 
                 <!-- Next -->
                 <li class="page-item" th:classappend="${currentPage+1 >= totalPages} ? 'disabled'">
                     <a class="page-link"
-                       th:href="@{/typeofapprovals/tacnumber/tacnumbers-list-print(page=${currentPage+1}, size=10)}">&rsaquo;</a>
+                       th:href="@{/typeofapprovals/tacnumber/tacnumbers-list-print(page=${currentPage+1}, size=30)}">&rsaquo;</a>
                 </li>
 
                 <!-- Last -->
                 <li class="page-item" th:classappend="${currentPage+1 >= totalPages} ? 'disabled'">
                     <a class="page-link"
-                       th:href="@{/typeofapprovals/tacnumber/tacnumbers-list-print(page=${totalPages-1}, size=10)}">&raquo;</a>
+                       th:href="@{/typeofapprovals/tacnumber/tacnumbers-list-print(page=${totalPages-1}, size=30)}">&raquo;</a>
                 </li>
             </ul>
         </nav>
