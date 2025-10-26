@@ -76,8 +76,8 @@
           </h4>
         </div>
       </div>
-      <div class="col-sm-4">
-        <div class="custom-card text-center p-3">
+      <div class="col-sm-4" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_TYPEOFAPPROVAL_ADMIN')">
+        <div class="custom-card text-center p-3" >
           <a th:href="@{/typeofapprovals/onlineapplicationform/list}">
             <img th:src="@{/images/edit_list.png}" alt="Applicant List" class="img-fluid" />
           </a>
