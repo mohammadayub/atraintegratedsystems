@@ -84,10 +84,10 @@ public class TypeOfApprovalService {
             throw new IllegalArgumentException("Organization must be selected.");
         }
 
-        // ✅ Check uniqueness
-        if (applicantRepository.existsByCompanyName(applicant.getCompanyName())) {
-            throw new IllegalArgumentException("Company name already exists.");
-        }
+//        // ✅ Check uniqueness
+//        if (applicantRepository.existsByCompanyName(applicant.getCompanyName())) {
+//            throw new IllegalArgumentException("Company name already exists.");
+//        }
 
         applicant.setApplicationFeeOrganizationName("atra");
         applicant.setAdminFeeOrganizationName("atra");
