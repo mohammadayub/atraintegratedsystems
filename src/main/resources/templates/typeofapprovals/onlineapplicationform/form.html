@@ -118,6 +118,7 @@
 <div class="container-fluid mt-4">
   <h3 class="mb-4 text-center"  style="font-family: 'Playwrite DK Loopet', cursive;" th:text="#{online_application}"></h3>
   <div th:if="${errorMessage}" class="alert alert-danger" th:text="${errorMessage}"></div>
+
   <form th:action="@{/typeofapprovals/onlineapplicationform/submit}" method="post" th:object="${form}" enctype="multipart/form-data">
     <!-- Applicant Details -->
     <div class="card mb-4" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
@@ -294,6 +295,20 @@
                  th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" readonly/>
 
         </div>
+        <div class="col-md-4">
+          <label for="organization" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">Select Organization:</label>
+          <select id="organization"
+                  class="form-select"
+                  th:field="*{applicant.typeOfApprovalOrganization}" required>
+            <option value="" disabled selected th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">Select Organization</option>
+            <option th:each="org : ${organizations}"
+                    th:value="${org.id}"
+                    th:text="${org.name}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+            </option>
+          </select>
+        </div>
+
+
       </div>
     </div>
 

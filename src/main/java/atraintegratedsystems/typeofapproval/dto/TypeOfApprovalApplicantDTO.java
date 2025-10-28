@@ -31,6 +31,7 @@ public class TypeOfApprovalApplicantDTO {
     private String typeSelect;
     private Double applicationFee;
     private String applicationFeeOrganizationName;
+    private Integer organizationId;
 
     //Application Fee Finance Section
     private String applicationFeeStatus;

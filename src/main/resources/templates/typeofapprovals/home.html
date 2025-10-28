@@ -50,6 +50,17 @@
           </h4>
         </div>
       </div>
+      <div class="col-sm-4">
+        <div class="custom-card text-center p-3">
+          <a th:href="@{/organizations}">
+            <img th:src="@{/images/addOrganization.png}" alt="Online Application Form" class="img-fluid" />
+          </a>
+          <h4 class="license-link mt-2">
+            <a th:href="@{/organizations}" th:text="#{typeof_approvals}" style="color: #14438B;
+            font-size: 18px;">Organization</a>
+          </h4>
+        </div>
+      </div>
     </div>
   </fieldset>
   <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_TYPEOFAPPROVAL_ADMIN','ROLE_TYPEOFAPPROVAL_STANDARD')">

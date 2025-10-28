@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: page_head}">
+  <title>Add/Edit Organization</title>
+  <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+</head>
+<body class="bg-light">
+<nav th:replace="~{typeofApproval_layout :: page_navbar}"></nav>
+<div class="container">
+  <h2 class="mb-4 text-primary" th:text="${organization.id == 0} ? 'Add Organization' : 'Edit Organization'"></h2>
+
+  <form th:action="@{/organizations/save}" th:object="${organization}" method="post" class="bg-white p-4 rounded shadow-sm">
+    <input type="hidden" th:field="*{id}"/>
+
+    <div class="mb-3">
+      <label for="name" class="form-label">Organization Name</label>
+      <input type="text" th:field="*{name}" class="form-control" id="name" placeholder="Enter name">
+      <small class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></small>
+      <small class="text-danger" th:if="${nameError}" th:text="${nameError}"></small>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a th:href="@{/organizations}" class="btn btn-secondary">Cancel</a>
+  </form>
+</div>
+<div style="height:10vh;"></div>
+<footer th:replace="~{layout :: page_footer}"></footer>
+</body>
+</html>

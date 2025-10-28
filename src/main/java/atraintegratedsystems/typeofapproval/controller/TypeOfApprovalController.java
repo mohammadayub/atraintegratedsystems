@@ -2,6 +2,7 @@ package atraintegratedsystems.typeofapproval.controller;
 
 import atraintegratedsystems.typeofapproval.dto.TypeOfApprovalFormDTO;
 import atraintegratedsystems.typeofapproval.model.TypeOfApprovalManufacturerDetail;
+import atraintegratedsystems.typeofapproval.service.TypeOfApprovalOrganizationService;
 import atraintegratedsystems.typeofapproval.service.TypeOfApprovalService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -15,8 +16,12 @@ public class TypeOfApprovalController {
 
     private final TypeOfApprovalService approvalService;
 
-    public TypeOfApprovalController(TypeOfApprovalService approvalService) {
+    private final TypeOfApprovalOrganizationService service;
+
+    public TypeOfApprovalController(TypeOfApprovalService approvalService,
+                                    TypeOfApprovalOrganizationService service) {
         this.approvalService = approvalService;
+        this.service = service;
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_TYPEOFAPPROVAL_ADMIN') or hasRole('ROLE_TYPEOFAPPROVAL_ONLINE_APPLICATION') or hasRole('ROLE_TYPEOFAPPROVAL_STANDARD')")
@@ -48,6 +53,8 @@ public class TypeOfApprovalController {
     public String showForm(Model model) {
         TypeOfApprovalFormDTO form = new TypeOfApprovalFormDTO();
         form.getManufacturers().add(new TypeOfApprovalManufacturerDetail()); // Add one empty row
+
+        model.addAttribute("organizations", service.findAll());
         model.addAttribute("form", form);
         return "typeofapprovals/onlineapplicationform/form";
     }

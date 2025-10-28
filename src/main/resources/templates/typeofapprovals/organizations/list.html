@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: page_head}">
+    <title>Organizations</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+</head>
+<body class="bg-light">
+<nav th:replace="~{typeofApproval_layout :: page_navbar}"></nav>
+<div class="container">
+    <h2 class="mb-4 text-primary">Organizations List</h2>
+    <a th:href="@{/organizations/add}" class="btn btn-success mb-3">Add Organization</a>
+
+    <table class="table table-bordered table-hover bg-white">
+        <thead class="table-primary">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="org : ${organizations}">
+            <td th:text="${org.id}"></td>
+            <td th:text="${org.name}"></td>
+            <td>
+                <a th:href="@{/organizations/edit/{id}(id=${org.id})}" class="btn btn-warning btn-sm">Edit</a>
+                <a th:href="@{/organizations/delete/{id}(id=${org.id})}" class="btn btn-danger btn-sm"
+                   onclick="return confirm('Are you sure?');">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div style="height:10vh;"></div>
+<footer th:replace="~{layout :: page_footer}"></footer>
+</body>
+</html>

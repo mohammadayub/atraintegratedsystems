@@ -20,7 +20,6 @@ public class TypeOfApprovalApplicant {
     private String licenseOperator;
     private String authorizedImporter;
     private String importRegistrationNo;
-    @Column(unique = true, nullable = false)
     private String companyName;
     private String contactPerson;
     private String address;
@@ -65,7 +64,6 @@ public class TypeOfApprovalApplicant {
     private LocalDate adminFeeEntryDate;
     private String adminFeeEnteredBy;
 
-
     private Double certificateFee;
 
     //Certificate Fee Section
@@ -91,12 +89,8 @@ public class TypeOfApprovalApplicant {
     private LocalDate entryReferDate;
     private String userEntered;
 
-
-
     @OneToMany(mappedBy = "applicant", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<TypeOfApprovalManufacturerDetail> manufacturers;
-
-
 
     @OneToMany(mappedBy = "approvalApplicant", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<TypeOfApprovalAttachment> attachments;
@@ -104,11 +98,10 @@ public class TypeOfApprovalApplicant {
     @OneToMany(mappedBy = "technicalDetails", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<TypeOfApprovalTechnicalDetail> details;
 
-
     @OneToMany(mappedBy = "standardCompliant", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<TypeOfApprovalStandardCompliant> standardCompliant;
 
-
-
-
+    @ManyToOne
+    @JoinColumn(name = "organization_id")
+    private TypeOfApprovalOrganization typeOfApprovalOrganization;
 }
