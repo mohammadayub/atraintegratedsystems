@@ -1,7 +1,7 @@
 package atraintegratedsystems.codes.service;
 
-import atra.erp.codes.model.Code;
-import atra.erp.codes.repository.CodeRepository;
+import atraintegratedsystems.codes.model.Code;
+import atraintegratedsystems.codes.repository.CodeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
