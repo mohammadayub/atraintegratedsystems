@@ -1,4 +1,6 @@
 package atraintegratedsystems.codes.service;
+import atraintegratedsystems.codes.model.CodeExtensionDetail;
+import atraintegratedsystems.codes.repository.CodeExtensionDetailRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

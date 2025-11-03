@@ -1,0 +1,129 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head th:replace="~{layout :: page_head}">
+    <title>Telecom Short Code Management System</title>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap" />
+    <div th:replace="styles :: data-tables-styles"></div>
+
+    <style>
+        body {
+            background-color: #f5f5f5;
+            font-family: 'EB Garamond', serif;
+            font-weight: bold;
+        }
+
+        .table-container {
+            margin-top: 15px;
+            border: 1px solid #ddd;
+            max-height: 800px;
+            overflow-y: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9em;
+        }
+
+        th, td {
+            padding: 6px;
+            text-align: center;
+            vertical-align: middle;
+            border: 1px solid #ddd;
+        }
+
+        thead th {
+            color: white;
+            background-color: #007bff;
+            font-size: 16px;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .assign {
+            background-color: lightgreen !important;
+        }
+
+        @media print {
+            .assign {
+                background-color: lightgreen !important;
+            }
+
+            .btn, .navbar, .footer {
+                display: none !important;
+            }
+        }
+
+        .btn.btn-success {
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            font-weight: bold;
+            background-color: #f8f9fa;
+            padding: 15px;
+        }
+    </style>
+
+    <div th:replace="styles :: ltr-to-rtl"></div>
+</head>
+
+<body>
+<nav th:replace="~{layout :: page_navbar}"></nav>
+
+<div class="container-fluid"
+     th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+
+    <fieldset class="mt-4">
+        <legend>Short Codes Digits Allocation Table</legend>
+
+        <div class="mb-3">
+            <a th:href="@{/codes/standard/shortcodes/add}" class="btn btn-primary">Add Code</a>
+            <button class="btn btn-primary" onclick="printPage()">Print</button>
+        </div>
+
+        <div class="table-container">
+            <table class="table table-bordered" id="shortCodeTable">
+                <tbody>
+                <tr th:each="row, rowStat : ${#numbers.sequence(0, codes.size(), 31)}">
+                    <td th:each="code : ${codes.subList(row, (row + 31 > codes.size()) ? codes.size() : row + 31)}"
+                        th:classappend="${code[1] == 'assign'} ? 'assign' : ''">
+                        <span th:text="${code[0]}"></span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </fieldset>
+
+    <a th:href="@{/}" class="btn btn-success">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+             stroke-width="1.5" stroke="currentColor" style="width:20px;height:20px;">
+            <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
+        </svg>
+        Back to Home
+    </a>
+</div>
+
+<div th:replace="scripts :: common-scripts"></div>
+<div th:replace="scripts :: data-tables-scripts"></div>
+
+<script>
+    function printPage() {
+        document.body.classList.add('print-style');
+        window.print();
+        document.body.classList.remove('print-style');
+    }
+</script>
+
+<footer th:replace="~{layout :: page_footer}"></footer>
+</body>
+</html>

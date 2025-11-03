@@ -1,9 +1,7 @@
 package atraintegratedsystems.codes.service;
 
-
-
-import atra.erp.codes.model.IspcExtensionDetail;
-import atra.erp.codes.repository.IspcExtensionDetailRepository;
+import atraintegratedsystems.codes.model.IspcExtensionDetail;
+import atraintegratedsystems.codes.repository.IspcExtensionDetailRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
