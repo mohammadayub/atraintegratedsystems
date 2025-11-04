@@ -15,10 +15,47 @@
 <body>
 <div th:replace="styles :: commonfieldset"></div>
 <nav th:replace="~{layout :: page_navbar}"></nav>
-<div class="container mt-5">
-    <h1 class="text-success text-center">Welcome to Codes Home Page</h1>
-</div>
 
+<div class="container mt-4">
+<fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_CODES_ADMIN','ROLE_LICENSE','ROLE_MINISTRY','ROLE_LICENSE_COMPLETION_PROFILE','ROLE_LICENSE_APPROVAL','ROLE_LICENSE_PROFILE_ENTRY','ROLE_FINANCE','ROLE_FINANCE','ROLE_TYPEOFAPPROVAL_ADMIN','ROLE_TYPEOFAPPROVAL_ATRA_FINANCE','ROLE_TYPEOFAPPROVAL_MCIT_FINANCE','ROLE_TYPEOFAPPROVAL_STANDARD','ROLE_TYPEOFAPPROVAL_ONLINE_APPLICATION')">
+    <legend>Codes Management Section</legend>
+    <table class="table table-borderless">
+        <tr>
+            <td>
+                <div class="custom-card" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_LICENSE','ROLE_LICENSE_COMPLETION_PROFILE','ROLE_LICENSE_APPROVAL','ROLE_LICENSE_PROFILE_ENTRY','ROLE_FINANCE','ROLE_MINISTRY')">
+                    <a th:href="@{/codes/standard/shortcodes/home}">
+                        <img th:src="@{/images/shortCodes.png}" alt="Short Code">
+                    </a>
+                    <h4 class="license-link" style="margin-top: 12px;">
+                        <a th:href="@{/codes/standard/shortcodes/home}">Short Code</a>
+                    </h4>
+                </div>
+            </td>
+            <td>
+                <div class="custom-card" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_CODES_ADMIN')">
+                    <a th:href="@{/#}">
+                        <img th:src="@{/images/smsidentifiercode.png}" alt="Finance Management">
+                    </a>
+                    <h4 class="license-link" style="margin-top: 10px;">
+                        <a th:href="@{/#}">SMS Identifier Code</a>
+                    </h4>
+                </div>
+            </td>
+
+            <td>
+                <div class="custom-card" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_TYPEOFAPPROVAL_ADMIN','ROLE_TYPEOFAPPROVAL_ATRA_FINANCE','ROLE_TYPEOFAPPROVAL_MCIT_FINANCE','ROLE_TYPEOFAPPROVAL_STANDARD','ROLE_TYPEOFAPPROVAL_ONLINE_APPLICATION')">
+                    <a th:href="@{/#}">
+                        <img th:src="@{/images/ispcCode.png}" alt="Finance Management">
+                    </a>
+                    <h4 class="license-link" style="margin-top: 10px;">
+                        <a th:href="@{/#}">ISPC Code</a>
+                    </h4>
+                </div>
+            </td>
+        </tr>
+    </table>
+</fieldset>
+</div>
 
 <footer th:replace="~{layout :: page_footer}"></footer>
 

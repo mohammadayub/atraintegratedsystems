@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.util.List;
 
 @Controller
-public class StandardCodeController {
+public class ISPCController {
 
     @Autowired
     private CodeRepository codeRepository;
@@ -24,7 +24,7 @@ public class StandardCodeController {
     /**
      * Displays the Short Codes Master Table page
      */
-    @GetMapping("/codes/standard/shortcodes")
+    @GetMapping("/codes/standard/ispc")
     public String getCodes(Model model) {
         List<Object[]> codes = codeRepository.getCodeData();
         model.addAttribute("codes", codes);
@@ -34,7 +34,7 @@ public class StandardCodeController {
     /**
      * Displays the Add Short Code form
      */
-    @GetMapping("/codes/standard/shortcodes/add")
+    @GetMapping("/codes/standard/ispc/add")
     public String showAddShortCodeForm(Model model) {
         model.addAttribute("codeDTO", new CodeDTO());
         List<Object[]> codes = codeRepository.getCodeData();
@@ -45,7 +45,7 @@ public class StandardCodeController {
     /**
      * Handles form submission for adding a new Short Code
      */
-    @PostMapping("/codes/standard/shortcodes/add")
+    @PostMapping("/codes/standard/ispc/add")
     public String handleAddShortCode(
             @Valid @ModelAttribute("codeDTO") Code code,
             BindingResult bindingResult,
