@@ -1,0 +1,157 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head th:replace="~{layout :: page_head}">
+    <div th:replace="styles :: persian-datepicker-styles"></div>
+    <div th:replace="styles :: select2-styles"></div>
+    <div th:replace="styles :: common-css"></div>
+    <title>Telecom Short Codes Management System</title>
+</head>
+<body>
+<nav th:replace="~{layout :: page_navbar}"></nav>
+
+<div class="container-fluid mt-4" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+    <form th:action="@{/codes/standard/shortcodes_detailsAdd/add}" th:object="${codeDetailDTO}" method="post" enctype="multipart/form-data">
+        <fieldset style="border: 2px solid #DCAF45; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+            <legend style="width: auto; font-size: 1.2rem; color: #14438B; padding: 0 10px; font-weight: bold;">
+                Telecom ShortCode Details
+            </legend>
+            <div class="row g-3">
+                <input type="hidden" th:field="*{id}"/>
+
+                <!-- Short Code -->
+                <div class="col-md-3 form-group">
+                    <label for="shortCode">Select Code</label>
+                    <select class="form-control search-select" th:field="*{shortCode}" id="shortCode">
+                        <option th:each="code : ${codes}" th:value="${code[0]}" th:text="${code[1]}"></option>
+                    </select>
+                    <div th:if="${#fields.hasErrors('shortCode')}" th:errors="*{shortCode}" class="text-danger small"></div>
+                </div>
+
+                <!-- Status -->
+                <div class="col-md-3 form-group">
+                    <label for="codeStatus">Select Status</label>
+                    <select class="form-control" th:field="*{codeStatus}" id="codeStatus">
+                        <option th:value="'Active'">Active</option>
+                        <option th:value="'InActive'">Inactive</option>
+                    </select>
+                </div>
+
+                <!-- Source Used -->
+                <div class="col-md-3 form-group">
+                    <label for="source_used">Source Used</label>
+                    <input type="text" class="form-control" th:field="*{source_used}" id="source_used">
+                </div>
+
+                <!-- Location -->
+                <div class="col-md-3 form-group">
+                    <label for="location">Location</label>
+                    <input type="text" class="form-control" th:field="*{location}" id="location">
+                </div>
+
+                <!-- Channel -->
+                <div class="col-md-3 form-group">
+                    <label for="chanel">Channel</label>
+                    <input type="text" class="form-control" th:field="*{chanel}" id="chanel">
+                </div>
+
+                <!-- Services -->
+                <div class="col-md-3 form-group">
+                    <label for="services">Services</label>
+                    <textarea class="form-control" th:field="*{services}" id="services"></textarea>
+                </div>
+
+                <!-- Category -->
+                <div class="col-md-3 form-group">
+                    <label for="category">Category</label>
+                    <input type="text" class="form-control" th:field="*{category}" id="category">
+                </div>
+
+                <!-- Back Long Number -->
+                <div class="col-md-3 form-group">
+                    <label for="back_long_number">Back Long Number</label>
+                    <input type="text" class="form-control" th:field="*{back_long_number}" id="back_long_number">
+                </div>
+
+                <!-- Responsible Person -->
+                <div class="col-md-3 form-group">
+                    <label for="name_of_responsible_person">Full Name</label>
+                    <input type="text" class="form-control" th:field="*{name_of_responsible_person}" id="name_of_responsible_person">
+                </div>
+                <div class="col-md-3 form-group">
+                    <label for="id_card_number_of_responsible_person">ID Card Number</label>
+                    <input type="text" class="form-control" th:field="*{id_card_number_of_responsible_person}" id="id_card_number_of_responsible_person">
+                </div>
+                <div class="col-md-3 form-group">
+                    <label for="mobile_number_of_responsible_person">Mobile Number</label>
+                    <input type="text" class="form-control" th:field="*{mobile_number_of_responsible_person}" id="mobile_number_of_responsible_person">
+                </div>
+                <div class="col-md-3 form-group">
+                    <label for="email_of_responsible_person">Email Address</label>
+                    <input type="text" class="form-control" th:field="*{email_of_responsible_person}" id="email_of_responsible_person">
+                </div>
+
+                <!-- Dates -->
+                <div class="col-md-3 form-group">
+                    <label for="assigning_date">Assigning Date</label>
+                    <input type="text" class="form-control hijrishamsi" th:field="*{assigning_date}" id="assigning_date">
+                </div>
+                <div class="col-md-3 form-group">
+                    <label for="expiration_date">Expiration Date</label>
+                    <input type="text" class="form-control hijrishamsi" th:field="*{expiration_date}" id="expiration_date">
+                </div>
+
+                <!-- Fees -->
+                <div class="col-md-3 form-group">
+                    <label for="application_fees">Application Fees</label>
+                    <input type="number" class="form-control" th:field="*{application_fees}" id="application_fees" disabled>
+                </div>
+                <div class="col-md-3 form-group">
+                    <label for="registration_fees">Registration Fees</label>
+                    <input type="number" class="form-control" th:field="*{registration_fees}" id="registration_fees" disabled>
+                </div>
+                <div class="col-md-3 form-group">
+                    <label for="royalty_fees">Royalty Fees</label>
+                    <input type="number" class="form-control" th:field="*{royalty_fees}" id="royalty_fees" disabled>
+                </div>
+
+            </div>
+
+            <!-- Submit Button -->
+            <div class="row mt-4">
+                <div class="col-md-4 btn-group d-flex justify-content-center">
+                    <button type="submit" class="btn btn-primary border border-primary rounded">
+                        <i class="fas fa-check"></i> Submit
+                    </button>
+                    <button type="reset" class="btn btn-info border border-info rounded">
+                        <i class="fas fa-redo"></i> Reset
+                    </button>
+                </div>
+            </div>
+
+        </fieldset>
+    </form>
+</div>
+
+<!-- Scripts -->
+<div th:replace="scripts :: common-scripts"></div>
+<div th:replace="scripts :: persian-datepicker-scripts"></div>
+<div th:replace="scripts :: select2-scripts"></div>
+<div th:replace="scripts :: common-hijrishamsi-date"></div>
+
+<script>
+    $(document).ready(function () {
+        $('.search-select').select2();
+        $('.hijrishamsi').persianDatepicker({
+            format: 'YYYY-MM-DD',
+            autoClose: true,
+            observer: true,
+            calendar: { persian: { locale: 'en' } },
+            onShow: function () {
+                $('.persian-datepicker-container').appendTo('body');
+            }
+        });
+    });
+</script>
+
+</body>
+</html>

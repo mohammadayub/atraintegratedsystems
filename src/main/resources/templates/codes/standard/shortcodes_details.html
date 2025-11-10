@@ -1,0 +1,217 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<head th:replace="~{layout :: page_head}">
+    <title>Telecom Short Code Management System</title>
+
+    <!-- Google Font -->
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap"/>
+
+    <!-- Custom Styles -->
+    <div th:replace="styles :: data-tables-styles"></div>
+
+    <style>
+        body {
+            background-color: #f5f5f5;
+            font-family: 'EB Garamond', serif;
+            font-weight: bold;
+        }
+
+        .table-container {
+            margin-top: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: white;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9em;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: center;
+            vertical-align: middle;
+            border: 1px solid #ddd;
+        }
+
+        thead th {
+            color: white;
+            background-color: #007bff;
+            font-size: 14px;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .expired-date {
+            background-color: #ffcccc !important;
+        }
+
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            font-weight: bold;
+            background-color: #f8f9fa;
+            padding: 15px;
+        }
+
+        @media print {
+            .btn, .navbar, .footer {
+                display: none !important;
+            }
+
+            table {
+                font-size: 12px;
+            }
+        }
+    </style>
+
+    <div th:replace="styles :: ltr-to-rtl"></div>
+</head>
+
+<body>
+
+<!-- Navbar -->
+<nav th:replace="~{layout :: page_navbar}"></nav>
+
+<!-- Main Content -->
+<div class="container-fluid"
+     th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+
+    <fieldset class="mt-4">
+        <legend class="text-center mb-3">Telecom Short Codes Registrations Management</legend>
+
+        <!-- Action Buttons -->
+        <div class="mb-3 text-end">
+            <a class="btn btn-primary me-2"
+               th:href="@{/codes/standard/shortcodes_details/add}">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                     fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5
+                             0 0 1 0 1h-3v3a.5.5
+                             0 0 1-1 0v-3h-3a.5.5
+                             0 0 1 0-1h3v-3A.5.5
+                             0 0 1 8 4"/>
+                </svg> Add Record
+            </a>
+
+            <button class="btn btn-success" onclick="printPage()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                     fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                     stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                          d="M9 15 3 9m0 0 6-6M3 9h12a6 6
+                          0 0 1 0 12h-3"/>
+                </svg> Print
+            </button>
+        </div>
+
+        <!-- Data Table -->
+        <div class="table-container">
+            <table id="example" class="table table-bordered table-hover text-center">
+                <thead>
+                <tr>
+                    <th>SN</th>
+                    <th>Short Code</th>
+                    <th>Status</th>
+                    <th>ISPC Unique Name</th>
+                    <th>Source Used</th>
+                    <th>Location</th>
+                    <th>Channel</th>
+                    <th>Services</th>
+                    <th>Category</th>
+                    <th>Back-Long#</th>
+                    <th>Responsible Person</th>
+                    <th>ID Card</th>
+                    <th>Mobile</th>
+                    <th>Email</th>
+<!--                    <th>Assigning Date</th>-->
+<!--                    <th>Expiration Date</th>-->
+                    <th>Miladi Expiry</th>
+                    <th>Application Fees</th>
+                    <th>Registration Fees</th>
+                    <th>Royalty Fees</th>
+                    <th>Total Fees</th>
+                    <th>Bank Voucher No</th>
+                    <th>Payment Status</th>
+                    <th>Update</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="codeDetail : ${data}">
+                    <td th:text="${codeDetail.id}"></td>
+                    <td th:text="${codeDetail.shortCode}"></td>
+                    <td th:text="${codeDetail.codeStatus}"></td>
+                    <td th:text="${codeDetail.unique_name_of_signaling_point}"></td>
+                    <td th:text="${codeDetail.source_used}"></td>
+                    <td th:text="${codeDetail.location}"></td>
+                    <td th:text="${codeDetail.chanel}"></td>
+                    <td th:text="${codeDetail.services}"></td>
+                    <td th:text="${codeDetail.category}"></td>
+                    <td th:text="${codeDetail.back_long_number}"></td>
+                    <td th:text="${codeDetail.name_of_responsible_person}"></td>
+                    <td th:text="${codeDetail.id_card_number_of_responsible_person}"></td>
+                    <td th:text="${codeDetail.mobile_number_of_responsible_person}"></td>
+                    <td th:text="${codeDetail.email_of_responsible_person}"></td>
+<!--                    <td th:text="${codeDetail.getAssigningDateToShamsi()}"></td>-->
+<!--                    <td th:text="${codeDetail.getExpiryDateToShamsi()}"></td>-->
+                    <td th:classappend="${#temporals.format(codeDetail.expiration_date, 'yyyy-MM-dd') < #temporals.format(#temporals.createNow(), 'yyyy-MM-dd')} ? 'expired-date' : ''"
+                        th:text="${#temporals.format(codeDetail.expiration_date, 'yyyy-MM-dd')}"></td>
+                    <td th:text="${codeDetail.application_fees}"></td>
+                    <td th:text="${codeDetail.registration_fees}"></td>
+                    <td th:text="${codeDetail.royalty_fees}"></td>
+                    <td th:text="${codeDetail.total}"></td>
+                    <td th:text="${codeDetail.bankVoucherNo}"></td>
+                    <td th:text="${codeDetail.paymentStatus}"></td>
+                    <td>
+                        <a th:href="@{/codes/standard/shortcodes_details/update/{id}(id=${codeDetail.id})}"
+                           class="btn btn-warning btn-sm">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                 fill="currentColor" class="bi bi-pencil-square"
+                                 viewBox="0 0 16 16">
+                                <path d="M15.502 1.94a.5.5 0 0 1 0
+                                         .706L14.459 3.69l-2-2L13.502.646a.5.5
+                                         0 0 1 .707 0l1.293 1.293z"/>
+                                <path fill-rule="evenodd"
+                                      d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5
+                                         1.5 0 0 0 1.5-1.5v-6a.5.5
+                                         0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5
+                                         0 0 1-.5-.5v-11a.5.5
+                                         0 0 1 .5-.5H9a.5.5
+                                         0 0 0 0-1H2.5A1.5 1.5
+                                         0 0 0 1 2.5z"/>
+                            </svg>
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </fieldset>
+</div>
+
+<!-- Scripts -->
+<div th:replace="scripts :: common-scripts"></div>
+<div th:replace="scripts :: data-tables-scripts"></div>
+
+<script>
+    function printPage() {
+        document.body.classList.add('print-style');
+        window.print();
+        document.body.classList.remove('print-style');
+    }
+
+    new DataTable('#example');
+</script>
+
+<footer th:replace="~{layout :: page_footer}"></footer>
+</body>
+</html>

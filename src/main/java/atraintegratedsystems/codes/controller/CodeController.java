@@ -27,7 +27,7 @@ public class CodeController {
 
     @GetMapping("/codes/standard/shortcodes/home")
     public String CodesHome() {
-        return "codes/standard/shortcode_home";
+        return "codes/standard/shortcodes_home";
     }
 
     @GetMapping("/codes/standard/shortcodes")
