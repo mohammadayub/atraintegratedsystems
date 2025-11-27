@@ -1,10 +1,9 @@
 package atraintegratedsystems.codes.model;
 
-import atraintegratedsystems.utils.DateConverter;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import atraintegratedsystems.licenses.model.LicenseType;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
-
 import javax.persistence.*;
 import java.time.LocalDate;
 
@@ -20,7 +19,9 @@ public class CodeDetail {
     private String codeStatus;
     @Column(name="ispc_unique_name_of_signaling_point")
     private String unique_name_of_signaling_point;
-    private String source_used;
+    @ManyToOne
+    @JoinColumn(name = "license_type_id")
+    private LicenseType licenseType;
     private String location;
     private String chanel;
     private String services;

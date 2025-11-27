@@ -36,10 +36,17 @@
                     </select>
                 </div>
 
-                <!-- Source Used -->
+                <!-- License Type -->
+                <!-- License Type -->
                 <div class="col-md-3 form-group">
-                    <label for="source_used">Source Used</label>
-                    <input type="text" class="form-control" th:field="*{source_used}" id="source_used">
+                    <label for="licenseTypeId">License Type</label>
+                    <select class="form-control" th:field="*{licenseTypeId}" id="licenseTypeId">
+                        <option value="" disabled selected>Select License Type</option>
+                        <option th:each="type : ${licenseTypes}"
+                                th:value="${type.id}"
+                                th:text="${type.name}">
+                        </option>
+                    </select>
                 </div>
 
                 <!-- Location -->

@@ -1,4 +1,5 @@
 package atraintegratedsystems.codes.service;
+
 import atraintegratedsystems.codes.model.Code;
 import atraintegratedsystems.codes.model.CodeDetail;
 import atraintegratedsystems.codes.repository.CodeDetailRepository;
@@ -9,48 +10,72 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
-
 @Service
 public class CodeDetailService {
 
     @Autowired
-    public CodeDetailRepository codeDetailRepository;
+    private CodeDetailRepository codeDetailRepository;
 
     @Autowired
-    public CodeRepository codeRepository;
-    public void AddShort(CodeDetail code){
+    private CodeRepository codeRepository;
+
+    // -------------------------------------------------------------------
+    // SAVE OR UPDATE
+    // -------------------------------------------------------------------
+    public CodeDetail save(CodeDetail codeDetail) {
+        return codeDetailRepository.save(codeDetail);
+    }
+
+    // For backward compatibility (your existing code)
+    public void AddShort(CodeDetail code) {
         codeDetailRepository.save(code);
     }
-    public List<CodeDetail> getAllDetailCodes(){
+
+    // -------------------------------------------------------------------
+    // FIND ALL
+    // -------------------------------------------------------------------
+    public List<CodeDetail> getAllDetailCodes() {
         return codeDetailRepository.findAll();
     }
 
-    public void deleteCodeDetail(Long id){
-        codeDetailRepository.deleteById(id);
+    // -------------------------------------------------------------------
+    // DELETE
+    // -------------------------------------------------------------------
+    public void deleteCodeDetail(Long id) {
+        if (codeDetailRepository.existsById(id)) {
+            codeDetailRepository.deleteById(id);
+        }
     }
 
-    public Optional<Code> getShortCode(int shortCode){
+    // -------------------------------------------------------------------
+    // FIND CODE (short code table)
+    // -------------------------------------------------------------------
+    public Optional<Code> getShortCode(int shortCode) {
         return codeRepository.findById(shortCode);
     }
 
-    public Optional<CodeDetail> getCodeDetailId(Long id){
+    // -------------------------------------------------------------------
+    // FIND CODE DETAIL BY ID
+    // -------------------------------------------------------------------
+    public Optional<CodeDetail> getCodeDetailId(Long id) {
         return codeDetailRepository.findById(id);
     }
 
-    public Optional<CodeDetail> getShortByCode(int shortCode){
+    // -------------------------------------------------------------------
+    // FIND BY SHORTCODE
+    // -------------------------------------------------------------------
+    public Optional<CodeDetail> getShortByCode(int shortCode) {
         return codeDetailRepository.findByShortCode(shortCode);
     }
 
-
+    // -------------------------------------------------------------------
+    // CUSTOM QUERIES
+    // -------------------------------------------------------------------
     public List<Object[]> getCodeDetailWithCompanyNameAndCode() {
         return codeDetailRepository.getCodeDetailWithCompanyNameAndCode();
     }
 
-
     public List<CodeDetail> findUnpaid() {
         return codeDetailRepository.findUnpaid();
     }
-
-
-
 }
