@@ -40,6 +40,29 @@
                             <a th:href="@{/codes/standard/shortcodes}">Short Code List</a>
                         </h4>
                     </div>
+
+
+                </td>
+                <td>
+                    <div class="custom-card" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_CODES_ADMIN')">
+                        <a th:href="@{/codes/standard/shortcodes_details/add}">
+                            <img th:src="@{/images/codeDetail.png}" alt="Finance Management">
+                        </a>
+                        <h4 class="license-link" style="margin-top: 10px;">
+                            <a th:href="@{/codes/standard/shortcodes_details/add}">Code Detail</a>
+                        </h4>
+                    </div>
+
+                </td>
+                <td>
+                    <div class="custom-card" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_CODES_ADMIN')">
+                        <a th:href="@{/codes/standard/shortcodes_details}">
+                            <img th:src="@{/images/code_detail_list.png}" alt="Finance Management">
+                        </a>
+                        <h4 class="license-link" style="margin-top: 10px;">
+                            <a th:href="@{/codes/standard/shortcodes_details}">Code Detail List</a>
+                        </h4>
+                    </div>
                 </td>
             </tr>
         </table>
