@@ -125,9 +125,19 @@
   <div class="mt-2">
     <div class="w-auto ms-auto">
       <div style="text-align:right; font-weight: bold;margin-top:15px;">مسلسل نمبر تعرفه: <input type="text" th:field="${licenseApprovalDTO.id}" disabled style="margin-right:20px;border:0px;background-color:white;"></div>
-      <div style="text-align:right; font-weight: bold;margin-top:15px;">سال مالی &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" th:field="${licenseApprovalDTO.approvalDate}" disabled style="border:0px;background-color:white;"> <input type="text" th:field="${licenseApprovalDTO.approvalDate}" disabled style="border:0px;background-color:white;"></div>
+      <div style="text-align:right; font-weight: bold; margin-top:15px;">
+        سال مالی &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="text" th:value="${licenseApprovalDTO.approvalYear}" disabled
+               style="border:0px;background-color:white;">
+      </div>
 
-      <div style="text-align:right; font-weight: bold;margin-top:15px;margin-bottom:4px;">تاریخ صدور جواز/جواز نامه &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" th:field="${licenseApprovalDTO.approvalDate}" disabled style="border:0px;background-color:white;"></div>
+
+      <div style="text-align:right; font-weight: bold; margin-top:15px; margin-bottom:4px;">
+        تاریخ صدور جواز/جواز نامه &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="text" th:value="${licenseApprovalDTO.approvalDate}" disabled
+               style="border:0px; background-color:white;">
+      </div>
+
 
     </div>
   </div>

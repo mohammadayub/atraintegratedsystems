@@ -127,6 +127,11 @@ public class LicenseApprovalDTO {
     private LocalDateTime licenseFeesCreatedDate;
 
 
+    //Approval Year
+
+    private String approvalYear;
+
+
 
 
 

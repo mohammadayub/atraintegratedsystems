@@ -57,4 +57,39 @@ public class PersianCalendarUtils {
 
         throw new IllegalArgumentException("Invalid Jalali date");
     }
+
+
+
+    public int[] gregorianToJalali(LocalDate gregorianDate) {
+        int gy = gregorianDate.getYear();
+        int gm = gregorianDate.getMonthValue();
+        int gd = gregorianDate.getDayOfMonth();
+
+        int[] g_d_m = {0,31,28,31,30,31,30,31,31,30,31,30,31};
+        int gy2 = (gm > 2) ? (gy + 1) : gy;
+        int days = 355666 + (365 * gy) + ((gy2 + 3)/4) - ((gy2 + 99)/100) + ((gy2 + 399)/400) + gd;
+        for (int i = 0; i < gm; ++i) {
+            days += g_d_m[i];
+        }
+        int jy = -1595 + (33 * (days / 12053));
+        days %= 12053;
+        jy += 4 * (days / 1461);
+        days %= 1461;
+        if (days > 365) {
+            jy += (days - 1) / 365;
+            days = (days - 1) % 365;
+        }
+        int jm = (days < 186) ? 1 + days / 31 : 7 + (days - 186) / 30;
+        int jd = 1 + ((days < 186) ? (days % 31) : ((days - 186) % 30));
+
+        return new int[]{jy, jm, jd};
+    }
+
+
+
+
+
+
+
+
 }

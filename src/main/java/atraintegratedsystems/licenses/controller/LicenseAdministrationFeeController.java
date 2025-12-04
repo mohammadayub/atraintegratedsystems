@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
 
 @Controller
@@ -52,15 +53,6 @@ public class LicenseAdministrationFeeController {
         // Fetch the existing entity from the database
         LicenseApproval existingLicenseApproval = licenseAdministrationFeeService.findById(licenseApprovalDTO.getId());
 
-        // Update only the required fields
-
-//        DateConverter dateConverter = new DateConverter();
-//        LocalDate administrationEntryVoucherDate = dateConverter.jalaliToGregorian(
-//                licenseApprovalDTO.getAdministrationFeeEntryVoucherDate().getYear(),
-//                licenseApprovalDTO.getAdministrationFeeEntryVoucherDate().getMonthValue(),
-//                licenseApprovalDTO.getAdministrationFeeEntryVoucherDate().getDayOfMonth()
-//        );
-//        existingLicenseApproval.setAdministrationFeeEntryVoucherDate(administrationEntryVoucherDate);
 
 
 
@@ -135,7 +127,23 @@ public class LicenseAdministrationFeeController {
         licenseApprovalDTO.setApprovalId(licenseApproval.getApprovalId());
         licenseApprovalDTO.setApplicantLicenseCompanyName(licenseApproval.getLicenseApplicant().getCompanyLicenseName());
         licenseApprovalDTO.setLicenseTypeName(licenseApproval.getLicenseType().getName());
-        licenseApprovalDTO.setApprovalDate(licenseApproval.getApprovalDate());
+
+
+        LocalDate approvalDateGregorian = licenseApproval.getApprovalDate();
+        PersianCalendarUtils converter = new PersianCalendarUtils();
+        int[] jalaliDate = converter.gregorianToJalali(approvalDateGregorian);
+
+        String approvalDateShamsi = String.format("%04d-%02d-%02d", jalaliDate[0], jalaliDate[1], jalaliDate[2]);
+        licenseApprovalDTO.setApprovalDate(LocalDate.parse(approvalDateShamsi));
+
+
+
+        // Extract year
+        String year = approvalDateShamsi.split("-")[0];
+        licenseApprovalDTO.setApprovalYear(year);
+
+
+
         licenseApprovalDTO.setBoardDecisionNumber(licenseApproval.getBoardDecisionNumber());
         licenseApprovalDTO.setApprovalStatus(licenseApproval.getApprovalStatus());
         licenseApprovalDTO.setCurrencyType(licenseApproval.getCurrencyType());
