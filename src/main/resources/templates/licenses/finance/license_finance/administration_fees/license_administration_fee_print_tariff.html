@@ -124,8 +124,11 @@
   <!-- Table aligned to the right -->
   <div class="mt-2">
     <div class="w-auto ms-auto">
-      <div style="text-align:right; font-weight: bold;margin-top:15px;">مسلسل نمبر تعرفه:</div>
-      <div style="text-align:right; font-weight: bold;margin-top:15px;">تاریخ صدور جواز/جواز نامه &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" th:field="${licenseApprovalDTO.approvalDate}" disabled style="border:0px;"></div>
+      <div style="text-align:right; font-weight: bold;margin-top:15px;">مسلسل نمبر تعرفه: <input type="text" th:field="${licenseApprovalDTO.id}" disabled style="margin-right:20px;border:0px;background-color:white;"></div>
+      <div style="text-align:right; font-weight: bold;margin-top:15px;">سال مالی &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" th:field="${licenseApprovalDTO.approvalDate}" disabled style="border:0px;background-color:white;"> <input type="text" th:field="${licenseApprovalDTO.approvalDate}" disabled style="border:0px;background-color:white;"></div>
+
+      <div style="text-align:right; font-weight: bold;margin-top:15px;margin-bottom:4px;">تاریخ صدور جواز/جواز نامه &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" th:field="${licenseApprovalDTO.approvalDate}" disabled style="border:0px;background-color:white;"></div>
+
     </div>
   </div>
 
@@ -143,10 +146,13 @@
   <div style="width: 100%; float: right;">
     <!-- Title -->
     <div style="float: right; width: 100%;margin-top:15px;">
-      <h6 style="text-align: right;">مرجع تحویل کننده <span style="width:50px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> <input type="text" th:field="${licenseApprovalDTO.applicantLicenseCompanyName}" disabled style="border:0px;"></h6>
+      <h6 style="text-align: right;">مرجع تحویل کننده <span style="width:50px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> <input type="text" th:field="${licenseApprovalDTO.applicantLicenseCompanyName}" disabled style="border:0px;background-color:white;"></h6>
+    </div>
+    <div style="width: 450px; float: right;">
+      <div class="mb-2" style="background-color: black; height: 1px;"></div>
     </div>
     <div style="float: right; width: 100%;margin-top:15px;">
-        <h6 style="text-align: right;">نوعیت جوازنامه&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" th:field="${licenseApprovalDTO.licenseTypeName}" disabled style="border:0px;"></h6>
+        <h6 style="text-align: right;">نوعیت جوازنامه&nbsp;&nbsp;<span style="width:50px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> <input type="text" th:field="${licenseApprovalDTO.licenseTypeName}" disabled style="border:0px;background-color:white;"></h6>
     </div>
 
     <!-- Black line underneath, aligned right with 450px width -->
@@ -155,7 +161,7 @@
     </div>
     <!-- Title -->
     <div style="float: right; width: 100%;margin-top:15px;">
-      <h6 style="text-align: right;">فیس سال مالی&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" th:field="${licenseApprovalDTO.administrativeYearlyFees}" disabled style="border:0px;"></h6>
+      <h6 style="text-align: right;">فیس سال مالی&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" th:field="${licenseApprovalDTO.administrativeYearlyFees}" disabled style="border:0px;background-color:white;"></h6>
     </div>
 
     <!-- Black line underneath, aligned right with 450px width -->
@@ -164,9 +170,23 @@
     </div>
 
     <!-- Title -->
-    <div style="float: right; width: 100%;margin-top:15px;">
-      <h6 style="text-align: right;">نمبر حساب بانکی</h6>
+    <div style="float: right; width: 100%; margin-top:15px; display:flex;direction:rtl;">
+      <!-- Heading -->
+      <h6 style="margin: 0; text-align:right;">نمبر حساب بانکی</h6>
+      <!-- Select -->
+      <div class="col-3" style="margin-top:-4px;text-align:right;">
+        <select class="form-select pr-3 pl-3"
+                style="margin: 0;appearance:none; -webkit-appearance:none; -moz-appearance:none; background-image:none !important;">
+          <option>۳۰۰۰۲۱۴۰۰۹۷۳۵</option>
+          <option>۱۰۰۱۳۳۶۰۹۶۸۷۲</option>
+          <option>۱۰۰۱۳۳۴۰۳۳۵۰۲</option>
+          <option>۱۰۰۱۳۳۶۰۹۷۳۶۲</option>
+        </select>
+      </div>
+
     </div>
+
+
 
     <!-- Black line underneath, aligned right with 450px width -->
     <div style="width: 450px; float: right;">
@@ -174,8 +194,27 @@
     </div>
 
     <!-- Title -->
-    <div style="float: right; width: 100%;margin-top:15px;">
-      <h6 style="text-align: right;">نام بانک</h6>
+    <div style="float: right; width: 100%; margin-top:15px; display:flex;direction:rtl;">
+      <!-- Heading -->
+      <h6 style="margin: 0; text-align:right;">نام بانک</h6>
+      <!-- Select -->
+      <div class="col-3" style="margin-top:-4px;">
+        <select class="form-select pr-3 pl-3"
+                style="margin: 0;appearance:none; -webkit-appearance:none; -moz-appearance:none; background-image:none !important;">
+          <option>د افغانستان بانک (مرکزي بانک)</option>
+          <option>بانک ملي افغان (BMA)</option>
+          <option>پشتنی بانک</option>
+          <option>نوی کابل بانک</option>
+          <option>افغانستان انترنشنل بانک (AIB)</option>
+          <option>عزیزی بانک</option>
+          <option>میوند بانک</option>
+          <option>غضنفر بانک</option>
+          <option></option>
+          <option>اسلامي بانک افغانستان
+            (پخوانی باختر بانک)</option>
+        </select>
+      </div>
+
     </div>
 
     <!-- Black line underneath, aligned right with 450px width -->
@@ -189,10 +228,10 @@
     <table class="table table-bordered w-100 ms-auto" style="margin-top:30px; position:relative;" dir="rtl">
       <thead>
       <tr style="background-color:gray;">
-        <th>مکلفیت های قابل تادیه</th>
-        <th style="text-align:center">تعداد جواز</th>
-        <th style="text-align:center">مقدار فیس</th>
-        <th style="text-align:center">مجموعه فیس</th>
+        <th style="text-align:center;">مکلفیت های قابل تادیه</th>
+        <th style="text-align:center;">تعداد جواز</th>
+        <th style="text-align:center;">مقدار فیس</th>
+        <th style="text-align:center;">مجموعه فیس</th>
       </tr>
       </thead>
 
@@ -200,13 +239,13 @@
 
       <!-- Actual rows -->
       <tr>
-        <th style="height:200px;"></th>
+        <th style="height:200px;text-align:center;" dir="rtl">فیس سالانه اداری</th>
         <th style="text-align:center">1</th>
         <th style="text-align:center">
-          <input type="text" th:field="${licenseApprovalDTO.administrativeYearlyFees}" disabled style="border:0px;">
+          <input type="text" th:field="${licenseApprovalDTO.administrativeYearlyFees}" disabled style="border:0px;background-color:white;">
         </th>
         <th style="text-align:center;">
-          <input type="text" th:field="${licenseApprovalDTO.administrativeYearlyFees}" disabled style="border:0px;">
+          <input type="text" th:field="${licenseApprovalDTO.administrativeYearlyFees}" disabled style="border:0px;background-color:white;">
         </th>
       </tr>
       <tr style="background-color:gray;">
@@ -240,7 +279,8 @@
     <div style="margin:0 auto;">آمریت کنترول</div>
   </div>
   <div class="row" style="margin-top:200px;">
-  <div class="col-12 ms-auto"><p  style="float:right;">نوت: مشتری محترم درج مشخصات تعرفه در آویز بانکی ضروری ولازمی میباشد در غیر آن طی مراحل نخواهد ګردید.</p></div>
+ <div class="col-12 ms-auto"><p  style="float:right;">نوع جواز از سوی ریاست حقوق و جواز انتخاب شده و تعرفهٔ آن در سیستم تهیه گردیده است. ریاست مالی نیز آن را چاپ نموده است.</p></div>
+
   </div>
 </div>
 
