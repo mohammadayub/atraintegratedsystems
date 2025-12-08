@@ -11,7 +11,8 @@ public class CodeDetailDTO {
     private int shortCode;
     private String codeStatus;
     private String unique_name_of_signaling_point;
-    private Long licenseTypeId;
+    private Long licenseApplicantId;
+    private String sourceUsed;
     private String location;
     private String chanel;
     private String services;

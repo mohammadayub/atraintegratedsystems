@@ -2,6 +2,7 @@ package atraintegratedsystems.licenses.repository;
 
 import atraintegratedsystems.licenses.dto.LicenseApplicantApprovalDTO;
 import atraintegratedsystems.licenses.model.LicenseApplicant;
+import atraintegratedsystems.licenses.service.LicenseApplicantBasic;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -40,13 +41,8 @@ public interface LicenseApplicantRepository extends JpaRepository<LicenseApplica
     List<LicenseApplicant> listAllApplicationFeesPaid();
 
 
-
-
-
-
-
-
-
+    @Query("SELECT la.id AS id, la.companyLicenseName AS companyLicenseName, la.reqDate AS reqDate, la.validity AS validity FROM LicenseApplicant la JOIN LicenseApproval lap ON lap.licenseApplicant.id = la.id WHERE lap.approvalStatus = 'Approve'")
+    List<LicenseApplicantBasic> findAllApprovedApplicants();
 
 
 

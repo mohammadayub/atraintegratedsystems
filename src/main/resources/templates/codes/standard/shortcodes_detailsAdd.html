@@ -36,18 +36,35 @@
                     </select>
                 </div>
 
-                <!-- License Type -->
-                <!-- License Type -->
-                <div class="col-md-3 form-group">
-                    <label for="licenseTypeId">License Type</label>
-                    <select class="form-control" th:field="*{licenseTypeId}" id="licenseTypeId">
-                        <option value="" disabled selected>Select License Type</option>
-                        <option th:each="type : ${licenseTypes}"
-                                th:value="${type.id}"
-                                th:text="${type.name}">
+                <!-- License Applicant -->
+                <div class="col-md-4 form-group">
+                    <label for="licenseApplicantId">License Applicant</label>
+
+                    <select class="form-control select2"
+                            th:field="*{licenseApplicantId}"
+                            id="licenseApplicantId">
+
+                        <!-- Allow NULL -->
+                        <option value="">None</option>
+
+                        <!-- Dynamic applicants -->
+                        <option th:each="la : ${licenseApplicants}"
+                                th:value="${la.id}"
+                                th:text="${la.companyLicenseName + ' — '
+                    + #temporals.format(la.reqDate, 'yyyy-MM-dd')
+                    + ' — Validity: ' + la.validity}">
                         </option>
+
                     </select>
                 </div>
+
+
+                <div class="col-md-3 form-group">
+                    <label for="sourceUsed">Source Used</label>
+                    <input type="text" class="form-control" th:field="*{sourceUsed}" id="sourceUsed">
+                </div>
+
+
 
                 <!-- Location -->
                 <div class="col-md-3 form-group">

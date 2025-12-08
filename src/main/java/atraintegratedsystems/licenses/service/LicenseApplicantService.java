@@ -44,6 +44,7 @@ public class LicenseApplicantService {
         return repository.findAllLicenseApplicantApprovalDetails();
     }
 
+
     @Transactional
     public LicenseApplicant saveProfile(LicenseApplicantDTO dto) throws Exception {
         LicenseApplicant profile = new LicenseApplicant();
@@ -343,4 +344,9 @@ public class LicenseApplicantService {
             profile.setPostAddress(dto.getPostAddress());
             return repository.save(profile);
     }
+
+
+
+
+
 }

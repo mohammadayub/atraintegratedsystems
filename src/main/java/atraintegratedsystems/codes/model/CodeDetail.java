@@ -1,6 +1,7 @@
 package atraintegratedsystems.codes.model;
 
 
+import atraintegratedsystems.licenses.model.LicenseApplicant;
 import atraintegratedsystems.licenses.model.LicenseType;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -20,8 +21,9 @@ public class CodeDetail {
     @Column(name="ispc_unique_name_of_signaling_point")
     private String unique_name_of_signaling_point;
     @ManyToOne
-    @JoinColumn(name = "license_type_id")
-    private LicenseType licenseType;
+    @JoinColumn(name = "license_applicant_id")
+    private LicenseApplicant licenseApplicant;
+    private String sourceUsed;
     private String location;
     private String chanel;
     private String services;
