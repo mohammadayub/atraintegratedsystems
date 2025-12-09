@@ -9,6 +9,7 @@ public interface LicenseApplicantBasic {
         String getCompanyLicenseName();
         LocalDate getReqDate();
         String getValidity();
-
+        // NEW FIELD
+        String getAdministrationFeePaymentStatus();
 
 }
