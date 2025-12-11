@@ -51,20 +51,20 @@
                         <option th:each="la : ${licenseApplicants}"
                                 th:value="${la.id}"
                                 th:text="${la.companyLicenseName + ' — '
-                    + #temporals.format(la.reqDate, 'yyyy-MM-dd')
-                    + ' — Validity: ' + la.validity}">
+                        + #temporals.format(la.reqDate, 'yyyy-MM-dd')
+                        + ' — Validity: ' + la.validity
+                        + ' — Admin Fee: ' + la.administrationFeePaymentStatus}">
                         </option>
 
                     </select>
                 </div>
 
 
+
                 <div class="col-md-3 form-group">
                     <label for="sourceUsed">Source Used</label>
                     <input type="text" class="form-control" th:field="*{sourceUsed}" id="sourceUsed">
                 </div>
-
-
 
                 <!-- Location -->
                 <div class="col-md-3 form-group">

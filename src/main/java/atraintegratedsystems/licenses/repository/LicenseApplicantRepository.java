@@ -41,8 +41,9 @@ public interface LicenseApplicantRepository extends JpaRepository<LicenseApplica
     List<LicenseApplicant> listAllApplicationFeesPaid();
 
 
-    @Query("SELECT la.id AS id, la.companyLicenseName AS companyLicenseName, la.reqDate AS reqDate, la.validity AS validity FROM LicenseApplicant la JOIN LicenseApproval lap ON lap.licenseApplicant.id = la.id WHERE lap.approvalStatus = 'Approve'")
+    @Query("SELECT la.id AS id, la.companyLicenseName AS companyLicenseName, la.reqDate AS reqDate, la.validity AS validity, lap.administrationFeePaymentStatus AS administrationFeePaymentStatus FROM LicenseApplicant la JOIN LicenseApproval lap ON lap.licenseApplicant.id = la.id WHERE lap.approvalStatus = 'Approve'")
     List<LicenseApplicantBasic> findAllApprovedApplicants();
+
 
 
 
