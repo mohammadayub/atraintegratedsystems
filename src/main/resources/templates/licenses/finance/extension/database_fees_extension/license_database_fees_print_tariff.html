@@ -161,7 +161,7 @@
       <div class="mb-2" style="background-color: black; height: 1px;"></div>
     </div>
     <div style="float: right; width: 100%;margin-top:15px;">
-      <h6 style="text-align: right;">نوعیت جوازنامه&nbsp;&nbsp;<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> <input type="text" th:field="${licenseDatabaseFeesExtensionDTO.licenseTypeName}" disabled style="border:0px;background-color:white;"></h6>
+      <h6 style="text-align: right;">نوعیت جوازنامه&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span th:text="${licenseDatabaseFeesExtensionDTO.licenseTypeName}"></span></h6>
     </div>
 
     <!-- Black line underneath, aligned right with 450px width -->
@@ -170,7 +170,7 @@
     </div>
     <!-- Title -->
     <div style="float: right; width: 100%;margin-top:15px;">
-      <h6 style="text-align: right;">فیس سال مالی&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" th:field="${licenseDatabaseFeesExtensionDTO.extensionDatabaseFees}" disabled style="border:0px;background-color:white;"></h6>    </div>
+      <h6 style="text-align: right;">فیس سال مالی&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;<input type="text" th:field="${licenseDatabaseFeesExtensionDTO.extensionDatabaseFees}" disabled style="border:0px;background-color:white;"></h6>    </div>
     </div>
 
     <!-- Black line underneath, aligned right with 450px width -->
@@ -278,18 +278,18 @@
     </table>
   </div>
 
-  <div class="row">
-    <div class="col-6 ms-auto"><p style="float:right;margin-top:15px;">ترتیب کننده تعرفه:</p></div>
-    <div class="col-6 ms-auto"><p style="float:left;margin-top:15px;">چاپ کننده تعرفه (Printed by)</p></div>
+<div class="row">
+  <div class="col-6 ms-auto"><p style="float:right;margin-top:15px;">ترتیب کننده تعرفه:</p></div>
+  <div class="col-6 ms-auto"><p style="float:left;margin-top:15px;">چاپ کننده تعرفه (Printed by)</p></div>
 
-  </div>
-  <div class="row">
-    <div style="margin:0 auto;">آمریت کنترول</div>
-  </div>
-  <div class="row" style="margin-top:200px;">
-    <div class="col-12 ms-auto"><p  style="float:right;">نوع جواز از سوی ریاست حقوق و جواز انتخاب شده و تعرفهٔ آن در سیستم تهیه گردیده است. ریاست مالی نیز آن را چاپ نموده است.</p></div>
+</div>
+<div class="row">
+  <div style="margin:0 auto;">آمریت کنترول</div>
+</div>
+<div class="row" style="margin-top:200px;">
+  <div class="col-12 ms-auto"><p  style="float:right;">ازینکه ریاست حقوق و جواز نوع جواز را انتخاب نموده تعرفه هذا توسط سیستم تهیه گردیده و ریاست مالی آنرا طبقاً پرنت نموده.</p></div>
 
-  </div>
+</div>
 </div>
 
 <!-- Print Function -->
