@@ -13,6 +13,9 @@ public class LicenseDatabaseFeesExtensionDTO {
     private String licenseCompanyName;
     private String licenseTypeName;
     private Long licenseApprovalId;
+
+    private String licenseApprovalDate;
+
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate extensionStartDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")

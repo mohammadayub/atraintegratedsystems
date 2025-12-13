@@ -4,6 +4,7 @@ import atraintegratedsystems.licenses.dto.LicenseAdminFeesExtensionDTO;
 import atraintegratedsystems.licenses.model.LicenseAdminFeesExtension;
 import atraintegratedsystems.licenses.service.LicenseAdminFeesExtensionFinanceService;
 import atraintegratedsystems.utils.DateConverter;
+import atraintegratedsystems.utils.JalaliDate;
 import atraintegratedsystems.utils.PersianCalendarUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -47,18 +48,6 @@ public class LicenseAdministrationFeeExtensionFinanceController {
         // Fetch the existing entity from the database
         LicenseAdminFeesExtension existingLicenseAdminFeesExtension = licenseAdminFeesExtensionFinanceService.findById(licenseAdminFeesExtensionDTO.getId());
 
-//        DateConverter dateConverter = new DateConverter();
-//        LocalDate adminEntryVoucherDate = dateConverter.jalaliToGregorian(
-//                licenseAdminFeesExtensionDTO.getExtensionAdministrationFeeBankVoucherDate().getYear(),
-//                licenseAdminFeesExtensionDTO.getExtensionAdministrationFeeBankVoucherDate().getMonthValue(),
-//                licenseAdminFeesExtensionDTO.getExtensionAdministrationFeeBankVoucherDate().getDayOfMonth()
-//        );
-//
-//        LocalDate adminSubmissionVoucherDate = dateConverter.jalaliToGregorian(
-//                licenseAdminFeesExtensionDTO.getExtensionAdministrationFeeBankVoucherSubmissionDate().getYear(),
-//                licenseAdminFeesExtensionDTO.getExtensionAdministrationFeeBankVoucherSubmissionDate().getMonthValue(),
-//                licenseAdminFeesExtensionDTO.getExtensionAdministrationFeeBankVoucherSubmissionDate().getDayOfMonth()
-//        );
 
 
         String[] partsEntry = licenseAdminFeesExtensionDTO.getExtensionAdministrationFeeBankVoucherJalaliDate().split("-");
@@ -110,6 +99,33 @@ public class LicenseAdministrationFeeExtensionFinanceController {
         licenseAdminFeesExtensionDTO.setId(licenseAdminFeesExtension.getId());
         licenseAdminFeesExtensionDTO.setLicenseApprovalId(licenseAdminFeesExtension.getLicenseApproval().getId());
         licenseAdminFeesExtensionDTO.setLicenseAppId(licenseAdminFeesExtension.getLicenseApproval().getApprovalId());
+
+        //License Approval Date
+
+        //License Approval Date
+        DateConverter converter = new DateConverter();
+        LocalDate gregDate = licenseAdminFeesExtension.getLicenseApproval().getApprovalDate();
+
+        JalaliDate jalali = converter.gregorianToJalali(
+                gregDate.getYear(),
+                gregDate.getMonthValue(),
+                gregDate.getDayOfMonth()
+        );
+
+// Convert JalaliDate → readable String (e.g. 1403-09-20)
+        String jalaliString = jalali.getYear() + "-" + jalali.getMonthPersian().getValue() + "-" + jalali.getDay();
+
+// Add to DTO (optional)
+        licenseAdminFeesExtensionDTO.setLicenseApprovalDate(jalaliString);
+
+// IMPORTANT — Add to model
+        model.addAttribute("jalali", jalaliString);
+
+
+        //End
+
+
+
         licenseAdminFeesExtensionDTO.setLicenseCompanyName(licenseAdminFeesExtension.getLicenseApproval().getLicenseApplicant().getCompanyLicenseName());
         licenseAdminFeesExtensionDTO.setLicenseTypeName(licenseAdminFeesExtension.getLicenseApproval().getLicenseType().getName());
         licenseAdminFeesExtensionDTO.setExtStartDate(licenseAdminFeesExtension.getExtentStartDate());

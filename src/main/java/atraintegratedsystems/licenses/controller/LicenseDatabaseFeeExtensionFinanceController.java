@@ -4,6 +4,7 @@ import atraintegratedsystems.licenses.dto.LicenseDatabaseFeesExtensionDTO;
 import atraintegratedsystems.licenses.model.LicenseDatabaseFeesExtension;
 import atraintegratedsystems.licenses.service.LicenseDatabaseFeesExtensionFinanceService;
 import atraintegratedsystems.utils.DateConverter;
+import atraintegratedsystems.utils.JalaliDate;
 import atraintegratedsystems.utils.PersianCalendarUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -45,20 +46,6 @@ public class LicenseDatabaseFeeExtensionFinanceController {
     public String updateLicenseApproval(@ModelAttribute LicenseDatabaseFeesExtensionDTO licenseDatabaseFeesExtensionDTO) {
         // Fetch the existing entity from the database
         LicenseDatabaseFeesExtension existingLicenseDatabaseFeesExtension = licenseDatabaseFeesExtensionFinanceService.findById(licenseDatabaseFeesExtensionDTO.getId());
-//        DateConverter dateConverter = new DateConverter();
-//        LocalDate databaseEntryVoucherDate = dateConverter.jalaliToGregorian(
-//                licenseDatabaseFeesExtensionDTO.getExtensionDatabaseFeeBankVoucherDate().getYear(),
-//                licenseDatabaseFeesExtensionDTO.getExtensionDatabaseFeeBankVoucherDate().getMonthValue(),
-//                licenseDatabaseFeesExtensionDTO.getExtensionDatabaseFeeBankVoucherDate().getDayOfMonth()
-//        );
-//
-//        LocalDate databaseSubmissionVoucherDate = dateConverter.jalaliToGregorian(
-//                licenseDatabaseFeesExtensionDTO.getExtensionDatabaseFeeBankVoucherSubmissionDate().getYear(),
-//                licenseDatabaseFeesExtensionDTO.getExtensionDatabaseFeeBankVoucherSubmissionDate().getMonthValue(),
-//                licenseDatabaseFeesExtensionDTO.getExtensionDatabaseFeeBankVoucherSubmissionDate().getDayOfMonth()
-//        );
-
-
         String[] partsEntry = licenseDatabaseFeesExtensionDTO.getExtensionDatabaseFeeBankVoucherJalaliDate().split("-");
         int jYear = Integer.parseInt(partsEntry[0]);
         int jMonth = Integer.parseInt(partsEntry[1]);
@@ -75,6 +62,7 @@ public class LicenseDatabaseFeeExtensionFinanceController {
         int jSubDay = Integer.parseInt(partsSub[2]);
         LocalDate licenseDataseSubmissionDate = converter.jalaliToGregorian(jSubYear, jSubMonth, jSubDay);
         licenseDatabaseFeesExtensionDTO.setExtensionDatabaseFeeBankVoucherSubmissionDate(licenseDataseSubmissionDate);
+
 
         // Update only the required fields
         existingLicenseDatabaseFeesExtension.setExtensionDatabaseFeeBankVoucherNo(licenseDatabaseFeesExtensionDTO.getExtensionDatabaseFeeBankVoucherNo());
@@ -102,9 +90,37 @@ public class LicenseDatabaseFeeExtensionFinanceController {
         // Map fields from licenseApplicant to licenseApplicantDTO
         licenseDatabaseFeesExtensionDTO.setId(licenseDatabaseFeesExtension.getId());
         licenseDatabaseFeesExtensionDTO.setLicenseApprovalId(licenseDatabaseFeesExtension.getLicenseApproval().getId());
+
+
+
+//License Approval Date
+        DateConverter converter = new DateConverter();
+        LocalDate gregDate = licenseDatabaseFeesExtension.getLicenseApproval().getApprovalDate();
+
+        JalaliDate jalali = converter.gregorianToJalali(
+                gregDate.getYear(),
+                gregDate.getMonthValue(),
+                gregDate.getDayOfMonth()
+        );
+
+// Convert JalaliDate → readable String (e.g. 1403-09-20)
+        String jalaliString = jalali.getYear() + "-" + jalali.getMonthPersian().getValue() + "-" + jalali.getDay();
+
+// Add to DTO (optional)
+        licenseDatabaseFeesExtensionDTO.setLicenseApprovalDate(jalaliString);
+
+// IMPORTANT — Add to model
+        model.addAttribute("jalali", jalaliString);
+
+
+        //End
+
+
+
         licenseDatabaseFeesExtensionDTO.setLicenseAppId(licenseDatabaseFeesExtension.getLicenseApproval().getApprovalId());
         licenseDatabaseFeesExtensionDTO.setLicenseCompanyName(licenseDatabaseFeesExtension.getLicenseApproval().getLicenseApplicant().getCompanyLicenseName());
         licenseDatabaseFeesExtensionDTO.setLicenseTypeName(licenseDatabaseFeesExtension.getLicenseApproval().getLicenseType().getName());
+
         licenseDatabaseFeesExtensionDTO.setExtStartDate(licenseDatabaseFeesExtension.getExtentStartDate());
         licenseDatabaseFeesExtensionDTO.setExtExpireDate(licenseDatabaseFeesExtension.getExtentExpDate());
         licenseDatabaseFeesExtensionDTO.setExtensionDatabaseFees(licenseDatabaseFeesExtension.getExtensionDatabaseFees());

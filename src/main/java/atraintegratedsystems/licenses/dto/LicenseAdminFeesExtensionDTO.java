@@ -15,6 +15,8 @@ public class LicenseAdminFeesExtensionDTO {
     private Long id;
     private Long licenseApprovalId;
     private String licenseAppId;
+
+    private String licenseApprovalDate;
     private String licenseCompanyName;
     private String licenseTypeName;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
