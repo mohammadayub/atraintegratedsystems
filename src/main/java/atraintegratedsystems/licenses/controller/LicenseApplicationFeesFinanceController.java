@@ -49,7 +49,6 @@ public class LicenseApplicationFeesFinanceController {
         return "licenses/finance/license_finance/application_fees/license_application_payment_confirmation";
     }
 
-
     @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_LICENSE_ADMIN') or hasRole('ROLE_FINANCE')")
     @PostMapping("/licenses/finance/license_finance/application_fees/license_application_fee_list/add")
     public String updateBankVoucherNoAndPaymentStatus(@Valid @ModelAttribute("licenseApplicantDTO") LicenseApplicantDTO licenseApplicantDTO, BindingResult bindingResult, Model model) {
@@ -57,14 +56,6 @@ public class LicenseApplicationFeesFinanceController {
             return "licenses/finance/license_finance/application_fees/license_application_payment_confirmation";
         }
         LicenseApplicant licenseApplicant = licenseApplicantFinanceService.getApplicantByReqId(licenseApplicantDTO.getReqId()).orElseThrow(() -> new IllegalArgumentException("Invalid code ID: " + licenseApplicantDTO.getReqId()));
-        // Update only the editable fields
-//        DateConverter dateConverter = new DateConverter();
-//        // Convert Jalali date to Gregorian
-//        LocalDate entryDate = dateConverter.jalaliToGregorian(licenseApplicantDTO.getEntryApplicationFeeVoucherDate().getYear(), licenseApplicantDTO.getEntryApplicationFeeVoucherDate().getMonthValue(), licenseApplicantDTO.getEntryApplicationFeeVoucherDate().getDayOfMonth());
-//        LocalDate entrySubmissionDate = dateConverter.jalaliToGregorian(licenseApplicantDTO.getApplicationFeeBankVoucherSubmissionDate().getYear(), licenseApplicantDTO.getApplicationFeeBankVoucherSubmissionDate().getMonthValue(), licenseApplicantDTO.getApplicationFeeBankVoucherSubmissionDate().getDayOfMonth());
-//        licenseApplicant.setEntryApplicationFeeVoucherDate(entryDate);
-//        licenseApplicant.setApplicationFeeBankVoucherSubmissionDate(entrySubmissionDate);
-
         String[] partsEntry = licenseApplicantDTO.getEntryApplicationFeeVoucherDateJalali().split("-");
         int jYear = Integer.parseInt(partsEntry[0]);
         int jMonth = Integer.parseInt(partsEntry[1]);
@@ -81,8 +72,6 @@ public class LicenseApplicationFeesFinanceController {
 
         LocalDate applicationFeeSubmissionDate = converter.jalaliToGregorian(jYearSubmission, jMonthSubmission, jDaySubmission);
         licenseApplicant.setApplicationFeeBankVoucherSubmissionDate(applicationFeeSubmissionDate);
-
-
 
 
         licenseApplicant.setBankVoucher(licenseApplicantDTO.getBankVoucher());
@@ -102,8 +91,6 @@ public class LicenseApplicationFeesFinanceController {
         licenseApplicantFinanceService.PaymentSave(licenseApplicant);
         return "redirect:/licenses/finance/license_finance/application_fees/license_application_fee_list";
     }
-
-
 
     @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_LICENSE_ADMIN') or hasRole('ROLE_FINANCE')")
     @GetMapping("/licenses/finance/license_finance/application_fees/license_application_fee_list/update/{reqId}")

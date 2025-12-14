@@ -53,23 +53,6 @@ public class LicenseDatabaseMaintainanceFeeController {
         // Fetch the existing entity from the database
         LicenseApproval existingLicenseApproval = licenseDatabaseMaintainanceFeeService.findById(licenseApprovalDTO.getId());
 
-//        DateConverter dateConverter = new DateConverter();
-//        LocalDate databasemaintainanceEntryVoucherDate = dateConverter.jalaliToGregorian(
-//                licenseApprovalDTO.getDatabaseMaintianenceFeeEntryVoucherDate().getYear(),
-//                licenseApprovalDTO.getDatabaseMaintianenceFeeEntryVoucherDate().getMonthValue(),
-//                licenseApprovalDTO.getDatabaseMaintianenceFeeEntryVoucherDate().getDayOfMonth()
-//        );
-//
-//        LocalDate databasemaintainanceSubmissionVoucherDate = dateConverter.jalaliToGregorian(
-//                licenseApprovalDTO.getDatabasemaintainanceFeeBankVoucherSubmissionDate().getYear(),
-//                licenseApprovalDTO.getDatabasemaintainanceFeeBankVoucherSubmissionDate().getMonthValue(),
-//                licenseApprovalDTO.getDatabasemaintainanceFeeBankVoucherSubmissionDate().getDayOfMonth()
-//        );
-//
-//        existingLicenseApproval.setDatabaseMaintianenceFeeEntryVoucherDate(databasemaintainanceEntryVoucherDate);
-//        existingLicenseApproval.setDatabasemaintainanceFeeBankVoucherSubmissionDate(databasemaintainanceSubmissionVoucherDate);
-
-
         String[] parts = licenseApprovalDTO.getDatabaseMaintianenceFeeEntryVoucherDateJalaliDate().split("-");
         int jYear = Integer.parseInt(parts[0]);
         int jMonth = Integer.parseInt(parts[1]);
@@ -144,7 +127,27 @@ public class LicenseDatabaseMaintainanceFeeController {
         licenseApprovalDTO.setApprovalId(licenseApproval.getApprovalId());
         licenseApprovalDTO.setApplicantLicenseCompanyName(licenseApproval.getLicenseApplicant().getCompanyLicenseName());
         licenseApprovalDTO.setLicenseTypeName(licenseApproval.getLicenseType().getName());
-        licenseApprovalDTO.setApprovalDate(licenseApproval.getApprovalDate());
+//        licenseApprovalDTO.setApprovalDate(licenseApproval.getApprovalDate());
+
+
+        LocalDate approvalDateGregorian = licenseApproval.getApprovalDate();
+        PersianCalendarUtils converter = new PersianCalendarUtils();
+        int[] jalaliDate = converter.gregorianToJalali(approvalDateGregorian);
+
+        String approvalDateShamsi = String.format("%04d-%02d-%02d", jalaliDate[0], jalaliDate[1], jalaliDate[2]);
+        licenseApprovalDTO.setApprovalDate(LocalDate.parse(approvalDateShamsi));
+
+
+        // Extract year
+        String year = approvalDateShamsi.split("-")[0];
+        licenseApprovalDTO.setApprovalYear(year);
+
+
+
+
+
+
+
         licenseApprovalDTO.setBoardDecisionNumber(licenseApproval.getBoardDecisionNumber());
         licenseApprovalDTO.setApprovalStatus(licenseApproval.getApprovalStatus());
         licenseApprovalDTO.setCurrencyType(licenseApproval.getCurrencyType());
