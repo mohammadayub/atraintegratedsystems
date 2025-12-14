@@ -55,23 +55,6 @@ public class LicenseGuaranteeFeesController {
         LicenseApproval existingLicenseApproval = licenseGuaranteeFeeService.findById(licenseApprovalDTO.getId());
 
 
-//        DateConverter dateConverter = new DateConverter();
-//        LocalDate guaranteeEntryVoucherDate = dateConverter.jalaliToGregorian(
-//                licenseApprovalDTO.getGuaranteeFeeEntryVoucherDate().getYear(),
-//                licenseApprovalDTO.getGuaranteeFeeEntryVoucherDate().getMonthValue(),
-//                licenseApprovalDTO.getGuaranteeFeeEntryVoucherDate().getDayOfMonth()
-//        );
-//        // Update only the required fields
-//        existingLicenseApproval.setGuaranteeFeeEntryVoucherDate(guaranteeEntryVoucherDate);
-//
-//        LocalDate guaranteeEntrySubmissionVoucherDate = dateConverter.jalaliToGregorian(
-//                licenseApprovalDTO.getGuaranteeFeeBankVoucherSubmissionDate().getYear(),
-//                licenseApprovalDTO.getGuaranteeFeeBankVoucherSubmissionDate().getMonthValue(),
-//                licenseApprovalDTO.getGuaranteeFeeBankVoucherSubmissionDate().getDayOfMonth()
-//        );
-//        existingLicenseApproval.setGuaranteeFeeBankVoucherSubmissionDate(guaranteeEntrySubmissionVoucherDate);
-
-
 
         String[] parts = licenseApprovalDTO.getGuaranteeFeeEntryVoucherDateJalaliDate().split("-");
         int jYear = Integer.parseInt(parts[0]);
@@ -146,7 +129,30 @@ public class LicenseGuaranteeFeesController {
         licenseApprovalDTO.setApprovalId(licenseApproval.getApprovalId());
         licenseApprovalDTO.setApplicantLicenseCompanyName(licenseApproval.getLicenseApplicant().getCompanyLicenseName());
         licenseApprovalDTO.setLicenseTypeName(licenseApproval.getLicenseType().getName());
-        licenseApprovalDTO.setApprovalDate(licenseApproval.getApprovalDate());
+//        licenseApprovalDTO.setApprovalDate(licenseApproval.getApprovalDate());
+
+
+
+        LocalDate approvalDateGregorian = licenseApproval.getApprovalDate();
+        PersianCalendarUtils converter = new PersianCalendarUtils();
+        int[] jalaliDate = converter.gregorianToJalali(approvalDateGregorian);
+
+        String approvalDateShamsi = String.format("%04d-%02d-%02d", jalaliDate[0], jalaliDate[1], jalaliDate[2]);
+        licenseApprovalDTO.setApprovalDate(LocalDate.parse(approvalDateShamsi));
+
+
+        // Extract year
+        String year = approvalDateShamsi.split("-")[0];
+        licenseApprovalDTO.setApprovalYear(year);
+
+
+
+
+
+
+
+
+
         licenseApprovalDTO.setBoardDecisionNumber(licenseApproval.getBoardDecisionNumber());
         licenseApprovalDTO.setApprovalStatus(licenseApproval.getApprovalStatus());
         licenseApprovalDTO.setCurrencyType(licenseApproval.getCurrencyType());
