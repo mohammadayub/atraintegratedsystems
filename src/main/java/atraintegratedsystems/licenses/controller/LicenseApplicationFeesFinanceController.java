@@ -129,6 +129,7 @@ public class LicenseApplicationFeesFinanceController {
         licenseApplicantDTO.setReqId(licenseApplicant.getReqId());
         licenseApplicantDTO.setReqDate(licenseApplicant.getReqDate());
         licenseApplicantDTO.setLicenseTypeId(licenseApplicant.getLicenseType().getId());
+        licenseApplicantDTO.setLicenseTypeName(licenseApplicant.getLicenseType().getName());
         licenseApplicantDTO.setCurrencyType(licenseApplicant.getCurrencyType());
         licenseApplicantDTO.setFinanceType(licenseApplicant.getFinanceType());
         licenseApplicantDTO.setCompanyLicenseName(licenseApplicant.getCompanyLicenseName());

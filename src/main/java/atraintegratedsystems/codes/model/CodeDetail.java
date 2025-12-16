@@ -16,7 +16,8 @@ public class CodeDetail {
     @Column(name="code_detail_id")
     private Long id;
     @Column(name="short_code")
-    private int shortCode;
+    private Integer shortCode;
+    private Integer releaseShortCode;
     private String codeStatus;
     @Column(name="ispc_unique_name_of_signaling_point")
     private String unique_name_of_signaling_point;

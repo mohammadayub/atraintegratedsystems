@@ -2,8 +2,11 @@ package atraintegratedsystems.codes.repository;
 
 import atraintegratedsystems.codes.model.CodeDetail;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,6 +19,12 @@ public interface CodeDetailRepository extends JpaRepository<CodeDetail,Long> {
 
     @Query(value = "SELECT * FROM code_detail WHERE payment_status IS NULL", nativeQuery = true)
     List<CodeDetail> findUnpaid();
+
+
+
+    @Modifying @Transactional @Query("UPDATE CodeDetail c SET c.releaseShortCode = c.shortCode, c.shortCode = NULL WHERE c.id = :id AND c.shortCode IS NOT NULL")
+    int releaseCode(@Param("id") Long id);
+
 
 
 }

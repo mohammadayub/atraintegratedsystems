@@ -8,7 +8,8 @@ import java.time.LocalDate;
 @Data
 public class CodeDetailDTO {
     private Long id;
-    private int shortCode;
+    private Integer shortCode;
+    private Integer releaseShortCode;
     private String codeStatus;
     private String unique_name_of_signaling_point;
     private Long licenseApplicantId;

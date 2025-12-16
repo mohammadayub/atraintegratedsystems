@@ -121,6 +121,7 @@
                 <tr>
                     <th>SN</th>
                     <th>Short Code</th>
+                    <th>Release Short Code</th>
                     <th>Status</th>
                     <th>ISPC Unique Name</th>
                     <th>Source Used</th>
@@ -143,12 +144,14 @@
                     <th>Bank Voucher No</th>
                     <th>Payment Status</th>
                     <th>Update</th>
+                    <th>Release</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:each="codeDetail : ${data}">
                     <td th:text="${codeDetail.id}"></td>
                     <td th:text="${codeDetail.shortCode}"></td>
+                    <td th:text="${codeDetail.releaseShortCode}"></td>
                     <td th:text="${codeDetail.codeStatus}"></td>
                     <td th:text="${codeDetail.unique_name_of_signaling_point}"></td>
                     <td th:text="${codeDetail.sourceUsed}"></td>
@@ -190,6 +193,18 @@
                                          0 0 0 1 2.5z"/>
                             </svg>
                         </a>
+                    </td>
+
+                    <td>
+                        <form th:action="@{/codes/standard/shortcodes_details/release/{id}(id=${codeDetail.id})}"
+                              method="post"
+                              th:if="${codeDetail.shortCode != null}">
+                            <button type="submit"
+                                    class="btn btn-danger btn-sm"
+                                    onclick="return confirm('Are you sure you want to release this short code?');">
+                                🔓 Release
+                            </button>
+                        </form>
                     </td>
                 </tr>
                 </tbody>

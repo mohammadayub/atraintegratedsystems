@@ -89,6 +89,7 @@ public class CodeDetailController {
 
         codeDetail.setId(dto.getId());
         codeDetail.setShortCode(dto.getShortCode());
+        codeDetail.setReleaseShortCode(dto.getReleaseShortCode());
         codeDetail.setCodeStatus(dto.getCodeStatus());
         codeDetail.setUnique_name_of_signaling_point(dto.getUnique_name_of_signaling_point());
 
@@ -147,7 +148,6 @@ public class CodeDetailController {
                     )
             );
         }
-
         // ---------- FEES ----------
         codeDetail.setApplication_fees(dto.getApplication_fees());
         codeDetail.setRegistration_fees(dto.getRegistration_fees());
@@ -159,6 +159,15 @@ public class CodeDetailController {
 
         return "redirect:/codes/standard/shortcodes_details";
     }
+
+    @PostMapping("/codes/standard/shortcodes_details/release/{id}")
+    public String releaseShortCode(@PathVariable Long id) {
+
+        codeDetailService.releaseShortCode(id);
+
+        return "redirect:/codes/standard/shortcodes_details";
+    }
+
 
 
     // -------------------------------------------------------------------

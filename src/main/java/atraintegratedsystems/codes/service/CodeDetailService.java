@@ -7,6 +7,7 @@ import atraintegratedsystems.codes.repository.CodeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,6 +26,20 @@ public class CodeDetailService {
     public CodeDetail save(CodeDetail codeDetail) {
         return codeDetailRepository.save(codeDetail);
     }
+
+
+
+    // -----------------------------
+    // RELEASE SHORT CODE
+    // -----------------------------
+    @Transactional
+    public boolean releaseShortCode(Long id) {
+        int updated = codeDetailRepository.releaseCode(id);
+        return updated > 0;
+    }
+
+
+
 
     // For backward compatibility (your existing code)
     public void AddShort(CodeDetail code) {
