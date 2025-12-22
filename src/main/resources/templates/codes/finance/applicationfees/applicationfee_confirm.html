@@ -1,0 +1,106 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<head th:replace="~{layout :: page_head}">
+    <meta charset="UTF-8">
+
+    <div th:replace="styles :: data-tables-styles"></div>
+    <div th:replace="styles :: select2-styles"></div>
+    <div th:replace="styles :: commonfieldset"></div>
+    <div th:replace="styles :: common-css"></div>
+    <div th:replace="styles :: persian-datepicker-styles"></div>
+
+    <title>Application Fee Confirmation</title>
+</head>
+
+<body>
+<nav th:replace="~{layout :: page_navbar}"></nav>
+
+<div class="container-fluid mt-4"
+     th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+
+    <fieldset>
+        <legend>
+            application_fee_confirmation
+        </legend>
+
+        <form th:action="@{/codes/applicationfees/confirm/save}" method="post">
+
+            <div class="row">
+
+                <!-- Hidden ID -->
+                <input type="hidden" name="id" th:value="${codeDetail.id}"/>
+
+                <!-- Short Code -->
+                <div class="col-md-2 form-group">
+                    <label>Short Code</label>
+                    <input type="text"
+                           class="form-control"
+                           th:value="${codeDetail.shortCode}"
+                           readonly>
+                </div>
+
+                <!-- Voucher Enter Date -->
+                <div class="col-md-3 form-group">
+                    <label>Application Fee Entry Voucher Date</label>
+                    <input type="text"
+                           name="applicationFeeEnterVoucherDate"
+                           class="form-control hijrishamsi"
+                           required>
+                </div>
+
+                <!-- Voucher Number -->
+                <div class="col-md-3 form-group">
+                    <label>Bank Voucher Number</label>
+                    <input type="text"
+                           name="applicationFeebankVoucherNo"
+                           class="form-control"
+                           required>
+                </div>
+
+                <!-- Voucher Submission Date -->
+                <div class="col-md-3 form-group">
+                    <label>Bank Voucher Submission Date</label>
+                    <input type="text"
+                           name="applicationFeebankVoucherSubmissionDate"
+                           class="form-control hijrishamsi"
+                           required>
+                </div>
+
+            </div>
+
+            <!-- Submit Button -->
+            <div class="col-md-4 btn-group d-flex justify-content-center"
+                 style="margin-top: 15px; margin-bottom:80px; margin:0 auto;">
+
+                <button type="submit"
+                        id="submitButton"
+                        class="btn btn-primary btn-sm"
+                        style="width: 140px;">
+                    Confirm Payment
+                </button>
+            </div>
+
+        </form>
+    </fieldset>
+
+    <a th:href="@{/codes/finance/applicationFeelist}"
+       class="btn btn-primary"
+       style="margin-top:20px;">
+        ← Back to Page
+    </a>
+
+</div>
+
+<!-- Scripts -->
+<div th:replace="scripts :: common-scripts"></div>
+<div th:replace="scripts :: persian-datepicker-scripts"></div>
+<div th:replace="scripts :: data-tables-scripts"></div>
+<div th:replace="scripts :: common-hijrishamsi-date"></div>
+
+<div style="height:10vh"></div>
+
+<footer th:replace="~{layout :: page_footer}"></footer>
+</body>
+</html>

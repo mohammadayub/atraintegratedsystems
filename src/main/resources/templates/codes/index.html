@@ -55,8 +55,30 @@
         </tr>
     </table>
 </fieldset>
-</div>
 
+
+
+    <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_CODES_ADMIN','ROLE_LICENSE','ROLE_MINISTRY','ROLE_LICENSE_COMPLETION_PROFILE','ROLE_LICENSE_APPROVAL','ROLE_LICENSE_PROFILE_ENTRY','ROLE_FINANCE','ROLE_FINANCE','ROLE_TYPEOFAPPROVAL_ADMIN','ROLE_TYPEOFAPPROVAL_ATRA_FINANCE','ROLE_TYPEOFAPPROVAL_MCIT_FINANCE','ROLE_TYPEOFAPPROVAL_STANDARD','ROLE_TYPEOFAPPROVAL_ONLINE_APPLICATION')">
+        <legend>Codes Finance Management Section</legend>
+        <table class="table table-borderless">
+            <tr>
+                <td>
+                    <div class="custom-card" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_LICENSE','ROLE_LICENSE_COMPLETION_PROFILE','ROLE_LICENSE_APPROVAL','ROLE_LICENSE_PROFILE_ENTRY','ROLE_FINANCE','ROLE_MINISTRY')">
+                        <a th:href="@{/codes/finance/home}">
+                            <img th:src="@{/images/CodesFinance.png}" alt="Short Code">
+                        </a>
+                        <h4 class="license-link" style="margin-top: 12px;">
+                            <a th:href="@{/codes/finance/home}">Codes Finance</a>
+                        </h4>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </fieldset>
+</div>
+<div th:replace="scripts :: common-scripts"></div>
+
+<div style="height:10vh;"></div>
 <footer th:replace="~{layout :: page_footer}"></footer>
 
 <script th:src="@{/js/bootstrap.bundle.min.js}"></script>

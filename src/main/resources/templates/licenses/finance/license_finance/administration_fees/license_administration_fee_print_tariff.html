@@ -73,7 +73,7 @@
 <body dir="rtl" style="background-color:white;">
 
 <!-- Navigation -->
-<nav th:replace="~{typeofApproval_layout :: page_navbar}"></nav>
+<nav th:replace="~{layout :: page_navbar}"></nav>
 
 <!-- Buttons -->
 <div class="text-center my-3">
@@ -185,13 +185,12 @@
       <h6 style="margin: 0; text-align:right;">نمبر حساب بانکی</h6>
       <!-- Select -->
       <div class="col-3" style="margin-top:-4px;text-align:right;">
-        <select class="form-select pr-3 pl-3"
-                style="margin: 0;appearance:none; -webkit-appearance:none; -moz-appearance:none; background-image:none !important;">
-          <option>۳۰۰۰۲۱۴۰۰۹۷۳۵</option>
-          <option>۱۰۰۱۳۳۶۰۹۶۸۷۲</option>
-          <option>۱۰۰۱۳۳۴۰۳۳۵۰۲</option>
-          <option>۱۰۰۱۳۳۶۰۹۷۳۶۲</option>
-        </select>
+        <span th:text="${licenseApprovalDTO.currencyType == 'AFN'
+               ? '3000214009735'
+               : (licenseApprovalDTO.currencyType == 'USD'
+                  ? '1001336096872'
+                  : '')}">
+        </span>
       </div>
 
     </div>
@@ -208,20 +207,14 @@
       <!-- Heading -->
       <h6 style="margin: 0; text-align:right;">نام بانک</h6>
       <!-- Select -->
-      <div class="col-3" style="margin-top:-4px;">
-        <select class="form-select pr-3 pl-3"
-                style="margin: 0;appearance:none; -webkit-appearance:none; -moz-appearance:none; background-image:none !important;">
-          <option>د افغانستان بانک (مرکزي بانک)</option>
-          <option>بانک ملي افغان (BMA)</option>
-          <option>پشتنی بانک</option>
-          <option>نوی کابل بانک</option>
-          <option>افغانستان انترنشنل بانک (AIB)</option>
-          <option>عزیزی بانک</option>
-          <option>میوند بانک</option>
-          <option>غضنفر بانک</option>
-          <option>اسلامي بانک افغانستان
-            (پخوانی باختر بانک)</option>
-        </select>
+      <div style="margin-top:-4px;margin-right:65px;">
+        <span th:text="${licenseApprovalDTO.currencyType == 'AFN'
+               ? 'د افغانستان بانک'
+               : (licenseApprovalDTO.currencyType == 'USD'
+                  ? 'بانک ملی افغان'
+                  : '')}">
+        </span>
+
       </div>
 
     </div>

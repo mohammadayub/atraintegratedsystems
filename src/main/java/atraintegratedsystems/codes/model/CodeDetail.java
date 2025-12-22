@@ -34,17 +34,43 @@ public class CodeDetail {
     private String name_of_responsible_person;
     private String id_card_number_of_responsible_person;
     private String mobile_number_of_responsible_person;
+    private String phone_number_of_responsible_person;
     private String email_of_responsible_person;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate assigning_date;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate expiration_date;
+
+    // Finance Fees Section
     private double application_fees;
+    private String applicationFeesOrganization="ATRA";
+    private String applicationFeesStatus;
     private double registration_fees;
     private double royalty_fees;
+    private String royaltyFeesOrganization = "MCIT";
+    private String royaltyFeesStatus;
     private double total;
-    private String bankVoucherNo;
+
+    //Application fees
+    private String applicationFeebankVoucherNo;
+    private String applicationFeeEnterVoucherDate;
+    private String applicationFeebankVoucherSubmissionDate;
     private String paymentStatus;
+
+    // ✅ One-to-One Relationship allow null
+    @OneToOne(
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY,
+            optional = true   // ✅ allow null
+    )
+    @JoinColumn(
+            name = "serial_number_id",
+            referencedColumnName = "id",
+            nullable = true   // ✅ allow null in DB
+    )
+    private ShortCodeSerialNumber serialNumber;
+
+
     public void setTotal(double total) {
         this.total = application_fees+registration_fees+royalty_fees;
     }

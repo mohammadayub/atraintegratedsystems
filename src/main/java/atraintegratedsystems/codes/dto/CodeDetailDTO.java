@@ -23,6 +23,7 @@ public class CodeDetailDTO {
     private String name_of_responsible_person;
     private String id_card_number_of_responsible_person;
     private String mobile_number_of_responsible_person;
+    private String phone_number_of_responsible_person;
     private String email_of_responsible_person;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate assigning_date;
@@ -34,4 +35,6 @@ public class CodeDetailDTO {
     private double total;
     private String bankVoucherNo;
     private String paymentStatus;
+
+    private Long serialNumberId;
 }

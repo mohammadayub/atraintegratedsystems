@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: page_head}">
+  <title>Serial Number Form</title>
+  <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+</head>
+<body>
+
+<nav th:replace="~{layout :: page_navbar}"></nav>
+
+<div class="container mt-4">
+
+  <h3>Serial Number Form</h3>
+
+  <form th:action="@{/serial-numbers/save}"
+        th:object="${serialNumber}"
+        method="post">
+
+    <input type="hidden" th:field="*{id}"/>
+
+    <div class="mb-3">
+      <label class="form-label">Serial Number</label>
+      <input type="number"
+             class="form-control"
+             th:field="*{serialNumber}"
+             required>
+    </div>
+
+    <button type="submit" class="btn btn-success">Save</button>
+    <a th:href="@{/serial-numbers}" class="btn btn-secondary">Back</a>
+
+  </form>
+
+</div>
+
+
+<div th:replace="scripts :: common-scripts"></div>
+
+<div style="height:10vh;"></div>
+<footer th:replace="~{layout :: page_footer}"></footer>
+
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

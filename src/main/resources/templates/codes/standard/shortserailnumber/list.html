@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Serial Numbers</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+
+    <style>
+        .assigned {
+            background-color: #42f5b0; /* Bootstrap blue */
+            color: white;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<div class="container mt-4">
+
+    <h3>Serial Numbers List</h3>
+
+    <a th:href="@{/serial-numbers/add}" class="btn btn-primary mb-3">
+        Add Serial Number
+    </a>
+
+    <table class="table table-bordered text-center">
+        <tbody>
+
+        <!-- Create rows -->
+        <tr th:each="row : ${#numbers.sequence(0, serialNumbers.size() - 1, 20)}">
+
+            <!-- Create 20 columns per row -->
+            <td th:each="i : ${#numbers.sequence(row, row + 19)}"
+                th:if="${i < serialNumbers.size()}"
+                th:text="${serialNumbers[i].serialNumber}"
+                th:classappend="${serialNumbers[i].status == 'Assigned'} ? 'assigned' : ''">
+            </td>
+
+        </tr>
+
+        </tbody>
+    </table>
+
+</div>
+</body>
+</html>

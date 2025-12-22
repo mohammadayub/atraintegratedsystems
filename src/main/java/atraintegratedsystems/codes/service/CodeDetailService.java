@@ -93,4 +93,61 @@ public class CodeDetailService {
     public List<CodeDetail> findUnpaid() {
         return codeDetailRepository.findUnpaid();
     }
+
+
+
+    // find uppaid application fees
+    public List<Object[]> getunPaidApplicationFees() {
+        return codeDetailRepository.findunPaidApplicationFee();
+    }
+
+    // application fee tariff related
+
+//    public Object[] getApplicationFeeTariff(Long id) {
+//        Object result = codeDetailRepository.findApplicationFeeById(id);
+//        return result != null ? (Object[]) result : null;
+//    }
+
+//    public Object[] getApplicationFeeTariff(Long id) {
+//        return codeDetailRepository.findApplicationFeeById(id);
+//    }
+// ✅ Load unpaid application fee for edit
+      public Optional<CodeDetail> getUnpaidApplicationFeeForEdit(Long id) {
+         return codeDetailRepository.findUnpaidApplicationFeeById(id);
+       }
+
+    // Confirm application fee
+
+//    @Transactional
+//    public boolean confirmApplicationFee(
+//            Long id,
+//            String voucherNo,
+//            String submissionDate
+//    ) {
+//        int updated = codeDetailRepository.confirmApplicationFeePayment(
+//                id,
+//                voucherNo,
+//                submissionDate
+//        );
+//        return updated > 0;
+//    }
+@Transactional
+public boolean confirmApplicationFee(
+        Long id,
+        String voucherNo,
+        String enterDate,
+        String submissionDate
+) {
+    int updated = codeDetailRepository.confirmApplicationFeePayment(
+            id,
+            voucherNo,
+            enterDate,
+            submissionDate
+    );
+    return updated > 0;
+}
+
+
+
+
 }

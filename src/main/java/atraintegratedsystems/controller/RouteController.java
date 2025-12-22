@@ -108,4 +108,9 @@ public class RouteController {
         return "licenses/license/report/license/home";
     }
 
+    @GetMapping("/codes/finance/home")
+    public String shortCodeFinanceHome()
+    {
+        return "codes/finance/home";
+    }
 }

@@ -27,6 +27,83 @@ public interface CodeDetailRepository extends JpaRepository<CodeDetail,Long> {
 
 
 
+    // for Application Fee
+
+    @Query(value = "SELECT cd.code_detail_id,cd.short_code, cd.code_status, cd.source_used, cd.location, cd.category_type, cd.category, cd.chanel, cd.email_of_responsible_person FROM code_detail cd WHERE cd.application_fees_status IS NULL", nativeQuery = true)
+    List<Object[]> findunPaidApplicationFee();
+
+    // Tariff Related
+
+//    @Query(value = "SELECT * FROM code_detail WHERE code_detail_id = :id", nativeQuery = true)
+//    Object findApplicationFeeById(@Param("id") Long id);
+
+//    @Query(value = "SELECT code_detail_id, short_code, code_status, source_used, location, category_type, category, chanel, email_of_responsible_person FROM code_detail WHERE code_detail_id = :id", nativeQuery = true)
+//    Object[] findApplicationFeeById(@Param("id") Long id);
+
+//    @Query(value =
+//            "SELECT cd.code_detail_id, " +
+//                    "       cd.short_code, " +
+//                    "       cd.code_status, " +
+//                    "       cd.source_used, " +
+//                    "       cd.location, " +
+//                    "       cd.category_type, " +
+//                    "       cd.category, " +
+//                    "       cd.chanel, " +
+//                    "       cd.email_of_responsible_person " +
+//                    "FROM code_detail cd " +
+//                    "WHERE cd.code_detail_id = :id",
+//            nativeQuery = true)
+//    Object[] findApplicationFeeById(@Param("id") Long id);
+
+    @Query(value =
+            "SELECT * FROM code_detail " +
+                    "WHERE code_detail_id = :id " +
+                    "AND application_fees_status IS NULL",
+            nativeQuery = true)
+    Optional<CodeDetail> findUnpaidApplicationFeeById(@Param("id") Long id);
+
+
+
+
+    // update
+
+//    @Modifying
+//    @Transactional
+//    @Query(
+//            "UPDATE CodeDetail c " +
+//                    "SET c.applicationFeesStatus = 'PAID', " +
+//                    "    c.applicationFeebankVoucherNo = :voucherNo, " +
+//                    "    c.applicationFeebankVoucherSubmissionDate = :submissionDate, " +
+//                    "    c.paymentStatus = 'PAID' " +
+//                    "WHERE c.id = :id"
+//    )
+//    int confirmApplicationFeePayment(
+//            @Param("id") Long id,
+//            @Param("voucherNo") String voucherNo,
+//            @Param("submissionDate") String submissionDate
+//    );
+
+    @Modifying
+    @Transactional
+    @Query(
+            "UPDATE CodeDetail c " +
+                    "SET c.applicationFeesStatus = 'PAID', " +
+                    "    c.applicationFeebankVoucherNo = :voucherNo, " +
+                    "    c.applicationFeeEnterVoucherDate = :enterDate, " +
+                    "    c.applicationFeebankVoucherSubmissionDate = :submissionDate, " +
+                    "    c.paymentStatus = 'PAID' " +
+                    "WHERE c.id = :id"
+    )
+    int confirmApplicationFeePayment(
+            @Param("id") Long id,
+            @Param("voucherNo") String voucherNo,
+            @Param("enterDate") String enterDate,
+            @Param("submissionDate") String submissionDate
+    );
+
+
+
+
 }
 
 

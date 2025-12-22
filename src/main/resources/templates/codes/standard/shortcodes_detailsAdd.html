@@ -1,165 +1,192 @@
 <!doctype html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head th:replace="~{layout :: page_head}">
     <div th:replace="styles :: persian-datepicker-styles"></div>
     <div th:replace="styles :: select2-styles"></div>
     <div th:replace="styles :: common-css"></div>
     <title>Telecom Short Codes Management System</title>
 </head>
+
 <body>
 <nav th:replace="~{layout :: page_navbar}"></nav>
 
-<div class="container-fluid mt-4" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
-    <form th:action="@{/codes/standard/shortcodes_detailsAdd/add}" th:object="${codeDetailDTO}" method="post" enctype="multipart/form-data">
-        <fieldset style="border: 2px solid #DCAF45; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
-            <legend style="width: auto; font-size: 1.2rem; color: #14438B; padding: 0 10px; font-weight: bold;">
-                Telecom ShortCode Details
+<div class="container-fluid mt-4"
+     th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+
+    <form th:action="@{/codes/standard/shortcodes_detailsAdd/add}"
+          th:object="${codeDetailDTO}"
+          method="post"
+          enctype="multipart/form-data">
+
+        <fieldset style="border:2px solid #DCAF45;padding:15px;border-radius:8px;margin-bottom:20px;">
+            <legend style="width:auto;font-size:1.2rem;color:#14438B;padding:0 10px;font-weight:bold;">
+                <span th:text="#{telecom_shortcode_details}">Telecom ShortCode Details</span>
             </legend>
+
             <div class="row g-3">
                 <input type="hidden" th:field="*{id}"/>
 
-                <!-- Short Code -->
+                <!-- ROW 1 -->
                 <div class="col-md-3 form-group">
-                    <label for="shortCode">Select Code</label>
-                    <select class="form-control search-select" th:field="*{shortCode}" id="shortCode">
-                        <option th:each="code : ${codes}" th:value="${code[0]}" th:text="${code[1]}"></option>
-                    </select>
-                    <div th:if="${#fields.hasErrors('shortCode')}" th:errors="*{shortCode}" class="text-danger small"></div>
-                </div>
-
-                <!-- Status -->
-                <div class="col-md-3 form-group">
-                    <label for="codeStatus">Select Status</label>
-                    <select class="form-control " th:field="*{codeStatus}" id="codeStatus">
-                        <option th:value="'Active'">Active</option>
-                        <option th:value="'InActive'">Inactive</option>
+                    <label th:text="#{select_code}">Select Code</label>
+                    <select class="form-control search-select" th:field="*{shortCode}">
+                        <option th:each="code : ${codes}"
+                                th:value="${code[0]}"
+                                th:text="${code[1]}"></option>
                     </select>
                 </div>
 
-                <!-- License Applicant -->
-                <div class="col-md-4 form-group">
-                    <label for="licenseApplicantId">License Applicant</label>
+                <div class="col-md-3 form-group">
+                    <label>Short Code Serial</label>
+                    <select class="form-control search-select" th:field="*{serialNumberId}">
+                        <option value="">--</option>
+                        <option th:each="sn : ${serialNumbers}"
+                                th:value="${sn.id}"
+                                th:text="${sn.serialNumber + ' (' + (sn.status != null ? sn.status : 'Not Assigned') + ')'}">
+                        </option>
+                    </select>
+                </div>
 
-                    <select class="form-control select2"
-                            th:field="*{licenseApplicantId}"
-                            id="licenseApplicantId">
+                <div class="col-md-3 form-group">
+                    <label th:text="#{select_status}">Select Status</label>
+                    <select class="form-control" th:field="*{codeStatus}">
+                        <option value="Active">Active</option>
+                        <option value="InActive">Inactive</option>
+                    </select>
+                </div>
 
-                        <!-- Allow NULL -->
+                <div class="col-md-3 form-group">
+                    <label th:text="#{license_applicants}">License Applicant</label>
+                    <select class="form-control select2" th:field="*{licenseApplicantId}">
                         <option value="">None</option>
-
-                        <!-- Dynamic applicants -->
                         <option th:each="la : ${licenseApplicants}"
                                 th:value="${la.id}"
-                                th:text="${la.companyLicenseName + ' — '
-                        + #temporals.format(la.reqDate, 'yyyy-MM-dd')
-                        + ' — Validity: ' + la.validity
-                        + ' — Admin Fee: ' + la.administrationFeePaymentStatus}">
+                                th:text="${la.companyLicenseName + ' — ' +
+                #temporals.format(la.reqDate,'yyyy-MM-dd') +
+                ' — Validity: ' + la.validity +
+                ' — Admin Fee: ' + la.administrationFeePaymentStatus}">
                         </option>
+                    </select>
+                </div>
 
+                <!-- ROW 2 -->
+                <div class="col-md-3 form-group">
+                    <label th:text="#{source_used}">Source Used</label>
+                    <input type="text" class="form-control" th:field="*{sourceUsed}">
+                </div>
+
+                <div class="col-md-3 form-group">
+                    <label th:text="#{location}">Location</label>
+                    <input type="text" class="form-control" th:field="*{location}">
+                </div>
+
+                <div class="col-md-3 form-group">
+                    <label th:text="#{channel}">Channel</label>
+                    <input type="text" class="form-control" th:field="*{chanel}">
+                </div>
+
+                <div class="col-md-3 form-group">
+                    <label th:text="#{services}">Services</label>
+                    <textarea class="form-control" th:field="*{services}"></textarea>
+                </div>
+
+                <!-- ROW 3 -->
+                <div class="col-md-3 form-group">
+                    <label th:text="#{select_category_type}">Select Category Type</label>
+                    <select class="form-control"
+                            th:field="*{categoryType}"
+                            id="categoryType"
+                            onchange="updateCategoryValues()">
+                        <option value="Technical01">Technical01</option>
+                        <option value="Business01">Business01</option>
+                        <option value="Technical02">Technical02</option>
+                        <option value="Business02">Business02</option>
+                        <option value="SubShortCodes">SubShortCodes</option>
                     </select>
                 </div>
 
                 <div class="col-md-3 form-group">
-                    <label for="sourceUsed">Source Used</label>
-                    <input type="text" class="form-control" th:field="*{sourceUsed}" id="sourceUsed">
-                </div>
-
-                <!-- Location -->
-                <div class="col-md-3 form-group">
-                    <label for="location">Location</label>
-                    <input type="text" class="form-control" th:field="*{location}" id="location">
-                </div>
-
-                <!-- Channel -->
-                <div class="col-md-3 form-group">
-                    <label for="chanel">Channel</label>
-                    <input type="text" class="form-control" th:field="*{chanel}" id="chanel">
-                </div>
-
-                <!-- Services -->
-                <div class="col-md-3 form-group">
-                    <label for="services">Services</label>
-                    <textarea class="form-control" th:field="*{services}" id="services"></textarea>
-                </div>
-
-                <div class="col-md-3 form-group">
-                    <label for="categoryType" class="col-form-label">Select Category Type</label>
-                    <select class="form-control" th:field="*{categoryType}" id="categoryType" name="categoryType" onchange="updateCategoryValues()">
-                        <option th:value="'Technical01'" th:text="Technical01"></option>
-                        <option th:value="'Business01'" th:text="Business01"></option>
-                        <option th:value="'Technical02'" th:text="Technical02"></option>
-                        <option th:value="'Business02'" th:text="Business02"></option>
-                        <option th:value="'SubShortCodes'" th:text="SubShortCodes"></option>
+                    <label th:text="#{select_category}">Select Category</label>
+                    <select class="form-control"
+                            th:field="*{category}"
+                            id="category"
+                            onchange="calculateTotalFees()">
+                        <option value="Golden">Golden</option>
+                        <option value="Silver">Silver</option>
+                        <option value="Normal">Normal</option>
+                        <option value="SubShortCodes">SubShortCodes</option>
                     </select>
                 </div>
-                <!-- Category -->
+
                 <div class="col-md-3 form-group">
-                <label for="category" class="col-form-label">Select Category</label>
-                <select class="form-control" th:field="*{category}" id=category name="category"  onchange="calculateTotalFees()">
-                    <option value="Golden">Golden</option>
-                    <option value="Silver">Silver</option>
-                    <option value="Normal">Normal</option>
-                    <option value="Normal">SubShortCodes</option>
-                </select>
+                    <label th:text="#{back_long_number}">Back Long Number</label>
+                    <input type="text" class="form-control" th:field="*{back_long_number}">
                 </div>
 
-                <!-- Back Long Number -->
                 <div class="col-md-3 form-group">
-                    <label for="back_long_number">Back Long Number</label>
-                    <input type="text" class="form-control" th:field="*{back_long_number}" id="back_long_number">
+                    <label th:text="#{full_name}">Full Name</label>
+                    <input type="text" class="form-control" th:field="*{name_of_responsible_person}">
                 </div>
 
-                <!-- Responsible Person -->
+                <!-- ROW 4 -->
                 <div class="col-md-3 form-group">
-                    <label for="name_of_responsible_person">Full Name</label>
-                    <input type="text" class="form-control" th:field="*{name_of_responsible_person}" id="name_of_responsible_person">
-                </div>
-                <div class="col-md-3 form-group">
-                    <label for="id_card_number_of_responsible_person">ID Card Number</label>
-                    <input type="text" class="form-control" th:field="*{id_card_number_of_responsible_person}" id="id_card_number_of_responsible_person">
-                </div>
-                <div class="col-md-3 form-group">
-                    <label for="mobile_number_of_responsible_person">Mobile Number</label>
-                    <input type="text" class="form-control" th:field="*{mobile_number_of_responsible_person}" id="mobile_number_of_responsible_person">
-                </div>
-                <div class="col-md-3 form-group">
-                    <label for="email_of_responsible_person">Email Address</label>
-                    <input type="text" class="form-control" th:field="*{email_of_responsible_person}" id="email_of_responsible_person">
+                    <label th:text="#{id_card_number}">ID Card Number</label>
+                    <input type="text" class="form-control"
+                           th:field="*{id_card_number_of_responsible_person}">
                 </div>
 
-                <!-- Dates -->
                 <div class="col-md-3 form-group">
-                    <label for="assigning_date">Assigning Date</label>
-                    <input type="text" class="form-control hijrishamsi" th:field="*{assigning_date}" id="assigning_date">
-                </div>
-                <div class="col-md-3 form-group">
-                    <label for="expiration_date">Expiration Date</label>
-                    <input type="text" class="form-control hijrishamsi" th:field="*{expiration_date}" id="expiration_date">
+                    <label th:text="#{mobile_number}">Mobile Number</label>
+                    <input type="text" class="form-control"
+                           th:field="*{mobile_number_of_responsible_person}">
                 </div>
 
-                <!-- Fees -->
                 <div class="col-md-3 form-group">
-                    <label for="application_fees">Application Fees</label>
-                    <input type="number" class="form-control" th:field="*{application_fees}" id="application_fees" readonly>
+                    <label th:text="#{email_address}">Email Address</label>
+                    <input type="text" class="form-control"
+                           th:field="*{email_of_responsible_person}">
                 </div>
+
                 <div class="col-md-3 form-group">
-                    <label for="registration_fees">Registration Fees</label>
-                    <input type="number" class="form-control" th:field="*{registration_fees}" id="registration_fees" readonly>
+                    <label th:text="#{assigning_date}">Assigning Date</label>
+                    <input type="text" class="form-control hijrishamsi"
+                           th:field="*{assigning_date}">
                 </div>
+
+                <!-- ROW 5 -->
                 <div class="col-md-3 form-group">
-                    <label for="royalty_fees">Royalty Fees</label>
-                    <input type="number" class="form-control" th:field="*{royalty_fees}" id="royalty_fees" readonly>
+                    <label th:text="#{expiry_date}">Expiry Date</label>
+                    <input type="text" class="form-control hijrishamsi"
+                           th:field="*{expiration_date}">
                 </div>
+
+                <div class="col-md-3 form-group">
+                    <label th:text="#{application_fees}">Application Fees</label>
+                    <input type="number" class="form-control"
+                           th:field="*{application_fees}" readonly>
+                </div>
+
+                <div class="col-md-3 form-group">
+                    <label th:text="#{royality_fees}">Royalty Fees</label>
+                    <input type="number" class="form-control"
+                           th:field="*{royalty_fees}" readonly>
+                </div>
+
+                <input type="hidden" th:field="*{registration_fees}">
+                <input type="hidden" id="totalFees">
 
             </div>
 
-            <!-- Submit Button -->
+            <!-- BUTTONS -->
             <div class="row mt-4">
-                <div class="col-md-4 btn-group d-flex justify-content-center">
-                    <button type="submit" class="btn btn-primary border border-primary rounded">
-                        <i class="fas fa-check"></i> Submit
+                <div class="col-md-4 mx-auto d-flex justify-content-center gap-2">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-check"></i>
+                        <span th:text="#{add_record}">Add Record</span>
                     </button>
-                    <button type="reset" class="btn btn-info border border-info rounded">
+                    &nbsp;&nbsp;
+                    <button type="reset" class="btn btn-info">
                         <i class="fas fa-redo"></i> Reset
                     </button>
                 </div>
@@ -168,7 +195,8 @@
         </fieldset>
     </form>
 </div>
-<!-- Scripts -->
+
+<!-- SCRIPTS -->
 <div th:replace="scripts :: common-scripts"></div>
 <div th:replace="scripts :: persian-datepicker-scripts"></div>
 <div th:replace="scripts :: select2-scripts"></div>
@@ -178,131 +206,69 @@
     function updateCategoryValues() {
         var categoryType = document.getElementById('categoryType').value;
         var categorySelect = document.getElementById('category');
+        categorySelect.innerHTML = '';
 
-        categorySelect.innerHTML = ''; // Clear existing options
+        var categories = [];
+        if (categoryType === 'SubShortCodes') {
+            categories = ['SubShortCodes'];
+        } else {
+            categories = ['Golden', 'Silver', 'Normal'];
+        }
 
-        if (categoryType === 'Technical01') {
-            var categories = ['Golden', 'Silver', 'Normal'];
-        } else if (categoryType === 'Business01') {
-            var categories = ['Golden', 'Silver', 'Normal'];
-        }else if (categoryType==='Technical02'){
-        var categories = ['Golden', 'Silver', 'Normal'];
-        }else if (categoryType === 'Business02') {
-        var categories = ['Golden', 'Silver', 'Normal'];
-        }
-        else if (categoryType === 'SubShortCodes') {
-        var categories = ['SubShortCodes'];
-        }
-        categories.forEach(function(category) {
-            var option = document.createElement('option');
-            option.value = category;
-            option.text = category;
-            categorySelect.appendChild(option);
+        categories.forEach(function (c) {
+            var opt = document.createElement('option');
+            opt.value = c;
+            opt.text = c;
+            categorySelect.appendChild(opt);
         });
 
-        calculateTotalFees(); // Recalculate fees based on new values
+        calculateTotalFees();
     }
 
     function calculateTotalFees() {
         var categoryType = document.getElementById('categoryType').value;
         var category = document.getElementById('category').value;
 
-        var applicationFees = parseFloat(document.getElementById('application_fees').value) || 0;
+        var applicationFees = 0;
         var registrationFees = 0;
         var royaltyFees = 0;
 
-        if (categoryType === 'Technical01' && category === 'Golden') {
-            registrationFees = 0; // Assign registration fee for Technical01 and Golden
-            royaltyFees = 50000; // Assign royalty fee for Technical01 and Golden
-            applicationFees=5000 // Assign application fee for Technical01 and Golden
+        if (categoryType === 'Technical01') {
+            applicationFees = 5000;
+            royaltyFees = category === 'Golden' ? 50000 :
+                          category === 'Silver' ? 40000 : 30000;
         }
 
-        if (categoryType === 'Technical01' && category === 'Silver') {
-            registrationFees = 0; // Assign registration fee for Technical01 and Silver
-            royaltyFees = 40000; // Assign royalty fee for Technical01 and Silver
-            applicationFees=5000 // Assign application fee for Technical01 and Silver
+        if (categoryType === 'Business01') {
+            applicationFees = 5000;
+            royaltyFees = category === 'Golden' ? 70000 :
+                          category === 'Silver' ? 60000 : 50000;
         }
 
-         if (categoryType === 'Technical01' && category === 'Normal') {
-             registrationFees = 0; // Assign registration fee for Technical01 and Normal
-            royaltyFees = 30000; // Assign royalty fee for Technical01 and Normal
-            applicationFees=5000 // Assign application fee for Technical01 and Normal
+        if (categoryType === 'Technical02') {
+            applicationFees = 3000;
+            royaltyFees = category === 'Golden' ? 30000 :
+                          category === 'Silver' ? 25000 : 20000;
         }
 
-          if (categoryType === 'Business01' && category === 'Golden') {
-             registrationFees = 0; // Assign registration fee for Technical01 and Normal
-            royaltyFees = 70000; // Assign royalty fee for Technical01 and Normal
-            applicationFees=5000 // Assign application fee for Technical01 and Normal
+        if (categoryType === 'Business02') {
+            applicationFees = 3000;
+            royaltyFees = category === 'Golden' ? 50000 :
+                          category === 'Silver' ? 40000 : 30000;
         }
 
-
-       if (categoryType === 'Business01' && category === 'Silver') {
-             registrationFees = 0; // Assign registration fee for Technical01 and Normal
-            royaltyFees = 60000; // Assign royalty fee for Technical01 and Normal
-            applicationFees=5000 // Assign application fee for Technical01 and Normal
+        if (categoryType === 'SubShortCodes') {
+            applicationFees = 0;
+            royaltyFees = 30000;
         }
 
-
-       if (categoryType === 'Business01' && category === 'Normal') {
-             registrationFees = 0; // Assign registration fee for Technical01 and Normal
-            royaltyFees = 50000; // Assign royalty fee for Technical01 and Normal
-            applicationFees=5000 // Assign application fee for Technical01 and Normal
-        }
-
-         if (categoryType === 'Technical02' && category === 'Golden') {
-             registrationFees = 0; // Assign registration fee for Technical01 and Normal
-            royaltyFees = 30000; // Assign royalty fee for Technical01 and Normal
-            applicationFees=3000 // Assign application fee for Technical01 and Normal
-        }
-
-          if (categoryType === 'Technical02' && category === 'Silver') {
-             registrationFees = 0; // Assign registration fee for Technical01 and Normal
-            royaltyFees = 25000; // Assign royalty fee for Technical01 and Normal
-            applicationFees=3000 // Assign application fee for Technical01 and Normal
-        }
-
-          if (categoryType === 'Technical02' && category === 'Normal') {
-             registrationFees = 0; // Assign registration fee for Technical01 and Normal
-            royaltyFees = 20000; // Assign royalty fee for Technical01 and Normal
-            applicationFees=3000 // Assign application fee for Technical01 and Normal
-        }
-
-          if (categoryType === 'Business02' && category === 'Golden') {
-             registrationFees = 0; // Assign registration fee for Technical01 and Normal
-            royaltyFees = 50000; // Assign royalty fee for Technical01 and Normal
-            applicationFees=3000 // Assign application fee for Technical01 and Normal
-        }
-
-          if (categoryType === 'Business02' && category === 'Silver') {
-             registrationFees = 0; // Assign registration fee for Technical01 and Normal
-            royaltyFees = 40000; // Assign royalty fee for Technical01 and Normal
-            applicationFees=3000 // Assign application fee for Technical01 and Normal
-        }
-
-          if (categoryType === 'Business02' && category === 'Normal') {
-             registrationFees = 0; // Assign registration fee for Technical01 and Normal
-            royaltyFees = 30000; // Assign royalty fee for Technical01 and Normal
-            applicationFees=3000 // Assign application fee for Technical01 and Normal
-        }
-
-          if (categoryType === 'SubShortCodes' && category === 'SubShortCodes') {
-             registrationFees = 0; // Assign registration fee for Technical01 and Normal
-            royaltyFees = 30000; // Assign royalty fee for Technical01 and Normal
-            applicationFees=0 // Assign application fee for Technical01 and Normal
-        }
-
-
-        var totalFees = applicationFees + registrationFees + royaltyFees;
-
-        document.getElementById('registration_fees').value = registrationFees;
+        document.getElementById('application_fees').value = applicationFees;
         document.getElementById('royalty_fees').value = royaltyFees;
-        document.getElementById('application_fees').value=applicationFees;
-        document.getElementById('totalFees').value = totalFees;
+        document.getElementById('registration_fees').value = registrationFees;
     }
 
-    // Calculate fees on page load
-    document.addEventListener('DOMContentLoaded', function() {
-        updateCategoryValues(); // Initialize category values
+    document.addEventListener('DOMContentLoaded', function () {
+        updateCategoryValues();
     });
 
     $(document).ready(function () {
