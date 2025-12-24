@@ -1,0 +1,89 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: page_head}">
+    <title>Extend Code</title>
+    <meta charset="UTF-8">
+
+    <div th:replace="styles :: data-tables-styles"></div>
+    <div th:replace="styles :: select2-styles"></div>
+    <div th:replace="styles :: commonfieldset"></div>
+    <div th:replace="styles :: common-css"></div>
+    <div th:replace="styles :: persian-datepicker-styles"></div>
+</head>
+
+<body>
+<nav th:replace="~{layout :: page_navbar}"></nav>
+
+<div class="container mt-4">
+
+    <h4>Code Extension Form</h4>
+
+    <form th:action="@{/codes/extension/save}"
+          th:object="${extension}"
+          method="post">
+
+        <!-- 🔒 Hidden fields -->
+        <input type="hidden" th:field="*{codeDetail.id}">
+        <input type="hidden" th:field="*{royaltyFeeExtendedStatus}">
+
+        <!-- Code Detail ID -->
+        <div class="mb-3">
+            <label>Code Detail ID</label>
+            <input type="text"
+                   class="form-control"
+                   th:value="*{codeDetail.id}"
+                   readonly>
+        </div>
+
+        <!-- Extending Date -->
+        <div class="mb-3">
+            <label>Extending Date</label>
+            <input type="date"
+                   th:field="*{extendingDate}"
+                   class="form-control hijrishamsi"
+                   required>
+        </div>
+
+        <!-- Expiration Date -->
+        <div class="mb-3">
+            <label>New Expiration Date</label>
+            <input type="date"
+                   th:field="*{expirationDate}"
+                   class="form-control hijrishamsi"
+                   required>
+        </div>
+
+        <!-- Royalty Fee -->
+        <div class="mb-3">
+            <label>Royalty Fee Extended Fees</label>
+            <input type="number"
+                   class="form-control"
+                   th:field="*{royaltyFeeExtendedFees}"
+                   value="4000">
+        </div>
+
+
+        <!-- Voucher No -->
+
+        <button type="submit" class="btn btn-success">
+            Save Extension
+        </button>
+
+        <a th:href="@{/codes}" class="btn btn-secondary">
+            Cancel
+        </a>
+
+    </form>
+</div>
+
+<!-- Scripts -->
+<div th:replace="scripts :: common-scripts"></div>
+<div th:replace="scripts :: persian-datepicker-scripts"></div>
+<div th:replace="scripts :: data-tables-scripts"></div>
+<div th:replace="scripts :: common-hijrishamsi-date"></div>
+
+<div style="height:10vh"></div>
+
+<footer th:replace="~{layout :: page_footer}"></footer>
+</body>
+</html>

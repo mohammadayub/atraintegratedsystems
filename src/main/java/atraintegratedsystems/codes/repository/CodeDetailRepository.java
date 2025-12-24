@@ -102,8 +102,47 @@ public interface CodeDetailRepository extends JpaRepository<CodeDetail,Long> {
     );
 
 
+//    Royalty Fee Related
 
+    @Query(value = "SELECT cd.code_detail_id,cd.short_code, cd.code_status, cd.source_used, cd.location, cd.category_type, cd.category, cd.chanel, cd.email_of_responsible_person FROM code_detail cd WHERE cd.royalty_fees_status IS null", nativeQuery = true)
+    List<Object[]> findunPaidRoyaltyFee();
+
+//    Bellow is related to Tariff
+@Query(value =
+        "SELECT * FROM code_detail " +
+                "WHERE code_detail_id = :id " +
+                "AND royalty_fees_status IS NULL",
+        nativeQuery = true)
+Optional<CodeDetail> findUnpaidRoyaltyFeeById(@Param("id") Long id);
+
+
+    // Bellow is Related To Confirmation
+
+    @Modifying
+    @Transactional
+    @Query(
+            "UPDATE CodeDetail c " +
+                    "SET c.royaltyFeesStatus = 'PAID', " +
+                    "    c.royaltyFeebankVoucherNo = :voucherNo, " +
+                    "    c.royaltyFeeEnterVoucherDate = :enterDate, " +
+                    "    c.royaltyFeeBankVoucherSubmissionDate = :submissionDate " +
+                    "WHERE c.id = :id"
+    )
+    int confirmRoyaltyFeePayment(
+            @Param("id") Long id,
+            @Param("voucherNo") String voucherNo,
+            @Param("enterDate") String enterDate,
+            @Param("submissionDate") String submissionDate
+    );
+
+    // Bellow is for royalty Fee Extension
+
+    @Query(value = "SELECT cd.code_detail_id,cd.short_code, cd.code_status, cd.source_used, cd.location, cd.category_type, cd.category, cd.chanel, cd.email_of_responsible_person FROM code_detail cd WHERE cd.royalty_fees_status='PAID'", nativeQuery = true)
+    List<Object[]> findUnPaidRoyaltyFeeForExtension();
+
+
+    // Bellow is Application Fee Extension
+    @Query(value = "SELECT cd.code_detail_id,cd.short_code, cd.code_status, cd.source_used, cd.location, cd.category_type, cd.category, cd.chanel, cd.email_of_responsible_person FROM code_detail cd WHERE cd.application_fees_status='PAID'", nativeQuery = true)
+    List<Object[]> findUnPaidApplicationFeeForExtension();
 
 }
-
-

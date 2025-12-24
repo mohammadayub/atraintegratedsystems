@@ -11,10 +11,11 @@
     <div th:replace="styles :: common-css"></div>
     <div th:replace="styles :: persian-datepicker-styles"></div>
 
-    <title>Application Fee Confirmation</title>
+    <title>Royalty Fee Confirmation</title>
 </head>
 
 <body>
+
 <nav th:replace="~{layout :: page_navbar}"></nav>
 
 <div class="container-fluid mt-4"
@@ -22,15 +23,14 @@
 
     <fieldset>
         <legend>
-            application_fee_confirmation
+            royalty_fee_confirmation
         </legend>
 
-        <form th:action="@{/codes/applicationfees/confirm/save}"
+        <form th:action="@{/codes/royaltyfees/confirm/save}"
               th:object="${codeDetail}"
               method="post">
 
-
-        <div class="row">
+            <div class="row">
 
                 <!-- Hidden ID -->
                 <input type="hidden" name="id" th:value="${codeDetail.id}"/>
@@ -44,38 +44,43 @@
                            readonly>
                 </div>
 
-                <!-- Voucher Enter Date -->
+                <!-- Royalty Fee Entry Voucher Date -->
                 <div class="col-md-3 form-group">
-                    <label>Application Fee Entry Voucher Date</label>
-                    <input type="text" th:field="*{applicationFeeEnterVoucherDate}"
-                           class="form-control hijrishamsi" required>
+                    <label>Royalty Fee Entry Voucher Date</label>
+                    <input type="text"
+                           th:field="*{royaltyFeeEnterVoucherDate}"
+                           class="form-control hijrishamsi"
+                           required>
                 </div>
 
-                <!-- Voucher Number -->
+                <!-- Bank Voucher Number -->
                 <div class="col-md-3 form-group">
                     <label>Bank Voucher Number</label>
-
-                    <input type="text" th:field="*{applicationFeebankVoucherNo}"
-                           class="form-control" required>
+                    <input type="text"
+                           th:field="*{royaltyFeebankVoucherNo}"
+                           class="form-control"
+                           required>
                 </div>
 
-                <!-- Voucher Submission Date -->
+                <!-- Bank Voucher Submission Date -->
                 <div class="col-md-3 form-group">
                     <label>Bank Voucher Submission Date</label>
-                    <input type="text" th:field="*{applicationFeebankVoucherSubmissionDate}"
-                           class="form-control hijrishamsi" required>
+                    <input type="text"
+                           th:field="*{royaltyFeeBankVoucherSubmissionDate}"
+                           class="form-control hijrishamsi"
+                           required>
                 </div>
 
             </div>
 
             <!-- Submit Button -->
             <div class="col-md-4 btn-group d-flex justify-content-center"
-                 style="margin-top: 15px; margin-bottom:80px; margin:0 auto;">
+                 style="margin-top:15px; margin-bottom:80px; margin:0 auto;">
 
                 <button type="submit"
                         id="submitButton"
                         class="btn btn-primary btn-sm"
-                        style="width: 140px;">
+                        style="width:140px;">
                     Confirm Payment
                 </button>
             </div>
@@ -83,7 +88,8 @@
         </form>
     </fieldset>
 
-    <a th:href="@{/codes/finance/applicationFeelist}"
+    <!-- Back Button -->
+    <a th:href="@{/codes/finance/royaltyFeelist}"
        class="btn btn-primary"
        style="margin-top:20px;">
         ← Back to Page
@@ -100,5 +106,6 @@
 <div style="height:10vh"></div>
 
 <footer th:replace="~{layout :: page_footer}"></footer>
+
 </body>
 </html>

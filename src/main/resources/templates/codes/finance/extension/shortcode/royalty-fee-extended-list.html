@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Application Fee Extended List</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+</head>
+<body>
+
+<div class="container mt-4">
+
+    <h4 class="mb-3 text-primary">
+        Application Fee – Extended Records
+    </h4>
+
+    <table class="table table-bordered table-striped table-hover">
+        <thead class="table-dark">
+        <tr>
+            <th>#</th>
+            <th>Code Detail ID</th>
+            <th>Royalty Extension Date</th>
+            <th>Roaylty Expiration Date</th>
+            <th>Royalty Extended Fee</th>
+            <th>Royalty Fee BankVoucher No</th>
+            <th>Royalty Fee Bank Voucher Date</th>
+            <th>Roaylty Fee Bank Voucher Submission Date</th>
+            <th>Edit</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item, iStat : ${extensions}">
+            <td th:text="${iStat.count}"></td>
+            <td th:text="${item.codeDetail.id}"></td>
+            <td th:text="${item.royaltyFeeExtensionDate}"></td>
+            <td th:text="${item.royaltyFeeExtentionExpirationDate}"></td>
+            <td th:text="${item.royaltyFeeExtendedFees}"></td>
+            <td th:text="${item.royaltyFeeExtensionBankVoucherNo}"></td>
+            <td th:text="${item.royaltyFeeExtensionEnterVoucherDate}"></td>
+            <td th:text="${item.royaltyFeeExtensionBankVoucherSubmissionDate}"></td>
+            <td>
+                <a class="btn btn-sm btn-primary"
+                   th:href="@{/finance/code-extension/royalty-fee/edit/{id}(id=${item.id})}">
+                    Edit
+                </a>
+            </td>
+
+        </tr>
+
+        </tbody>
+    </table>
+
+</div>
+
+</body>
+</html>

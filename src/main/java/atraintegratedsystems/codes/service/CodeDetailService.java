@@ -1,5 +1,6 @@
 package atraintegratedsystems.codes.service;
 
+import atraintegratedsystems.codes.dto.CodeDetailDTO;
 import atraintegratedsystems.codes.model.Code;
 import atraintegratedsystems.codes.model.CodeDetail;
 import atraintegratedsystems.codes.repository.CodeDetailRepository;
@@ -131,23 +132,71 @@ public class CodeDetailService {
 //        );
 //        return updated > 0;
 //    }
-@Transactional
-public boolean confirmApplicationFee(
-        Long id,
-        String voucherNo,
-        String enterDate,
-        String submissionDate
-) {
-    int updated = codeDetailRepository.confirmApplicationFeePayment(
-            id,
-            voucherNo,
-            enterDate,
-            submissionDate
-    );
-    return updated > 0;
-}
+//@Transactional
+//public boolean confirmApplicationFee(
+//        Long id,
+//        String voucherNo,
+//        String enterDate,
+//        String submissionDate
+//) {
+//    int updated = codeDetailRepository.confirmApplicationFeePayment(
+//            id,
+//            voucherNo,
+//            enterDate,
+//            submissionDate
+//    );
+//    return updated > 0;
+//}
+
+    @Transactional
+    public boolean confirmApplicationFee(CodeDetailDTO dto) {
+
+        int updated = codeDetailRepository.confirmApplicationFeePayment(
+                dto.getId(),
+                dto.getApplicationFeebankVoucherNo(),
+                dto.getApplicationFeeEnterVoucherDate(),
+                dto.getApplicationFeebankVoucherSubmissionDate()
+        );
+
+        return updated > 0;
+    }
 
 
+//    Royalty Fee Section
+
+    public List<Object[]> getunPaidRyaltyFees() {
+        return codeDetailRepository.findunPaidRoyaltyFee();
+    }
+
+    // Royalty Fee Print Tariffs Section
+
+    public Optional<CodeDetail> getUnRoyaltyFeeForEdit(Long id) {
+        return codeDetailRepository.findUnpaidRoyaltyFeeById(id);
+    }
+
+    // Royalty Fees Confirmation Section
+    @Transactional
+    public boolean confirmRoyaltyFee(CodeDetailDTO dto) {
+
+        int updated = codeDetailRepository.confirmRoyaltyFeePayment(
+                dto.getId(),
+                dto.getRoyaltyFeebankVoucherNo(),
+                dto.getRoyaltyFeeEnterVoucherDate(),
+                dto.getRoyaltyFeeBankVoucherSubmissionDate()
+        );
+
+        return updated > 0;
+    }
+
+    // Royalty Fee Extension section
+    public List<Object[]> getUnPaidRyaltyFeesForExtension() {
+        return codeDetailRepository.findUnPaidRoyaltyFeeForExtension();
+    }
+
+    // Application Fee Extension Section
+    public List<Object[]> getUnPaidApplicationFeesForExtension() {
+        return codeDetailRepository.findUnPaidApplicationFeeForExtension();
+    }
 
 
 }

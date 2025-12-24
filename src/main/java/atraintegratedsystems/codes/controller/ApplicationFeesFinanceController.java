@@ -1,5 +1,6 @@
 package atraintegratedsystems.codes.controller;
 
+import atraintegratedsystems.codes.dto.CodeDetailDTO;
 import atraintegratedsystems.codes.model.CodeDetail;
 import atraintegratedsystems.codes.service.CodeDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,20 +70,28 @@ public class ApplicationFeesFinanceController {
         return "codes/finance/applicationfees/applicationfee_confirm";
     }
 
-    @PostMapping("/codes/applicationfees/confirm/save")
-    public String confirmPayment(
-            @RequestParam Long id,
-            @RequestParam String applicationFeebankVoucherNo,
-            @RequestParam String applicationFeeEnterVoucherDate,
-            @RequestParam String applicationFeebankVoucherSubmissionDate
-    ) {
+//    @PostMapping("/codes/applicationfees/confirm/save")
+//    public String confirmPayment(
+//            @RequestParam Long id,
+//            @RequestParam String applicationFeebankVoucherNo,
+//            @RequestParam String applicationFeeEnterVoucherDate,
+//            @RequestParam String applicationFeebankVoucherSubmissionDate
+//    ) {
+//
+//        codeDetailService.confirmApplicationFee(
+//                id,
+//                applicationFeebankVoucherNo,
+//                applicationFeeEnterVoucherDate,
+//                applicationFeebankVoucherSubmissionDate
+//        );
+//
+//        return "redirect:/codes/finance/applicationFeelist";
+//    }
 
-        codeDetailService.confirmApplicationFee(
-                id,
-                applicationFeebankVoucherNo,
-                applicationFeeEnterVoucherDate,
-                applicationFeebankVoucherSubmissionDate
-        );
+    @PostMapping("/codes/applicationfees/confirm/save")
+    public String confirmPayment(CodeDetailDTO dto) {
+
+        codeDetailService.confirmApplicationFee(dto);
 
         return "redirect:/codes/finance/applicationFeelist";
     }

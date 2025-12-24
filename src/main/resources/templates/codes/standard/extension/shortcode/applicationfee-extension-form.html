@@ -1,0 +1,97 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: page_head}">
+    <title>Extend Code</title>
+    <meta charset="UTF-8">
+
+    <div th:replace="styles :: data-tables-styles"></div>
+    <div th:replace="styles :: select2-styles"></div>
+    <div th:replace="styles :: commonfieldset"></div>
+    <div th:replace="styles :: common-css"></div>
+    <div th:replace="styles :: persian-datepicker-styles"></div>
+</head>
+
+<body>
+<nav th:replace="~{layout :: page_navbar}"></nav>
+
+<div class="container mt-4">
+
+
+    <fieldset>
+        <legend>
+            Code Extension Form
+        </legend>
+    <form th:action="@{/codes/application/extension/save}"
+          th:object="${extension}"
+          method="post">
+
+        <!-- 🔒 Hidden fields -->
+        <input type="hidden" th:field="*{codeDetail.id}">
+        <input type="hidden" th:field="*{royaltyFeeExtendedStatus}">
+
+        <!-- Row 1 -->
+        <div class="row">
+            <!-- Code Detail ID -->
+            <div class="col-md-6 mb-3">
+                <label>Code Detail ID</label>
+                <input type="text"
+                       class="form-control"
+                       th:value="*{codeDetail.id}"
+                       readonly>
+            </div>
+
+            <!-- Application Fee -->
+            <div class="col-md-6 mb-3">
+                <label>Application Fee Extended Fees</label>
+                <input type="number"
+                       class="form-control"
+                       th:field="*{applicationFeeExtendedFees}"
+                       value="4000">
+            </div>
+        </div>
+
+        <!-- Row 2 -->
+        <div class="row">
+            <!-- Extending Date -->
+            <div class="col-md-6 mb-3">
+                <label>Extending Date</label>
+                <input type="date"
+                       th:field="*{applicationFeeExtensionDate}"
+                       class="form-control hijrishamsi"
+                       required>
+            </div>
+
+            <!-- Expiration Date -->
+            <div class="col-md-6 mb-3">
+                <label>New Expiration Date</label>
+                <input type="date"
+                       th:field="*{applicationFeeExtentionExpirationDate}"
+                       class="form-control hijrishamsi"
+                       required>
+            </div>
+        </div>
+
+        <!-- Buttons -->
+        <button type="submit" class="btn btn-success">
+            Save Extension
+        </button>
+
+        <a th:href="@{/codes}" class="btn btn-secondary">
+            Cancel
+        </a>
+
+    </form>
+    </fieldset>
+</div>
+
+<!-- Scripts -->
+<div th:replace="scripts :: common-scripts"></div>
+<div th:replace="scripts :: persian-datepicker-scripts"></div>
+<div th:replace="scripts :: data-tables-scripts"></div>
+<div th:replace="scripts :: common-hijrishamsi-date"></div>
+
+<div style="height:10vh"></div>
+
+<footer th:replace="~{layout :: page_footer}"></footer>
+</body>
+</html>

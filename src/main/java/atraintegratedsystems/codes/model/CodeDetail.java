@@ -46,9 +46,16 @@ public class CodeDetail {
     private String applicationFeesOrganization="ATRA";
     private String applicationFeesStatus;
     private double registration_fees;
+
+    // Royalty Fees
+
     private double royalty_fees;
     private String royaltyFeesOrganization = "MCIT";
     private String royaltyFeesStatus;
+    private String royaltyFeebankVoucherNo;
+    private String royaltyFeeEnterVoucherDate;
+    private String royaltyFeeBankVoucherSubmissionDate;
+
     private double total;
 
     //Application fees
@@ -58,17 +65,25 @@ public class CodeDetail {
     private String paymentStatus;
 
     // ✅ One-to-One Relationship allow null
-    @OneToOne(
-            cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY,
-            optional = true   // ✅ allow null
-    )
+//    @OneToOne(
+//            cascade = CascadeType.ALL,
+//            fetch = FetchType.LAZY,
+//            optional = true   // ✅ allow null
+//    )
+//    @JoinColumn(
+//            name = "serial_number_id",
+//            referencedColumnName = "id",
+//            nullable = true   // ✅ allow null in DB
+//    )
+//    private ShortCodeSerialNumber serialNumber;
+
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(
             name = "serial_number_id",
-            referencedColumnName = "id",
-            nullable = true   // ✅ allow null in DB
+            unique = true
     )
     private ShortCodeSerialNumber serialNumber;
+
 
 
     public void setTotal(double total) {

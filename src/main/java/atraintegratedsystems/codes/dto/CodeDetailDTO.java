@@ -30,11 +30,25 @@ public class CodeDetailDTO {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate expiration_date;
     private double application_fees;
+    //Application fees
+    private String applicationFeebankVoucherNo;
+    private String applicationFeeEnterVoucherDate;
+    private String applicationFeebankVoucherSubmissionDate;
+
     private double registration_fees;
+
+    // Royalty Fees
     private double royalty_fees;
+    private String royaltyFeesStatus;
+    private String royaltyFeebankVoucherNo;
+    private String royaltyFeeEnterVoucherDate;
+    private String royaltyFeeBankVoucherSubmissionDate;
+
     private double total;
     private String bankVoucherNo;
     private String paymentStatus;
 
     private Long serialNumberId;
+
+
 }

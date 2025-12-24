@@ -21,9 +21,29 @@ public class CodeExtensionDetail {
     private LocalDate extendingDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate expirationDate;
-    private double extendedFees;
-    private String bankVoucherNo;
-    private String paymentStatus;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate applicationFeeExtensionDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate applicationFeeExtentionExpirationDate;
+
+    // Bellow is Application Fee Extension Fields
+    private double applicationFeeExtendedFees;
+    private String applicationFeeExtensionBankVoucherNo;
+    private String applicationFeeExtensionEnterVoucherDate;
+    private String applicationFeeExtensionBankVoucherSubmissionDate;
+
+    // Bellow is Royalty Fee Extension Fields
+    private double royaltyFeeExtendedFees;
+    private String royaltyFeeExtensionBankVoucherNo;
+    private String royaltyFeeExtensionDate;
+    private String royaltyFeeExtentionExpirationDate;
+    private String royaltyFeeExtensionEnterVoucherDate;
+    private String royaltyFeeExtensionBankVoucherSubmissionDate;
+
+    private String applicationFeeExtendedStatus;
+    private String royaltyFeeExtendedStatus;
+
 
 }
 

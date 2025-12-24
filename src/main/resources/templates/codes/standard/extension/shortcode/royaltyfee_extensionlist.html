@@ -1,0 +1,95 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<head th:replace="~{layout :: page_head}">
+  <div th:replace="styles :: data-tables-styles"></div>
+  <div th:replace="styles :: select2-styles"></div>
+  <div th:replace="styles :: common-css"></div>
+  <div th:replace="styles :: commonfieldset-with-legend-border"></div>
+  <title>Royalty Fee List</title>
+</head>
+
+<body>
+<nav th:replace="~{layout :: page_navbar}"></nav>
+
+<div class="container-fluid"
+     th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+
+  <fieldset>
+    <legend>
+      Unpaid Royalty Fees List
+    </legend>
+
+    <div class="table-container">
+      <table class="slip" id="profileTable">
+
+        <thead>
+        <tr class="bg-primary">
+          <th>ID</th>
+          <th>Short Code</th>
+          <th>Status</th>
+          <th>Source</th>
+          <th>Location</th>
+          <th>Type</th>
+          <th>Category</th>
+          <th>Channel</th>
+          <th>Email</th>
+          <th th:text="#{mcit_license_prints_tariff}">Extend</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="row : ${codes}">
+
+          <td th:text="${row[0]}"></td>
+          <td th:text="${row[1]}"></td>
+
+          <td th:text="${row[2]}"></td>
+          <td th:text="${row[3]}"></td>
+          <td th:text="${row[4]}"></td>
+          <td th:text="${row[5]}"></td>
+          <td th:text="${row[6]}"></td>
+          <td th:text="${row[7]}"></td>
+
+          <td th:text="${row[8]}">
+          </td>
+
+          <!-- Print -->
+          <td>
+            <a th:href="@{/codes/extension/create/{id}(id=${row[0]})}"
+               class="btn btn-warning btn-sm">
+              Mark as Extend
+            </a>
+
+          </td>
+
+
+        </tr>
+
+
+        </tbody>
+
+      </table>
+    </div>
+  </fieldset>
+
+  <a th:href="@{/codes}"
+     class="btn btn-primary"
+     style="margin-top:20px;">
+    ← Back to Page
+  </a>
+</div>
+
+<!-- Scripts -->
+<div th:replace="scripts :: common-scripts"></div>
+<div th:replace="scripts :: persian-datepicker-scripts"></div>
+<div th:replace="scripts :: data-tables-scripts"></div>
+<div th:replace="scripts :: common-datatable"></div>
+
+<div style="height:5vh;"></div>
+<footer th:replace="~{layout :: page_footer}"></footer>
+
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>
