@@ -1,10 +1,57 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>home</title>
+<html lang="en" th:lang="#{lang}" th:dir="${#locale.language == 'ps' ? 'rtl' : 'ltr'}"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head th:replace="~{layout :: page_head}">
+    <div th:replace="styles :: commonfieldset"></div>
+    <title>LMS</title>
+    <style>
+        h4 a {
+            color: #14438B;
+            font-size: 20px;
+        }
+    </style>
+    <div th:replace="styles :: commonfieldset"></div>
 </head>
 <body>
 
+<nav th:replace="~{layout :: page_navbar}"></nav>
+
+<div class="container mt-4">
+    <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_CODES_ADMIN','ROLE_LICENSE','ROLE_MINISTRY','ROLE_LICENSE_COMPLETION_PROFILE','ROLE_LICENSE_APPROVAL','ROLE_LICENSE_PROFILE_ENTRY','ROLE_FINANCE','ROLE_FINANCE','ROLE_TYPEOFAPPROVAL_ADMIN','ROLE_TYPEOFAPPROVAL_ATRA_FINANCE','ROLE_TYPEOFAPPROVAL_MCIT_FINANCE','ROLE_TYPEOFAPPROVAL_STANDARD','ROLE_TYPEOFAPPROVAL_ONLINE_APPLICATION')">
+        <legend>Short Codes Finance Management Section</legend>
+        <table class="table table-borderless">
+            <tr>
+                <td>
+                    <div class="custom-card" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_LICENSE','ROLE_LICENSE_COMPLETION_PROFILE','ROLE_LICENSE_APPROVAL','ROLE_LICENSE_PROFILE_ENTRY','ROLE_FINANCE','ROLE_MINISTRY')">
+                        <a th:href="@{/codes/standard/extension/applicationfeelist}">
+                            <img th:src="@{/images/shortCodeFinance.png}" alt="Short Code">
+                        </a>
+                        <h4 class="license-link" style="margin-top: 12px;">
+                            <a th:href="@{/codes/standard/extension/applicationfeelist}">Application Fee Extension</a>
+                        </h4>
+                    </div>
+                </td>
+                <td>
+                    <div class="custom-card" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_CODES_ADMIN')">
+                        <a th:href="@{/codes/standard/extension/royaltyFeelist}">
+                            <img th:src="@{/images/smsidentifiercode.png}" alt="Finance Management">
+                        </a>
+                        <h4 class="license-link" style="margin-top: 10px;">
+                            <a th:href="@{/codes/standard/extension/royaltyFeelist}">Royalty Fee Extension</a>
+                        </h4>
+                    </div>
+                </td>
+
+            </tr>
+        </table>
+    </fieldset>
+</div>
+<div th:replace="scripts :: common-scripts"></div>
+
+<div style="height:10vh;"></div>
+<footer th:replace="~{layout :: page_footer}"></footer>
+
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
 </body>
 </html>

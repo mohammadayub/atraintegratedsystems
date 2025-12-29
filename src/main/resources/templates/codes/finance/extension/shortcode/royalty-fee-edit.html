@@ -1,65 +1,86 @@
-<!DOCTYPE html>
+<!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>Edit Application Fee Voucher</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-          rel="stylesheet">
+<head th:replace="~{layout :: page_head}">
+    <meta charset="UTF-8">
+
+    <div th:replace="styles :: data-tables-styles"></div>
+    <div th:replace="styles :: select2-styles"></div>
+    <div th:replace="styles :: commonfieldset"></div>
+    <div th:replace="styles :: common-css"></div>
+    <div th:replace="styles :: persian-datepicker-styles"></div>
+    <title>Edit Royalty Fee Voucher</title>
 </head>
+
 <body>
 
-<div class="container mt-4">
+<nav th:replace="~{layout :: page_navbar}"></nav>
 
-    <h4 class="text-primary mb-4">
-        Edit Application Fee Voucher
-    </h4>
+<div class="container-fluid"
+     th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
 
-    <form th:action="@{/finance/code-extension/royalty-fee/update}"
-          method="post" class="card p-4">
+    <fieldset>
+        <legend>
+            Edit Royalty Fee Voucher
+        </legend>
 
-        <input type="hidden" name="id" th:value="${detail.id}"/>
+        <form th:action="@{/finance/code-extension/royalty-fee/update}"
+              method="post"
+              class="card p-4 shadow-sm">
 
-        <div class="mb-3">
-            <label class="form-label">Bank Voucher No</label>
-            <input type="text"
-                   name="royaltyFeeExtensionBankVoucherNo"
-                   class="form-control"
-                   th:value="${detail.royaltyFeeExtensionBankVoucherNo}"
-                   required>
-        </div>
+            <input type="hidden" name="id" th:value="${detail.id}"/>
 
-        <div class="mb-3">
-            <label class="form-label">Voucher Enter Date</label>
-            <input type="date"
-                   name="royaltyFeeExtensionEnterVoucherDate"
-                   class="form-control"
-                   th:value="${detail.royaltyFeeExtensionEnterVoucherDate}"
-                   required>
-        </div>
+            <div class="mb-3">
+                <label class="form-label">Bank Voucher No</label>
+                <input type="text"
+                       name="royaltyFeeExtensionBankVoucherNo"
+                       class="form-control"
+                       th:value="${detail.royaltyFeeExtensionBankVoucherNo}"
+                       required>
+            </div>
 
-        <div class="mb-3">
-            <label class="form-label">Voucher Submission Date</label>
-            <input type="date"
-                   name="royaltyFeeExtensionBankVoucherSubmissionDate"
-                   class="form-control"
-                   th:value="${detail.royaltyFeeExtensionBankVoucherSubmissionDate}"
-                   required>
-        </div>
+            <div class="mb-3">
+                <label class="form-label">Voucher Enter Date</label>
+                <input type="text"
+                       name="royaltyFeeExtensionEnterVoucherDate"
+                       class="form-control hijrishamsi"
+                       th:value="${detail.royaltyFeeExtensionEnterVoucherDate}"
+                       required>
+            </div>
 
-        <div class="d-flex gap-2">
-            <button type="submit" class="btn btn-success">
-                Update
-            </button>
+            <div class="mb-3">
+                <label class="form-label">Voucher Submission Date</label>
+                <input type="text"
+                       name="royaltyFeeExtensionBankVoucherSubmissionDate"
+                       class="form-control hijrishamsi"
+                       th:value="${detail.royaltyFeeExtensionBankVoucherSubmissionDate}"
+                       required>
+            </div>
 
-            <a th:href="@{/finance/code-extension/royalty-fee-extended}"
-               class="btn btn-secondary">
-                Back
-            </a>
-        </div>
+            <div class="d-flex gap-2">
+                <button type="submit" class="btn btn-success">
+                    Update
+                </button>
 
-    </form>
+                <a th:href="@{/finance/code-extension/royalty-fee-extended}"
+                   class="btn btn-secondary">
+                    Back
+                </a>
+            </div>
+
+        </form>
+    </fieldset>
 
 </div>
 
+<!-- Scripts -->
+<div th:replace="scripts :: common-scripts"></div>
+<div th:replace="scripts :: persian-datepicker-scripts"></div>
+<div th:replace="scripts :: data-tables-scripts"></div>
+<div th:replace="scripts :: common-hijrishamsi-date"></div>
+
+<div style="height:10vh"></div>
+
+<footer th:replace="~{layout :: page_footer}"></footer>
 </body>
 </html>

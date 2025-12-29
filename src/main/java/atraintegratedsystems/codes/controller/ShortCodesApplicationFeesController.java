@@ -3,26 +3,28 @@ package atraintegratedsystems.codes.controller;
 import atraintegratedsystems.codes.dto.CodeDetailDTO;
 import atraintegratedsystems.codes.model.CodeDetail;
 import atraintegratedsystems.codes.service.CodeDetailService;
+import atraintegratedsystems.codes.service.CodesDetailPaymentsConfirmationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.Arrays;
 import java.util.List;
 
 @Controller
-public class ApplicationFeesFinanceController {
+public class ShortCodesApplicationFeesController {
 
     @Autowired
     private CodeDetailService codeDetailService;
 
+    @Autowired
+    private CodesDetailPaymentsConfirmationService codesDetailPaymentsConfirmationService;
+
     @GetMapping("/codes/finance/applicationFeelist")
     public String codeSummary(Model model) {
-        List<Object[]> codes = codeDetailService.getunPaidApplicationFees();
+        List<Object[]> codes = codesDetailPaymentsConfirmationService.getunPaidApplicationFees();
         model.addAttribute("codes", codes);
         return "codes/finance/applicationfees/applicationfeeslist";
     }
@@ -47,7 +49,7 @@ public class ApplicationFeesFinanceController {
     @GetMapping("/codes/applicationfees/edit/{id}")
     public String showCodeTariff(@PathVariable Long id, Model model) {
 
-        CodeDetail codeDetail = codeDetailService
+        CodeDetail codeDetail = codesDetailPaymentsConfirmationService
                 .getUnpaidApplicationFeeForEdit(id)
                 .orElseThrow(() -> new RuntimeException("Unpaid application fee not found"));
 
@@ -91,7 +93,7 @@ public class ApplicationFeesFinanceController {
     @PostMapping("/codes/applicationfees/confirm/save")
     public String confirmPayment(CodeDetailDTO dto) {
 
-        codeDetailService.confirmApplicationFee(dto);
+        codesDetailPaymentsConfirmationService.confirmApplicationFee(dto);
 
         return "redirect:/codes/finance/applicationFeelist";
     }

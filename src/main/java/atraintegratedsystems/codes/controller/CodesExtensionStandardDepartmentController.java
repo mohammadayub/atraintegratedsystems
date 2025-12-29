@@ -5,6 +5,7 @@ import atraintegratedsystems.codes.model.CodeExtensionDetail;
 import atraintegratedsystems.codes.repository.CodeDetailRepository;
 import atraintegratedsystems.codes.service.CodeDetailService;
 import atraintegratedsystems.codes.service.CodeExtensionDetailService;
+import atraintegratedsystems.codes.service.CodesDetailPaymentsConfirmationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,15 +15,19 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Controller
-public class CodesExtensionController {
+public class CodesExtensionStandardDepartmentController {
     @Autowired
     private CodeDetailService codeDetailService;
+
+    @Autowired
+    private CodesDetailPaymentsConfirmationService codesDetailPaymentsConfirmationService;
+
 
     private final CodeExtensionDetailService extensionService;
     private final CodeDetailRepository codeDetailRepository;
 
-    public CodesExtensionController(CodeExtensionDetailService extensionService,
-                                    CodeDetailRepository codeDetailRepository) {
+    public CodesExtensionStandardDepartmentController(CodeExtensionDetailService extensionService,
+                                                      CodeDetailRepository codeDetailRepository) {
         this.extensionService = extensionService;
         this.codeDetailRepository = codeDetailRepository;
     }
@@ -30,7 +35,7 @@ public class CodesExtensionController {
 
     @GetMapping("/codes/standard/extension/royaltyFeelist")
     public String royaltyFeesExtensionList(Model model) {
-        List<Object[]> codes = codeDetailService.getUnPaidRyaltyFeesForExtension();
+        List<Object[]> codes = codesDetailPaymentsConfirmationService.getUnPaidRyaltyFeesForExtension();
         model.addAttribute("codes", codes);
         return "codes/standard/extension/shortcode/royaltyfee_extensionlist";
     }
@@ -70,7 +75,7 @@ public class CodesExtensionController {
 
     @GetMapping("/codes/standard/extension/applicationfeelist")
     public String applicationFeesExtensionList(Model model) {
-        List<Object[]> codes = codeDetailService.getUnPaidRyaltyFeesForExtension();
+        List<Object[]> codes = codesDetailPaymentsConfirmationService.getUnPaidRyaltyFeesForExtension();
         model.addAttribute("codes", codes);
         return "codes/standard/extension/shortcode/applicationfee_extensionlist";
     }

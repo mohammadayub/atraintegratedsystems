@@ -137,7 +137,7 @@ Optional<CodeDetail> findUnpaidRoyaltyFeeById(@Param("id") Long id);
 
     // Bellow is for royalty Fee Extension
 
-    @Query(value = "SELECT cd.code_detail_id,cd.short_code, cd.code_status, cd.source_used, cd.location, cd.category_type, cd.category, cd.chanel, cd.email_of_responsible_person FROM code_detail cd WHERE cd.royalty_fees_status='PAID'", nativeQuery = true)
+    @Query(value = "SELECT cd.code_detail_id,cd.short_code, cd.code_status, cd.source_used, cd.location, cd.category_type, cd.category, cd.chanel, cd.email_of_responsible_person FROM code_detail cd WHERE cd.royalty_fees_status is null", nativeQuery = true)
     List<Object[]> findUnPaidRoyaltyFeeForExtension();
 
 

@@ -3,6 +3,7 @@ package atraintegratedsystems.codes.controller;
 import atraintegratedsystems.codes.dto.CodeDetailDTO;
 import atraintegratedsystems.codes.model.CodeDetail;
 import atraintegratedsystems.codes.service.CodeDetailService;
+import atraintegratedsystems.codes.service.CodesDetailPaymentsConfirmationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,13 +14,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import java.util.List;
 
 @Controller
-public class RoyaltyFeesFinanceController {
+public class ShortCodesRoyaltyFeesController {
     @Autowired
     private CodeDetailService codeDetailService;
 
+    @Autowired
+    private CodesDetailPaymentsConfirmationService codesDetailPaymentsConfirmationService;
+
     @GetMapping("/codes/finance/royaltyFeelist")
     public String codeSummary(Model model) {
-        List<Object[]> codes = codeDetailService.getunPaidRyaltyFees();
+        List<Object[]> codes = codesDetailPaymentsConfirmationService.getunPaidRyaltyFees();
         model.addAttribute("codes", codes);
         return "codes/finance/royaltyfees/royaltyfeeslist";
     }
@@ -28,7 +32,7 @@ public class RoyaltyFeesFinanceController {
     @GetMapping("/codes/royaltyfees/edit/{id}")
     public String showCodeTariff(@PathVariable Long id, Model model) {
 
-        CodeDetail codeDetail = codeDetailService
+        CodeDetail codeDetail = codesDetailPaymentsConfirmationService
                 .getUnpaidApplicationFeeForEdit(id)
                 .orElseThrow(() -> new RuntimeException("Unpaid application fee not found"));
 
@@ -55,7 +59,7 @@ public class RoyaltyFeesFinanceController {
     @PostMapping("/codes/royaltyfees/confirm/save")
     public String confirmRoyaltyFee(CodeDetailDTO dto) {
 
-        codeDetailService.confirmRoyaltyFee(dto);
+        codesDetailPaymentsConfirmationService.confirmRoyaltyFee(dto);
 
         return "redirect:/codes/finance/royaltyFeelist";
     }

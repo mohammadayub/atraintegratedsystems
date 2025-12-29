@@ -18,7 +18,7 @@
 
 <div class="container mt-4">
   <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_CODES_ADMIN','ROLE_LICENSE','ROLE_MINISTRY','ROLE_LICENSE_COMPLETION_PROFILE','ROLE_LICENSE_APPROVAL','ROLE_LICENSE_PROFILE_ENTRY','ROLE_FINANCE','ROLE_FINANCE','ROLE_TYPEOFAPPROVAL_ADMIN','ROLE_TYPEOFAPPROVAL_ATRA_FINANCE','ROLE_TYPEOFAPPROVAL_MCIT_FINANCE','ROLE_TYPEOFAPPROVAL_STANDARD','ROLE_TYPEOFAPPROVAL_ONLINE_APPLICATION')">
-    <legend>Codes Management Section</legend>
+    <legend>Short Codes Finance Management Section</legend>
     <table class="table table-borderless">
       <tr>
         <td>
@@ -27,35 +27,54 @@
               <img th:src="@{/images/shortCodeFinance.png}" alt="Short Code">
             </a>
             <h4 class="license-link" style="margin-top: 12px;">
-              <a th:href="@{/codes/finance/applicationFeelist}">Short Code Finance</a>
+              <a th:href="@{/codes/finance/applicationFeelist}">Application Fee</a>
             </h4>
           </div>
         </td>
         <td>
           <div class="custom-card" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_CODES_ADMIN')">
-            <a th:href="@{/#}">
+            <a th:href="@{/codes/finance/royaltyFeelist}">
               <img th:src="@{/images/smsidentifiercode.png}" alt="Finance Management">
             </a>
             <h4 class="license-link" style="margin-top: 10px;">
-              <a th:href="@{/#}">SMS Identifier Code Finance</a>
+              <a th:href="@{/codes/finance/royaltyFeelist}">Royalty Fee</a>
             </h4>
           </div>
         </td>
 
-        <td>
-          <div class="custom-card" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_TYPEOFAPPROVAL_ADMIN','ROLE_TYPEOFAPPROVAL_ATRA_FINANCE','ROLE_TYPEOFAPPROVAL_MCIT_FINANCE','ROLE_TYPEOFAPPROVAL_STANDARD','ROLE_TYPEOFAPPROVAL_ONLINE_APPLICATION')">
-            <a th:href="@{/#}">
-              <img th:src="@{/images/ispcCode.png}" alt="Finance Management">
-            </a>
-            <h4 class="license-link" style="margin-top: 10px;">
-              <a th:href="@{/#}">ISPC Code Finance</a>
-            </h4>
-          </div>
-        </td>
       </tr>
     </table>
   </fieldset>
 
+
+  <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_CODES_ADMIN','ROLE_LICENSE','ROLE_MINISTRY','ROLE_LICENSE_COMPLETION_PROFILE','ROLE_LICENSE_APPROVAL','ROLE_LICENSE_PROFILE_ENTRY','ROLE_FINANCE','ROLE_FINANCE','ROLE_TYPEOFAPPROVAL_ADMIN','ROLE_TYPEOFAPPROVAL_ATRA_FINANCE','ROLE_TYPEOFAPPROVAL_MCIT_FINANCE','ROLE_TYPEOFAPPROVAL_STANDARD','ROLE_TYPEOFAPPROVAL_ONLINE_APPLICATION')">
+    <legend>Short Codes Extension Management Section</legend>
+    <table class="table table-borderless">
+      <tr>
+        <td>
+          <div class="custom-card" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_LICENSE','ROLE_LICENSE_COMPLETION_PROFILE','ROLE_LICENSE_APPROVAL','ROLE_LICENSE_PROFILE_ENTRY','ROLE_FINANCE','ROLE_MINISTRY')">
+            <a th:href="@{/finance/code-extension/application-fee-extended}">
+              <img th:src="@{/images/shortCodeFinance.png}" alt="Short Code">
+            </a>
+            <h4 class="license-link" style="margin-top: 12px;">
+              <a th:href="@{/finance/code-extension/application-fee-extended}">Application Fee Extension</a>
+            </h4>
+          </div>
+        </td>
+        <td>
+          <div class="custom-card" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_CODES_ADMIN')">
+            <a th:href="@{/finance/code-extension/royalty-fee-extended}">
+              <img th:src="@{/images/smsidentifiercode.png}" alt="Finance Management">
+            </a>
+            <h4 class="license-link" style="margin-top: 10px;">
+              <a th:href="@{/finance/code-extension/royalty-fee-extended}">Royalty Fee Extension</a>
+            </h4>
+          </div>
+        </td>
+
+      </tr>
+    </table>
+  </fieldset>
 </div>
 <div th:replace="scripts :: common-scripts"></div>
 

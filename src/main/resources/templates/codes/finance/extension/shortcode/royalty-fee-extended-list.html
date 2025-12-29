@@ -1,56 +1,91 @@
-<!DOCTYPE html>
+<!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>Application Fee Extended List</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-          rel="stylesheet">
+<head th:replace="~{layout :: page_head}">
+    <div th:replace="styles :: data-tables-styles"></div>
+    <div th:replace="styles :: common-css"></div>
+    <div th:replace="styles :: commonfieldset-with-legend-border"></div>
+    <title>Application Fee Extended List</title>
 </head>
+
 <body>
 
-<div class="container mt-4">
+<nav th:replace="~{layout :: page_navbar}"></nav>
 
-    <h4 class="mb-3 text-primary">
-        Application Fee – Extended Records
-    </h4>
+<div class="container-fluid"
+     th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
 
-    <table class="table table-bordered table-striped table-hover">
-        <thead class="table-dark">
-        <tr>
-            <th>#</th>
-            <th>Code Detail ID</th>
-            <th>Royalty Extension Date</th>
-            <th>Roaylty Expiration Date</th>
-            <th>Royalty Extended Fee</th>
-            <th>Royalty Fee BankVoucher No</th>
-            <th>Royalty Fee Bank Voucher Date</th>
-            <th>Roaylty Fee Bank Voucher Submission Date</th>
-            <th>Edit</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="item, iStat : ${extensions}">
-            <td th:text="${iStat.count}"></td>
-            <td th:text="${item.codeDetail.id}"></td>
-            <td th:text="${item.royaltyFeeExtensionDate}"></td>
-            <td th:text="${item.royaltyFeeExtentionExpirationDate}"></td>
-            <td th:text="${item.royaltyFeeExtendedFees}"></td>
-            <td th:text="${item.royaltyFeeExtensionBankVoucherNo}"></td>
-            <td th:text="${item.royaltyFeeExtensionEnterVoucherDate}"></td>
-            <td th:text="${item.royaltyFeeExtensionBankVoucherSubmissionDate}"></td>
-            <td>
-                <a class="btn btn-sm btn-primary"
-                   th:href="@{/finance/code-extension/royalty-fee/edit/{id}(id=${item.id})}">
-                    Edit
-                </a>
-            </td>
+    <fieldset>
+        <legend>
+            Royalty Fee – Extended Records
+        </legend>
 
-        </tr>
+        <div class="table-container">
+            <table class="slip" id="profileTable">
 
-        </tbody>
-    </table>
+                <thead>
+                <tr class="bg-primary">
+                    <th>#</th>
+                    <th>Code Detail ID</th>
+                    <th>Royalty Extension Date</th>
+                    <th>Royalty Expiration Date</th>
+                    <th>Royalty Extended Fee</th>
+                    <th>Royalty Fee Bank Voucher No</th>
+                    <th>Royalty Fee Bank Voucher Date</th>
+                    <th>Royalty Fee Bank Voucher Submission Date</th>
+                    <th>Edit</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr th:each="item, iStat : ${extensions}">
+
+                    <td th:text="${iStat.count}"></td>
+                    <td th:text="${item.codeDetail.id}"></td>
+                    <td th:text="${item.royaltyFeeExtensionDate}"></td>
+                    <td th:text="${item.royaltyFeeExtentionExpirationDate}"></td>
+                    <td th:text="${item.royaltyFeeExtendedFees}"></td>
+                    <td th:text="${item.royaltyFeeExtensionBankVoucherNo}"></td>
+                    <td th:text="${item.royaltyFeeExtensionEnterVoucherDate}"></td>
+                    <td th:text="${item.royaltyFeeExtensionBankVoucherSubmissionDate}"></td>
+
+                    <!-- Edit -->
+                    <td>
+                        <a class="btn btn-primary"
+                           th:href="@{/finance/code-extension/royalty-fee/edit/{id}(id=${item.id})}">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                 fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                <path d="M15.502 1.94a.5.5 0 0 1 0 .706l-1.439 1.439-2.121-2.121 1.439-1.439a.5.5 0 0 1 .707 0z"/>
+                                <path d="M14.061 4.879 9.172 9.768l-2.121-2.121 4.889-4.889z"/>
+                                <path fill-rule="evenodd"
+                                      d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
+                            </svg>
+                        </a>
+                    </td>
+
+                </tr>
+                </tbody>
+
+            </table>
+        </div>
+    </fieldset>
+
+    <a th:href="@{/codes}"
+       class="btn btn-primary"
+       style="margin-top:20px;">
+        ← Back to Page
+    </a>
 
 </div>
 
+<!-- Scripts -->
+<div th:replace="scripts :: common-scripts"></div>
+<div th:replace="scripts :: data-tables-scripts"></div>
+<div th:replace="scripts :: common-datatable"></div>
+
+<div style="height:5vh;"></div>
+<footer th:replace="~{layout :: page_footer}"></footer>
+
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
 </body>
 </html>

@@ -1,5 +1,6 @@
 package atraintegratedsystems.codes.controller;
 
+import atraintegratedsystems.codes.dto.CodeExtensionDetailDTO;
 import atraintegratedsystems.codes.model.CodeExtensionDetail;
 import atraintegratedsystems.codes.repository.CodeExtensionDetailRepository;
 import lombok.RequiredArgsConstructor;
@@ -7,12 +8,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+
 @Controller
 @RequiredArgsConstructor
-public class CodeExtensionFinanceController {
+public class ShortCodesExtensionFinanceController {
 
     private final CodeExtensionDetailRepository repository;
 
+    @GetMapping("/codes/finance/extension/home")
+    public String codeExtensionFinanceHome()
+    {
+        return "codes/finance/extension/home";
+    }
     @GetMapping("/finance/code-extension/application-fee-extended")
     public String applicationFeeExtendedList(Model model) {
         model.addAttribute(
@@ -38,23 +46,28 @@ public class CodeExtensionFinanceController {
        ====================== */
     @PostMapping("/finance/code-extension/application-fee/update")
     public String updateApplicationFee(
-            @RequestParam Long id,
-            @RequestParam String applicationFeeExtensionBankVoucherNo,
-            @RequestParam String applicationFeeExtensionEnterVoucherDate,
-            @RequestParam String applicationFeeExtensionBankVoucherSubmissionDate
+            @ModelAttribute CodeExtensionDetailDTO dto
     ) {
 
-        CodeExtensionDetail detail = repository.findById(id)
+        CodeExtensionDetail detail = repository.findById(dto.getId())
                 .orElseThrow(() -> new RuntimeException("Record not found"));
 
-        detail.setApplicationFeeExtensionBankVoucherNo(applicationFeeExtensionBankVoucherNo);
-        detail.setApplicationFeeExtensionEnterVoucherDate(applicationFeeExtensionEnterVoucherDate);
-        detail.setApplicationFeeExtensionBankVoucherSubmissionDate(applicationFeeExtensionBankVoucherSubmissionDate);
+        // UPDATE ONLY APPLICATION FEE FIELDS
+        detail.setApplicationFeeExtensionBankVoucherNo(
+                dto.getApplicationFeeExtensionBankVoucherNo()
+        );
+        detail.setApplicationFeeExtensionEnterVoucherDate(
+                dto.getApplicationFeeExtensionEnterVoucherDate()
+        );
+        detail.setApplicationFeeExtensionBankVoucherSubmissionDate(
+                dto.getApplicationFeeExtensionBankVoucherSubmissionDate()
+        );
 
         repository.save(detail);
 
         return "redirect:/finance/code-extension/application-fee-extended";
     }
+
 
 
 //   Bellow is For Royalty Fee Extension   findRoyaltyFeeExtended
@@ -83,24 +96,29 @@ public class CodeExtensionFinanceController {
        UPDATE ONLY 3 FIELDS
        ====================== */
     @PostMapping("/finance/code-extension/royalty-fee/update")
-    public String updateroyaltyFee(
-            @RequestParam Long id,
-            @RequestParam String royaltyFeeExtensionBankVoucherNo,
-            @RequestParam String royaltyFeeExtensionEnterVoucherDate,
-            @RequestParam String royaltyFeeExtensionBankVoucherSubmissionDate
+    public String updateRoyaltyFee(
+            @ModelAttribute CodeExtensionDetailDTO dto
     ) {
 
-        CodeExtensionDetail detail = repository.findById(id)
+        CodeExtensionDetail detail = repository.findById(dto.getId())
                 .orElseThrow(() -> new RuntimeException("Record not found"));
 
-        detail.setApplicationFeeExtensionBankVoucherNo(royaltyFeeExtensionBankVoucherNo);
-        detail.setApplicationFeeExtensionEnterVoucherDate(royaltyFeeExtensionEnterVoucherDate);
-        detail.setApplicationFeeExtensionBankVoucherSubmissionDate(royaltyFeeExtensionBankVoucherSubmissionDate);
+        // UPDATE ONLY ROYALTY FEE FIELDS
+        detail.setRoyaltyFeeExtensionBankVoucherNo(
+                dto.getRoyaltyFeeExtensionBankVoucherNo()
+        );
+        detail.setRoyaltyFeeExtensionEnterVoucherDate(
+                dto.getRoyaltyFeeExtensionEnterVoucherDate()
+        );
+        detail.setRoyaltyFeeExtensionBankVoucherSubmissionDate(
+                dto.getRoyaltyFeeExtensionBankVoucherSubmissionDate()
+        );
 
         repository.save(detail);
 
         return "redirect:/finance/code-extension/royalty-fee-extended";
     }
+
 
 
 
