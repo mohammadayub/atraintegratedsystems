@@ -3,7 +3,7 @@ package atraintegratedsystems.codes.controller;
 import atraintegratedsystems.codes.dto.CodeDetailDTO;
 import atraintegratedsystems.codes.model.CodeDetail;
 import atraintegratedsystems.codes.service.CodeDetailService;
-import atraintegratedsystems.codes.service.CodesDetailPaymentsConfirmationService;
+import atraintegratedsystems.codes.service.ShortCodesDetailPaymentsConfirmationFinanceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,13 +14,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import java.util.List;
 
 @Controller
-public class ShortCodesApplicationFeesController {
+public class ShortCodesApplicationFeesFinanceController {
 
     @Autowired
     private CodeDetailService codeDetailService;
 
     @Autowired
-    private CodesDetailPaymentsConfirmationService codesDetailPaymentsConfirmationService;
+    private ShortCodesDetailPaymentsConfirmationFinanceService codesDetailPaymentsConfirmationService;
 
     @GetMapping("/codes/finance/applicationFeelist")
     public String codeSummary(Model model) {
