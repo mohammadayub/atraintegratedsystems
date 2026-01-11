@@ -2,7 +2,7 @@
 <html lang="en" th:lang="#{lang}" th:dir="${#locale.language == 'ps' ? 'rtl' : 'ltr'}"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
-<head th:replace="~{layout :: page_head}">
+<head th:replace="~{codes_layout :: page_head}">
     <div th:replace="styles :: commonfieldset"></div>
     <title>LMS</title>
     <style>
@@ -14,7 +14,7 @@
 </head>
 <body>
 <div th:replace="styles :: commonfieldset"></div>
-<nav th:replace="~{layout :: page_navbar}"></nav>
+<nav th:replace="~{codes_layout :: page_navbar}"></nav>
 
 <div class="container mt-4">
     <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_CODES_ADMIN','ROLE_LICENSE','ROLE_MINISTRY','ROLE_LICENSE_COMPLETION_PROFILE','ROLE_LICENSE_APPROVAL','ROLE_LICENSE_PROFILE_ENTRY','ROLE_FINANCE','ROLE_FINANCE','ROLE_TYPEOFAPPROVAL_ADMIN','ROLE_TYPEOFAPPROVAL_ATRA_FINANCE','ROLE_TYPEOFAPPROVAL_MCIT_FINANCE','ROLE_TYPEOFAPPROVAL_STANDARD','ROLE_TYPEOFAPPROVAL_ONLINE_APPLICATION')">
@@ -120,7 +120,7 @@
 <div th:replace="scripts :: common-scripts"></div>
 
 <div style="height:10vh;"></div>
-<footer th:replace="~{layout :: page_footer}"></footer>
+<footer th:replace="~{codes_layout :: page_footer}"></footer>
 
 <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
 </body>

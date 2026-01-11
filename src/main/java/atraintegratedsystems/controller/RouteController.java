@@ -113,4 +113,10 @@ public class RouteController {
     {
         return "codes/finance/home";
     }
+
+    @GetMapping("/codes/finance/extension/home")
+    public String shortCodeFinanceExtensionHome()
+    {
+        return "codes/finance/extension/home";
+    }
 }

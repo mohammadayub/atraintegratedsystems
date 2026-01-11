@@ -41,6 +41,13 @@ public class CodeDetail {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate expiration_date;
 
+
+    // Short Code Rejection Section
+    private String shortCodeRejectionStatus;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate shortCodeRejectionDate;
+
+
     // Finance Fees Section
     private double application_fees;
     private String applicationFeesOrganization="ATRA";

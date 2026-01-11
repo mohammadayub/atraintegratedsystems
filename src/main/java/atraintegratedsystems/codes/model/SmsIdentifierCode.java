@@ -2,15 +2,33 @@ package atraintegratedsystems.codes.model;
 
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 
 @Entity
 @Data
 public class SmsIdentifierCode {
 
     @Id
-    @Column(name="sms_identifier_code",unique = true)
-    private int id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
+    @NotNull
+    @Column(unique = true)
+    private String smsIdentifierCodeName;
+
+    private String assignStatus;
+
+    private LocalDate EnteredDate=LocalDate.now();
+
+    // RelationShips
+
+    // One-to-One relationship
+    @OneToOne(mappedBy = "smsIdentifierCode",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY,
+            orphanRemoval = true)
+    private SmsIdentifierDetail smsIdentifierDetail;
+
 }

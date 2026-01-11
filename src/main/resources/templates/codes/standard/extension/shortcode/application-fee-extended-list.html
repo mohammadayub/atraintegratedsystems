@@ -1,0 +1,90 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{codes_layout :: page_head}">
+  <title>Application Fee Extended List</title>
+
+  <div th:replace="styles :: data-tables-styles"></div>
+  <div th:replace="styles :: common-css"></div>
+  <div th:replace="styles :: commonfieldset-with-legend-border"></div>
+</head>
+
+<body>
+
+<nav th:replace="~{codes_layout :: page_navbar}"></nav>
+
+<div class="container-fluid"
+     th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+
+  <fieldset>
+    <legend>Application Fee – Extended Records</legend>
+
+    <div class="table-container">
+      <table class="slip table table-bordered table-striped"
+             id="profileTable"
+             style="width:100%">
+
+        <thead>
+        <tr class="bg-primary text-white">
+          <th>#</th>
+          <th>Code Detail ID</th>
+          <th>Short Code</th>
+          <th>Status</th>
+          <th>Source</th>
+          <th>Location</th>
+          <th>Category Type</th>
+          <th>Category</th>
+          <th>Channel</th>
+          <th>Email</th>
+          <th>Extend</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="row, iStat : ${extensions}">
+
+          <td th:text="${iStat.count}">1</td>
+          <td th:text="${row[0]}">ID</td>
+          <td th:text="${row[1]}">Short Code</td>
+          <td th:text="${row[2]}">Status</td>
+          <td th:text="${row[3]}">Source</td>
+          <td th:text="${row[4]}">Location</td>
+          <td th:text="${row[5]}">Category Type</td>
+          <td th:text="${row[6]}">Category</td>
+          <td th:text="${row[7]}">Channel</td>
+          <td th:text="${row[8]}">Email</td>
+
+          <!-- Action -->
+          <td class="text-center">
+            <a class="btn btn-warning btn-sm"
+               th:href="@{/finance/code-extension/application-fee/create/{id}(id=${row[0]})}">
+              Extend
+            </a>
+          </td>
+
+        </tr>
+        </tbody>
+
+      </table>
+    </div>
+  </fieldset>
+
+  <a th:href="@{/codes}"
+     class="btn btn-primary mt-3">
+    ← Back to Page
+  </a>
+
+</div>
+
+<!-- Scripts -->
+<div th:replace="scripts :: common-scripts"></div>
+<div th:replace="scripts :: data-tables-scripts"></div>
+<div th:replace="scripts :: common-datatable"></div>
+
+<div style="height:10vh;"></div>
+<footer th:replace="~{codes_layout :: page_footer}"></footer>
+
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+
+</body>
+</html>

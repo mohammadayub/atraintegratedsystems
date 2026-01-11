@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import javax.transaction.Transactional;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -137,12 +138,52 @@ Optional<CodeDetail> findUnpaidRoyaltyFeeById(@Param("id") Long id);
 
     // Bellow is for royalty Fee Extension
 
-    @Query(value = "SELECT cd.code_detail_id,cd.short_code, cd.code_status, cd.source_used, cd.location, cd.category_type, cd.category, cd.chanel, cd.email_of_responsible_person FROM code_detail cd WHERE cd.royalty_fees_status is null", nativeQuery = true)
-    List<Object[]> findUnPaidRoyaltyFeeForExtension();
+//    @Query(value = "SELECT * FROM code_detail cd WHERE cd.royalty_fees_status='PAID'", nativeQuery = true)
+//    List<Object[]> findUnPaidRoyaltyFeeForExtension();
+@Query(
+        value =
+                "SELECT " +
+                        " cd.code_detail_id, " +              // row[0]
+                        " cd.short_code, " +                  // row[1]
+                        " cd.royalty_fees_status, " +         // row[2]
+                        " cd.source_used, " +                 // row[3]
+                        " cd.location, " +                    // row[4]
+                        " cd.category_type, " +               // row[5]
+                        " cd.category, " +                    // row[6]
+                        " cd.chanel, " +                      // row[7]
+                        " cd.email_of_responsible_person " +  // row[8]
+                        "FROM code_detail cd " +
+                        "WHERE cd.royalty_fees_status = 'PAID'",
+        nativeQuery = true
+)
+List<Object[]> findUnPaidRoyaltyFeeForExtension();
+
 
 
     // Bellow is Application Fee Extension
     @Query(value = "SELECT cd.code_detail_id,cd.short_code, cd.code_status, cd.source_used, cd.location, cd.category_type, cd.category, cd.chanel, cd.email_of_responsible_person FROM code_detail cd WHERE cd.application_fees_status='PAID'", nativeQuery = true)
     List<Object[]> findUnPaidApplicationFeeForExtension();
+
+
+    // Bellow is For Short Code Rejection
+
+    @Modifying
+    @Transactional
+    @Query(
+            "UPDATE CodeDetail c " +
+                    "SET c.shortCodeRejectionStatus = :status, " +
+                    "    c.shortCodeRejectionDate = :date, " +
+                    "    c.codeStatus = 'REJECTED' " +
+                    "WHERE c.id = :id"
+    )
+    int rejectShortCode(
+            @Param("id") Long id,
+            @Param("status") String status,
+            @Param("date") LocalDate date
+    );
+
+
+
+
 
 }

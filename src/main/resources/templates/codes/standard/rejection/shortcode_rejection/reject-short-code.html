@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{codes_layout :: page_head}">
+    <title>Reject Short Code</title>
+</head>
+
+<body>
+
+<nav th:replace="~{codes_layout :: page_navbar}"></nav>
+
+<div class="container mt-4">
+    <fieldset>
+        <legend class="text-center">Reject Short Code</legend>
+
+        <form th:action="@{/codes/standard/shortcodes_details/reject/{id}(id=${codeDetail.id})}"
+              method="post"
+              th:object="${dto}">
+
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label>Short Code</label>
+                    <input class="form-control" th:value="${codeDetail.shortCode}" disabled>
+                </div>
+
+                <div class="col-md-6">
+                    <label>Rejection Status</label>
+                    <select class="form-control"
+                            th:field="*{shortCodeRejectionStatus}" required>
+                        <option value="">-- Select --</option>
+                        <option value="REJECTED">Rejected</option>
+                        <option value="CANCELLED">Cancelled</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label>Rejection Date</label>
+                    <input type="date"
+                           class="form-control"
+                           th:field="*{shortCodeRejectionDate}" required>
+                </div>
+            </div>
+
+            <div class="text-end">
+                <button class="btn btn-danger">Reject Short Code</button>
+                <a th:href="@{/codes/standard/shortcodes_details/list}"
+                   class="btn btn-secondary">
+                    Cancel
+                </a>
+            </div>
+
+        </form>
+    </fieldset>
+</div>
+
+<footer th:replace="~{codes_layout :: page_footer}"></footer>
+</body>
+</html>

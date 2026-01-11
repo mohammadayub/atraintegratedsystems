@@ -32,6 +32,7 @@ public class CodeExtensionDetailDTO {
     private LocalDate applicationFeeExtensionEnterVoucherDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate applicationFeeExtensionBankVoucherSubmissionDate;
+    private String applicationFeeExtensionPaymentStatus;
 
     // Bellow is Royalty Fee Extension Fields
     private double royaltyFeeExtendedFees;
@@ -44,6 +45,7 @@ public class CodeExtensionDetailDTO {
     private LocalDate royaltyFeeExtensionEnterVoucherDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate royaltyFeeExtensionBankVoucherSubmissionDate;
+    private String royaltyFeeExtensionPaymentStatus;
 
     private String applicationFeeExtendedStatus;
     private String royaltyFeeExtendedStatus;

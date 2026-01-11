@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 
-<head th:replace="~{layout :: page_head}">
+<head th:replace="~{codes_layout :: page_head}">
     <title>Telecom Short Code Management System</title>
 
     <!-- Google Font -->
@@ -80,7 +80,7 @@
 <body>
 
 <!-- Navbar -->
-<nav th:replace="~{layout :: page_navbar}"></nav>
+<nav th:replace="~{codes_layout :: page_navbar}"></nav>
 
 <!-- Main Content -->
 <div class="container-fluid"
@@ -142,6 +142,7 @@
                     <th>Payment Status</th>
                     <th>Update</th>
                     <th>Release</th>
+                    <th>Rejection</th>
                 </tr>
                 </thead>
 
@@ -191,6 +192,12 @@
                             </button>
                         </form>
                     </td>
+                    <td>
+                        <a th:href="@{/codes/standard/shortcodes_details/reject/{id}(id=${codeDetail.id})}"
+                           class="btn btn-danger btn-sm">
+                            ❌ Reject
+                        </a>
+                    </td>
                 </tr>
                 </tbody>
 
@@ -213,6 +220,6 @@
     new DataTable('#example');
 </script>
 
-<footer th:replace="~{layout :: page_footer}"></footer>
+<footer th:replace="~{codes_layout :: page_footer}"></footer>
 </body>
 </html>

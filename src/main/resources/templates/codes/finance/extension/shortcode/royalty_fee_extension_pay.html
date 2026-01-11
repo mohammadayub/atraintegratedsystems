@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{codes_layout :: page_head}">
+  <meta charset="UTF-8">
+
+  <div th:replace="styles :: common-css"></div>
+  <div th:replace="styles :: commonfieldset"></div>
+  <div th:replace="styles :: persian-datepicker-styles"></div>
+
+  <title>Pay Royalty Fee Extension</title>
+</head>
+
+<body>
+
+<nav th:replace="~{codes_layout :: page_navbar}"></nav>
+
+<div class="container-fluid mt-4"
+     th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+
+  <fieldset>
+    <legend>
+      Royalty Fee Extension Payment
+    </legend>
+
+    <form th:action="@{/royalty-fee-extension/pay}"
+          th:object="${extension}"
+          method="post">
+
+      <!-- Hidden ID -->
+      <input type="hidden" th:field="*{id}"/>
+
+      <div class="row">
+
+        <!-- Expiration Date -->
+        <div class="col-md-4 form-group">
+          <label>Expiration Date</label>
+          <input type="text"
+                 class="form-control hijrishamsi"
+                 th:field="*{royaltyFeeExtentionExpirationDate}" required>
+        </div>
+
+        <!-- Entry Voucher Date -->
+        <div class="col-md-4 form-group">
+          <label>Entry Voucher Date</label>
+          <input type="text"
+                 class="form-control hijrishamsi"
+                 th:field="*{royaltyFeeExtensionEnteryVoucherDate}" required>
+        </div>
+
+        <!-- Submission Date -->
+        <div class="col-md-4 form-group">
+          <label>Submission Date</label>
+          <input type="text"
+                 class="form-control hijrishamsi"
+                 th:field="*{royaltyFeeExtensionBankVoucherSubmissionDate}" required>
+        </div>
+
+      </div>
+
+      <!-- Buttons -->
+      <div class="col-md-4 btn-group d-flex justify-content-center"
+           style="margin-top: 15px; margin-bottom:80px; margin:0 auto;">
+
+        <button type="submit"
+                class="btn btn-primary btn-sm"
+                style="width: 140px;">
+          Confirm Payment
+        </button>
+
+        <a th:href="@{/royalty-fee-extension/unpaid}"
+           class="btn btn-secondary btn-sm ms-2"
+           style="width: 140px;">
+          Cancel
+        </a>
+
+      </div>
+
+    </form>
+  </fieldset>
+
+</div>
+
+<!-- Scripts -->
+<div th:replace="scripts :: common-scripts"></div>
+<div th:replace="scripts :: persian-datepicker-scripts"></div>
+<div th:replace="scripts :: common-hijrishamsi-date"></div>
+
+<div style="height:10vh;"></div>
+
+<footer th:replace="~{codes_layout :: page_footer}"></footer>
+
+</body>
+</html>

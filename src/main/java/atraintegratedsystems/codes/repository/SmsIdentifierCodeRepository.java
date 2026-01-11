@@ -1,28 +1,20 @@
 package atraintegratedsystems.codes.repository;
+
 import atraintegratedsystems.codes.model.SmsIdentifierCode;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
-public interface SmsIdentifierCodeRepository extends JpaRepository<SmsIdentifierCode,Integer> {
+@Repository
+public interface SmsIdentifierCodeRepository extends JpaRepository<SmsIdentifierCode, Long> {
 
-    @Query(value = "SELECT sms_identifier_code.sms_identifier_code, " +
-            "CONCAT(sms_identifier_code.sms_identifier_code, ' - ', " +
-            "CASE " +
-            "WHEN sms_identifier_detail.sms_identifier_code IS NULL THEN 'unassigned' " +
-            "ELSE 'assign' " +
-            "END) AS SMSIdentifierCode " +
-            "FROM sms_identifier_code " +
-            "LEFT JOIN sms_identifier_detail ON sms_identifier_code.sms_identifier_code = sms_identifier_detail.sms_identifier_code",
-            nativeQuery = true)
-    List<Object[]> getSMSIdentifiersWithStatus();
+    boolean existsBySmsIdentifierCodeName(String smsIdentifierCodeName);
 
+    Optional<SmsIdentifierCode> findBySmsIdentifierCodeName(String smsIdentifierCodeName);
 
-    @Query(value = "SELECT sms_identifier_code.sms_identifier_code,  " +
-            "       CASE WHEN sms_identifier_detail.sms_identifier_code IS NULL THEN 'unassigned' ELSE 'assign' END AS assignment " +
-            "FROM sms_identifier_code " +
-            "LEFT JOIN sms_identifier_detail ON sms_identifier_code.sms_identifier_code = sms_identifier_detail.sms_identifier_code", nativeQuery = true)
-    List<Object[]> getCodeData();
+    // ✅ Get all records where assignStatus IS NULL
+    List<SmsIdentifierCode> findByAssignStatusIsNullOrAssignStatusEquals(String status);
 
 }

@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 
-<head th:replace="~{layout :: page_head}">
+<head th:replace="~{codes_layout :: page_head}">
     <meta charset="UTF-8">
 
     <div th:replace="styles :: data-tables-styles"></div>
@@ -16,7 +16,7 @@
 
 <body>
 
-<nav th:replace="~{layout :: page_navbar}"></nav>
+<nav th:replace="~{codes_layout :: page_navbar}"></nav>
 
 <div class="container-fluid mt-4"
      th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
@@ -105,7 +105,7 @@
 
 <div style="height:10vh"></div>
 
-<footer th:replace="~{layout :: page_footer}"></footer>
+<footer th:replace="~{codes_layout :: page_footer}"></footer>
 
 </body>
 </html>

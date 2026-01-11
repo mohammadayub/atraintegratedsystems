@@ -1,0 +1,109 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{codes_layout :: page_head}">
+  <title>Royalty Fee Extension</title>
+  <div th:replace="styles :: common-css"></div>
+  <div th:replace="styles :: commonfieldset"></div>
+  <div th:replace="styles :: persian-datepicker-styles"></div>
+</head>
+
+<body>
+
+<nav th:replace="~{codes_layout :: page_navbar}"></nav>
+
+<div class="container mt-4">
+  <fieldset>
+    <legend>Royalty Fee Extension</legend>
+
+    <form th:action="@{/finance/code-extension/royalty-fee/save/{id}(id=${codeDetailId})}"
+          th:object="${extension}"
+          method="post">
+      <div class="mb-3">
+        <label>Extension Date</label>
+        <input type="text"
+               class="form-control hijrishamsi"
+               id="extensionDate"
+               th:field="*{royaltyFeeExtensionDate}">
+      </div>
+
+      <div class="mb-3">
+        <label>Expiration Date</label>
+        <input type="text"
+               class="form-control hijrishamsi"
+               th:field="*{royaltyFeeExtentionExpirationDate}">
+      </div>
+      <div class="mb-3">
+        <label>Extended Royalty Fee</label>
+        <input type="number"
+               class="form-control"
+               th:field="*{royaltyFeeExtendedFees}"
+               id="extendedFees"
+               readonly
+               required>
+      </div>
+
+
+      <!-- 🔒 SYSTEM VALUES (NOT SHOWN TO USER) -->
+      <input type="hidden" th:field="*{extendStatus}">
+      <input type="hidden" th:field="*{extendDate}">
+
+      <button type="submit"
+              class="btn btn-success">
+        Save Extension
+      </button>
+
+      <a th:href="@{/codes/finance/royalty-fee/list}"
+         class="btn btn-secondary">
+        Cancel
+      </a>
+
+    </form>
+  </fieldset>
+</div>
+
+<div th:replace="scripts :: common-scripts"></div>
+<div th:replace="scripts :: persian-datepicker-scripts"></div>
+<div th:replace="scripts :: common-hijrishamsi-date"></div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+
+      const extensionDateInput = document.getElementById("extensionDate");
+      const extendedFeesInput = document.getElementById("extendedFees");
+
+      const referenceDate = "1392-02-26";
+
+      function updateExtendedFee() {
+          let selectedDate = extensionDateInput.value;
+
+          if (!selectedDate) {
+              extendedFeesInput.value = "";
+              return;
+          }
+
+          // Normalize Persian date format: 1392/02/26 → 1392-02-26
+          selectedDate = selectedDate.replaceAll("/", "-");
+
+          // Compare as string (yyyy-mm-dd)
+          if (selectedDate > referenceDate) {
+              extendedFeesInput.value = 4000;
+          } else {
+              extendedFeesInput.value = 2000;
+          }
+      }
+
+      // Persian datepicker usually fires input, not change
+      extensionDateInput.addEventListener("input", updateExtendedFee);
+      extensionDateInput.addEventListener("change", updateExtendedFee);
+
+      // Run once if value already exists (edit mode)
+      updateExtendedFee();
+  });
+</script>
+
+
+<div style="height:10vh;"></div>
+<footer th:replace="~{codes_layout :: page_footer}"></footer>
+</body>
+</html>

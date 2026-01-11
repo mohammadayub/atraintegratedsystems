@@ -30,6 +30,12 @@ public class CodeDetailDTO {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate expiration_date;
     private double application_fees;
+
+    // Short Code Rejection Section
+    private String shortCodeRejectionStatus;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate shortCodeRejectionDate;
+
     //Application fees
     private String applicationFeebankVoucherNo;
     private String applicationFeeEnterVoucherDate;

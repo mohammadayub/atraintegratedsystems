@@ -1,0 +1,92 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{codes_layout :: page_head}">
+    <div th:replace="styles :: data-tables-styles"></div>
+    <div th:replace="styles :: common-css"></div>
+    <div th:replace="styles :: commonfieldset-with-legend-border"></div>
+    <title>Application Fee Extended List</title>
+</head>
+
+<body>
+
+<nav th:replace="~{codes_layout :: page_navbar}"></nav>
+
+<div class="container-fluid"
+     th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+
+    <fieldset>
+        <legend>
+            Royalty Fee – Extended Records
+        </legend>
+
+        <div class="table-container">
+            <table class="slip table table-bordered table-striped"
+                   id="profileTable"
+                   style="width:100%">
+
+                <thead>
+                <tr class="bg-primary text-white">
+                    <th>#</th>
+                    <th>Code Detail ID</th>
+                    <th>Short Code</th>
+                    <th>Royalty Fee Status</th>
+                    <th>Source</th>
+                    <th>Location</th>
+                    <th>Category Type</th>
+                    <th>Category</th>
+                    <th>Channel</th>
+                    <th>Email</th>
+                    <th>Extend</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr th:each="row, iStat : ${extensions}">
+
+                    <td th:text="${iStat.count}"></td>
+                    <td th:text="${row[0]}"></td> <!-- Code Detail ID -->
+                    <td th:text="${row[1]}"></td> <!-- Short Code -->
+                    <td th:text="${row[2]}"></td> <!-- Royalty Fee Status -->
+                    <td th:text="${row[3]}"></td> <!-- Source -->
+                    <td th:text="${row[4]}"></td> <!-- Location -->
+                    <td th:text="${row[5]}"></td> <!-- Category Type -->
+                    <td th:text="${row[6]}"></td> <!-- Category -->
+                    <td th:text="${row[7]}"></td> <!-- Channel -->
+                    <td th:text="${row[8]}"></td> <!-- Email -->
+
+                    <td class="text-center">
+                        <a class="btn btn-warning btn-sm"
+                           th:href="@{/finance/code-extension/royalty-fee/create/{id}(id=${row[0]})}">
+                            Extend
+                        </a>
+
+                    </td>
+
+                </tr>
+                </tbody>
+
+
+            </table>
+        </div>
+    </fieldset>
+
+    <a th:href="@{/codes}"
+       class="btn btn-primary"
+       style="margin-top:20px;">
+        ← Back to Page
+    </a>
+
+</div>
+
+<!-- Scripts -->
+<div th:replace="scripts :: common-scripts"></div>
+<div th:replace="scripts :: data-tables-scripts"></div>
+<div th:replace="scripts :: common-datatable"></div>
+
+<div style="height:5vh;"></div>
+<footer th:replace="~{codes_layout :: page_footer}"></footer>
+
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

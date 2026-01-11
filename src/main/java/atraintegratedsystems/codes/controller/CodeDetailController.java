@@ -124,7 +124,7 @@ public class CodeDetailController {
         // ---------- SERIAL NUMBER (ONLY ID STORED) ----------
         // ---------- SERIAL NUMBER (ONLY ID STORED + AUTO ASSIGN STATUS) ----------
         if (dto.getSerialNumberId() != null) {
-
+ 
             ShortCodeSerialNumber serial =
                     shortCodeSerialNumberService.findById(dto.getSerialNumberId());
 
