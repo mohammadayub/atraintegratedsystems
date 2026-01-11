@@ -20,7 +20,7 @@ public class SmsIdentifierCode {
 
     private String assignStatus;
 
-    private LocalDate EnteredDate=LocalDate.now();
+    private LocalDate enteredDate=LocalDate.now();
 
     // RelationShips
 

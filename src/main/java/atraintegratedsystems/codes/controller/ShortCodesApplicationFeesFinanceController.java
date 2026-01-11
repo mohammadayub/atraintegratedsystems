@@ -29,23 +29,6 @@ public class ShortCodesApplicationFeesFinanceController {
         return "codes/finance/applicationfees/applicationfeeslist";
     }
 
-    // ✅ TARIFF PAGE
-//    @GetMapping("/tariff/{id}")
-//    public String showTariff(@PathVariable Long id, Model model) {
-//
-//        Object[] fee = codeDetailService.getApplicationFeeTariff(id);
-//
-//        // LOG IT (important)
-//        System.out.println("TARIFF DATA = " + Arrays.toString(fee));
-//
-//        if (fee == null) {
-//            model.addAttribute("error", "Tariff not found");
-//            return "codes/finance/applicationfees/applicationfee_tariff";
-//        }
-//
-//        model.addAttribute("fee", fee);
-//        return "codes/finance/applicationfees/applicationfee_tariff";
-//    }
     @GetMapping("/codes/applicationfees/edit/{id}")
     public String showCodeTariff(@PathVariable Long id, Model model) {
 
@@ -56,8 +39,6 @@ public class ShortCodesApplicationFeesFinanceController {
         model.addAttribute("codeDetail", codeDetail);
         return "codes/finance/applicationfees/applicationfee_tariff";
     }
-
-
 
     // confirmation section
 
@@ -72,23 +53,6 @@ public class ShortCodesApplicationFeesFinanceController {
         return "codes/finance/applicationfees/applicationfee_confirm";
     }
 
-//    @PostMapping("/codes/applicationfees/confirm/save")
-//    public String confirmPayment(
-//            @RequestParam Long id,
-//            @RequestParam String applicationFeebankVoucherNo,
-//            @RequestParam String applicationFeeEnterVoucherDate,
-//            @RequestParam String applicationFeebankVoucherSubmissionDate
-//    ) {
-//
-//        codeDetailService.confirmApplicationFee(
-//                id,
-//                applicationFeebankVoucherNo,
-//                applicationFeeEnterVoucherDate,
-//                applicationFeebankVoucherSubmissionDate
-//        );
-//
-//        return "redirect:/codes/finance/applicationFeelist";
-//    }
 
     @PostMapping("/codes/applicationfees/confirm/save")
     public String confirmPayment(CodeDetailDTO dto) {

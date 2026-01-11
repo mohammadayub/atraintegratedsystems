@@ -17,7 +17,7 @@ public class SmsIdentifierRoyaltyFeesExtension {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate royaltyFeeExtensionStartDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate royaltyFeeExtentionExpirationDate;
+    private LocalDate royaltyFeeExtensionExpirationDate;
     @Column(name="extend_status")
     private String extendStatus;
     @Column(name="extend_Date")
@@ -27,7 +27,7 @@ public class SmsIdentifierRoyaltyFeesExtension {
     private double royaltyFeeExtendedFees;
     private String royaltyFeeExtensionBankVoucherNo;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate royaltyFeeExtensionEnteryVoucherDate;
+    private LocalDate royaltyFeeExtensionEntryVoucherDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate royaltyFeeExtensionBankVoucherSubmissionDate;
     private String royaltyFeeExtensionPaymentStatus;

@@ -1,8 +1,5 @@
 package atraintegratedsystems.codes.model;
-
-
 import atraintegratedsystems.licenses.model.LicenseApplicant;
-import atraintegratedsystems.licenses.model.LicenseType;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
@@ -55,42 +52,28 @@ public class CodeDetail {
     private double registration_fees;
 
     // Royalty Fees
-
     private double royalty_fees;
     private String royaltyFeesOrganization = "MCIT";
     private String royaltyFeesStatus;
     private String royaltyFeebankVoucherNo;
     private String royaltyFeeEnterVoucherDate;
     private String royaltyFeeBankVoucherSubmissionDate;
-
     private double total;
 
     //Application fees
     private String applicationFeebankVoucherNo;
-    private String applicationFeeEnterVoucherDate;
-    private String applicationFeebankVoucherSubmissionDate;
+    private LocalDate applicationFeeEnterVoucherDate;
+    private LocalDate applicationFeebankVoucherSubmissionDate;
     private String paymentStatus;
 
-    // ✅ One-to-One Relationship allow null
-//    @OneToOne(
-//            cascade = CascadeType.ALL,
-//            fetch = FetchType.LAZY,
-//            optional = true   // ✅ allow null
-//    )
-//    @JoinColumn(
-//            name = "serial_number_id",
-//            referencedColumnName = "id",
-//            nullable = true   // ✅ allow null in DB
-//    )
-//    private ShortCodeSerialNumber serialNumber;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(
             name = "serial_number_id",
             unique = true
     )
-    private ShortCodeSerialNumber serialNumber;
 
+    private ShortCodeSerialNumber serialNumber;
 
 
     public void setTotal(double total) {

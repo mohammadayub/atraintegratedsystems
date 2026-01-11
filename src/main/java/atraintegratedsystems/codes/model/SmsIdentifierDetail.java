@@ -17,14 +17,14 @@ public class SmsIdentifierDetail {
     private Long id;
 
     private String companyName;
-    private String eid;
+    private String enid;
     private String companyAddress;
     private String mobile;
     private String telephone;
     private String email;
     private String channel;
     private String serviceType;
-    private String MNOsCompanyHost;
+    private String mnosCompanyHost;
     private String codeCategory="Golden";
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate assigningDate;
