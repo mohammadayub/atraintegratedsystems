@@ -4,10 +4,13 @@ import atraintegratedsystems.codes.dto.CodeDetailDTO;
 import atraintegratedsystems.codes.model.CodeDetail;
 import atraintegratedsystems.codes.repository.CodeDetailRepository;
 import atraintegratedsystems.codes.repository.CodeRepository;
+import atraintegratedsystems.utils.DateConverter;
+import atraintegratedsystems.utils.PersianCalendarUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,64 +27,61 @@ public class ShortCodesDetailPaymentsConfirmationFinanceService {
         return codeDetailRepository.findunPaidApplicationFee();
     }
 
-    // application fee tariff related
-
-//    public Object[] getApplicationFeeTariff(Long id) {
-//        Object result = codeDetailRepository.findApplicationFeeById(id);
-//        return result != null ? (Object[]) result : null;
-//    }
-
-    //    public Object[] getApplicationFeeTariff(Long id) {
-//        return codeDetailRepository.findApplicationFeeById(id);
-//    }
 // ✅ Load unpaid application fee for edit
     public Optional<CodeDetail> getUnpaidApplicationFeeForEdit(Long id) {
         return codeDetailRepository.findUnpaidApplicationFeeById(id);
     }
 
-    // Confirm application fee
-
-//    @Transactional
-//    public boolean confirmApplicationFee(
-//            Long id,
-//            String voucherNo,
-//            String submissionDate
-//    ) {
-//        int updated = codeDetailRepository.confirmApplicationFeePayment(
-//                id,
-//                voucherNo,
-//                submissionDate
-//        );
-//        return updated > 0;
-//    }
-//@Transactional
-//public boolean confirmApplicationFee(
-//        Long id,
-//        String voucherNo,
-//        String enterDate,
-//        String submissionDate
-//) {
-//    int updated = codeDetailRepository.confirmApplicationFeePayment(
-//            id,
-//            voucherNo,
-//            enterDate,
-//            submissionDate
-//    );
-//    return updated > 0;
-//}
 
     @Transactional
     public boolean confirmApplicationFee(CodeDetailDTO dto) {
 
-        int updated = codeDetailRepository.confirmApplicationFeePayment(
-                dto.getId(),
-                dto.getApplicationFeebankVoucherNo(),
-                dto.getApplicationFeeEnterVoucherDate(),
-                dto.getApplicationFeebankVoucherSubmissionDate()
-        );
+        CodeDetail codeDetail = codeDetailRepository.findById(dto.getId())
+                .orElseThrow(() -> new IllegalArgumentException(
+                        "Invalid code ID: " + dto.getId()));
 
-        return updated > 0;
+        PersianCalendarUtils converter = new PersianCalendarUtils();
+
+        // ===== Entry Voucher Date (Jalali → Gregorian) =====
+        if (dto.getApplicationFeeEnterVoucherDateJalali() != null &&
+                !dto.getApplicationFeeEnterVoucherDateJalali().isEmpty()) {
+
+            String[] partsEntry = dto.getApplicationFeeEnterVoucherDateJalali().split("-");
+            int jYear = Integer.parseInt(partsEntry[0]);
+            int jMonth = Integer.parseInt(partsEntry[1]);
+            int jDay = Integer.parseInt(partsEntry[2]);
+
+            LocalDate enterVoucherDate =
+                    converter.jalaliToGregorian(jYear, jMonth, jDay);
+
+            codeDetail.setApplicationFeeEnterVoucherDate(enterVoucherDate);
+        }
+
+        // ===== Submission Date (Jalali → Gregorian) =====
+        if (dto.getApplicationFeebankVoucherSubmissionDateJalali() != null &&
+                !dto.getApplicationFeebankVoucherSubmissionDateJalali().isEmpty()) {
+
+            String[] partsSubmission =
+                    dto.getApplicationFeebankVoucherSubmissionDateJalali().split("-");
+            int jYearSub = Integer.parseInt(partsSubmission[0]);
+            int jMonthSub = Integer.parseInt(partsSubmission[1]);
+            int jDaySub = Integer.parseInt(partsSubmission[2]);
+
+            LocalDate submissionDate =
+                    converter.jalaliToGregorian(jYearSub, jMonthSub, jDaySub);
+
+            codeDetail.setApplicationFeebankVoucherSubmissionDate(submissionDate);
+        }
+
+        // ===== Voucher Number =====
+        codeDetail.setApplicationFeebankVoucherNo(
+                dto.getApplicationFeebankVoucherNo());
+
+        codeDetailRepository.save(codeDetail);
+
+        return true;
     }
+
 
 
 //    Royalty Fee Section
@@ -100,15 +100,41 @@ public class ShortCodesDetailPaymentsConfirmationFinanceService {
     @Transactional
     public boolean confirmRoyaltyFee(CodeDetailDTO dto) {
 
-        int updated = codeDetailRepository.confirmRoyaltyFeePayment(
-                dto.getId(),
-                dto.getRoyaltyFeebankVoucherNo(),
-                dto.getRoyaltyFeeEnterVoucherDate(),
-                dto.getRoyaltyFeeBankVoucherSubmissionDate()
-        );
+        CodeDetail codeDetail = codeDetailRepository.findById(dto.getId())
+                .orElseThrow(() -> new IllegalArgumentException("Invalid code ID: " + dto.getId()));
 
-        return updated > 0;
+        PersianCalendarUtils converter = new PersianCalendarUtils();
+
+            String[] partsEntry = dto.getRoyaltyFeeEnterVoucherDateJalali().split("-");
+            int jYear = Integer.parseInt(partsEntry[0]);
+            int jMonth = Integer.parseInt(partsEntry[1]);
+            int jDay = Integer.parseInt(partsEntry[2]);
+
+            LocalDate enterVoucherDate = converter.jalaliToGregorian(jYear, jMonth, jDay);
+            codeDetail.setRoyaltyFeeEnterVoucherDate(enterVoucherDate);
+
+
+        // ===== Submission Date (Jalali → Gregorian) =====
+
+
+            String[] partsSubmission = dto.getRoyaltyFeeBankVoucherSubmissionDateJalali().split("-");
+            int jYearSub = Integer.parseInt(partsSubmission[0]);
+            int jMonthSub = Integer.parseInt(partsSubmission[1]);
+            int jDaySub = Integer.parseInt(partsSubmission[2]);
+
+            LocalDate submissionDate = converter.jalaliToGregorian(jYearSub, jMonthSub, jDaySub);
+            codeDetail.setRoyaltyFeeBankVoucherSubmissionDate(submissionDate);
+
+
+        // ===== Voucher Number =====
+        codeDetail.setRoyaltyFeebankVoucherNo(dto.getRoyaltyFeebankVoucherNo());
+
+        codeDetailRepository.save(codeDetail);
+
+        return true;
     }
+
+
 
     // Royalty Fee Extension section
     public List<Object[]> getUnPaidRyaltyFeesForExtension() {

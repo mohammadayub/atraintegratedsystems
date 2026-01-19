@@ -39,7 +39,9 @@ public class CodeDetailDTO {
     //Application fees
     private String applicationFeebankVoucherNo;
     private String applicationFeeEnterVoucherDate;
+    private String applicationFeeEnterVoucherDateJalali;
     private String applicationFeebankVoucherSubmissionDate;
+    private String applicationFeebankVoucherSubmissionDateJalali;
 
     private double registration_fees;
 
@@ -48,7 +50,9 @@ public class CodeDetailDTO {
     private String royaltyFeesStatus;
     private String royaltyFeebankVoucherNo;
     private String royaltyFeeEnterVoucherDate;
+    private String royaltyFeeEnterVoucherDateJalali;
     private String royaltyFeeBankVoucherSubmissionDate;
+    private String royaltyFeeBankVoucherSubmissionDateJalali;
 
     private double total;
     private String bankVoucherNo;

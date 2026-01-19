@@ -50,7 +50,11 @@ public class ShortCodesRoyaltyFeesFinanceController {
                 .getCodeDetailId(id)
                 .orElseThrow(() -> new RuntimeException("Record not found"));
 
-        model.addAttribute("codeDetail", codeDetail);
+        CodeDetailDTO dto = new CodeDetailDTO();
+        dto.setId(codeDetail.getId());
+        dto.setShortCode(codeDetail.getShortCode());
+
+        model.addAttribute("codeDetail", dto); // ✅ DTO, NOT Entity
         return "codes/finance/royaltyfees/royaltyfee_confirm";
     }
 
