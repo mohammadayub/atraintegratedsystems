@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>تعرفه بانکی – فیس درخواست</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: white;
+        }
+
+        #dari_text {
+            font-family: Arial, sans-serif;
+            font-size: 18px;
+            line-height: 1.8;
+        }
+
+        @media print {
+            .no-print, nav, footer {
+                display: none !important;
+            }
+
+            .card {
+                border: none !important;
+                box-shadow: none !important;
+            }
+
+            @page {
+                size: A4;
+                margin: 10mm;
+            }
+        }
+    </style>
+</head>
+
+<body dir="rtl">
+
+<!-- Header Card -->
+<div class="d-flex justify-content-center">
+    <div class="card shadow rounded-4 p-4 w-100 text-center">
+
+        <!-- Top Banner -->
+        <div class="row justify-content-center">
+            <div class="col-12">
+                <img th:src="@{/images/emarat_text.png}" alt="Header" class="img-fluid">
+            </div>
+        </div>
+
+        <!-- Logos + Title -->
+        <div class="row align-items-center mt-2">
+
+            <div class="col-3 text-start">
+                <img th:src="@{/images/atra_afghanistan.png}" alt="ATRA" class="img-fluid">
+            </div>
+
+            <div class="col-6">
+                <p id="dari_text" class="m-0">
+                    وزارت مخابرات و تکنالوژی معلوماتی<br>
+                    اداره تنظیم خدمات مخابراتی افغانستان<br>
+                    ریاست مالی – آمریت عواید<br>
+                    تعرفه تحویلی فیس درخواست
+                </p>
+            </div>
+
+            <div class="col-3 text-end">
+                <img th:src="@{/images/islami_emarat.png}" alt="Emarat" class="img-fluid">
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid mt-3">
+
+    <div style="background:black;height:2px;"></div>
+
+    <!-- Serial -->
+    <div class="fw-bold mt-3">
+        نمبر مسلسل تعرفه:
+        <span th:text="${tariff.id}"></span>
+    </div>
+
+    <div style="background:black;height:2px;"></div>
+
+    <!-- Section -->
+    <div class="fw-bold mt-3">مشخصات فیس درخواست</div>
+
+    <div style="background:black;height:2px;"></div>
+
+    <!-- Details -->
+    <div class="mt-3">
+        <h6>کود شناسایی:
+            <span th:text="${tariff.smsIdentifierCodeName}"></span>
+        </h6>
+        <div style="width:450px;height:1px;background:black;"></div>
+    </div>
+
+    <div class="mt-3">
+        <h6>نام کمپنی:
+            <span th:text="${tariff.companyName}"></span>
+        </h6>
+        <div style="width:450px;height:1px;background:black;"></div>
+    </div>
+
+    <div class="mt-3">
+        <h6>ENID:
+            <span th:text="${tariff.enid}"></span>
+        </h6>
+        <div style="width:450px;height:1px;background:black;"></div>
+    </div>
+
+    <div class="mt-3">
+        <h6>چینل:
+            <span th:text="${tariff.channel}"></span>
+        </h6>
+        <div style="width:450px;height:1px;background:black;"></div>
+    </div>
+
+    <div class="mt-3">
+        <h6>نوع خدمات:
+            <span th:text="${tariff.serviceType}"></span>
+        </h6>
+        <div style="width:450px;height:1px;background:black;"></div>
+    </div>
+
+    <div class="mt-3">
+        <h6>کتگوری کود:
+            <span th:text="${tariff.codeCategory}"></span>
+        </h6>
+        <div style="width:450px;height:1px;background:black;"></div>
+    </div>
+
+    <!-- Fees Table -->
+    <table class="table table-bordered mt-4" dir="rtl">
+
+        <thead>
+        <tr class="table-secondary text-center">
+            <th>مکلفیت های قابل تادیه</th>
+            <th>تعداد</th>
+            <th>مقدار فیس</th>
+            <th>مجموعه فیس</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr style="height:150px;" class="text-center">
+            <td>فیس درخواست</td>
+            <td>1</td>
+            <td th:text="${tariff.applicationFees}"></td>
+            <td th:text="${tariff.applicationFees}"></td>
+        </tr>
+
+        <tr class="table-secondary text-center">
+            <th>مجموعه</th>
+            <th></th>
+            <th th:text="${tariff.applicationFees}"></th>
+            <th th:text="${tariff.applicationFees}"></th>
+        </tr>
+        </tbody>
+    </table>
+
+    <!-- Signatures -->
+    <div class="row mt-4">
+        <div class="col-6 text-end">
+            <h6>ترتیب کننده تعرفه:</h6>
+        </div>
+        <div class="col-6 text-start">
+            <h6>چاپ کننده تعرفه:</h6>
+        </div>
+    </div>
+
+    <div class="text-center mt-3">
+        <h6>آمریت کنترول</h6>
+    </div>
+
+    <div class="mt-5">
+        <p class="text-end">
+            این تعرفه توسط سیستم تهیه گردیده و جهت اجرا به ریاست مالی ارائه گردیده است.
+        </p>
+    </div>
+
+    <!-- Buttons -->
+    <div class="text-center my-4 no-print">
+        <a th:href="@{/codes/sms-identifier-applicationfee/unpaid/list}"
+           class="btn btn-secondary">Back</a>
+
+        <button onclick="window.print()" class="btn btn-primary">Print</button>
+    </div>
+
+</div>
+
+</body>
+</html>

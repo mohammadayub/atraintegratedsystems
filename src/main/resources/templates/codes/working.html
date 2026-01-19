@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en"
+      th:lang="#{lang}"
+      th:dir="${#locale.language == 'ps' ? 'rtl' : 'ltr'}"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head th:replace="~{codes_layout :: page_head}">
+    <title>LMS</title>
+
+    <style>
+        body {
+            background: linear-gradient(135deg, #f4f6fb, #e9edf5);
+        }
+
+        .working-container {
+            min-height: 75vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .working-card {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 45px 40px;
+            max-width: 540px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 12px 35px rgba(20, 67, 139, 0.15);
+            animation: fadeInUp 0.8s ease-in-out;
+        }
+
+        .working-icon {
+            font-size: 64px;
+            color: #f0ad4e;
+            margin-bottom: 18px;
+            animation: rotateGear 3s linear infinite;
+        }
+
+        .working-title {
+            color: #14438B;
+            font-weight: 700;
+            margin-bottom: 12px;
+            letter-spacing: 0.5px;
+        }
+
+        .working-text {
+            color: #6c757d;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .working-badge {
+            display: inline-block;
+            margin-top: 18px;
+            padding: 6px 14px;
+            background-color: #fff3cd;
+            color: #856404;
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        @keyframes rotateGear {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- Common styles -->
+<div th:replace="styles :: commonfieldset"></div>
+
+<!-- Navbar -->
+<nav th:replace="~{codes_layout :: page_navbar}"></nav>
+
+<!-- Main Content -->
+<div class="container working-container mt-4 p-4">
+    <div class="working-card">
+
+
+        <h2 class="working-title">
+            ⚙️ Module Under Development
+        </h2>
+
+        <p class="working-text">
+            We are currently improving this module to provide
+            a better learning experience.
+            <br/>
+            Thank you for your patience.
+        </p>
+
+        <span class="working-badge">
+            Coming Soon
+        </span>
+
+    </div>
+</div>
+
+<!-- Footer -->
+<footer th:replace="~{codes_layout :: page_footer}"></footer>
+
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

@@ -8,16 +8,16 @@ import java.time.LocalDate;
 
 @Entity
 @Data
-public class SmsIdentifierApplicationFeesExtension {
+public class SmsIdentifierExtension {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     // Standard Department
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate applicationFeeExtensionStartDate;
+    private LocalDate extensionStartDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate applicationFeeExtentionExpirationDate;
+    private LocalDate extentionExpirationDate;
     @Column(name="extend_status")
     private String extendStatus;
     @Column(name="extend_Date")
@@ -25,13 +25,13 @@ public class SmsIdentifierApplicationFeesExtension {
 
     // For Finance Departpemtn
     // Bellow is Application Fee Extension Fields
-    private double applicationFeeExtendedFees;
-    private String applicationFeeExtensionBankVoucherNo;
+    private double extendedFees;
+    private String extensionBankVoucherNo;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate applicationFeeExtensionEnteryVoucherDate;
+    private LocalDate extensionEnteryVoucherDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate applicationFeeExtensionBankVoucherSubmissionDate;
-    private String applicationFeeExtensionPaymentStatus;
+    private LocalDate extensionBankVoucherSubmissionDate;
+    private String extensionPaymentStatus;
 
     @ManyToOne
     @JoinColumn(name = "smsidentifier_detail_id")

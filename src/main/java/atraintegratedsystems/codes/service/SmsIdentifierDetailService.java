@@ -98,14 +98,14 @@ public class SmsIdentifierDetailService {
 
     private void mapToEntity(SmsIdentifierDetailDTO dto, SmsIdentifierDetail e) {
         e.setCompanyName(dto.getCompanyName());
-        e.setEid(dto.getEid());
+        e.setEnid(dto.getEnid());
         e.setCompanyAddress(dto.getCompanyAddress());
         e.setMobile(dto.getMobile());
         e.setTelephone(dto.getTelephone());
         e.setEmail(dto.getEmail());
         e.setChannel(dto.getChannel());
         e.setServiceType(dto.getServiceType());
-        e.setMNOsCompanyHost(dto.getMNOsCompanyHost());
+        e.setMnosCompanyHost(dto.getMnosCompanyHost());
         e.setCodeCategory(dto.getCodeCategory());
         e.setAssigningDate(dto.getAssigningDate());
         e.setExpirationDate(dto.getExpirationDate());
@@ -131,14 +131,14 @@ public class SmsIdentifierDetailService {
 
         dto.setId(e.getId());
         dto.setCompanyName(e.getCompanyName());
-        dto.setEid(e.getEid());
+        dto.setEnid(e.getEnid());
         dto.setCompanyAddress(e.getCompanyAddress());
         dto.setMobile(e.getMobile());
         dto.setTelephone(e.getTelephone());
         dto.setEmail(e.getEmail());
         dto.setChannel(e.getChannel());
         dto.setServiceType(e.getServiceType());
-        dto.setMNOsCompanyHost(e.getMNOsCompanyHost());
+        dto.setMnosCompanyHost(e.getMnosCompanyHost());
         dto.setCodeCategory(e.getCodeCategory());
         dto.setAssigningDate(e.getAssigningDate());
         dto.setExpirationDate(e.getExpirationDate());

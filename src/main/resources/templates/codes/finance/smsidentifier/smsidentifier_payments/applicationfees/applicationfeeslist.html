@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Pending SMS Identifiers</title>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container mt-4">
+
+    <h4 class="text-center mb-3">Pending SMS Identifier Applications</h4>
+
+    <table class="table table-bordered table-hover table-striped">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Code Name</th>
+            <th>Company</th>
+            <th>ENID</th>
+            <th>Mobile</th>
+            <th>Email</th>
+            <th>Channel</th>
+            <th>Service Type</th>
+            <th>Assign Date</th>
+            <th>Expire Date</th>
+            <th>Print Tariff</th>
+            <th>Cofirm Payment</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item, stat : ${list}">
+            <td th:text="${stat.count}"></td>
+            <td th:text="${item.smsIdentifierCodeName}"></td>
+            <td th:text="${item.companyName}"></td>
+            <td th:text="${item.enid}"></td>
+            <td th:text="${item.mobile}"></td>
+            <td th:text="${item.email}"></td>
+            <td th:text="${item.channel}"></td>
+            <td th:text="${item.serviceType}"></td>
+            <td th:text="${item.assigningDate}"></td>
+            <td th:text="${item.expirationDate}"></td>
+            <td>
+                <a class="btn btn-sm btn-secondary"
+                   th:href="@{/codes/sms-identifier-applicationfee/print-tariff/{id}(id=${item.id})}">
+                    Print Tariff
+                </a>
+            </td>
+
+            <td>
+                <a class="btn btn-sm btn-primary"
+                   th:href="@{/codes/sms-identifier-applicationfee/pay/{id}(id=${item.id})}">
+                    Pay
+                </a>
+            </td>
+
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+
+</body>
+</html>

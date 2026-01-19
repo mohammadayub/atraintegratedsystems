@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Reject SMS Identifier</title>
+</head>
+<body>
+
+<h2>Reject SMS Identifier Code</h2>
+
+<form th:action="@{/sms-identifiers/reject}"
+      th:object="${sms}"
+      method="post">
+
+    <!-- Hidden ID -->
+    <input type="hidden" th:field="*{id}" />
+
+    <p>
+        <strong>Company Name:</strong>
+        <span th:text="*{companyName}"></span>
+    </p>
+
+    <p>
+        <strong>SMS Identifier Code:</strong>
+        <span th:text="*{smsIdentifierCodeName}"></span>
+    </p>
+
+    <hr/>
+
+    <!-- MANUAL INPUT -->
+    <p>
+        <label>Rejection Status:</label><br/>
+        <input type="text"
+               th:field="*{shortCodeRejectionStatus}"
+               placeholder="REJECTED"
+               required />
+    </p>
+
+    <p>
+        <label>Rejection Date:</label><br/>
+        <input type="date"
+               th:field="*{shortCodeRejectionDate}"
+               required />
+    </p>
+
+    <br/>
+
+    <button type="submit">Submit Rejection</button>
+    <a th:href="@{/sms-identifiers/active}">Cancel</a>
+
+</form>
+
+</body>
+</html>

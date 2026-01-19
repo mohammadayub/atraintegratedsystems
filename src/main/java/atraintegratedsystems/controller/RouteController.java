@@ -119,4 +119,16 @@ public class RouteController {
     {
         return "codes/finance/extension/home";
     }
+
+    @GetMapping("/codes/sms-identifier/home")
+    public String smsIdentifierHome()
+    {
+        return "codes/smsidentifier/home";
+    }
+
+    @GetMapping("/codes/under-working")
+    public String codesHome()
+    {
+        return "codes/working";
+    }
 }

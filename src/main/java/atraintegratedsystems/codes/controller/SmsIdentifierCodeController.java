@@ -8,14 +8,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/sms-identifier-codes")
+@RequestMapping("/codes/sms-identifier-codes")
 public class SmsIdentifierCodeController {
 
     @Autowired
     private SmsIdentifierCodeService service;
 
     /* LIST */
-    @GetMapping
+    @GetMapping("/list")
     public String list(Model model) {
         model.addAttribute("codes", service.findAll());
         return "codes/smsidentifier/smsidentifier/sms_identifier_code_list";
@@ -32,7 +32,7 @@ public class SmsIdentifierCodeController {
     @PostMapping("/save")
     public String save(@ModelAttribute("smsCode") SmsIdentifierCodeDTO dto) {
         service.save(dto);
-        return "redirect:/sms-identifier-codes";
+        return "redirect:/codes/sms-identifier-codes/list";
     }
 
     /* EDIT FORM */
@@ -47,13 +47,13 @@ public class SmsIdentifierCodeController {
     public String update(@PathVariable Long id,
                          @ModelAttribute("smsCode") SmsIdentifierCodeDTO dto) {
         service.update(id, dto);
-        return "redirect:/sms-identifier-codes";
+        return "redirect:/codes/sms-identifier-codes/list";
     }
 
     /* DELETE */
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable Long id) {
         service.delete(id);
-        return "redirect:/sms-identifier-codes";
+        return "redirect:/codes/sms-identifier-codes/list";
     }
 }

@@ -1,9 +1,7 @@
 package atraintegratedsystems.codes.dto;
 
 
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
@@ -11,18 +9,20 @@ import java.time.LocalDate;
 @Data
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class SmsIdentifierDetailDTO {
     private Long id;
 
     private String companyName;
-    private String eid;
+    private String enid;
     private String companyAddress;
     private String mobile;
     private String telephone;
     private String email;
     private String channel;
     private String serviceType;
-    private String MNOsCompanyHost;
+    private String mnosCompanyHost;
     private String codeCategory="Golden";
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate assigningDate;
@@ -56,4 +56,5 @@ public class SmsIdentifierDetailDTO {
 
     /* 🔥 IMPORTANT */
     private Long smsIdentifierCodeId;
+    private String smsIdentifierCodeName;
 }

@@ -9,7 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/sms-identifier-details")
+@RequestMapping("/codes/sms-identifier-details")
 public class SmsIdentifierDetailController {
 
     @Autowired
@@ -18,7 +18,7 @@ public class SmsIdentifierDetailController {
     @Autowired
     private SmsIdentifierCodeRepository codeRepo;
 
-    @GetMapping
+    @GetMapping("list")
     public String list(Model model) {
         model.addAttribute("details", detailService.findAll());
         return "codes/smsidentifier/smsidentifier/sms_identifier_detail_list";
@@ -34,7 +34,7 @@ public class SmsIdentifierDetailController {
     @PostMapping("/save")
     public String save(@ModelAttribute("detail") SmsIdentifierDetailDTO dto) {
         detailService.save(dto);
-        return "redirect:/sms-identifier-details";
+        return "redirect:/codes/sms-identifier-details/list";
     }
 
     @GetMapping("/edit/{id}")
@@ -48,12 +48,12 @@ public class SmsIdentifierDetailController {
     public String update(@PathVariable Long id,
                          @ModelAttribute("detail") SmsIdentifierDetailDTO dto) {
         detailService.update(id, dto);
-        return "redirect:/sms-identifier-details";
+        return "redirect:/codes/sms-identifier-details/list";
     }
 
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable Long id) {
         detailService.delete(id);
-        return "redirect:/sms-identifier-details";
+        return "redirect:/codes/sms-identifier-details/list";
     }
 }

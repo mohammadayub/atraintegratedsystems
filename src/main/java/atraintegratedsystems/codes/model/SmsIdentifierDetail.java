@@ -33,7 +33,7 @@ public class SmsIdentifierDetail {
 
     // Fees Related Section
     // Application Fees Related
-    private double applicationFees;
+    private double applicationFees=5000;
     private String applicationFeesBankVoucherNo;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate applicationFeesEnteryVoucherDate;
@@ -42,7 +42,7 @@ public class SmsIdentifierDetail {
     private String applicationFeesPaymentStatus;
 
     // Royalty Fees Related
-    private double royaltyFees;
+    private double royaltyFees=70000;
     private String royaltyFeesBankVoucherNo;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate royaltyFeesEnteryVoucherDate;
@@ -51,7 +51,7 @@ public class SmsIdentifierDetail {
     private String royaltyFeesPaymentStatus;
 
 
-    // Short Code Rejection Section
+    // smsIdentifier Code Rejection Section
     private String shortCodeRejectionStatus;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate shortCodeRejectionDate;

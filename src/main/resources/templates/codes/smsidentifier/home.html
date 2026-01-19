@@ -1,10 +1,127 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+<html lang="en" th:lang="#{lang}" th:dir="${#locale.language == 'ps' ? 'rtl' : 'ltr'}"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head th:replace="~{codes_layout :: page_head}">
+    <div th:replace="styles :: commonfieldset"></div>
+    <title>LMS</title>
+    <style>
+        h4 a {
+            color: #14438B;
+            font-size: 20px;
+        }
+    </style>
 </head>
 <body>
+<div th:replace="styles :: commonfieldset"></div>
+<nav th:replace="~{codes_layout :: page_navbar}"></nav>
 
+<div class="container mt-4">
+    <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_CODES_ADMIN','ROLE_LICENSE','ROLE_MINISTRY','ROLE_LICENSE_COMPLETION_PROFILE','ROLE_LICENSE_APPROVAL','ROLE_LICENSE_PROFILE_ENTRY','ROLE_FINANCE','ROLE_FINANCE','ROLE_TYPEOFAPPROVAL_ADMIN','ROLE_TYPEOFAPPROVAL_ATRA_FINANCE','ROLE_TYPEOFAPPROVAL_MCIT_FINANCE','ROLE_TYPEOFAPPROVAL_STANDARD','ROLE_TYPEOFAPPROVAL_ONLINE_APPLICATION')">
+        <legend>Short Codes Management Section</legend>
+        <table class="table table-borderless">
+            <tr>
+                <td>
+                    <div class="custom-card" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_LICENSE','ROLE_LICENSE_COMPLETION_PROFILE','ROLE_LICENSE_APPROVAL','ROLE_LICENSE_PROFILE_ENTRY','ROLE_FINANCE','ROLE_MINISTRY')">
+                        <a th:href="@{/codes/sms-identifier-codes/new}">
+                            <img th:src="@{/images/shortCodes.png}" alt="Short Code">
+                        </a>
+                        <h4 class="license-link" style="margin-top: 12px;">
+                            <a th:href="@{/codes/sms-identifier-codes/new}">Add SMS Identifier</a>
+                        </h4>
+                    </div>
+                </td>
+                <td>
+                    <div class="custom-card" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_CODES_ADMIN')">
+                        <a th:href="@{/codes/sms-identifier-codes/list}">
+                            <img th:src="@{/images/smsidentifiercode.png}" alt="Finance Management">
+                        </a>
+                        <h4 class="license-link" style="margin-top: 10px;">
+                            <a th:href="@{/codes/sms-identifier-codes/list}">SMS Identifier List</a>
+                        </h4>
+                    </div>
+
+
+                </td>
+                <td>
+                    <div class="custom-card" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_CODES_ADMIN')">
+                        <a th:href="@{/codes/sms-identifier-details/new}">
+                            <img th:src="@{/images/codeDetail.png}" alt="Finance Management">
+                        </a>
+                        <h4 class="license-link" style="margin-top: 10px;">
+                            <a th:href="@{/codes/sms-identifier-details/new}">SMS Identifier Detail</a>
+                        </h4>
+                    </div>
+
+                </td>
+                <td>
+                    <div class="custom-card" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_CODES_ADMIN')">
+                        <a th:href="@{/codes/sms-identifier-details/list}">
+                            <img th:src="@{/images/code_detail_list.png}" alt="Finance Management">
+                        </a>
+                        <h4 class="license-link" style="margin-top: 10px;">
+                            <a th:href="@{/codes/sms-identifier-details/list}">SMS Identifier Detail List</a>
+                        </h4>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </fieldset>
+
+
+    <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_CODES_ADMIN','ROLE_LICENSE','ROLE_MINISTRY','ROLE_LICENSE_COMPLETION_PROFILE','ROLE_LICENSE_APPROVAL','ROLE_LICENSE_PROFILE_ENTRY','ROLE_FINANCE','ROLE_FINANCE','ROLE_TYPEOFAPPROVAL_ADMIN','ROLE_TYPEOFAPPROVAL_ATRA_FINANCE','ROLE_TYPEOFAPPROVAL_MCIT_FINANCE','ROLE_TYPEOFAPPROVAL_STANDARD','ROLE_TYPEOFAPPROVAL_ONLINE_APPLICATION')">
+        <legend>SMS Identifier Serial Number Management Section</legend>
+        <table class="table table-borderless">
+            <tr>
+                <td>
+                    <div class="custom-card" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_LICENSE','ROLE_LICENSE_COMPLETION_PROFILE','ROLE_LICENSE_APPROVAL','ROLE_LICENSE_PROFILE_ENTRY','ROLE_FINANCE','ROLE_MINISTRY')">
+                        <a th:href="@{/serial-numbers/add}">
+                            <img th:src="@{/images/serialNumber.png}" alt="Short Code">
+                        </a>
+                        <h4 class="license-link" style="margin-top: 12px;">
+                            <a th:href="@{#}">Add SMS Identifier Serial Number</a>
+                        </h4>
+                    </div>
+                </td>
+                <td>
+                    <div class="custom-card" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_CODES_ADMIN')">
+                        <a th:href="@{#}">
+                            <img th:src="@{/images/smsidentifiercode.png}" alt="Finance Management">
+                        </a>
+                        <h4 class="license-link" style="margin-top: 10px;">
+                            <a th:href="@{#}">SMS Identifier Serial List</a>
+                        </h4>
+                    </div>
+
+
+                </td>
+            </tr>
+        </table>
+    </fieldset>
+
+    <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_CODES_ADMIN','ROLE_LICENSE','ROLE_MINISTRY','ROLE_LICENSE_COMPLETION_PROFILE','ROLE_LICENSE_APPROVAL','ROLE_LICENSE_PROFILE_ENTRY','ROLE_FINANCE','ROLE_FINANCE','ROLE_TYPEOFAPPROVAL_ADMIN','ROLE_TYPEOFAPPROVAL_ATRA_FINANCE','ROLE_TYPEOFAPPROVAL_MCIT_FINANCE','ROLE_TYPEOFAPPROVAL_STANDARD','ROLE_TYPEOFAPPROVAL_ONLINE_APPLICATION')">
+        <legend>SMS Extension Management Section</legend>
+        <table class="table table-borderless">
+            <tr>
+                <td>
+                    <div class="custom-card" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_LICENSE','ROLE_LICENSE_COMPLETION_PROFILE','ROLE_LICENSE_APPROVAL','ROLE_LICENSE_PROFILE_ENTRY','ROLE_FINANCE','ROLE_MINISTRY')">
+                        <a th:href="@{/codes/finance/extension/home}">
+                            <img th:src="@{/images/serialNumber.png}" alt="Short Code">
+                        </a>
+                        <h4 class="license-link" style="margin-top: 12px;">
+                            <a th:href="@{/codes/finance/extension/home}">Codes Extension</a>
+                        </h4>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </fieldset>
+</div>
+<div th:replace="scripts :: common-scripts"></div>
+
+<div style="height:10vh;"></div>
+<footer th:replace="~{codes_layout :: page_footer}"></footer>
+
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
 </body>
 </html>
