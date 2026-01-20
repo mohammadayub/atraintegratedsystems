@@ -33,56 +33,55 @@ public class ShortCodesDetailPaymentsConfirmationFinanceService {
     }
 
 
-
     @Transactional
     public boolean confirmApplicationFee(CodeDetailDTO dto) {
-        // Retrieve CodeDetail by ID and throw an exception if not found
+
         CodeDetail codeDetail = codeDetailRepository.findById(dto.getId())
                 .orElseThrow(() -> new IllegalArgumentException(
                         "Invalid code ID: " + dto.getId()));
 
         PersianCalendarUtils converter = new PersianCalendarUtils();
-        LocalDate enterVoucherDate = null;
-        LocalDate submissionDate = null;
 
-        // Convert Entry Voucher Date (Jalali → Gregorian)
+        // ===== Entry Voucher Date (Jalali → Gregorian) =====
         if (dto.getApplicationFeeEnterVoucherDateJalali() != null &&
-                !dto.getApplicationFeeEnterVoucherDateJalali().trim().isEmpty()) {
-            try {
-                String[] partsEntry = dto.getApplicationFeeEnterVoucherDateJalali().split("-");
-                int jYear = Integer.parseInt(partsEntry[0]);
-                int jMonth = Integer.parseInt(partsEntry[1]);
-                int jDay = Integer.parseInt(partsEntry[2]);
-                enterVoucherDate = converter.jalaliToGregorian(jYear, jMonth, jDay);
-            } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
-                throw new IllegalArgumentException("Invalid format for entry voucher date.");
-            }
-        }
-        codeDetail.setApplicationFeeEnterVoucherDate(enterVoucherDate);
+                !dto.getApplicationFeeEnterVoucherDateJalali().isEmpty()) {
 
-        // Convert Submission Date (Jalali → Gregorian)
+            String[] partsEntry = dto.getApplicationFeeEnterVoucherDateJalali().split("-");
+            int jYear = Integer.parseInt(partsEntry[0]);
+            int jMonth = Integer.parseInt(partsEntry[1]);
+            int jDay = Integer.parseInt(partsEntry[2]);
+
+            LocalDate enterVoucherDate =
+                    converter.jalaliToGregorian(jYear, jMonth, jDay);
+
+            codeDetail.setApplicationFeeEnterVoucherDate(enterVoucherDate);
+        }
+
+        // ===== Submission Date (Jalali → Gregorian) =====
         if (dto.getApplicationFeebankVoucherSubmissionDateJalali() != null &&
-                !dto.getApplicationFeebankVoucherSubmissionDateJalali().trim().isEmpty()) {
-            try {
-                String[] partsSubmission = dto.getApplicationFeebankVoucherSubmissionDateJalali().split("-");
-                int jYearSub = Integer.parseInt(partsSubmission[0]);
-                int jMonthSub = Integer.parseInt(partsSubmission[1]);
-                int jDaySub = Integer.parseInt(partsSubmission[2]);
-                submissionDate = converter.jalaliToGregorian(jYearSub, jMonthSub, jDaySub);
-            } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
-                throw new IllegalArgumentException("Invalid format for submission date.");
-            }
+                !dto.getApplicationFeebankVoucherSubmissionDateJalali().isEmpty()) {
+
+            String[] partsSubmission =
+                    dto.getApplicationFeebankVoucherSubmissionDateJalali().split("-");
+            int jYearSub = Integer.parseInt(partsSubmission[0]);
+            int jMonthSub = Integer.parseInt(partsSubmission[1]);
+            int jDaySub = Integer.parseInt(partsSubmission[2]);
+
+            LocalDate submissionDate =
+                    converter.jalaliToGregorian(jYearSub, jMonthSub, jDaySub);
+
+            codeDetail.setApplicationFeebankVoucherSubmissionDate(submissionDate);
         }
-        codeDetail.setApplicationFeebankVoucherSubmissionDate(submissionDate);
 
-        // Set Voucher Number
-        codeDetail.setApplicationFeebankVoucherNo(dto.getApplicationFeebankVoucherNo());
+        // ===== Voucher Number =====
+        codeDetail.setApplicationFeebankVoucherNo(
+                dto.getApplicationFeebankVoucherNo());
 
-        // Save the updated code detail
         codeDetailRepository.save(codeDetail);
 
         return true;
     }
+
 
 
 //    Royalty Fee Section
