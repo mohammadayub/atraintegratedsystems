@@ -1,6 +1,7 @@
 package atraintegratedsystems.codes.dto;
 
 import lombok.Data;
+import org.apache.tomcat.jni.Local;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
@@ -38,9 +39,9 @@ public class CodeDetailDTO {
 
     //Application fees
     private String applicationFeebankVoucherNo;
-    private String applicationFeeEnterVoucherDate;
+    private LocalDate applicationFeeEnterVoucherDate;
     private String applicationFeeEnterVoucherDateJalali;
-    private String applicationFeebankVoucherSubmissionDate;
+    private LocalDate applicationFeebankVoucherSubmissionDate;
     private String applicationFeebankVoucherSubmissionDateJalali;
 
     private double registration_fees;

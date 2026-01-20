@@ -15,7 +15,6 @@ public class SmsIdentifierApplicationFeeFinanceController {
     @Autowired
     private SmsIdentifierApplicationFeesFinanceService service;
 
-
     @GetMapping("/codes/sms-identifier-applicationfee/unpaid/list")
     public String pendingSmsIdentifiers(Model model) {
         model.addAttribute("list", service.getPendingSmsIdentifiers());
@@ -23,7 +22,6 @@ public class SmsIdentifierApplicationFeeFinanceController {
     }
 
     // Confirmation Section
-
     // 🔹 Show payment form
     @GetMapping("/codes/sms-identifier-applicationfee/pay/{id}")
     public String showPaymentForm(@PathVariable Long id, Model model) {
