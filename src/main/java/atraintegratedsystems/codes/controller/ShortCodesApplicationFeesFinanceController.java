@@ -26,7 +26,7 @@ public class ShortCodesApplicationFeesFinanceController {
     public String codeSummary(Model model) {
         List<Object[]> codes = codesDetailPaymentsConfirmationService.getunPaidApplicationFees();
         model.addAttribute("codes", codes);
-        return "codes/finance/applicationfees/applicationfeeslist";
+        return "codes/finance/shortcode/applicationfees/applicationfeeslist";
     }
 
     @GetMapping("/codes/applicationfees/edit/{id}")
@@ -37,7 +37,7 @@ public class ShortCodesApplicationFeesFinanceController {
                 .orElseThrow(() -> new RuntimeException("Unpaid application fee not found"));
 
         model.addAttribute("codeDetail", codeDetail);
-        return "codes/finance/applicationfees/applicationfee_tariff";
+        return "codes/finance/shortcode/applicationfees/applicationfee_tariff";
     }
 
     // confirmation section
@@ -50,7 +50,7 @@ public class ShortCodesApplicationFeesFinanceController {
                 .orElseThrow(() -> new RuntimeException("Record not found"));
 
         model.addAttribute("codeDetail", codeDetail);
-        return "codes/finance/applicationfees/applicationfee_confirm";
+        return "codes/finance/shortcode/applicationfees/applicationfee_confirm";
     }
 
 

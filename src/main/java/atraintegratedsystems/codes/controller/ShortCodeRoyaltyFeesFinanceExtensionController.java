@@ -23,14 +23,14 @@ public class ShortCodeRoyaltyFeesFinanceExtensionController {
                 "extensions",
                 service.getUnpaidRoyaltyExtensions()
         );
-        return "codes/finance/extension/shortcode/royalty_fee_extension_unpaid_list";
+        return "codes/finance/shortcode/extension/shortcode/royalty_fee_extension_unpaid_list";
     }
 
     /* ===== SHOW PAY FORM ===== */
     @GetMapping("/pay/{id}")
     public String showPayForm(@PathVariable Long id, Model model) {
         model.addAttribute("extension", service.getById(id));
-        return "codes/finance/extension/shortcode/royalty_fee_extension_pay";
+        return "codes/finance/shortcode/extension/shortcode/royalty_fee_extension_pay";
     }
 
     /* ===== SAVE PAYMENT ===== */

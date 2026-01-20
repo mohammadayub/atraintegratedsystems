@@ -117,7 +117,7 @@ public class RouteController {
     @GetMapping("/codes/finance/extension/home")
     public String shortCodeFinanceExtensionHome()
     {
-        return "codes/finance/extension/home";
+        return "codes/finance/shortcode/extension/home";
     }
 
     @GetMapping("/codes/sms-identifier/home")

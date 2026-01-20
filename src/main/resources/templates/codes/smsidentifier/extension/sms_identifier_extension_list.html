@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Active SMS Identifier Codes</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 8px;
+            border: 1px solid #ccc;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Active SMS Identifier Codes (Not Rejected)</h2>
+
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Company Name</th>
+        <th>ENID</th>
+        <th>Company Address</th>
+        <th>Mobile</th>
+        <th>Telephone</th>
+        <th>Email</th>
+        <th>Channel</th>
+        <th>Service Type</th>
+        <th>MNO Host</th>
+        <th>Code Category</th>
+        <th>Assigning Date</th>
+        <th>Expiration Date</th>
+        <th>SMS Identifier Code</th>
+        <th>Extension</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="item : ${smsIdentifierDetails}">
+        <td th:text="${item.id}"></td>
+        <td th:text="${item.companyName}"></td>
+        <td th:text="${item.enid}"></td>
+        <td th:text="${item.companyAddress}"></td>
+        <td th:text="${item.mobile}"></td>
+        <td th:text="${item.telephone}"></td>
+        <td th:text="${item.email}"></td>
+        <td th:text="${item.channel}"></td>
+        <td th:text="${item.serviceType}"></td>
+        <td th:text="${item.mnosCompanyHost}"></td>
+        <td th:text="${item.codeCategory}"></td>
+        <td th:text="${item.assigningDate}"></td>
+        <td th:text="${item.expirationDate}"></td>
+        <td th:text="${item.smsIdentifierCodeName}"></td>
+        <td>
+        <td>
+        <td>
+            <a th:href="@{/sms-identifier-extension/create/{id}(id=${item.id})}">
+                Extend
+            </a>
+        </td>
+
+        </td>
+
+        </td>
+
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

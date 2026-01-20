@@ -36,4 +36,6 @@ public class SmsIdentifierExtension {
     @ManyToOne
     @JoinColumn(name = "smsidentifier_detail_id")
     private SmsIdentifierDetail smsIdentifierDetail;
+
+
 }

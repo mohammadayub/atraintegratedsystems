@@ -25,7 +25,7 @@ public class ShortCodeApplicationFeesFinanceExtensionController {
                 "extensions",
                 service.getUnpaidExtensions()
         );
-        return "codes/finance/extension/shortcode/application-fee-extention-list";
+        return "codes/finance/shortcode/extension/shortcode/application-fee-extention-list";
 
     }
 
@@ -33,7 +33,7 @@ public class ShortCodeApplicationFeesFinanceExtensionController {
     @GetMapping("/application-fee-extension/pay/{id}")
     public String showPayForm(@PathVariable Long id, Model model) {
         model.addAttribute("extension", service.getById(id));
-        return "codes/finance/extension/shortcode/application_fee_extension_pay";
+        return "codes/finance/shortcode/extension/shortcode/application_fee_extension_pay";
     }
 
     /* ===================== SAVE PAYMENT ===================== */

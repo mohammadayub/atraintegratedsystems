@@ -34,4 +34,6 @@ public class SmsIdentifierExtensionDTO {
     private LocalDate extensionBankVoucherSubmissionDate;
     private String extensionPaymentStatus;
 
+
+
 }

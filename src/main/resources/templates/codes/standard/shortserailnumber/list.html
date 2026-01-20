@@ -11,8 +11,10 @@
             font-weight: bold;
         }
     </style>
+    <th:block th:insert="~{codes_layout :: page_head}"></th:block>
 </head>
 <body>
+<nav th:replace="~{codes_layout :: page_navbar}"></nav>
 <div class="container mt-4">
 
     <h3>Serial Numbers List</h3>
@@ -40,5 +42,10 @@
     </table>
 
 </div>
+
+<div style="height:10vh"></div>
+
+<footer th:replace="~{codes_layout :: page_footer}"></footer>
+
 </body>
 </html>

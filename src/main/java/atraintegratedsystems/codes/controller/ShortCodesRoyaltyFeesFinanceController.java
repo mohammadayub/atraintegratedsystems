@@ -25,7 +25,7 @@ public class ShortCodesRoyaltyFeesFinanceController {
     public String codeSummary(Model model) {
         List<Object[]> codes = codesDetailPaymentsConfirmationService.getunPaidRyaltyFees();
         model.addAttribute("codes", codes);
-        return "codes/finance/royaltyfees/royaltyfeeslist";
+        return "codes/finance/shortcode/royaltyfees/royaltyfeeslist";
     }
 
     // Printing Tariffs
@@ -37,7 +37,7 @@ public class ShortCodesRoyaltyFeesFinanceController {
                 .orElseThrow(() -> new RuntimeException("Unpaid application fee not found"));
 
         model.addAttribute("codeDetail", codeDetail);
-        return "codes/finance/royaltyfees/applicationfee_tariff";
+        return "codes/finance/shortcode/royaltyfees/royaltyfee_tariff";
     }
 
     // Fees Confirmation
@@ -55,7 +55,7 @@ public class ShortCodesRoyaltyFeesFinanceController {
         dto.setShortCode(codeDetail.getShortCode());
 
         model.addAttribute("codeDetail", dto); // ✅ DTO, NOT Entity
-        return "codes/finance/royaltyfees/royaltyfee_confirm";
+        return "codes/finance/shortcode/royaltyfees/royaltyfee_confirm";
     }
 
 
