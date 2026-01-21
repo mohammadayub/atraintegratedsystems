@@ -10,11 +10,12 @@
 
 <div class="container mt-4">
 
-  <h3>Serial Number Form</h3>
+  <div class="col-4" style="margin:0 auto;background-color:white;">
+  <h4 class="mt-2 pt-2">Serial Number Form</h4>
 
   <form th:action="@{/serial-numbers/save}"
         th:object="${serialNumber}"
-        method="post">
+        method="post" class="m-2">
 
     <input type="hidden" th:field="*{id}"/>
 
@@ -26,10 +27,11 @@
              required>
     </div>
 
-    <button type="submit" class="btn btn-success">Save</button>
-    <a th:href="@{/serial-numbers}" class="btn btn-secondary">Back</a>
+    <button type="submit" class="btn btn-success mb-2">Save</button>
+    <a th:href="@{/serial-numbers}" class="btn btn-secondary mb-2">Back</a>
 
   </form>
+  </div>
 
 </div>
 

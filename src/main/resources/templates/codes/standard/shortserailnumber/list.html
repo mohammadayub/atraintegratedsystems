@@ -17,13 +17,14 @@
 <nav th:replace="~{codes_layout :: page_navbar}"></nav>
 <div class="container mt-4">
 
-    <h3>Serial Numbers List</h3>
+
+    <h5>Serial Numbers List</h5>
 
     <a th:href="@{/serial-numbers/add}" class="btn btn-primary mb-3">
         Add Serial Number
     </a>
-
-    <table class="table table-bordered text-center">
+    <div class="table-responsive">
+        <table class="table table-bordered text-center table-sm">
         <tbody>
 
         <!-- Create rows -->
@@ -40,6 +41,7 @@
 
         </tbody>
     </table>
+    </div>
 
 </div>
 

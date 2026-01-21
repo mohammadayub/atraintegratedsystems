@@ -126,9 +126,9 @@ public class RouteController {
         return "codes/smsidentifier/home";
     }
 
-    @GetMapping("/codes/under-working")
+    @GetMapping("/smsidentifier/under-working")
     public String codesHome()
     {
-        return "codes/working";
+        return "codes/smsidentifier/working";
     }
 }
