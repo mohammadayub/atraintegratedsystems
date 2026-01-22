@@ -126,9 +126,19 @@ public class RouteController {
         return "codes/smsidentifier/home";
     }
 
+    // Bellow is For Under Working Module
     @GetMapping("/smsidentifier/under-working")
     public String codesHome()
     {
         return "codes/smsidentifier/working";
+    }
+
+    // bellow is For Report home
+
+    @GetMapping("/codes/report/home")
+    public String codesReportHome()
+    {
+
+        return "codes/reports/home";
     }
 }
