@@ -16,17 +16,20 @@ public class ShortCodeApplicationFeesExtensionDTO {
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate applicationFeeExtensionDate;
+    private String applicationFeeExtensionDateJalali;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate applicationFeeExtentionExpirationDate;
+    private LocalDate applicationFeeExtensionExpirationDate;
+    private String applicationFeeExtensionExpirationDateJalali;
 
     // Bellow is Application Fee Extension Fields
     private double applicationFeeExtendedFees;
     private String applicationFeeExtensionBankVoucherNo;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate applicationFeeExtensionEnteryVoucherDate;
-    private String applicationFeeExtensionEnteryVoucherDateJalali;
+    private LocalDate applicationFeeExtensionEntryVoucherDate;
+    private String applicationFeeExtensionEntryVoucherDateJalali;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate applicationFeeExtensionBankVoucherSubmissionDate;
+    private String applicationFeeExtensionBankVoucherSubmissionDateJalali;
     private String applicationFeeExtensionPaymentStatus;
 
     private String extendStatus;

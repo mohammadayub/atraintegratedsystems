@@ -6,12 +6,9 @@
   <div th:replace="styles :: common-css"></div>
   <div th:replace="styles :: commonfieldset"></div>
   <div th:replace="styles :: persian-datepicker-styles"></div>
-
   <title>Pay Application Fee Extension</title>
 </head>
-
 <body>
-
 <nav th:replace="~{codes_layout :: page_navbar}"></nav>
 <div class="container-fluid mt-4"
      th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
@@ -51,7 +48,7 @@
           <label>Entry Voucher Date</label>
           <input type="text"
                  class="form-control hijrishamsi"
-                 th:field="*{applicationFeeExtensionEnteryVoucherDate}" required>
+                 th:field="*{applicationFeeExtensionEntryVoucherDateJalali}" required>
         </div>
 
         <!-- Submission Date -->
@@ -59,7 +56,7 @@
           <label>Submission Date</label>
           <input type="text"
                  class="form-control hijrishamsi"
-                 th:field="*{applicationFeeExtensionBankVoucherSubmissionDate}" required>
+                 th:field="*{applicationFeeExtensionBankVoucherSubmissionDateJalali}" required>
         </div>
 
       </div>

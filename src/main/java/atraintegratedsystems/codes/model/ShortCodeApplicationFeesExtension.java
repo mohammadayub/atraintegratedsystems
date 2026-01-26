@@ -17,18 +17,18 @@ public class ShortCodeApplicationFeesExtension {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate applicationFeeExtensionDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate applicationFeeExtentionExpirationDate;
+    private LocalDate applicationFeeExtensionExpirationDate;
     @Column(name="extend_status")
     private String extendStatus;
     @Column(name="extend_Date")
-    private String extendDate;
+    private String extendEntryDate;
 
     // For Finance Departpemtn
     // Bellow is Application Fee Extension Fields
     private double applicationFeeExtendedFees;
     private String applicationFeeExtensionBankVoucherNo;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate applicationFeeExtensionEnteryVoucherDate;
+    private LocalDate applicationFeeExtensionEntryVoucherDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate applicationFeeExtensionBankVoucherSubmissionDate;
     private String applicationFeeExtensionPaymentStatus;

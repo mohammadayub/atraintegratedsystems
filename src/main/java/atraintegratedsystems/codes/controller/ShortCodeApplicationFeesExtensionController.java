@@ -2,62 +2,79 @@ package atraintegratedsystems.codes.controller;
 
 import atraintegratedsystems.codes.dto.ShortCodeApplicationFeesExtensionDTO;
 import atraintegratedsystems.codes.model.CodeDetail;
-import atraintegratedsystems.codes.model.ShortCodeApplicationFeesExtension;
-import atraintegratedsystems.codes.repository.CodeDetailRepository;
 import atraintegratedsystems.codes.service.ShortCodeApplicationFeesExtensionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-
-import java.time.LocalDate;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
+@RequestMapping("/finance/code-extension/application-fee")
 public class ShortCodeApplicationFeesExtensionController {
 
     @Autowired
-    private CodeDetailRepository codeDetailRepository;
-    @Autowired
-    private ShortCodeApplicationFeesExtensionService shortCodeApplicationFeesExtensionService;
+    private ShortCodeApplicationFeesExtensionService extensionService;
 
-
-    @GetMapping("/codes/finance/application-fee/list")
+    // -------------------------------
+    // LIST UNPAID EXTENSIONS
+    // -------------------------------
+    @GetMapping("/list")
     public String applicationFeeExtensionList(Model model) {
-
         model.addAttribute(
                 "extensions",
-                shortCodeApplicationFeesExtensionService.findUnPaidApplicationFeeForExtension()
+                extensionService.findUnPaidApplicationFeeForExtension()
         );
-
         return "codes/standard/extension/shortcode/application-fee-extended-list";
     }
 
-    // Extension Section
-
-    @GetMapping("/finance/code-extension/application-fee/create/{id}")
+    // -------------------------------
+    // OPEN CREATE FORM
+    // -------------------------------
+    @GetMapping("/create/{id}")
     public String openForm(@PathVariable Long id, Model model) {
+        try {
+            // Fetch code detail
+            CodeDetail codeDetail = extensionService.getCodeDetailById(id);
 
-        CodeDetail codeDetail = shortCodeApplicationFeesExtensionService.getCodeDetailById(id);
+            // Create DTO with default values
+            ShortCodeApplicationFeesExtensionDTO extensionDTO = new ShortCodeApplicationFeesExtensionDTO();
+            extensionDTO.setApplicationFeeExtendedFees(4000); // default fee
 
-        model.addAttribute("codeDetail", codeDetail);
-        model.addAttribute("extensionDTO", new ShortCodeApplicationFeesExtensionDTO());
+            // Add to model
+            model.addAttribute("codeDetail", codeDetail);
+            model.addAttribute("extensionDTO", extensionDTO);
 
-        return "codes/standard/extension/shortcode/application-fee-extension-form";
+            return "codes/standard/extension/shortcode/application-fee-extension-form";
+
+        } catch (RuntimeException e) {
+            // If code detail not found, show error page
+            model.addAttribute("errorMessage", "CodeDetail not found for ID: " + id);
+            return "codes/error-page"; // create a simple error page template
+        }
     }
 
-   // SAVE EXTENSION
-
-    @PostMapping("/finance/code-extension/application-fee/save/{id}")
+    // -------------------------------
+    // SAVE EXTENSION
+    // -------------------------------
+    @PostMapping("/save/{id}")
     public String save(
             @PathVariable Long id,
-            @ModelAttribute("extensionDTO") ShortCodeApplicationFeesExtensionDTO dto
+            @ModelAttribute("extensionDTO") ShortCodeApplicationFeesExtensionDTO dto,
+            Model model
     ) {
+        try {
+            extensionService.saveExtension(id, dto);
+            return "redirect:/finance/code-extension/application-fee/list";
 
-        shortCodeApplicationFeesExtensionService.saveExtension(id, dto);
+        } catch (RuntimeException e) {
+            // Handle errors (e.g., null date fields, invalid data)
+            model.addAttribute("errorMessage", "Error saving extension: " + e.getMessage());
 
-        return "redirect:/codes/finance/application-fee/list";
+            // Re-populate the form
+            model.addAttribute("codeDetail", extensionService.getCodeDetailById(id));
+            model.addAttribute("extensionDTO", dto);
+
+            return "codes/standard/extension/shortcode/application-fee-extension-form";
+        }
     }
 }

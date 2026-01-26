@@ -14,51 +14,58 @@
     <fieldset>
         <legend>Application Fee Extension</legend>
 
+        <!-- Display error messages -->
+        <div th:if="${errorMessage}" class="alert alert-danger">
+            <p th:text="${errorMessage}"></p>
+        </div>
+
         <form th:action="@{/finance/code-extension/application-fee/save/{id}(id=${codeDetail.id})}"
               th:object="${extensionDTO}"
               method="post">
 
             <div class="row">
 
+                <!-- Extension Date -->
                 <div class="col-md-6 mb-3">
                     <label>Extension Date</label>
                     <input type="text"
                            class="form-control hijrishamsi"
                            id="extensionDate"
-                           th:field="*{applicationFeeExtensionDate}"
+                           th:field="*{applicationFeeExtensionDateJalali}"
+                           placeholder="yyyy-mm-dd"
                            required>
                 </div>
 
+                <!-- Expiration Date -->
                 <div class="col-md-6 mb-3">
                     <label>Expiration Date</label>
                     <input type="text"
                            class="form-control hijrishamsi"
-                           th:field="*{applicationFeeExtentionExpirationDate}"
+                           th:field="*{applicationFeeExtensionExpirationDateJalali}"
+                           placeholder="yyyy-mm-dd"
                            required>
                 </div>
 
-                <!-- ✅ DEFAULT VALUE 4000 -->
+                <!-- Extended Fees (readonly) -->
                 <div class="col-md-6 mb-3">
                     <label>Extended Fees</label>
                     <input type="text"
                            class="form-control"
                            id="extendedFees"
                            th:field="*{applicationFeeExtendedFees}"
-                           required
-                           readonly
-                    >
+                           readonly>
                 </div>
-
 
             </div>
 
             <button type="submit" class="btn btn-success">Save Extension</button>
-            <a th:href="@{/application-fee/listt}" class="btn btn-secondary">Cancel</a>
+            <a th:href="@{/finance/code-extension/application-fee/list}" class="btn btn-secondary">Cancel</a>
 
         </form>
     </fieldset>
 </div>
 
+<!-- Scripts -->
 <div th:replace="scripts :: common-scripts"></div>
 <div th:replace="scripts :: persian-datepicker-scripts"></div>
 <div th:replace="scripts :: common-hijrishamsi-date"></div>
@@ -72,10 +79,12 @@
         const referenceDate = "1392-02-26";
 
         function updateExtendedFee() {
+            if (!extensionDateInput || !extendedFeesInput) return;
+
             let selectedDate = extensionDateInput.value;
 
             if (!selectedDate) {
-                extendedFeesInput.value = "";
+                extendedFeesInput.value = 4000; // default fee if empty
                 return;
             }
 
@@ -83,24 +92,17 @@
             selectedDate = selectedDate.replaceAll("/", "-");
 
             // Compare as string (yyyy-mm-dd)
-            if (selectedDate > referenceDate) {
-                extendedFeesInput.value = 4000;
-            } else {
-                extendedFeesInput.value = 2000;
-            }
+            extendedFeesInput.value = selectedDate > referenceDate ? 4000 : 2000;
         }
 
-        // Persian datepicker usually fires input, not change
+        // Event listeners
         extensionDateInput.addEventListener("input", updateExtendedFee);
         extensionDateInput.addEventListener("change", updateExtendedFee);
 
-        // Run once if value already exists (edit mode)
+        // Initialize on load
         updateExtendedFee();
     });
 </script>
-
-
-
 
 <div style="height:10vh;"></div>
 <footer th:replace="~{codes_layout :: page_footer}"></footer>

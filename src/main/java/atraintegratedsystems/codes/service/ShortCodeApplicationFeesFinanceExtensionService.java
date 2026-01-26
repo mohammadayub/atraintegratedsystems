@@ -35,20 +35,20 @@ public class ShortCodeApplicationFeesFinanceExtensionService {
         dto.setId(entity.getId());
         dto.setApplicationFeeExtensionDate(
                 entity.getApplicationFeeExtensionDate());
-        dto.setApplicationFeeExtentionExpirationDate(
-                entity.getApplicationFeeExtentionExpirationDate());
+        dto.setApplicationFeeExtensionExpirationDate(
+                entity.getApplicationFeeExtensionExpirationDate());
         dto.setApplicationFeeExtendedFees(
                 entity.getApplicationFeeExtendedFees());
         dto.setApplicationFeeExtensionBankVoucherNo(
                 entity.getApplicationFeeExtensionBankVoucherNo());
-        dto.setApplicationFeeExtensionEnteryVoucherDate(
-                entity.getApplicationFeeExtensionEnteryVoucherDate());
+        dto.setApplicationFeeExtensionEntryVoucherDate(
+                entity.getApplicationFeeExtensionEntryVoucherDate());
         dto.setApplicationFeeExtensionBankVoucherSubmissionDate(
                 entity.getApplicationFeeExtensionBankVoucherSubmissionDate());
         dto.setApplicationFeeExtensionPaymentStatus(
                 entity.getApplicationFeeExtensionPaymentStatus());
         dto.setExtendStatus(entity.getExtendStatus());
-        dto.setExtendDate(entity.getExtendDate());
+        dto.setExtendDate(entity.getExtendEntryDate());
 
         return dto;
     }
@@ -66,8 +66,8 @@ public class ShortCodeApplicationFeesFinanceExtensionService {
         dto.setApplicationFeeExtendedFees(entity.getApplicationFeeExtendedFees());
         dto.setApplicationFeeExtensionBankVoucherNo(
                 entity.getApplicationFeeExtensionBankVoucherNo());
-        dto.setApplicationFeeExtensionEnteryVoucherDate(
-                entity.getApplicationFeeExtensionEnteryVoucherDate());
+        dto.setApplicationFeeExtensionEntryVoucherDate(
+                entity.getApplicationFeeExtensionEntryVoucherDate());
         dto.setApplicationFeeExtensionBankVoucherSubmissionDate(
                 entity.getApplicationFeeExtensionBankVoucherSubmissionDate());
 
@@ -85,8 +85,8 @@ public class ShortCodeApplicationFeesFinanceExtensionService {
                 dto.getApplicationFeeExtendedFees());
         entity.setApplicationFeeExtensionBankVoucherNo(
                 dto.getApplicationFeeExtensionBankVoucherNo());
-        entity.setApplicationFeeExtensionEnteryVoucherDate(
-                dto.getApplicationFeeExtensionEnteryVoucherDate());
+        entity.setApplicationFeeExtensionEntryVoucherDate(
+                dto.getApplicationFeeExtensionEntryVoucherDate());
         entity.setApplicationFeeExtensionBankVoucherSubmissionDate(
                 dto.getApplicationFeeExtensionBankVoucherSubmissionDate());
 
