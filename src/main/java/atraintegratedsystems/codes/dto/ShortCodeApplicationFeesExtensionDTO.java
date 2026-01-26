@@ -24,6 +24,7 @@ public class ShortCodeApplicationFeesExtensionDTO {
     private String applicationFeeExtensionBankVoucherNo;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate applicationFeeExtensionEnteryVoucherDate;
+    private String applicationFeeExtensionEnteryVoucherDateJalali;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate applicationFeeExtensionBankVoucherSubmissionDate;
     private String applicationFeeExtensionPaymentStatus;

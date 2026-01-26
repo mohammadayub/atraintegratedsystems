@@ -82,8 +82,8 @@ public class ShortCodeRoyaltyFeeFinanceExtensionService {
                 repository.findById(dto.getId())
                         .orElseThrow(() -> new RuntimeException("Record not found"));
 
-        entity.setRoyaltyFeeExtentionExpirationDate(
-                dto.getRoyaltyFeeExtentionExpirationDate());
+        entity.setRoyaltyFeeExtensionBankVoucherNo(
+                dto.getRoyaltyFeeExtensionBankVoucherNo());
         entity.setRoyaltyFeeExtensionEnteryVoucherDate(
                 dto.getRoyaltyFeeExtensionEnteryVoucherDate());
         entity.setRoyaltyFeeExtensionBankVoucherSubmissionDate(

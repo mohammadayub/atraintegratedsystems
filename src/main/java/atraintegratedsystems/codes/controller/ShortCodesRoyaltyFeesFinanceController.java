@@ -42,6 +42,7 @@ public class ShortCodesRoyaltyFeesFinanceController {
 
     // Fees Confirmation
 
+
     // show confirm page
     @GetMapping("/codes/royaltyfees/confirm/{id}")
     public String showRoyaltyConfirmForm(@PathVariable Long id, Model model) {

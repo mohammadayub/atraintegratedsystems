@@ -7,7 +7,7 @@
   <div th:replace="styles :: common-css"></div>
   <div th:replace="styles :: commonfieldset-with-legend-border"></div>
 
-  <title>Unpaid Application Fee Extensions</title>
+  <title>Unpaid Royalty Fee Extensions</title>
 </head>
 <body>
 
@@ -23,7 +23,6 @@
 
         <thead>
         <tr class="bg-primary">
-    <tr>
       <th>#</th>
       <th>Extension Date</th>
       <th>Expiration Date</th>
@@ -62,8 +61,13 @@
     </div>
   </fieldset>
 </div>
+<!-- Scripts -->
+<div th:replace="scripts :: common-scripts"></div>
+<div th:replace="scripts :: data-tables-scripts"></div>
+<div th:replace="scripts :: common-datatable"></div>
 
-<div style="height:10vh;"></div>
+<div style="height:5vh;"></div>
 <footer th:replace="~{codes_layout :: page_footer}"></footer>
+
 </body>
 </html>

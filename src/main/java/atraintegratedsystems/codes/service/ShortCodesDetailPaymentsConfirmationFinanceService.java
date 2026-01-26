@@ -77,10 +77,17 @@ public class ShortCodesDetailPaymentsConfirmationFinanceService {
         codeDetail.setApplicationFeebankVoucherNo(
                 dto.getApplicationFeebankVoucherNo());
 
+        // ✅ IMPORTANT PART — AUTO SET STATUS
+        codeDetail.setApplicationFeesStatus("PAID");
+
+        // (Optional) overall payment status
+        codeDetail.setPaymentStatus("PAID");
+
         codeDetailRepository.save(codeDetail);
 
         return true;
     }
+
 
 
 
@@ -96,43 +103,60 @@ public class ShortCodesDetailPaymentsConfirmationFinanceService {
         return codeDetailRepository.findUnpaidRoyaltyFeeById(id);
     }
 
-    // Royalty Fees Confirmation Section
     @Transactional
     public boolean confirmRoyaltyFee(CodeDetailDTO dto) {
 
         CodeDetail codeDetail = codeDetailRepository.findById(dto.getId())
-                .orElseThrow(() -> new IllegalArgumentException("Invalid code ID: " + dto.getId()));
+                .orElseThrow(() ->
+                        new IllegalArgumentException("Invalid code ID: " + dto.getId()));
 
         PersianCalendarUtils converter = new PersianCalendarUtils();
+
+        // ===== Entry Voucher Date (Jalali → Gregorian) =====
+        if (dto.getRoyaltyFeeEnterVoucherDateJalali() != null &&
+                !dto.getRoyaltyFeeEnterVoucherDateJalali().isEmpty()) {
 
             String[] partsEntry = dto.getRoyaltyFeeEnterVoucherDateJalali().split("-");
             int jYear = Integer.parseInt(partsEntry[0]);
             int jMonth = Integer.parseInt(partsEntry[1]);
             int jDay = Integer.parseInt(partsEntry[2]);
 
-            LocalDate enterVoucherDate = converter.jalaliToGregorian(jYear, jMonth, jDay);
-            codeDetail.setRoyaltyFeeEnterVoucherDate(enterVoucherDate);
+            LocalDate enterVoucherDate =
+                    converter.jalaliToGregorian(jYear, jMonth, jDay);
 
+            codeDetail.setRoyaltyFeeEnterVoucherDate(enterVoucherDate);
+        }
 
         // ===== Submission Date (Jalali → Gregorian) =====
+        if (dto.getRoyaltyFeeBankVoucherSubmissionDateJalali() != null &&
+                !dto.getRoyaltyFeeBankVoucherSubmissionDateJalali().isEmpty()) {
 
-
-            String[] partsSubmission = dto.getRoyaltyFeeBankVoucherSubmissionDateJalali().split("-");
+            String[] partsSubmission =
+                    dto.getRoyaltyFeeBankVoucherSubmissionDateJalali().split("-");
             int jYearSub = Integer.parseInt(partsSubmission[0]);
             int jMonthSub = Integer.parseInt(partsSubmission[1]);
             int jDaySub = Integer.parseInt(partsSubmission[2]);
 
-            LocalDate submissionDate = converter.jalaliToGregorian(jYearSub, jMonthSub, jDaySub);
-            codeDetail.setRoyaltyFeeBankVoucherSubmissionDate(submissionDate);
+            LocalDate submissionDate =
+                    converter.jalaliToGregorian(jYearSub, jMonthSub, jDaySub);
 
+            codeDetail.setRoyaltyFeeBankVoucherSubmissionDate(submissionDate);
+        }
 
         // ===== Voucher Number =====
         codeDetail.setRoyaltyFeebankVoucherNo(dto.getRoyaltyFeebankVoucherNo());
+
+        // ✅ IMPORTANT PART — AUTO SET ROYALTY STATUS
+        codeDetail.setRoyaltyFeesStatus("PAID");
+
+        // (Optional but consistent with application fee)
+        codeDetail.setPaymentStatus("PAID");
 
         codeDetailRepository.save(codeDetail);
 
         return true;
     }
+
 
 
 
