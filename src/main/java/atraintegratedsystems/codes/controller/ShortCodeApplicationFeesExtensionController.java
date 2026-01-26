@@ -58,6 +58,6 @@ public class ShortCodeApplicationFeesExtensionController {
 
         shortCodeApplicationFeesExtensionService.saveExtension(id, dto);
 
-        return "redirect:/finance/code-extension/application-fee/list";
+        return "redirect:/codes/finance/application-fee/list";
     }
 }
