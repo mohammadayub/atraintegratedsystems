@@ -39,16 +39,15 @@ public class ShortCodeRoyaltyFeeFinanceExtensionService {
                 entity.getRoyaltyFeeExtensionBankVoucherNo());
         dto.setRoyaltyFeeExtensionDate(
                 entity.getRoyaltyFeeExtensionDate());
-        dto.setRoyaltyFeeExtentionExpirationDate(
+        dto.setRoyaltyFeeExtensionExpirationDate(
                 entity.getRoyaltyFeeExtentionExpirationDate());
-        dto.setRoyaltyFeeExtensionEnteryVoucherDate(
+        dto.setRoyaltyFeeExtensionEntryVoucherDate(
                 entity.getRoyaltyFeeExtensionEnteryVoucherDate());
         dto.setRoyaltyFeeExtensionBankVoucherSubmissionDate(
                 entity.getRoyaltyFeeExtensionBankVoucherSubmissionDate());
         dto.setRoyaltyFeeExtensionPaymentStatus(
                 entity.getRoyaltyFeeExtensionPaymentStatus());
         dto.setExtendStatus(entity.getExtendStatus());
-        dto.setExtendDate(entity.getExtendDate());
 
         return dto;
     }
@@ -65,9 +64,9 @@ public class ShortCodeRoyaltyFeeFinanceExtensionService {
                 new ShortCodeRoyaltyFeesExtensionDTO();
 
         dto.setId(entity.getId());
-        dto.setRoyaltyFeeExtentionExpirationDate(
+        dto.setRoyaltyFeeExtensionExpirationDate(
                 entity.getRoyaltyFeeExtentionExpirationDate());
-        dto.setRoyaltyFeeExtensionEnteryVoucherDate(
+        dto.setRoyaltyFeeExtensionEntryVoucherDate(
                 entity.getRoyaltyFeeExtensionEnteryVoucherDate());
         dto.setRoyaltyFeeExtensionBankVoucherSubmissionDate(
                 entity.getRoyaltyFeeExtensionBankVoucherSubmissionDate());
@@ -85,7 +84,7 @@ public class ShortCodeRoyaltyFeeFinanceExtensionService {
         entity.setRoyaltyFeeExtensionBankVoucherNo(
                 dto.getRoyaltyFeeExtensionBankVoucherNo());
         entity.setRoyaltyFeeExtensionEnteryVoucherDate(
-                dto.getRoyaltyFeeExtensionEnteryVoucherDate());
+                dto.getRoyaltyFeeExtensionEntryVoucherDate());
         entity.setRoyaltyFeeExtensionBankVoucherSubmissionDate(
                 dto.getRoyaltyFeeExtensionBankVoucherSubmissionDate());
 

@@ -18,14 +18,17 @@ public class ShortCodeRoyaltyFeesExtensionDTO {
     private String royaltyFeeExtensionBankVoucherNo;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate royaltyFeeExtensionDate;
+    private String royaltyFeeExtensionDateJalali;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate royaltyFeeExtentionExpirationDate;
+    private LocalDate royaltyFeeExtensionExpirationDate;
+    private String royaltyFeeExtensionExpirationDateJalali;
+
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate royaltyFeeExtensionEnteryVoucherDate;
+    private LocalDate royaltyFeeExtensionEntryVoucherDate;
+    private String royaltyFeeExtensionEntryVoucherDateJalali;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate royaltyFeeExtensionBankVoucherSubmissionDate;
+    private String royaltyFeeExtensionBankVoucherSubmissionDateJalali;
     private String royaltyFeeExtensionPaymentStatus;
-
     private String extendStatus;
-    private String extendDate;
 }

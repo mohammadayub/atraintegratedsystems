@@ -9,7 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/finance/code-extension/application-fee")
+@RequestMapping("/codes/finance/code-extension/application-fee")
 public class ShortCodeApplicationFeesExtensionController {
 
     @Autowired
@@ -64,7 +64,7 @@ public class ShortCodeApplicationFeesExtensionController {
     ) {
         try {
             extensionService.saveExtension(id, dto);
-            return "redirect:/finance/code-extension/application-fee/list";
+            return "redirect:/codes/finance/code-extension/application-fee/list";
 
         } catch (RuntimeException e) {
             // Handle errors (e.g., null date fields, invalid data)

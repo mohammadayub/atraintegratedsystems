@@ -5,6 +5,7 @@ import atraintegratedsystems.codes.model.CodeDetail;
 import atraintegratedsystems.codes.model.ShortCodeRoylatyFeesExtension;
 import atraintegratedsystems.codes.repository.CodeDetailRepository;
 import atraintegratedsystems.codes.repository.ShortCodeRoyaltyFeesExtensionRepository;
+import atraintegratedsystems.utils.PersianCalendarUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,14 +40,100 @@ public class ShortCodeRoyaltyFeesExtensionService {
         extension.setRoyaltyFeeExtendedFees(dto.getRoyaltyFeeExtendedFees());
         extension.setRoyaltyFeeExtensionBankVoucherNo(
                 dto.getRoyaltyFeeExtensionBankVoucherNo());
-        extension.setRoyaltyFeeExtensionDate(
-                dto.getRoyaltyFeeExtensionDate());
-        extension.setRoyaltyFeeExtentionExpirationDate(
-                dto.getRoyaltyFeeExtentionExpirationDate());
-        extension.setRoyaltyFeeExtensionEnteryVoucherDate(
-                dto.getRoyaltyFeeExtensionEnteryVoucherDate());
-        extension.setRoyaltyFeeExtensionBankVoucherSubmissionDate(
-                dto.getRoyaltyFeeExtensionBankVoucherSubmissionDate());
+
+
+//        extension.setRoyaltyFeeExtensionDate(
+//                dto.getRoyaltyFeeExtensionDate());
+
+        PersianCalendarUtils converter = new PersianCalendarUtils();
+
+        if (dto.getRoyaltyFeeExtensionDateJalali() != null &&
+                !dto.getRoyaltyFeeExtensionDateJalali().isEmpty()) {
+
+            String[] partsExtensionDate = dto.getRoyaltyFeeExtensionDateJalali().split("-");
+            if (partsExtensionDate.length == 3) {
+                int jExtensionYear = Integer.parseInt(partsExtensionDate[0]);
+                int jExtensionMonth = Integer.parseInt(partsExtensionDate[1]);
+                int jExtensionDay = Integer.parseInt(partsExtensionDate[2]);
+                LocalDate extensionDate = converter.jalaliToGregorian(jExtensionYear, jExtensionMonth, jExtensionDay);
+                extension.setRoyaltyFeeExtensionDate(extensionDate);
+            }
+        }
+
+
+
+//        extension.setRoyaltyFeeExtentionExpirationDate(
+//                dto.getRoyaltyFeeExtensionExpirationDate());
+
+
+
+        if (dto.getRoyaltyFeeExtensionExpirationDateJalali() != null &&
+                !dto.getRoyaltyFeeExtensionExpirationDateJalali().isEmpty()) {
+
+            String[] parts = dto.getRoyaltyFeeExtensionExpirationDateJalali().split("-");
+            if (parts.length == 3) {
+                int year = Integer.parseInt(parts[0]);
+                int month = Integer.parseInt(parts[1]);
+                int day = Integer.parseInt(parts[2]);
+
+                LocalDate gregorianDate = converter.jalaliToGregorian(year, month, day);
+                extension.setRoyaltyFeeExtentionExpirationDate(gregorianDate);
+            }
+        }
+
+
+//        extension.setRoyaltyFeeExtensionEnteryVoucherDate(
+//                dto.getRoyaltyFeeExtensionEntryVoucherDate());
+
+        if (dto.getRoyaltyFeeExtensionEntryVoucherDateJalali() != null &&
+                !dto.getRoyaltyFeeExtensionEntryVoucherDateJalali().isEmpty()) {
+
+            String[] parts = dto.getRoyaltyFeeExtensionEntryVoucherDateJalali().split("-");
+            if (parts.length == 3) {
+                int year = Integer.parseInt(parts[0]);
+                int month = Integer.parseInt(parts[1]);
+                int day = Integer.parseInt(parts[2]);
+
+                LocalDate gregorianDate = converter.jalaliToGregorian(year, month, day);
+                extension.setRoyaltyFeeExtensionEnteryVoucherDate(gregorianDate);
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+//        extension.setRoyaltyFeeExtensionBankVoucherSubmissionDate(
+//                dto.getRoyaltyFeeExtensionBankVoucherSubmissionDate());
+
+        if (dto.getRoyaltyFeeExtensionBankVoucherSubmissionDateJalali() != null &&
+                !dto.getRoyaltyFeeExtensionBankVoucherSubmissionDateJalali().isEmpty()) {
+
+            String[] parts = dto.getRoyaltyFeeExtensionBankVoucherSubmissionDateJalali().split("-");
+            if (parts.length == 3) {
+                int year = Integer.parseInt(parts[0]);
+                int month = Integer.parseInt(parts[1]);
+                int day = Integer.parseInt(parts[2]);
+
+                LocalDate gregorianDate = converter.jalaliToGregorian(year, month, day);
+                extension.setRoyaltyFeeExtensionBankVoucherSubmissionDate(gregorianDate);
+            }
+        }
+
+
+
+
+
+
+
+
+
         extension.setRoyaltyFeeExtensionPaymentStatus(
                 dto.getRoyaltyFeeExtensionPaymentStatus());
 

@@ -19,7 +19,7 @@
             <p th:text="${errorMessage}"></p>
         </div>
 
-        <form th:action="@{/finance/code-extension/application-fee/save/{id}(id=${codeDetail.id})}"
+        <form th:action="@{/codes/finance/code-extension/application-fee/save/{id}(id=${codeDetail.id})}"
               th:object="${extensionDTO}"
               method="post">
 
@@ -59,7 +59,7 @@
             </div>
 
             <button type="submit" class="btn btn-success">Save Extension</button>
-            <a th:href="@{/finance/code-extension/application-fee/list}" class="btn btn-secondary">Cancel</a>
+            <a th:href="@{/codes/finance/code-extension/application-fee/list}" class="btn btn-secondary">Cancel</a>
 
         </form>
     </fieldset>

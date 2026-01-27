@@ -24,14 +24,14 @@
         <input type="text"
                class="form-control hijrishamsi"
                id="extensionDate"
-               th:field="*{royaltyFeeExtensionDate}">
+               th:field="*{royaltyFeeExtensionDateJalali}">
       </div>
 
       <div class="mb-3">
         <label>Expiration Date</label>
         <input type="text"
                class="form-control hijrishamsi"
-               th:field="*{royaltyFeeExtentionExpirationDate}">
+               th:field="*{royaltyFeeExtensionExpirationDateJalali}">
       </div>
       <div class="mb-3">
         <label>Extended Royalty Fee</label>
@@ -46,7 +46,6 @@
 
       <!-- 🔒 SYSTEM VALUES (NOT SHOWN TO USER) -->
       <input type="hidden" th:field="*{extendStatus}">
-      <input type="hidden" th:field="*{extendDate}">
 
       <button type="submit"
               class="btn btn-success">
