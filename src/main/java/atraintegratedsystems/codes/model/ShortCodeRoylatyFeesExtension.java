@@ -36,5 +36,5 @@ public class ShortCodeRoylatyFeesExtension {
 
     @ManyToOne
     @JoinColumn(name = "code_detail_id")
-    private CodeDetail codeDetail;
+    private ShortCodeDetail shortCodeDetail;
 }

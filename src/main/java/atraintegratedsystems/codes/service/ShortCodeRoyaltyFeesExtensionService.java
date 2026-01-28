@@ -1,9 +1,9 @@
 package atraintegratedsystems.codes.service;
 
 import atraintegratedsystems.codes.dto.ShortCodeRoyaltyFeesExtensionDTO;
-import atraintegratedsystems.codes.model.CodeDetail;
+import atraintegratedsystems.codes.model.ShortCodeDetail;
 import atraintegratedsystems.codes.model.ShortCodeRoylatyFeesExtension;
-import atraintegratedsystems.codes.repository.CodeDetailRepository;
+import atraintegratedsystems.codes.repository.ShortCodeDetailRepository;
 import atraintegratedsystems.codes.repository.ShortCodeRoyaltyFeesExtensionRepository;
 import atraintegratedsystems.utils.PersianCalendarUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,13 +15,13 @@ import java.util.List;
 @Service
 public class ShortCodeRoyaltyFeesExtensionService {
     @Autowired
-    private CodeDetailRepository codeDetailRepository;
+    private ShortCodeDetailRepository shortCodeDetailRepository;
     @Autowired
     private ShortCodeRoyaltyFeesExtensionRepository extensionRepository;
 
 
     public List<Object[]> findUnPaidRoyaltyFeeForExtension() {
-        return codeDetailRepository.findUnPaidRoyaltyFeeForExtension();
+        return shortCodeDetailRepository.findUnPaidRoyaltyFeeForExtension();
     }
 
     public void saveRoyaltyFeeExtension(
@@ -29,7 +29,7 @@ public class ShortCodeRoyaltyFeesExtensionService {
             ShortCodeRoyaltyFeesExtensionDTO dto
     ) {
 
-        CodeDetail codeDetail = codeDetailRepository.findById(codeDetailId)
+        ShortCodeDetail codeDetail = shortCodeDetailRepository.findById(codeDetailId)
                 .orElseThrow(() ->
                         new RuntimeException("Code Detail not found"));
 
@@ -142,7 +142,7 @@ public class ShortCodeRoyaltyFeesExtensionService {
         extension.setExtendDate(LocalDate.now().toString());
 
         // 🔥 AUTO LINK
-        extension.setCodeDetail(codeDetail);
+        extension.setShortCodeDetail(codeDetail);
 
         extensionRepository.save(extension);
     }

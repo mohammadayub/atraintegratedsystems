@@ -1,10 +1,9 @@
 package atraintegratedsystems.codes.service;
 
-import atraintegratedsystems.codes.dto.CodeDetailDTO;
-import atraintegratedsystems.codes.model.CodeDetail;
-import atraintegratedsystems.codes.repository.CodeDetailRepository;
-import atraintegratedsystems.codes.repository.CodeRepository;
-import atraintegratedsystems.utils.DateConverter;
+import atraintegratedsystems.codes.dto.ShortCodeDetailDTO;
+import atraintegratedsystems.codes.model.ShortCodeDetail;
+import atraintegratedsystems.codes.repository.ShortCodeDetailRepository;
+import atraintegratedsystems.codes.repository.ShortCodeRepository;
 import atraintegratedsystems.utils.PersianCalendarUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,26 +16,26 @@ import java.util.Optional;
 @Service
 public class ShortCodesDetailPaymentsConfirmationFinanceService {
     @Autowired
-    private CodeDetailRepository codeDetailRepository;
+    private ShortCodeDetailRepository shortCodeDetailRepository;
 
     @Autowired
-    private CodeRepository codeRepository;
+    private ShortCodeRepository shortCodeRepository;
 
     // find uppaid application fees
     public List<Object[]> getunPaidApplicationFees() {
-        return codeDetailRepository.findunPaidApplicationFee();
+        return shortCodeDetailRepository.findunPaidApplicationFee();
     }
 
 // ✅ Load unpaid application fee for edit
-    public Optional<CodeDetail> getUnpaidApplicationFeeForEdit(Long id) {
-        return codeDetailRepository.findUnpaidApplicationFeeById(id);
+    public Optional<ShortCodeDetail> getUnpaidApplicationFeeForEdit(Long id) {
+        return shortCodeDetailRepository.findUnpaidApplicationFeeById(id);
     }
 
 
     @Transactional
-    public boolean confirmApplicationFee(CodeDetailDTO dto) {
+    public boolean confirmApplicationFee(ShortCodeDetailDTO dto) {
 
-        CodeDetail codeDetail = codeDetailRepository.findById(dto.getId())
+        ShortCodeDetail codeDetail = shortCodeDetailRepository.findById(dto.getId())
                 .orElseThrow(() -> new IllegalArgumentException(
                         "Invalid code ID: " + dto.getId()));
 
@@ -83,7 +82,7 @@ public class ShortCodesDetailPaymentsConfirmationFinanceService {
         // (Optional) overall payment status
         codeDetail.setPaymentStatus("PAID");
 
-        codeDetailRepository.save(codeDetail);
+        shortCodeDetailRepository.save(codeDetail);
 
         return true;
     }
@@ -94,19 +93,19 @@ public class ShortCodesDetailPaymentsConfirmationFinanceService {
 //    Royalty Fee Section
 
     public List<Object[]> getunPaidRyaltyFees() {
-        return codeDetailRepository.findunPaidRoyaltyFee();
+        return shortCodeDetailRepository.findunPaidRoyaltyFee();
     }
 
     // Royalty Fee Print Tariffs Section
 
-    public Optional<CodeDetail> getUnRoyaltyFeeForEdit(Long id) {
-        return codeDetailRepository.findUnpaidRoyaltyFeeById(id);
+    public Optional<ShortCodeDetail> getUnRoyaltyFeeForEdit(Long id) {
+        return shortCodeDetailRepository.findUnpaidRoyaltyFeeById(id);
     }
 
     @Transactional
-    public boolean confirmRoyaltyFee(CodeDetailDTO dto) {
+    public boolean confirmRoyaltyFee(ShortCodeDetailDTO dto) {
 
-        CodeDetail codeDetail = codeDetailRepository.findById(dto.getId())
+        ShortCodeDetail codeDetail = shortCodeDetailRepository.findById(dto.getId())
                 .orElseThrow(() ->
                         new IllegalArgumentException("Invalid code ID: " + dto.getId()));
 
@@ -152,7 +151,7 @@ public class ShortCodesDetailPaymentsConfirmationFinanceService {
         // (Optional but consistent with application fee)
         codeDetail.setPaymentStatus("PAID");
 
-        codeDetailRepository.save(codeDetail);
+        shortCodeDetailRepository.save(codeDetail);
 
         return true;
     }
@@ -162,11 +161,11 @@ public class ShortCodesDetailPaymentsConfirmationFinanceService {
 
     // Royalty Fee Extension section
     public List<Object[]> getUnPaidRyaltyFeesForExtension() {
-        return codeDetailRepository.findUnPaidRoyaltyFeeForExtension();
+        return shortCodeDetailRepository.findUnPaidRoyaltyFeeForExtension();
     }
 
     // Application Fee Extension Section
     public List<Object[]> getUnPaidApplicationFeesForExtension() {
-        return codeDetailRepository.findUnPaidApplicationFeeForExtension();
+        return shortCodeDetailRepository.findUnPaidApplicationFeeForExtension();
     }
 }

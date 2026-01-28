@@ -1,10 +1,10 @@
 package atraintegratedsystems.codes.controller;
 
-import atraintegratedsystems.codes.dto.CodeDetailDTO;
-import atraintegratedsystems.codes.model.CodeDetail;
+import atraintegratedsystems.codes.dto.ShortCodeDetailDTO;
+import atraintegratedsystems.codes.model.ShortCodeDetail;
 import atraintegratedsystems.codes.model.ShortCodeSerialNumber;
-import atraintegratedsystems.codes.service.CodeDetailService;
-import atraintegratedsystems.codes.service.CodeService;
+import atraintegratedsystems.codes.service.ShortCodeDetailService;
+import atraintegratedsystems.codes.service.ShortCodeService;
 import atraintegratedsystems.codes.service.ShortCodeSerialNumberService;
 import atraintegratedsystems.licenses.model.LicenseApplicant;
 import atraintegratedsystems.licenses.repository.LicenseApplicantRepository;
@@ -20,17 +20,17 @@ import java.io.IOException;
 import java.util.Optional;
 
 @Controller
-public class CodeDetailController {
+public class ShortCodeDetailController {
 
     // ======================================================
     // SERVICES
     // ======================================================
 
     @Autowired
-    private CodeDetailService codeDetailService;
+    private ShortCodeDetailService shortCodeDetailService;
 
     @Autowired
-    private CodeService codeService;
+    private ShortCodeService shortCodeService;
 
     @Autowired
     private LicenseApplicantRepository licenseApplicantRepository;
@@ -48,10 +48,10 @@ public class CodeDetailController {
     @GetMapping("/codes/standard/shortcodes_details")
     public String telecomShortCodes(Model model) {
 
-        model.addAttribute("data", codeDetailService.getAllDetailCodes());
-        model.addAttribute("codeDetailDTO", new CodeDetailDTO());
+        model.addAttribute("data", shortCodeDetailService.getAllDetailCodes());
+        model.addAttribute("codeDetailDTO", new ShortCodeDetailDTO());
 
-        model.addAttribute("codes", codeService.getShortCodes());
+        model.addAttribute("codes", shortCodeService.getShortCodes());
         model.addAttribute("serialNumbers", shortCodeSerialNumberService.findAll());
 
         model.addAttribute(
@@ -69,9 +69,9 @@ public class CodeDetailController {
     @GetMapping("/codes/standard/shortcodes_details/add")
     public String addTelecomShortCode(Model model) {
 
-        model.addAttribute("codeDetailDTO", new CodeDetailDTO());
+        model.addAttribute("codeDetailDTO", new ShortCodeDetailDTO());
 
-        model.addAttribute("codes", codeService.getShortCodes());
+        model.addAttribute("codes", shortCodeService.getShortCodes());
         model.addAttribute("serialNumbers", shortCodeSerialNumberService.findAll());
 
         model.addAttribute(
@@ -88,7 +88,7 @@ public class CodeDetailController {
 
     @PostMapping("/codes/standard/shortcodes_detailsAdd/add")
     public String telecomShortCodePost(
-            @Valid @ModelAttribute("codeDetailDTO") CodeDetailDTO dto,
+            @Valid @ModelAttribute("codeDetailDTO") ShortCodeDetailDTO dto,
             BindingResult bindingResult,
             Model model
     ) throws IOException {
@@ -96,7 +96,7 @@ public class CodeDetailController {
         // ---------- VALIDATION ----------
         if (bindingResult.hasErrors()) {
 
-            model.addAttribute("codes", codeService.getShortCodes());
+            model.addAttribute("codes", shortCodeService.getShortCodes());
             model.addAttribute("serialNumbers", shortCodeSerialNumberService.findAll());
             model.addAttribute("licenseApplicants",
                     licenseApplicantRepository.findAllApprovedApplicants());
@@ -105,7 +105,7 @@ public class CodeDetailController {
         }
 
         // ---------- CREATE ENTITY ----------
-        CodeDetail codeDetail = new CodeDetail();
+        ShortCodeDetail codeDetail = new ShortCodeDetail();
 
         codeDetail.setId(dto.getId());
         codeDetail.setShortCode(dto.getShortCode());
@@ -185,7 +185,7 @@ public class CodeDetailController {
         codeDetail.setTotal(dto.getTotal());
 
         // ---------- SAVE ----------
-        codeDetailService.AddShort(codeDetail);
+        shortCodeDetailService.AddShort(codeDetail);
 
         return "redirect:/codes/standard/shortcodes_details";
     }
@@ -197,7 +197,7 @@ public class CodeDetailController {
     @PostMapping("/codes/standard/shortcodes_details/release/{id}")
     public String releaseShortCode(@PathVariable Long id) {
 
-        codeDetailService.releaseShortCode(id);
+        shortCodeDetailService.releaseShortCode(id);
 
         return "redirect:/codes/standard/shortcodes_details";
     }
@@ -209,11 +209,11 @@ public class CodeDetailController {
     @GetMapping("/codes/standard/shortcodes_details/update/{id}")
     public String updateShortCodeGet(@PathVariable Long id, Model model) {
 
-        CodeDetail codeDetail = codeDetailService.getCodeDetailId(id)
+        ShortCodeDetail codeDetail = shortCodeDetailService.getCodeDetailId(id)
                 .orElseThrow(() ->
                         new RuntimeException("CodeDetail not found with id: " + id));
 
-        CodeDetailDTO dto = new CodeDetailDTO();
+        ShortCodeDetailDTO dto = new ShortCodeDetailDTO();
 
         dto.setId(codeDetail.getId());
         dto.setShortCode(codeDetail.getShortCode());
@@ -249,7 +249,7 @@ public class CodeDetailController {
         dto.setTotal(codeDetail.getTotal());
 
         model.addAttribute("codeDetailDTO", dto);
-        model.addAttribute("codes", codeService.getShortCodes());
+        model.addAttribute("codes", shortCodeService.getShortCodes());
         model.addAttribute("serialNumbers", shortCodeSerialNumberService.findAll());
         model.addAttribute("licenseApplicants",
                 licenseApplicantRepository.findAllApprovedApplicants());
@@ -264,7 +264,7 @@ public class CodeDetailController {
     @GetMapping("/codes/standard/shortcodes_details/delete/{id}")
     public String deleteProduct(@PathVariable Long id) {
 
-        codeDetailService.deleteCodeDetail(id);
+        shortCodeDetailService.deleteCodeDetail(id);
 
         return "redirect:/codes/standard/shortcodes_details";
     }

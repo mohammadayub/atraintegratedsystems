@@ -1,7 +1,7 @@
 package atraintegratedsystems.codes.controller;
 
-import atraintegratedsystems.codes.dto.CodeDetailDTO;
-import atraintegratedsystems.codes.model.CodeDetail;
+import atraintegratedsystems.codes.dto.ShortCodeDetailDTO;
+import atraintegratedsystems.codes.model.ShortCodeDetail;
 import atraintegratedsystems.codes.service.ShortCodeRejectionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,9 +21,9 @@ public class ShortCodeRejectionController {
     @GetMapping("/codes/standard/shortcodes_details/reject/{id}")
     public String showRejectForm(@PathVariable Long id, Model model) {
 
-        CodeDetail codeDetail = shortCodeRejectionService.getById(id);
+        ShortCodeDetail codeDetail = shortCodeRejectionService.getById(id);
 
-        CodeDetailDTO dto = new CodeDetailDTO();
+        ShortCodeDetailDTO dto = new ShortCodeDetailDTO();
         dto.setId(codeDetail.getId());
 
         model.addAttribute("codeDetail", codeDetail);
@@ -36,7 +36,7 @@ public class ShortCodeRejectionController {
     @PostMapping("/codes/standard/shortcodes_details/reject/{id}")
     public String rejectShortCode(
             @PathVariable Long id,
-            @ModelAttribute("dto") CodeDetailDTO dto
+            @ModelAttribute("dto") ShortCodeDetailDTO dto
     ) {
 
         shortCodeRejectionService.rejectShortCode(id, dto);

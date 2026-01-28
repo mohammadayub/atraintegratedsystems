@@ -12,8 +12,9 @@
 <body>
 
 <nav th:replace="~{codes_layout :: page_navbar}"></nav>
-<div class="container mt-4">
-  <fieldset>
+<div class="container-fluid"
+     th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+<fieldset>
     <legend>
       Unpaid Royalty Fee Extensions
     </legend>

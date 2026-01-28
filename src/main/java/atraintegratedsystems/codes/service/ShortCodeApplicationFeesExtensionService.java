@@ -1,9 +1,9 @@
 package atraintegratedsystems.codes.service;
 
 import atraintegratedsystems.codes.dto.ShortCodeApplicationFeesExtensionDTO;
-import atraintegratedsystems.codes.model.CodeDetail;
 import atraintegratedsystems.codes.model.ShortCodeApplicationFeesExtension;
-import atraintegratedsystems.codes.repository.CodeDetailRepository;
+import atraintegratedsystems.codes.model.ShortCodeDetail;
+import atraintegratedsystems.codes.repository.ShortCodeDetailRepository;
 import atraintegratedsystems.codes.repository.ShortCodeApplicationFeesExtensionRepository;
 import atraintegratedsystems.utils.PersianCalendarUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,7 @@ import java.util.List;
 public class ShortCodeApplicationFeesExtensionService {
 
     @Autowired
-    private CodeDetailRepository codeDetailRepository;
+    private ShortCodeDetailRepository shortCodeDetailRepository;
 
     @Autowired
     private ShortCodeApplicationFeesExtensionRepository extensionRepository;
@@ -25,20 +25,20 @@ public class ShortCodeApplicationFeesExtensionService {
        LIST UNPAID EXTENSIONS
        ========================= */
     public List<Object[]> findUnPaidApplicationFeeForExtension() {
-        return codeDetailRepository.findUnPaidApplicationFeeForExtension();
+        return shortCodeDetailRepository.findUnPaidApplicationFeeForExtension();
     }
 
     /* =========================
        GET CODE DETAIL
        ========================= */
-    public CodeDetail getCodeDetailById(Long id) {
-        return codeDetailRepository.findById(id)
+    public ShortCodeDetail getCodeDetailById(Long id) {
+        return shortCodeDetailRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("CodeDetail not found with id: " + id));
     }
 
     public void saveExtension(Long codeDetailId, ShortCodeApplicationFeesExtensionDTO dto) {
 
-        CodeDetail codeDetail = getCodeDetailById(codeDetailId);
+        ShortCodeDetail codeDetail = getCodeDetailById(codeDetailId);
 
         ShortCodeApplicationFeesExtension entity = new ShortCodeApplicationFeesExtension();
 
@@ -120,7 +120,7 @@ public class ShortCodeApplicationFeesExtensionService {
         entity.setExtendEntryDate(LocalDate.now().toString());
 
         // Relation
-        entity.setCodeDetail(codeDetail);
+        entity.setShortCodeDetail(codeDetail);
 
         // Save entity
         extensionRepository.save(entity);

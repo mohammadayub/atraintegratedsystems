@@ -8,9 +8,8 @@ import javax.persistence.Id;
 
 @Entity
 @Data
-public class Code {
+public class ShortCode {
     @Id
     @Column(name="short_code",unique = true)
     private int id;
-
 }

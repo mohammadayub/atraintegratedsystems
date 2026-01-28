@@ -19,7 +19,7 @@ public class ShortCodeSerialNumber {
 
     // ✅ One-to-One (inverse side) - NULL allowed
     @OneToOne(mappedBy = "serialNumber", optional = true)
-    private CodeDetail codeDetail;
+    private ShortCodeDetail shortCodeDetail;
 
 
 }

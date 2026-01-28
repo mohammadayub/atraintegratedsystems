@@ -1,0 +1,64 @@
+package atraintegratedsystems.codes.dto;
+
+import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.time.LocalDate;
+
+@Data
+public class ShortCodeDetailDTO {
+    private Long id;
+    private Integer shortCode;
+    private Integer releaseShortCode;
+    private String codeStatus;
+    private String unique_name_of_signaling_point;
+    private Long licenseApplicantId;
+    private String sourceUsed;
+    private String location;
+    private String chanel;
+    private String services;
+    private String categoryType;
+    private String category;
+    private String back_long_number;
+    private String name_of_responsible_person;
+    private String id_card_number_of_responsible_person;
+    private String mobile_number_of_responsible_person;
+    private String phone_number_of_responsible_person;
+    private String email_of_responsible_person;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate assigning_date;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate expiration_date;
+    private double application_fees;
+
+    // Short Code Rejection Section
+    private String shortCodeRejectionStatus;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate shortCodeRejectionDate;
+
+    //Application fees
+    private String applicationFeebankVoucherNo;
+    private LocalDate applicationFeeEnterVoucherDate;
+    private String applicationFeeEnterVoucherDateJalali;
+    private LocalDate applicationFeebankVoucherSubmissionDate;
+    private String applicationFeebankVoucherSubmissionDateJalali;
+
+    private double registration_fees;
+
+    // Royalty Fees
+    private double royalty_fees;
+    private String royaltyFeesStatus;
+    private String royaltyFeebankVoucherNo;
+    private String royaltyFeeEnterVoucherDate;
+    private String royaltyFeeEnterVoucherDateJalali;
+    private String royaltyFeeBankVoucherSubmissionDate;
+    private String royaltyFeeBankVoucherSubmissionDateJalali;
+
+    private double total;
+    private String bankVoucherNo;
+    private String paymentStatus;
+
+    private Long serialNumberId;
+
+
+}

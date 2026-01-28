@@ -1,8 +1,8 @@
 package atraintegratedsystems.codes.controller;
 
-import atraintegratedsystems.codes.dto.CodeDTO;
-import atraintegratedsystems.codes.model.Code;
-import atraintegratedsystems.codes.repository.CodeRepository;
+import atraintegratedsystems.codes.dto.ShortCodeDTO;
+import atraintegratedsystems.codes.model.ShortCode;
+import atraintegratedsystems.codes.repository.ShortCodeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,10 +16,10 @@ import java.io.IOException;
 import java.util.List;
 
 @Controller
-public class CodeController {
+public class ShortCodeController {
 
     @Autowired
-    private CodeRepository codeRepository;
+    private ShortCodeRepository shortCodeRepository;
 
     /**
      * Displays the Short Codes Master Table page
@@ -32,7 +32,7 @@ public class CodeController {
 
     @GetMapping("/codes/standard/shortcodes")
     public String getCodes(Model model) {
-        List<Object[]> codes = codeRepository.getCodeData();
+        List<Object[]> codes = shortCodeRepository.getCodeData();
         model.addAttribute("codes", codes);
         return "codes/standard/shortcodes_mastertable";
     }
@@ -42,8 +42,8 @@ public class CodeController {
      */
     @GetMapping("/codes/standard/shortcodes/add")
     public String showAddShortCodeForm(Model model) {
-        model.addAttribute("codeDTO", new CodeDTO());
-        List<Object[]> codes = codeRepository.getCodeData();
+        model.addAttribute("codeDTO", new ShortCodeDTO());
+        List<Object[]> codes = shortCodeRepository.getCodeData();
         model.addAttribute("codes", codes);
         return "codes/standard/shortcodes_mastertableadd";
     }
@@ -53,7 +53,7 @@ public class CodeController {
      */
     @PostMapping("/codes/standard/shortcodes/add")
     public String handleAddShortCode(
-            @Valid @ModelAttribute("codeDTO") Code code,
+            @Valid @ModelAttribute("codeDTO") ShortCode code,
             BindingResult bindingResult,
             Model model
     ) throws IOException {
@@ -62,12 +62,12 @@ public class CodeController {
             return "codes/standard/shortcodes_mastertableadd";
         }
 
-        if (codeRepository.existsById(code.getId())) {
+        if (shortCodeRepository.existsById(code.getId())) {
             model.addAttribute("errorMessage", "ID already exists. Please enter a unique ID.");
             return "codes/standard/shortcodes_mastertableadd";
         }
 
-        codeRepository.save(code);
+        shortCodeRepository.save(code);
         return "redirect:/codes/standard/shortcodes";
     }
 }

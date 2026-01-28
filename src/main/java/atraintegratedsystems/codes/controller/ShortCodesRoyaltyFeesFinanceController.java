@@ -1,8 +1,8 @@
 package atraintegratedsystems.codes.controller;
 
-import atraintegratedsystems.codes.dto.CodeDetailDTO;
-import atraintegratedsystems.codes.model.CodeDetail;
-import atraintegratedsystems.codes.service.CodeDetailService;
+import atraintegratedsystems.codes.dto.ShortCodeDetailDTO;
+import atraintegratedsystems.codes.model.ShortCodeDetail;
+import atraintegratedsystems.codes.service.ShortCodeDetailService;
 import atraintegratedsystems.codes.service.ShortCodesDetailPaymentsConfirmationFinanceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,7 +16,7 @@ import java.util.List;
 @Controller
 public class ShortCodesRoyaltyFeesFinanceController {
     @Autowired
-    private CodeDetailService codeDetailService;
+    private ShortCodeDetailService shortCodeDetailService;
 
     @Autowired
     private ShortCodesDetailPaymentsConfirmationFinanceService codesDetailPaymentsConfirmationService;
@@ -32,7 +32,7 @@ public class ShortCodesRoyaltyFeesFinanceController {
     @GetMapping("/codes/royaltyfees/edit/{id}")
     public String showCodeTariff(@PathVariable Long id, Model model) {
 
-        CodeDetail codeDetail = codesDetailPaymentsConfirmationService
+        ShortCodeDetail codeDetail = codesDetailPaymentsConfirmationService
                 .getUnpaidApplicationFeeForEdit(id)
                 .orElseThrow(() -> new RuntimeException("Unpaid application fee not found"));
 
@@ -47,11 +47,11 @@ public class ShortCodesRoyaltyFeesFinanceController {
     @GetMapping("/codes/royaltyfees/confirm/{id}")
     public String showRoyaltyConfirmForm(@PathVariable Long id, Model model) {
 
-        CodeDetail codeDetail = codeDetailService
+        ShortCodeDetail codeDetail = shortCodeDetailService
                 .getCodeDetailId(id)
                 .orElseThrow(() -> new RuntimeException("Record not found"));
 
-        CodeDetailDTO dto = new CodeDetailDTO();
+        ShortCodeDetailDTO dto = new ShortCodeDetailDTO();
         dto.setId(codeDetail.getId());
         dto.setShortCode(codeDetail.getShortCode());
 
@@ -62,7 +62,7 @@ public class ShortCodesRoyaltyFeesFinanceController {
 
     // save confirmation
     @PostMapping("/codes/royaltyfees/confirm/save")
-    public String confirmRoyaltyFee(CodeDetailDTO dto) {
+    public String confirmRoyaltyFee(ShortCodeDetailDTO dto) {
 
         codesDetailPaymentsConfirmationService.confirmRoyaltyFee(dto);
 

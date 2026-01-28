@@ -1,6 +1,6 @@
 package atraintegratedsystems.codes.repository;
 
-import atraintegratedsystems.codes.model.CodeDetail;
+import atraintegratedsystems.codes.model.ShortCodeDetail;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -11,26 +11,36 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
-public interface CodeDetailRepository extends JpaRepository<CodeDetail,Long> {
-    Optional<CodeDetail> findByShortCode(int shortCode);
+public interface ShortCodeDetailRepository extends JpaRepository<ShortCodeDetail,Long> {
+    Optional<ShortCodeDetail> findByShortCode(int shortCode);
 
     @Query(value = "SELECT cd.code_detail_id, CONCAT(cd.source_used, '-', cd.short_code) AS company_name_with_code " +
-            "FROM code_extension_detail ced RIGHT OUTER JOIN code_detail cd ON ced.code_detail_id = cd.code_detail_id", nativeQuery = true)
+            "FROM code_extension_detail ced RIGHT OUTER JOIN short_code_detail cd ON ced.code_detail_id = cd.code_detail_id", nativeQuery = true)
     List<Object[]> getCodeDetailWithCompanyNameAndCode();
 
-    @Query(value = "SELECT * FROM code_detail WHERE payment_status IS NULL", nativeQuery = true)
-    List<CodeDetail> findUnpaid();
+    @Query(value = "SELECT * FROM short_code_detail WHERE payment_status IS NULL", nativeQuery = true)
+    List<ShortCodeDetail> findUnpaid();
 
 
 
-    @Modifying @Transactional @Query("UPDATE CodeDetail c SET c.releaseShortCode = c.shortCode, c.shortCode = NULL WHERE c.id = :id AND c.shortCode IS NOT NULL")
-    int releaseCode(@Param("id") Long id);
+//    @Modifying @Transactional @Query("UPDATE CodeDetail c SET c.releaseShortCode = c.shortCode, c.shortCode = NULL WHERE c.id = :id AND c.shortCode IS NOT NULL")
+//    int releaseCode(@Param("id") Long id);
+@Modifying
+@Transactional
+@Query(
+        "UPDATE ShortCodeDetail c " +
+                "SET c.releaseShortCode = c.shortCode, " +
+                "    c.shortCode = NULL " +
+                "WHERE c.id = :id AND c.shortCode IS NOT NULL"
+)
+int releaseCode(@Param("id") Long id);
+
 
 
 
     // for Application Fee
 
-    @Query(value = "SELECT cd.code_detail_id,cd.short_code, cd.code_status, cd.source_used, cd.location, cd.category_type, cd.category, cd.chanel, cd.email_of_responsible_person FROM code_detail cd WHERE cd.application_fees_status IS NULL", nativeQuery = true)
+    @Query(value = "SELECT cd.code_detail_id,cd.short_code, cd.code_status, cd.source_used, cd.location, cd.category_type, cd.category, cd.chanel, cd.email_of_responsible_person FROM short_code_detail cd WHERE cd.application_fees_status IS NULL", nativeQuery = true)
     List<Object[]> findunPaidApplicationFee();
 
     // Tariff Related
@@ -57,11 +67,11 @@ public interface CodeDetailRepository extends JpaRepository<CodeDetail,Long> {
 //    Object[] findApplicationFeeById(@Param("id") Long id);
 
     @Query(value =
-            "SELECT * FROM code_detail " +
+            "SELECT * FROM short_code_detail " +
                     "WHERE code_detail_id = :id " +
                     "AND application_fees_status IS NULL",
             nativeQuery = true)
-    Optional<CodeDetail> findUnpaidApplicationFeeById(@Param("id") Long id);
+    Optional<ShortCodeDetail> findUnpaidApplicationFeeById(@Param("id") Long id);
 
 
 
@@ -87,7 +97,7 @@ public interface CodeDetailRepository extends JpaRepository<CodeDetail,Long> {
     @Modifying
     @Transactional
     @Query(
-            "UPDATE CodeDetail c " +
+            "UPDATE ShortCodeDetail c " +
                     "SET c.applicationFeesStatus = 'PAID', " +
                     "    c.applicationFeebankVoucherNo = :voucherNo, " +
                     "    c.applicationFeeEnterVoucherDate = :enterDate, " +
@@ -105,16 +115,16 @@ public interface CodeDetailRepository extends JpaRepository<CodeDetail,Long> {
 
 //    Royalty Fee Related
 
-    @Query(value = "SELECT cd.code_detail_id,cd.short_code, cd.code_status, cd.source_used, cd.location, cd.category_type, cd.category, cd.chanel, cd.email_of_responsible_person FROM code_detail cd WHERE cd.royalty_fees_status IS null", nativeQuery = true)
+    @Query(value = "SELECT cd.code_detail_id,cd.short_code, cd.code_status, cd.source_used, cd.location, cd.category_type, cd.category, cd.chanel, cd.email_of_responsible_person FROM short_code_detail cd WHERE cd.royalty_fees_status IS null", nativeQuery = true)
     List<Object[]> findunPaidRoyaltyFee();
 
 //    Bellow is related to Tariff
 @Query(value =
-        "SELECT * FROM code_detail " +
+        "SELECT * FROM short_code_detail " +
                 "WHERE code_detail_id = :id " +
                 "AND royalty_fees_status IS NULL",
         nativeQuery = true)
-Optional<CodeDetail> findUnpaidRoyaltyFeeById(@Param("id") Long id);
+Optional<ShortCodeDetail> findUnpaidRoyaltyFeeById(@Param("id") Long id);
 
 
     // Bellow is Related To Confirmation
@@ -122,7 +132,7 @@ Optional<CodeDetail> findUnpaidRoyaltyFeeById(@Param("id") Long id);
     @Modifying
     @Transactional
     @Query(
-            "UPDATE CodeDetail c " +
+            "UPDATE ShortCodeDetail c " +
                     "SET c.royaltyFeesStatus = 'PAID', " +
                     "    c.royaltyFeebankVoucherNo = :voucherNo, " +
                     "    c.royaltyFeeEnterVoucherDate = :enterDate, " +
@@ -152,7 +162,7 @@ Optional<CodeDetail> findUnpaidRoyaltyFeeById(@Param("id") Long id);
                         " cd.category, " +                    // row[6]
                         " cd.chanel, " +                      // row[7]
                         " cd.email_of_responsible_person " +  // row[8]
-                        "FROM code_detail cd " +
+                        "FROM short_code_detail cd " +
                         "WHERE cd.royalty_fees_status = 'PAID'",
         nativeQuery = true
 )
@@ -161,7 +171,7 @@ List<Object[]> findUnPaidRoyaltyFeeForExtension();
 
 
     // Bellow is Application Fee Extension
-    @Query(value = "SELECT cd.code_detail_id,cd.short_code, cd.code_status, cd.source_used, cd.location, cd.category_type, cd.category, cd.chanel, cd.email_of_responsible_person FROM code_detail cd WHERE cd.application_fees_status='PAID'", nativeQuery = true)
+    @Query(value = "SELECT cd.code_detail_id,cd.short_code, cd.code_status, cd.source_used, cd.location, cd.category_type, cd.category, cd.chanel, cd.email_of_responsible_person FROM short_code_detail cd WHERE cd.application_fees_status='PAID'", nativeQuery = true)
     List<Object[]> findUnPaidApplicationFeeForExtension();
 
 
@@ -170,7 +180,7 @@ List<Object[]> findUnPaidRoyaltyFeeForExtension();
     @Modifying
     @Transactional
     @Query(
-            "UPDATE CodeDetail c " +
+            "UPDATE ShortCodeDetail c " +
                     "SET c.shortCodeRejectionStatus = :status, " +
                     "    c.shortCodeRejectionDate = :date, " +
                     "    c.codeStatus = 'REJECTED' " +

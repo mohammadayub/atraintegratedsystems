@@ -1,7 +1,7 @@
 package atraintegratedsystems.codes.controller;
 
 import atraintegratedsystems.codes.dto.ShortCodeApplicationFeesExtensionDTO;
-import atraintegratedsystems.codes.model.CodeDetail;
+import atraintegratedsystems.codes.model.ShortCodeDetail;
 import atraintegratedsystems.codes.service.ShortCodeApplicationFeesExtensionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,7 +34,7 @@ public class ShortCodeApplicationFeesExtensionController {
     public String openForm(@PathVariable Long id, Model model) {
         try {
             // Fetch code detail
-            CodeDetail codeDetail = extensionService.getCodeDetailById(id);
+            ShortCodeDetail codeDetail = extensionService.getCodeDetailById(id);
 
             // Create DTO with default values
             ShortCodeApplicationFeesExtensionDTO extensionDTO = new ShortCodeApplicationFeesExtensionDTO();

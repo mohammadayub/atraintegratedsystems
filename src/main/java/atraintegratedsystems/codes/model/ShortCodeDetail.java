@@ -1,19 +1,28 @@
-package atraintegratedsystems.codes.dto;
+package atraintegratedsystems.codes.model;
 
+import atraintegratedsystems.licenses.model.LicenseApplicant;
 import lombok.Data;
-import org.apache.tomcat.jni.Local;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 
+@Entity
 @Data
-public class CodeDetailDTO {
+public class ShortCodeDetail {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="code_detail_id")
     private Long id;
+    @Column(name="short_code")
     private Integer shortCode;
     private Integer releaseShortCode;
     private String codeStatus;
+    @Column(name="ispc_unique_name_of_signaling_point")
     private String unique_name_of_signaling_point;
-    private Long licenseApplicantId;
+    @ManyToOne
+    @JoinColumn(name = "license_applicant_id")
+    private LicenseApplicant licenseApplicant;
     private String sourceUsed;
     private String location;
     private String chanel;
@@ -30,36 +39,48 @@ public class CodeDetailDTO {
     private LocalDate assigning_date;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate expiration_date;
-    private double application_fees;
+
 
     // Short Code Rejection Section
     private String shortCodeRejectionStatus;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate shortCodeRejectionDate;
 
-    //Application fees
-    private String applicationFeebankVoucherNo;
-    private LocalDate applicationFeeEnterVoucherDate;
-    private String applicationFeeEnterVoucherDateJalali;
-    private LocalDate applicationFeebankVoucherSubmissionDate;
-    private String applicationFeebankVoucherSubmissionDateJalali;
 
+    // Finance Fees Section
+    private double application_fees;
+    private String applicationFeesOrganization="ATRA";
+    private String applicationFeesStatus;
     private double registration_fees;
 
     // Royalty Fees
     private double royalty_fees;
+    private String royaltyFeesOrganization = "MCIT";
     private String royaltyFeesStatus;
     private String royaltyFeebankVoucherNo;
-    private String royaltyFeeEnterVoucherDate;
-    private String royaltyFeeEnterVoucherDateJalali;
-    private String royaltyFeeBankVoucherSubmissionDate;
-    private String royaltyFeeBankVoucherSubmissionDateJalali;
-
+    private LocalDate royaltyFeeEnterVoucherDate;
+    private LocalDate royaltyFeeBankVoucherSubmissionDate;
     private double total;
-    private String bankVoucherNo;
+
+    //Application fees
+    private String applicationFeebankVoucherNo;
+    private LocalDate applicationFeeEnterVoucherDate;
+    private LocalDate applicationFeebankVoucherSubmissionDate;
     private String paymentStatus;
 
-    private Long serialNumberId;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(
+            name = "serial_number_id",
+            unique = true
+    )
+
+    private ShortCodeSerialNumber serialNumber;
+
+
+    public void setTotal(double total) {
+        this.total = application_fees+registration_fees+royalty_fees;
+    }
 
 
 }
