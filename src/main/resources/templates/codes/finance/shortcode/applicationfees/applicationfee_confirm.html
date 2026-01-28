@@ -1,78 +1,122 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      th:lang="#{lang}"
+      th:dir="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'rtl' : 'ltr'">
 
 <head th:replace="~{codes_layout :: page_head}">
-    <meta charset="UTF-8">
     <title>Application Fee Confirmation</title>
 
+    <!-- Styles -->
     <div th:replace="styles :: data-tables-styles"></div>
     <div th:replace="styles :: select2-styles"></div>
     <div th:replace="styles :: commonfieldset"></div>
     <div th:replace="styles :: common-css"></div>
     <div th:replace="styles :: persian-datepicker-styles"></div>
 
-    <!-- Bootstrap Icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
     <style>
         body {
-            background: #f4f6f9;
+            background-color: #f5f7fa;
+            font-family: "Segoe UI", system-ui, sans-serif;
         }
 
-        .main-card {
-            border-radius: 14px;
-            overflow: hidden;
+        /* Page wrapper */
+        .page-container {
+            max-width: 1100px;
         }
 
-        .header-bar {
-            background: linear-gradient(135deg, #0d6efd, #0b5ed7);
-            color: #fff;
-            padding: 14px 20px;
+        /* Card */
+        .content-card {
+            border-radius: 10px;
+            border: 1px solid #e5e7eb;
+            background: #ffffff;
+        }
+
+        /* Header */
+        .content-header {
+            padding: 16px 20px;
+            border-bottom: 1px solid #e5e7eb;
+            font-size: 15px;
             font-weight: 600;
-            letter-spacing: 0.5px;
+            color: #1f2937;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        .form-label {
-            font-weight: 600;
-            color: #344054;
+        /* Section title */
+        .section-title {
             font-size: 14px;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
 
+        /* Labels */
+        .form-label {
+            font-size: 13px;
+            font-weight: 600;
+            color: #4b5563;
+        }
+
+        /* Inputs */
         .form-control {
-            border-radius: 8px;
             height: 42px;
             font-size: 14px;
-            box-shadow: none !important;
+            border-radius: 6px;
+            border: 1px solid #d1d5db;
         }
 
         .form-control:focus {
-            border-color: #0d6efd;
-            box-shadow: 0 0 0 0.15rem rgba(13,110,253,.15);
+            border-color: #2563eb;
+            box-shadow: none;
         }
 
-        .form-control-solid {
-            background-color: #eef2f7;
+        .form-control-readonly {
+            background-color: #f3f4f6;
             font-weight: 600;
         }
 
-        .action-bar {
-            background: #f8fafc;
+        /* Input group */
+        .input-group-text {
+            background-color: #f3f4f6;
+            border: 1px solid #d1d5db;
+            color: #6b7280;
+        }
+
+        [dir="rtl"] .input-group-text {
+            border-left: none;
+        }
+
+        [dir="ltr"] .input-group-text {
+            border-right: none;
+        }
+
+        /* Footer */
+        .form-footer {
             padding: 20px;
             border-top: 1px solid #e5e7eb;
-            text-align: center;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        .btn-confirm {
-            padding: 10px 28px;
+        /* Buttons */
+        .btn-primary {
+            padding: 8px 28px;
             font-size: 14px;
-            border-radius: 8px;
             font-weight: 600;
-            box-shadow: 0 4px 12px rgba(13,110,253,.25);
+            border-radius: 6px;
         }
 
-        .back-btn {
-            margin-top: 18px;
+        .btn-secondary {
+            padding: 8px 20px;
             font-size: 14px;
             border-radius: 6px;
         }
@@ -80,88 +124,87 @@
 </head>
 
 <body>
+
 <nav th:replace="~{codes_layout :: page_navbar}"></nav>
 
-<div class="container-fluid mt-4"
-     th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+<div class="container page-container mt-4">
 
-    <div class="card shadow-lg border-0 main-card">
+    <div class="content-card">
 
         <!-- Header -->
-        <div class="card-header header-bar">
-            <i class="bi bi-receipt-cutoff me-2"></i>
+        <div class="content-header">
+            <i class="bi bi-receipt"></i>
             Application Fee Confirmation
         </div>
 
         <!-- Body -->
-        <div class="card-body">
+        <div class="p-4">
 
             <form th:action="@{/codes/applicationfees/confirm/save}"
                   th:object="${codeDetail}"
                   method="post">
 
-                <input type="hidden" name="id" th:value="${codeDetail.id}"/>
+                <input type="hidden" th:field="*{id}"/>
 
                 <div class="row g-4">
 
-                    <!-- Short Code -->
                     <div class="col-lg-2 col-md-4">
                         <label class="form-label">Short Code</label>
                         <input type="text"
-                               class="form-control form-control-solid"
+                               class="form-control form-control-readonly"
                                th:value="*{shortCode}" readonly>
                     </div>
 
-                    <!-- Entry Voucher Date -->
                     <div class="col-lg-3 col-md-6">
                         <label class="form-label">Entry Voucher Date</label>
-                        <input type="text"
-                               th:field="*{applicationFeeEnterVoucherDateJalali}"
-                               class="form-control hijrishamsi"
-                               placeholder="YYYY-MM-DD" required>
+                        <div class="input-group">
+                            <input type="text"
+                                   th:field="*{applicationFeeEnterVoucherDateJalali}"
+                                   class="form-control hijrishamsi"
+                                   required>
+                        </div>
                     </div>
 
-                    <!-- Bank Voucher Number -->
                     <div class="col-lg-3 col-md-6">
                         <label class="form-label">Bank Voucher Number</label>
-                        <input type="text"
-                               th:field="*{applicationFeebankVoucherNo}"
-                               class="form-control"
-                               placeholder="Enter voucher number" required>
+                        <div class="input-group">
+                            <input type="text"
+                                   th:field="*{applicationFeebankVoucherNo}"
+                                   class="form-control"
+                                   required>
+                        </div>
                     </div>
 
-                    <!-- Voucher Submission Date -->
                     <div class="col-lg-3 col-md-6">
                         <label class="form-label">Voucher Submission Date</label>
-                        <input type="text"
-                               th:field="*{applicationFeebankVoucherSubmissionDateJalali}"
-                               class="form-control hijrishamsi"
-                               placeholder="YYYY-MM-DD" required>
+                        <div class="input-group">
+                            <input type="text"
+                                   th:field="*{applicationFeebankVoucherSubmissionDateJalali}"
+                                   class="form-control hijrishamsi"
+                                   required>
+                        </div>
                     </div>
 
                 </div>
 
-                <!-- Action Bar -->
-                <div class="action-bar mt-4">
-                    <button type="submit" id="submitButton"
-                            class="btn btn-primary btn-confirm">
-                        <i class="bi bi-check-circle me-1"></i>
+                <!-- Footer -->
+                <div class="form-footer mt-4">
+
+                    <a th:href="@{/codes/finance/applicationFeelist}"
+                       class="btn btn-secondary">
+                        <i class="bi bi-arrow-left"></i>
+                        Back
+                    </a>
+
+                    <button type="submit" class="btn btn-primary">
                         Confirm Payment
                     </button>
+
                 </div>
 
             </form>
         </div>
     </div>
-
-    <!-- Back Button -->
-    <div class="text-center">
-        <a th:href="@{/codes/finance/applicationFeelist}"
-           class="btn btn-outline-primary back-btn">
-            <i class="bi bi-arrow-left"></i> Back to List
-        </a>
-    </div>
-
 </div>
 
 <!-- Scripts -->
@@ -171,5 +214,6 @@
 <div th:replace="scripts :: common-hijrishamsi-date"></div>
 
 <footer th:replace="~{codes_layout :: page_footer}"></footer>
+
 </body>
 </html>
