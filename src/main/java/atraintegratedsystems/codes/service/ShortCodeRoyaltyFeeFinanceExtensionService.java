@@ -3,8 +3,10 @@ package atraintegratedsystems.codes.service;
 import atraintegratedsystems.codes.dto.ShortCodeRoyaltyFeesExtensionDTO;
 import atraintegratedsystems.codes.model.ShortCodeRoylatyFeesExtension;
 import atraintegratedsystems.codes.repository.ShortCodeRoyaltyFeesExtensionRepository;
+import atraintegratedsystems.utils.PersianCalendarUtils;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -40,9 +42,9 @@ public class ShortCodeRoyaltyFeeFinanceExtensionService {
         dto.setRoyaltyFeeExtensionDate(
                 entity.getRoyaltyFeeExtensionDate());
         dto.setRoyaltyFeeExtensionExpirationDate(
-                entity.getRoyaltyFeeExtentionExpirationDate());
+                entity.getRoyaltyFeeExtensionExpirationDate());
         dto.setRoyaltyFeeExtensionEntryVoucherDate(
-                entity.getRoyaltyFeeExtensionEnteryVoucherDate());
+                entity.getRoyaltyFeeExtensionEntryVoucherDate());
         dto.setRoyaltyFeeExtensionBankVoucherSubmissionDate(
                 entity.getRoyaltyFeeExtensionBankVoucherSubmissionDate());
         dto.setRoyaltyFeeExtensionPaymentStatus(
@@ -65,9 +67,9 @@ public class ShortCodeRoyaltyFeeFinanceExtensionService {
 
         dto.setId(entity.getId());
         dto.setRoyaltyFeeExtensionExpirationDate(
-                entity.getRoyaltyFeeExtentionExpirationDate());
+                entity.getRoyaltyFeeExtensionExpirationDate());
         dto.setRoyaltyFeeExtensionEntryVoucherDate(
-                entity.getRoyaltyFeeExtensionEnteryVoucherDate());
+                entity.getRoyaltyFeeExtensionEntryVoucherDate());
         dto.setRoyaltyFeeExtensionBankVoucherSubmissionDate(
                 entity.getRoyaltyFeeExtensionBankVoucherSubmissionDate());
 
@@ -77,20 +79,58 @@ public class ShortCodeRoyaltyFeeFinanceExtensionService {
     /* ===== UPDATE PAYMENT ONLY ===== */
     public void updatePayment(ShortCodeRoyaltyFeesExtensionDTO dto) {
 
-        ShortCodeRoylatyFeesExtension entity =
-                repository.findById(dto.getId())
-                        .orElseThrow(() -> new RuntimeException("Record not found"));
+        ShortCodeRoylatyFeesExtension entity = repository.findById(dto.getId())
+                .orElseThrow(() -> new RuntimeException("Record not found with ID: " + dto.getId()));
 
-        entity.setRoyaltyFeeExtensionBankVoucherNo(
-                dto.getRoyaltyFeeExtensionBankVoucherNo());
-        entity.setRoyaltyFeeExtensionEnteryVoucherDate(
-                dto.getRoyaltyFeeExtensionEntryVoucherDate());
-        entity.setRoyaltyFeeExtensionBankVoucherSubmissionDate(
-                dto.getRoyaltyFeeExtensionBankVoucherSubmissionDate());
+        PersianCalendarUtils converter = new PersianCalendarUtils();
 
-        /* REQUIRED */
+        /* ================= VOUCHER NUMBER ================= */
+        entity.setRoyaltyFeeExtensionBankVoucherNo(dto.getRoyaltyFeeExtensionBankVoucherNo());
+
+        /* ================= ENTRY VOUCHER DATE ================= */
+        if (dto.getRoyaltyFeeExtensionEntryVoucherDateJalali() != null &&
+                !dto.getRoyaltyFeeExtensionEntryVoucherDateJalali().trim().isEmpty()) {
+
+            try {
+                String[] parts = dto.getRoyaltyFeeExtensionEntryVoucherDateJalali().trim().split("-");
+
+                if (parts.length == 3) {
+                    int year = Integer.parseInt(parts[0]);
+                    int month = Integer.parseInt(parts[1]);
+                    int day = Integer.parseInt(parts[2]);
+
+                    LocalDate voucherDate = converter.jalaliToGregorian(year, month, day);
+                    entity.setRoyaltyFeeExtensionEntryVoucherDate(voucherDate); // ✅ FIXED
+                }
+            } catch (Exception e) {
+                throw new RuntimeException("Invalid Entry Voucher Jalali Date format. Expected yyyy-MM-dd");
+            }
+        }
+
+        /* ================= SUBMISSION DATE ================= */
+        if (dto.getRoyaltyFeeExtensionBankVoucherSubmissionDateJalali() != null &&
+                !dto.getRoyaltyFeeExtensionBankVoucherSubmissionDateJalali().trim().isEmpty()) {
+
+            try {
+                String[] parts = dto.getRoyaltyFeeExtensionBankVoucherSubmissionDateJalali().trim().split("-");
+
+                if (parts.length == 3) {
+                    int year = Integer.parseInt(parts[0]);
+                    int month = Integer.parseInt(parts[1]);
+                    int day = Integer.parseInt(parts[2]);
+
+                    LocalDate submissionDate = converter.jalaliToGregorian(year, month, day);
+                    entity.setRoyaltyFeeExtensionBankVoucherSubmissionDate(submissionDate); // ✅ FIXED
+                }
+            } catch (Exception e) {
+                throw new RuntimeException("Invalid Submission Jalali Date format. Expected yyyy-MM-dd");
+            }
+        }
+
+        /* ================= PAYMENT STATUS ================= */
         entity.setRoyaltyFeeExtensionPaymentStatus("PAID");
 
         repository.save(entity);
     }
+
 }

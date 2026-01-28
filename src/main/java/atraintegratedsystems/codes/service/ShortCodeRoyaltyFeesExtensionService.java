@@ -77,7 +77,7 @@ public class ShortCodeRoyaltyFeesExtensionService {
                 int day = Integer.parseInt(parts[2]);
 
                 LocalDate gregorianDate = converter.jalaliToGregorian(year, month, day);
-                extension.setRoyaltyFeeExtentionExpirationDate(gregorianDate);
+                extension.setRoyaltyFeeExtensionExpirationDate(gregorianDate);
             }
         }
 
@@ -94,8 +94,8 @@ public class ShortCodeRoyaltyFeesExtensionService {
                 int month = Integer.parseInt(parts[1]);
                 int day = Integer.parseInt(parts[2]);
 
-                LocalDate gregorianDate = converter.jalaliToGregorian(year, month, day);
-                extension.setRoyaltyFeeExtensionEnteryVoucherDate(gregorianDate);
+                LocalDate voucherDate = converter.jalaliToGregorian(year, month, day);
+                extension.setRoyaltyFeeExtensionEntryVoucherDate(voucherDate);
             }
         }
 
@@ -121,8 +121,8 @@ public class ShortCodeRoyaltyFeesExtensionService {
                 int month = Integer.parseInt(parts[1]);
                 int day = Integer.parseInt(parts[2]);
 
-                LocalDate gregorianDate = converter.jalaliToGregorian(year, month, day);
-                extension.setRoyaltyFeeExtensionBankVoucherSubmissionDate(gregorianDate);
+                LocalDate submissionDate = converter.jalaliToGregorian(year, month, day);
+                extension.setRoyaltyFeeExtensionBankVoucherSubmissionDate(submissionDate);
             }
         }
 

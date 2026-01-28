@@ -11,74 +11,157 @@
     <div th:replace="styles :: commonfieldset"></div>
     <div th:replace="styles :: common-css"></div>
     <div th:replace="styles :: persian-datepicker-styles"></div>
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+    <style>
+        body {
+            background: #f4f6f9;
+        }
+
+        .main-card {
+            border-radius: 14px;
+            overflow: hidden;
+        }
+
+        .header-bar {
+            background: linear-gradient(135deg, #0d6efd, #0b5ed7);
+            color: #fff;
+            padding: 14px 20px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: #344054;
+            font-size: 14px;
+        }
+
+        .form-control {
+            border-radius: 8px;
+            height: 42px;
+            font-size: 14px;
+            box-shadow: none !important;
+        }
+
+        .form-control:focus {
+            border-color: #0d6efd;
+            box-shadow: 0 0 0 0.15rem rgba(13,110,253,.15);
+        }
+
+        .form-control-solid {
+            background-color: #eef2f7;
+            font-weight: 600;
+        }
+
+        .action-bar {
+            background: #f8fafc;
+            padding: 20px;
+            border-top: 1px solid #e5e7eb;
+            text-align: center;
+        }
+
+        .btn-confirm {
+            padding: 10px 28px;
+            font-size: 14px;
+            border-radius: 8px;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(13,110,253,.25);
+        }
+
+        .back-btn {
+            margin-top: 18px;
+            font-size: 14px;
+            border-radius: 6px;
+        }
+    </style>
 </head>
 
 <body>
 <nav th:replace="~{codes_layout :: page_navbar}"></nav>
 
-
-
 <div class="container-fluid mt-4"
      th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
 
-    <fieldset>
-        <legend>Application Fee Confirmation</legend>
+    <div class="card shadow-lg border-0 main-card">
 
-        <form th:action="@{/codes/applicationfees/confirm/save}"
-              th:object="${codeDetail}"
-              method="post">
+        <!-- Header -->
+        <div class="card-header header-bar">
+            <i class="bi bi-receipt-cutoff me-2"></i>
+            Application Fee Confirmation
+        </div>
 
-            <div class="row">
-                <!-- Hidden ID -->
+        <!-- Body -->
+        <div class="card-body">
+
+            <form th:action="@{/codes/applicationfees/confirm/save}"
+                  th:object="${codeDetail}"
+                  method="post">
+
                 <input type="hidden" name="id" th:value="${codeDetail.id}"/>
 
-                <!-- Short Code -->
-                <div class="col-md-2 form-group">
-                    <label>Short Code</label>
-                    <input type="text" class="form-control" th:value="*{shortCode}" readonly>
+                <div class="row g-4">
+
+                    <!-- Short Code -->
+                    <div class="col-lg-2 col-md-4">
+                        <label class="form-label">Short Code</label>
+                        <input type="text"
+                               class="form-control form-control-solid"
+                               th:value="*{shortCode}" readonly>
+                    </div>
+
+                    <!-- Entry Voucher Date -->
+                    <div class="col-lg-3 col-md-6">
+                        <label class="form-label">Entry Voucher Date</label>
+                        <input type="text"
+                               th:field="*{applicationFeeEnterVoucherDateJalali}"
+                               class="form-control hijrishamsi"
+                               placeholder="YYYY-MM-DD" required>
+                    </div>
+
+                    <!-- Bank Voucher Number -->
+                    <div class="col-lg-3 col-md-6">
+                        <label class="form-label">Bank Voucher Number</label>
+                        <input type="text"
+                               th:field="*{applicationFeebankVoucherNo}"
+                               class="form-control"
+                               placeholder="Enter voucher number" required>
+                    </div>
+
+                    <!-- Voucher Submission Date -->
+                    <div class="col-lg-3 col-md-6">
+                        <label class="form-label">Voucher Submission Date</label>
+                        <input type="text"
+                               th:field="*{applicationFeebankVoucherSubmissionDateJalali}"
+                               class="form-control hijrishamsi"
+                               placeholder="YYYY-MM-DD" required>
+                    </div>
+
                 </div>
 
-                <!-- Voucher Enter Date -->
-                <div class="col-md-3 form-group">
-                    <label>Application Fee Entry Voucher Date</label>
-                    <input type="text" th:field="*{applicationFeeEnterVoucherDateJalali}"
-                           class="form-control hijrishamsi" required>
+                <!-- Action Bar -->
+                <div class="action-bar mt-4">
+                    <button type="submit" id="submitButton"
+                            class="btn btn-primary btn-confirm">
+                        <i class="bi bi-check-circle me-1"></i>
+                        Confirm Payment
+                    </button>
                 </div>
 
-                <!-- Voucher Number -->
-                <div class="col-md-3 form-group">
-                    <label>Bank Voucher Number</label>
-                    <input type="text" th:field="*{applicationFeebankVoucherNo}"
-                           class="form-control" required>
-                </div>
+            </form>
+        </div>
+    </div>
 
-                <!-- Voucher Submission Date -->
-                <div class="col-md-3 form-group">
-                    <label>Bank Voucher Submission Date</label>
-                    <input type="text" th:field="*{applicationFeebankVoucherSubmissionDateJalali}"
-                           class="form-control hijrishamsi" required>
-                </div>
-            </div>
+    <!-- Back Button -->
+    <div class="text-center">
+        <a th:href="@{/codes/finance/applicationFeelist}"
+           class="btn btn-outline-primary back-btn">
+            <i class="bi bi-arrow-left"></i> Back to List
+        </a>
+    </div>
 
-            <!-- Submit Button -->
-            <div class="col-md-4 btn-group d-flex justify-content-center"
-                 style="margin-top: 15px; margin-bottom:80px;">
-
-                <button type="submit"
-                        id="submitButton"
-                        class="btn btn-primary btn-sm"
-                        style="width: 140px;">
-                    Confirm Payment
-                </button>
-            </div>
-        </form>
-    </fieldset>
-
-    <a th:href="@{/codes/finance/applicationFeelist}"
-       class="btn btn-primary"
-       style="margin-top:20px;">
-        ← Back to Page
-    </a>
 </div>
 
 <!-- Scripts -->
@@ -86,8 +169,6 @@
 <div th:replace="scripts :: persian-datepicker-scripts"></div>
 <div th:replace="scripts :: data-tables-scripts"></div>
 <div th:replace="scripts :: common-hijrishamsi-date"></div>
-
-<div style="height:10vh"></div>
 
 <footer th:replace="~{codes_layout :: page_footer}"></footer>
 </body>
