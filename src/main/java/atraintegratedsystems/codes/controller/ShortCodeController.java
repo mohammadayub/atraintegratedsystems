@@ -45,7 +45,7 @@ public class ShortCodeController {
         model.addAttribute("codeDTO", new ShortCodeDTO());
         List<Object[]> codes = shortCodeRepository.getCodeData();
         model.addAttribute("codes", codes);
-        return "codes/standard/shortcodes_mastertableadd";
+        return "codes/standard/shortcodes_mastertableAdd";
     }
 
     /**
@@ -59,12 +59,12 @@ public class ShortCodeController {
     ) throws IOException {
 
         if (bindingResult.hasErrors()) {
-            return "codes/standard/shortcodes_mastertableadd";
+            return "codes/standard/shortcodes_mastertableAdd";
         }
 
         if (shortCodeRepository.existsById(code.getId())) {
             model.addAttribute("errorMessage", "ID already exists. Please enter a unique ID.");
-            return "codes/standard/shortcodes_mastertableadd";
+            return "codes/standard/shortcodes_mastertableAdd";
         }
 
         shortCodeRepository.save(code);

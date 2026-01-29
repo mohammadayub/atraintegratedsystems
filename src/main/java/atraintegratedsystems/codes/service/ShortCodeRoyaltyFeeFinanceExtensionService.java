@@ -53,8 +53,6 @@ public class ShortCodeRoyaltyFeeFinanceExtensionService {
 
         return dto;
     }
-
-
     /* ===== LOAD FOR PAY FORM ===== */
     public ShortCodeRoyaltyFeesExtensionDTO getById(Long id) {
 
