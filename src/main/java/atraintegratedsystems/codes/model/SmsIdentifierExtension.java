@@ -32,6 +32,9 @@ public class SmsIdentifierExtension {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate extensionBankVoucherSubmissionDate;
     private String extensionPaymentStatus;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate extensionEnteryDate;
+    private String extensionBy;
 
     @ManyToOne
     @JoinColumn(name = "smsidentifier_detail_id")

@@ -1,32 +1,75 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{codes_layout :: page_head}">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SMS Identifier</title>
+
   <div th:replace="styles :: common-css"></div>
   <div th:replace="styles :: commonfieldset"></div>
   <div th:replace="styles :: persian-datepicker-styles"></div>
+
+  <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+  <style>
+    body {
+        background-color: #f8f9fa;
+        font-family: 'EB Garamond', serif;
+        font-weight: bold;
+    }
+
+    .container {
+        margin-top: 70px;
+    }
+
+    .card {
+        border-radius: 15px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    #footer {
+        margin-top: 60px;
+        background: rgba(0, 0, 0, 0.05);
+        text-align: center;
+        padding: 15px;
+        font-size: 14px;
+    }
+  </style>
 </head>
+
 <body>
 <nav th:replace="~{codes_layout :: page_navbar}"></nav>
-<div class="container mt-4">
-  <h3 th:text="${smsCode.id == null ? 'Add SMS Identifier Code' : 'Edit SMS Identifier Code'}"></h3>
 
-  <form th:action="${smsCode.id == null} ?
-            @{/codes/sms-identifier-codes/save} :
-            @{/codes/sms-identifier-codes/update/{id}(id=${smsCode.id})}"
-        th:object="${smsCode}"
-        method="post">
+<div class="container d-flex justify-content-center mt-4">
+  <div class="col-sm-10 col-md-6 col-lg-4">
+    <div class="card p-4">
+      <h3 class="text-center mb-4 text-primary"
+          th:text="${smsCode.id == null ? 'Add SMS Identifier Code' : 'Edit SMS Identifier Code'}">
+      </h3>
 
-    <div class="mb-3">
-      <label class="form-label">SMS Identifier Code</label>
-      <input type="text" class="form-control"
-             th:field="*{smsIdentifierCodeName}" required>
+      <form th:action="${smsCode.id == null} ?
+                @{/codes/sms-identifier-codes/save} :
+                @{/codes/sms-identifier-codes/update/{id}(id=${smsCode.id})}"
+            th:object="${smsCode}"
+            method="post">
+
+        <div class="form-group mb-3">
+          <label class="form-label">SMS Identifier Code</label>
+          <input type="text"
+                 class="form-control"
+                 th:field="*{smsIdentifierCodeName}"
+                 placeholder="Enter SMS Identifier Code"
+                 required>
+        </div>
+
+        <div class="d-flex justify-content-between mt-4">
+          <button type="submit" class="btn btn-primary">Save</button>
+          <a th:href="@{/sms-identifier-codes}" class="btn btn-secondary">
+            ← Back to List
+          </a>
+        </div>
+      </form>
     </div>
-
-
-    <button type="submit" class="btn btn-success">Save</button>
-    <a th:href="@{/sms-identifier-codes}" class="btn btn-secondary">Back</a>
-  </form>
+  </div>
 </div>
 
 <!-- Common scripts -->
@@ -34,7 +77,8 @@
 <div th:replace="scripts :: persian-datepicker-scripts"></div>
 <div th:replace="scripts :: common-hijrishamsi-date"></div>
 
-<div style="height:10vh;"></div>
 <footer th:replace="~{codes_layout :: page_footer}"></footer>
+
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
 </body>
 </html>

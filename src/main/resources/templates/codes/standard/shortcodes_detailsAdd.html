@@ -83,7 +83,11 @@
 
                 <div class="col-md-3 form-group">
                     <label th:text="#{channel}">Channel</label>
-                    <input type="text" class="form-control" th:field="*{chanel}">
+                    <select class="form-control" th:field="*{chanel}">
+                        <option value="IVR">IVR</option>
+                        <option value="SMS">SMS</option>
+                        <option value="USSD">USSD</option>
+                    </select>
                 </div>
 
                 <div class="col-md-3 form-group">

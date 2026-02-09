@@ -1,11 +1,18 @@
 package atraintegratedsystems.codes.dto;
 
+import lombok.*;
+
 import javax.persistence.Column;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 public class SmsIdentifierSerialNumberDTO {
     private Long id;
 
-    @Column(nullable = false)
+
     private int serialNumber;
 
 

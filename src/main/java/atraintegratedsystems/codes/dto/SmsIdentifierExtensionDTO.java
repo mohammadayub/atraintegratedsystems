@@ -19,9 +19,7 @@ public class SmsIdentifierExtensionDTO {
     private LocalDate extensionStartDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate extentionExpirationDate;
-    @Column(name="extend_status")
     private String extendStatus;
-    @Column(name="extend_Date")
     private String extendDate;
 
     // For Finance Departpemtn
@@ -33,6 +31,9 @@ public class SmsIdentifierExtensionDTO {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate extensionBankVoucherSubmissionDate;
     private String extensionPaymentStatus;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate extensionEnteryDate;
+    private String extensionBy;
 
 
 

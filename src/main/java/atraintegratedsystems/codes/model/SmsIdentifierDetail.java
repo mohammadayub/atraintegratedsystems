@@ -7,6 +7,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -68,7 +70,23 @@ public class SmsIdentifierDetail {
     @JsonIgnore
     private SmsIdentifierCode smsIdentifierCode;
 
+    @OneToMany(
+            mappedBy = "smsIdentifierDetail",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true,
+            fetch = FetchType.LAZY
+    )
+    private List<SmsIdentifierExtension> extensions = new ArrayList<>();
 
+
+
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(
+            name = "smsidentifier_serial_number_id",
+            unique = true
+    )
+    private SmsIdentifierSerialNumber smsIdentifierSerialNumber;
 
 
 }

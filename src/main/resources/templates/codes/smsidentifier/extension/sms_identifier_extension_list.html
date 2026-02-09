@@ -1,76 +1,90 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
+<head th:replace="~{codes_layout :: page_head}">
     <title>Active SMS Identifier Codes</title>
+
+    <div th:replace="styles :: data-tables-styles"></div>
+    <div th:replace="styles :: persian-datepicker-styles"></div>
+    <div th:replace="styles :: commonfieldset-with-legend-border"></div>
+
     <style>
+        .table-responsive {
+            overflow-x: auto;
+        }
         table {
             width: 100%;
-            border-collapse: collapse;
-        }
-        th, td {
-            padding: 8px;
-            border: 1px solid #ccc;
-        }
-        th {
-            background-color: #f4f4f4;
+            white-space: nowrap; /* prevent columns from breaking */
         }
     </style>
 </head>
+
 <body>
+<nav th:replace="~{codes_layout :: page_navbar}"></nav>
 
-<h2>Active SMS Identifier Codes (Not Rejected)</h2>
+<div class="container-fluid mt-4"
+     th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
 
-<table>
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>Company Name</th>
-        <th>ENID</th>
-        <th>Company Address</th>
-        <th>Mobile</th>
-        <th>Telephone</th>
-        <th>Email</th>
-        <th>Channel</th>
-        <th>Service Type</th>
-        <th>MNO Host</th>
-        <th>Code Category</th>
-        <th>Assigning Date</th>
-        <th>Expiration Date</th>
-        <th>SMS Identifier Code</th>
-        <th>Extension</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="item : ${smsIdentifierDetails}">
-        <td th:text="${item.id}"></td>
-        <td th:text="${item.companyName}"></td>
-        <td th:text="${item.enid}"></td>
-        <td th:text="${item.companyAddress}"></td>
-        <td th:text="${item.mobile}"></td>
-        <td th:text="${item.telephone}"></td>
-        <td th:text="${item.email}"></td>
-        <td th:text="${item.channel}"></td>
-        <td th:text="${item.serviceType}"></td>
-        <td th:text="${item.mnosCompanyHost}"></td>
-        <td th:text="${item.codeCategory}"></td>
-        <td th:text="${item.assigningDate}"></td>
-        <td th:text="${item.expirationDate}"></td>
-        <td th:text="${item.smsIdentifierCodeName}"></td>
-        <td>
-        <td>
-        <td>
-            <a th:href="@{/sms-identifier-extension/create/{id}(id=${item.id})}">
-                Extend
-            </a>
-        </td>
+    <fieldset class="mt-2">
+        <legend>Active SMS Identifier Codes (Not Rejected)</legend>
 
-        </td>
+        <!-- RESPONSIVE WRAPPER -->
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped table-hover" id="profileTable">
 
-        </td>
+                <thead class="table-light">
+                <tr>
+                    <th>ID</th>
+                    <th>Company Name</th>
+                    <th>ENID</th>
+                    <th>Company Address</th>
+                    <th>Mobile</th>
+                    <th>Telephone</th>
+                    <th>Email</th>
+                    <th>Channel</th>
+                    <th>Service Type</th>
+                    <th>MNO Host</th>
+                    <th>Code Category</th>
+                    <th>Assigning Date</th>
+                    <th>Expiration Date</th>
+                    <th>SMS Identifier Code</th>
+                    <th>Extension</th>
+                </tr>
+                </thead>
 
-    </tr>
-    </tbody>
-</table>
+                <tbody>
+                <tr th:each="item : ${smsIdentifierDetails}">
+                    <td th:text="${item.id}"></td>
+                    <td th:text="${item.companyName}"></td>
+                    <td th:text="${item.enid}"></td>
+                    <td th:text="${item.companyAddress}"></td>
+                    <td th:text="${item.mobile}"></td>
+                    <td th:text="${item.telephone}"></td>
+                    <td th:text="${item.email}"></td>
+                    <td th:text="${item.channel}"></td>
+                    <td th:text="${item.serviceType}"></td>
+                    <td th:text="${item.mnosCompanyHost}"></td>
+                    <td th:text="${item.codeCategory}"></td>
+                    <td th:text="${item.assigningDate}"></td>
+                    <td th:text="${item.expirationDate}"></td>
+                    <td th:text="${item.smsIdentifierCodeName}"></td>
+
+                    <!-- FIXED: only ONE td -->
+                    <td>
+                        <a class="btn btn-sm btn-outline-primary"
+                           th:href="@{/sms-identifier-extension/create/{id}(id=${item.id})}">
+                            Extend
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+
+            </table>
+        </div>
+    </fieldset>
+</div>
+
+<div style="height:10vh;"></div>
+<footer th:replace="~{codes_layout :: page_footer}"></footer>
 
 </body>
 </html>

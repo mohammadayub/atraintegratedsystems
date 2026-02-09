@@ -3,8 +3,10 @@ package atraintegratedsystems.codes.service;
 import atraintegratedsystems.codes.dto.SmsIdentifierDetailDTO;
 import atraintegratedsystems.codes.model.SmsIdentifierCode;
 import atraintegratedsystems.codes.model.SmsIdentifierDetail;
+import atraintegratedsystems.codes.model.SmsIdentifierSerialNumber;
 import atraintegratedsystems.codes.repository.SmsIdentifierCodeRepository;
 import atraintegratedsystems.codes.repository.SmsIdentifierDetailRepository;
+import atraintegratedsystems.codes.repository.SmsIdentifierSerialNumberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,27 +22,30 @@ public class SmsIdentifierDetailService {
     @Autowired
     private SmsIdentifierCodeRepository codeRepo;
 
+    @Autowired
+    private SmsIdentifierSerialNumberRepository serialNumberRepo;
+
+
     /* ================= CREATE ================= */
     public void save(SmsIdentifierDetailDTO dto) {
 
         SmsIdentifierCode code = codeRepo.findById(dto.getSmsIdentifierCodeId())
                 .orElseThrow(() -> new RuntimeException("SMS Identifier Code not found"));
 
-        // 🔥 PREVENT DOUBLE ASSIGN (OPTIONAL BUT RECOMMENDED)
         if (code.getSmsIdentifierDetail() != null) {
             throw new RuntimeException("This SMS Identifier Code is already assigned");
         }
 
-        // 🔥 AUTOMATIC STATUS UPDATE
-        code.setAssignStatus("Assign");
-
         SmsIdentifierDetail entity = new SmsIdentifierDetail();
         mapToEntity(dto, entity);
+
+        code.setAssignStatus("Assign");
         entity.setSmsIdentifierCode(code);
 
         detailRepo.save(entity);
         codeRepo.save(code);
     }
+
 
     /* ================= READ ALL ================= */
     public List<SmsIdentifierDetailDTO> findAll() {
@@ -64,18 +69,20 @@ public class SmsIdentifierDetailService {
         SmsIdentifierDetail entity = detailRepo.findById(id)
                 .orElseThrow(() -> new RuntimeException("Record not found"));
 
-        SmsIdentifierCode code = codeRepo.findById(dto.getSmsIdentifierCodeId())
-                .orElseThrow(() -> new RuntimeException("SMS Identifier Code not found"));
+        // 🔁 Release old serial number if changed
+        if (entity.getSmsIdentifierSerialNumber() != null &&
+                !entity.getSmsIdentifierSerialNumber().getId().equals(dto.getSmsIdentifierSerialNumberId())) {
 
-        // 🔥 ENSURE STATUS REMAINS ASSIGN
-        code.setAssignStatus("Assign");
+            SmsIdentifierSerialNumber oldSn = entity.getSmsIdentifierSerialNumber();
+            oldSn.setStatus(null);
+            serialNumberRepo.save(oldSn);
+        }
 
         mapToEntity(dto, entity);
-        entity.setSmsIdentifierCode(code);
 
         detailRepo.save(entity);
-        codeRepo.save(code);
     }
+
 
     /* ================= DELETE ================= */
     public void delete(Long id) {
@@ -84,15 +91,21 @@ public class SmsIdentifierDetailService {
                 .orElseThrow(() -> new RuntimeException("Record not found"));
 
         SmsIdentifierCode code = detail.getSmsIdentifierCode();
+        SmsIdentifierSerialNumber sn = detail.getSmsIdentifierSerialNumber();
 
-        // 🔥 RESET STATUS WHEN DETAIL IS DELETED
         if (code != null) {
             code.setAssignStatus("Unassign");
             codeRepo.save(code);
         }
 
+        if (sn != null) {
+            sn.setStatus(null);   // 🔁 free the serial number
+            serialNumberRepo.save(sn);
+        }
+
         detailRepo.delete(detail);
     }
+
 
     /* ================= MAPPERS ================= */
 
@@ -124,6 +137,20 @@ public class SmsIdentifierDetailService {
 
         e.setShortCodeRejectionStatus(dto.getShortCodeRejectionStatus());
         e.setShortCodeRejectionDate(dto.getShortCodeRejectionDate());
+
+        if (dto.getSmsIdentifierSerialNumberId() != null) {
+            SmsIdentifierSerialNumber sn = serialNumberRepo.findById(dto.getSmsIdentifierSerialNumberId())
+                    .orElseThrow(() -> new RuntimeException("Serial Number not found"));
+
+            // 🚫 Prevent double assign
+            if ("Assigned".equalsIgnoreCase(sn.getStatus())) {
+                throw new RuntimeException("This Serial Number is already assigned!");
+            }
+
+            sn.setStatus("Assigned");   // 🔥 mark as assigned
+            e.setSmsIdentifierSerialNumber(sn);
+        }
+
     }
 
     private SmsIdentifierDetailDTO mapToDTO(SmsIdentifierDetail e) {
@@ -159,6 +186,11 @@ public class SmsIdentifierDetailService {
         dto.setShortCodeRejectionDate(e.getShortCodeRejectionDate());
 
         dto.setSmsIdentifierCodeId(e.getSmsIdentifierCode().getId());
+
+        if (e.getSmsIdentifierSerialNumber() != null) {
+            dto.setSmsIdentifierSerialNumberId(e.getSmsIdentifierSerialNumber().getId());
+        }
+
 
         return dto;
     }

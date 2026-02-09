@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class SmsIdentifierExtensionController {
     @Autowired
     private SmsIdentifierExtensionService smsIdentifierExtensionService;
-    @GetMapping("/sms-identifiers/extension/list")
+    @GetMapping("/codes/sms-identifiers/extension/list")
     public String viewActiveSmsIdentifiers(Model model) {
 
         model.addAttribute(
@@ -46,6 +46,6 @@ public class SmsIdentifierExtensionController {
 
         smsIdentifierExtensionService.saveExtension(id, dto);
 
-        return "redirect:/sms-identifiers/extension/list";
+        return "redirect:/codes/sms-identifiers/extension/list";
     }
 }

@@ -1,5 +1,6 @@
 package atraintegratedsystems.codes.repository;
 import atraintegratedsystems.codes.dto.SmsIdentifierDetailDTO;
+import atraintegratedsystems.codes.dto.SmsIdentifierFinanceExtensionDTO;
 import atraintegratedsystems.codes.model.SmsIdentifierDetail;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -244,5 +245,39 @@ void rejectSmsIdentifier(
                     "AND d.royaltyFeesPaymentStatus IS NOT NULL"
     )
     List<SmsIdentifierDetailDTO> findSmsIdentifierCodeForExtension();
+
+
+    // Bellow is For SmsIdentifierFinanceExtension
+    @Query(
+            "SELECT new atraintegratedsystems.codes.dto.SmsIdentifierFinanceExtensionDTO(" +
+                    " e.id, " +                     // <<<<<< THIS IS THE REAL FIX
+                    " c.smsIdentifierCodeName, " +
+                    " d.companyName, " +
+                    " d.enid, " +
+                    " d.mobile, " +
+                    " d.email, " +
+                    " d.channel, " +
+                    " d.serviceType, " +
+                    " d.mnosCompanyHost, " +
+                    " d.codeCategory, " +
+                    " d.applicationFeesPaymentStatus, " +
+                    " d.royaltyFeesPaymentStatus, " +
+                    " e.extensionStartDate, " +
+                    " e.extentionExpirationDate, " +
+                    " e.extendStatus, " +
+                    " e.extensionStartDate " +   // createdDate (better than assigningDate)
+                    ") " +
+                    "FROM SmsIdentifierDetail d " +
+                    "JOIN d.smsIdentifierCode c " +
+                    "JOIN d.extensions e " +
+                    "WHERE d.applicationFeesPaymentStatus = 'PAID' " +
+                    "AND d.royaltyFeesPaymentStatus = 'PAID' " +
+                    "AND e.extendStatus = 'EXTENDED'"+
+                    "AND e.extensionPaymentStatus IS NULL"
+    )
+    List<SmsIdentifierFinanceExtensionDTO> findFinanceExtensions();
+
+
+
 
 }

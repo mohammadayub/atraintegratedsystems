@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>SMS Identifier Serial Numbers</title>
+
+    <!-- Layout head -->
+    <th:block th:insert="~{codes_layout :: page_head}"></th:block>
+
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+
+    <style>
+
+        /* Assigned numbers highlight */
+        .assigned {
+            background-color: #42f5b0;
+            color: white;
+            font-weight: bold;
+        }
+
+        /* grid cell design */
+        .serial-cell {
+            width: 70px;
+            height: 45px;
+            font-size: 14px;
+            vertical-align: middle;
+            font-weight: 600;
+        }
+
+        .serial-cell:hover {
+            background-color: #e9ecef;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<!-- Navbar -->
+<nav th:replace="~{codes_layout :: page_navbar}"></nav>
+
+<div class="container mt-4">
+
+    <h5 class="mb-3">SMS Identifier Serial Numbers</h5>
+
+    <!-- Add button -->
+    <a th:href="@{/codes/smsidentifier/serial-numbers/new}" class="btn btn-primary mb-3">
+        Add Serial Number
+    </a>
+
+    <div class="table-responsive">
+
+        <table class="table table-bordered text-center table-sm">
+            <tbody>
+
+            <!-- create rows (20 per row) -->
+            <tr th:each="row : ${#numbers.sequence(0, list.size() - 1, 20)}">
+
+                <!-- create 20 columns -->
+                <td class="serial-cell"
+                    th:each="i : ${#numbers.sequence(row, row + 19)}"
+                    th:if="${i < list.size()}"
+                    th:text="${list[i].serialNumber}"
+                    th:classappend="${list[i].status == 'Assigned'} ? 'assigned' : ''">
+                </td>
+
+            </tr>
+
+            </tbody>
+        </table>
+
+    </div>
+
+</div>
+
+<div style="height:10vh"></div>
+
+<!-- Footer -->
+<footer th:replace="~{codes_layout :: page_footer}"></footer>
+
+</body>
+</html>

@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{codes_layout :: page_head}">
+    <div th:replace="styles :: persian-datepicker-styles"></div>
+    <div th:replace="styles :: select2-styles"></div>
+    <div th:replace="styles :: common-css"></div>
     <title>Reject Short Code</title>
 </head>
 
@@ -37,7 +40,7 @@
                 <div class="col-md-6">
                     <label>Rejection Date</label>
                     <input type="date"
-                           class="form-control"
+                           class="form-control hijrishamsi"
                            th:field="*{shortCodeRejectionDate}" required>
                 </div>
             </div>
@@ -53,6 +56,10 @@
         </form>
     </fieldset>
 </div>
+<div th:replace="scripts :: common-scripts"></div>
+<div th:replace="scripts :: persian-datepicker-scripts"></div>
+<div th:replace="scripts :: select2-scripts"></div>
+<div th:replace="scripts :: common-hijrishamsi-date"></div>
 
 <footer th:replace="~{codes_layout :: page_footer}"></footer>
 </body>

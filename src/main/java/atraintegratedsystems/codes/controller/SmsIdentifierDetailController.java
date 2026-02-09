@@ -2,6 +2,7 @@ package atraintegratedsystems.codes.controller;
 
 import atraintegratedsystems.codes.dto.SmsIdentifierDetailDTO;
 import atraintegratedsystems.codes.repository.SmsIdentifierCodeRepository;
+import atraintegratedsystems.codes.repository.SmsIdentifierSerialNumberRepository;
 import atraintegratedsystems.codes.service.SmsIdentifierDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +19,11 @@ public class SmsIdentifierDetailController {
     @Autowired
     private SmsIdentifierCodeRepository codeRepo;
 
+    @Autowired
+    private SmsIdentifierSerialNumberRepository serialNumberRepo;
+
+
+
     @GetMapping("list")
     public String list(Model model) {
         model.addAttribute("details", detailService.findAll());
@@ -28,8 +34,11 @@ public class SmsIdentifierDetailController {
     public String createForm(Model model) {
         model.addAttribute("detail", new SmsIdentifierDetailDTO());
         model.addAttribute("codes", codeRepo.findByAssignStatusIsNullOrAssignStatusEquals(""));
+        model.addAttribute("serialNumbers", serialNumberRepo.findByStatusIsNull());
         return "codes/smsidentifier/smsidentifier/sms_identifier_detail_form";
     }
+
+
 
     @PostMapping("/save")
     public String save(@ModelAttribute("detail") SmsIdentifierDetailDTO dto) {
@@ -39,10 +48,21 @@ public class SmsIdentifierDetailController {
 
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable Long id, Model model) {
-        model.addAttribute("detail", detailService.findById(id));
+
+        SmsIdentifierDetailDTO dto = detailService.findById(id);
+
+        model.addAttribute("detail", dto);
         model.addAttribute("codes", codeRepo.findByAssignStatusIsNullOrAssignStatusEquals(""));
+
+        // 🔥 include unassigned + currently assigned serial number
+        model.addAttribute("serialNumbers",
+                serialNumberRepo.findByStatusIsNull()
+        );
+
         return "codes/smsidentifier/smsidentifier/sms_identifier_detail_form";
     }
+
+
 
     @PostMapping("/update/{id}")
     public String update(@PathVariable Long id,

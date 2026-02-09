@@ -72,6 +72,29 @@
                 font-size: 12px;
             }
         }
+
+        @media print {
+
+    @page {
+        size: auto;   /* 👈 allows Portrait & Landscape */
+        margin: 10mm;
+    }
+
+    body {
+        width: auto !important;
+        overflow: visible !important;
+    }
+
+    .container-fluid {
+        width: 100% !important;
+    }
+
+    table {
+        width: 100% !important;
+        table-layout: auto;
+    }
+}
+
     </style>
 
     <div th:replace="styles :: ltr-to-rtl"></div>
@@ -81,7 +104,6 @@
 
 <!-- Navbar -->
 <nav th:replace="~{codes_layout :: page_navbar}"></nav>
-
 <!-- Main Content -->
 <div class="container-fluid"
      th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
@@ -119,7 +141,7 @@
             <table id="example" class="table table-bordered table-hover text-center">
                 <thead>
                 <tr>
-                    <th>SN</th>
+                    <th>ID#</th>
                     <th>Short Code</th>
                     <th>Release Short Code</th>
                     <th>Status</th>

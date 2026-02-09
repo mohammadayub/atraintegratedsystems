@@ -57,4 +57,66 @@ public class SmsIdentifierDetailDTO {
     /* 🔥 IMPORTANT */
     private Long smsIdentifierCodeId;
     private String smsIdentifierCodeName;
+
+    private Long smsIdentifierSerialNumberId;
+    private int serialNumber;
+
+    public SmsIdentifierDetailDTO(
+            long id,
+            String companyName,
+            String enid,
+            String companyAddress,
+            String mobile,
+            String telephone,
+            String email,
+            String channel,
+            String serviceType,
+            String mnosCompanyHost,
+            String codeCategory,
+            LocalDate assigningDate,
+            LocalDate expirationDate,
+            double applicationFees,
+            String applicationFeesBankVoucherNo,
+            LocalDate applicationFeesEnteryVoucherDate,
+            LocalDate applicationFeesBankVoucherSubmissionDate,
+            String applicationFeesPaymentStatus,
+            double royaltyFees,
+            String royaltyFeesBankVoucherNo,
+            LocalDate royaltyFeesEnteryVoucherDate,
+            LocalDate royaltyFeesBankVoucherSubmissionDate,
+            String royaltyFeesPaymentStatus,
+            String shortCodeRejectionStatus,
+            LocalDate shortCodeRejectionDate,
+            long smsIdentifierCodeId,
+            String smsIdentifierCodeName
+    ) {
+        this.id = id;
+        this.companyName = companyName;
+        this.enid = enid;
+        this.companyAddress = companyAddress;
+        this.mobile = mobile;
+        this.telephone = telephone;
+        this.email = email;
+        this.channel = channel;
+        this.serviceType = serviceType;
+        this.mnosCompanyHost = mnosCompanyHost;
+        this.codeCategory = codeCategory;
+        this.assigningDate = assigningDate;
+        this.expirationDate = expirationDate;
+        this.applicationFees = applicationFees;
+        this.applicationFeesBankVoucherNo = applicationFeesBankVoucherNo;
+        this.applicationFeesEnteryVoucherDate = applicationFeesEnteryVoucherDate;
+        this.applicationFeesBankVoucherSubmissionDate = applicationFeesBankVoucherSubmissionDate;
+        this.applicationFeesPaymentStatus = applicationFeesPaymentStatus;
+        this.royaltyFees = royaltyFees;
+        this.royaltyFeesBankVoucherNo = royaltyFeesBankVoucherNo;
+        this.royaltyFeesEnteryVoucherDate = royaltyFeesEnteryVoucherDate;
+        this.royaltyFeesBankVoucherSubmissionDate = royaltyFeesBankVoucherSubmissionDate;
+        this.royaltyFeesPaymentStatus = royaltyFeesPaymentStatus;
+        this.shortCodeRejectionStatus = shortCodeRejectionStatus;
+        this.shortCodeRejectionDate = shortCodeRejectionDate;
+        this.smsIdentifierCodeId = smsIdentifierCodeId;
+        this.smsIdentifierCodeName = smsIdentifierCodeName;
+    }
+
 }

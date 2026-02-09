@@ -17,16 +17,7 @@ public class SmsIdentifierRejectionController {
     @Autowired
     private SmsIdentifierRejectionService service;
 
-//    @GetMapping("/rejection-list")
-//    public String rejectionList(Model model) {
-//
-//        model.addAttribute(
-//                "rejectionList",
-//                service.getRejectionList()
-//        );
-//        return "codes/smsidentifier/rejection/sms_identifier_rejection_list";
-//    }
-@GetMapping("/sms-identifiers/active")
+@GetMapping("/codes/sms-identifiers/reject/list")
 public String viewActiveSmsIdentifiers(Model model) {
 
     model.addAttribute(
@@ -58,6 +49,6 @@ public String viewActiveSmsIdentifiers(Model model) {
             @ModelAttribute("sms") SmsIdentifierDetailDTO dto
     ) {
         service.rejectUsingDto(dto);
-        return "redirect:/sms-identifiers/active";
+        return "redirect:/codes/sms-identifiers/reject/list";
     }
 }

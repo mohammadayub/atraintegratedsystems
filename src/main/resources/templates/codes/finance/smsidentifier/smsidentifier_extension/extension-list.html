@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="~{codes_layout :: page_head}">
+        <div th:replace="styles :: commonfieldset"></div>
+        <title>Finance Extension List</title>
+</head>
+
+<body>
+
+<nav th:replace="~{codes_layout :: page_navbar}"></nav>
+
+<div class="container mt-4">
+
+
+    <h3 class="mb-3 text-primary">
+        Finance Department — Extended SMS Identifier Codes
+    </h3>
+
+    <table class="table table-bordered table-striped table-hover table-sm">
+
+        <thead>
+        <tr>
+            <th>Extension ID</th>
+            <th>Code</th>
+            <th>Company</th>
+            <th>ENID</th>
+            <th>Mobile</th>
+            <th>Email</th>
+            <th>Channel</th>
+            <th>Service</th>
+            <th>MNO Host</th>
+            <th>Category</th>
+            <th>Start Date</th>
+            <th>Expiration</th>
+            <th>Extension</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="e : ${extensions}">
+            <td th:text="${e.id}"></td>   <!-- EXTENSION ID -->
+
+            <td th:text="${e.smsIdentifierCodeName}"></td>
+            <td th:text="${e.companyName}"></td>
+            <td th:text="${e.enid}"></td>
+            <td th:text="${e.mobile}"></td>
+            <td th:text="${e.email}"></td>
+            <td th:text="${e.channel}"></td>
+            <td th:text="${e.serviceType}"></td>
+            <td th:text="${e.mnosCompanyHost}"></td>
+            <td th:text="${e.codeCategory}"></td>
+            <td th:text="${e.extensionStartDate}"></td>
+            <td th:text="${e.extentionExpirationDate}"></td>
+            <td>
+                <a th:href="@{/codes/smsidentifier/finance/extensions/edit/{id}(id=${e.id})}">
+                    Extend
+                </a>
+
+            </td>
+        </tr>
+
+        </tbody>
+
+    </table>
+
+</div>
+
+
+<div style="height:10vh;"></div>
+<footer th:replace="~{codes_layout :: page_footer}"></footer>
+
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+
+</body>
+</html>

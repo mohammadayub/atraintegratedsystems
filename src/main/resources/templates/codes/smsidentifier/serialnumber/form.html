@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{layout :: page_head}">
+  <title th:text="${serial.id == null ? 'Add Serial Number' : 'Edit Serial Number'}">Serial Number Form</title>
+  <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+</head>
+
+<body>
+
+<!-- Navbar -->
+<nav th:replace="~{layout :: page_navbar}"></nav>
+
+<div class="container mt-4">
+
+  <!-- Center white card -->
+  <div class="col-md-4 col-sm-8"
+       style="margin:0 auto; background-color:white; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,.15);">
+
+    <h4 class="mt-2 pt-2 text-center"
+        th:text="${serial.id == null ? 'Add Serial Number' : 'Edit Serial Number'}">
+      Serial Number Form
+    </h4>
+
+    <form th:action="@{/codes/smsidentifier/serial-numbers/save}"
+          th:object="${serial}"
+          method="post"
+          class="m-3">
+
+      <!-- hidden id -->
+      <input type="hidden" th:field="*{id}"/>
+
+      <!-- Serial Number -->
+      <div class="mb-3">
+        <label class="form-label">Serial Number</label>
+        <input type="number"
+               class="form-control"
+               th:field="*{serialNumber}"
+               required>
+      </div>
+
+      <!-- Buttons -->
+      <div class="d-flex justify-content-between">
+        <button type="submit" class="btn btn-success mb-2">Save</button>
+
+        <a th:href="@{/codes/smsidentifier/serial-numbers}"
+           class="btn btn-secondary mb-2">Back</a>
+      </div>
+
+    </form>
+  </div>
+
+</div>
+
+<div style="height:10vh;"></div>
+
+<!-- Footer -->
+<footer th:replace="~{layout :: page_footer}"></footer>
+
+<!-- Scripts -->
+<div th:replace="scripts :: common-scripts"></div>
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+
+</body>
+</html>

@@ -109,7 +109,7 @@ public class RouteController {
     }
 
     @GetMapping("/codes/finance/home")
-    public String shortCodeFinanceHome()
+    public String codesFinanceHome()
     {
         return "codes/finance/home";
     }
@@ -126,11 +126,32 @@ public class RouteController {
         return "codes/smsidentifier/home";
     }
 
+    @GetMapping("/codes/sms-identifier/finance/home")
+    public String smsIdentifierFinanceHome()
+    {
+        return "codes/finance/smsidentifier/home";
+    }
+
     // Bellow is For Under Working Module
     @GetMapping("/smsidentifier/under-working")
     public String codesHome()
     {
         return "codes/smsidentifier/working";
+    }
+
+    // Short Code Finance Home
+    @GetMapping("/codes/shortcode/finance/home")
+    public String shortCodeFinanceHome()
+    {
+
+        return "codes/finance/shortcode/home";
+    }
+    // bellow is For SmsIdentifier finance Home
+    @GetMapping("/codes/smsidentifier/finance/home")
+    public String smsIdentifierCodeFinanceHome()
+    {
+
+        return "codes/finance/smsidentifier/home";
     }
 
     // bellow is For Report home

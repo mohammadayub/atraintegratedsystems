@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{codes_layout :: page_head}">
-    <title>SMS Identifier Extension</title>
+    <title>SMS Identifier Finance Extension</title>
     <div th:replace="styles :: common-css"></div>
     <div th:replace="styles :: commonfieldset"></div>
     <div th:replace="styles :: persian-datepicker-styles"></div>
@@ -13,50 +13,52 @@
 <div class="container-fluid mt-4"
      th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
 
-    <form th:action="@{/sms-identifier-extension/save/{id}(id=${detailId})}"
+    <form th:action="@{/codes/smsidentifier/finance/extensions/update}"
           th:object="${extension}"
           method="post">
 
         <fieldset style="border:2px solid #DCAF45;padding:15px;border-radius:8px;margin-bottom:20px;">
             <legend style="width:auto;font-size:1.2rem;color:#14438B;padding:0 10px;font-weight:bold;">
-                SMS Identifier Extension – Standard Department
+                SMS Identifier Extension – Finance Department
             </legend>
 
             <div class="row g-3">
 
                 <!-- ROW 1 -->
                 <div class="col-md-4 form-group">
-                    <label>Extension Start Date</label>
-                    <input type="text"
-                           class="form-control hijrishamsi"
-                           th:field="*{extensionStartDate}"
-                           required/>
-                </div>
-
-                <div class="col-md-4 form-group">
-                    <label>New Expiration Date</label>
-                    <input type="text"
-                           class="form-control hijrishamsi"
-                           th:field="*{extentionExpirationDate}"
-                           required/>
-                </div>
-
-                <div class="col-md-4 form-group">
-                    <label>Extend Status</label>
+                    <label>Extension ID</label>
                     <input type="text"
                            class="form-control"
-                           th:field="*{extendStatus}"
+                           th:field="*{id}"
                            readonly/>
+                </div>
+
+                <div class="col-md-4 form-group">
+                    <label>Bank Voucher No</label>
+                    <input type="text"
+                           class="form-control"
+                           th:field="*{extensionBankVoucherNo}"
+                           required/>
+                </div>
+
+                <div class="col-md-4 form-group">
+                    <label>Entry Voucher Date</label>
+                    <input type="date"
+                           class="form-control"
+                           th:field="*{extensionEnteryVoucherDate}"
+                           required/>
                 </div>
 
                 <!-- ROW 2 -->
                 <div class="col-md-4 form-group">
-                    <label>Extend Date</label>
-                    <input type="text"
-                           class="form-control hijrishamsi"
-                           th:field="*{extendDate}"
-                           readonly/>
+                    <label>Voucher Submission Date</label>
+                    <input type="date"
+                           class="form-control"
+                           th:field="*{extensionBankVoucherSubmissionDate}"
+                           required/>
                 </div>
+
+
 
             </div>
 
@@ -65,12 +67,13 @@
                 <div class="col-md-4 mx-auto d-flex justify-content-center gap-2">
                     <button type="submit" class="btn btn-primary">
                         <i class="fas fa-check"></i>
-                        Save Extension
+                        Confirm Payment
                     </button>
                     &nbsp;&nbsp;&nbsp;&nbsp;
 
                     <button type="reset" class="btn btn-info">
-                        <i class="fas fa-redo"></i> Reset
+                        <i class="fas fa-redo"></i>
+                        Reset
                     </button>
                 </div>
             </div>
