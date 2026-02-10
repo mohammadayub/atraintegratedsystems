@@ -1,75 +1,95 @@
 <!DOCTYPE html>
-<html lang="en" th:lang="#{lang}" th:dir="${#locale.language == 'ps' ? 'rtl' : 'ltr'}"
+<html lang="en"
+      th:lang="#{lang}"
+      th:dir="${#locale.language == 'ps' ? 'rtl' : 'ltr'}"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
 <head th:replace="~{codes_layout :: page_head}">
-    <div th:replace="styles :: commonfieldset"></div>
     <title>LMS</title>
+    <div th:replace="styles :: commonfieldset"></div>
+
     <style>
-        h4 a {
+        /* SAME STYLE AS LMS DASHBOARD */
+        a h4 {
             color: #14438B;
             font-size: 20px;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .custom-card {
+            text-align: center;
+            padding: 20px;
+            border-radius: 12px;
+            transition: 0.3s ease;
+        }
+
+        .custom-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .custom-card img {
+            height: 80px;
         }
     </style>
 </head>
+
 <body>
-<div th:replace="styles :: commonfieldset"></div>
+
 <nav th:replace="~{codes_layout :: page_navbar}"></nav>
 
 <div class="container mt-4">
-<fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_CODES_ADMIN')">
-    <legend>Codes Management Section</legend>
-    <table class="table table-borderless">
-        <tr>
-            <td>
-                <div class="custom-card" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_CODES_ADMIN')">
-                    <a th:href="@{/codes/standard/shortcodes/home}">
-                        <img th:src="@{/images/shortCodes.png}" alt="Short Code">
-                    </a>
-                    <h4 class="license-link" style="margin-top: 12px;">
-                        <a th:href="@{/codes/standard/shortcodes/home}">Short Code</a>
-                    </h4>
-                </div>
-            </td>
-            <td>
-                <div class="custom-card" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_CODES_ADMIN')">
-                    <a th:href="@{/codes/sms-identifier/home}">
-                        <img th:src="@{/images/smsidentifiercode.png}" alt="Finance Management">
-                    </a>
-                    <h4 class="license-link" style="margin-top: 10px;">
-                        <a th:href="@{/codes/sms-identifier/home}">SMS Identifier Code</a>
-                    </h4>
-                </div>
-            </td>
 
-            <td>
-                <div class="custom-card" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_CODES_ADMIN')">
-                    <a th:href="@{/#}">
-                        <img th:src="@{/images/ispcCode.png}" alt="Finance Management">
-                    </a>
-                    <h4 class="license-link" style="margin-top: 10px;">
-                        <a th:href="@{/#}">ISPC Code</a>
-                    </h4>
-                </div>
-            </td>
-        </tr>
-    </table>
-</fieldset>
+    <!-- ================= CODES MANAGEMENT ================= -->
+    <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_CODES_ADMIN')">
+        <legend>Codes Management Section</legend>
+
+        <table class="table table-borderless text-center">
+            <tr>
+                <td>
+                    <div class="custom-card">
+                        <a th:href="@{/codes/standard/shortcodes/home}">
+                            <img th:src="@{/images/shortCodes.png}" alt="Short Code">
+                            <h4 style="margin-top:12px;">Short Code</h4>
+                        </a>
+                    </div>
+                </td>
+
+                <td>
+                    <div class="custom-card">
+                        <a th:href="@{/codes/sms-identifier/home}">
+                            <img th:src="@{/images/smsidentifiercode.png}" alt="SMS Identifier">
+                            <h4 style="margin-top:12px;">SMS Identifier Code</h4>
+                        </a>
+                    </div>
+                </td>
+
+                <td>
+                    <div class="custom-card">
+                        <a th:href="@{/#}">
+                            <img th:src="@{/images/ispcCode.png}" alt="ISPC Code">
+                            <h4 style="margin-top:12px;">ISPC Code</h4>
+                        </a>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </fieldset>
 
 
-
+    <!-- ================= FINANCE MANAGEMENT ================= -->
     <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_CODES_ADMIN')">
         <legend>Codes Finance Management Section</legend>
-        <table class="table table-borderless">
+
+        <table class="table table-borderless text-center">
             <tr>
                 <td>
-                    <div class="custom-card" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_CODES_ADMIN')">
+                    <div class="custom-card">
                         <a th:href="@{/codes/finance/home}">
-                            <img th:src="@{/images/CodesFinance.png}" alt="Short Code">
+                            <img th:src="@{/images/CodesFinance.png}" alt="Codes Finance">
+                            <h4 style="margin-top:12px;">Codes Finance</h4>
                         </a>
-                        <h4 class="license-link" style="margin-top: 12px;">
-                            <a th:href="@{/codes/finance/home}">Codes Finance</a>
-                        </h4>
                     </div>
                 </td>
             </tr>
@@ -77,29 +97,32 @@
     </fieldset>
 
 
+    <!-- ================= REPORTS ================= -->
     <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_CODES_ADMIN')">
         <legend>Reports Management Section</legend>
-        <table class="table table-borderless">
+
+        <table class="table table-borderless text-center">
             <tr>
                 <td>
-                    <div class="custom-card" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_CODES_ADMIN')">
+                    <div class="custom-card">
                         <a th:href="@{/codes/report/home}">
-                            <img th:src="@{/images/reportManagement.png}" alt="Short Code">
+                            <img th:src="@{/images/reportManagement.png}" alt="Reports">
+                            <h4 style="margin-top:12px;">Reports</h4>
                         </a>
-                        <h4 class="license-link" style="margin-top: 12px;">
-                            <a th:href="@{/codes/report/home}">Reports</a>
-                        </h4>
                     </div>
                 </td>
             </tr>
         </table>
     </fieldset>
+
 </div>
+
 <div th:replace="scripts :: common-scripts"></div>
 
 <div style="height:10vh;"></div>
 <footer th:replace="~{codes_layout :: page_footer}"></footer>
 
 <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+
 </body>
 </html>

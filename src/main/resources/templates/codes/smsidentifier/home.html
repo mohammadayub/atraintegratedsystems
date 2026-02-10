@@ -1,67 +1,89 @@
 <!DOCTYPE html>
-<html lang="en" th:lang="#{lang}" th:dir="${#locale.language == 'ps' ? 'rtl' : 'ltr'}"
+<html lang="en"
+      th:lang="#{lang}"
+      th:dir="${#locale.language == 'ps' ? 'rtl' : 'ltr'}"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
 <head th:replace="~{codes_layout :: page_head}">
-    <div th:replace="styles :: commonfieldset"></div>
     <title>LMS</title>
+    <div th:replace="styles :: commonfieldset"></div>
+
+    <!-- SAME LMS DASHBOARD STYLE -->
     <style>
-        h4 a {
+        a h4 {
             color: #14438B;
             font-size: 20px;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .custom-card {
+            text-align: center;
+            padding: 20px;
+            border-radius: 12px;
+            transition: 0.3s ease;
+        }
+
+        .custom-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .custom-card img {
+            height: 80px;
         }
     </style>
 </head>
+
 <body>
-<div th:replace="styles :: commonfieldset"></div>
+
 <nav th:replace="~{codes_layout :: page_navbar}"></nav>
 
 <div class="container mt-4">
+
+    <!-- ================= SHORT CODES ================= -->
     <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_CODES_ADMIN','ROLE_LICENSE','ROLE_MINISTRY','ROLE_LICENSE_COMPLETION_PROFILE','ROLE_LICENSE_APPROVAL','ROLE_LICENSE_PROFILE_ENTRY','ROLE_FINANCE','ROLE_FINANCE','ROLE_TYPEOFAPPROVAL_ADMIN','ROLE_TYPEOFAPPROVAL_ATRA_FINANCE','ROLE_TYPEOFAPPROVAL_MCIT_FINANCE','ROLE_TYPEOFAPPROVAL_STANDARD','ROLE_TYPEOFAPPROVAL_ONLINE_APPLICATION')">
         <legend>Short Codes Management Section</legend>
-        <table class="table table-borderless">
+
+        <table class="table table-borderless text-center">
             <tr>
                 <td>
-                    <div class="custom-card" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_LICENSE','ROLE_LICENSE_COMPLETION_PROFILE','ROLE_LICENSE_APPROVAL','ROLE_LICENSE_PROFILE_ENTRY','ROLE_FINANCE','ROLE_MINISTRY')">
+                    <div class="custom-card"
+                         sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_LICENSE','ROLE_LICENSE_COMPLETION_PROFILE','ROLE_LICENSE_APPROVAL','ROLE_LICENSE_PROFILE_ENTRY','ROLE_FINANCE','ROLE_MINISTRY')">
                         <a th:href="@{/codes/sms-identifier-codes/new}">
-                            <img th:src="@{/images/shortCodes.png}" alt="Short Code">
+                            <img th:src="@{/images/shortCodes.png}" alt="Add SMS Identifier">
+                            <h4 style="margin-top:12px;">Add SMS Identifier</h4>
                         </a>
-                        <h4 class="license-link" style="margin-top: 12px;">
-                            <a th:href="@{/codes/sms-identifier-codes/new}">Add SMS Identifier</a>
-                        </h4>
                     </div>
                 </td>
+
                 <td>
-                    <div class="custom-card" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_CODES_ADMIN')">
+                    <div class="custom-card"
+                         sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_CODES_ADMIN')">
                         <a th:href="@{/codes/sms-identifier-codes/list}">
-                            <img th:src="@{/images/smsidentifiercode.png}" alt="Finance Management">
+                            <img th:src="@{/images/smsidentifiercode.png}" alt="SMS Identifier List">
+                            <h4 style="margin-top:12px;">SMS Identifier List</h4>
                         </a>
-                        <h4 class="license-link" style="margin-top: 10px;">
-                            <a th:href="@{/codes/sms-identifier-codes/list}">SMS Identifier List</a>
-                        </h4>
                     </div>
-
-
                 </td>
+
                 <td>
-                    <div class="custom-card" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_CODES_ADMIN')">
+                    <div class="custom-card"
+                         sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_CODES_ADMIN')">
                         <a th:href="@{/codes/sms-identifier-details/new}">
-                            <img th:src="@{/images/codeDetail.png}" alt="Finance Management">
+                            <img th:src="@{/images/codeDetail.png}" alt="SMS Identifier Detail">
+                            <h4 style="margin-top:12px;">SMS Identifier Detail</h4>
                         </a>
-                        <h4 class="license-link" style="margin-top: 10px;">
-                            <a th:href="@{/codes/sms-identifier-details/new}">SMS Identifier Detail</a>
-                        </h4>
                     </div>
-
                 </td>
+
                 <td>
-                    <div class="custom-card" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_CODES_ADMIN')">
+                    <div class="custom-card"
+                         sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_CODES_ADMIN')">
                         <a th:href="@{/codes/sms-identifier-details/list}">
-                            <img th:src="@{/images/code_detail_list.png}" alt="Finance Management">
+                            <img th:src="@{/images/code_detail_list.png}" alt="SMS Identifier Detail List">
+                            <h4 style="margin-top:12px;">SMS Identifier Detail List</h4>
                         </a>
-                        <h4 class="license-link" style="margin-top: 10px;">
-                            <a th:href="@{/codes/sms-identifier-details/list}">SMS Identifier Detail List</a>
-                        </h4>
                     </div>
                 </td>
             </tr>
@@ -69,78 +91,82 @@
     </fieldset>
 
 
+    <!-- ================= SERIAL NUMBERS ================= -->
     <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_CODES_ADMIN','ROLE_LICENSE','ROLE_MINISTRY','ROLE_LICENSE_COMPLETION_PROFILE','ROLE_LICENSE_APPROVAL','ROLE_LICENSE_PROFILE_ENTRY','ROLE_FINANCE','ROLE_FINANCE','ROLE_TYPEOFAPPROVAL_ADMIN','ROLE_TYPEOFAPPROVAL_ATRA_FINANCE','ROLE_TYPEOFAPPROVAL_MCIT_FINANCE','ROLE_TYPEOFAPPROVAL_STANDARD','ROLE_TYPEOFAPPROVAL_ONLINE_APPLICATION')">
         <legend>SMS Identifier Serial Number Management Section</legend>
-        <table class="table table-borderless">
+
+        <table class="table table-borderless text-center">
             <tr>
                 <td>
-                    <div class="custom-card" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_LICENSE','ROLE_LICENSE_COMPLETION_PROFILE','ROLE_LICENSE_APPROVAL','ROLE_LICENSE_PROFILE_ENTRY','ROLE_FINANCE','ROLE_MINISTRY')">
+                    <div class="custom-card"
+                         sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_LICENSE','ROLE_LICENSE_COMPLETION_PROFILE','ROLE_LICENSE_APPROVAL','ROLE_LICENSE_PROFILE_ENTRY','ROLE_FINANCE','ROLE_MINISTRY')">
                         <a th:href="@{/serial-numbers/add}">
-                            <img th:src="@{/images/serialNumber.png}" alt="Short Code">
+                            <img th:src="@{/images/serialNumber.png}" alt="Add Serial">
+                            <h4 style="margin-top:12px;">Add SMS Identifier Serial Number</h4>
                         </a>
-                        <h4 class="license-link" style="margin-top: 12px;">
-                            <a th:href="@{#}">Add SMS Identifier Serial Number</a>
-                        </h4>
                     </div>
                 </td>
+
                 <td>
-                    <div class="custom-card" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_CODES_ADMIN')">
+                    <div class="custom-card"
+                         sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_CODES_ADMIN')">
                         <a th:href="@{#}">
-                            <img th:src="@{/images/smsidentifiercode.png}" alt="Finance Management">
+                            <img th:src="@{/images/smsidentifiercode.png}" alt="Serial List">
+                            <h4 style="margin-top:12px;">SMS Identifier Serial List</h4>
                         </a>
-                        <h4 class="license-link" style="margin-top: 10px;">
-                            <a th:href="@{#}">SMS Identifier Serial List</a>
-                        </h4>
                     </div>
-
-
                 </td>
             </tr>
         </table>
     </fieldset>
 
+
+    <!-- ================= REJECTION ================= -->
     <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_CODES_ADMIN','ROLE_LICENSE','ROLE_MINISTRY','ROLE_LICENSE_COMPLETION_PROFILE','ROLE_LICENSE_APPROVAL','ROLE_LICENSE_PROFILE_ENTRY','ROLE_FINANCE','ROLE_FINANCE','ROLE_TYPEOFAPPROVAL_ADMIN','ROLE_TYPEOFAPPROVAL_ATRA_FINANCE','ROLE_TYPEOFAPPROVAL_MCIT_FINANCE','ROLE_TYPEOFAPPROVAL_STANDARD','ROLE_TYPEOFAPPROVAL_ONLINE_APPLICATION')">
         <legend>SMSIdentifier Rejection Management Section</legend>
-        <table class="table table-borderless">
+
+        <table class="table table-borderless text-center">
             <tr>
                 <td>
-                    <div class="custom-card" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_LICENSE','ROLE_LICENSE_COMPLETION_PROFILE','ROLE_LICENSE_APPROVAL','ROLE_LICENSE_PROFILE_ENTRY','ROLE_FINANCE','ROLE_MINISTRY')">
+                    <div class="custom-card"
+                         sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_LICENSE','ROLE_LICENSE_COMPLETION_PROFILE','ROLE_LICENSE_APPROVAL','ROLE_LICENSE_PROFILE_ENTRY','ROLE_FINANCE','ROLE_MINISTRY')">
                         <a th:href="@{/codes/sms-identifiers/reject/list}">
-                            <img th:src="@{/images/rejectionList.png}" alt="Short Code">
+                            <img th:src="@{/images/rejectionList.png}" alt="Rejection List">
+                            <h4 style="margin-top:12px;">Sms Identifier Extension</h4>
                         </a>
-                        <h4 class="license-link" style="margin-top: 12px;">
-                            <a th:href="@{/codes/sms-identifiers/reject/list}">Sms Identifier Extension</a>
-                        </h4>
                     </div>
                 </td>
             </tr>
         </table>
     </fieldset>
 
+
+    <!-- ================= EXTENSION ================= -->
     <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_CODES_ADMIN','ROLE_LICENSE','ROLE_MINISTRY','ROLE_LICENSE_COMPLETION_PROFILE','ROLE_LICENSE_APPROVAL','ROLE_LICENSE_PROFILE_ENTRY','ROLE_FINANCE','ROLE_FINANCE','ROLE_TYPEOFAPPROVAL_ADMIN','ROLE_TYPEOFAPPROVAL_ATRA_FINANCE','ROLE_TYPEOFAPPROVAL_MCIT_FINANCE','ROLE_TYPEOFAPPROVAL_STANDARD','ROLE_TYPEOFAPPROVAL_ONLINE_APPLICATION')">
         <legend>SMS Extension Management Section</legend>
-        <table class="table table-borderless">
+
+        <table class="table table-borderless text-center">
             <tr>
                 <td>
-                    <div class="custom-card" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_LICENSE','ROLE_LICENSE_COMPLETION_PROFILE','ROLE_LICENSE_APPROVAL','ROLE_LICENSE_PROFILE_ENTRY','ROLE_FINANCE','ROLE_MINISTRY')">
+                    <div class="custom-card"
+                         sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_LICENSE','ROLE_LICENSE_COMPLETION_PROFILE','ROLE_LICENSE_APPROVAL','ROLE_LICENSE_PROFILE_ENTRY','ROLE_FINANCE','ROLE_MINISTRY')">
                         <a th:href="@{/codes/sms-identifiers/extension/list}">
-                            <img th:src="@{/images/serialNumber.png}" alt="Short Code">
+                            <img th:src="@{/images/serialNumber.png}" alt="Extension">
+                            <h4 style="margin-top:12px;">Sms Identifier Extension</h4>
                         </a>
-                        <h4 class="license-link" style="margin-top: 12px;">
-                            <a th:href="@{/codes/sms-identifiers/extension/list}">Sms Identifier Extension</a>
-                        </h4>
                     </div>
                 </td>
             </tr>
         </table>
     </fieldset>
+
 </div>
 
 <div th:replace="scripts :: common-scripts"></div>
-
 <div style="height:10vh;"></div>
 <footer th:replace="~{codes_layout :: page_footer}"></footer>
 
 <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+
 </body>
 </html>
