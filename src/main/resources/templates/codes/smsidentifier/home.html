@@ -100,7 +100,7 @@
                 <td>
                     <div class="custom-card"
                          sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_LICENSE','ROLE_LICENSE_COMPLETION_PROFILE','ROLE_LICENSE_APPROVAL','ROLE_LICENSE_PROFILE_ENTRY','ROLE_FINANCE','ROLE_MINISTRY')">
-                        <a th:href="@{/serial-numbers/add}">
+                        <a th:href="@{/codes/smsidentifier/serial-numbers/new}">
                             <img th:src="@{/images/serialNumber.png}" alt="Add Serial">
                             <h4 style="margin-top:12px;">Add SMS Identifier Serial Number</h4>
                         </a>
@@ -110,7 +110,7 @@
                 <td>
                     <div class="custom-card"
                          sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_CODES_ADMIN')">
-                        <a th:href="@{#}">
+                        <a th:href="@{/codes/smsidentifier/serial-numbers}">
                             <img th:src="@{/images/smsidentifiercode.png}" alt="Serial List">
                             <h4 style="margin-top:12px;">SMS Identifier Serial List</h4>
                         </a>
