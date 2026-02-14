@@ -39,6 +39,7 @@
 
 <nav th:replace="~{codes_layout :: page_navbar}"></nav>
 
+<!-- This is Main Page -->
 <div class="container mt-4">
 
     <!-- ================= SHORT CODES ================= -->
@@ -130,7 +131,7 @@
                 <td>
                     <div class="custom-card"
                          sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_LICENSE','ROLE_LICENSE_COMPLETION_PROFILE','ROLE_LICENSE_APPROVAL','ROLE_LICENSE_PROFILE_ENTRY','ROLE_FINANCE','ROLE_MINISTRY')">
-                        <a th:href="@{/codes/sms-identifiers/reject/list}">
+                        <a th:href="@{#}">
                             <img th:src="@{/images/rejectionList.png}" alt="Rejection List">
                             <h4 style="margin-top:12px;">Sms Identifier Extension</h4>
                         </a>
@@ -150,7 +151,7 @@
                 <td>
                     <div class="custom-card"
                          sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_LICENSE','ROLE_LICENSE_COMPLETION_PROFILE','ROLE_LICENSE_APPROVAL','ROLE_LICENSE_PROFILE_ENTRY','ROLE_FINANCE','ROLE_MINISTRY')">
-                        <a th:href="@{/codes/sms-identifiers/extension/list}">
+                        <a th:href="@{#}">
                             <img th:src="@{/images/serialNumber.png}" alt="Extension">
                             <h4 style="margin-top:12px;">Sms Identifier Extension</h4>
                         </a>
