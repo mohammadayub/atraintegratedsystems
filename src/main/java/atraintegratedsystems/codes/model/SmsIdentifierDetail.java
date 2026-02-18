@@ -1,5 +1,7 @@
 package atraintegratedsystems.codes.model;
 
+import atraintegratedsystems.utils.DateConverter;
+import atraintegratedsystems.utils.JalaliDate;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
@@ -87,6 +89,43 @@ public class SmsIdentifierDetail {
             unique = true
     )
     private SmsIdentifierSerialNumber smsIdentifierSerialNumber;
+
+
+
+    public JalaliDate getAssigningDateJalali() {
+        if (assigningDate == null) {
+            return null; // Return null if issueLicenseDate is null
+        }
+        DateConverter dateConverter= new DateConverter();
+        JalaliDate jalaliAssigningDate=dateConverter.gregorianToJalali(assigningDate.getYear(),assigningDate.getMonthValue(),assigningDate.getDayOfMonth());
+        return jalaliAssigningDate;
+    }
+
+
+    public JalaliDate getExpirationDateJalali() {
+        if (expirationDate == null) {
+            return null; // Return null if issueLicenseDate is null
+        }
+        DateConverter dateConverter= new DateConverter();
+        JalaliDate jalaliExpirationDate=dateConverter.gregorianToJalali(expirationDate.getYear(),expirationDate.getMonthValue(),expirationDate.getDayOfMonth());
+        return jalaliExpirationDate;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 }

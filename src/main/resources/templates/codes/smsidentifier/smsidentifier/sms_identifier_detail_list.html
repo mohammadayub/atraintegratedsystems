@@ -47,8 +47,8 @@
                     <td th:text="${d.companyName}"></td>
                     <td th:text="${d.channel}"></td>
                     <td th:text="${d.serviceType}"></td>
-                    <td th:text="${d.assigningDate}"></td>
-                    <td th:text="${d.expirationDate}"></td>
+                    <td th:text="${d.getAssigningDateJalali()}"></td>
+                    <td th:text="${d.getExpirationDateJalali()}"></td>
                     <td class="text-center">
 
                         <a th:href="@{/sms-identifier-details/edit/{id}(id=${d.id})}"

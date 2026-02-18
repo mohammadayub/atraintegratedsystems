@@ -7,9 +7,11 @@ import atraintegratedsystems.codes.model.SmsIdentifierSerialNumber;
 import atraintegratedsystems.codes.repository.SmsIdentifierCodeRepository;
 import atraintegratedsystems.codes.repository.SmsIdentifierDetailRepository;
 import atraintegratedsystems.codes.repository.SmsIdentifierSerialNumberRepository;
+import atraintegratedsystems.utils.PersianCalendarUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -120,8 +122,58 @@ public class SmsIdentifierDetailService {
         e.setServiceType(dto.getServiceType());
         e.setMnosCompanyHost(dto.getMnosCompanyHost());
         e.setCodeCategory(dto.getCodeCategory());
-        e.setAssigningDate(dto.getAssigningDate());
-        e.setExpirationDate(dto.getExpirationDate());
+
+//        e.setAssigningDate(dto.getAssigningDate());
+
+
+        PersianCalendarUtils converter = new PersianCalendarUtils();
+        /* ================= ENTRY VOUCHER DATE ================= */
+        if (dto.getAssigningDateJalali() != null &&
+                !dto.getAssigningDateJalali().trim().isEmpty()) {
+
+
+                String[] parts = dto.getAssigningDateJalali().trim().split("-");
+
+                if (parts.length == 3) {
+                    int year = Integer.parseInt(parts[0]);
+                    int month = Integer.parseInt(parts[1]);
+                    int day = Integer.parseInt(parts[2]);
+
+                    LocalDate assigningDate = converter.jalaliToGregorian(year, month, day);
+                    e.setAssigningDate(assigningDate); // ✅ FIXED
+                }
+        }
+
+
+
+//        e.setExpirationDate(dto.getExpirationDate());
+
+
+
+        /* ================= Expiry DATE ================= */
+        if (dto.getExpirationDateJalali() != null &&
+                !dto.getExpirationDateJalali().trim().isEmpty()) {
+
+
+            String[] part = dto.getExpirationDateJalali().trim().split("-");
+
+            if (part.length == 3) {
+                int eyear = Integer.parseInt(part[0]);
+                int emonth = Integer.parseInt(part[1]);
+                int eday = Integer.parseInt(part[2]);
+
+                LocalDate expDate = converter.jalaliToGregorian(eyear, emonth, eday);
+                e.setExpirationDate(expDate); // ✅ FIXED
+            }
+        }
+
+
+
+
+
+
+
+
 
         e.setApplicationFees(dto.getApplicationFees());
         e.setApplicationFeesBankVoucherNo(dto.getApplicationFeesBankVoucherNo());
@@ -167,8 +219,21 @@ public class SmsIdentifierDetailService {
         dto.setServiceType(e.getServiceType());
         dto.setMnosCompanyHost(e.getMnosCompanyHost());
         dto.setCodeCategory(e.getCodeCategory());
-        dto.setAssigningDate(e.getAssigningDate());
-        dto.setExpirationDate(e.getExpirationDate());
+//        dto.setAssigningDate(e.getAssigningDate());
+
+        dto.setAssigningDateJalali(
+                e.getAssigningDateJalali() != null
+                        ? e.getAssigningDateJalali().toString()
+                        : null
+        );
+
+//        dto.setExpirationDate(e.getExpirationDate());
+
+        dto.setExpirationDateJalali(
+                e.getExpirationDateJalali() != null
+                        ? e.getExpirationDateJalali().toString()
+                        : null
+        );
 
         dto.setApplicationFees(e.getApplicationFees());
         dto.setApplicationFeesBankVoucherNo(e.getApplicationFeesBankVoucherNo());

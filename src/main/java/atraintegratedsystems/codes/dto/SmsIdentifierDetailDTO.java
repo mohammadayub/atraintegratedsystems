@@ -1,6 +1,8 @@
 package atraintegratedsystems.codes.dto;
 
 
+import atraintegratedsystems.utils.DateConverter;
+import atraintegratedsystems.utils.JalaliDate;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -26,8 +28,10 @@ public class SmsIdentifierDetailDTO {
     private String codeCategory="Golden";
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate assigningDate;
+    private String  assigningDateJalali;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate expirationDate;
+    private String expirationDateJalali;
 
     // Fees Related Section
     // Application Fees Related
@@ -118,5 +122,13 @@ public class SmsIdentifierDetailDTO {
         this.smsIdentifierCodeId = smsIdentifierCodeId;
         this.smsIdentifierCodeName = smsIdentifierCodeName;
     }
+
+
+
+
+
+
+
+
 
 }
