@@ -2,15 +2,16 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{codes_layout :: page_head}">
     <title>SMS Identifier</title>
+    <div th:replace="styles :: persian-datepicker-styles"></div>
     <div th:replace="styles :: common-css"></div>
     <div th:replace="styles :: commonfieldset"></div>
-    <div th:replace="styles :: persian-datepicker-styles"></div>
 </head>
+
 <body>
 <nav th:replace="~{codes_layout :: page_navbar}"></nav>
-<div class="container mt-4">
 
-    <h3 th:text="${detail.id == null ? 'Add SMS Identifier Detail' : 'Edit SMS Identifier Detail'}"></h3>
+<div class="container-fluid mt-4"
+     th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
 
     <form th:action="${detail.id == null} ?
             @{/codes/sms-identifier-details/save} :
@@ -18,105 +19,116 @@
           th:object="${detail}"
           method="post">
 
-        <!-- ROW 1 -->
-        <div class="row">
-            <div class="col-md-4 mb-3">
-                <label class="form-label">SMS Identifier Code</label>
-                <select class="form-control" th:field="*{smsIdentifierCodeId}" required>
-                    <option value="">-- Select Code --</option>
-                    <option th:each="c : ${codes}"
-                            th:value="${c.id}"
-                            th:text="${c.smsIdentifierCodeName}">
-                    </option>
-                </select>
+        <fieldset style="border:2px solid #DCAF45;padding:15px;border-radius:8px;margin-bottom:20px;">
+            <legend style="width:auto;font-size:1.2rem;color:#14438B;padding:0 10px;font-weight:bold;">
+                <span th:text="${detail.id == null ? 'Add SMS Identifier Detail' : 'Edit SMS Identifier Detail'}">
+                    SMS Identifier Detail
+                </span>
+            </legend>
+
+            <div class="row g-3">
+
+                <!-- ROW 1 -->
+                <div class="col-md-3">
+                    <label class="form-label">SMS Identifier Code</label>
+                    <select class="form-control" th:field="*{smsIdentifierCodeId}" required>
+                        <option value="">-- Select Code --</option>
+                        <option th:each="c : ${codes}"
+                                th:value="${c.id}"
+                                th:text="${c.smsIdentifierCodeName}">
+                        </option>
+                    </select>
+                </div>
+
+                <div class="col-md-3">
+                    <label class="form-label">Serial Number</label>
+                    <select class="form-control" th:field="*{smsIdentifierSerialNumberId}" required>
+                        <option value="">-- Select Serial Number --</option>
+                        <option th:each="sn : ${serialNumbers}"
+                                th:value="${sn.id}"
+                                th:text="${sn.serialNumber}">
+                        </option>
+                    </select>
+                </div>
+
+                <div class="col-md-3">
+                    <label>Company Name</label>
+                    <input type="text" th:field="*{companyName}" class="form-control">
+                </div>
+
+                <div class="col-md-3">
+                    <label>ENID</label>
+                    <input type="text" th:field="*{enid}" class="form-control">
+                </div>
+
+                <!-- ROW 2 -->
+                <div class="col-md-3">
+                    <label>Mobile</label>
+                    <input type="text" th:field="*{mobile}" class="form-control">
+                </div>
+
+                <div class="col-md-3">
+                    <label>Telephone</label>
+                    <input type="text" th:field="*{telephone}" class="form-control">
+                </div>
+
+                <div class="col-md-3">
+                    <label>Company Address</label>
+                    <input type="text" th:field="*{companyAddress}" class="form-control">
+                </div>
+
+                <div class="col-md-3">
+                    <label>Email</label>
+                    <input type="email" th:field="*{email}" class="form-control">
+                </div>
+
+                <!-- ROW 3 -->
+                <div class="col-md-3">
+                    <label>Channel</label>
+                    <input type="text" th:field="*{channel}" class="form-control">
+                </div>
+
+                <div class="col-md-3">
+                    <label>Service Type</label>
+                    <input type="text" th:field="*{serviceType}" class="form-control">
+                </div>
+
+                <div class="col-md-3">
+                    <label>MNO Host</label>
+                    <input type="text" th:field="*{mnosCompanyHost}" class="form-control">
+                </div>
+
+                <div class="col-md-3">
+                    <label>Assigning Date</label>
+                    <input type="text" th:field="*{assigningDate}" class="form-control hijrishamsi">
+                </div>
+
+                <!-- ROW 4 -->
+                <div class="col-md-3">
+                    <label>Expiration Date</label>
+                    <input type="text" th:field="*{expirationDate}" class="form-control hijrishamsi">
+                </div>
+
             </div>
 
-            <div class="col-md-4 mb-3">
-                <label class="form-label">Serial Number</label>
-                <select class="form-control" th:field="*{smsIdentifierSerialNumberId}" required>
-                    <option value="">-- Select Serial Number --</option>
-                    <option th:each="sn : ${serialNumbers}"
-                            th:value="${sn.id}"
-                            th:text="${sn.serialNumber}">
-                    </option>
-                </select>
-
+            <!-- BUTTONS -->
+            <div class="row mt-4">
+                <div class="col-md-4 mx-auto d-flex justify-content-center gap-2">
+                    <button type="submit" class="btn btn-success">
+                        Save
+                    </button>
+                    &nbsp;&nbsp;
+                    <a th:href="@{/sms-identifier-details}" class="btn btn-secondary">
+                        Back
+                    </a>
+                </div>
             </div>
 
-
-            <div class="col-md-4 mb-3">
-                <label>Company Name</label>
-                <input type="text" th:field="*{companyName}" class="form-control">
-            </div>
-
-        </div>
-
-        <!-- ROW 2 -->
-        <div class="row">
-            <div class="col-md-4 mb-3">
-                <label>ENID</label>
-                <input type="text" th:field="*{enid}" class="form-control">
-            </div>
-
-            <div class="col-md-4 mb-3">
-                <label>Mobile</label>
-                <input type="text" th:field="*{mobile}" class="form-control">
-            </div>
-
-            <div class="col-md-4 mb-3">
-                <label>Telephone</label>
-                <input type="text" th:field="*{telephone}" class="form-control">
-            </div>
-        </div>
-
-        <!-- ROW 3 -->
-        <div class="row">
-            <div class="col-md-4 mb-3">
-                <label>Company Address</label>
-                <input type="text" th:field="*{companyAddress}" class="form-control">
-            </div>
-            <div class="col-md-4 mb-3">
-                <label>Email</label>
-                <input type="email" th:field="*{email}" class="form-control">
-            </div>
-
-            <div class="col-md-4 mb-3">
-                <label>Channel</label>
-                <input type="text" th:field="*{channel}" class="form-control">
-            </div>
-        </div>
-
-        <!-- ROW 4 -->
-        <div class="row">
-            <div class="col-md-3 mb-3">
-                <label>Service Type</label>
-                <input type="text" th:field="*{serviceType}" class="form-control">
-            </div>
-            <div class="col-md-3 mb-3">
-                <label>MNO Host</label>
-                <input type="text" th:field="*{mnosCompanyHost}" class="form-control">
-            </div>
-
-            <div class="col-md-3 mb-3">
-                <label>Assigning Date</label>
-                <input type="text" th:field="*{assigningDate}" class="form-control hijrishamsi">
-            </div>
-
-            <div class="col-md-3 mb-3">
-                <label>Expiration Date</label>
-                <input type="text" th:field="*{expirationDate}" class="form-control hijrishamsi">
-            </div>
-        </div>
-
-        <!-- BUTTONS -->
-        <div class="mt-4">
-            <button type="submit" class="btn btn-success">Save</button>
-            <a th:href="@{/sms-identifier-details}" class="btn btn-secondary">Back</a>
-        </div>
+        </fieldset>
 
     </form>
-
 </div>
+
 <!-- Common scripts -->
 <div th:replace="scripts :: common-scripts"></div>
 <div th:replace="scripts :: persian-datepicker-scripts"></div>
@@ -124,5 +136,6 @@
 
 <div style="height:10vh;"></div>
 <footer th:replace="~{codes_layout :: page_footer}"></footer>
+
 </body>
 </html>

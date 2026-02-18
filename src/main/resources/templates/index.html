@@ -1,86 +1,125 @@
 <!doctype html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<html lang="en"
+      th:lang="#{lang}"
+      th:dir="${#locale.language == 'ps' ? 'rtl' : 'ltr'}"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 
 <head th:replace="~{layout :: page_head}">
     <meta charset="UTF-8">
-    <div th:replace="styles :: data-tables-styles"></div>
-<!--    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">-->
-<!--    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css">-->
-    <title>LMS - Report</title>
-<!--    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">-->
-<!--    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css">-->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <title>LMS</title>
 
+    <!-- Existing Styles (kept) -->
     <div th:replace="styles :: data-tables-styles"></div>
     <div th:replace="styles :: select2-styles"></div>
     <div th:replace="styles :: commonfieldset"></div>
     <div th:replace="styles :: common-css"></div>
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+
+    <!-- SAME LMS DASHBOARD STYLE -->
     <style>
-        h4 a {
+        a h4, h4 a {
             color: #14438B;
             font-size: 20px;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .custom-card {
+            text-align: center;
+            padding: 20px;
+            border-radius: 12px;
+            transition: 0.3s ease;
+        }
+
+        .custom-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .custom-card img {
+            height: 90px;
         }
     </style>
-</head>
-<body>
-<nav th:replace="~{layout :: page_navbar}"></nav>
-<div class="container mt-5" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
 
-    <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_CODES_ADMIN','ROLE_LICENSE','ROLE_MINISTRY','ROLE_LICENSE_COMPLETION_PROFILE','ROLE_LICENSE_APPROVAL','ROLE_LICENSE_PROFILE_ENTRY','ROLE_FINANCE','ROLE_FINANCE','ROLE_TYPEOFAPPROVAL_ADMIN','ROLE_TYPEOFAPPROVAL_ATRA_FINANCE','ROLE_TYPEOFAPPROVAL_MCIT_FINANCE','ROLE_TYPEOFAPPROVAL_STANDARD','ROLE_TYPEOFAPPROVAL_ONLINE_APPLICATION')">
+</head>
+
+<body>
+
+<nav th:replace="~{layout :: page_navbar}"></nav>
+
+<div class="container mt-4"
+     th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+
+    <!-- ================= PROJECTS SECTION ================= -->
+    <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_CODES_ADMIN','ROLE_LICENSE','ROLE_MINISTRY','ROLE_LICENSE_COMPLETION_PROFILE','ROLE_LICENSE_APPROVAL','ROLE_LICENSE_PROFILE_ENTRY','ROLE_FINANCE','ROLE_TYPEOFAPPROVAL_ADMIN','ROLE_TYPEOFAPPROVAL_ATRA_FINANCE','ROLE_TYPEOFAPPROVAL_MCIT_FINANCE','ROLE_TYPEOFAPPROVAL_STANDARD','ROLE_TYPEOFAPPROVAL_ONLINE_APPLICATION')">
         <legend th:text="#{project_section}">Projects Section</legend>
-        <table class="table table-borderless">
+
+        <table class="table table-borderless text-center">
             <tr>
+
+                <!-- LICENSE MANAGEMENT SYSTEM -->
                 <td>
-                    <div class="custom-card" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_LICENSE','ROLE_LICENSE_COMPLETION_PROFILE','ROLE_LICENSE_APPROVAL','ROLE_LICENSE_PROFILE_ENTRY','ROLE_FINANCE','ROLE_MINISTRY')">
+                    <div class="custom-card"
+                         sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_LICENSE','ROLE_LICENSE_COMPLETION_PROFILE','ROLE_LICENSE_APPROVAL','ROLE_LICENSE_PROFILE_ENTRY','ROLE_FINANCE','ROLE_MINISTRY')">
                         <a th:href="@{/licenses/index}">
                             <img th:src="@{/images/license_management_system.png}" alt="License Management System">
+                            <h4 style="margin-top:12px;">
+                                <span th:text="#{license_management_system}">License Management System</span>
+                            </h4>
                         </a>
-                        <h4 class="license-link" style="margin-top: 12px;">
-                            <a th:href="@{/licenses/index}" th:text="#{license_management_system}">License Management System</a>
-                        </h4>
                     </div>
                 </td>
+
+                <!-- CODES MANAGEMENT SYSTEM -->
                 <td>
-                    <div class="custom-card" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_CODES_ADMIN')">
-<!--                        <a th:href="@{/Codes}">-->
+                    <div class="custom-card"
+                         sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_CODES_ADMIN')">
                         <a th:href="@{/Codes}">
-
-                            <img th:src="@{/images/Codes_management_system.png}" alt="Finance Management">
+                            <img th:src="@{/images/Codes_management_system.png}" alt="Codes Management System">
+                            <h4 style="margin-top:12px;">
+                                <span th:text="#{codes_management_system}">Codes Management System</span>
+                            </h4>
                         </a>
-                        <h4 class="license-link" style="margin-top: 10px;">
-<!--                            <a th:href="@{/Codes}" th:text="#{codes_management_system}">-->
-                                <a th:href="@{/Codes}" th:text="#{codes_management_system}">
-                                Codes Management System</a>
-                        </h4>
                     </div>
                 </td>
 
+                <!-- TYPE OF APPROVALS -->
                 <td>
-                    <div class="custom-card" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_TYPEOFAPPROVAL_ADMIN','ROLE_TYPEOFAPPROVAL_ATRA_FINANCE','ROLE_TYPEOFAPPROVAL_MCIT_FINANCE','ROLE_TYPEOFAPPROVAL_STANDARD','ROLE_TYPEOFAPPROVAL_ONLINE_APPLICATION')">
+                    <div class="custom-card"
+                         sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_TYPEOFAPPROVAL_ADMIN','ROLE_TYPEOFAPPROVAL_ATRA_FINANCE','ROLE_TYPEOFAPPROVAL_MCIT_FINANCE','ROLE_TYPEOFAPPROVAL_STANDARD','ROLE_TYPEOFAPPROVAL_ONLINE_APPLICATION')">
                         <a th:href="@{/typeofapprovals/home}">
-                            <img th:src="@{/images/typeofApprovals.png}" alt="Finance Management">
+                            <img th:src="@{/images/typeofApprovals.png}" alt="Type Of Approvals">
+                            <h4 style="margin-top:12px;">
+                                <span th:text="#{typeof_approvals_system}">Type Of Approvals</span>
+                            </h4>
                         </a>
-                        <h4 class="license-link" style="margin-top: 10px;">
-                            <a th:href="@{/typeofapprovals/home}" th:text="#{typeof_approvals_system}">Type Of Approvals</a>
-                        </h4>
                     </div>
                 </td>
+
             </tr>
         </table>
     </fieldset>
-    <fieldset style="border: 2px solid #DCAF45; padding: 15px; border-radius: 8px; margin-bottom: 20px;"
-              sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN')">
-        <legend style="width: auto; font-size: 1.2rem; color: #14438B; padding: 0 10px; font-weight: bold;" th:text="#{user_management_section}"></legend>
-        <table class="table table-borderless">
+
+
+    <!-- ================= USER MANAGEMENT SECTION ================= -->
+    <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN')">
+        <legend th:text="#{user_management_section}">User Management Section</legend>
+
+        <table class="table table-borderless text-center">
             <tr>
                 <td>
                     <div class="custom-card">
                         <a th:href="@{/licenses/admin/userlists}">
-                            <img class="rounded" th:src="@{/images/user.gif}" alt="User Management" style="height:100px;width:100px;">
+                            <img class="rounded"
+                                 th:src="@{/images/user.gif}"
+                                 alt="User Management"
+                                 style="height:100px;width:100px;">
+                            <h4 style="margin-top:12px;">
+                                <span>User Management</span>
+                            </h4>
                         </a>
-                        <h4 class="license-link" style="margin-top: 12px;">
-                            <a th:href="@{/licenses/admin/userlists}">User Management</a>
-                        </h4>
                     </div>
                 </td>
             </tr>
@@ -88,11 +127,13 @@
     </fieldset>
 
 </div>
+
 <div th:replace="scripts :: common-scripts"></div>
 
 <div style="height:10vh;"></div>
 <footer th:replace="~{layout :: page_footer}"></footer>
 
 <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+
 </body>
 </html>

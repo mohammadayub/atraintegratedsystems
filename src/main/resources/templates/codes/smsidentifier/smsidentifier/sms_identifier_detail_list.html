@@ -1,63 +1,93 @@
-<!DOCTYPE html>
+<!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head th:replace="~{codes_layout :: page_head}">
-    <title>SMS Identifier</title>
+    <title>SMS Identifier Details</title>
+
+    <div th:replace="styles :: data-tables-styles"></div>
     <div th:replace="styles :: common-css"></div>
-    <div th:replace="styles :: commonfieldset"></div>
+    <div th:replace="styles :: commonfieldset-with-legend-border"></div>
     <div th:replace="styles :: persian-datepicker-styles"></div>
 </head>
+
 <body>
+
 <nav th:replace="~{codes_layout :: page_navbar}"></nav>
-<div class="container mt-4">
 
-    <div class="d-flex justify-content-between align-items-center mb-3">
-        <h3>SMS Identifier Details</h3>
-        <a th:href="@{/codes/sms-identifier-details/new}" class="btn btn-primary">
-            + Add New
-        </a>
-    </div>
+<div class="container-fluid"
+     th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
 
-    <table class="table table-bordered table-striped table-hover">
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>Code</th>
-            <th>Company</th>
-            <th>Channel</th>
-            <th>Service Type</th>
-            <th>Assign Date</th>
-            <th>Expiry Date</th>
-            <th>Actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="d : ${details}">
-            <td th:text="${d.id}"></td>
-            <td th:text="${d.smsIdentifierCodeId}"></td>
-            <td th:text="${d.companyName}"></td>
-            <td th:text="${d.channel}"></td>
-            <td th:text="${d.serviceType}"></td>
-            <td th:text="${d.assigningDate}"></td>
-            <td th:text="${d.expirationDate}"></td>
-            <td>
-                <a th:href="@{/sms-identifier-details/edit/{id}(id=${d.id})}"
-                   class="btn btn-warning btn-sm">Edit</a>
+    <fieldset>
+        <legend>SMS Identifier Details</legend>
 
-                <a th:href="@{/sms-identifier-details/delete/{id}(id=${d.id})}"
-                   class="btn btn-danger btn-sm"
-                   onclick="return confirm('Are you sure?')">Delete</a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+        <div class="table-container">
+            <table class="slip table table-bordered table-striped"
+                   id="profileTable"
+                   style="width:100%">
+
+                <thead>
+                <tr class="bg-primary text-white">
+                    <th>#</th>
+                    <th>ID</th>
+                    <th>Code</th>
+                    <th>Company</th>
+                    <th>Channel</th>
+                    <th>Service Type</th>
+                    <th>Assign Date</th>
+                    <th>Expiry Date</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr th:each="d, iStat : ${details}">
+                    <td th:text="${iStat.count}">1</td>
+                    <td th:text="${d.id}"></td>
+                    <td th:text="${d.smsIdentifierCodeId}"></td>
+                    <td th:text="${d.companyName}"></td>
+                    <td th:text="${d.channel}"></td>
+                    <td th:text="${d.serviceType}"></td>
+                    <td th:text="${d.assigningDate}"></td>
+                    <td th:text="${d.expirationDate}"></td>
+                    <td class="text-center">
+
+                        <a th:href="@{/sms-identifier-details/edit/{id}(id=${d.id})}"
+                           class="btn btn-warning btn-sm">
+                            Edit
+                        </a>
+
+                        <a th:href="@{/sms-identifier-details/delete/{id}(id=${d.id})}"
+                           class="btn btn-danger btn-sm"
+                           onclick="return confirm('Are you sure?')">
+                            Delete
+                        </a>
+
+                    </td>
+                </tr>
+                </tbody>
+
+            </table>
+        </div>
+    </fieldset>
+
+    <a th:href="@{/codes}"
+       class="btn btn-primary mt-3">
+        ← Back to Page
+    </a>
 
 </div>
-<!-- Common scripts -->
+
+<!-- Scripts -->
 <div th:replace="scripts :: common-scripts"></div>
+<div th:replace="scripts :: data-tables-scripts"></div>
+<div th:replace="scripts :: common-datatable"></div>
 <div th:replace="scripts :: persian-datepicker-scripts"></div>
 <div th:replace="scripts :: common-hijrishamsi-date"></div>
 
 <div style="height:10vh;"></div>
 <footer th:replace="~{codes_layout :: page_footer}"></footer>
+
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+
 </body>
 </html>
