@@ -87,6 +87,7 @@
                         <option value="IVR">IVR</option>
                         <option value="SMS">SMS</option>
                         <option value="USSD">USSD</option>
+                        <option value="Simple Call Center">Simple Call Center</option>
                     </select>
                 </div>
 
@@ -131,6 +132,10 @@
                 <div class="col-md-3 form-group">
                     <label th:text="#{full_name}">Full Name</label>
                     <input type="text" class="form-control" th:field="*{name_of_responsible_person}">
+                </div>
+                <div class="col-md-3 form-group">
+                    <label>Job</label>
+                    <input type="text" class="form-control" th:field="*{job}">
                 </div>
 
                 <!-- ROW 4 -->
@@ -289,5 +294,9 @@
     });
 </script>
 
+<div style="height:10vh;"></div>
+<footer th:replace="~{codes_layout :: page_footer}"></footer>
+
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
 </body>
 </html>

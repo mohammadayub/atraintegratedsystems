@@ -154,7 +154,7 @@ public class ShortCodeDetailController {
         codeDetail.setMobile_number_of_responsible_person(dto.getMobile_number_of_responsible_person());
         codeDetail.setPhone_number_of_responsible_person(dto.getPhone_number_of_responsible_person());
         codeDetail.setEmail_of_responsible_person(dto.getEmail_of_responsible_person());
-
+        codeDetail.setJob(dto.getJob());
         // ---------- DATE CONVERSION ----------
         DateConverter dc = new DateConverter();
 
@@ -246,6 +246,7 @@ public class ShortCodeDetailController {
         dto.setApplication_fees(codeDetail.getApplication_fees());
         dto.setRegistration_fees(codeDetail.getRegistration_fees());
         dto.setRoyalty_fees(codeDetail.getRoyalty_fees());
+        dto.setJob(codeDetail.getJob());
         dto.setTotal(codeDetail.getTotal());
 
         model.addAttribute("codeDetailDTO", dto);

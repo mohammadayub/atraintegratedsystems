@@ -143,9 +143,9 @@
                 <tr>
                     <th>ID#</th>
                     <th>Short Code</th>
+                    <th>Serial Number</th>
                     <th>Release Short Code</th>
                     <th>Status</th>
-                    <th>ISPC Unique Name</th>
                     <th>Source Used</th>
                     <th>Location</th>
                     <th>Channel</th>
@@ -153,6 +153,7 @@
                     <th>Category</th>
                     <th>Back-Long#</th>
                     <th>Responsible Person</th>
+                    <th>Job</th>
                     <th>ID Card</th>
                     <th>Mobile</th>
                     <th>Email</th>
@@ -172,9 +173,9 @@
                 <tr th:each="codeDetail : ${data}">
                     <td th:text="${codeDetail.id}"></td>
                     <td th:text="${codeDetail.shortCode}"></td>
+                    <td th:text="${codeDetail.serialNumber != null ? codeDetail.serialNumber.serialNumber : '-'}"></td>
                     <td th:text="${codeDetail.releaseShortCode}"></td>
                     <td th:text="${codeDetail.codeStatus}"></td>
-                    <td th:text="${codeDetail.unique_name_of_signaling_point}"></td>
                     <td th:text="${codeDetail.sourceUsed}"></td>
                     <td th:text="${codeDetail.location}"></td>
                     <td th:text="${codeDetail.chanel}"></td>
@@ -182,6 +183,7 @@
                     <td th:text="${codeDetail.category}"></td>
                     <td th:text="${codeDetail.back_long_number}"></td>
                     <td th:text="${codeDetail.name_of_responsible_person}"></td>
+                    <td th:text="${codeDetail.job}"></td>
                     <td th:text="${codeDetail.id_card_number_of_responsible_person}"></td>
                     <td th:text="${codeDetail.mobile_number_of_responsible_person}"></td>
                     <td th:text="${codeDetail.email_of_responsible_person}"></td>
@@ -242,6 +244,9 @@
     new DataTable('#example');
 </script>
 
+<div style="height:10vh;"></div>
 <footer th:replace="~{codes_layout :: page_footer}"></footer>
+
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
 </body>
 </html>

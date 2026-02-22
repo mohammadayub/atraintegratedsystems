@@ -35,6 +35,7 @@ public class ShortCodeDetail {
     private String mobile_number_of_responsible_person;
     private String phone_number_of_responsible_person;
     private String email_of_responsible_person;
+    private String job;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate assigning_date;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
