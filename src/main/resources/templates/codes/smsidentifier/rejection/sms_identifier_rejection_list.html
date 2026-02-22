@@ -1,28 +1,29 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>Active SMS Identifier Codes</title>
-    <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        th, td {
-            padding: 8px;
-            border: 1px solid #ccc;
-        }
-        th {
-            background-color: #f4f4f4;
-        }
-    </style>
+<head th:replace="~{codes_layout :: page_head}">
+    <title>SMS Identifier Rejection</title>
+
+    <div th:replace="styles :: data-tables-styles"></div>
+    <div th:replace="styles :: common-css"></div>
+    <div th:replace="styles :: commonfieldset-with-legend-border"></div>
+    <div th:replace="styles :: persian-datepicker-styles"></div>
 </head>
 <body>
 
-<h2>Active SMS Identifier Codes (Not Rejected)</h2>
+<nav th:replace="~{codes_layout :: page_navbar}"></nav>
+<div class="container-fluid"
+     th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
 
-<table>
-    <thead>
-    <tr>
+    <fieldset>
+        <legend>SMS Identifier Details</legend>
+
+        <div class="table-container">
+            <table class="slip table table-bordered table-striped"
+                   id="profileTable"
+                   style="width:100%">
+
+                <thead>
+                <tr class="bg-primary text-white">
         <th>ID</th>
         <th>Company Name</th>
         <th>ENID</th>
@@ -65,6 +66,23 @@
     </tr>
     </tbody>
 </table>
+        </div>
+    </fieldset>
+    <a th:href="@{/codes/sms-identifier/home}"
+       class="btn btn-primary mt-3">
+        ← Back to Page
+    </a>
+        </div>
+<!-- Scripts -->
+<div th:replace="scripts :: common-scripts"></div>
+<div th:replace="scripts :: data-tables-scripts"></div>
+<div th:replace="scripts :: common-datatable"></div>
+<div th:replace="scripts :: persian-datepicker-scripts"></div>
+<div th:replace="scripts :: common-hijrishamsi-date"></div>
 
+<div style="height:10vh;"></div>
+<footer th:replace="~{codes_layout :: page_footer}"></footer>
+
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
 </body>
 </html>

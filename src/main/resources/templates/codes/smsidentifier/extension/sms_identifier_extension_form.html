@@ -26,10 +26,17 @@
 
                 <!-- ROW 1 -->
                 <div class="col-md-4 form-group">
+                    <label>Extension Fee</label>
+                    <input type="text"
+                           class="form-control hijrishamsi"
+                           th:field="*{extensionStartDateJalali}"
+                           required/>
+                </div>
+                <div class="col-md-4 form-group">
                     <label>Extension Start Date</label>
                     <input type="text"
                            class="form-control hijrishamsi"
-                           th:field="*{extensionStartDate}"
+                           th:field="*{extensionStartDateJalali}"
                            required/>
                 </div>
 
@@ -37,26 +44,11 @@
                     <label>New Expiration Date</label>
                     <input type="text"
                            class="form-control hijrishamsi"
-                           th:field="*{extentionExpirationDate}"
+                           th:field="*{extentionExpirationDateJalali}"
                            required/>
                 </div>
 
-                <div class="col-md-4 form-group">
-                    <label>Extend Status</label>
-                    <input type="text"
-                           class="form-control"
-                           th:field="*{extendStatus}"
-                           readonly/>
-                </div>
 
-                <!-- ROW 2 -->
-                <div class="col-md-4 form-group">
-                    <label>Extend Date</label>
-                    <input type="text"
-                           class="form-control hijrishamsi"
-                           th:field="*{extendDate}"
-                           readonly/>
-                </div>
 
             </div>
 
@@ -76,6 +68,10 @@
             </div>
 
         </fieldset>
+        <a th:href="@{/codes/sms-identifiers/extension/list}"
+           class="btn btn-primary mt-3">
+            ← Back to Page
+        </a>
 
     </form>
 </div>

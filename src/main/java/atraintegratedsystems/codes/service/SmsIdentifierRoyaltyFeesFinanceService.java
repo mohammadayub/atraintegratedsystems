@@ -2,10 +2,13 @@ package atraintegratedsystems.codes.service;
 
 import atraintegratedsystems.codes.dto.SmsIdentifierDetailDTO;
 import atraintegratedsystems.codes.repository.SmsIdentifierDetailRepository;
+import atraintegratedsystems.utils.PersianCalendarUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,21 +59,55 @@ public class SmsIdentifierRoyaltyFeesFinanceService {
     }
 
     // Confirm Section
+    @Transactional
     public void saveRoyaltyFees(SmsIdentifierDetailDTO dto) {
 
+        LocalDate entryVoucherDate = null;
+        LocalDate submissionDate = null;
+
+        // Entry Date Conversion
+        if (dto.getRoyaltyFeesEnteryVoucherDateJalali() != null &&
+                !dto.getRoyaltyFeesEnteryVoucherDateJalali().trim().isEmpty()) {
+
+            String[] parts = dto.getRoyaltyFeesEnteryVoucherDateJalali().split("-");
+            entryVoucherDate = PersianCalendarUtils.jalaliToGregorian(
+                    Integer.parseInt(parts[0]),
+                    Integer.parseInt(parts[1]),
+                    Integer.parseInt(parts[2])
+            );
+        }
+
+        // Submission Date Conversion
+        if (dto.getRoyaltyFeesBankVoucherSubmissionDateJalali() != null &&
+                !dto.getRoyaltyFeesBankVoucherSubmissionDateJalali().trim().isEmpty()) {
+
+            String[] parts = dto.getRoyaltyFeesBankVoucherSubmissionDateJalali().split("-");
+            submissionDate = PersianCalendarUtils.jalaliToGregorian(
+                    Integer.parseInt(parts[0]),
+                    Integer.parseInt(parts[1]),
+                    Integer.parseInt(parts[2])
+            );
+        }
+
+        java.sql.Date entrySqlDate =
+                (entryVoucherDate != null) ? java.sql.Date.valueOf(entryVoucherDate) : null;
+
+        java.sql.Date submissionSqlDate =
+                (submissionDate != null) ? java.sql.Date.valueOf(submissionDate) : null;
+
+        // ✅ Automatically set PAID
+        String paymentStatus = "PAID";
         repository.updateRoyaltyFees(
                 dto.getId(),
                 dto.getRoyaltyFees(),
                 dto.getRoyaltyFeesBankVoucherNo(),
-                dto.getRoyaltyFeesEnteryVoucherDate() == null
-                        ? null
-                        : Date.valueOf(dto.getRoyaltyFeesEnteryVoucherDate()),
-                dto.getRoyaltyFeesBankVoucherSubmissionDate() == null
-                        ? null
-                        : Date.valueOf(dto.getRoyaltyFeesBankVoucherSubmissionDate()),
-                dto.getRoyaltyFeesPaymentStatus()
+                entrySqlDate,
+                submissionSqlDate,
+                paymentStatus
         );
     }
+
+
 
     // Tariff Section
     public SmsIdentifierDetailDTO getTariffById(Long id) {

@@ -5,9 +5,11 @@ import atraintegratedsystems.codes.dto.SmsIdentifierFinanceExtensionDTO;
 import atraintegratedsystems.codes.model.SmsIdentifierExtension;
 import atraintegratedsystems.codes.repository.SmsIdentifierDetailRepository;
 import atraintegratedsystems.codes.repository.SmsIdentifierExtensionRepository;
+import atraintegratedsystems.utils.PersianCalendarUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -40,21 +42,59 @@ public class SmsIdentifierFinanceExtensionService {
     }
 
     /* UPDATE */
+    @Transactional
     public void updateFinanceExtension(SmsIdentifierExtensionDTO dto, String currentUser) {
 
         SmsIdentifierExtension entity = smsIdentifierExtensionRepository.findById(dto.getId())
                 .orElseThrow(() -> new RuntimeException("Extension not found"));
 
-        // USER ENTERED
-        entity.setExtensionBankVoucherNo(dto.getExtensionBankVoucherNo());
-        entity.setExtensionEnteryVoucherDate(dto.getExtensionEnteryVoucherDate());
-        entity.setExtensionBankVoucherSubmissionDate(dto.getExtensionBankVoucherSubmissionDate());
+        LocalDate entryVoucherDate = null;
+        LocalDate submissionDate = null;
 
-        // SYSTEM CONTROLLED
+        // 🔹 Convert Entry Voucher Date
+        if (dto.getExtensionEnteryVoucherDateJalali() != null &&
+                !dto.getExtensionEnteryVoucherDateJalali().trim().isEmpty()) {
+
+            String[] parts = dto.getExtensionEnteryVoucherDateJalali().split("-");
+
+            entryVoucherDate = PersianCalendarUtils.jalaliToGregorian(
+                    Integer.parseInt(parts[0]),
+                    Integer.parseInt(parts[1]),
+                    Integer.parseInt(parts[2])
+            );
+
+        } else if (dto.getExtensionEnteryVoucherDate() != null) {
+            entryVoucherDate = dto.getExtensionEnteryVoucherDate();
+        }
+
+        // 🔹 Convert Submission Date
+        if (dto.getExtensionBankVoucherSubmissionDateJalali() != null &&
+                !dto.getExtensionBankVoucherSubmissionDateJalali().trim().isEmpty()) {
+
+            String[] parts = dto.getExtensionBankVoucherSubmissionDateJalali().split("-");
+
+            submissionDate = PersianCalendarUtils.jalaliToGregorian(
+                    Integer.parseInt(parts[0]),
+                    Integer.parseInt(parts[1]),
+                    Integer.parseInt(parts[2])
+            );
+
+        } else if (dto.getExtensionBankVoucherSubmissionDate() != null) {
+            submissionDate = dto.getExtensionBankVoucherSubmissionDate();
+        }
+
+        // 🔹 USER ENTERED
+        entity.setExtendedFees(dto.getExtendedFees());
+        entity.setExtensionBankVoucherNo(dto.getExtensionBankVoucherNo());
+        entity.setExtensionEnteryVoucherDate(entryVoucherDate);
+        entity.setExtensionBankVoucherSubmissionDate(submissionDate);
+
+        // 🔹 SYSTEM CONTROLLED
         entity.setExtensionPaymentStatus("PAID");
         entity.setExtensionEnteryDate(LocalDate.now());
         entity.setExtensionBy(currentUser);
 
         smsIdentifierExtensionRepository.save(entity);
     }
+
 }

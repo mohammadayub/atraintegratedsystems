@@ -1,26 +1,32 @@
 <!DOCTYPE html>
 
 <html xmlns:th="http://www.thymeleaf.org">
-    <head th:replace="~{codes_layout :: page_head}">
-        <div th:replace="styles :: commonfieldset"></div>
-        <title>Finance Extension List</title>
+<head th:replace="~{codes_layout :: page_head}">
+    <title>SMS Identifier Finance Extension</title>
+
+    <div th:replace="styles :: data-tables-styles"></div>
+    <div th:replace="styles :: common-css"></div>
+    <div th:replace="styles :: commonfieldset-with-legend-border"></div>
+    <div th:replace="styles :: persian-datepicker-styles"></div>
 </head>
 
 <body>
 
 <nav th:replace="~{codes_layout :: page_navbar}"></nav>
 
-<div class="container mt-4">
+<div class="container-fluid"
+     th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
 
+    <fieldset>
+        <legend>Finance Department — Extended SMS Identifier Codes</legend>
 
-    <h3 class="mb-3 text-primary">
-        Finance Department — Extended SMS Identifier Codes
-    </h3>
+        <div class="table-container">
+            <table class="slip table table-bordered table-striped"
+                   id="profileTable"
+                   style="width:100%">
 
-    <table class="table table-bordered table-striped table-hover table-sm">
-
-        <thead>
-        <tr>
+                <thead>
+          <tr class="bg-primary text-white">
             <th>Extension ID</th>
             <th>Code</th>
             <th>Company</th>
@@ -63,14 +69,26 @@
         </tbody>
 
     </table>
+        </div>
+    </fieldset>
+    <a th:href="@{/codes/smsidentifier/finance/home}"
+       class="btn btn-primary mt-3">
+        ← Back to Page
+    </a>
 
 </div>
 
+
+<!-- Scripts -->
+<div th:replace="scripts :: common-scripts"></div>
+<div th:replace="scripts :: data-tables-scripts"></div>
+<div th:replace="scripts :: common-datatable"></div>
+<div th:replace="scripts :: persian-datepicker-scripts"></div>
+<div th:replace="scripts :: common-hijrishamsi-date"></div>
 
 <div style="height:10vh;"></div>
 <footer th:replace="~{codes_layout :: page_footer}"></footer>
 
 <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
-
 </body>
 </html>

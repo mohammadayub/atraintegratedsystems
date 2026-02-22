@@ -131,9 +131,9 @@
                 <td>
                     <div class="custom-card"
                          sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_LICENSE','ROLE_LICENSE_COMPLETION_PROFILE','ROLE_LICENSE_APPROVAL','ROLE_LICENSE_PROFILE_ENTRY','ROLE_FINANCE','ROLE_MINISTRY')">
-                        <a th:href="@{#}">
+                        <a th:href="@{/codes/sms-identifiers/reject/list}">
                             <img th:src="@{/images/rejectionList.png}" alt="Rejection List">
-                            <h4 style="margin-top:12px;">Sms Identifier Extension</h4>
+                            <h4 style="margin-top:12px;">Sms Identifier Rejection</h4>
                         </a>
                     </div>
                 </td>
@@ -151,7 +151,7 @@
                 <td>
                     <div class="custom-card"
                          sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_LICENSE','ROLE_LICENSE_COMPLETION_PROFILE','ROLE_LICENSE_APPROVAL','ROLE_LICENSE_PROFILE_ENTRY','ROLE_FINANCE','ROLE_MINISTRY')">
-                        <a th:href="@{#}">
+                        <a th:href="@{/codes/sms-identifiers/extension/list}">
                             <img th:src="@{/images/serialNumber.png}" alt="Extension">
                             <h4 style="margin-top:12px;">Sms Identifier Extension</h4>
                         </a>

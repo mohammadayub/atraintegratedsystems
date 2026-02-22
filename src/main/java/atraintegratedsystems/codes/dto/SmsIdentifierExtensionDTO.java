@@ -17,8 +17,10 @@ public class SmsIdentifierExtensionDTO {
     // Standard Department
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate extensionStartDate;
+    private String extensionStartDateJalali;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate extentionExpirationDate;
+    private String extentionExpirationDateJalali;
     private String extendStatus;
     private String extendDate;
 
@@ -28,8 +30,10 @@ public class SmsIdentifierExtensionDTO {
     private String extensionBankVoucherNo;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate extensionEnteryVoucherDate;
+    private String extensionEnteryVoucherDateJalali;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate extensionBankVoucherSubmissionDate;
+    private String extensionBankVoucherSubmissionDateJalali;
     private String extensionPaymentStatus;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate extensionEnteryDate;

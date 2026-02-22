@@ -41,24 +41,24 @@ public interface SmsIdentifierDetailRepository extends JpaRepository<SmsIdentifi
     // Application Fees Confirm Payment
     @Modifying
     @Transactional
-    @Query(
-            value = "UPDATE sms_identifier_detail SET " +
-                    "application_fees = ?2, " +
-                    "application_fees_bank_voucher_no = ?3, " +
-                    "application_fees_entery_voucher_date = ?4, " +
-                    "application_fees_bank_voucher_submission_date = ?5, " +
-                    "application_fees_payment_status = ?6 " +
-                    "WHERE id = ?1",
-            nativeQuery = true
-    )
+    @Query(value = "UPDATE sms_identifier_detail SET " +
+            "application_fees = ?2, " +
+            "application_fees_bank_voucher_no = ?3, " +
+            "application_fees_entery_voucher_date = ?4, " +
+            "application_fees_bank_voucher_submission_date = ?5, " +
+            "application_fees_payment_status = ?6 " +
+            "WHERE id = ?1",
+            nativeQuery = true)
     void updateApplicationFees(
             Long id,
-            double applicationFees,
+            double fees,
             String voucherNo,
             java.sql.Date entryDate,
             java.sql.Date submissionDate,
-            String paymentStatus
+            String status
     );
+
+
 
     // Tariff Section
 
@@ -113,7 +113,6 @@ public interface SmsIdentifierDetailRepository extends JpaRepository<SmsIdentifi
 
     // Royalty Fees Confirm Payment
     @Modifying
-    @Transactional
     @Query(
             value = "UPDATE sms_identifier_detail SET " +
                     "royalty_fees = ?2, " +
@@ -132,6 +131,7 @@ public interface SmsIdentifierDetailRepository extends JpaRepository<SmsIdentifi
             java.sql.Date submissionDate,
             String paymentStatus
     );
+
 
     // Royalty Fee Tariff Section
     @Query(
@@ -250,7 +250,7 @@ void rejectSmsIdentifier(
     // Bellow is For SmsIdentifierFinanceExtension
     @Query(
             "SELECT new atraintegratedsystems.codes.dto.SmsIdentifierFinanceExtensionDTO(" +
-                    " e.id, " +                     // <<<<<< THIS IS THE REAL FIX
+                    " e.id, " +
                     " c.smsIdentifierCodeName, " +
                     " d.companyName, " +
                     " d.enid, " +
@@ -265,17 +265,16 @@ void rejectSmsIdentifier(
                     " e.extensionStartDate, " +
                     " e.extentionExpirationDate, " +
                     " e.extendStatus, " +
-                    " e.extensionStartDate " +   // createdDate (better than assigningDate)
+                    " e.extensionStartDate " +
                     ") " +
                     "FROM SmsIdentifierDetail d " +
                     "JOIN d.smsIdentifierCode c " +
                     "JOIN d.extensions e " +
-                    "WHERE d.applicationFeesPaymentStatus = 'PAID' " +
-                    "AND d.royaltyFeesPaymentStatus = 'PAID' " +
-                    "AND e.extendStatus = 'EXTENDED'"+
+                    "WHERE e.extendStatus = 'Extended' " +
                     "AND e.extensionPaymentStatus IS NULL"
     )
     List<SmsIdentifierFinanceExtensionDTO> findFinanceExtensions();
+
 
 
 

@@ -1,53 +1,85 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
+<head th:replace="~{codes_layout :: page_head}">
     <title>Reject SMS Identifier</title>
+    <div th:replace="styles :: common-css"></div>
+    <div th:replace="styles :: commonfieldset"></div>
+    <div th:replace="styles :: persian-datepicker-styles"></div>
 </head>
 <body>
 
-<h2>Reject SMS Identifier Code</h2>
+<nav th:replace="~{codes_layout :: page_navbar}"></nav>
 
-<form th:action="@{/sms-identifiers/reject}"
-      th:object="${sms}"
-      method="post">
+<div class="container-fluid mt-4"
+     th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
 
-    <!-- Hidden ID -->
-    <input type="hidden" th:field="*{id}" />
+    <form th:action="@{/sms-identifiers/reject}"
+          th:object="${sms}"
+          method="post">
 
-    <p>
-        <strong>Company Name:</strong>
-        <span th:text="*{companyName}"></span>
-    </p>
+        <fieldset style="border:2px solid #DCAF45;padding:15px;border-radius:8px;margin-bottom:20px;">
+            <legend style="width:auto;font-size:1.2rem;color:#14438B;padding:0 10px;font-weight:bold;">
+                Reject SMS Identifier Code
+            </legend>
 
-    <p>
-        <strong>SMS Identifier Code:</strong>
-        <span th:text="*{smsIdentifierCodeName}"></span>
-    </p>
+            <!-- Hidden ID -->
+            <input type="hidden" th:field="*{id}" />
 
-    <hr/>
+            <div class="row g-3">
 
-    <!-- MANUAL INPUT -->
-    <p>
-        <label>Rejection Status:</label><br/>
-        <input type="text"
-               th:field="*{shortCodeRejectionStatus}"
-               placeholder="REJECTED"
-               required />
-    </p>
+                <!-- ROW 1 -->
+                <div class="col-md-4 form-group">
+                    <label>Rejection Status</label>
+                    <input type="text"
+                           class="form-control"
+                           th:field="*{shortCodeRejectionStatus}"
+                           placeholder="REJECTED"
+                           required />
+                </div>
 
-    <p>
-        <label>Rejection Date:</label><br/>
-        <input type="date"
-               th:field="*{shortCodeRejectionDate}"
-               required />
-    </p>
+                <div class="col-md-4 form-group">
+                    <label>Rejection Date</label>
+                    <input type="text"
+                           class="form-control hijrishamsi"
+                           th:field="*{shortCodeRejectionDateJalali}"
+                           required />
+                </div>
 
-    <br/>
+            </div>
 
-    <button type="submit">Submit Rejection</button>
-    <a th:href="@{/sms-identifiers/active}">Cancel</a>
+            <!-- BUTTONS -->
+            <div class="row mt-4">
+                <div class="col-md-4 mx-auto d-flex justify-content-center gap-2">
+                    <button type="submit" class="btn btn-danger">
+                        <i class="fas fa-times"></i>
+                        Submit Rejection
+                    </button>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
 
-</form>
+
+                    <a th:href="@{/codes/sms-identifiers/reject/list}" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i>
+                        Cancel
+                    </a>
+                </div>
+            </div>
+
+        </fieldset>
+        <a th:href="@{/codes/sms-identifiers/reject/list}"
+           class="btn btn-primary mt-3">
+            ← Back to Page
+        </a>
+
+    </form>
+</div>
+
+<!-- Common scripts -->
+<div th:replace="scripts :: common-scripts"></div>
+<div th:replace="scripts :: persian-datepicker-scripts"></div>
+<div th:replace="scripts :: common-hijrishamsi-date"></div>
+
+<div style="height:10vh;"></div>
+<footer th:replace="~{codes_layout :: page_footer}"></footer>
 
 </body>
 </html>

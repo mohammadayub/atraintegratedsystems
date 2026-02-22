@@ -1,27 +1,30 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{codes_layout :: page_head}">
-    <title>Sms Identifier Finance | Royalty Fees</title>
+    <title>SMS Identifier Royalty Fees List</title>
 
     <div th:replace="styles :: data-tables-styles"></div>
-    <div th:replace="styles :: persian-datepicker-styles"></div>
+    <div th:replace="styles :: common-css"></div>
     <div th:replace="styles :: commonfieldset-with-legend-border"></div>
+    <div th:replace="styles :: persian-datepicker-styles"></div>
 </head>
 <body>
 
 <nav th:replace="~{codes_layout :: page_navbar}"></nav>
 
-<div class="container-fluid mt-4"
+<div class="container-fluid"
      th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
 
-    <fieldset class="mt-2">
+    <fieldset>
         <legend>Sms Identifier Royalty Fees List</legend>
 
-        <!-- RESPONSIVE WRAPPER -->
-        <div class="table-responsive">
-            <table class="table table-bordered table-striped table-hover" id="profileTable">
+        <div class="table-container">
+            <table class="slip table table-bordered table-striped"
+                   id="profileTable"
+                   style="width:100%">
+
                 <thead>
-        <tr>
+            <tr class="bg-primary text-white">
             <th>#</th>
             <th>Code Name</th>
             <th>Company</th>
@@ -67,11 +70,22 @@
     </table>
         </div>
     </fieldset>
-
+    <a th:href="@{/codes/smsidentifier/finance/home}"
+       class="btn btn-primary mt-3">
+        ← Back to Page
+    </a>
 </div>
+
+<!-- Scripts -->
+<div th:replace="scripts :: common-scripts"></div>
+<div th:replace="scripts :: data-tables-scripts"></div>
+<div th:replace="scripts :: common-datatable"></div>
+<div th:replace="scripts :: persian-datepicker-scripts"></div>
+<div th:replace="scripts :: common-hijrishamsi-date"></div>
 
 <div style="height:10vh;"></div>
 <footer th:replace="~{codes_layout :: page_footer}"></footer>
 
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
 </body>
 </html>

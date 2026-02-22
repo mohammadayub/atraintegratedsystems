@@ -43,18 +43,18 @@
 
                 <div class="col-md-4 form-group">
                     <label>Entry Voucher Date</label>
-                    <input type="date"
-                           class="form-control"
-                           th:field="*{extensionEnteryVoucherDate}"
+                    <input type="text"
+                           class="form-control hijrishamsi"
+                           th:field="*{extensionEnteryVoucherDateJalali}"
                            required/>
                 </div>
 
                 <!-- ROW 2 -->
                 <div class="col-md-4 form-group">
                     <label>Voucher Submission Date</label>
-                    <input type="date"
-                           class="form-control"
-                           th:field="*{extensionBankVoucherSubmissionDate}"
+                    <input type="text"
+                           class="form-control hijrishamsi"
+                           th:field="*{extensionBankVoucherSubmissionDateJalali}"
                            required/>
                 </div>
 
@@ -79,6 +79,10 @@
             </div>
 
         </fieldset>
+        <a th:href="@{/codes/smsidentifier/finance/extensions/list}"
+           class="btn btn-primary mt-3">
+            ← Back to Page
+        </a>
 
     </form>
 </div>

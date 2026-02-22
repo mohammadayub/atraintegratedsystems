@@ -2,14 +2,19 @@ package atraintegratedsystems.codes.service;
 
 import atraintegratedsystems.codes.dto.SmsIdentifierDetailDTO;
 import atraintegratedsystems.codes.repository.SmsIdentifierDetailRepository;
+import atraintegratedsystems.utils.PersianCalendarUtils;
+import java.time.LocalDate;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Transactional
 public class SmsIdentifierApplicationFeesFinanceService {
 
     @Autowired
@@ -57,21 +62,57 @@ public class SmsIdentifierApplicationFeesFinanceService {
     }
 
     // Confirm Section
+    @Transactional
     public void saveApplicationFees(SmsIdentifierDetailDTO dto) {
+
+        LocalDate entryVoucherDate = null;
+        LocalDate submissionDate = null;
+
+        if (dto.getApplicationFeesEnteryVoucherDateJalali() != null &&
+                !dto.getApplicationFeesEnteryVoucherDateJalali().trim().isEmpty()) {
+
+            String[] parts = dto.getApplicationFeesEnteryVoucherDateJalali().split("-");
+            entryVoucherDate = PersianCalendarUtils.jalaliToGregorian(
+                    Integer.parseInt(parts[0]),
+                    Integer.parseInt(parts[1]),
+                    Integer.parseInt(parts[2])
+            );
+        }
+
+        if (dto.getApplicationFeesBankVoucherSubmissionDateJalali() != null &&
+                !dto.getApplicationFeesBankVoucherSubmissionDateJalali().trim().isEmpty()) {
+
+            String[] parts = dto.getApplicationFeesBankVoucherSubmissionDateJalali().split("-");
+            submissionDate = PersianCalendarUtils.jalaliToGregorian(
+                    Integer.parseInt(parts[0]),
+                    Integer.parseInt(parts[1]),
+                    Integer.parseInt(parts[2])
+            );
+        }
+
+        java.sql.Date entrySqlDate = null;
+        java.sql.Date submissionSqlDate = null;
+
+        if (entryVoucherDate != null) {
+            entrySqlDate = java.sql.Date.valueOf(entryVoucherDate);
+        }
+
+        if (submissionDate != null) {
+            submissionSqlDate = java.sql.Date.valueOf(submissionDate);
+        }
 
         repository.updateApplicationFees(
                 dto.getId(),
                 dto.getApplicationFees(),
                 dto.getApplicationFeesBankVoucherNo(),
-                dto.getApplicationFeesEnteryVoucherDate() == null
-                        ? null
-                        : Date.valueOf(dto.getApplicationFeesEnteryVoucherDate()),
-                dto.getApplicationFeesBankVoucherSubmissionDate() == null
-                        ? null
-                        : Date.valueOf(dto.getApplicationFeesBankVoucherSubmissionDate()),
-                dto.getApplicationFeesPaymentStatus()
+                entrySqlDate,
+                submissionSqlDate,
+                "PAID"
         );
+
+
     }
+
 
     // Tariff Section
     public SmsIdentifierDetailDTO getTariffById(Long id) {

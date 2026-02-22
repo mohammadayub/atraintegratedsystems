@@ -39,8 +39,10 @@ public class SmsIdentifierDetailDTO {
     private String applicationFeesBankVoucherNo;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate applicationFeesEnteryVoucherDate;
+    private String applicationFeesEnteryVoucherDateJalali;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate applicationFeesBankVoucherSubmissionDate;
+    private String applicationFeesBankVoucherSubmissionDateJalali;
     private String applicationFeesPaymentStatus;
 
     // Royalty Fees Related
@@ -48,8 +50,10 @@ public class SmsIdentifierDetailDTO {
     private String royaltyFeesBankVoucherNo;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate royaltyFeesEnteryVoucherDate;
+    private String royaltyFeesEnteryVoucherDateJalali;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate royaltyFeesBankVoucherSubmissionDate;
+    private String royaltyFeesBankVoucherSubmissionDateJalali;
     private String royaltyFeesPaymentStatus;
 
 
@@ -57,6 +61,7 @@ public class SmsIdentifierDetailDTO {
     private String shortCodeRejectionStatus;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate shortCodeRejectionDate;
+    private String shortCodeRejectionDateJalali;
 
     /* 🔥 IMPORTANT */
     private Long smsIdentifierCodeId;
