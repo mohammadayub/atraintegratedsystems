@@ -20,9 +20,12 @@ public class SmsIdentifierDetail {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+
     private String companyName;
     private String enid;
     private String companyAddress;
+    private String responsiblePerson;
+    private String job;
     private String mobile;
     private String telephone;
     private String email;
@@ -44,6 +47,7 @@ public class SmsIdentifierDetail {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate applicationFeesBankVoucherSubmissionDate;
     private String applicationFeesPaymentStatus;
+    private String applicationFessPaymentOrganization="MCIT";
 
     // Royalty Fees Related
     private double royaltyFees=70000;
@@ -53,6 +57,7 @@ public class SmsIdentifierDetail {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate royaltyFeesBankVoucherSubmissionDate;
     private String royaltyFeesPaymentStatus;
+    private String royaltyFeesPaymentOrganization="ATRA";
 
 
     // smsIdentifier Code Rejection Section

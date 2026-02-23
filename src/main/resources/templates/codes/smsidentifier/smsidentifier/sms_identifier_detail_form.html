@@ -55,6 +55,14 @@
                     <label>Company Name</label>
                     <input type="text" th:field="*{companyName}" class="form-control">
                 </div>
+                <div class="col-md-3">
+                    <label>Responsible Person</label>
+                    <input type="text" th:field="*{responsiblePerson}" class="form-control">
+                </div>
+                <div class="col-md-3">
+                    <label>Job</label>
+                    <input type="text" th:field="*{job}" class="form-control">
+                </div>
 
                 <div class="col-md-3">
                     <label>ENID</label>
@@ -107,6 +115,14 @@
                 <div class="col-md-3">
                     <label>Expiration Date</label>
                     <input type="text" th:field="*{expirationDateJalali}" class="form-control hijrishamsi">
+                </div>
+                <div class="col-md-3">
+                    <label>Application Fee</label>
+                    <input type="text" th:field="*{applicationFees}" class="form-control" readonly>
+                </div>
+                <div class="col-md-3">
+                    <label>Royalty Fee</label>
+                    <input type="text" th:field="*{royaltyFees}" class="form-control" readonly>
                 </div>
 
             </div>

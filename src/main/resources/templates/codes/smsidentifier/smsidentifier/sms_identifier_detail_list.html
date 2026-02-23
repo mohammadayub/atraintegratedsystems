@@ -30,11 +30,16 @@
                     <th>#</th>
                     <th>ID</th>
                     <th>Code</th>
+                    <th>smsIdentifierCodeName</th>
+                    <th>Serial Number</th>
                     <th>Company</th>
+                    <th>Responsible Person</th>
+                    <th>Job</th>
                     <th>Channel</th>
                     <th>Service Type</th>
                     <th>Assign Date</th>
                     <th>Expiry Date</th>
+                    <th>Print</th>
                     <th>Actions</th>
                 </tr>
                 </thead>
@@ -44,11 +49,22 @@
                     <td th:text="${iStat.count}">1</td>
                     <td th:text="${d.id}"></td>
                     <td th:text="${d.smsIdentifierCodeId}"></td>
+                    <td th:text="${d.smsIdentifierCodeName}"></td>
+                    <td th:text="${d.serialNumber}"></td>
                     <td th:text="${d.companyName}"></td>
+                    <td th:text="${d.responsiblePerson}"></td>
+                    <td th:text="${d.job}"></td>
                     <td th:text="${d.channel}"></td>
                     <td th:text="${d.serviceType}"></td>
                     <td th:text="${d.getAssigningDateJalali()}"></td>
                     <td th:text="${d.getExpirationDateJalali()}"></td>
+                    <td>
+                        <a th:href="@{/codes/sms-identifier-details/print/{id}(id=${d.id})}"
+                           class="btn btn-info btn-sm"
+                           target="_blank">
+                            Print
+                        </a>
+                    </td>
                     <td class="text-center">
 
                         <a th:href="@{/sms-identifier-details/edit/{id}(id=${d.id})}"

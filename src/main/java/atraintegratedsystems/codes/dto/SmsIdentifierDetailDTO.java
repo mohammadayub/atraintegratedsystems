@@ -19,6 +19,8 @@ public class SmsIdentifierDetailDTO {
     private String companyName;
     private String enid;
     private String companyAddress;
+    private String responsiblePerson;
+    private String job;
     private String mobile;
     private String telephone;
     private String email;
@@ -35,7 +37,7 @@ public class SmsIdentifierDetailDTO {
 
     // Fees Related Section
     // Application Fees Related
-    private double applicationFees;
+    private double applicationFees=5000;
     private String applicationFeesBankVoucherNo;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate applicationFeesEnteryVoucherDate;
@@ -46,7 +48,7 @@ public class SmsIdentifierDetailDTO {
     private String applicationFeesPaymentStatus;
 
     // Royalty Fees Related
-    private double royaltyFees;
+    private double royaltyFees=70000;
     private String royaltyFeesBankVoucherNo;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate royaltyFeesEnteryVoucherDate;
@@ -55,6 +57,9 @@ public class SmsIdentifierDetailDTO {
     private LocalDate royaltyFeesBankVoucherSubmissionDate;
     private String royaltyFeesBankVoucherSubmissionDateJalali;
     private String royaltyFeesPaymentStatus;
+
+
+
 
 
     // Short Code Rejection Section

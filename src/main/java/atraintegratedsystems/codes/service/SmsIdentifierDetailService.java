@@ -113,6 +113,8 @@ public class SmsIdentifierDetailService {
 
     private void mapToEntity(SmsIdentifierDetailDTO dto, SmsIdentifierDetail e) {
         e.setCompanyName(dto.getCompanyName());
+        e.setResponsiblePerson(dto.getResponsiblePerson());   // ✅ ADD
+        e.setJob(dto.getJob());
         e.setEnid(dto.getEnid());
         e.setCompanyAddress(dto.getCompanyAddress());
         e.setMobile(dto.getMobile());
@@ -210,6 +212,8 @@ public class SmsIdentifierDetailService {
 
         dto.setId(e.getId());
         dto.setCompanyName(e.getCompanyName());
+        dto.setResponsiblePerson(e.getResponsiblePerson());
+        dto.setJob(e.getJob());
         dto.setEnid(e.getEnid());
         dto.setCompanyAddress(e.getCompanyAddress());
         dto.setMobile(e.getMobile());
@@ -219,6 +223,17 @@ public class SmsIdentifierDetailService {
         dto.setServiceType(e.getServiceType());
         dto.setMnosCompanyHost(e.getMnosCompanyHost());
         dto.setCodeCategory(e.getCodeCategory());
+        dto.setApplicationFees(e.getApplicationFees());
+        dto.setRoyaltyFees(e.getRoyaltyFees());
+
+        if (e.getSmsIdentifierCode() != null) {
+            dto.setSmsIdentifierCodeId(e.getSmsIdentifierCode().getId());
+            dto.setSmsIdentifierCodeName(e.getSmsIdentifierCode().getSmsIdentifierCodeName());
+        }
+        if (e.getSmsIdentifierSerialNumber() != null) {
+            dto.setSmsIdentifierSerialNumberId(e.getSmsIdentifierSerialNumber().getId());
+            dto.setSerialNumber(e.getSmsIdentifierSerialNumber().getSerialNumber());
+        }
 //        dto.setAssigningDate(e.getAssigningDate());
 
         dto.setAssigningDateJalali(

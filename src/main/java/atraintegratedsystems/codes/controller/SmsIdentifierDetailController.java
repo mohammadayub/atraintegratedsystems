@@ -76,4 +76,15 @@ public class SmsIdentifierDetailController {
         detailService.delete(id);
         return "redirect:/codes/sms-identifier-details/list";
     }
+
+    // bellow is for printing
+    @GetMapping("/print/{id}")
+    public String printSmsIdentifier(@PathVariable Long id, Model model) {
+
+        SmsIdentifierDetailDTO dto = detailService.findById(id);
+
+        model.addAttribute("detail", dto);
+
+        return "codes/smsidentifier/smsidentifier/sms_identifier_detail_print";
+    }
 }

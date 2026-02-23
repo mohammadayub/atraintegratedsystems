@@ -47,7 +47,7 @@ public class TypeOfApprovalApplicant {
     private String address;
 
     @Column(length = 50)
-    private String poBox;
+    private String P_O_Box;;
 
     @Column(length = 30)
     private String telephone;

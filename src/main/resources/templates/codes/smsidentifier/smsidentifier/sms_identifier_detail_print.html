@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>SMS Identifier Print</title>
+
+    <style>
+        body{
+            font-family: Arial;
+            margin:40px;
+        }
+
+        table{
+            width:100%;
+            border-collapse: collapse;
+        }
+
+        th,td{
+            border:1px solid #000;
+            padding:8px;
+        }
+
+        h2{
+            text-align:center;
+            margin-bottom:30px;
+        }
+
+        @media print{
+            .no-print{
+                display:none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<h2>SMS Identifier Details</h2>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <td th:text="${detail.id}"></td>
+    </tr>
+
+    <tr>
+        <th>Code</th>
+        <td th:text="${detail.smsIdentifierCodeName}"></td>
+    </tr>
+
+    <tr>
+        <th>Serial Number</th>
+        <td th:text="${detail.serialNumber}"></td>
+    </tr>
+
+    <tr>
+        <th>Company</th>
+        <td th:text="${detail.companyName}"></td>
+    </tr>
+
+    <tr>
+        <th>Responsible Person</th>
+        <td th:text="${detail.responsiblePerson}"></td>
+    </tr>
+
+    <tr>
+        <th>Job</th>
+        <td th:text="${detail.job}"></td>
+    </tr>
+
+    <tr>
+        <th>Channel</th>
+        <td th:text="${detail.channel}"></td>
+    </tr>
+
+    <tr>
+        <th>Service Type</th>
+        <td th:text="${detail.serviceType}"></td>
+    </tr>
+
+    <tr>
+        <th>Assign Date</th>
+        <td th:text="${detail.assigningDateJalali}"></td>
+    </tr>
+
+    <tr>
+        <th>Expiry Date</th>
+        <td th:text="${detail.expirationDateJalali}"></td>
+    </tr>
+
+</table>
+
+<br>
+
+<button onclick="window.print()" class="no-print">
+    Print
+</button>
+
+</body>
+</html>

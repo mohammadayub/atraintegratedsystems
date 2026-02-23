@@ -13,6 +13,7 @@ import java.util.Optional;
 
 public interface SmsIdentifierDetailRepository extends JpaRepository<SmsIdentifierDetail,Long> {
 
+
     @Query(
             value = "SELECT " +
                     "d.id, " +
