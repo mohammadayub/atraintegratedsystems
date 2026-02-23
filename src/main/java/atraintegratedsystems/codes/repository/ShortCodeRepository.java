@@ -20,15 +20,42 @@ public interface ShortCodeRepository extends JpaRepository<ShortCode, Integer> {
     List<Object[]> getCodeDetails();
 
 
+//    @Query(
+//            value = "SELECT sc.short_code, " +
+//                    "sc.short_code || ' - ' || " +
+//                    "CASE WHEN scd.short_code IS NULL THEN 'unassigned' ELSE 'assign' END AS ShortCodes " +
+//                    "FROM short_code sc " +
+//                    "LEFT JOIN short_code_detail scd ON sc.short_code = scd.short_code",
+//            nativeQuery = true
+//    )
+//    List<Object[]> getShortCodes();
+
+
+
     @Query(
-            value = "SELECT sc.short_code, " +
+            value = "SELECT sc.short_code AS shortCode, " +
                     "sc.short_code || ' - ' || " +
-                    "CASE WHEN scd.short_code IS NULL THEN 'unassigned' ELSE 'assign' END AS ShortCodes " +
+                    "CASE WHEN EXISTS (" +
+                    "    SELECT 1 FROM short_code_detail scd " +
+                    "    WHERE scd.short_code = sc.short_code" +
+                    ") THEN 'assign' ELSE 'unassigned' END AS shortCodeStatus " +
                     "FROM short_code sc " +
-                    "LEFT JOIN short_code_detail scd ON sc.short_code = scd.short_code",
+                    "ORDER BY sc.short_code",
             nativeQuery = true
     )
     List<Object[]> getShortCodes();
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     @Query(

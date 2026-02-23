@@ -32,18 +32,22 @@ public class LicenseApplicant {
     private String companyLicenseName;
 
     @Lob
+    @Basic(fetch = FetchType.LAZY)
     @Column(name="application_upload")
     private byte[] applicationUpload;
 
     @Lob
+    @Basic(fetch = FetchType.LAZY)
     @Column(name="enid_upload")
     private byte[] enidUpload;
 
     @Lob
+    @Basic(fetch = FetchType.LAZY)
     @Column(name="article_of_association_upload")
     private byte[] articleOfAssociationUpload;
 
     @Lob
+    @Basic(fetch = FetchType.LAZY)
     @Column(name="business_plan_upload")
     private byte[] businessPlanUpload;
 
@@ -51,6 +55,7 @@ public class LicenseApplicant {
     private String licenseNo;
 
     @Lob
+    @Basic(fetch = FetchType.LAZY)
     @Column(name = "license_upload")
     private byte[] licenseUpload;
 
@@ -58,6 +63,7 @@ public class LicenseApplicant {
     private String tinNo;
 
     @Lob
+    @Basic(fetch = FetchType.LAZY)
     @Column(name = "identity_form_upload")
     private byte[] identityFormUpload;
 
