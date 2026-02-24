@@ -33,10 +33,7 @@ public class SmsIdentifierDetailService {
 
         SmsIdentifierCode code = codeRepo.findById(dto.getSmsIdentifierCodeId())
                 .orElseThrow(() -> new RuntimeException("SMS Identifier Code not found"));
-
-        if (code.getSmsIdentifierDetail() != null) {
-            throw new RuntimeException("This SMS Identifier Code is already assigned");
-        }
+        
 
         SmsIdentifierDetail entity = new SmsIdentifierDetail();
         mapToEntity(dto, entity);

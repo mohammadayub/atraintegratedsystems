@@ -1,6 +1,7 @@
 package atraintegratedsystems.codes.service;
 
 import atraintegratedsystems.codes.dto.SmsIdentifierDetailDTO;
+import atraintegratedsystems.codes.model.SmsIdentifierDetail;
 import atraintegratedsystems.codes.repository.SmsIdentifierDetailRepository;
 import atraintegratedsystems.utils.PersianCalendarUtils;
 import lombok.RequiredArgsConstructor;
@@ -35,12 +36,15 @@ public class SmsIdentifierRejectionService {
                 .orElseThrow(() -> new RuntimeException("Record not found"));
     }
 
+
     @Transactional
     public void rejectUsingDto(SmsIdentifierDetailDTO dto) {
 
+        SmsIdentifierDetail detail = repository.findById(dto.getId())
+                .orElseThrow(() -> new RuntimeException("Record not found"));
+
         LocalDate rejectionDate = null;
 
-        // 🔹 Convert Jalali → Gregorian
         if (dto.getShortCodeRejectionDateJalali() != null &&
                 !dto.getShortCodeRejectionDateJalali().trim().isEmpty()) {
 
@@ -51,16 +55,19 @@ public class SmsIdentifierRejectionService {
                     Integer.parseInt(parts[1]),
                     Integer.parseInt(parts[2])
             );
-
         } else if (dto.getShortCodeRejectionDate() != null) {
             rejectionDate = dto.getShortCodeRejectionDate();
         }
 
-        repository.rejectSmsIdentifier(
-                dto.getId(),
-                dto.getShortCodeRejectionStatus(),
-                rejectionDate
-        );
-    }
+        // Update Detail
+        detail.setShortCodeRejectionStatus(dto.getShortCodeRejectionStatus());
+        detail.setShortCodeRejectionDate(rejectionDate);
 
+        // 🔴 IMPORTANT PART
+        if (detail.getSmsIdentifierCode() != null) {
+            detail.getSmsIdentifierCode().setAssignStatus(null);
+        }
+
+        repository.save(detail);
+    }
 }

@@ -5,6 +5,7 @@
     <div th:replace="styles :: persian-datepicker-styles"></div>
     <div th:replace="styles :: common-css"></div>
     <div th:replace="styles :: commonfieldset"></div>
+    <div th:replace="styles :: select2-styles"></div>
 </head>
 
 <body>
@@ -31,7 +32,7 @@
                 <!-- ROW 1 -->
                 <div class="col-md-3">
                     <label class="form-label">SMS Identifier Code</label>
-                    <select class="form-control" th:field="*{smsIdentifierCodeId}" required>
+                    <select class="form-control search-select" th:field="*{smsIdentifierCodeId}" required>
                         <option value="">-- Select Code --</option>
                         <option th:each="c : ${codes}"
                                 th:value="${c.id}"
@@ -42,7 +43,7 @@
 
                 <div class="col-md-3">
                     <label class="form-label">Serial Number</label>
-                    <select class="form-control" th:field="*{smsIdentifierSerialNumberId}" required>
+                    <select class="form-control search-select" th:field="*{smsIdentifierSerialNumberId}" required>
                         <option value="">-- Select Serial Number --</option>
                         <option th:each="sn : ${serialNumbers}"
                                 th:value="${sn.id}"
@@ -149,9 +150,17 @@
 <div th:replace="scripts :: common-scripts"></div>
 <div th:replace="scripts :: persian-datepicker-scripts"></div>
 <div th:replace="scripts :: common-hijrishamsi-date"></div>
+<div th:replace="scripts :: select2-scripts"></div>
+
 
 <div style="height:10vh;"></div>
 <footer th:replace="~{codes_layout :: page_footer}"></footer>
-
+<script>
+    $(document).ready(function () {
+        $('.search-select').select2({
+            width: '100%'
+        });
+    });
+</script>
 </body>
 </html>

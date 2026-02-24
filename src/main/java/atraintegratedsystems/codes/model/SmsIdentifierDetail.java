@@ -67,14 +67,8 @@ public class SmsIdentifierDetail {
 
     // RelationShips
 
-    // One-to-One relationship (OWNING SIDE)
-    @OneToOne
-    @JoinColumn(
-            name = "sms_identifier_code_id",
-            nullable = false,
-            unique = true
-    )
-    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "sms_identifier_code_id")
     private SmsIdentifierCode smsIdentifierCode;
 
     @OneToMany(

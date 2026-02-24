@@ -161,33 +161,33 @@ public interface SmsIdentifierDetailRepository extends JpaRepository<SmsIdentifi
 
     @Query(
             "SELECT new atraintegratedsystems.codes.dto.SmsIdentifierDetailDTO(" +
-                    " d.id, " +
-                    " d.companyName, " +
-                    " d.enid, " +
-                    " d.companyAddress, " +
-                    " d.mobile, " +
-                    " d.telephone, " +
-                    " d.email, " +
-                    " d.channel, " +
-                    " d.serviceType, " +
-                    " d.mnosCompanyHost, " +
-                    " d.codeCategory, " +
-                    " d.assigningDate, " +
-                    " d.expirationDate, " +
-                    " d.applicationFees, " +
-                    " d.applicationFeesBankVoucherNo, " +
-                    " d.applicationFeesEnteryVoucherDate, " +
-                    " d.applicationFeesBankVoucherSubmissionDate, " +
-                    " d.applicationFeesPaymentStatus, " +
-                    " d.royaltyFees, " +
-                    " d.royaltyFeesBankVoucherNo, " +
-                    " d.royaltyFeesEnteryVoucherDate, " +
-                    " d.royaltyFeesBankVoucherSubmissionDate, " +
-                    " d.royaltyFeesPaymentStatus, " +
-                    " d.shortCodeRejectionStatus, " +
-                    " d.shortCodeRejectionDate, " +
-                    " c.id, " +
-                    " c.smsIdentifierCodeName" +
+                    "d.id, " +
+                    "d.companyName, " +
+                    "d.enid, " +
+                    "d.companyAddress, " +
+                    "d.mobile, " +
+                    "d.telephone, " +
+                    "d.email, " +
+                    "d.channel, " +
+                    "d.serviceType, " +
+                    "d.mnosCompanyHost, " +
+                    "d.codeCategory, " +
+                    "d.assigningDate, " +
+                    "d.expirationDate, " +
+                    "d.applicationFees, " +
+                    "d.applicationFeesBankVoucherNo, " +
+                    "d.applicationFeesEnteryVoucherDate, " +
+                    "d.applicationFeesBankVoucherSubmissionDate, " +
+                    "d.applicationFeesPaymentStatus, " +
+                    "d.royaltyFees, " +
+                    "d.royaltyFeesBankVoucherNo, " +
+                    "d.royaltyFeesEnteryVoucherDate, " +
+                    "d.royaltyFeesBankVoucherSubmissionDate, " +
+                    "d.royaltyFeesPaymentStatus, " +
+                    "d.shortCodeRejectionStatus, " +
+                    "d.shortCodeRejectionDate, " +
+                    "c.id, " +
+                    "c.smsIdentifierCodeName" +
                     ") " +
                     "FROM SmsIdentifierDetail d " +
                     "JOIN d.smsIdentifierCode c " +
