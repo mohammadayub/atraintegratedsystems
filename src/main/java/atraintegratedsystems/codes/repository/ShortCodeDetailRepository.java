@@ -73,7 +73,7 @@ int releaseCode(@Param("id") Long id);
     // for Application Fee
 
     @Query(value =
-            "SELECT cd.code_detail_id, sc.short_code, cd.code_status, cd.source_used, cd.location, cd.category_type, cd.category, cd.chanel, cd.email_of_responsible_person " +
+            "SELECT cd.code_detail_id, sc.short_code_name, cd.code_status, cd.source_used, cd.location, cd.category_type, cd.category, cd.chanel, cd.email_of_responsible_person " +
                     "FROM short_code_detail cd " +
                     "LEFT JOIN short_code sc ON cd.shortcode_id = sc.id " +
                     "WHERE cd.application_fees_status IS NULL",
@@ -152,7 +152,10 @@ int releaseCode(@Param("id") Long id);
 
 //    Royalty Fee Related
 
-    @Query(value = "SELECT cd.code_detail_id,cd.short_code, cd.code_status, cd.source_used, cd.location, cd.category_type, cd.category, cd.chanel, cd.email_of_responsible_person FROM short_code_detail cd WHERE cd.royalty_fees_status IS null", nativeQuery = true)
+//    @Query(value = "SELECT cd.code_detail_id,cd.short_code, cd.code_status, cd.source_used, cd.location, cd.category_type, cd.category, cd.chanel, cd.email_of_responsible_person FROM short_code_detail cd WHERE cd.royalty_fees_status IS null", nativeQuery = true)
+//    List<Object[]> findunPaidRoyaltyFee();
+
+    @Query(value = "SELECT cd.code_detail_id, sc.short_code_name, cd.code_status, cd.source_used, cd.location, cd.category_type, cd.category, cd.chanel, cd.email_of_responsible_person FROM short_code_detail cd JOIN short_code sc ON cd.shortcode_id = sc.id WHERE cd.royalty_fees_status IS NULL", nativeQuery = true)
     List<Object[]> findunPaidRoyaltyFee();
 
 //    Bellow is related to Tariff
@@ -187,28 +190,35 @@ Optional<ShortCodeDetail> findUnpaidRoyaltyFeeById(@Param("id") Long id);
 
 //    @Query(value = "SELECT * FROM code_detail cd WHERE cd.royalty_fees_status='PAID'", nativeQuery = true)
 //    List<Object[]> findUnPaidRoyaltyFeeForExtension();
-@Query(
-        value =
-                "SELECT " +
-                        " cd.code_detail_id, " +              // row[0]
-                        " cd.short_code, " +                  // row[1]
-                        " cd.royalty_fees_status, " +         // row[2]
-                        " cd.source_used, " +                 // row[3]
-                        " cd.location, " +                    // row[4]
-                        " cd.category_type, " +               // row[5]
-                        " cd.category, " +                    // row[6]
-                        " cd.chanel, " +                      // row[7]
-                        " cd.email_of_responsible_person " +  // row[8]
-                        "FROM short_code_detail cd " +
-                        "WHERE cd.royalty_fees_status = 'PAID'",
-        nativeQuery = true
-)
-List<Object[]> findUnPaidRoyaltyFeeForExtension();
+//@Query(
+//        value =
+//                "SELECT " +
+//                        " cd.code_detail_id, " +              // row[0]
+//                        " cd.short_code, " +                  // row[1]
+//                        " cd.royalty_fees_status, " +         // row[2]
+//                        " cd.source_used, " +                 // row[3]
+//                        " cd.location, " +                    // row[4]
+//                        " cd.category_type, " +               // row[5]
+//                        " cd.category, " +                    // row[6]
+//                        " cd.chanel, " +                      // row[7]
+//                        " cd.email_of_responsible_person " +  // row[8]
+//                        "FROM short_code_detail cd " +
+//                        "WHERE cd.royalty_fees_status = 'PAID'",
+//        nativeQuery = true
+//)
+//List<Object[]> findUnPaidRoyaltyFeeForExtension();
+
+
+    @Query(value = "SELECT cd.code_detail_id, sc.short_code_name, cd.royalty_fees_status, cd.source_used, cd.location, cd.category_type, cd.category, cd.chanel, cd.email_of_responsible_person FROM short_code_detail cd JOIN short_code sc ON cd.shortcode_id = sc.id WHERE cd.royalty_fees_status = 'PAID'", nativeQuery = true)
+    List<Object[]> findUnPaidRoyaltyFeeForExtension();
 
 
 
     // Bellow is Application Fee Extension
-    @Query(value = "SELECT cd.code_detail_id,cd.short_code, cd.code_status, cd.source_used, cd.location, cd.category_type, cd.category, cd.chanel, cd.email_of_responsible_person FROM short_code_detail cd WHERE cd.application_fees_status='PAID'", nativeQuery = true)
+//    @Query(value = "SELECT cd.code_detail_id,cd.shortcode_id, cd.code_status, cd.source_used, cd.location, cd.category_type, cd.category, cd.chanel, cd.email_of_responsible_person FROM short_code_detail cd WHERE cd.application_fees_status='PAID'", nativeQuery = true)
+//    List<Object[]> findUnPaidApplicationFeeForExtension();
+
+    @Query(value = "SELECT cd.code_detail_id, sc.short_code_name, cd.code_status, cd.source_used, cd.location, cd.category_type, cd.category, cd.chanel, cd.email_of_responsible_person FROM short_code_detail cd JOIN short_code sc ON cd.shortcode_id = sc.id WHERE cd.application_fees_status = 'PAID'", nativeQuery = true)
     List<Object[]> findUnPaidApplicationFeeForExtension();
 
 
