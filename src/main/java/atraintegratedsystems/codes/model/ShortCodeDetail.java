@@ -2,6 +2,7 @@ package atraintegratedsystems.codes.model;
 
 import atraintegratedsystems.licenses.model.LicenseApplicant;
 import lombok.Data;
+import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -12,13 +13,11 @@ import java.time.LocalDate;
 public class ShortCodeDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="code_detail_id")
+    @Column(name = "code_detail_id")
     private Long id;
-    @Column(name="short_code")
-    private Integer shortCode;
     private Integer releaseShortCode;
     private String codeStatus;
-    @Column(name="ispc_unique_name_of_signaling_point")
+    @Column(name = "ispc_unique_name_of_signaling_point")
     private String unique_name_of_signaling_point;
     @ManyToOne
     @JoinColumn(name = "license_applicant_id")
@@ -50,7 +49,7 @@ public class ShortCodeDetail {
 
     // Finance Fees Section
     private double application_fees;
-    private String applicationFeesOrganization="ATRA";
+    private String applicationFeesOrganization = "ATRA";
     private String applicationFeesStatus;
     private double registration_fees;
 
@@ -70,6 +69,7 @@ public class ShortCodeDetail {
     private String paymentStatus;
 
 
+    @ToString.Exclude
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(
             name = "serial_number_id",
@@ -79,9 +79,10 @@ public class ShortCodeDetail {
     private ShortCodeSerialNumber serialNumber;
 
 
-    public void setTotal(double total) {
-        this.total = application_fees+registration_fees+royalty_fees;
-    }
 
+    @ToString.Exclude
+    @ManyToOne
+    @JoinColumn(name = "shortcode_id", nullable = false)
+    private ShortCode shortCode;
 
 }

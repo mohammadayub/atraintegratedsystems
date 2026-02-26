@@ -1,5 +1,6 @@
 package atraintegratedsystems.codes.repository;
 
+import atraintegratedsystems.codes.dto.ShortCodeTableDTO;
 import atraintegratedsystems.codes.model.ShortCodeDetail;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -12,8 +13,39 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ShortCodeDetailRepository extends JpaRepository<ShortCodeDetail,Long> {
-    Optional<ShortCodeDetail> findByShortCode(int shortCode);
-
+    Optional<ShortCodeDetail> findByShortCode_ShortCodeName(int shortCode);
+    // After Testing
+    @Query(
+            "SELECT new atraintegratedsystems.codes.dto.ShortCodeTableDTO(" +
+                    " cd.id, " +
+                    " sc.shortCodeName, " +
+                    " sn.serialNumber, " +
+                    " cd.releaseShortCode, " +
+                    " cd.codeStatus, " +
+                    " cd.sourceUsed, " +
+                    " cd.location, " +
+                    " cd.chanel, " +
+                    " cd.services, " +
+                    " cd.category, " +
+                    " cd.back_long_number, " +
+                    " cd.name_of_responsible_person, " +
+                    " cd.job, " +
+                    " cd.id_card_number_of_responsible_person, " +
+                    " cd.mobile_number_of_responsible_person, " +
+                    " cd.email_of_responsible_person, " +
+                    " cd.expiration_date, " +
+                    " cd.application_fees, " +
+                    " cd.registration_fees, " +
+                    " cd.royalty_fees, " +
+                    " cd.total, " +
+                    " cd.paymentStatus ) " +
+                    "FROM ShortCodeDetail cd " +
+                    "LEFT JOIN cd.shortCode sc " +
+                    "LEFT JOIN cd.serialNumber sn " +
+                    "ORDER BY cd.id DESC"
+    )
+    List<ShortCodeTableDTO> getFullShortCodeTable();
+    // End Testing
     @Query(value = "SELECT cd.code_detail_id, CONCAT(cd.source_used, '-', cd.short_code) AS company_name_with_code " +
             "FROM code_extension_detail ced RIGHT OUTER JOIN short_code_detail cd ON ced.code_detail_id = cd.code_detail_id", nativeQuery = true)
     List<Object[]> getCodeDetailWithCompanyNameAndCode();
@@ -29,7 +61,7 @@ public interface ShortCodeDetailRepository extends JpaRepository<ShortCodeDetail
 @Transactional
 @Query(
         "UPDATE ShortCodeDetail c " +
-                "SET c.releaseShortCode = c.shortCode, " +
+                "SET c.releaseShortCode = c.shortCode.shortCodeName, " +
                 "    c.shortCode = NULL " +
                 "WHERE c.id = :id AND c.shortCode IS NOT NULL"
 )
@@ -40,7 +72,12 @@ int releaseCode(@Param("id") Long id);
 
     // for Application Fee
 
-    @Query(value = "SELECT cd.code_detail_id,cd.short_code, cd.code_status, cd.source_used, cd.location, cd.category_type, cd.category, cd.chanel, cd.email_of_responsible_person FROM short_code_detail cd WHERE cd.application_fees_status IS NULL", nativeQuery = true)
+    @Query(value =
+            "SELECT cd.code_detail_id, sc.short_code, cd.code_status, cd.source_used, cd.location, cd.category_type, cd.category, cd.chanel, cd.email_of_responsible_person " +
+                    "FROM short_code_detail cd " +
+                    "LEFT JOIN short_code sc ON cd.shortcode_id = sc.id " +
+                    "WHERE cd.application_fees_status IS NULL",
+            nativeQuery = true)
     List<Object[]> findunPaidApplicationFee();
 
     // Tariff Related

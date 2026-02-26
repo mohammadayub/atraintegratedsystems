@@ -19,11 +19,21 @@ public class ShortCodeRejectionService {
 
     public void rejectShortCode(Long id, ShortCodeDetailDTO dto) {
 
-        shortCodeDetailRepository.rejectShortCode(
-                id,
-                dto.getShortCodeRejectionStatus(),
-                dto.getShortCodeRejectionDate()
-        );
+        ShortCodeDetail detail = shortCodeDetailRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Code Detail not found"));
+
+        // 1️⃣ Update rejection info
+        detail.setShortCodeRejectionStatus(dto.getShortCodeRejectionStatus());
+        detail.setShortCodeRejectionDate(dto.getShortCodeRejectionDate());
+
+        // 2️⃣ IMPORTANT: update ShortCode status
+        if (detail.getShortCode() != null) {
+            detail.getShortCode().setAssignStatus("UNASSIGN");
+        }
+
+        // 3️⃣ Save (Hibernate will flush both entities)
+        shortCodeDetailRepository.save(detail);
     }
+
 
 }

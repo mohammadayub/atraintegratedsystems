@@ -53,7 +53,7 @@ public class ShortCodesRoyaltyFeesFinanceController {
 
         ShortCodeDetailDTO dto = new ShortCodeDetailDTO();
         dto.setId(codeDetail.getId());
-        dto.setShortCode(codeDetail.getShortCode());
+
 
         model.addAttribute("codeDetail", dto); // ✅ DTO, NOT Entity
         return "codes/finance/shortcode/royaltyfees/royaltyfee_confirm";

@@ -1,6 +1,7 @@
 package atraintegratedsystems.codes.model;
 
 import lombok.Data;
+import lombok.ToString;
 
 import javax.persistence.*;
 
@@ -8,7 +9,7 @@ import javax.persistence.*;
 @Data
 public class ShortCodeSerialNumber {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
@@ -18,6 +19,7 @@ public class ShortCodeSerialNumber {
     private String status;
 
     // ✅ One-to-One (inverse side) - NULL allowed
+    @ToString.Exclude
     @OneToOne(mappedBy = "serialNumber", optional = true)
     private ShortCodeDetail shortCodeDetail;
 

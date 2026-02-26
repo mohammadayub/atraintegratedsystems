@@ -23,6 +23,11 @@ public class ShortCodeSerialNumberService {
         return repository.findAll();
     }
 
+    public List<ShortCodeSerialNumber> findAllNullShortCode() {
+        return repository.findByStatusIsNull();
+    }
+
+
     // READ BY ID
     public ShortCodeSerialNumber findById(Long id) {
         return repository.findById(id).orElse(null);

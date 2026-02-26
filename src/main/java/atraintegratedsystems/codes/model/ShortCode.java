@@ -1,15 +1,28 @@
 package atraintegratedsystems.codes.model;
 
 import lombok.Data;
+import lombok.ToString;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Data
 public class ShortCode {
+
     @Id
-    @Column(name="short_code",unique = true)
-    private int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(unique = true, nullable = false)
+    private Integer shortCodeName;
+
+    private String assignStatus = "UNASSIGN";
+
+
+    @ToString.Exclude
+    @OneToMany(mappedBy = "shortCode", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<ShortCodeDetail> shortCodeDetail;
 }

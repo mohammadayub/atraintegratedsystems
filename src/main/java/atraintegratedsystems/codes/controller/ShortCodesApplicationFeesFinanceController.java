@@ -54,7 +54,6 @@ public class ShortCodesApplicationFeesFinanceController {
         // 2️⃣ Map entity → DTO
         ShortCodeDetailDTO dto = new ShortCodeDetailDTO();
         dto.setId(codeDetail.getId());
-        dto.setShortCode(codeDetail.getShortCode());
         dto.setApplicationFeebankVoucherNo(codeDetail.getApplicationFeebankVoucherNo());
 
         PersianCalendarUtils converter = new PersianCalendarUtils();

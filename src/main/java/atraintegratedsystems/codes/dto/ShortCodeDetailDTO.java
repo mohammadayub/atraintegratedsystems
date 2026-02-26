@@ -8,7 +8,7 @@ import java.time.LocalDate;
 @Data
 public class ShortCodeDetailDTO {
     private Long id;
-    private Integer shortCode;
+
     private Integer releaseShortCode;
     private String codeStatus;
     private String unique_name_of_signaling_point;
@@ -60,6 +60,9 @@ public class ShortCodeDetailDTO {
     private String paymentStatus;
 
     private Long serialNumberId;
+    private Long shortCodeId;
+
+
 
 
 }

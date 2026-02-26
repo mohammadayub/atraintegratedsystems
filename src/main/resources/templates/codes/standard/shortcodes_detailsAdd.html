@@ -28,12 +28,15 @@
                 <input type="hidden" th:field="*{id}"/>
 
                 <!-- ROW 1 -->
+
                 <div class="col-md-3 form-group">
-                    <label th:text="#{select_code}">Select Code</label>
-                    <select class="form-control search-select" th:field="*{shortCode}">
-                        <option th:each="code : ${codes}"
-                                th:value="${code[0]}"
-                                th:text="${code[1]}"></option>
+                    <label>Short Code</label>
+                    <select class="form-control search-select" th:field="*{shortCodeId}">
+                        <option value="">-- Select Short Code --</option>
+                        <option th:each="sc : ${codes}"
+                                th:value="${sc.id}"
+                                th:text="${sc.shortCodeName}">
+                        </option>
                     </select>
                 </div>
 
@@ -43,7 +46,7 @@
                         <option value="">--</option>
                         <option th:each="sn : ${serialNumbers}"
                                 th:value="${sn.id}"
-                                th:text="${sn.serialNumber + ' (' + (sn.status != null ? sn.status : 'Not Assigned') + ')'}">
+                                th:text="${sn.serialNumber}">
                         </option>
                     </select>
                 </div>

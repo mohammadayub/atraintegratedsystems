@@ -1,5 +1,6 @@
 package atraintegratedsystems.codes.service;
 
+import atraintegratedsystems.codes.dto.ShortCodeTableDTO;
 import atraintegratedsystems.codes.model.ShortCode;
 import atraintegratedsystems.codes.model.ShortCodeDetail;
 import atraintegratedsystems.codes.repository.ShortCodeDetailRepository;
@@ -53,6 +54,11 @@ public class ShortCodeDetailService {
         return shortCodeDetailRepository.findAll();
     }
 
+    // Speedup Query
+    public List<ShortCodeTableDTO> getAllShortCodes() {
+        return shortCodeDetailRepository.getFullShortCodeTable();
+    }
+    // End of Faster Query
     // -------------------------------------------------------------------
     // DELETE
     // -------------------------------------------------------------------
@@ -65,9 +71,7 @@ public class ShortCodeDetailService {
     // -------------------------------------------------------------------
     // FIND CODE (short code table)
     // -------------------------------------------------------------------
-    public Optional<ShortCode> getShortCode(int shortCode) {
-        return shortCodeRepository.findById(shortCode);
-    }
+
 
     // -------------------------------------------------------------------
     // FIND CODE DETAIL BY ID
@@ -80,7 +84,7 @@ public class ShortCodeDetailService {
     // FIND BY SHORTCODE
     // -------------------------------------------------------------------
     public Optional<ShortCodeDetail> getShortByCode(int shortCode) {
-        return shortCodeDetailRepository.findByShortCode(shortCode);
+        return shortCodeDetailRepository.findByShortCode_ShortCodeName(shortCode);
     }
 
     // -------------------------------------------------------------------

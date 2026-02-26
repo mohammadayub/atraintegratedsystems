@@ -1,74 +1,93 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head th:replace="~{codes_layout :: page_head}">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Short Code | Telecom Numbers & Shortcode System</title>
+    <title>Add Short Code</title>
 
-    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
     <style>
-        body {
-            background-color: #f8f9fa;
-            font-family: 'EB Garamond', serif;
-            font-weight: bold;
+        body{
+            background:#f8f9fa;
+            font-family:'EB Garamond',serif;
+            font-weight:bold;
         }
 
-        .container {
-            margin-top: 70px;
+        .container{
+            margin-top:70px;
         }
 
-        .card {
-            border-radius: 15px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        #footer {
-            margin-top: 60px;
-            background: rgba(0, 0, 0, 0.05);
-            text-align: center;
-            padding: 15px;
-            font-size: 14px;
+        .card{
+            border-radius:15px;
+            box-shadow:0 0 10px rgba(0,0,0,0.1);
         }
     </style>
+
 </head>
 
 <body>
 
-
 <nav th:replace="~{codes_layout :: page_navbar}"></nav>
 
-<div class="container d-flex justify-content-center mt-4">
-    <div class="col-sm-10 col-md-6 col-lg-4">
+<div class="container d-flex justify-content-center">
+
+    <div class="col-md-5">
+
         <div class="card p-4">
-            <h3 class="text-center mb-4 text-primary">Add Short Code</h3>
 
-            <form th:action="@{/codes/standard/shortcodes/add}" th:object="${codeDTO}" method="post">
-                <div class="form-group mb-3">
-                    <label for="id" class="form-label">Enter Code</label>
-                    <div class="input-group">
-                        <input type="text" class="form-control" id="id" name="id"
-                               th:field="*{id}" placeholder="Enter code" required>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </div>
+            <h3 class="text-center text-primary mb-4">
+                Add Short Code
+            </h3>
 
-                    <div th:if="${errorMessage != null}" class="alert alert-danger mt-3" role="alert">
-                        <span th:text="${errorMessage}"></span>
-                    </div>
+            <form th:action="@{/codes/standard/shortcodes/add}"
+                  th:object="${codeDTO}"
+                  method="post">
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Short Code
+                    </label>
+
+                    <input type="number"
+                           th:field="*{shortCodeName}"
+                           class="form-control"
+                           placeholder="Enter Short Code"
+                           required>
+
                 </div>
+
+                <button type="submit"
+                        class="btn btn-primary w-100">
+
+                    Save
+                </button>
+
+                <div th:if="${errorMessage}"
+                     class="alert alert-danger mt-3">
+
+                    <span th:text="${errorMessage}"></span>
+
+                </div>
+
             </form>
 
             <div class="text-center mt-3">
-                <a th:href="@{/codes/standard/shortcodes}" class="btn btn-secondary">
-                    ← Back to List
-                </a>
-            </div>
-        </div>
-    </div>
-</div>
 
+                <a th:href="@{/codes/standard/shortcodes}"
+                   class="btn btn-secondary">
+
+                    Back
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
 
 <footer th:replace="~{codes_layout :: page_footer}"></footer>
 
-<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
 </body>
 </html>

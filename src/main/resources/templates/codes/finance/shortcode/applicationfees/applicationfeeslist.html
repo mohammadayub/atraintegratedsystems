@@ -27,7 +27,6 @@
                 <thead>
                 <tr class="bg-primary">
                     <th>ID</th>
-                    <th>Short Code</th>
                     <th>Status</th>
                     <th>Source</th>
                     <th>Location</th>
@@ -44,7 +43,6 @@
                 <tr th:each="row : ${codes}">
 
                     <td th:text="${row[0]}"></td>
-                    <td th:text="${row[1]}"></td>
 
                     <td th:text="${row[2]}"></td>
                     <td th:text="${row[3]}"></td>
