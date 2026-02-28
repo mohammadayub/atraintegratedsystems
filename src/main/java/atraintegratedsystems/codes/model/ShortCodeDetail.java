@@ -15,6 +15,7 @@ public class ShortCodeDetail {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "code_detail_id")
     private Long id;
+    private String serialNumber;
     private Integer releaseShortCode;
     private String codeStatus;
     @Column(name = "ispc_unique_name_of_signaling_point")

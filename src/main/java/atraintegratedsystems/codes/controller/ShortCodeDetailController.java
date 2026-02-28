@@ -9,6 +9,8 @@ import atraintegratedsystems.licenses.model.LicenseApplicant;
 import atraintegratedsystems.licenses.repository.LicenseApplicantRepository;
 import atraintegratedsystems.licenses.service.LicenseApplicantService;
 import atraintegratedsystems.utils.DateConverter;
+import atraintegratedsystems.utils.PersianCalendarUtils;
+import atraintegratedsystems.utils.SerialGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +18,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
 @Controller
@@ -109,6 +113,7 @@ public class ShortCodeDetailController {
         ShortCodeDetail codeDetail = new ShortCodeDetail();
 
         codeDetail.setId(dto.getId());
+
         codeDetail.setReleaseShortCode(dto.getReleaseShortCode());
         codeDetail.setCodeStatus(dto.getCodeStatus());
         codeDetail.setUnique_name_of_signaling_point(dto.getUnique_name_of_signaling_point());
@@ -149,9 +154,7 @@ public class ShortCodeDetailController {
 
 
 
-        // =====================================================
-        // SERIAL NUMBER
-        // =====================================================
+
 
 
 
@@ -212,9 +215,35 @@ public class ShortCodeDetailController {
 
 
 
+        SerialGenerator serialGenerator = new SerialGenerator();
+
+        if (codeDetail.getSerialNumber() == null ||
+                codeDetail.getSerialNumber().trim().isEmpty()) {
+
+            String serialNumber = serialGenerator.generateSerialNumber(
+                    codeDetail.getSourceUsed(),
+                    codeDetail.getExpiration_date(),
+                    codeDetail.getShortCode().getShortCodeName() // must be String
+            );
+
+            codeDetail.setSerialNumber(serialNumber);
+        }
+
+
+
+
+
+
+
+
+
+
+
+
         // =====================================================
         // SAVE
         // =====================================================
+
         shortCodeDetailService.AddShort(codeDetail);
 
         return "redirect:/codes/standard/shortcodes_details";
@@ -293,4 +322,25 @@ public class ShortCodeDetailController {
 
         return "redirect:/codes/standard/shortcodes_details";
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
