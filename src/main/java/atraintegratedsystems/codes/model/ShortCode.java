@@ -16,7 +16,7 @@ public class ShortCode {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true, nullable = false)
+    @Column(nullable = false)
     private Integer shortCodeName;
 
     private String assignStatus = "UNASSIGN";

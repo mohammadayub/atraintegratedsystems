@@ -19,7 +19,6 @@ public interface ShortCodeDetailRepository extends JpaRepository<ShortCodeDetail
             "SELECT new atraintegratedsystems.codes.dto.ShortCodeTableDTO(" +
                     " cd.id, " +
                     " sc.shortCodeName, " +
-                    " sn.serialNumber, " +
                     " cd.releaseShortCode, " +
                     " cd.codeStatus, " +
                     " cd.sourceUsed, " +
@@ -41,7 +40,6 @@ public interface ShortCodeDetailRepository extends JpaRepository<ShortCodeDetail
                     " cd.paymentStatus ) " +
                     "FROM ShortCodeDetail cd " +
                     "LEFT JOIN cd.shortCode sc " +
-                    "LEFT JOIN cd.serialNumber sn " +
                     "ORDER BY cd.id DESC"
     )
     List<ShortCodeTableDTO> getFullShortCodeTable();

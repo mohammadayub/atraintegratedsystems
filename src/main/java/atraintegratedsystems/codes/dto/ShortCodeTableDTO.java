@@ -8,7 +8,6 @@ public class ShortCodeTableDTO {
 
     private Long id;
     private Integer shortCodeName;
-    private Integer serialNumber;
     private Integer releaseShortCode;
     private String codeStatus;
     private String sourceUsed;
@@ -32,7 +31,6 @@ public class ShortCodeTableDTO {
     public ShortCodeTableDTO(
             Long id,
             Integer shortCodeName,
-            Integer serialNumber,
             Integer releaseShortCode,
             String codeStatus,
             String sourceUsed,
@@ -55,7 +53,6 @@ public class ShortCodeTableDTO {
     ) {
         this.id = id;
         this.shortCodeName = shortCodeName;
-        this.serialNumber = serialNumber;
         this.releaseShortCode = releaseShortCode;
         this.codeStatus = codeStatus;
         this.sourceUsed = sourceUsed;

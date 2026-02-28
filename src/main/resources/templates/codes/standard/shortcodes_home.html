@@ -85,33 +85,6 @@
         </table>
     </fieldset>
 
-    <!-- ================= SERIAL NUMBERS ================= -->
-    <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_CODES_ADMIN')">
-        <legend>Short Codes Serial Number Management</legend>
-
-        <table class="table table-borderless text-center">
-            <tr>
-                <td>
-                    <div class="custom-card">
-                        <a th:href="@{/serial-numbers/add}">
-                            <img th:src="@{/images/serialNumber.png}" alt="Add Serial">
-                            <h4 style="margin-top:12px;">Add Serial Number</h4>
-                        </a>
-                    </div>
-                </td>
-
-                <td>
-                    <div class="custom-card">
-                        <a th:href="@{/serial-numbers}">
-                            <img th:src="@{/images/smsidentifiercode.png}" alt="Serial List">
-                            <h4 style="margin-top:12px;">Serial Number List</h4>
-                        </a>
-                    </div>
-                </td>
-            </tr>
-        </table>
-    </fieldset>
-
     <!-- ================= EXTENSIONS ================= -->
     <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_CODES_ADMIN')">
         <legend>Short Codes Extension Management</legend>
@@ -133,6 +106,7 @@
 </div>
 
 <div th:replace="scripts :: common-scripts"></div>
+<div style="height:10vh;"></div>
 <footer th:replace="~{codes_layout :: page_footer}"></footer>
 
 <script th:src="@{/js/bootstrap.bundle.min.js}"></script>

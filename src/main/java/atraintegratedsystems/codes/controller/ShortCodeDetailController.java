@@ -3,10 +3,8 @@ package atraintegratedsystems.codes.controller;
 import atraintegratedsystems.codes.dto.ShortCodeDetailDTO;
 import atraintegratedsystems.codes.model.ShortCode;
 import atraintegratedsystems.codes.model.ShortCodeDetail;
-import atraintegratedsystems.codes.model.ShortCodeSerialNumber;
 import atraintegratedsystems.codes.service.ShortCodeDetailService;
 import atraintegratedsystems.codes.service.ShortCodeService;
-import atraintegratedsystems.codes.service.ShortCodeSerialNumberService;
 import atraintegratedsystems.licenses.model.LicenseApplicant;
 import atraintegratedsystems.licenses.repository.LicenseApplicantRepository;
 import atraintegratedsystems.licenses.service.LicenseApplicantService;
@@ -39,8 +37,6 @@ public class ShortCodeDetailController {
     @Autowired
     private LicenseApplicantService licenseApplicantService;
 
-    @Autowired
-    private ShortCodeSerialNumberService shortCodeSerialNumberService;
 
     // ======================================================
     // LIST PAGE
@@ -81,7 +77,6 @@ public class ShortCodeDetailController {
         model.addAttribute("codeDetailDTO", new ShortCodeDetailDTO());
 
         model.addAttribute("codes", shortCodeService.getAvailableShortCodes());
-        model.addAttribute("serialNumbers", shortCodeSerialNumberService.findAllNullShortCode());
 
         model.addAttribute(
                 "licenseApplicants",
@@ -105,7 +100,6 @@ public class ShortCodeDetailController {
         if (bindingResult.hasErrors()) {
 
             model.addAttribute("codes", shortCodeService.getAvailableShortCodes());
-            model.addAttribute("serialNumbers", shortCodeSerialNumberService.findAllNullShortCode());
             model.addAttribute("licenseApplicants",
                     licenseApplicantRepository.findAllApprovedApplicants());
 
@@ -158,23 +152,7 @@ public class ShortCodeDetailController {
         // =====================================================
         // SERIAL NUMBER
         // =====================================================
-        if (dto.getSerialNumberId() != null) {
 
-            ShortCodeSerialNumber serial =
-                    shortCodeSerialNumberService.findById(dto.getSerialNumberId());
-
-            if (serial != null) {
-
-                codeDetail.setSerialNumber(serial);
-
-                serial.setStatus("Assigned");
-                shortCodeSerialNumberService.save(serial);
-            }
-
-        } else {
-
-            codeDetail.setSerialNumber(null);
-        }
 
 
 
@@ -276,10 +254,6 @@ public class ShortCodeDetailController {
             dto.setLicenseApplicantId(codeDetail.getLicenseApplicant().getId());
         }
 
-        if (codeDetail.getSerialNumber() != null) {
-            dto.setSerialNumberId(codeDetail.getSerialNumber().getId());
-        }
-
         dto.setSourceUsed(codeDetail.getSourceUsed());
         dto.setLocation(codeDetail.getLocation());
         dto.setChanel(codeDetail.getChanel());
@@ -302,7 +276,6 @@ public class ShortCodeDetailController {
 
         model.addAttribute("codeDetailDTO", dto);
         model.addAttribute("codes", shortCodeService.getAvailableShortCodes());
-        model.addAttribute("serialNumbers", shortCodeSerialNumberService.findAllNullShortCode());
         model.addAttribute("licenseApplicants",
                 licenseApplicantRepository.findAllApprovedApplicants());
 

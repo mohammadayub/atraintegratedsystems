@@ -41,17 +41,6 @@
                 </div>
 
                 <div class="col-md-3 form-group">
-                    <label>Short Code Serial</label>
-                    <select class="form-control search-select" th:field="*{serialNumberId}">
-                        <option value="">--</option>
-                        <option th:each="sn : ${serialNumbers}"
-                                th:value="${sn.id}"
-                                th:text="${sn.serialNumber}">
-                        </option>
-                    </select>
-                </div>
-
-                <div class="col-md-3 form-group">
                     <label th:text="#{select_status}">Select Status</label>
                     <select class="form-control" th:field="*{codeStatus}">
                         <option value="Active">Active</option>

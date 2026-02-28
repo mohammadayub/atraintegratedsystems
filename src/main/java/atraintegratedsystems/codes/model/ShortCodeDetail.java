@@ -70,17 +70,6 @@ public class ShortCodeDetail {
 
 
     @ToString.Exclude
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(
-            name = "serial_number_id",
-            unique = true
-    )
-
-    private ShortCodeSerialNumber serialNumber;
-
-
-
-    @ToString.Exclude
     @ManyToOne
     @JoinColumn(name = "shortcode_id", nullable = false)
     private ShortCode shortCode;

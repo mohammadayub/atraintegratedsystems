@@ -15,7 +15,7 @@ public class ShortCodeService {
     private ShortCodeRepository shortCodeRepository;
 
     public List<ShortCode> getAvailableShortCodes(){
-        return shortCodeRepository.findByAssignStatusEqualsOrAssignStatusIsNullOrderByShortCodeNameAsc("UNASSIGN");
+        return shortCodeRepository.findAll();
     }
     public ShortCode getById(Long id) {
         return shortCodeRepository.findById(id).orElse(null);
@@ -35,10 +35,6 @@ public class ShortCodeService {
 
     // Save new shortcode
     public void saveShortCode(ShortCodeDTO dto){
-
-        if(shortCodeRepository.existsByShortCodeName(dto.getShortCodeName())){
-            throw new RuntimeException("This Short Code already exists.");
-        }
 
         ShortCode code = new ShortCode();
         code.setShortCodeName(dto.getShortCodeName());
