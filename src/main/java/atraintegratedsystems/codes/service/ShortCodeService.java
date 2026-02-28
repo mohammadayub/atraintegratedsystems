@@ -27,7 +27,7 @@ public class ShortCodeService {
 
     // Get all short codes
     public List<ShortCode> getAllCodes(){
-        return shortCodeRepository.findAll();
+        return shortCodeRepository.findDistinctShortCodes();
     }
     public List<Object[]> getCodeDetails() {
         return shortCodeRepository.getCodeDetails();

@@ -23,6 +23,8 @@ public interface ShortCodeRepository extends JpaRepository<ShortCode, Long> {
     )
     List<Object[]> getCodeDetails();
 
+    @Query("SELECT DISTINCT s FROM ShortCode s ORDER BY s.shortCodeName ASC")
+    List<ShortCode> findDistinctShortCodes();
 
 //    @Query(
 //            value = "SELECT sc.short_code, " +
