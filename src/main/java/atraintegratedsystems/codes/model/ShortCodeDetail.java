@@ -1,6 +1,8 @@
 package atraintegratedsystems.codes.model;
 
 import atraintegratedsystems.licenses.model.LicenseApplicant;
+import atraintegratedsystems.utils.DateConverter;
+import atraintegratedsystems.utils.JalaliDate;
 import lombok.Data;
 import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -18,28 +20,28 @@ public class ShortCodeDetail {
     private String serialNumber;
     private Integer releaseShortCode;
     private String codeStatus;
-    @Column(name = "ispc_unique_name_of_signaling_point")
-    private String unique_name_of_signaling_point;
+    private String uniqueNameOfSignalingPoint;
     @ManyToOne
     @JoinColumn(name = "license_applicant_id")
     private LicenseApplicant licenseApplicant;
     private String sourceUsed;
+    private String sourceUsedInDari;
     private String location;
     private String chanel;
     private String services;
     private String categoryType;
     private String category;
-    private String back_long_number;
-    private String name_of_responsible_person;
-    private String id_card_number_of_responsible_person;
-    private String mobile_number_of_responsible_person;
-    private String phone_number_of_responsible_person;
-    private String email_of_responsible_person;
+    private String backLongNumber;
+    private String nameOfResponsiblePerson;
+    private String idCardNumberOfResponsiblePerson;
+    private String mobileNumberOfResponsiblePerson;
+    private String phoneNumberOfResponsiblePerson;
+    private String emailOfResponsiblePerson;
     private String job;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate assigning_date;
+    private LocalDate assigningDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate expiration_date;
+    private LocalDate expirationDate;
 
 
     // Short Code Rejection Section
@@ -49,13 +51,13 @@ public class ShortCodeDetail {
 
 
     // Finance Fees Section
-    private double application_fees;
+    private double applicationFees;
     private String applicationFeesOrganization = "ATRA";
     private String applicationFeesStatus;
-    private double registration_fees;
+    private double registrationFees;
 
     // Royalty Fees
-    private double royalty_fees;
+    private double royaltyFees;
     private String royaltyFeesOrganization = "MCIT";
     private String royaltyFeesStatus;
     private String royaltyFeebankVoucherNo;
@@ -74,5 +76,28 @@ public class ShortCodeDetail {
     @ManyToOne
     @JoinColumn(name = "shortcode_id", nullable = false)
     private ShortCode shortCode;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }

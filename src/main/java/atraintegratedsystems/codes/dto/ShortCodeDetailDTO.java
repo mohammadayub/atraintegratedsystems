@@ -11,26 +11,27 @@ public class ShortCodeDetailDTO {
     private String serialNumber;
     private Integer releaseShortCode;
     private String codeStatus;
-    private String unique_name_of_signaling_point;
+    private String uniqueNameOfSignalingPoint;
     private Long licenseApplicantId;
     private String sourceUsed;
+    private String sourceUsedInDari;
     private String location;
     private String chanel;
     private String services;
     private String categoryType;
     private String category;
-    private String back_long_number;
-    private String name_of_responsible_person;
-    private String id_card_number_of_responsible_person;
-    private String mobile_number_of_responsible_person;
-    private String phone_number_of_responsible_person;
-    private String email_of_responsible_person;
+    private String backLongNumber;
+    private String nameOfResponsiblePerson;
+    private String idCardNumberOfResponsiblePerson;
+    private String mobileNumberOfResponsiblePerson;
+    private String phoneNumberOfResponsiblePerson;
+    private String emailOfResponsiblePerson;
     private String job;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate assigning_date;
+    private LocalDate assigningDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate expiration_date;
-    private double application_fees;
+    private LocalDate expirationDate;
+    private double applicationFees;
 
     // Short Code Rejection Section
     private String shortCodeRejectionStatus;
@@ -44,10 +45,10 @@ public class ShortCodeDetailDTO {
     private LocalDate applicationFeebankVoucherSubmissionDate;
     private String applicationFeebankVoucherSubmissionDateJalali;
 
-    private double registration_fees;
+    private double registrationFees;
 
     // Royalty Fees
-    private double royalty_fees;
+    private double royaltyFees;
     private String royaltyFeesStatus;
     private String royaltyFeebankVoucherNo;
     private String royaltyFeeEnterVoucherDate;

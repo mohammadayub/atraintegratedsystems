@@ -21,6 +21,11 @@ public class ShortCodeService {
         return shortCodeRepository.findById(id).orElse(null);
     }
 
+//    public ShortCode getById(Integer id) {
+//        if (id == null) return null;
+//        return shortCodeRepository.findById(id.longValue()).orElse(null);
+//    }
+
     public ShortCode save(ShortCode code) {
         return shortCodeRepository.save(code);
     }

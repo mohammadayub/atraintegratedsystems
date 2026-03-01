@@ -31,7 +31,7 @@
         table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 0.9em;
+            font-size: 0.7em;
         }
 
         th, td {
@@ -44,7 +44,7 @@
         thead th {
             color: white;
             background-color: #007bff;
-            font-size: 14px;
+            font-size: 12px;
         }
 
         tbody tr:nth-child(even) {
@@ -144,10 +144,10 @@
                     <th>ID#</th>
 <!--                    show bellow from shortCode Model-->
                     <th>Short Code Name</th>
-                    <!--                    show bellow from shortCodeSerialNumber Model-->
-                    <th>Release Short Code</th>
+                    <th>Serial Number</th>
                     <th>Status</th>
                     <th>Source Used</th>
+                    <th> Source Used(Dari)</th>
                     <th>Location</th>
                     <th>Channel</th>
                     <th>Services</th>
@@ -158,15 +158,12 @@
                     <th>ID Card</th>
                     <th>Mobile</th>
                     <th>Email</th>
-                    <th>Miladi Expiry</th>
+                    <th>Assigning Date</th>
+                    <th>Expiration Date</th>
                     <th>Application Fees</th>
-                    <th>Registration Fees</th>
                     <th>Royalty Fees</th>
-                    <th>Total Fees</th>
                     <th>Payment Status</th>
-                    <th>Print</th>
                     <th>Update</th>
-                    <th>Release</th>
                     <th>Rejection</th>
                 </tr>
                 </thead>
@@ -178,12 +175,14 @@
 
                     <td th:text="${codeDetail.shortCodeName}"></td>
 
+                    <td th:text="${codeDetail.serialNumber}"></td>
 
-                    <td th:text="${codeDetail.releaseShortCode}"></td>
 
                     <td th:text="${codeDetail.codeStatus}"></td>
 
                     <td th:text="${codeDetail.sourceUsed}"></td>
+
+                    <td th:text="${codeDetail.sourceUsedInDari}"></td>
 
                     <td th:text="${codeDetail.location}"></td>
 
@@ -205,30 +204,20 @@
 
                     <td th:text="${codeDetail.email}"></td>
 
-                    <td th:text="${#temporals.format(codeDetail.expirationDate,'yyyy-MM-dd')}"></td>
+                    <td th:text="${codeDetail.assignDateJalali}"></td>
+
+                    <td th:text="${codeDetail.ExpireDateJalali}"></td>
 
                     <td th:text="${codeDetail.applicationFees}"></td>
 
-                    <td th:text="${codeDetail.registrationFees}"></td>
-
                     <td th:text="${codeDetail.royaltyFees}"></td>
-
-                    <td th:text="${codeDetail.total}"></td>
 
                     <td th:text="${codeDetail.paymentStatus}"></td>
 
-                    <td>Print</td>
 
                     <td>
                         <a th:href="@{/codes/standard/shortcodes_details/update/{id}(id=${codeDetail.id})}"
                            class="btn btn-warning btn-sm">✏</a>
-                    </td>
-
-                    <td>
-                        <form th:action="@{/codes/standard/shortcodes_details/release/{id}(id=${codeDetail.id})}"
-                              method="post">
-                            <button class="btn btn-danger btn-sm">🔓</button>
-                        </form>
                     </td>
 
                     <td>

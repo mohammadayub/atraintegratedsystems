@@ -15,33 +15,62 @@ import java.util.Optional;
 public interface ShortCodeDetailRepository extends JpaRepository<ShortCodeDetail,Long> {
     Optional<ShortCodeDetail> findByShortCode_ShortCodeName(int shortCode);
     // After Testing
-    @Query(
-            "SELECT new atraintegratedsystems.codes.dto.ShortCodeTableDTO(" +
-                    " cd.id, " +
-                    " sc.shortCodeName, " +
-                    " cd.releaseShortCode, " +
-                    " cd.codeStatus, " +
-                    " cd.sourceUsed, " +
-                    " cd.location, " +
-                    " cd.chanel, " +
-                    " cd.services, " +
-                    " cd.category, " +
-                    " cd.back_long_number, " +
-                    " cd.name_of_responsible_person, " +
-                    " cd.job, " +
-                    " cd.id_card_number_of_responsible_person, " +
-                    " cd.mobile_number_of_responsible_person, " +
-                    " cd.email_of_responsible_person, " +
-                    " cd.expiration_date, " +
-                    " cd.application_fees, " +
-                    " cd.registration_fees, " +
-                    " cd.royalty_fees, " +
-                    " cd.total, " +
-                    " cd.paymentStatus ) " +
-                    "FROM ShortCodeDetail cd " +
-                    "LEFT JOIN cd.shortCode sc " +
-                    "ORDER BY cd.id DESC"
-    )
+//    @Query(
+//            "SELECT new atraintegratedsystems.codes.dto.ShortCodeTableDTO(" +
+//                    " cd.id, " +
+//                    " sc.shortCodeName, " +
+//                    " cd.releaseShortCode, " +
+//                    " cd.codeStatus, " +
+//                    " cd.sourceUsed, " +
+//                    " cd.location, " +
+//                    " cd.chanel, " +
+//                    " cd.services, " +
+//                    " cd.category, " +
+//                    " cd.back_long_number, " +
+//                    " cd.name_of_responsible_person, " +
+//                    " cd.job, " +
+//                    " cd.id_card_number_of_responsible_person, " +
+//                    " cd.mobile_number_of_responsible_person, " +
+//                    " cd.email_of_responsible_person, " +
+//                    " cd.expiration_date, " +
+//                    " cd.application_fees, " +
+//                    " cd.registration_fees, " +
+//                    " cd.royalty_fees, " +
+//                    " cd.total, " +
+//                    " cd.paymentStatus ) " +
+//                    "FROM ShortCodeDetail cd " +
+//                    "LEFT JOIN cd.shortCode sc " +
+//                    "ORDER BY cd.id DESC"
+//    )
+
+    @Query("SELECT new atraintegratedsystems.codes.dto.ShortCodeTableDTO(" +
+            " cd.id, " +
+            " sc.shortCodeName, " +
+            " cd.serialNumber, " +
+            " cd.releaseShortCode, " +
+            " cd.codeStatus, " +
+            " cd.sourceUsed, " +
+            " cd.sourceUsedInDari, " +
+            " cd.location, " +
+            " cd.chanel, " +
+            " cd.services, " +
+            " cd.category, " +
+            " cd.backLongNumber, " +
+            " cd.nameOfResponsiblePerson, " +
+            " cd.job, " +
+            " cd.idCardNumberOfResponsiblePerson, " +
+            " cd.mobileNumberOfResponsiblePerson, " +
+            " cd.emailOfResponsiblePerson, " +
+            " cd.assigningDate, " +
+            " cd.expirationDate, " +
+            " cd.applicationFees, " +
+            " cd.registrationFees, " +
+            " cd.royaltyFees, " +
+            " cd.total, " +
+            " cd.paymentStatus ) " +
+            "FROM ShortCodeDetail cd " +
+            "LEFT JOIN cd.shortCode sc " +
+            "ORDER BY cd.id DESC")
     List<ShortCodeTableDTO> getFullShortCodeTable();
     // End Testing
     @Query(value = "SELECT cd.code_detail_id, CONCAT(cd.source_used, '-', cd.short_code) AS company_name_with_code " +
@@ -78,28 +107,6 @@ int releaseCode(@Param("id") Long id);
             nativeQuery = true)
     List<Object[]> findunPaidApplicationFee();
 
-    // Tariff Related
-
-//    @Query(value = "SELECT * FROM code_detail WHERE code_detail_id = :id", nativeQuery = true)
-//    Object findApplicationFeeById(@Param("id") Long id);
-
-//    @Query(value = "SELECT code_detail_id, short_code, code_status, source_used, location, category_type, category, chanel, email_of_responsible_person FROM code_detail WHERE code_detail_id = :id", nativeQuery = true)
-//    Object[] findApplicationFeeById(@Param("id") Long id);
-
-//    @Query(value =
-//            "SELECT cd.code_detail_id, " +
-//                    "       cd.short_code, " +
-//                    "       cd.code_status, " +
-//                    "       cd.source_used, " +
-//                    "       cd.location, " +
-//                    "       cd.category_type, " +
-//                    "       cd.category, " +
-//                    "       cd.chanel, " +
-//                    "       cd.email_of_responsible_person " +
-//                    "FROM code_detail cd " +
-//                    "WHERE cd.code_detail_id = :id",
-//            nativeQuery = true)
-//    Object[] findApplicationFeeById(@Param("id") Long id);
 
     @Query(value =
             "SELECT * FROM short_code_detail " +
@@ -110,24 +117,6 @@ int releaseCode(@Param("id") Long id);
 
 
 
-
-    // update
-
-//    @Modifying
-//    @Transactional
-//    @Query(
-//            "UPDATE CodeDetail c " +
-//                    "SET c.applicationFeesStatus = 'PAID', " +
-//                    "    c.applicationFeebankVoucherNo = :voucherNo, " +
-//                    "    c.applicationFeebankVoucherSubmissionDate = :submissionDate, " +
-//                    "    c.paymentStatus = 'PAID' " +
-//                    "WHERE c.id = :id"
-//    )
-//    int confirmApplicationFeePayment(
-//            @Param("id") Long id,
-//            @Param("voucherNo") String voucherNo,
-//            @Param("submissionDate") String submissionDate
-//    );
 
     @Modifying
     @Transactional
@@ -236,7 +225,6 @@ Optional<ShortCodeDetail> findUnpaidRoyaltyFeeById(@Param("id") Long id);
             @Param("status") String status,
             @Param("date") LocalDate date
     );
-
 
 
 

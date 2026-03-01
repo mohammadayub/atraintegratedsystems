@@ -41,14 +41,6 @@
                 </div>
 
                 <div class="col-md-3 form-group">
-                    <label th:text="#{select_status}">Select Status</label>
-                    <select class="form-control" th:field="*{codeStatus}">
-                        <option value="Active">Active</option>
-                        <option value="InActive">Inactive</option>
-                    </select>
-                </div>
-
-                <div class="col-md-3 form-group">
                     <label th:text="#{license_applicants}">License Applicant</label>
                     <select class="form-control select2" th:field="*{licenseApplicantId}">
                         <option value="">None</option>
@@ -66,6 +58,11 @@
                 <div class="col-md-3 form-group">
                     <label th:text="#{source_used}">Source Used</label>
                     <input type="text" class="form-control" th:field="*{sourceUsed}">
+                </div>
+
+                <div class="col-md-3 form-group">
+                    <label >Source Used in Dari</label>
+                    <input type="text" class="form-control" th:field="*{sourceUsedInDari}">
                 </div>
 
                 <div class="col-md-3 form-group">
@@ -118,12 +115,12 @@
 
                 <div class="col-md-3 form-group">
                     <label th:text="#{back_long_number}">Back Long Number</label>
-                    <input type="text" class="form-control" th:field="*{back_long_number}">
+                    <input type="text" class="form-control" th:field="*{backLongNumber}">
                 </div>
 
                 <div class="col-md-3 form-group">
                     <label th:text="#{full_name}">Full Name</label>
-                    <input type="text" class="form-control" th:field="*{name_of_responsible_person}">
+                    <input type="text" class="form-control" th:field="*{nameOfResponsiblePerson}">
                 </div>
                 <div class="col-md-3 form-group">
                     <label>Job</label>
@@ -134,47 +131,47 @@
                 <div class="col-md-3 form-group">
                     <label th:text="#{id_card_number}">ID Card Number</label>
                     <input type="text" class="form-control"
-                           th:field="*{id_card_number_of_responsible_person}">
+                           th:field="*{idCardNumberOfResponsiblePerson}">
                 </div>
 
                 <div class="col-md-3 form-group">
                     <label th:text="#{mobile_number}">Mobile Number</label>
                     <input type="text" class="form-control"
-                           th:field="*{mobile_number_of_responsible_person}">
+                           th:field="*{mobileNumberOfResponsiblePerson}">
                 </div>
 
                 <div class="col-md-3 form-group">
                     <label th:text="#{email_address}">Email Address</label>
                     <input type="text" class="form-control"
-                           th:field="*{email_of_responsible_person}">
+                           th:field="*{emailOfResponsiblePerson}">
                 </div>
 
                 <div class="col-md-3 form-group">
                     <label th:text="#{assigning_date}">Assigning Date</label>
                     <input type="text" class="form-control hijrishamsi"
-                           th:field="*{assigning_date}">
+                           th:field="*{assigningDate}">
                 </div>
 
                 <!-- ROW 5 -->
                 <div class="col-md-3 form-group">
                     <label th:text="#{expiry_date}">Expiry Date</label>
                     <input type="text" class="form-control hijrishamsi"
-                           th:field="*{expiration_date}">
+                           th:field="*{expirationDate}">
                 </div>
 
                 <div class="col-md-3 form-group">
                     <label th:text="#{application_fees}">Application Fees</label>
                     <input type="number" class="form-control"
-                           th:field="*{application_fees}" readonly>
+                           th:field="*{applicationFees}" readonly>
                 </div>
 
                 <div class="col-md-3 form-group">
                     <label th:text="#{royality_fees}">Royalty Fees</label>
                     <input type="number" class="form-control"
-                           th:field="*{royalty_fees}" readonly>
+                           th:field="*{royaltyFees}" readonly>
                 </div>
 
-                <input type="hidden" th:field="*{registration_fees}">
+                <input type="hidden" th:field="*{registrationFees}">
                 <input type="hidden" id="totalFees">
 
             </div>
@@ -263,9 +260,9 @@
             royaltyFees = 30000;
         }
 
-        document.getElementById('application_fees').value = applicationFees;
-        document.getElementById('royalty_fees').value = royaltyFees;
-        document.getElementById('registration_fees').value = registrationFees;
+        document.getElementById('applicationFees').value = applicationFees;
+        document.getElementById('royaltyFees').value = royaltyFees;
+        document.getElementById('registrationFees').value = registrationFees;
     }
 
     document.addEventListener('DOMContentLoaded', function () {
