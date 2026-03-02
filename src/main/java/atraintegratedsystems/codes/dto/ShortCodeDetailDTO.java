@@ -63,6 +63,8 @@ public class ShortCodeDetailDTO {
     private Long serialNumberId;
     private Long shortCodeId;
 
+    private Integer shortCodeName;
+
 
 
 
