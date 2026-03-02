@@ -29,7 +29,6 @@
                 <tr class="bg-primary text-white">
                     <th>#</th>
                     <th>smsIdentifierCodeName</th>
-                    <th>Serial Number</th>
                     <th>Company</th>
                     <th>Responsible Person</th>
                     <th>Job</th>
@@ -45,7 +44,6 @@
                 <tr th:each="d, iStat : ${details}">
                     <td th:text="${iStat.count}">1</td>
                     <td th:text="${d.smsIdentifierCodeName}"></td>
-                    <td th:text="${d.serialNumber}"></td>
                     <td th:text="${d.companyName}"></td>
                     <td th:text="${d.responsiblePerson}"></td>
                     <td th:text="${d.job}"></td>

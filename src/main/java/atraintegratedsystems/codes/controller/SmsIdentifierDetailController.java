@@ -2,7 +2,6 @@ package atraintegratedsystems.codes.controller;
 
 import atraintegratedsystems.codes.dto.SmsIdentifierDetailDTO;
 import atraintegratedsystems.codes.repository.SmsIdentifierCodeRepository;
-import atraintegratedsystems.codes.repository.SmsIdentifierSerialNumberRepository;
 import atraintegratedsystems.codes.service.SmsIdentifierDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,8 +18,6 @@ public class SmsIdentifierDetailController {
     @Autowired
     private SmsIdentifierCodeRepository codeRepo;
 
-    @Autowired
-    private SmsIdentifierSerialNumberRepository serialNumberRepo;
 
 
 
@@ -34,7 +31,6 @@ public class SmsIdentifierDetailController {
     public String createForm(Model model) {
         model.addAttribute("detail", new SmsIdentifierDetailDTO());
         model.addAttribute("codes", codeRepo.findByAssignStatusIsNullOrAssignStatusEquals(""));
-        model.addAttribute("serialNumbers", serialNumberRepo.findByStatusIsNull());
         return "codes/smsidentifier/smsidentifier/sms_identifier_detail_form";
     }
 
@@ -53,11 +49,7 @@ public class SmsIdentifierDetailController {
 
         model.addAttribute("detail", dto);
         model.addAttribute("codes", codeRepo.findByAssignStatusIsNullOrAssignStatusEquals(""));
-
-        // 🔥 include unassigned + currently assigned serial number
-        model.addAttribute("serialNumbers",
-                serialNumberRepo.findByStatusIsNull()
-        );
+        
 
         return "codes/smsidentifier/smsidentifier/sms_identifier_detail_form";
     }

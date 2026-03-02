@@ -79,18 +79,6 @@ public class SmsIdentifierDetail {
     )
     private List<SmsIdentifierExtension> extensions = new ArrayList<>();
 
-
-
-
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(
-            name = "smsidentifier_serial_number_id",
-            unique = true
-    )
-    private SmsIdentifierSerialNumber smsIdentifierSerialNumber;
-
-
-
     public JalaliDate getAssigningDateJalali() {
         if (assigningDate == null) {
             return null; // Return null if issueLicenseDate is null
