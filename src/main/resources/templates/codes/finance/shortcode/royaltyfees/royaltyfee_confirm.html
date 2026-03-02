@@ -148,6 +148,15 @@
                 <!-- Hidden ID -->
                 <input type="hidden" name="id" th:value="${codeDetail.id}"/>
 
+                <!-- Short Code -->
+                <div class="col-md-2 form-group">
+                    <label>Short Code</label>
+                    <input type="text"
+                           class="form-control"
+                           th:value="*{shortCodeName}"
+                           readonly>
+                </div>
+
                 <!-- Royalty Fee Entry Voucher Date -->
                 <div class="col-md-3 form-group">
                     <label>Royalty Fee Entry Voucher Date</label>
