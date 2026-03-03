@@ -15,7 +15,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class SmsIdentifierDetailDTO {
     private Long id;
-
+    private String serialNumber;
     private String companyName;
     private String enid;
     private String companyAddress;
@@ -73,7 +73,6 @@ public class SmsIdentifierDetailDTO {
     private String smsIdentifierCodeName;
 
     private Long smsIdentifierSerialNumberId;
-    private int serialNumber;
 
     public SmsIdentifierDetailDTO(
             long id,

@@ -233,17 +233,6 @@ public class ShortCodeDetailController {
             codeDetail.setSerialNumber(serial);
         }
 
-
-
-
-
-
-
-
-
-
-
-
         // =====================================================
         // SAVE
         // =====================================================

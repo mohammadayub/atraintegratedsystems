@@ -20,6 +20,8 @@ public class SmsIdentifierDetail {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    private String serialNumber;
+
 
     private String companyName;
     private String enid;

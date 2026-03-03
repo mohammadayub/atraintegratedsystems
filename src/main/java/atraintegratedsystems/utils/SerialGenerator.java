@@ -41,4 +41,7 @@ public class SerialGenerator {
     public long getLastNumber() {
         return globalCounter.get();
     }
+
+
+
 }

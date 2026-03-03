@@ -6,6 +6,8 @@ import atraintegratedsystems.codes.model.SmsIdentifierDetail;
 import atraintegratedsystems.codes.repository.SmsIdentifierCodeRepository;
 import atraintegratedsystems.codes.repository.SmsIdentifierDetailRepository;
 import atraintegratedsystems.utils.PersianCalendarUtils;
+import atraintegratedsystems.utils.SerialGenerator;
+import atraintegratedsystems.utils.SerialGeneratorWithString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,13 +31,39 @@ public class SmsIdentifierDetailService {
 
         SmsIdentifierCode code = codeRepo.findById(dto.getSmsIdentifierCodeId())
                 .orElseThrow(() -> new RuntimeException("SMS Identifier Code not found"));
-        
+
 
         SmsIdentifierDetail entity = new SmsIdentifierDetail();
         mapToEntity(dto, entity);
-
         code.setAssignStatus("Assign");
         entity.setSmsIdentifierCode(code);
+
+
+
+
+        //Serial Number Auto Generate//
+
+        SerialGeneratorWithString serialGenerator = new SerialGeneratorWithString();
+
+        if (entity.getSerialNumber() == null || entity.getSerialNumber().trim().isEmpty()) {
+
+            if (entity.getCompanyName() == null || entity.getExpirationDate() == null) {
+                throw new IllegalArgumentException("Company Name and Expiration Date are required");
+            }
+
+            String smsCodeName = entity.getSmsIdentifierCode().getSmsIdentifierCodeName();
+
+            String serial = serialGenerator.generateSerialNumber(
+                    entity.getCompanyName(),
+                    entity.getExpirationDate(),
+                    smsCodeName
+            );
+
+            entity.setSerialNumber(serial);
+        }
+
+        ///  End  ///
+
 
         detailRepo.save(entity);
         codeRepo.save(code);
@@ -93,6 +121,7 @@ public class SmsIdentifierDetailService {
     /* ================= MAPPERS ================= */
 
     private void mapToEntity(SmsIdentifierDetailDTO dto, SmsIdentifierDetail e) {
+
         e.setCompanyName(dto.getCompanyName());
         e.setResponsiblePerson(dto.getResponsiblePerson());   // ✅ ADD
         e.setJob(dto.getJob());
@@ -149,14 +178,6 @@ public class SmsIdentifierDetailService {
                 e.setExpirationDate(expDate); // ✅ FIXED
             }
         }
-
-
-
-
-
-
-
-
 
         e.setApplicationFees(dto.getApplicationFees());
         e.setApplicationFeesBankVoucherNo(dto.getApplicationFeesBankVoucherNo());
