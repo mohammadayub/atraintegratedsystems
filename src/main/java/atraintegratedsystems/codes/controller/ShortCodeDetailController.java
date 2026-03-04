@@ -323,6 +323,18 @@ public class ShortCodeDetailController {
         return "redirect:/codes/standard/shortcodes_details";
     }
 
+    // Print Section
+    @GetMapping("/codes/standard/shortcodes_details/print/{id}")
+    public String printShortCode(@PathVariable Long id, Model model) {
+
+        ShortCodeDetail codeDetail = shortCodeDetailService
+                .getCodeDetailId(id)
+                .orElseThrow(() -> new RuntimeException("Record not found"));
+
+        model.addAttribute("code", codeDetail);
+
+        return "codes/standard/shortcode_print";
+    }
 
 
 

@@ -4,7 +4,7 @@
 
 <head th:replace="~{codes_layout :: page_head}">
     <title>Telecom Short Code Management System</title>
-
+    <meta charset="UTF-8">
     <!-- Google Font -->
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap"/>
@@ -163,6 +163,7 @@
                     <th>Application Fees</th>
                     <th>Royalty Fees</th>
                     <th>Payment Status</th>
+                    <th>Print</th>
                     <th>Update</th>
                     <th>Rejection</th>
                 </tr>
@@ -213,6 +214,12 @@
                     <td th:text="${codeDetail.royaltyFees}"></td>
 
                     <td th:text="${codeDetail.paymentStatus}"></td>
+                    <td>
+                        <a th:href="@{/codes/standard/shortcodes_details/print/{id}(id=${codeDetail.id})}"
+                           class="btn btn-info btn-sm">
+                            🖨 Print
+                        </a>
+                    </td>
 
 
                     <td>
