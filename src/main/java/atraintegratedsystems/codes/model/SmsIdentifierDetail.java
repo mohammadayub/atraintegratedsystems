@@ -19,11 +19,9 @@ public class SmsIdentifierDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String serialNumber;
-
-
     private String companyName;
+    private String companyNameInDari;
     private String enid;
     private String companyAddress;
     private String responsiblePerson;

@@ -123,6 +123,7 @@ public class SmsIdentifierDetailService {
     private void mapToEntity(SmsIdentifierDetailDTO dto, SmsIdentifierDetail e) {
 
         e.setCompanyName(dto.getCompanyName());
+        e.setCompanyNameInDari(dto.getCompanyNameInDari());
         e.setResponsiblePerson(dto.getResponsiblePerson());   // ✅ ADD
         e.setJob(dto.getJob());
         e.setEnid(dto.getEnid());

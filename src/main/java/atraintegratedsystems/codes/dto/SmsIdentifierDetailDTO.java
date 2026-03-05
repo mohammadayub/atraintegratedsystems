@@ -17,6 +17,7 @@ public class SmsIdentifierDetailDTO {
     private Long id;
     private String serialNumber;
     private String companyName;
+    private String companyNameInDari;
     private String enid;
     private String companyAddress;
     private String responsiblePerson;
