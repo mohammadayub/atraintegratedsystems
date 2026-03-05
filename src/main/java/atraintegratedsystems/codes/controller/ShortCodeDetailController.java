@@ -178,6 +178,7 @@ public class ShortCodeDetailController {
         codeDetail.setEmailOfResponsiblePerson(dto.getEmailOfResponsiblePerson());
         codeDetail.setJob(dto.getJob());
         codeDetail.setCodeStatus("Active");
+        codeDetail.setRemarks(dto.getRemarks());
 
 
 
@@ -302,6 +303,7 @@ public class ShortCodeDetailController {
         dto.setRoyaltyFees(codeDetail.getRoyaltyFees());
         dto.setJob(codeDetail.getJob());
         dto.setTotal(codeDetail.getTotal());
+        dto.setRemarks(codeDetail.getRemarks());
 
         model.addAttribute("codeDetailDTO", dto);
         model.addAttribute("codes", shortCodeService.getAvailableShortCodes());

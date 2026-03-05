@@ -55,15 +55,14 @@ public class ShortCodeDetailDTO {
     private String royaltyFeeEnterVoucherDateJalali;
     private String royaltyFeeBankVoucherSubmissionDate;
     private String royaltyFeeBankVoucherSubmissionDateJalali;
-
     private double total;
     private String bankVoucherNo;
     private String paymentStatus;
-
     private Long serialNumberId;
     private Long shortCodeId;
-
     private Integer shortCodeName;
+    private String remarks;
+
 
 
 

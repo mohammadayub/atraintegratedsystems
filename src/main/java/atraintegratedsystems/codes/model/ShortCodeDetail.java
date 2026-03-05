@@ -70,6 +70,7 @@ public class ShortCodeDetail {
     private LocalDate applicationFeeEnterVoucherDate;
     private LocalDate applicationFeebankVoucherSubmissionDate;
     private String paymentStatus;
+    private String remarks;
 
 
     @ToString.Exclude

@@ -171,7 +171,12 @@
                            th:field="*{royaltyFees}" readonly>
                 </div>
 
-                <input type="hidden" th:field="*{registrationFees}">
+                <div class="col-md-3 form-group">
+                    <label >Remarks</label>
+                    <textarea  class="form-control"
+                               th:field="*{remarks}" ></textarea>
+                </div>
+
                 <input type="hidden" id="totalFees">
 
             </div>
