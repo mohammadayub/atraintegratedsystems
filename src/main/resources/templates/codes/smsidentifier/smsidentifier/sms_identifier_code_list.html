@@ -28,7 +28,6 @@
             <th>Code</th>
             <th>Status</th>
             <th>Entered Date</th>
-            <th>Actions</th>
         </tr>
         </thead>
         <tbody>
@@ -39,13 +38,6 @@
 
 
             <td th:text="${c.enteredDate}"></td>
-            <td>
-                <a th:href="@{/sms-identifier-codes/edit/{id}(id=${c.id})}"
-                   class="btn btn-warning btn-sm">Edit</a>
-                <a th:href="@{/sms-identifier-codes/delete/{id}(id=${c.id})}"
-                   class="btn btn-danger btn-sm"
-                   onclick="return confirm('Are you sure?')">Delete</a>
-            </td>
         </tr>
         </tbody>
     </table>

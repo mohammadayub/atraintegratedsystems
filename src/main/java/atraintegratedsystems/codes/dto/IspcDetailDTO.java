@@ -26,8 +26,10 @@ public class IspcDetailDTO {
     private String codeCategory="Golden";
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate assigningDate;
+    private String  assigningDateJalali;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate expirationDate;
+    private String expirationDateJalali;
 
     // Fees Related Section
     // Application Fees Related
@@ -35,8 +37,10 @@ public class IspcDetailDTO {
     private String applicationFeesBankVoucherNo;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate applicationFeesEntryVoucherDate;
+    private String applicationFeesEntryVoucherDateJalali;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate applicationFeesBankVoucherSubmissionDate;
+    private String applicationFeesBankVoucherSubmissionDateJalali;
     private String applicationFeesPaymentStatus;
     private String applicationFessPaymentOrganization="MCIT";
 
@@ -45,8 +49,10 @@ public class IspcDetailDTO {
     private String royaltyFeesBankVoucherNo;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate royaltyFeesEntryVoucherDate;
+    private String royaltyFeesEntryVoucherDateJalali;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate royaltyFeesBankVoucherSubmissionDate;
+    private String royaltyFeesBankVoucherSubmissionDateJalali;
     private String royaltyFeesPaymentStatus;
     private String royaltyFeesPaymentOrganization="ATRA";
 
@@ -55,4 +61,7 @@ public class IspcDetailDTO {
     private String ispcCodeRejectionStatus;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate ispcCodeRejectionDate;
+    private String ispcCodeRejectionDateJalali;
+
+    private String ispcCodeName;
 }
