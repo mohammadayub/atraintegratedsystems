@@ -155,17 +155,13 @@ public class ShortCodeDetailController {
 
 
 
-
-
-
-
-
         // =====================================================
         // SIMPLE FIELDS
         // =====================================================
         codeDetail.setSourceUsed(dto.getSourceUsed());
         codeDetail.setSourceUsedInDari(dto.getSourceUsedInDari());
         codeDetail.setLocation(dto.getLocation());
+        codeDetail.setAddress(dto.getAddress());
         codeDetail.setChanel(dto.getChanel());
         codeDetail.setServices(dto.getServices());
         codeDetail.setCategoryType(dto.getCategoryType());
@@ -276,7 +272,6 @@ public class ShortCodeDetailController {
         dto.setShortCodeId(codeDetail.getShortCode() != null
                 ? codeDetail.getShortCode().getId()
                 : null);
-
         dto.setUniqueNameOfSignalingPoint(codeDetail.getUniqueNameOfSignalingPoint());
 
         if (codeDetail.getLicenseApplicant() != null) {
@@ -286,6 +281,7 @@ public class ShortCodeDetailController {
         dto.setSourceUsed(codeDetail.getSourceUsed());
         dto.setSourceUsedInDari(codeDetail.getSourceUsedInDari());
         dto.setLocation(codeDetail.getLocation());
+        dto.setAddress(codeDetail.getAddress());
         dto.setChanel(codeDetail.getChanel());
         dto.setServices(codeDetail.getServices());
         dto.setCategoryType(codeDetail.getCategoryType());

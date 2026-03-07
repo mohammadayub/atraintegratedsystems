@@ -69,6 +69,10 @@
                     <label th:text="#{location}">Location</label>
                     <input type="text" class="form-control" th:field="*{location}">
                 </div>
+                <div class="col-md-3 form-group">
+                    <label>Address</label>
+                    <input type="text" class="form-control" th:field="*{address}">
+                </div>
 
                 <div class="col-md-3 form-group">
                     <label th:text="#{channel}">Channel</label>
@@ -92,11 +96,13 @@
                             th:field="*{categoryType}"
                             id="categoryType"
                             onchange="updateCategoryValues()">
-                        <option value="Technical01">Technical01</option>
-                        <option value="Business01">Business01</option>
-                        <option value="Technical02">Technical02</option>
-                        <option value="Business02">Business02</option>
-                        <option value="SubShortCodes">SubShortCodes</option>
+
+                        <option th:value="Technical01">Technical01</option>
+                        <option th:value="Business01">Business01</option>
+                        <option th:value="Technical02">Technical02</option>
+                        <option th:value="Business02">Business02</option>
+                        <option th:value="SubShortCodes">SubShortCodes</option>
+
                     </select>
                 </div>
 
@@ -106,12 +112,18 @@
                             th:field="*{category}"
                             id="category"
                             onchange="calculateTotalFees()">
-                        <option value="Golden">Golden</option>
-                        <option value="Silver">Silver</option>
-                        <option value="Normal">Normal</option>
-                        <option value="SubShortCodes">SubShortCodes</option>
+
+                        <option th:value="Golden">Golden</option>
+                        <option th:value="Silver">Silver</option>
+                        <option th:value="Normal">Normal</option>
+                        <option th:value="SubShortCodes">SubShortCodes</option>
+
                     </select>
                 </div>
+
+
+
+
 
                 <div class="col-md-3 form-group">
                     <label th:text="#{back_long_number}">Back Long Number</label>
@@ -209,6 +221,10 @@
     function updateCategoryValues() {
         var categoryType = document.getElementById('categoryType').value;
         var categorySelect = document.getElementById('category');
+
+        // حفظ مقدار انتخاب شده
+        var selectedValue = categorySelect.value;
+
         categorySelect.innerHTML = '';
 
         var categories = [];
@@ -222,6 +238,12 @@
             var opt = document.createElement('option');
             opt.value = c;
             opt.text = c;
+
+            // اگر مقدار قبلاً انتخاب شده بود دوباره انتخاب شود
+            if (c === selectedValue) {
+                opt.selected = true;
+            }
+
             categorySelect.appendChild(opt);
         });
 

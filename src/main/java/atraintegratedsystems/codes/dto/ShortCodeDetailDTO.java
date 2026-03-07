@@ -16,6 +16,7 @@ public class ShortCodeDetailDTO {
     private String sourceUsed;
     private String sourceUsedInDari;
     private String location;
+    private String address;
     private String chanel;
     private String services;
     private String categoryType;

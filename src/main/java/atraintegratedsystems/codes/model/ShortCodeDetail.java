@@ -27,6 +27,7 @@ public class ShortCodeDetail {
     private String sourceUsed;
     private String sourceUsedInDari;
     private String location;
+    private String address;
     private String chanel;
     private String services;
     private String categoryType;
@@ -80,7 +81,30 @@ public class ShortCodeDetail {
 
 
 
+    public JalaliDate getAssignDateJalali() {
+        if (assigningDate == null) {
+            return null;
+        }
+        DateConverter dateConverter = new DateConverter();
+        return dateConverter.gregorianToJalali(
+                assigningDate.getYear(),
+                assigningDate.getMonthValue(),
+                assigningDate.getDayOfMonth()
+        );
+    }
 
+
+    public JalaliDate getExpireDateJalali() {
+        if (expirationDate == null) {
+            return null;
+        }
+        DateConverter dateConverter = new DateConverter();
+        return dateConverter.gregorianToJalali(
+                expirationDate.getYear(),
+                expirationDate.getMonthValue(),
+                expirationDate.getDayOfMonth()
+        );
+    }
 
 
 

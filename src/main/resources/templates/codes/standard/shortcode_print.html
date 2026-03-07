@@ -195,8 +195,8 @@
     <tr>
         <th>3</th>
         <th>تاریخ تخصیص</th>
-        <td th:text="${code.assigningDate}"></td>
-        <td th:text="${code.expirationDate}"></td>
+        <td th:text="${code.getAssignDateJalali()}"></td>
+        <td th:text="${code.getExpireDateJalali()}"></td>
     </tr>
 
 </table>

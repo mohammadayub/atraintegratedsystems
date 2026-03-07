@@ -142,13 +142,13 @@
                 <thead>
                 <tr>
                     <th>ID#</th>
-<!--                    show bellow from shortCode Model-->
                     <th>Short Code Name</th>
                     <th>Serial Number</th>
                     <th>Status</th>
                     <th>Source Used</th>
                     <th> Source Used(Dari)</th>
                     <th>Location</th>
+                    <th>Address</th>
                     <th>Channel</th>
                     <th>Services</th>
                     <th>Category</th>
@@ -178,7 +178,6 @@
 
                     <td th:text="${codeDetail.serialNumber}"></td>
 
-
                     <td th:text="${codeDetail.codeStatus}"></td>
 
                     <td th:text="${codeDetail.sourceUsed}"></td>
@@ -187,9 +186,10 @@
 
                     <td th:text="${codeDetail.location}"></td>
 
+                    <td th:text="${codeDetail.address}"></td>
+
                     <td th:text="${codeDetail.chanel}"></td>
 
-<!--                    <td th:text="${codeDetail.services}"></td>-->
                     <td th:text="${codeDetail.services}"
                         dir="auto"
                         style="unicode-bidi: plaintext;">
@@ -224,7 +224,6 @@
                             🖨 Print
                         </a>
                     </td>
-
 
                     <td>
                         <a th:href="@{/codes/standard/shortcodes_details/update/{id}(id=${codeDetail.id})}"

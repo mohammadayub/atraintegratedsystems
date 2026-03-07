@@ -16,6 +16,7 @@ public class ShortCodeTableDTO {
     private String sourceUsed;
     private String sourceUsedInDari;
     private String location;
+    private String address;
     private String chanel;
     private String services;
     private String category;
@@ -42,6 +43,7 @@ public class ShortCodeTableDTO {
             String sourceUsed,
             String sourceUsedInDari,
             String location,
+            String address,
             String chanel,
             String services,
             String category,
@@ -67,6 +69,7 @@ public class ShortCodeTableDTO {
         this.sourceUsed = sourceUsed;
         this.sourceUsedInDari=sourceUsedInDari;
         this.location = location;
+        this.address = address;
         this.chanel = chanel;
         this.services = services;
         this.category = category;
@@ -97,7 +100,6 @@ public class ShortCodeTableDTO {
                 assigningDate.getDayOfMonth()
         );
     }
-
 
     public JalaliDate getExpireDateJalali() {
         if (expirationDate == null) {

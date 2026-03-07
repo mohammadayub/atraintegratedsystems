@@ -52,6 +52,7 @@ public interface ShortCodeDetailRepository extends JpaRepository<ShortCodeDetail
             " cd.sourceUsed, " +
             " cd.sourceUsedInDari, " +
             " cd.location, " +
+            " cd.address, " +
             " cd.chanel, " +
             " cd.services, " +
             " cd.category, " +
