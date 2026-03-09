@@ -55,4 +55,7 @@ public class IspcDetailDTO {
     private String ispcCodeName;
     // NEW FIELD
     private Long ispcCodeId;
+
+
+
 }

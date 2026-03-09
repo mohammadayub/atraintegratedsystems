@@ -1,6 +1,7 @@
 package atraintegratedsystems.codes.service;
 
 import atraintegratedsystems.codes.dto.IspcDetailDTO;
+import atraintegratedsystems.codes.dto.RejectedIspcDetailDTO;
 import atraintegratedsystems.codes.model.IspcDetail;
 import atraintegratedsystems.codes.repository.IspcDetailRepository;
 import atraintegratedsystems.utils.PersianCalendarUtils;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Service
 public class IspcRejectionService {
@@ -16,6 +18,12 @@ public class IspcRejectionService {
     private IspcDetailRepository detailRepository;
 
     /* ================= REJECT ISPC ================= */
+
+    public List<RejectedIspcDetailDTO> getRejectedList(){
+        return detailRepository.findAllRecjectIspcDetails();
+    }
+
+
 
     public void reject(IspcDetailDTO dto){
 

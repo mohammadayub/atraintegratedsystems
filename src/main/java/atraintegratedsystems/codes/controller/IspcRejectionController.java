@@ -19,13 +19,20 @@ public class IspcRejectionController {
     private IspcRejectionService ispcRejectionService;
 
 
-    /* ================= REJECT FORM ================= */
 
+
+    @GetMapping("/rejected")
+    public String rejectedList(Model model){
+        model.addAttribute("rejects", ispcRejectionService.getRejectedList());
+        return "codes/ispc/rejection/ispc_reject_list";
+    }
+
+
+
+    /* ================= REJECT FORM ================= */
     @GetMapping("/reject/{id}")
     public String rejectForm(@PathVariable Long id, Model model){
-
         model.addAttribute("detail", ispcDetailService.getById(id));
-
         return "codes/ispc/rejection/ispc_reject_form";
     }
 
