@@ -8,4 +8,6 @@ import java.util.List;
 
 public interface IspcDetailRepository extends JpaRepository<IspcDetail,Long> {
 
+    @Query("SELECT d FROM IspcDetail d JOIN d.ispcCode c WHERE d.ispcCodeRejectionStatus IS NULL")
+    List<IspcDetail> findAllActiveIspcDetails();
 }

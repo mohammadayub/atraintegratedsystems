@@ -46,6 +46,7 @@ public class IspcDetailDTO {
     private String ispcCodeRejectionStatus;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate ispcCodeRejectionDate;
+    private String ispcCodeRejectionDateJalali;
 
     @ManyToOne
     @JoinColumn(name = "ispc_code_id")

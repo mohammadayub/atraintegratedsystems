@@ -1,0 +1,56 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Reject ISPC</title>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h3>Reject ISPC Code</h3>
+
+    <form th:action="@{/codes/ispc/details/reject/save}"
+          th:object="${detail}"
+          method="post">
+
+        <input type="hidden" th:field="*{id}"/>
+
+        <div class="form-group">
+            <label>Rejection Status</label>
+
+            <input type="text"
+                   value="Rejected"
+                   class="form-control"
+                   readonly
+                   />
+        </div>
+
+        <div class="form-group">
+            <label>Rejection Date</label>
+
+            <input type="text"
+                   th:field="*{ispcCodeRejectionDateJalali}"
+                   class="form-control"
+                   placeholder="YYYY-MM-DD"
+                   required/>
+        </div>
+
+        <br>
+
+        <button type="submit" class="btn btn-danger">
+            Confirm Reject
+        </button>
+
+        <a th:href="@{/codes/ispc/details}"
+           class="btn btn-secondary">
+            Cancel
+        </a>
+
+    </form>
+
+</div>
+
+</body>
+</html>
