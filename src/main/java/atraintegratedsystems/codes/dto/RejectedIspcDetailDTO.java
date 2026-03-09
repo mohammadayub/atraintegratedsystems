@@ -69,10 +69,6 @@ public class RejectedIspcDetailDTO {
     }
 
 
-
-
-
-
     public JalaliDate getAssigningDateJalali() {
 
         if(assigningDate == null){
@@ -96,6 +92,19 @@ public class RejectedIspcDetailDTO {
                 expirationDate.getYear(),
                 expirationDate.getMonthValue(),
                 expirationDate.getDayOfMonth()
+        );
+    }
+
+
+    public JalaliDate getIspcCodeRejectionDateJalali() {
+        if(ispcCodeRejectionDate == null){
+            return null;
+        }
+        DateConverter converter = new DateConverter();
+        return converter.gregorianToJalali(
+                ispcCodeRejectionDate.getYear(),
+                ispcCodeRejectionDate.getMonthValue(),
+                ispcCodeRejectionDate.getDayOfMonth()
         );
     }
 
