@@ -51,7 +51,7 @@
           th:text="${ispcCode.id == null ? 'Add ISPC Code' : 'Update ISPC Code'}">
       </h3>
 
-      <form th:action="@{/ispc/save}"
+      <form th:action="@{/codes/ispc/save}"
             th:object="${ispcCode}"
             method="post">
 

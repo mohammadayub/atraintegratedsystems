@@ -7,7 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/ispc")
+@RequestMapping("/codes/ispc")
 public class IspcCodeController {
 
     private final IspcCodeService service;
@@ -34,7 +34,7 @@ public class IspcCodeController {
     @PostMapping("/save")
     public String save(@ModelAttribute IspcCode ispcCode) {
         service.save(ispcCode);
-        return "redirect:/ispc/list";
+        return "redirect:/codes/ispc/list";
     }
 
     // SHOW UPDATE FORM
@@ -48,6 +48,6 @@ public class IspcCodeController {
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable Long id) {
         service.delete(id);
-        return "redirect:/ispc/list";
+        return "redirect:/codes/ispc/list";
     }
 }

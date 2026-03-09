@@ -97,7 +97,7 @@
         <tr th:each="row : ${#numbers.sequence(0, codes.size() > 0 ? codes.size() - 1 : 0, 31)}">
 
           <td th:each="code : ${codes.subList(row, (row + 31 > codes.size()) ? codes.size() : row + 31)}"
-              th:classappend="${code.assignStatus == 'ASSIGN'} ? 'assign' : ''">
+              th:classappend="${code.assignStatus == 'Assign'} ? 'assign' : ''">
 
             <span th:text="${code.ispcCodeName}"></span>
 

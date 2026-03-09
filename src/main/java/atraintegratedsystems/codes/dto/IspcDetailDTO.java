@@ -64,4 +64,6 @@ public class IspcDetailDTO {
     private String ispcCodeRejectionDateJalali;
 
     private String ispcCodeName;
+    // NEW FIELD
+    private Long ispcCodeId;
 }

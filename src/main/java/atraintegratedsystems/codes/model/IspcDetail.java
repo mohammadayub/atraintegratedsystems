@@ -1,4 +1,6 @@
 package atraintegratedsystems.codes.model;
+import atraintegratedsystems.utils.DateConverter;
+import atraintegratedsystems.utils.JalaliDate;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -64,5 +66,36 @@ public class IspcDetail {
     @ManyToOne
     @JoinColumn(name = "ispc_code_id")
     private IspcCode ispcCode;
+
+    public JalaliDate getAssigningDateJalali() {
+
+        if(assigningDate == null){
+            return null;
+        }
+
+        DateConverter converter = new DateConverter();
+
+        return converter.gregorianToJalali(
+                assigningDate.getYear(),
+                assigningDate.getMonthValue(),
+                assigningDate.getDayOfMonth()
+        );
+    }
+
+
+    public JalaliDate getExpirationDateJalali() {
+
+        if(expirationDate == null){
+            return null;
+        }
+
+        DateConverter converter = new DateConverter();
+
+        return converter.gregorianToJalali(
+                expirationDate.getYear(),
+                expirationDate.getMonthValue(),
+                expirationDate.getDayOfMonth()
+        );
+    }
 
 }

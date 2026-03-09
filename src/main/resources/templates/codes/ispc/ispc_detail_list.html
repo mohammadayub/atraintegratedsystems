@@ -1,0 +1,111 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{codes_layout :: page_head}">
+    <title>ISPC Details</title>
+
+    <div th:replace="styles :: data-tables-styles"></div>
+    <div th:replace="styles :: common-css"></div>
+    <div th:replace="styles :: commonfieldset-with-legend-border"></div>
+    <div th:replace="styles :: persian-datepicker-styles"></div>
+</head>
+
+<body>
+
+<nav th:replace="~{codes_layout :: page_navbar}"></nav>
+
+<div class="container-fluid"
+     th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+
+    <fieldset>
+        <legend>ISPC Details</legend>
+
+        <div class="table-container">
+
+            <table class="slip table table-bordered table-striped"
+                   id="profileTable"
+                   style="width:100%">
+
+                <thead>
+                <tr class="bg-primary text-white">
+
+                    <th>#</th>
+                    <th>Serial Number</th>
+                    <th>Company</th>
+                    <th>ENID</th>
+                    <th>Responsible Person</th>
+                    <th>Mobile</th>
+                    <th>Channel</th>
+                    <th>Service Type</th>
+                    <th>Assign Date</th>
+                    <th>Expire Date</th>
+                    <th>Action</th>
+
+                </tr>
+                </thead>
+
+                <tbody>
+
+                <tr th:each="d, iStat : ${details}">
+
+                    <td th:text="${iStat.count}"></td>
+
+                    <td th:text="${d.serialNumber}"></td>
+
+                    <td th:text="${d.companyName}"></td>
+
+                    <td th:text="${d.enid}"></td>
+
+                    <td th:text="${d.responsiblePerson}"></td>
+
+                    <td th:text="${d.mobile}"></td>
+
+                    <td th:text="${d.channel}"></td>
+
+                    <td th:text="${d.serviceType}"></td>
+
+                    <td th:text="${d.getAssigningDateJalali()}"></td>
+
+                    <td th:text="${d.getExpirationDateJalali()}"></td>
+
+                    <td>
+
+                        <a th:href="@{/codes/ispc/details/edit/{id}(id=${d.id})}"
+                           class="btn btn-warning btn-sm">
+                            Edit
+                        </a>
+                    </td>
+
+                </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </fieldset>
+
+    <a th:href="@{/codes}"
+       class="btn btn-primary mt-3">
+        ← Back to Page
+    </a>
+
+</div>
+
+<!-- Scripts -->
+
+<div th:replace="scripts :: common-scripts"></div>
+<div th:replace="scripts :: data-tables-scripts"></div>
+<div th:replace="scripts :: common-datatable"></div>
+<div th:replace="scripts :: persian-datepicker-scripts"></div>
+<div th:replace="scripts :: common-hijrishamsi-date"></div>
+
+<div style="height:10vh;"></div>
+
+<footer th:replace="~{codes_layout :: page_footer}"></footer>
+
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+
+</body>
+</html>
