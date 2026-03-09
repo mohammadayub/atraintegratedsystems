@@ -1,67 +1,55 @@
 package atraintegratedsystems.codes.dto;
 
+import atraintegratedsystems.codes.model.IspcCode;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import java.time.LocalDate;
 
 @Data
 public class IspcDetailDTO {
+
     private Long id;
-
     private String serialNumber;
-
-
+    private String ispcNumber;
+    private String signalingPoint;
     private String companyName;
     private String enid;
+    private String location;
     private String companyAddress;
     private String responsiblePerson;
     private String job;
     private String mobile;
     private String telephone;
     private String email;
-    private String channel;
-    private String serviceType;
-    private String mnosCompanyHost;
-    private String codeCategory="Golden";
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate assigningDate;
-    private String  assigningDateJalali;
+    private String assigningDateJalali;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate expirationDate;
     private String expirationDateJalali;
 
     // Fees Related Section
-    // Application Fees Related
-    private double applicationFees;
-    private String applicationFeesBankVoucherNo;
+    // Registration Fees Related
+    private double registrationFees;
+    private String registrationFeesBankVoucherNo;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate applicationFeesEntryVoucherDate;
-    private String applicationFeesEntryVoucherDateJalali;
+    private LocalDate registrationFeesEntryVoucherDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate applicationFeesBankVoucherSubmissionDate;
-    private String applicationFeesBankVoucherSubmissionDateJalali;
-    private String applicationFeesPaymentStatus;
-    private String applicationFessPaymentOrganization="MCIT";
+    private LocalDate registrationFeesBankVoucherSubmissionDate;
+    private String registrationFeesPaymentStatus;
+    private String registrationFessPaymentOrganization="MCIT";
 
-    // Royalty Fees Related
-    private double royaltyFees;
-    private String royaltyFeesBankVoucherNo;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate royaltyFeesEntryVoucherDate;
-    private String royaltyFeesEntryVoucherDateJalali;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate royaltyFeesBankVoucherSubmissionDate;
-    private String royaltyFeesBankVoucherSubmissionDateJalali;
-    private String royaltyFeesPaymentStatus;
-    private String royaltyFeesPaymentOrganization="ATRA";
-
-
-    // smsIdentifier Code Rejection Section
+    // ispc Code Rejection Section
     private String ispcCodeRejectionStatus;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate ispcCodeRejectionDate;
-    private String ispcCodeRejectionDateJalali;
+
+    @ManyToOne
+    @JoinColumn(name = "ispc_code_id")
+    private IspcCode ispcCode;
 
     private String ispcCodeName;
     // NEW FIELD

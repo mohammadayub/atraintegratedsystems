@@ -19,13 +19,12 @@ public class TypeOfApprovalApplicant {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate requestDate;
 
-    @Column(length = 100)
+
     private String typeOfApprovalApplicantNumber;
 
     @Column(columnDefinition = "TEXT")
     private String manufacturer;
 
-    @Column(length = 150)
     private String person;
 
     @Column(columnDefinition = "TEXT")
@@ -34,31 +33,31 @@ public class TypeOfApprovalApplicant {
     @Column(columnDefinition = "TEXT")
     private String authorizedImporter;
 
-    @Column(length = 100)
+
     private String importRegistrationNo;
 
     @Column(columnDefinition = "TEXT")
     private String companyName;
 
-    @Column(length = 150)
+
     private String contactPerson;
 
     @Column(columnDefinition = "TEXT")
     private String address;
 
-    @Column(length = 50)
+
     private String P_O_Box;;
 
-    @Column(length = 30)
+
     private String telephone;
 
-    @Column(length = 30)
+
     private String mobile;
 
-    @Column(length = 150)
+
     private String email;
 
-    @Column(length = 50)
+
     private String typeSelect;
 
     private Double applicationFee;
@@ -68,10 +67,10 @@ public class TypeOfApprovalApplicant {
 
     /* ================= Application Fee ================= */
 
-    @Column(length = 50)
+
     private String applicationFeeStatus;
 
-    @Column(length = 100)
+
     private String applicationFeeBankVoucherNo;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -93,10 +92,10 @@ public class TypeOfApprovalApplicant {
     @Column(columnDefinition = "TEXT")
     private String adminFeeOrganizationName;
 
-    @Column(length = 50)
+
     private String adminFeeStatus;
 
-    @Column(length = 100)
+
     private String adminFeeBankVoucherNo;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -115,13 +114,13 @@ public class TypeOfApprovalApplicant {
 
     private Double certificateFee;
 
-    @Column(length = 50)
+
     private String certificateFeeStatus;
 
     @Column(columnDefinition = "TEXT")
     private String certificateFeeOrganizationName;
 
-    @Column(length = 100)
+
     private String certificateFeeBankVoucherNo;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -141,7 +140,7 @@ public class TypeOfApprovalApplicant {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate referDate;
 
-    @Column(length = 50)
+
     private String referStatus;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")

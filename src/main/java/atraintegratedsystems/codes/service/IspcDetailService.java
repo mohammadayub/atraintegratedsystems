@@ -112,16 +112,16 @@ public class IspcDetailService {
 
         e.setCompanyName(dto.getCompanyName());
         e.setEnid(dto.getEnid());
+        e.setLocation(dto.getLocation());
         e.setCompanyAddress(dto.getCompanyAddress());
         e.setResponsiblePerson(dto.getResponsiblePerson());
         e.setJob(dto.getJob());
         e.setMobile(dto.getMobile());
         e.setTelephone(dto.getTelephone());
         e.setEmail(dto.getEmail());
-        e.setChannel(dto.getChannel());
-        e.setServiceType(dto.getServiceType());
-        e.setMnosCompanyHost(dto.getMnosCompanyHost());
-        e.setCodeCategory(dto.getCodeCategory());
+        e.setIspcNumber(dto.getIspcNumber());
+        e.setSignalingPoint(dto.getSignalingPoint());
+        e.setRegistrationFees(50000);
 
         PersianCalendarUtils converter = new PersianCalendarUtils();
 
@@ -170,16 +170,16 @@ public class IspcDetailService {
         dto.setSerialNumber(e.getSerialNumber());
         dto.setCompanyName(e.getCompanyName());
         dto.setEnid(e.getEnid());
+        dto.setLocation(e.getLocation());
         dto.setCompanyAddress(e.getCompanyAddress());
         dto.setResponsiblePerson(e.getResponsiblePerson());
         dto.setJob(e.getJob());
         dto.setMobile(e.getMobile());
         dto.setTelephone(e.getTelephone());
         dto.setEmail(e.getEmail());
-        dto.setChannel(e.getChannel());
-        dto.setServiceType(e.getServiceType());
-        dto.setMnosCompanyHost(e.getMnosCompanyHost());
-        dto.setCodeCategory(e.getCodeCategory());
+        dto.setIspcNumber(e.getIspcNumber());
+        dto.setSignalingPoint(e.getSignalingPoint());
+
 
         if(e.getIspcCode()!=null){
             dto.setIspcCodeId(e.getIspcCode().getId());

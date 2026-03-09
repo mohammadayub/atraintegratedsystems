@@ -15,47 +15,34 @@ public class IspcDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String serialNumber;
-
-
+    private String ispcNumber;
+    private String signalingPoint;
     private String companyName;
     private String enid;
+    private String location;
     private String companyAddress;
     private String responsiblePerson;
     private String job;
     private String mobile;
     private String telephone;
     private String email;
-    private String channel;
-    private String serviceType;
-    private String mnosCompanyHost;
-    private String codeCategory="Golden";
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate assigningDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate expirationDate;
 
     // Fees Related Section
-    // Application Fees Related
-    private double applicationFees;
-    private String applicationFeesBankVoucherNo;
+    // Registration Fees Related
+    private double registrationFees;
+    private String registrationFeesBankVoucherNo;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate applicationFeesEntryVoucherDate;
+    private LocalDate registrationFeesEntryVoucherDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate applicationFeesBankVoucherSubmissionDate;
-    private String applicationFeesPaymentStatus;
-    private String applicationFessPaymentOrganization="MCIT";
+    private LocalDate registrationFeesBankVoucherSubmissionDate;
+    private String registrationFeesPaymentStatus;
+    private String registrationFessPaymentOrganization="MCIT";
 
-    // Royalty Fees Related
-    private double royaltyFees;
-    private String royaltyFeesBankVoucherNo;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate royaltyFeesEntryVoucherDate;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate royaltyFeesBankVoucherSubmissionDate;
-    private String royaltyFeesPaymentStatus;
-    private String royaltyFeesPaymentOrganization="ATRA";
 
 
     // ispc Code Rejection Section
@@ -74,7 +61,6 @@ public class IspcDetail {
         }
 
         DateConverter converter = new DateConverter();
-
         return converter.gregorianToJalali(
                 assigningDate.getYear(),
                 assigningDate.getMonthValue(),
@@ -82,15 +68,11 @@ public class IspcDetail {
         );
     }
 
-
     public JalaliDate getExpirationDateJalali() {
-
         if(expirationDate == null){
             return null;
         }
-
         DateConverter converter = new DateConverter();
-
         return converter.gregorianToJalali(
                 expirationDate.getYear(),
                 expirationDate.getMonthValue(),
