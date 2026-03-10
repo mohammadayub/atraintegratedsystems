@@ -145,7 +145,7 @@
         <th>1</th>
         <th>شماره شارت کود</th>
         <td th:text="${code.shortCode.shortCodeName}"></td>
-        <td></td>
+        <td th:text="${code.category}" ></td>
     </tr>
 
     <tr>
@@ -186,7 +186,7 @@
         <th>1</th>
         <th>فیس درخواست</th>
         <td th:text="${code.applicationFees}"></td>
-        <td th:text="${code.remarks}"></td>
+        <td ></td>
     </tr>
 
     <tr>
@@ -200,18 +200,18 @@
         <th>3</th>
         <th>تاریخ تخصیص</th>
         <td th:text="${code.getAssignDateJalali()}"></td>
-        <td th:text="${code.getExpireDateJalali()}"></td>
+        <td></td>
     </tr>
     <tr>
         <th>3</th>
         <th>تاریخ انقضا</th>
         <td th:text="${code.getExpireDateJalali()}"></td>
-        <td></td>
+        <td  th:text="${code.remarks}"></td>
     </tr>
 
 </table>
 
-<br>
+       <p> <b> نمبر تماس آمریت ستندرد ها : 0202105968</b> </p>
 
 <div>
     <p>
