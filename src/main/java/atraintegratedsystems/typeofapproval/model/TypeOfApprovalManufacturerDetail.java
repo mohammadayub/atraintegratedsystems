@@ -18,6 +18,7 @@ public class TypeOfApprovalManufacturerDetail {
     private String contactPerson;
     @Column(columnDefinition = "TEXT")
     private String address;
+    @Column(columnDefinition = "TEXT")
     private String manufacturer_P_O_Box;
     private String manufacturer_telephone;
     private String manufacturer_mobile;

@@ -40,19 +40,33 @@ public class TypeOfApprovalTechnicalDetail {
     private String brandName;
     private String typeNumber;
     private String countryofOrigin;
+    @Column(columnDefinition = "TEXT")
     private String frequencyrangeFromMHZ;
+    @Column(columnDefinition = "TEXT")
     private String frequencyrangeToMHZ;
+    @Column(columnDefinition = "TEXT")
     private String frequencyrangeFromGHZ;
+    @Column(columnDefinition = "TEXT")
     private String frequencyrangeToGHZ;
+    @Column(columnDefinition = "TEXT")
     private String outputPowerRadiatedConducted;
+    @Column(columnDefinition = "TEXT")
     private String transmissionCapacity;
+    @Column(columnDefinition = "TEXT")
     private String channelCapacity;
+    @Column(columnDefinition = "TEXT")
     private String channelSpacing;
+    @Column(columnDefinition = "TEXT")
     private String modulationType;
+    @Column(columnDefinition = "TEXT")
     private String antennaType;
+    @Column(columnDefinition = "TEXT")
     private String antennaGain;
+    @Column(columnDefinition = "TEXT")
     private String technicalInterface;
+    @Column(columnDefinition = "TEXT")
     private String technicalVariants;
+    @Column(columnDefinition = "TEXT")
     private String equipmentLicenseRequirement;
     private String enteredBy;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
