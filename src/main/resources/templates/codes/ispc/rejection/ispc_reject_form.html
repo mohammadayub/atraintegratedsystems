@@ -1,15 +1,20 @@
-<!doctype html>
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<head>
+<head th:replace="~{codes_layout :: page_head}">
     <title>Reject ISPC</title>
+
+    <div th:replace="styles :: persian-datepicker-styles"></div>
+    <div th:replace="styles :: common-css"></div>
+    <div th:replace="styles :: commonfieldset"></div>
 </head>
 
 <body>
 
-<div class="container">
+<nav th:replace="~{codes_layout :: page_navbar}"></nav>
 
-    <h3>Reject ISPC Code</h3>
+<div class="container-fluid mt-4"
+     th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
 
     <form th:action="@{/codes/ispc/details/reject/save}"
           th:object="${detail}"
@@ -17,40 +22,71 @@
 
         <input type="hidden" th:field="*{id}"/>
 
-        <div class="form-group">
-            <label>Rejection Status</label>
+        <fieldset style="border:2px solid #DCAF45;padding:15px;border-radius:8px;margin-bottom:20px;">
 
-            <input type="text"
-                   value="Rejected"
-                   class="form-control"
-                   readonly
-                   />
-        </div>
+            <legend style="width:auto;font-size:1.2rem;color:#14438B;padding:0 10px;font-weight:bold;">
+                Reject ISPC Code
+            </legend>
 
-        <div class="form-group">
-            <label>Rejection Date</label>
+            <div class="row g-3">
 
-            <input type="text"
-                   th:field="*{ispcCodeRejectionDateJalali}"
-                   class="form-control"
-                   placeholder="YYYY-MM-DD"
-                   required/>
-        </div>
+                <div class="col-md-4">
+                    <label>Rejection Status</label>
 
-        <br>
+                    <input type="text"
+                           value="Rejected"
+                           class="form-control"
+                           readonly>
+                </div>
 
-        <button type="submit" class="btn btn-danger">
-            Confirm Reject
-        </button>
+                <div class="col-md-4">
+                    <label>Rejection Date</label>
 
-        <a th:href="@{/codes/ispc/details}"
-           class="btn btn-secondary">
-            Cancel
-        </a>
+                    <input type="text"
+                           th:field="*{ispcCodeRejectionDateJalali}"
+                           class="form-control hijrishamsi"
+                           placeholder="YYYY-MM-DD"
+                           required>
+                </div>
+
+            </div>
+
+            <!-- BUTTONS -->
+
+            <div class="row mt-4">
+
+                <div class="col-md-4 mx-auto d-flex justify-content-center gap-2">
+
+                    <button type="submit" class="btn btn-danger">
+                        Confirm Reject
+                    </button>
+
+                    &nbsp;&nbsp;
+
+                    <a th:href="@{/codes/ispc/details}"
+                       class="btn btn-secondary">
+                        Cancel
+                    </a>
+
+                </div>
+
+            </div>
+
+        </fieldset>
 
     </form>
 
 </div>
+
+<!-- Scripts -->
+
+<div th:replace="scripts :: common-scripts"></div>
+<div th:replace="scripts :: persian-datepicker-scripts"></div>
+<div th:replace="scripts :: common-hijrishamsi-date"></div>
+
+<div style="height:10vh;"></div>
+
+<footer th:replace="~{codes_layout :: page_footer}"></footer>
 
 </body>
 </html>
