@@ -107,7 +107,7 @@ public class TypeOfApprovalApplicant {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate adminFeeEntryDate;
 
-    @Column(columnDefinition = "TEXT")
+
     private String adminFeeEnteredBy;
 
     /* ================= Certificate Fee ================= */
@@ -132,7 +132,7 @@ public class TypeOfApprovalApplicant {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate certificateFeeEntryDate;
 
-    @Column(columnDefinition = "TEXT")
+
     private String certificateFeeEnteredBy;
 
     /* ================= Refer Section ================= */
@@ -146,8 +146,7 @@ public class TypeOfApprovalApplicant {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate entryReferDate;
 
-    @Column(columnDefinition = "TEXT")
-    private String userEntered;
+      private String userEntered;
 
     /* ================= Relations ================= */
 

@@ -21,4 +21,7 @@ public interface IspcDetailRepository extends JpaRepository<IspcDetail,Long> {
             "FROM IspcDetail d JOIN d.ispcCode c " +
             "WHERE d.ispcCodeRejectionStatus = 'Reject'")
     List<RejectedIspcDetailDTO> findAllRecjectIspcDetails();
+
+    @Query("SELECT d FROM IspcDetail d WHERE d.ispcCodeRejectionStatus <> 'Reject' OR d.ispcCodeRejectionStatus IS NULL")
+    List<IspcDetail> findAllNotRejected();
 }

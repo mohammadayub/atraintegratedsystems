@@ -68,14 +68,12 @@ public class IspcDetailService {
 
     /* ================= READ ALL ================= */
 
-    public List<IspcDetailDTO> getAllDetails(){
-
-        return detailRepository.findAll()
+    public List<IspcDetailDTO> getAllDetails() {
+        return detailRepository.findAllNotRejected()
                 .stream()
                 .map(this::mapToDTO)
                 .collect(Collectors.toList());
     }
-
 
     /* ================= READ BY ID ================= */
 
