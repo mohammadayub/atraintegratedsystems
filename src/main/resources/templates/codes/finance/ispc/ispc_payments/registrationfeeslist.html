@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{codes_layout :: page_head}">
+    <title>SMS Identifier Application Fee List</title>
+
+    <div th:replace="styles :: data-tables-styles"></div>
+    <div th:replace="styles :: common-css"></div>
+    <div th:replace="styles :: commonfieldset-with-legend-border"></div>
+    <div th:replace="styles :: persian-datepicker-styles"></div>
+</head>
+
+<body>
+
+<nav th:replace="~{codes_layout :: page_navbar}"></nav>
+
+<div class="container-fluid"
+     th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+
+    <fieldset>
+        <legend>Ispc Code Registration Fees List</legend>
+
+        <div class="table-container">
+            <table class="slip table table-bordered table-striped"
+                   id="profileTable"
+                   style="width:100%">
+
+                <thead>
+                <tr class="bg-primary text-white">
+            <th>#ID</th>
+            <th>Code Name</th>
+            <th>Company</th>
+            <th>ENID</th>
+            <th>Mobile</th>
+            <th>Email</th>
+            <th>Assign Date</th>
+            <th>Expire Date</th>
+            <th>Print Tariff</th>
+            <th>Confirm Payment</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item, stat : ${list}">
+            <td th:text="${stat.count}"></td>
+            <td th:text="${item.ispcCodeName}"></td>
+            <td th:text="${item.companyName}"></td>
+            <td th:text="${item.enid}"></td>
+            <td th:text="${item.mobile}"></td>
+            <td th:text="${item.email}"></td>
+            <td th:text="${item.assigningDate}"></td>
+            <td th:text="${item.expirationDate}"></td>
+            <td>
+                <a class="btn btn-sm btn-secondary"
+                   th:href="@{/codes/sms-identifier-applicationfee/print-tariff/{id}(id=${item.id})}">
+                    Print Tariff
+                </a>
+            </td>
+
+            <td>
+                <a class="btn btn-sm btn-primary"
+                   th:href="@{/codes/ispc-registrationfee/pay/{id}(id=${item.id})}">
+                    Pay
+                </a>
+            </td>
+
+        </tr>
+        </tbody>
+    </table>
+        </div>
+    </fieldset>
+    <a th:href="@{/codes/smsidentifier/finance/home}"
+       class="btn btn-primary mt-3">
+        ← Back to Page
+    </a>
+</div>
+
+<!-- Scripts -->
+<div th:replace="scripts :: common-scripts"></div>
+<div th:replace="scripts :: data-tables-scripts"></div>
+<div th:replace="scripts :: common-datatable"></div>
+<div th:replace="scripts :: persian-datepicker-scripts"></div>
+<div th:replace="scripts :: common-hijrishamsi-date"></div>
+
+<div style="height:10vh;"></div>
+<footer th:replace="~{codes_layout :: page_footer}"></footer>
+
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

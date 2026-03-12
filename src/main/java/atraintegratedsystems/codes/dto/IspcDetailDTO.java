@@ -37,8 +37,10 @@ public class IspcDetailDTO {
     private String registrationFeesBankVoucherNo;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate registrationFeesEntryVoucherDate;
+    private String registrationFeesEntryVoucherDateJalali;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate registrationFeesBankVoucherSubmissionDate;
+    private String registrationFeesBankVoucherSubmissionDateJalali;
     private String registrationFeesPaymentStatus;
     private String registrationFessPaymentOrganization="MCIT";
 
