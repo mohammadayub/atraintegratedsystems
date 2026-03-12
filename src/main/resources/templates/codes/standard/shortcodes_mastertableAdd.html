@@ -3,6 +3,8 @@
 
 <head th:replace="~{codes_layout :: page_head}">
     <title>Add Short Code</title>
+    <div th:replace="styles :: select2-styles"></div>
+    <div th:replace="styles :: common-css"></div>
 
     <style>
         body{
@@ -86,8 +88,8 @@
     </div>
 
 </div>
-
+<div th:replace="scripts :: common-scripts"></div>
 <footer th:replace="~{codes_layout :: page_footer}"></footer>
-
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
 </body>
 </html>

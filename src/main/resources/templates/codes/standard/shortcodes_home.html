@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"
       th:lang="#{lang}"
-      th:dir="${#locale.language == 'ps' ? 'rtl' : 'ltr'}"
+      th:dir="${#locale.language == 'ps' or #locale.language == 'prs' ? 'rtl' : 'ltr'}"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 

@@ -1,10 +1,144 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+<html lang="en"
+      th:lang="#{lang}"
+      th:dir="${#locale.language == 'ps' or #locale.language == 'prs' ? 'rtl' : 'ltr'}"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head th:replace="~{codes_layout :: page_head}">
+    <title>AIS</title>
+    <div th:replace="styles :: common-css"></div>
+    <div th:replace="styles :: commonfieldset"></div>
+
+    <!-- SAME LMS DASHBOARD STYLE -->
+    <style>
+        a h4 {
+            color: #14438B;
+            font-size: 20px;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .custom-card {
+            text-align: center;
+            padding: 20px;
+            border-radius: 12px;
+            transition: 0.3s ease;
+        }
+
+        .custom-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .custom-card img {
+            height: 80px;
+        }
+    </style>
+    <div th:replace="styles :: ltr-to-rtl"></div>
 </head>
+
 <body>
+
+<nav th:replace="~{codes_layout :: page_navbar}"></nav>
+
+<!-- This is Main Page -->
+<div class="container mt-4">
+
+    <!-- ================= SHORT CODES ================= -->
+    <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_CODES_ADMIN','ROLE_LICENSE','ROLE_MINISTRY','ROLE_LICENSE_COMPLETION_PROFILE','ROLE_LICENSE_APPROVAL','ROLE_LICENSE_PROFILE_ENTRY','ROLE_FINANCE','ROLE_FINANCE','ROLE_TYPEOFAPPROVAL_ADMIN','ROLE_TYPEOFAPPROVAL_ATRA_FINANCE','ROLE_TYPEOFAPPROVAL_MCIT_FINANCE','ROLE_TYPEOFAPPROVAL_STANDARD','ROLE_TYPEOFAPPROVAL_ONLINE_APPLICATION')">
+        <legend>ISPC Codes Management Section</legend>
+
+        <table class="table table-borderless text-center">
+            <tr>
+                <td>
+                    <div class="custom-card"
+                         sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_LICENSE','ROLE_LICENSE_COMPLETION_PROFILE','ROLE_LICENSE_APPROVAL','ROLE_LICENSE_PROFILE_ENTRY','ROLE_FINANCE','ROLE_MINISTRY')">
+                        <a th:href="@{/codes/ispc/add}">
+                            <img th:src="@{/images/shortCodes.png}" alt="Add SMS Identifier">
+                            <h4 style="margin-top:12px;">Add ISPC Code</h4>
+                        </a>
+                    </div>
+                </td>
+
+                <td>
+                    <div class="custom-card"
+                         sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_CODES_ADMIN')">
+                        <a th:href="@{/codes/ispc/list}">
+                            <img th:src="@{/images/smsidentifiercode.png}" alt="SMS Identifier List">
+                            <h4 style="margin-top:12px;">ISPC Code List</h4>
+                        </a>
+                    </div>
+                </td>
+
+                <td>
+                    <div class="custom-card"
+                         sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_CODES_ADMIN')">
+                        <a th:href="@{/codes/ispc/details/create}">
+                            <img th:src="@{/images/codeDetail.png}" alt="SMS Identifier Detail">
+                            <h4 style="margin-top:12px;">ISPC Code Detail</h4>
+                        </a>
+                    </div>
+                </td>
+
+                <td>
+                    <div class="custom-card"
+                         sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_CODES_ADMIN')">
+                        <a th:href="@{/codes/ispc/details}">
+                            <img th:src="@{/images/code_detail_list.png}" alt="SMS Identifier Detail List">
+                            <h4 style="margin-top:12px;">ISPC Code Detail List</h4>
+                        </a>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </fieldset>
+
+    <!-- ================= REJECTION ================= -->
+    <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_CODES_ADMIN','ROLE_LICENSE','ROLE_MINISTRY','ROLE_LICENSE_COMPLETION_PROFILE','ROLE_LICENSE_APPROVAL','ROLE_LICENSE_PROFILE_ENTRY','ROLE_FINANCE','ROLE_FINANCE','ROLE_TYPEOFAPPROVAL_ADMIN','ROLE_TYPEOFAPPROVAL_ATRA_FINANCE','ROLE_TYPEOFAPPROVAL_MCIT_FINANCE','ROLE_TYPEOFAPPROVAL_STANDARD','ROLE_TYPEOFAPPROVAL_ONLINE_APPLICATION')">
+        <legend>ISPC Code Rejection Management Section</legend>
+
+        <table class="table table-borderless text-center">
+            <tr>
+                <td>
+                    <div class="custom-card"
+                         sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_LICENSE','ROLE_LICENSE_COMPLETION_PROFILE','ROLE_LICENSE_APPROVAL','ROLE_LICENSE_PROFILE_ENTRY','ROLE_FINANCE','ROLE_MINISTRY')">
+                        <a th:href="@{/codes/ispc/details/rejected}">
+                            <img th:src="@{/images/rejectionList.png}" alt="Rejection List">
+                            <h4 style="margin-top:12px;">Rejected ISPC Codes List</h4>
+                        </a>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </fieldset>
+
+
+    <!-- ================= EXTENSION ================= -->
+    <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_CODES_ADMIN','ROLE_LICENSE','ROLE_MINISTRY','ROLE_LICENSE_COMPLETION_PROFILE','ROLE_LICENSE_APPROVAL','ROLE_LICENSE_PROFILE_ENTRY','ROLE_FINANCE','ROLE_FINANCE','ROLE_TYPEOFAPPROVAL_ADMIN','ROLE_TYPEOFAPPROVAL_ATRA_FINANCE','ROLE_TYPEOFAPPROVAL_MCIT_FINANCE','ROLE_TYPEOFAPPROVAL_STANDARD','ROLE_TYPEOFAPPROVAL_ONLINE_APPLICATION')">
+        <legend>ISPC Code Extension Management Section</legend>
+
+        <table class="table table-borderless text-center">
+            <tr>
+                <td>
+                    <div class="custom-card"
+                         sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_LICENSE','ROLE_LICENSE_COMPLETION_PROFILE','ROLE_LICENSE_APPROVAL','ROLE_LICENSE_PROFILE_ENTRY','ROLE_FINANCE','ROLE_MINISTRY')">
+                        <a th:href="@{#}">
+                            <img th:src="@{/images/serialNumber.png}" alt="Extension">
+                            <h4 style="margin-top:12px;">ISPC Code Extension</h4>
+                        </a>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </fieldset>
+
+</div>
+
+<div th:replace="scripts :: common-scripts"></div>
+<div style="height:10vh;"></div>
+<footer th:replace="~{codes_layout :: page_footer}"></footer>
+
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
 
 </body>
 </html>

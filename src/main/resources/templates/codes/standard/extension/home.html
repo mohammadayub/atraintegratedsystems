@@ -1,10 +1,13 @@
 <!DOCTYPE html>
-<html lang="en" th:lang="#{lang}" th:dir="${#locale.language == 'ps' ? 'rtl' : 'ltr'}"
-      xmlns:th="http://www.thymeleaf.org"
+<html lang="en"
+      th:lang="#{lang}"
+      th:dir="${#locale.language == 'ps' or #locale.language == 'prs' ? 'rtl' : 'ltr'}"      xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
 <head th:replace="~{codes_layout :: page_head}">
+    <title>AIS</title>
+    <div th:replace="styles :: common-css"></div>
     <div th:replace="styles :: commonfieldset"></div>
-    <title>LMS</title>
     <style>
         h4 a {
             color: #14438B;
@@ -12,10 +15,9 @@
         }
     </style>
 </head>
-<body>
-<div th:replace="styles :: commonfieldset"></div>
-<nav th:replace="~{codes_layout :: page_navbar}"></nav>
 
+<body>
+<nav th:replace="~{codes_layout :: page_navbar}"></nav>
 <div class="container mt-4">
     <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_CODES_ADMIN')">
         <legend>Short Codes Management Section</legend>

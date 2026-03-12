@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en"
       th:lang="#{lang}"
-      th:dir="${#locale.language == 'ps' ? 'rtl' : 'ltr'}"
+      th:dir="${#locale.language == 'ps' or #locale.language == 'prs' ? 'rtl' : 'ltr'}"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
 <head th:replace="~{codes_layout :: page_head}">
-    <title>LMS</title>
+    <title>AIS</title>
+    <div th:replace="styles :: common-css"></div>
     <div th:replace="styles :: commonfieldset"></div>
 
     <!-- SAME LMS DASHBOARD STYLE -->
@@ -33,6 +34,7 @@
             height: 80px;
         }
     </style>
+    <div th:replace="styles :: ltr-to-rtl"></div>
 </head>
 
 <body>

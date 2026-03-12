@@ -10,6 +10,8 @@
 
     <div th:replace="styles :: data-tables-styles"></div>
     <div th:replace="styles :: ltr-to-rtl"></div>
+    <div th:replace="styles :: select2-styles"></div>
+    <div th:replace="styles :: common-css"></div>
 
     <style>
         body {
@@ -137,6 +139,7 @@
 
 <div th:replace="scripts :: common-scripts"></div>
 <div th:replace="scripts :: data-tables-scripts"></div>
+<div th:replace="scripts :: select2-scripts"></div>
 
 <script>
     function printPage() {
@@ -145,6 +148,6 @@
 </script>
 
 <footer th:replace="~{codes_layout :: page_footer}"></footer>
-
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
 </body>
 </html>

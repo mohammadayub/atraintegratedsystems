@@ -95,7 +95,7 @@
     <div style="float:right;width:100%;margin-top:15px;">
         <h6 style="text-align:right;">
             شارت کود&nbsp;&nbsp;&nbsp;
-            <span th:text="${codeDetail.shortCode}"></span>
+            <span th:text="${codeDetail.shortCode.shortCodeName}"></span>
         </h6>
     </div>
     <div style="width:450px;float:right;">
@@ -135,7 +135,7 @@
     <!-- TABLE (same as original) -->
     <div style="display:block;margin:0 auto;">
         <table class="table table-bordered w-100 ms-auto"
-               style="margin-top:30px;" dir="rtl">
+               style="margin-top:10px;" dir="rtl">
 
             <thead>
             <tr style="background-color:gray;">
@@ -148,13 +148,13 @@
 
             <tbody>
             <tr>
-                <th style="height:180px;text-align:center;">فیس درخواست</th>
+                <th style="height:100px;text-align:center;">فیس درخواست</th>
                 <th style="text-align:center;">1</th>
                 <th style="text-align:center;">
-                    <span th:text="${codeDetail.application_fees}"></span>
+                    <span th:text="${codeDetail.applicationFees}"></span>
                 </th>
                 <th style="text-align:center;">
-                    <span th:text="${codeDetail.application_fees}"></span>
+                    <span th:text="${codeDetail.applicationFees}"></span>
                 </th>
             </tr>
 
@@ -162,10 +162,10 @@
                 <th style="text-align:center;">مجموعه</th>
                 <th></th>
                 <td style="text-align:center;">
-                    <span th:text="${codeDetail.application_fees}"></span>
+                    <span th:text="${codeDetail.applicationFees}"></span>
                 </td>
                 <td style="text-align:center;">
-                    <span th:text="${codeDetail.application_fees}"></span>
+                    <span th:text="${codeDetail.applicationFees}"></span>
                 </td>
             </tr>
             </tbody>
@@ -180,13 +180,13 @@
     <div class="row">
         <div style="margin:0 auto;"><h6 class="text-center">آمریت کنترول</h6></div>
     </div>
-    <div class="row" style="margin-top:200px;">
+    <div class="row" style="margin-top:100px;">
         <div class="col-12 ms-auto"><p  style="float:right;">ازینکه ریاست حقوق و جواز نوع جواز را انتخاب نموده تعرفه هذا توسط سیستم تهیه گردیده و ریاست مالی آنرا طبقاً پرنت نموده.</p></div>
 
     </div>
 
     <!-- Buttons -->
-    <div class="text-center my-3">
+    <div class="text-center my-3 no-print">
         <button id="back" class="btn btn-secondary" onclick="history.back()">Back</button>
         <button id="print" class="btn btn-primary" onclick="window.print()">Print</button>
 

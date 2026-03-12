@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en"
       th:lang="#{lang}"
-      th:dir="${#locale.language == 'ps' ? 'rtl' : 'ltr'}"
-      xmlns:th="http://www.thymeleaf.org"
+      th:dir="${#locale.language == 'ps' or #locale.language == 'prs' ? 'rtl' : 'ltr'}"      xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
 <head th:replace="~{codes_layout :: page_head}">
   <title>LMS</title>
+  <div th:replace="styles :: common-css"></div>
   <div th:replace="styles :: commonfieldset"></div>
 
   <style>
@@ -67,7 +67,7 @@
 
         <td>
           <div class="custom-card">
-            <a th:href="@{#}">
+            <a th:href="@{/codes/ispc-code/finance/home}">
               <img th:src="@{/images/smsidentifiercode.png}" alt="Short Code List">
               <h4 style="margin-top:12px;">ISPC Code</h4>
             </a>
