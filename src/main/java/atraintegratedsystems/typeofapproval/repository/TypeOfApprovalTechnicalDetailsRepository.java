@@ -1,5 +1,6 @@
 package atraintegratedsystems.typeofapproval.repository;
 
+import atraintegratedsystems.typeofapproval.model.TypeOfApprovalApplicant;
 import atraintegratedsystems.typeofapproval.model.TypeOfApprovalTechnicalDetail;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -15,5 +16,8 @@ public interface TypeOfApprovalTechnicalDetailsRepository
 
 
     List<TypeOfApprovalTechnicalDetail> findByTechnicalDetails_Id(Long applicantId);
+
+
+    Optional<TypeOfApprovalTechnicalDetail> findByTechnicalDetails(TypeOfApprovalApplicant applicant);
 
 }

@@ -559,80 +559,149 @@
 
 
 
-      <!-- Attachment Section-->
-    <div class="card mb-4 mt-4" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
-      <div class="card-header b-4" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" title="Only Allowed PDF File">Attachments <span style="color:red;font-size:12px;">Only Allowed (.PDF) <img  th:src="@{/images/pdf.png}" width="30px" height="30px"></span></div>
-      <div class="card-body row g-3">
-        <div class="col-md-6">
-          <label th:text="#{declaration_of_Conformity}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">1. Declaration of Conformity issued by the manufacturer of the RCE</label>
-          <input type="file" name="declarationOfConformity" class="form-control" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
-        </div>
-        <div class="col-md-6">
-          <label th:text="#{technical_operational_doc_of_the_RCE}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">2. ational doc of the RCE including user /installation manual</label>
-          <input type="file" name="technicalOperationalDocOfTheRCE" class="form-control" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
-        </div>
-        <div class="col-md-6">
-          <label th:text="#{test_Reports_of_accredited_laboratory}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">3. Test Reports of accredited laboratory</label>
-          <input type="file" name="testReportsOfAccreditedLaboratory" class="form-control" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
-        </div>
-        <div class="col-md-6">
-          <label th:text="#{Circuit_diagram_PCB}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">4. Circuit diagram,PCB layout,part lists and other relevant design information</label>
-          <input type="file" name="circuitDiagramPCB" class="form-control" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
-        </div>
-        <div class="col-md-6">
-          <label th:text="#{photographs}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">5. Photographs</label>
-          <input type="file" name="photographs" class="form-control" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
-        </div>
-        <div class="col-md-6">
-          <label th:text="#{label}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">6. Label</label>
-          <input type="file" name="label" class="form-control" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
-        </div>
-        <div class="col-md-6">
-          <label th:text="#{test_reports_issued_by_accredited_testing}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">7. Test reports issued by accredited testing laboratories recognized by ATRA</label>
-          <input type="file" name="testReportsIssuedByAccreditedTesting" class="form-control" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
-        </div>
-      </div>
-    </div>
 
-<!--    Standards compliant With -->
-      <div style="height:20vh;display:none;" id="space2"></div>
-    <div class="card" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
-      <div class="card-header b-4" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'" title="Only Allowed PDF File">Standards compliant With</div>
-      <div class="card-body row g-3">
-        <div class="col-md-6">
-          <label th:text="#{emc}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">EMC</label>
-          <input type="file" name="emc" th:field="*{emc}" class="form-control" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+        <!-- Attachment Section-->
+        <div class="card mb-4 mt-4"
+             th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+
+            <div class="card-header b-4"
+                 th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"
+                 title="Only Allowed PDF File">
+
+                Attachments
+                <span style="color:red;font-size:12px;">
+            Only Allowed (.PDF)
+            <img th:src="@{/images/pdf.png}" width="30px" height="30px">
+        </span>
+
+            </div>
+
+            <div class="card-body row g-3">
+
+                <div class="col-md-6">
+                    <label th:text="#{declaration_of_Conformity}">1. Declaration of Conformity issued by the manufacturer of the RCE</label>
+                    <input type="file" name="declarationOfConformity" accept=".pdf" class="form-control">
+                </div>
+
+                <div class="col-md-6">
+                    <label th:text="#{technical_operational_doc_of_the_RCE}">2. Technical operational document of the RCE including user / installation manual</label>
+                    <input type="file" name="technicalOperationalDocOfTheRCE" accept=".pdf" class="form-control">
+                </div>
+
+                <div class="col-md-6">
+                    <label th:text="#{test_Reports_of_accredited_laboratory}">3. Test Reports of accredited laboratory</label>
+                    <input type="file" name="testReportsOfAccreditedLaboratory" accept=".pdf" class="form-control">
+                </div>
+
+                <div class="col-md-6">
+                    <label th:text="#{Circuit_diagram_PCB}">4. Circuit diagram, PCB layout, part lists and other relevant design information</label>
+                    <input type="file" name="circuitDiagramPCB" accept=".pdf" class="form-control">
+                </div>
+
+                <div class="col-md-6">
+                    <label th:text="#{photographs}">5. Photographs</label>
+                    <input type="file" name="photographs" accept=".pdf" class="form-control">
+                </div>
+
+                <div class="col-md-6">
+                    <label th:text="#{label}">6. Label</label>
+                    <input type="file" name="label" accept=".pdf" class="form-control">
+                </div>
+
+                <div class="col-md-6">
+                    <label th:text="#{test_reports_issued_by_accredited_testing}">
+                        7. Test reports issued by accredited testing laboratories recognized by ATRA
+                    </label>
+                    <input type="file" name="testReportsIssuedByAccreditedTesting" accept=".pdf" class="form-control">
+                </div>
+
+            </div>
         </div>
-        <div class="col-md-6">
-          <label th:text="#{emc_test_report_no}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">Test Report No:</label>
-          <input type="text" class="form-control" th:field="*{emcTestReportNo}"  th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+
+
+
+
+        <!-- Standards Compliant With -->
+        <div style="height:20vh;display:none;" id="space2"></div>
+
+        <div class="card"
+             th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+
+            <div class="card-header b-4"
+                 th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'"
+                 title="Only Allowed PDF File">
+
+                Standards Compliant With
+                <span style="color:red;font-size:12px;">Only Allowed (.PDF)</span>
+
+            </div>
+
+            <div class="card-body row g-3">
+
+                <!-- EMC -->
+                <div class="col-md-6">
+                    <label th:text="#{emc}">EMC</label>
+                    <input type="file" name="emc" accept=".pdf" class="form-control">
+                </div>
+
+                <div class="col-md-6">
+                    <label th:text="#{emc_test_report_no}">Test Report No:</label>
+                    <input type="text" name="emcTestReportNo" class="form-control">
+                </div>
+
+                <!-- RADIO -->
+                <div class="col-md-6">
+                    <label th:text="#{radio}">Radio</label>
+                    <input type="file" name="radio" accept=".pdf" class="form-control">
+                </div>
+
+                <div class="col-md-6">
+                    <label th:text="#{radio_test_report_no}">Test Report No:</label>
+                    <input type="text" name="radioTestReportNo" class="form-control">
+                </div>
+
+                <!-- HEALTH AND SAFETY -->
+                <div class="col-md-6">
+                    <label th:text="#{health_and_safety}">Health and Safety</label>
+                    <input type="file" name="healthAndSafety" accept=".pdf" class="form-control">
+                </div>
+
+                <div class="col-md-6">
+                    <label th:text="#{health_and_safety_test_report_no}">Test Report No:</label>
+                    <input type="text" name="healthAndSafetyTestReportNo" class="form-control">
+                </div>
+
+                <!-- TECHNOLOGY SPECIFIC -->
+                <div class="col-md-6">
+                    <label th:text="#{technology_specific}">Technology Specific</label>
+                    <input type="file" name="technologySpecific" accept=".pdf" class="form-control">
+                </div>
+
+                <div class="col-md-6">
+                    <label th:text="#{technology_specific_test_report_no}">Test Report No:</label>
+                    <input type="text" name="technologySpecificTestReportNo" class="form-control">
+                </div>
+
+            </div>
         </div>
-        <div class="col-md-6">
-          <label th:text="#{radio}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">Radio</label>
-          <input type="file" name="radio" th:field="*{radio}" class="form-control" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
-        </div>
-        <div class="col-md-6">
-          <label th:text="#{radio_test_report_no}" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">Test Report No:</label>
-          <input type="text" class="form-control" th:field="*{radioTestReportNo}"  th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
-        </div>
-        <div class="col-md-6">
-          <label th:text="#{health_and_safety}">Health and Safety</label>
-          <input type="file" name="Health and Safety" th:field="*{healthAndSafety}" class="form-control" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
-        </div>
-        <div class="col-md-6">
-          <label th:text="#{health_and_safety_test_report_no}">Test Report No:</label>
-          <input type="text" class="form-control" th:field="*{healthAndSafetyTestReportNo}"  th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
-        </div>
-        <div class="col-md-6">
-          <label th:text="#{technology_specific}">Technology Specific</label>
-          <input type="file" name="Technology_Safety" th:field="*{technologySpecific}" class="form-control" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
-        </div>
-        <div class="col-md-6">
-          <label th:text="#{technology_specific_test_report_no}">Test Report No:</label>
-          <input type="text" th:field="*{technologySpecificTestReportNo}" class="form-control"  th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
-        </div>
-      </div>
-    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     <!--    Signature of applicant -->

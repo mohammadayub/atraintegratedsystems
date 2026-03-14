@@ -1,5 +1,6 @@
 package atraintegratedsystems.typeofapproval.repository;
 
+import atraintegratedsystems.typeofapproval.model.TypeOfApprovalApplicant;
 import atraintegratedsystems.typeofapproval.model.TypeOfApprovalAttachment;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -10,4 +11,7 @@ public interface TypeOfApprovalAttachmentRepository extends JpaRepository<TypeOf
 
     // In TypeOfApprovalAttachmentRepository
     Optional<TypeOfApprovalAttachment> findByApprovalApplicantId(Long applicantId);
+
+
+    Optional<TypeOfApprovalAttachment> findByApprovalApplicant(TypeOfApprovalApplicant applicant);
 }

@@ -146,7 +146,11 @@ public class TypeOfApprovalApplicant {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate entryReferDate;
 
-      private String userEntered;
+
+    private String enteredBy;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate enteredDate;
 
     /* ================= Relations ================= */
 

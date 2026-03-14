@@ -73,7 +73,6 @@ public class TypeOfApprovalReferController {
         referApplicant.setReferDate(referDate);
         referApplicant.setEntryReferDate(LocalDate.now());
         String username = SecurityUtil.getCurrentUsername();
-        referApplicant.setUserEntered(username);
         referApplicant.setReferStatus(typeOfApprovalApplicantDTO.getReferStatus());
 
         // Save the updated entity

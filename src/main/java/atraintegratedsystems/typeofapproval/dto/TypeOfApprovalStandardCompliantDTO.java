@@ -1,27 +1,27 @@
 package atraintegratedsystems.typeofapproval.dto;
 
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.multipart.MultipartFile;
 
-import javax.persistence.Lob;
+import java.time.LocalDate;
 
 @Data
 public class TypeOfApprovalStandardCompliantDTO {
-    private Long id;
-
-    @Lob
-    private byte[] emc;
+    private MultipartFile emc;
     private String emcTestReportNo;
 
-    @Lob
-    private byte[] radio;
+    private MultipartFile radio;
     private String radioTestReportNo;
 
-    @Lob
-    private byte[] healthAndSafety;
+    private MultipartFile healthAndSafety;
     private String healthAndSafetyTestReportNo;
 
-    @Lob
-    private byte[] technologySpecific;
-
+    private MultipartFile technologySpecific;
     private String technologySpecificTestReportNo;
+
+    private String enteredBy;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate enteredDate;
 }

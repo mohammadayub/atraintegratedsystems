@@ -33,6 +33,17 @@ public class TypeOfApprovalApplicantDTO {
     private String applicationFeeOrganizationName;
     private Integer organizationId;
 
+    private String enteredBy;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate enteredDate;
+
+
+
+
+
+
+
     //Application Fee Finance Section
     private String applicationFeeStatus;
     private String applicationFeeBankVoucherNo;

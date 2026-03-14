@@ -13,43 +13,34 @@ public class TypeOfApprovalAttachment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Lob
-    @Basic(fetch = FetchType.LAZY)
+    // Store file paths instead of byte[]
     @Column(name="declaration_of_Conformity")
-    private byte[] declarationOfConformity;
+    private String declarationOfConformity;
 
-    @Lob
     @Column(name="technical_operational_doc_of_the_RCE")
-    private byte[] technicalOperationalDocOfTheRCE;
+    private String technicalOperationalDocOfTheRCE;
 
-    @Lob
     @Column(name="test_Reports_of_accredited_laboratory")
-    private byte[] testReportsOfAccreditedLaboratory;
+    private String testReportsOfAccreditedLaboratory;
 
-    @Lob
     @Column(name="Circuit_diagram_PCB")
-    private byte[] circuitDiagramPCB;
+    private String circuitDiagramPCB;
 
-    @Lob
     @Column(name="photographs")
-    private byte[] photographs;
+    private String photographs;
 
-    @Lob
     @Column(name="label")
-    private byte[] label;
+    private String label;
 
-    @Lob
     @Column(name="test_reports_issued_by_accredited_testing")
-    private byte[] testReportsIssuedByAccreditedTesting ;
-
+    private String testReportsIssuedByAccreditedTesting;
 
     private String enteredBy;
+
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate enteredDate;
 
     @ManyToOne
     @JoinColumn(name = "type_of_approval_applicant_id")
     private TypeOfApprovalApplicant approvalApplicant;
-
-
 }
