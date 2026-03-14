@@ -84,6 +84,7 @@
         <legend th:text="#{list_of_all_applicants_with_attachments}">Type Of Approvals List</legend>
         <div class="table-container">
             <table class="table table-bordered" id="profileTable">
+
                 <thead class="bg-primary">
                 <tr>
                     <th th:text="#{requestDate}">Request Date</th>
@@ -100,17 +101,20 @@
                     <th th:text="#{mobile}">Mobile Number</th>
                     <th th:text="#{email}">Email Address</th>
                     <th>Manufacturer Company Name</th>
-                    <th>Declaration OF Confirmity</th>
-                    <th>Technical Operation Doc</th>
-                    <th>Test Report of Labratory</th>
-                    <th>Circuit Diagram PCB</th>
+                    <th>Declaration</th>
+                    <th>Technical Operation</th>
+                    <th>Test Report Laboratory</th>
+                    <th>Circuit Diagram</th>
                     <th>Photograph</th>
                     <th>Label</th>
                     <th>Test Report Issued</th>
                 </tr>
                 </thead>
+
                 <tbody>
+
                 <tr th:each="profile : ${applicants}">
+
                     <td th:text="${profile.requestDate}"></td>
                     <td th:text="${profile.manufacturer}"></td>
                     <td th:text="${profile.person}"></td>
@@ -124,137 +128,144 @@
                     <td th:text="${profile.telephone}"></td>
                     <td th:text="${profile.mobile}"></td>
                     <td th:text="${profile.email}"></td>
+
+                    <!-- Manufacturer -->
                     <td>
-                        <ul style="list-style: none; margin: 0; padding: 0;">
+                        <ul style="list-style:none;padding:0;margin:0;">
                             <li th:each="m : ${profile.manufacturers}" th:text="${m.companyName}"></li>
                         </ul>
                     </td>
 
 
+                    <!-- Declaration -->
                     <td>
-                        <ul style="list-style: none; margin: 0; padding: 0;">
-                            <li th:each="attachment : ${profile.attachments}">
-                                <a th:href="@{/typeofapprovals/applicant/attachmentapplicationlists/declarationdownload/{id}(id=${attachment.id})}"
-                                   class="btn btn-primary btn-sm" title="Download Declaration of Conformity">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-download icon-small"
-                                         viewBox="0 0 16 16">
-                                        <path
-                                                d="M8 0a.5.5 0 0 1 .5.5V8.707l2.854-2.854a.5.5 0 0 1 .707.707L8.5 9.207 5.939 6.646a.5.5 0 0 1 .707-.707L8 8.707V.5A.5.5 0 0 1 8 0zM2 14a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v.5a.5.5 0 0 1-.5.5H2.5a.5.5 0 0 1-.5-.5V14z"/>
-                                    </svg>
-                                </a>
-                            </li>
-                            <li th:if="${profile.attachments.size() == 0}">
-                                <span>No File</span>
-                            </li>
-                        </ul>
-                    </td>
-                    <td>
-                        <ul style="list-style: none; margin: 0; padding: 0;">
-                            <li th:each="attachment : ${profile.attachments}">
-                                <a th:href="@{/typeofapprovals/applicant/attachmentapplicationlists/technicaloperation/{id}(id=${attachment.id})}"
-                                   class="btn btn-primary btn-sm" title="Download Technical Operation">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-download icon-small"
-                                         viewBox="0 0 16 16">
-                                        <path
-                                                d="M8 0a.5.5 0 0 1 .5.5V8.707l2.854-2.854a.5.5 0 0 1 .707.707L8.5 9.207 5.939 6.646a.5.5 0 0 1 .707-.707L8 8.707V.5A.5.5 0 0 1 8 0zM2 14a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v.5a.5.5 0 0 1-.5.5H2.5a.5.5 0 0 1-.5-.5V14z"/>
-                                    </svg>
-                                </a>
-                            </li>
-                            <li th:if="${profile.attachments.size() == 0}">
-                                <span>No File</span>
-                            </li>
-                        </ul>
-                    </td>
-                    <td>
-                        <ul style="list-style: none; margin: 0; padding: 0;">
-                            <li th:each="attachment : ${profile.attachments}">
-                                <a th:href="@{/typeofapprovals/applicant/attachmentapplicationlists/testreportdownload/{id}(id=${attachment.id})}"
-                                   class="btn btn-primary btn-sm" title="Download Technical Operation">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-download icon-small"
-                                         viewBox="0 0 16 16">
-                                        <path
-                                                d="M8 0a.5.5 0 0 1 .5.5V8.707l2.854-2.854a.5.5 0 0 1 .707.707L8.5 9.207 5.939 6.646a.5.5 0 0 1 .707-.707L8 8.707V.5A.5.5 0 0 1 8 0zM2 14a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v.5a.5.5 0 0 1-.5.5H2.5a.5.5 0 0 1-.5-.5V14z"/>
-                                    </svg>
-                                </a>
-                            </li>
-                            <li th:if="${profile.attachments.size() == 0}">
-                                <span>No File</span>
-                            </li>
-                        </ul>
-                    </td>
-                    <td>
-                        <ul style="list-style: none; margin: 0; padding: 0;">
-                            <li th:each="attachment : ${profile.attachments}">
-                                <a th:href="@{/typeofapprovals/applicant/attachmentapplicationlists/circuitdiagramdownload/{id}(id=${attachment.id})}"
-                                   class="btn btn-primary btn-sm" title="Download Technical Operation">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-download icon-small"
-                                         viewBox="0 0 16 16">
-                                        <path
-                                                d="M8 0a.5.5 0 0 1 .5.5V8.707l2.854-2.854a.5.5 0 0 1 .707.707L8.5 9.207 5.939 6.646a.5.5 0 0 1 .707-.707L8 8.707V.5A.5.5 0 0 1 8 0zM2 14a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v.5a.5.5 0 0 1-.5.5H2.5a.5.5 0 0 1-.5-.5V14z"/>
-                                    </svg>
-                                </a>
-                            </li>
-                            <li th:if="${profile.attachments.size() == 0}">
-                                <span>No File</span>
-                            </li>
-                        </ul>
+                        <span th:if="${#lists.isEmpty(profile.attachments)}">No File</span>
+
+                        <span th:each="attachment : ${profile.attachments}">
+                <a th:if="${attachment.declarationOfConformity != null}"
+                   th:href="@{/typeofapprovals/applicant/attachmentapplicationlists/declarationdownload/{id}(id=${attachment.id})}"
+                   class="btn btn-primary btn-sm">
+                   Download
+                </a>
+
+                <span th:if="${attachment.declarationOfConformity == null}">
+                    No File
+                </span>
+            </span>
                     </td>
 
+
+                    <!-- Technical Operation -->
                     <td>
-                        <ul style="list-style: none; margin: 0; padding: 0;">
-                            <li th:each="attachment : ${profile.attachments}">
-                                <a th:href="@{/typeofapprovals/applicant/attachmentapplicationlists/photographdownload/{id}(id=${attachment.id})}"
-                                   class="btn btn-primary btn-sm" title="Download Technical Operation">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-download icon-small"
-                                         viewBox="0 0 16 16">
-                                        <path
-                                                d="M8 0a.5.5 0 0 1 .5.5V8.707l2.854-2.854a.5.5 0 0 1 .707.707L8.5 9.207 5.939 6.646a.5.5 0 0 1 .707-.707L8 8.707V.5A.5.5 0 0 1 8 0zM2 14a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v.5a.5.5 0 0 1-.5.5H2.5a.5.5 0 0 1-.5-.5V14z"/>
-                                    </svg>
-                                </a>
-                            </li>
-                            <li th:if="${profile.attachments.size() == 0}">
-                                <span>No File</span>
-                            </li>
-                        </ul>
+                        <span th:if="${#lists.isEmpty(profile.attachments)}">No File</span>
+
+                        <span th:each="attachment : ${profile.attachments}">
+                <a th:if="${attachment.technicalOperationalDocOfTheRCE != null}"
+                   th:href="@{/typeofapprovals/applicant/attachmentapplicationlists/technicaloperation/{id}(id=${attachment.id})}"
+                   class="btn btn-primary btn-sm">
+                   Download
+                </a>
+
+                <span th:if="${attachment.technicalOperationalDocOfTheRCE == null}">
+                    No File
+                </span>
+            </span>
                     </td>
 
+
+                    <!-- Test Report Laboratory -->
                     <td>
-                        <ul style="list-style: none; margin: 0; padding: 0;">
-                            <li th:each="attachment : ${profile.attachments}">
-                                <a th:href="@{/typeofapprovals/applicant/attachmentapplicationlists/labeldownload/{id}(id=${attachment.id})}"
-                                   class="btn btn-primary btn-sm" title="Download Technical Operation">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-download icon-small"
-                                         viewBox="0 0 16 16">
-                                        <path
-                                                d="M8 0a.5.5 0 0 1 .5.5V8.707l2.854-2.854a.5.5 0 0 1 .707.707L8.5 9.207 5.939 6.646a.5.5 0 0 1 .707-.707L8 8.707V.5A.5.5 0 0 1 8 0zM2 14a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v.5a.5.5 0 0 1-.5.5H2.5a.5.5 0 0 1-.5-.5V14z"/>
-                                    </svg>
-                                </a>
-                            </li>
-                            <li th:if="${profile.attachments.size() == 0}">
-                                <span>No File</span>
-                            </li>
-                        </ul>
+                        <span th:if="${#lists.isEmpty(profile.attachments)}">No File</span>
+
+                        <span th:each="attachment : ${profile.attachments}">
+                <a th:if="${attachment.testReportsOfAccreditedLaboratory != null}"
+                   th:href="@{/typeofapprovals/applicant/attachmentapplicationlists/testreportdownload/{id}(id=${attachment.id})}"
+                   class="btn btn-primary btn-sm">
+                   Download
+                </a>
+
+                <span th:if="${attachment.testReportsOfAccreditedLaboratory == null}">
+                    No File
+                </span>
+            </span>
                     </td>
 
+
+                    <!-- Circuit Diagram -->
                     <td>
-                        <ul style="list-style: none; margin: 0; padding: 0;">
-                            <li th:each="attachment : ${profile.attachments}">
-                                <a th:href="@{/typeofapprovals/applicant/attachmentapplicationlists/testreprotsissueddownload/{id}(id=${attachment.id})}"
-                                   class="btn btn-primary btn-sm" title="Download Technical Operation">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-download icon-small"
-                                         viewBox="0 0 16 16">
-                                        <path
-                                                d="M8 0a.5.5 0 0 1 .5.5V8.707l2.854-2.854a.5.5 0 0 1 .707.707L8.5 9.207 5.939 6.646a.5.5 0 0 1 .707-.707L8 8.707V.5A.5.5 0 0 1 8 0zM2 14a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v.5a.5.5 0 0 1-.5.5H2.5a.5.5 0 0 1-.5-.5V14z"/>
-                                    </svg>
-                                </a>
-                            </li>
-                            <li th:if="${profile.attachments.size() == 0}">
-                                <span>No File</span>
-                            </li>
-                        </ul>
+                        <span th:if="${#lists.isEmpty(profile.attachments)}">No File</span>
+
+                        <span th:each="attachment : ${profile.attachments}">
+                <a th:if="${attachment.circuitDiagramPCB != null}"
+                   th:href="@{/typeofapprovals/applicant/attachmentapplicationlists/circuitdiagramdownload/{id}(id=${attachment.id})}"
+                   class="btn btn-primary btn-sm">
+                   Download
+                </a>
+
+                <span th:if="${attachment.circuitDiagramPCB == null}">
+                    No File
+                </span>
+            </span>
                     </td>
+
+
+                    <!-- Photograph -->
+                    <td>
+                        <span th:if="${#lists.isEmpty(profile.attachments)}">No File</span>
+
+                        <span th:each="attachment : ${profile.attachments}">
+                <a th:if="${attachment.photographs != null}"
+                   th:href="@{/typeofapprovals/applicant/attachmentapplicationlists/photographdownload/{id}(id=${attachment.id})}"
+                   class="btn btn-primary btn-sm">
+                   Download
+                </a>
+
+                <span th:if="${attachment.photographs == null}">
+                    No File
+                </span>
+            </span>
+                    </td>
+
+
+                    <!-- Label -->
+                    <td>
+                        <span th:if="${#lists.isEmpty(profile.attachments)}">No File</span>
+
+                        <span th:each="attachment : ${profile.attachments}">
+                <a th:if="${attachment.label != null}"
+                   th:href="@{/typeofapprovals/applicant/attachmentapplicationlists/labeldownload/{id}(id=${attachment.id})}"
+                   class="btn btn-primary btn-sm">
+                   Download
+                </a>
+
+                <span th:if="${attachment.label == null}">
+                    No File
+                </span>
+            </span>
+                    </td>
+
+
+                    <!-- Test Report Issued -->
+                    <td>
+                        <span th:if="${#lists.isEmpty(profile.attachments)}">No File</span>
+
+                        <span th:each="attachment : ${profile.attachments}">
+                <a th:if="${attachment.testReportsIssuedByAccreditedTesting != null}"
+                   th:href="@{/typeofapprovals/applicant/attachmentapplicationlists/testreprotsissueddownload/{id}(id=${attachment.id})}"
+                   class="btn btn-primary btn-sm">
+                   Download
+                </a>
+
+                <span th:if="${attachment.testReportsIssuedByAccreditedTesting == null}">
+                    No File
+                </span>
+            </span>
+                    </td>
+
                 </tr>
+
                 </tbody>
+
             </table>
         </div>
     </fieldset>
