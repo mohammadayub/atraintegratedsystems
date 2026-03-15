@@ -48,7 +48,7 @@
             <tr>
                 <td>
                     <div class="custom-card" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_CODES_ADMIN')">
-                        <a th:href="@{#}">
+                        <a th:href="@{/codes/ispc-registrationfee/unpaid/list}">
                             <img th:src="@{/images/shortCodeFinance.png}" alt="Application Fee">
                             <h4 style="margin-top:12px;">Registration Fee</h4>
                         </a>
@@ -66,7 +66,7 @@
             <tr>
                 <td>
                     <div class="custom-card" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_CODES_ADMIN')">
-                        <a th:href="@{#}">
+                        <a th:href="@{/codes/ispc/finance-extensions}">
                             <img th:src="@{/images/applicationFeesExtension.png}" alt="Extension">
                             <h4 style="margin-top:12px;">ISPC Code Extension</h4>
                         </a>

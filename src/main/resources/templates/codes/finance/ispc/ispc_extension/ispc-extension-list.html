@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{codes_layout :: page_head}">
+    <title>ISPC Extension List</title>
+
+    <div th:replace="styles :: data-tables-styles"></div>
+    <div th:replace="styles :: common-css"></div>
+    <div th:replace="styles :: commonfieldset-with-legend-border"></div>
+    <div th:replace="styles :: persian-datepicker-styles"></div>
+</head>
+
+<body>
+
+<nav th:replace="~{codes_layout :: page_navbar}"></nav>
+
+<div class="container-fluid"
+     th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+
+    <fieldset>
+        <legend>ISPC Code Extension List</legend>
+
+        <div class="table-container">
+
+            <table class="slip table table-bordered table-striped"
+                   id="profileTable"
+                   style="width:100%">
+
+                <thead>
+                <tr class="bg-primary text-white">
+
+                    <th>#ID</th>
+                    <th>ISPC Code</th>
+                    <th>Serial Number</th>
+                    <th>Signaling Point</th>
+                    <th>Company</th>
+                    <th>Assign Date</th>
+                    <th>Expire Date</th>
+                    <th>Extension Start</th>
+                    <th>Extension Expire</th>
+                    <th>Status</th>
+                    <th>Extend</th>
+
+                </tr>
+                </thead>
+
+                <tbody>
+
+                <tr th:each="ext, stat : ${extensions}">
+
+                    <td th:text="${stat.count}"></td>
+                    <td th:text="${ext.ispcCodeName}"></td>
+                    <td th:text="${ext.serialNumber}"></td>
+                    <td th:text="${ext.signalingPoint}"></td>
+                    <td th:text="${ext.companyName}"></td>
+                    <td th:text="${ext.assigningDate}"></td>
+                    <td th:text="${ext.expirationDate}"></td>
+                    <td th:text="${ext.extensionStartDate}"></td>
+                    <td th:text="${ext.extentionExpirationDate}"></td>
+                    <td th:text="${ext.extendStatus}"></td>
+                    <td>
+                        <a class="btn btn-sm btn-primary"
+                           th:href="@{/codes/ispc/finance-extension/edit/{id}(id=${ext.id})}">
+                            Extend
+                        </a>
+                    </td>
+
+                </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </fieldset>
+
+    <a th:href="@{/codes/ispc/finance/home}"
+       class="btn btn-primary mt-3">
+        ← Back to Page
+    </a>
+
+</div>
+
+<!-- Scripts -->
+
+<div th:replace="scripts :: common-scripts"></div>
+<div th:replace="scripts :: data-tables-scripts"></div>
+<div th:replace="scripts :: common-datatable"></div>
+<div th:replace="scripts :: persian-datepicker-scripts"></div>
+<div th:replace="scripts :: common-hijrishamsi-date"></div>
+
+<div style="height:10vh;"></div>
+
+<footer th:replace="~{codes_layout :: page_footer}"></footer>
+
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+
+</body>
+</html>

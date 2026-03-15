@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{codes_layout :: page_head}">
+    <title>SMS Identifier Extension</title>
+    <div th:replace="styles :: common-css"></div>
+    <div th:replace="styles :: commonfieldset"></div>
+    <div th:replace="styles :: persian-datepicker-styles"></div>
+</head>
+<body>
+
+<nav th:replace="~{codes_layout :: page_navbar}"></nav>
+
+<div class="container-fluid mt-4"
+     th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+
+    <form th:action="@{/codes/ispc-extension/save/{id}(id=${detailId})}"
+          th:object="${extension}"
+          method="post">
+
+        <fieldset style="border:2px solid #DCAF45;padding:15px;border-radius:8px;margin-bottom:20px;">
+            <legend style="width:auto;font-size:1.2rem;color:#14438B;padding:0 10px;font-weight:bold;">
+                ISPC Code Extension – Standard Department
+            </legend>
+
+            <div class="row g-3">
+
+                <div class="col-md-4 form-group">
+                    <label>Extension Fee</label>
+                    <input type="text"
+                           class="form-control"
+                           th:field="*{extendedFees}"
+                           required/>
+                </div>
+
+                <div class="col-md-4 form-group">
+                    <label>Extension Start Date</label>
+                    <input type="text"
+                           class="form-control hijrishamsi"
+                           th:field="*{extensionStartDateJalali}"
+                           required/>
+                </div>
+
+                <div class="col-md-4 form-group">
+                    <label>New Expiration Date</label>
+                    <input type="text"
+                           class="form-control hijrishamsi"
+                           th:field="*{extentionExpirationDateJalali}"
+                           required/>
+                </div>
+
+            </div>
+
+            <div class="row mt-4">
+                <div class="col-md-4 mx-auto d-flex justify-content-center gap-2">
+
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-check"></i> Save Extension
+                    </button>
+
+                    <button type="reset" class="btn btn-info">
+                        <i class="fas fa-redo"></i> Reset
+                    </button>
+
+                </div>
+            </div>
+
+        </fieldset>
+
+        <a th:href="@{/codes/ispc/extension/list}"
+           class="btn btn-primary mt-3">
+            ← Back to Page
+        </a>
+
+    </form>
+</div>
+
+<!-- Common scripts -->
+<div th:replace="scripts :: common-scripts"></div>
+<div th:replace="scripts :: persian-datepicker-scripts"></div>
+<div th:replace="scripts :: common-hijrishamsi-date"></div>
+
+<div style="height:10vh;"></div>
+<footer th:replace="~{codes_layout :: page_footer}"></footer>
+
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{codes_layout :: page_head}">
+    <title>SMS Identifier Extension</title>
+
+    <div th:replace="styles :: data-tables-styles"></div>
+    <div th:replace="styles :: common-css"></div>
+    <div th:replace="styles :: commonfieldset-with-legend-border"></div>
+    <div th:replace="styles :: persian-datepicker-styles"></div>
+</head>
+
+<body>
+<nav th:replace="~{codes_layout :: page_navbar}"></nav>
+
+<div class="container-fluid"
+     th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+
+    <fieldset>
+        <legend>SMS Identifier Code Extension List</legend>
+
+        <div class="table-container">
+            <table class="slip table table-bordered table-striped"
+                   id="profileTable"
+                   style="width:100%">
+
+                <thead>
+                <tr class="bg-primary text-white">
+                    <th>ID</th>
+                    <th>Company Name</th>
+                    <th>ENID</th>
+                    <th>Company Address</th>
+                    <th>Mobile</th>
+                    <th>Telephone</th>
+                    <th>Email</th>
+                    <th>Assigning Date</th>
+                    <th>Expiration Date</th>
+                    <th>SMS Identifier Code</th>
+                    <th>Extension</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr th:each="item : ${ispcDetails}">
+                    <td th:text="${item.id}"></td>
+                    <td th:text="${item.companyName}"></td>
+                    <td th:text="${item.enid}"></td>
+                    <td th:text="${item.companyAddress}"></td>
+                    <td th:text="${item.mobile}"></td>
+                    <td th:text="${item.telephone}"></td>
+                    <td th:text="${item.email}"></td>
+                    <td th:text="${item.assigningDate}"></td>
+                    <td th:text="${item.expirationDate}"></td>
+                    <td th:text="${item.ispcCodeName}"></td>
+
+                    <!-- FIXED: only ONE td -->
+                    <td>
+                        <a class="btn btn-sm btn-outline-primary"
+                           th:href="@{/codes/ispc-extension/create/{id}(id=${item.id})}">
+                            Extend
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+
+            </table>
+        </div>
+    </fieldset>
+    <a th:href="@{/codes/sms-identifier/home}"
+       class="btn btn-primary mt-3">
+        ← Back to Page
+    </a>
+</div>
+
+<!-- Scripts -->
+<div th:replace="scripts :: common-scripts"></div>
+<div th:replace="scripts :: data-tables-scripts"></div>
+<div th:replace="scripts :: common-datatable"></div>
+<div th:replace="scripts :: persian-datepicker-scripts"></div>
+<div th:replace="scripts :: common-hijrishamsi-date"></div>
+
+<div style="height:10vh;"></div>
+<footer th:replace="~{codes_layout :: page_footer}"></footer>
+
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

@@ -11,17 +11,35 @@ import java.time.LocalDate;
 @Data
 public class IspcExtensionDetail {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    // Standard Department
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate extensionStartDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate extentionExpirationDate;
+
+    @Column(name="extend_status")
+    private String extendStatus;
+
+
+    // For Finance Departpemtn
+    // Bellow is Application Fee Extension Fields
+    private double extendedFees;
+    private String extensionBankVoucherNo;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate extensionEnteryVoucherDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate extensionBankVoucherSubmissionDate;
+    private String extensionPaymentStatus;
+
+
+    private String extensionBy;
+
     @ManyToOne
     @JoinColumn(name = "ispc_detail_id")
     private IspcDetail ispcDetail;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate extendingDate;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate expirationDate;
-    private double extendedFees;
-    private String bankVoucherNo;
-    private String paymentStatus;
+
 }
 

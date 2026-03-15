@@ -1,4 +1,6 @@
 package atraintegratedsystems.codes.repository;
+
+import atraintegratedsystems.codes.dto.IspcExtensionViewDTO;
 import atraintegratedsystems.codes.model.IspcExtensionDetail;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -7,10 +9,30 @@ import java.util.List;
 
 public interface IspcExtensionDetailRepository extends JpaRepository<IspcExtensionDetail,Long> {
 
-    @Query(value = "SELECT cd.ispc_detail_id, CONCAT(cd.source_used, '-', cd.ispc_code) AS company_name_with_code " +
-            "FROM ispc_extension_detail ced RIGHT OUTER JOIN ispc_detail cd ON ced.ispc_detail_id = cd.ispc_detail_id", nativeQuery = true)
-    List<Object[]> getCompanyNamesWithCodes();
-
-    @Query(value = "SELECT * FROM ispc_extension_detail WHERE payment_status IS NULL", nativeQuery = true)
-    List<IspcExtensionDetail> findUnpaid();
+    @Query("SELECT new atraintegratedsystems.codes.dto.IspcExtensionViewDTO(" +
+            "e.id, " +
+            "c.ispcCodeName, " +
+            "d.serialNumber, " +
+            "d.signalingPoint, " +
+            "d.companyName, " +
+            "d.enid, " +
+            "d.location, " +
+            "d.companyAddress, " +
+            "d.responsiblePerson, " +
+            "d.job, " +
+            "d.mobile, " +
+            "d.telephone, " +
+            "d.email, " +
+            "d.assigningDate, " +
+            "d.expirationDate, " +
+            "e.extensionPaymentStatus, " +
+            "e.extensionStartDate, " +
+            "e.extentionExpirationDate, " +
+            "e.extendStatus ) " +
+            "FROM IspcExtensionDetail e " +
+            "JOIN e.ispcDetail d " +
+            "JOIN d.ispcCode c " +
+            "WHERE e.extensionPaymentStatus IS NULL " +
+            "AND e.extendStatus = 'Extended'")
+    List<IspcExtensionViewDTO> findAllExtensionDetails();
 }

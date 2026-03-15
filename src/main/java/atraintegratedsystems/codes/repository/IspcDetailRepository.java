@@ -1,6 +1,8 @@
 package atraintegratedsystems.codes.repository;
 import atraintegratedsystems.codes.dto.IspcDetailDTO;
 import atraintegratedsystems.codes.dto.RejectedIspcDetailDTO;
+import atraintegratedsystems.codes.dto.SmsIdentifierDetailDTO;
+import atraintegratedsystems.codes.dto.SmsIdentifierFinanceExtensionDTO;
 import atraintegratedsystems.codes.model.IspcCode;
 import atraintegratedsystems.codes.model.IspcDetail;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -74,5 +76,32 @@ public interface IspcDetailRepository extends JpaRepository<IspcDetail,Long> {
 
     List<Object[]> findTariffById(Long id);
 
+
+    // Bellow is For Extension
+    // extension From Standard Department
+    @Query(
+            "SELECT new atraintegratedsystems.codes.dto.IspcDetailDTO(" +
+                    " d.id, " +
+                    " d.companyName, " +
+                    " d.enid, " +
+                    " d.companyAddress, " +
+                    " d.mobile, " +
+                    " d.telephone, " +
+                    " d.email, " +
+                    " d.assigningDate, " +
+                    " d.expirationDate, " +
+                    " d.registrationFees, " +
+                    " d.registrationFeesBankVoucherNo, " +
+                    " d.registrationFeesEntryVoucherDate, " +
+                    " d.registrationFeesBankVoucherSubmissionDate, " +
+                    " d.registrationFeesPaymentStatus, " +
+                    " c.ispcCodeName" +
+                    ") " +
+                    "FROM IspcDetail d " +
+                    "JOIN d.ispcCode c " +
+                    "WHERE d.ispcCodeRejectionStatus IS NULL " +
+                    "AND d.registrationFeesPaymentStatus='PAID' "
+    )
+    List<IspcDetailDTO> findIspcDetailCodeForExtension();
 
 }
