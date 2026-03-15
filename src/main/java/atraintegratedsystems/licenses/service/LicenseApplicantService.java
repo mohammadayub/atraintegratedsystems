@@ -10,12 +10,16 @@ import atraintegratedsystems.licenses.repository.LicenseTypeRepository;
 import atraintegratedsystems.utils.DateConverter;
 import atraintegratedsystems.utils.PersianCalendarUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Arrays;
@@ -29,6 +33,33 @@ public class LicenseApplicantService {
     @Autowired
     private LicenseTypeRepository licenseTypeRepository;
     private static final List<String> VALID_FILE_TYPES = Arrays.asList("application/pdf", "image/jpeg", "image/png");
+
+    @Value("${lms.attachments.path}")
+    private String attachmentsFolder;
+
+
+
+    // Utility to save file and return path
+    private String saveFile(MultipartFile file, String subfolder) throws IOException {
+        if (file == null || file.isEmpty()) return null;
+
+        Path dirPath = Paths.get(attachmentsFolder, subfolder);
+        Files.createDirectories(dirPath);
+
+        String filename = System.currentTimeMillis() + "_" + file.getOriginalFilename();
+        Path filePath = dirPath.resolve(filename);
+
+        file.transferTo(filePath.toFile());
+        return filePath.toString(); // return saved path
+    }
+
+
+
+
+
+
+
+
 
     @Transactional
     public List<LicenseApplicant> getAllApplicants() {
@@ -47,17 +78,25 @@ public class LicenseApplicantService {
 
     @Transactional
     public LicenseApplicant saveProfile(LicenseApplicantDTO dto) throws Exception {
+
         LicenseApplicant profile = new LicenseApplicant();
         profile.setReqId(generateRequestId());
+
         DateConverter dateConverter = new DateConverter();
+
         // Convert Jalali date to Gregorian
-        LocalDate requestDate = dateConverter.jalaliToGregorian(dto.getReqDate().getYear(), dto.getReqDate().getMonthValue(), dto.getReqDate().getDayOfMonth());
+        LocalDate requestDate = dateConverter.jalaliToGregorian(
+                dto.getReqDate().getYear(),
+                dto.getReqDate().getMonthValue(),
+                dto.getReqDate().getDayOfMonth()
+        );
+
         profile.setReqDate(requestDate);
 
-        // Set the LicenseType based on the provided licenseTypeId
+        // License Type
         if (dto.getLicenseTypeId() != null) {
             LicenseType licenseType = licenseTypeRepository.findById(dto.getLicenseTypeId())
-                    .orElseThrow(() -> new IllegalArgumentException("Invalid license type ID: " + dto.getLicenseTypeId()));
+                    .orElseThrow(() -> new IllegalArgumentException("Invalid license type ID"));
             profile.setLicenseType(licenseType);
         } else {
             throw new IllegalArgumentException("License type is required");
@@ -67,72 +106,43 @@ public class LicenseApplicantService {
         profile.setFinanceType(dto.getFinanceType());
         profile.setCompanyLicenseName(dto.getCompanyLicenseName());
 
-        MultipartFile applicationUpload = dto.getApplicationUpload();
+        // APPLICATION FILE
+        String applicationPath = saveFile(dto.getApplicationUpload(), "application");
+        profile.setApplicationUpload(applicationPath);
 
-        if (applicationUpload != null && !applicationUpload.isEmpty()) {
-            String contentType = applicationUpload.getContentType();
+        // ENID FILE
+        String enidPath = saveFile(dto.getEnidUpload(), "enid");
+        profile.setEnidUpload(enidPath);
 
-            if (!VALID_FILE_TYPES.contains(contentType)) {
-                throw new IllegalArgumentException("Invalid File Type: " + contentType);
-            }
+        // ARTICLE OF ASSOCIATION
+        String articlePath = saveFile(dto.getArticleOfAssociationUpload(), "article");
+        profile.setArticleOfAssociationUpload(articlePath);
 
-            profile.setApplicationUpload(applicationUpload.getBytes());
-        }
-
+        // BUSINESS PLAN
+        String businessPlanPath = saveFile(dto.getBusinessPlanUpload(), "businessplan");
+        profile.setBusinessPlanUpload(businessPlanPath);
 
         profile.setLicenseNo(dto.getLicenseNo());
 
-        MultipartFile licenseUpload = dto.getLicenseUpload();
-
-        if (licenseUpload != null && !licenseUpload.isEmpty()) {
-            String contentType = licenseUpload.getContentType();
-
-            if (!VALID_FILE_TYPES.contains(contentType)) {
-                throw new IllegalArgumentException("Invalid File Type: " + contentType);
-            }
-
-            profile.setLicenseUpload(licenseUpload.getBytes());
-        }
+        // LICENSE FILE
+        String licensePath = saveFile(dto.getLicenseUpload(), "license");
+        profile.setLicenseUpload(licensePath);
 
         profile.setTinNo(dto.getTinNo());
 
-        MultipartFile identityFormUpload=dto.getIdentityFormUpload();
-        if(identityFormUpload != null && !identityFormUpload.isEmpty()){
-            String contentType=identityFormUpload.getContentType();
-            if(!VALID_FILE_TYPES.contains(contentType)){
-                throw new IllegalArgumentException("Invalid File Type" +contentType);
-            }
-            profile.setIdentityFormUpload(identityFormUpload.getBytes());
-        }
+        // IDENTITY FORM
+        String identityPath = saveFile(dto.getIdentityFormUpload(), "identity");
+        profile.setIdentityFormUpload(identityPath);
 
+        // Bank Statement
+        String bankStatementPath = saveFile(dto.getBankStatementUpload(), "bankstatement");
+        profile.setBankStatementUpload(bankStatementPath);
 
-        String[] parts = dto.getJalaliYearOfEstablishment().split("-");
-        int jYear = Integer.parseInt(parts[0]);
-        int jMonth = Integer.parseInt(parts[1]);
-        int jDay = Integer.parseInt(parts[2]);
+        // Proposal
+        String proposalPath = saveFile(dto.getProposalUpload(), "proposal");
+        profile.setProposalUpload(proposalPath);
 
-        PersianCalendarUtils converter = new PersianCalendarUtils();
-        LocalDate yearOfEstablishmentDate = converter.jalaliToGregorian(jYear, jMonth, jDay);
-        profile.setYearOfEstablishment(yearOfEstablishmentDate);
-
-//        LocalDate yearEstablishmentDate = dateConverter.jalaliToGregorian(dto.getYearOfEstablishment().getYear(), dto.getYearOfEstablishment().getMonthValue(), dto.getYearOfEstablishment().getDayOfMonth());
-//        profile.setYearOfEstablishment(yearEstablishmentDate);
-
-
-        String[] subParts = dto.getJalaliExpiryDate().split("-");
-        int jSubYear = Integer.parseInt(subParts[0]);
-        int jSubMonth = Integer.parseInt(subParts[1]);
-        int jSubDay = Integer.parseInt(subParts[2]);
-
-        LocalDate expiryDate = converter.jalaliToGregorian(jSubYear, jSubMonth, jSubDay);
-        profile.setExpiryDate(expiryDate);
-
-//        LocalDate expiryDate = dateConverter.jalaliToGregorian(dto.getExpiryDate().getYear(), dto.getExpiryDate().getMonthValue(), dto.getExpiryDate().getDayOfMonth());
-//        profile.setExpiryDate(expiryDate);
-
-
-
-
+        // Other fields
         profile.setApplicationFees(dto.getApplicationFees());
         profile.setValidity(dto.getValidity());
         profile.setPlannedActivitiesAndServices(dto.getPlannedActivitiesAndServices());
@@ -140,14 +150,6 @@ public class LicenseApplicantService {
         profile.setTotalInternationalEmployees(dto.getTotalInternationalEmployees());
         profile.setExpectedInvestment(dto.getExpectedInvestment());
         profile.setCash(dto.getCash());
-        MultipartFile bankStatementUpload=dto.getBankStatementUpload();
-        if(bankStatementUpload != null && !bankStatementUpload.isEmpty()){
-            String contentType=bankStatementUpload.getContentType();
-            if(!VALID_FILE_TYPES.contains(contentType)){
-                throw new IllegalArgumentException("Invalid File Type" +contentType);
-            }
-            profile.setBankStatementUpload(bankStatementUpload.getBytes());
-        }
         profile.setOtherLicenseTaken(dto.getOtherLicenseTaken());
         profile.setCompanyAddress(dto.getCompanyAddress());
         profile.setContactNo(dto.getContactNo());
@@ -155,20 +157,11 @@ public class LicenseApplicantService {
         profile.setWebsite(dto.getWebsite());
         profile.setPostAddress(dto.getPostAddress());
 
-        LocalDate entryVoucherDate = null;
-        if (dto.getEntryApplicationFeeVoucherDate() != null) {
-            entryVoucherDate = dateConverter.jalaliToGregorian(
-                    dto.getEntryApplicationFeeVoucherDate().getYear(),
-                    dto.getEntryApplicationFeeVoucherDate().getMonthValue(),
-                    dto.getEntryApplicationFeeVoucherDate().getDayOfMonth()
-            );
-        }
-        profile.setEntryApplicationFeeVoucherDate(entryVoucherDate);
         profile.setBankVoucher(dto.getBankVoucher());
         profile.setPaymentStatus(dto.getPaymentStatus());
+
         return repository.save(profile);
     }
-
 
     private String generateRequestId() {
         Long maxId = repository.findMaxId();
@@ -181,59 +174,56 @@ public class LicenseApplicantService {
     }
     @Transactional
     public LicenseApplicant SendToBoard(Long licenseId, LicenseApplicantDTO dto) throws IOException {
+
         LicenseApplicant profile = repository.findById(licenseId)
                 .orElseThrow(() -> new IllegalArgumentException("Profile not found with ID: " + licenseId));
 
-//        DateConverter dateConverter = new DateConverter();
-//        // Convert Jalali date to Gregorian
-//        LocalDate referToBoardDate = dateConverter.jalaliToGregorian(dto.getReferToBoardDate().getYear(),
-//                dto.getReferToBoardDate().getMonthValue(),
-//                dto.getReferToBoardDate().getDayOfMonth());
-//        profile.setReferToBoardDate(referToBoardDate);
+        // Convert Jalali date to Gregorian
+        if (dto.getJalaliReferToBoardDate() != null && !dto.getJalaliReferToBoardDate().isEmpty()) {
 
+            String[] parts = dto.getJalaliReferToBoardDate().split("-");
+            int jYear = Integer.parseInt(parts[0]);
+            int jMonth = Integer.parseInt(parts[1]);
+            int jDay = Integer.parseInt(parts[2]);
 
-        String[] parts = dto.getJalaliReferToBoardDate().split("-");
-        int jYear = Integer.parseInt(parts[0]);
-        int jMonth = Integer.parseInt(parts[1]);
-        int jDay = Integer.parseInt(parts[2]);
+            PersianCalendarUtils converter = new PersianCalendarUtils();
+            LocalDate referToBoardDate = converter.jalaliToGregorian(jYear, jMonth, jDay);
 
-        PersianCalendarUtils converter = new PersianCalendarUtils();
-        LocalDate referToBoardDate = converter.jalaliToGregorian(jYear, jMonth, jDay);
-        profile.setReferToBoardDate(referToBoardDate);
-
-
-
+            profile.setReferToBoardDate(referToBoardDate);
+        }
 
         profile.setIsSend(dto.getIsSend());
 
+        // Save proposal file as PATH
         MultipartFile proposalUpload = dto.getProposalUpload();
+
         if (proposalUpload != null && !proposalUpload.isEmpty()) {
+
             String contentType = proposalUpload.getContentType();
 
             if (!VALID_FILE_TYPES.contains(contentType)) {
                 throw new IllegalArgumentException("Invalid File Type: " + contentType);
             }
 
-            try {
-                profile.setProposalUpload(proposalUpload.getBytes());
-            } catch (IOException e) {
-                throw new RuntimeException("Error processing file upload", e);
-            }
+            // Save file to folder and store path
+            String proposalPath = saveFile(proposalUpload, "proposal");
+
+            profile.setProposalUpload(proposalPath);
         }
 
-
-
-        // Set sendToBoardEnteredBy to the logged-in user
+        // Logged-in user
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        String enteredBy = (principal instanceof UserDetails) ? ((UserDetails) principal).getUsername() : "Unknown";
+
+        String enteredBy = (principal instanceof UserDetails)
+                ? ((UserDetails) principal).getUsername()
+                : "Unknown";
+
         profile.setSendToBoardEnteredBy(enteredBy);
 
-        // If sendToBoardCreatedDate is null, set it to the current time
+        // Set created date if null
         if (profile.getSendToBoardCreatedDate() == null) {
             profile.setSendToBoardCreatedDate(LocalDateTime.now());
         }
-
-
 
         return repository.save(profile);
     }
@@ -241,108 +231,138 @@ public class LicenseApplicantService {
 
     @Transactional
     public LicenseApplicant updateCompleteProfile(Long id, LicenseApplicantDTO dto) throws IOException {
+
         LicenseApplicant profile = repository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Profile not found with ID: " + id));
-//            DateConverter dateConverter = new DateConverter();
-            profile.setLicenseNo(dto.getLicenseNo());
 
+        profile.setLicenseNo(dto.getLicenseNo());
+
+        // ENID Upload
         MultipartFile enidUpload = dto.getEnidUpload();
         if (enidUpload != null && !enidUpload.isEmpty()) {
+
             String contentType = enidUpload.getContentType();
             if (!VALID_FILE_TYPES.contains(contentType)) {
                 throw new IllegalArgumentException("Invalid File Type: " + contentType);
             }
-            profile.setEnidUpload(enidUpload.getBytes());
+
+            String enidPath = saveFile(enidUpload, "enid");
+            profile.setEnidUpload(enidPath);
         }
 
-        MultipartFile articleOfAssociationUpload = dto.getArticleOfAssociationUpload();
-        if (articleOfAssociationUpload != null && !articleOfAssociationUpload.isEmpty()) {
-            String contentType = articleOfAssociationUpload.getContentType();
+        // Article of Association
+        MultipartFile articleUpload = dto.getArticleOfAssociationUpload();
+        if (articleUpload != null && !articleUpload.isEmpty()) {
+
+            String contentType = articleUpload.getContentType();
             if (!VALID_FILE_TYPES.contains(contentType)) {
                 throw new IllegalArgumentException("Invalid File Type: " + contentType);
             }
-            profile.setArticleOfAssociationUpload(articleOfAssociationUpload.getBytes());
+
+            String articlePath = saveFile(articleUpload, "article");
+            profile.setArticleOfAssociationUpload(articlePath);
         }
 
+        // Business Plan
         MultipartFile businessPlanUpload = dto.getBusinessPlanUpload();
         if (businessPlanUpload != null && !businessPlanUpload.isEmpty()) {
+
             String contentType = businessPlanUpload.getContentType();
             if (!VALID_FILE_TYPES.contains(contentType)) {
                 throw new IllegalArgumentException("Invalid File Type: " + contentType);
             }
-            profile.setBusinessPlanUpload(businessPlanUpload.getBytes());
+
+            String businessPlanPath = saveFile(businessPlanUpload, "businessplan");
+            profile.setBusinessPlanUpload(businessPlanPath);
         }
 
+        // License Upload
+        MultipartFile licenseUpload = dto.getLicenseUpload();
+        if (licenseUpload != null && !licenseUpload.isEmpty()) {
 
-
-            MultipartFile licenseUpload = dto.getLicenseUpload();
-            if (licenseUpload != null && !licenseUpload.isEmpty()) {
-                String contentType = licenseUpload.getContentType();
-                if (!VALID_FILE_TYPES.contains(contentType)) {
-                    throw new IllegalArgumentException("Invalid File Type: " + contentType);
-                }
-                profile.setLicenseUpload(licenseUpload.getBytes());
+            String contentType = licenseUpload.getContentType();
+            if (!VALID_FILE_TYPES.contains(contentType)) {
+                throw new IllegalArgumentException("Invalid File Type: " + contentType);
             }
 
-            profile.setTinNo(dto.getTinNo());
-            MultipartFile identityFormUpload=dto.getIdentityFormUpload();
-            if(identityFormUpload != null && !identityFormUpload.isEmpty()){
-                String contentType=identityFormUpload.getContentType();
-                if(!VALID_FILE_TYPES.contains(contentType)){
-                    throw new IllegalArgumentException("Invalid File Type" +contentType);
-                }
-                profile.setIdentityFormUpload(identityFormUpload.getBytes());
+            String licensePath = saveFile(licenseUpload, "license");
+            profile.setLicenseUpload(licensePath);
+        }
+
+        profile.setTinNo(dto.getTinNo());
+
+        // Identity Form Upload
+        MultipartFile identityUpload = dto.getIdentityFormUpload();
+        if (identityUpload != null && !identityUpload.isEmpty()) {
+
+            String contentType = identityUpload.getContentType();
+            if (!VALID_FILE_TYPES.contains(contentType)) {
+                throw new IllegalArgumentException("Invalid File Type: " + contentType);
             }
 
+            String identityPath = saveFile(identityUpload, "identity");
+            profile.setIdentityFormUpload(identityPath);
+        }
 
-        String[] parts = dto.getJalaliYearOfEstablishment().split("-");
-        int jYear = Integer.parseInt(parts[0]);
-        int jMonth = Integer.parseInt(parts[1]);
-        int jDay = Integer.parseInt(parts[2]);
+        // Jalali Year Of Establishment
+        if (dto.getJalaliYearOfEstablishment() != null) {
 
-        PersianCalendarUtils converter = new PersianCalendarUtils();
-        LocalDate yearOfEstablishmentDate = converter.jalaliToGregorian(jYear, jMonth, jDay);
-        profile.setYearOfEstablishment(yearOfEstablishmentDate);
-//            LocalDate yearEstablishmentDate = dateConverter.jalaliToGregorian(dto.getYearOfEstablishment().getYear(), dto.getYearOfEstablishment().getMonthValue(), dto.getYearOfEstablishment().getDayOfMonth());
-//            profile.setYearOfEstablishment(yearEstablishmentDate);
+            String[] parts = dto.getJalaliYearOfEstablishment().split("-");
 
+            int jYear = Integer.parseInt(parts[0]);
+            int jMonth = Integer.parseInt(parts[1]);
+            int jDay = Integer.parseInt(parts[2]);
 
+            PersianCalendarUtils converter = new PersianCalendarUtils();
+            LocalDate yearOfEstablishmentDate = converter.jalaliToGregorian(jYear, jMonth, jDay);
 
+            profile.setYearOfEstablishment(yearOfEstablishmentDate);
+        }
 
-        String[] subParts = dto.getJalaliExpiryDate().split("-");
-        int jSubYear = Integer.parseInt(subParts[0]);
-        int jSubMonth = Integer.parseInt(subParts[1]);
-        int jSubDay = Integer.parseInt(subParts[2]);
+        // Jalali Expiry Date
+        if (dto.getJalaliExpiryDate() != null) {
 
-        LocalDate expiryDate = converter.jalaliToGregorian(jSubYear, jSubMonth, jSubDay);
-        profile.setExpiryDate(expiryDate);
-//            LocalDate expiryDate = dateConverter.jalaliToGregorian(dto.getExpiryDate().getYear(), dto.getExpiryDate().getMonthValue(), dto.getExpiryDate().getDayOfMonth());
-//            profile.setExpiryDate(expiryDate);
+            String[] subParts = dto.getJalaliExpiryDate().split("-");
 
+            int jYear = Integer.parseInt(subParts[0]);
+            int jMonth = Integer.parseInt(subParts[1]);
+            int jDay = Integer.parseInt(subParts[2]);
 
+            PersianCalendarUtils converter = new PersianCalendarUtils();
+            LocalDate expiryDate = converter.jalaliToGregorian(jYear, jMonth, jDay);
 
-            profile.setApplicationFees(dto.getApplicationFees());
-            profile.setValidity(dto.getValidity());
-            profile.setPlannedActivitiesAndServices(dto.getPlannedActivitiesAndServices());
-            profile.setTotalNationalEmployees(dto.getTotalNationalEmployees());
-            profile.setTotalInternationalEmployees(dto.getTotalInternationalEmployees());
-            profile.setExpectedInvestment(dto.getExpectedInvestment());
-            profile.setCash(dto.getCash());
-            MultipartFile bankStatementUpload=dto.getBankStatementUpload();
-            if(bankStatementUpload != null && !bankStatementUpload.isEmpty()){
-                String contentType=bankStatementUpload.getContentType();
-                if(!VALID_FILE_TYPES.contains(contentType)){
-                    throw new IllegalArgumentException("Invalid File Type" +contentType);
-                }
-                profile.setBankStatementUpload(bankStatementUpload.getBytes());
+            profile.setExpiryDate(expiryDate);
+        }
+
+        profile.setApplicationFees(dto.getApplicationFees());
+        profile.setValidity(dto.getValidity());
+        profile.setPlannedActivitiesAndServices(dto.getPlannedActivitiesAndServices());
+        profile.setTotalNationalEmployees(dto.getTotalNationalEmployees());
+        profile.setTotalInternationalEmployees(dto.getTotalInternationalEmployees());
+        profile.setExpectedInvestment(dto.getExpectedInvestment());
+        profile.setCash(dto.getCash());
+
+        // Bank Statement Upload
+        MultipartFile bankStatementUpload = dto.getBankStatementUpload();
+        if (bankStatementUpload != null && !bankStatementUpload.isEmpty()) {
+
+            String contentType = bankStatementUpload.getContentType();
+            if (!VALID_FILE_TYPES.contains(contentType)) {
+                throw new IllegalArgumentException("Invalid File Type: " + contentType);
             }
-            profile.setOtherLicenseTaken(dto.getOtherLicenseTaken());
-            profile.setCompanyAddress(dto.getCompanyAddress());
-            profile.setContactNo(dto.getContactNo());
-            profile.setEmail(dto.getEmail());
-            profile.setWebsite(dto.getWebsite());
-            profile.setPostAddress(dto.getPostAddress());
-            return repository.save(profile);
+
+            String bankStatementPath = saveFile(bankStatementUpload, "bankstatement");
+            profile.setBankStatementUpload(bankStatementPath);
+        }
+
+        profile.setOtherLicenseTaken(dto.getOtherLicenseTaken());
+        profile.setCompanyAddress(dto.getCompanyAddress());
+        profile.setContactNo(dto.getContactNo());
+        profile.setEmail(dto.getEmail());
+        profile.setWebsite(dto.getWebsite());
+        profile.setPostAddress(dto.getPostAddress());
+
+        return repository.save(profile);
     }
 
 

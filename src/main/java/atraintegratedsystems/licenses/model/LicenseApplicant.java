@@ -31,41 +31,37 @@ public class LicenseApplicant {
     @NotBlank(message = "Please enter Company Name")
     private String companyLicenseName;
 
-    @Lob
-    @Basic(fetch = FetchType.LAZY)
+
     @Column(name="application_upload")
-    private byte[] applicationUpload;
+    private String applicationUpload;
 
-    @Lob
-    @Basic(fetch = FetchType.LAZY)
+
+
+
     @Column(name="enid_upload")
-    private byte[] enidUpload;
+    private String enidUpload;
 
-    @Lob
-    @Basic(fetch = FetchType.LAZY)
+
     @Column(name="article_of_association_upload")
-    private byte[] articleOfAssociationUpload;
+    private String articleOfAssociationUpload;
 
-    @Lob
-    @Basic(fetch = FetchType.LAZY)
+
     @Column(name="business_plan_upload")
-    private byte[] businessPlanUpload;
+    private String businessPlanUpload;
 
     @Column(name = "license_no")
     private String licenseNo;
 
-    @Lob
-    @Basic(fetch = FetchType.LAZY)
+
     @Column(name = "license_upload")
-    private byte[] licenseUpload;
+    private String licenseUpload;
 
     @Column(name = "tin_no")
     private String tinNo;
 
-    @Lob
-    @Basic(fetch = FetchType.LAZY)
+
     @Column(name = "identity_form_upload")
-    private byte[] identityFormUpload;
+    private String identityFormUpload;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "year_of_establishment")
@@ -96,9 +92,9 @@ public class LicenseApplicant {
     @Column(name = "cash")
     private Double cash;
 
-    @Lob
+
     @Column(name = "bank_statement_upload")
-    private byte[] bankStatementUpload;
+    private String bankStatementUpload;
 
     @Column(name = "other_license_taken")
     private String otherLicenseTaken;
@@ -138,9 +134,9 @@ public class LicenseApplicant {
     @Column(name="is_send")
     private String isSend;
 
-    @Lob
+
     @Column(name = "proposal_upload")
-    private byte[] proposalUpload;
+    private String proposalUpload;
 
 
     //Audit for Profile
