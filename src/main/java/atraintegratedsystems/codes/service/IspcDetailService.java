@@ -5,6 +5,8 @@ import atraintegratedsystems.codes.model.IspcCode;
 import atraintegratedsystems.codes.model.IspcDetail;
 import atraintegratedsystems.codes.repository.IspcCodeRepository;
 import atraintegratedsystems.codes.repository.IspcDetailRepository;
+import atraintegratedsystems.utils.DateConverter;
+import atraintegratedsystems.utils.JalaliDate;
 import atraintegratedsystems.utils.PersianCalendarUtils;
 import atraintegratedsystems.utils.SerialGeneratorWithString;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -178,23 +180,46 @@ public class IspcDetailService {
         dto.setIspcNumber(e.getIspcNumber());
         dto.setSignalingPoint(e.getSignalingPoint());
 
-
         if(e.getIspcCode()!=null){
             dto.setIspcCodeId(e.getIspcCode().getId());
             dto.setIspcCodeName(e.getIspcCode().getIspcCodeName());
         }
 
-        dto.setAssigningDateJalali(
-                e.getAssigningDateJalali()!=null
-                        ? e.getAssigningDateJalali().toString()
-                        : null
-        );
+        DateConverter converter = new DateConverter();
 
-        dto.setExpirationDateJalali(
-                e.getExpirationDateJalali()!=null
-                        ? e.getExpirationDateJalali().toString()
-                        : null
-        );
+        /* Assigning Date */
+        if(e.getAssigningDate() != null){
+
+            JalaliDate jd = converter.gregorianToJalali(
+                    e.getAssigningDate().getYear(),
+                    e.getAssigningDate().getMonthValue(),
+                    e.getAssigningDate().getDayOfMonth()
+            );
+
+            dto.setAssigningDateJalali(
+                    String.format("%04d-%02d-%02d",
+                            jd.getYear(),
+                            jd.getMonthPersian().getValue(),
+                            jd.getDay())
+            );
+        }
+
+        /* Expiration Date */
+        if(e.getExpirationDate() != null){
+
+            JalaliDate jd = converter.gregorianToJalali(
+                    e.getExpirationDate().getYear(),
+                    e.getExpirationDate().getMonthValue(),
+                    e.getExpirationDate().getDayOfMonth()
+            );
+
+            dto.setExpirationDateJalali(
+                    String.format("%04d-%02d-%02d",
+                            jd.getYear(),
+                            jd.getMonthPersian().getValue(),
+                            jd.getDay())
+            );
+        }
 
         return dto;
     }

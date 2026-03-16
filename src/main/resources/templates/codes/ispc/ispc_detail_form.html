@@ -168,12 +168,42 @@
 <footer th:replace="~{codes_layout :: page_footer}"></footer>
 
 
+<!--<script>-->
+<!--    $(document).ready(function () {-->
+
+<!--    $('.search-select').select2({-->
+<!--    width:'100%'-->
+<!--    });-->
+
+<!--    });-->
+
+<!--</script>-->
+
+
 <script>
     $(document).ready(function () {
 
-    $('.search-select').select2({
-    width:'100%'
-    });
+        // Select2
+        $('.search-select').select2({
+            width: '100%'
+        });
+
+        // Persian Datepicker
+        $('.hijrishamsi').persianDatepicker({
+            format: 'YYYY-MM-DD',
+            autoClose: true,
+            initialValue: true,
+            initialValueType: 'persian',
+            observer: true,
+            calendar: {
+                persian: {
+                    locale: 'en'
+                }
+            },
+            onShow: function () {
+                $('.persian-datepicker-container').appendTo('body');
+            }
+        });
 
     });
 </script>
