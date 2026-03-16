@@ -128,56 +128,5 @@ public class ShortCodeApplicationFeesExtensionService {
         extensionRepository.save(entity);
     }
 
-    // Bellow is For Paid Extension List
-    public List<ShortCodeExtensionViewDTO> getPaidShortCodeExtensions() {
 
-        List<ShortCodeExtensionViewDTO> list = extensionRepository.findPaidShortExtension();
-
-        DateConverter converter = new DateConverter();
-
-        for (ShortCodeExtensionViewDTO dto : list) {
-
-            if (dto.getApplicationFeeExtensionDate() != null) {
-                dto.setApplicationFeeExtensionDateJalali(
-                        converter.gregorianToJalali(
-                                dto.getApplicationFeeExtensionDate().getYear(),
-                                dto.getApplicationFeeExtensionDate().getMonthValue(),
-                                dto.getApplicationFeeExtensionDate().getDayOfMonth()
-                        ).toString()
-                );
-            }
-
-            if (dto.getApplicationFeeExtensionExpirationDate() != null) {
-                dto.setApplicationFeeExtensionExpirationDateJalali(
-                        converter.gregorianToJalali(
-                                dto.getApplicationFeeExtensionExpirationDate().getYear(),
-                                dto.getApplicationFeeExtensionExpirationDate().getMonthValue(),
-                                dto.getApplicationFeeExtensionExpirationDate().getDayOfMonth()
-                        ).toString()
-                );
-            }
-
-            if (dto.getApplicationFeeExtensionEntryVoucherDate() != null) {
-                dto.setApplicationFeeExtensionEntryVoucherDateJalali(
-                        converter.gregorianToJalali(
-                                dto.getApplicationFeeExtensionEntryVoucherDate().getYear(),
-                                dto.getApplicationFeeExtensionEntryVoucherDate().getMonthValue(),
-                                dto.getApplicationFeeExtensionEntryVoucherDate().getDayOfMonth()
-                        ).toString()
-                );
-            }
-
-            if (dto.getApplicationFeeExtensionBankVoucherSubmissionDate() != null) {
-                dto.setApplicationFeeExtensionBankVoucherSubmissionDateJalali(
-                        converter.gregorianToJalali(
-                                dto.getApplicationFeeExtensionBankVoucherSubmissionDate().getYear(),
-                                dto.getApplicationFeeExtensionBankVoucherSubmissionDate().getMonthValue(),
-                                dto.getApplicationFeeExtensionBankVoucherSubmissionDate().getDayOfMonth()
-                        ).toString()
-                );
-            }
-        }
-
-        return list;
-    }
 }

@@ -7,6 +7,7 @@
 
 <body>
 
+<!-- Navbar -->
 <div th:replace="~{codes_layout :: page_navbar}"></div>
 
 <div class="container-fluid mt-4">
@@ -14,18 +15,21 @@
     <fieldset class="commonfieldset-with-legend-border">
         <legend>Short Code Application Fee Extensions</legend>
 
-        <table id="profileTable" class="table table-bordered table-striped">
+        <table id="profileTable" class="table table-bordered table-striped table-hover">
 
-            <thead>
+            <thead class="bg-primary text-white">
             <tr>
                 <th>Short Code</th>
                 <th>Status</th>
                 <th>Location</th>
+                <th>Category Type</th>
                 <th>Category</th>
                 <th>Channel</th>
                 <th>Email</th>
-                <th>Extension Date</th>
-                <th>Expiration Date</th>
+                <th>Extension Date (Jalali)</th>
+                <th>Expiration Date (Jalali)</th>
+                <th>Entry Voucher Date (Jalali)</th>
+                <th>Bank Voucher Submission Date (Jalali)</th>
                 <th>Extended Fee</th>
                 <th>Voucher No</th>
                 <th>Payment Status</th>
@@ -33,26 +37,24 @@
             </thead>
 
             <tbody>
-
             <tr th:each="ext : ${extensions}">
-
                 <td th:text="${ext.shortCodeName}"></td>
                 <td th:text="${ext.codeStatus}"></td>
                 <td th:text="${ext.location}"></td>
+                <td th:text="${ext.categoryType}"></td>
                 <td th:text="${ext.category}"></td>
                 <td th:text="${ext.chanel}"></td>
                 <td th:text="${ext.emailOfResponsiblePerson}"></td>
 
                 <td th:text="${ext.applicationFeeExtensionDateJalali}"></td>
                 <td th:text="${ext.applicationFeeExtensionExpirationDateJalali}"></td>
+                <td th:text="${ext.applicationFeeExtensionEntryVoucherDateJalali}"></td>
+                <td th:text="${ext.applicationFeeExtensionBankVoucherSubmissionDateJalali}"></td>
 
                 <td th:text="${ext.applicationFeeExtendedFees}"></td>
                 <td th:text="${ext.applicationFeeExtensionBankVoucherNo}"></td>
-
                 <td th:text="${ext.applicationFeeExtensionPaymentStatus}"></td>
-
             </tr>
-
             </tbody>
 
         </table>
@@ -61,12 +63,23 @@
 
 </div>
 
+<!-- Footer -->
 <div th:replace="~{codes_layout :: page_footer}"></div>
-<div th:replace="~{codes_layout :: common_scripts}"></div>
 
+
+<!-- DataTables Initialization -->
 <script>
     $(document).ready(function () {
-        $('#profileTable').DataTable();
+        $('#profileTable').DataTable({
+            "paging": true,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "language": {
+                "url": /* Optional: path to your DataTables language file for RTL if needed */
+            }
+        });
     });
 </script>
 

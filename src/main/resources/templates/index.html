@@ -5,17 +5,14 @@
       th:dir="${#locale.language == 'ps' ? 'rtl' : 'ltr'}"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
-
 <head th:replace="~{layout :: page_head}">
     <meta charset="UTF-8">
     <title>LMS</title>
-
     <!-- Existing Styles (kept) -->
     <div th:replace="styles :: data-tables-styles"></div>
     <div th:replace="styles :: select2-styles"></div>
     <div th:replace="styles :: commonfieldset"></div>
     <div th:replace="styles :: common-css"></div>
-
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 
     <!-- SAME LMS DASHBOARD STYLE -->
@@ -44,11 +41,9 @@
     </style>
 
 </head>
-
 <body>
 
 <nav th:replace="~{layout :: page_navbar}"></nav>
-
 <div class="container mt-4"
      th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
 
@@ -102,7 +97,6 @@
         </table>
     </fieldset>
 
-
     <!-- ================= USER MANAGEMENT SECTION ================= -->
     <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN')">
         <legend th:text="#{user_management_section}">User Management Section</legend>
@@ -125,15 +119,11 @@
             </tr>
         </table>
     </fieldset>
-
 </div>
 
 <div th:replace="scripts :: common-scripts"></div>
-
 <div style="height:10vh;"></div>
 <footer th:replace="~{layout :: page_footer}"></footer>
-
 <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
-
 </body>
 </html>
