@@ -34,8 +34,6 @@
                     <th>Serial Number</th>
                     <th>Signaling Point</th>
                     <th>Company</th>
-                    <th>Assign Date</th>
-                    <th>Expire Date</th>
                     <th>Extension Start</th>
                     <th>Extension Expire</th>
                     <th>Status</th>
@@ -53,10 +51,8 @@
                     <td th:text="${ext.serialNumber}"></td>
                     <td th:text="${ext.signalingPoint}"></td>
                     <td th:text="${ext.companyName}"></td>
-                    <td th:text="${ext.assigningDate}"></td>
-                    <td th:text="${ext.expirationDate}"></td>
-                    <td th:text="${ext.extensionStartDate}"></td>
-                    <td th:text="${ext.extentionExpirationDate}"></td>
+                    <td th:text="${ext.extensionStartDateJalali}"></td>
+                    <td th:text="${ext.extentionExpirationDateJalali}"></td>
                     <td th:text="${ext.extendStatus}"></td>
                     <td>
                         <a class="btn btn-sm btn-primary"

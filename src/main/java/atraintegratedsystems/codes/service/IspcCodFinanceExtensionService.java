@@ -6,6 +6,8 @@ import atraintegratedsystems.codes.model.IspcExtensionDetail;
 import atraintegratedsystems.codes.repository.IspcExtensionDetailRepository;
 import atraintegratedsystems.utils.PersianCalendarUtils;
 import org.springframework.stereotype.Service;
+import atraintegratedsystems.utils.DateConverter;
+import atraintegratedsystems.utils.JalaliDate;
 
 import javax.transaction.Transactional;
 import java.time.LocalDate;
@@ -21,7 +23,33 @@ public class IspcCodFinanceExtensionService {
     }
 
     public List<IspcExtensionViewDTO> getAllExtensions() {
-        return repository.findAllExtensionDetails();
+
+        List<IspcExtensionViewDTO> list = repository.findAllExtensionDetails();
+
+        DateConverter converter = new DateConverter();
+
+        for(IspcExtensionViewDTO dto : list){
+
+            if(dto.getExtensionStartDate() != null){
+                JalaliDate jd = converter.gregorianToJalali(
+                        dto.getExtensionStartDate().getYear(),
+                        dto.getExtensionStartDate().getMonthValue(),
+                        dto.getExtensionStartDate().getDayOfMonth());
+
+                dto.setExtensionStartDateJalali(jd.toString());
+            }
+
+            if(dto.getExtentionExpirationDate() != null){
+                JalaliDate jd = converter.gregorianToJalali(
+                        dto.getExtentionExpirationDate().getYear(),
+                        dto.getExtentionExpirationDate().getMonthValue(),
+                        dto.getExtentionExpirationDate().getDayOfMonth());
+
+                dto.setExtentionExpirationDateJalali(jd.toString());
+            }
+        }
+
+        return list;
     }
 
     /* FETCH FOR UPDATE */

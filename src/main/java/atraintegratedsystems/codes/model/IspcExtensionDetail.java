@@ -6,6 +6,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import atraintegratedsystems.utils.DateConverter;
+import atraintegratedsystems.utils.JalaliDate;
 
 @Entity
 @Data
@@ -40,6 +42,59 @@ public class IspcExtensionDetail {
     @ManyToOne
     @JoinColumn(name = "ispc_detail_id")
     private IspcDetail ispcDetail;
+
+    public JalaliDate getExtensionStartDateJalali() {
+        if (extensionStartDate == null) {
+            return null;
+        }
+
+        DateConverter dateConverter = new DateConverter();
+        return dateConverter.gregorianToJalali(
+                extensionStartDate.getYear(),
+                extensionStartDate.getMonthValue(),
+                extensionStartDate.getDayOfMonth()
+        );
+    }
+
+    public JalaliDate getExtentionExpirationDateJalali() {
+        if (extentionExpirationDate == null) {
+            return null;
+        }
+
+        DateConverter dateConverter = new DateConverter();
+        return dateConverter.gregorianToJalali(
+                extentionExpirationDate.getYear(),
+                extentionExpirationDate.getMonthValue(),
+                extentionExpirationDate.getDayOfMonth()
+        );
+    }
+
+    public JalaliDate getExtensionEnteryVoucherDateJalali() {
+        if (extensionEnteryVoucherDate == null) {
+            return null;
+        }
+
+        DateConverter dateConverter = new DateConverter();
+        return dateConverter.gregorianToJalali(
+                extensionEnteryVoucherDate.getYear(),
+                extensionEnteryVoucherDate.getMonthValue(),
+                extensionEnteryVoucherDate.getDayOfMonth()
+        );
+    }
+
+    public JalaliDate getExtensionBankVoucherSubmissionDateJalali() {
+        if (extensionBankVoucherSubmissionDate == null) {
+            return null;
+        }
+
+        DateConverter dateConverter = new DateConverter();
+        return dateConverter.gregorianToJalali(
+                extensionBankVoucherSubmissionDate.getYear(),
+                extensionBankVoucherSubmissionDate.getMonthValue(),
+                extensionBankVoucherSubmissionDate.getDayOfMonth()
+        );
+    }
+
 
 }
 
