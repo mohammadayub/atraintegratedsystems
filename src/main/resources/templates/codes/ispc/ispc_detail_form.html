@@ -160,7 +160,7 @@
 
 <div th:replace="scripts :: common-scripts"></div>
 <div th:replace="scripts :: persian-datepicker-scripts"></div>
-<div th:replace="scripts :: common-hijrishamsi-date"></div>
+<!--<div th:replace="scripts :: common-hijrishamsi-date"></div>-->
 <div th:replace="scripts :: select2-scripts"></div>
 
 <div style="height:10vh;"></div>
@@ -197,7 +197,8 @@
             observer: true,
             calendar: {
                 persian: {
-                    locale: 'en'
+                    locale: 'en',
+                    leapYearMode: 'astronomical'
                 }
             },
             onShow: function () {
