@@ -1,45 +1,79 @@
 <!DOCTYPE html>
 <html lang="en"
       th:lang="#{lang}"
-      th:dir="${#locale.language == 'ps' or #locale.language == 'prs' ? 'rtl' : 'ltr'}"      xmlns:th="http://www.thymeleaf.org"
+      th:dir="${#locale.language == 'ps' or #locale.language == 'prs' ? 'rtl' : 'ltr'}"
+      xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
 <head th:replace="~{codes_layout :: page_head}">
-    <div th:replace="styles :: commonfieldset"></div>
     <title>LMS</title>
+
+    <div th:replace="styles :: commonfieldset"></div>
+
+    <!-- SAME LMS DASHBOARD STYLE -->
     <style>
-        h4 a {
+        a h4 {
             color: #14438B;
             font-size: 20px;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .custom-card {
+            text-align: center;
+            padding: 20px;
+            border-radius: 12px;
+            transition: 0.3s ease;
+        }
+
+        .custom-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .custom-card img {
+            height: 80px;
         }
     </style>
-    <div th:replace="styles :: commonfieldset"></div>
 </head>
+
 <body>
 
 <nav th:replace="~{codes_layout :: page_navbar}"></nav>
+
 <div class="container mt-4">
+
+    <!-- ================= EXTENSION MANAGEMENT ================= -->
     <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_CODES_ADMIN')">
         <legend>Short Codes Extension Management Section</legend>
-        <table class="table table-borderless">
+
+        <table class="table table-borderless text-center">
             <tr>
+
                 <td>
-                    <div class="custom-card" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_CODES_ADMIN')">
+                    <div class="custom-card"
+                         sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_CODES_ADMIN')">
+
                         <a th:href="@{/codes/finance/code-extension/application-fee/list}">
-                            <img th:src="@{/images/shortCodeFinance.png}" alt="Short Code">
+                            <img th:src="@{/images/shortCodeFinance.png}" alt="Application Fee Extension">
+                            <h4 style="margin-top:12px;">
+                                Application Fee Extension
+                            </h4>
                         </a>
-                        <h4 class="license-link" style="margin-top: 12px;">
-                            <a th:href="@{/codes/finance/code-extension/application-fee/list}">Application Fee Extension</a>
-                        </h4>
+
                     </div>
                 </td>
+
                 <td>
-                    <div class="custom-card" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_CODES_ADMIN')">
+                    <div class="custom-card"
+                         sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_CODES_ADMIN')">
+
                         <a th:href="@{/codes/finance/royalty-fee/list}">
-                            <img th:src="@{/images/smsidentifiercode.png}" alt="Finance Management">
+                            <img th:src="@{/images/smsidentifiercode.png}" alt="Royalty Fee Extension">
+                            <h4 style="margin-top:12px;">
+                                Royalty Fee Extension
+                            </h4>
                         </a>
-                        <h4 class="license-link" style="margin-top: 10px;">
-                            <a th:href="@{/codes/finance/royalty-fee/list}">Royalty Fee Extension</a>
-                        </h4>
+
                     </div>
                 </td>
 
@@ -48,28 +82,38 @@
     </fieldset>
 
 
+    <!-- ================= PAID EXTENSION ================= -->
     <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_CODES_ADMIN')">
         <legend>Short Codes Paid Extension</legend>
-        <table class="table table-borderless">
+
+        <table class="table table-borderless text-center">
             <tr>
+
                 <td>
-                    <div class="custom-card" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_CODES_ADMIN')">
+                    <div class="custom-card"
+                         sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_CODES_ADMIN')">
+
                         <a th:href="@{/codes/finance/code-extension/application-fee/list}">
-                            <img th:src="@{/images/shortCodeFinance.png}" alt="Short Code">
+                            <img th:src="@{/images/shortCodeFinance.png}" alt="Paid Application Fee Extension">
+                            <h4 style="margin-top:12px;">
+                                Application Fee Extension
+                            </h4>
                         </a>
-                        <h4 class="license-link" style="margin-top: 12px;">
-                            <a th:href="@{/codes/finance/code-extension/application-fee/list}">Application Fee Extension</a>
-                        </h4>
+
                     </div>
                 </td>
+
                 <td>
-                    <div class="custom-card" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_CODES_ADMIN')">
+                    <div class="custom-card"
+                         sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_CODES_ADMIN')">
+
                         <a th:href="@{/codes/finance/royalty-fee/list}">
-                            <img th:src="@{/images/smsidentifiercode.png}" alt="Finance Management">
+                            <img th:src="@{/images/smsidentifiercode.png}" alt="Paid Royalty Fee Extension">
+                            <h4 style="margin-top:12px;">
+                                Royalty Fee Extension
+                            </h4>
                         </a>
-                        <h4 class="license-link" style="margin-top: 10px;">
-                            <a th:href="@{/codes/finance/royalty-fee/list}">Royalty Fee Extension</a>
-                        </h4>
+
                     </div>
                 </td>
 
@@ -78,11 +122,14 @@
     </fieldset>
 
 </div>
+
 <div th:replace="scripts :: common-scripts"></div>
 
 <div style="height:10vh;"></div>
+
 <footer th:replace="~{codes_layout :: page_footer}"></footer>
 
 <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+
 </body>
 </html>

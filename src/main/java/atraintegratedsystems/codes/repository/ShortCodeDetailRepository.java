@@ -1,5 +1,6 @@
 package atraintegratedsystems.codes.repository;
 
+import atraintegratedsystems.codes.dto.ShortCodeExtensionViewDTO;
 import atraintegratedsystems.codes.dto.ShortCodeTableDTO;
 import atraintegratedsystems.codes.model.ShortCodeDetail;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -208,6 +209,8 @@ Optional<ShortCodeDetail> findUnpaidRoyaltyFeeById(@Param("id") Long id);
 
     @Query(value = "SELECT cd.code_detail_id, sc.short_code_name, cd.code_status, cd.source_used, cd.location, cd.category_type, cd.category, cd.chanel, cd.email_of_responsible_person FROM short_code_detail cd JOIN short_code sc ON cd.shortcode_id = sc.id WHERE cd.application_fees_status = 'PAID'", nativeQuery = true)
     List<Object[]> findUnPaidApplicationFeeForExtension();
+
+
 
 
     // Bellow is For Short Code Rejection

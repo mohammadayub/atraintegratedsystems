@@ -77,4 +77,15 @@ public class ShortCodeApplicationFeesExtensionController {
             return "codes/standard/extension/shortcode/application-fee-extension-form";
         }
     }
+
+
+    // Bellow is Extension Paid List
+    @GetMapping("/codes/applicationfees/extensions/paid/list")
+    public String getPaidShortCodeExtensions(Model model) {
+
+        model.addAttribute("extensions", extensionService.getPaidShortCodeExtensions());
+
+        return "codes/standard/extension/shortcode/paid/short_extension_paid_list";
+    }
+
 }
