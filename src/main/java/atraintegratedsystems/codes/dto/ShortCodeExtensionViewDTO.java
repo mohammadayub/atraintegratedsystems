@@ -2,6 +2,7 @@ package atraintegratedsystems.codes.dto;
 
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
+
 import java.time.LocalDate;
 
 @Data
@@ -18,25 +19,25 @@ public class ShortCodeExtensionViewDTO {
     private String emailOfResponsiblePerson;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate applicationFeeExtensionDate;
-    private String applicationFeeExtensionDateJalali;
+    private LocalDate extendedFeeExtensionDate;
+    private String extendedFeeExtensionDateJalali;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate applicationFeeExtensionExpirationDate;
-    private String applicationFeeExtensionExpirationDateJalali;
+    private LocalDate extendedFeeExtensionExpirationDate;
+    private String extendedFeeExtensionExpirationDateJalali;
 
-    private double applicationFeeExtendedFees;
-    private String applicationFeeExtensionBankVoucherNo;
-
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate applicationFeeExtensionEntryVoucherDate;
-    private String applicationFeeExtensionEntryVoucherDateJalali;
+    private double extendedFeeExtendedFees;
+    private String extendedFeeExtensionBankVoucherNo;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate applicationFeeExtensionBankVoucherSubmissionDate;
-    private String applicationFeeExtensionBankVoucherSubmissionDateJalali;
+    private LocalDate extendedFeeExtensionEntryVoucherDate;
+    private String extendedFeeExtensionEntryVoucherDateJalali;
 
-    private String applicationFeeExtensionPaymentStatus;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate extendedFeeExtensionBankVoucherSubmissionDate;
+    private String extendedFeeExtensionBankVoucherSubmissionDateJalali;
+
+    private String extendedFeeExtensionPaymentStatus;
 
     public ShortCodeExtensionViewDTO(
             Long codeDetailId,
@@ -48,13 +49,13 @@ public class ShortCodeExtensionViewDTO {
             String category,
             String chanel,
             String emailOfResponsiblePerson,
-            LocalDate applicationFeeExtensionDate,
-            LocalDate applicationFeeExtensionExpirationDate,
-            double applicationFeeExtendedFees,
-            String applicationFeeExtensionBankVoucherNo,
-            LocalDate applicationFeeExtensionEntryVoucherDate,
-            LocalDate applicationFeeExtensionBankVoucherSubmissionDate,
-            String applicationFeeExtensionPaymentStatus
+            LocalDate extendedFeeExtensionDate,
+            LocalDate extendedFeeExtensionExpirationDate,
+            double extendedFeeExtendedFees,
+            String extendedFeeExtensionBankVoucherNo,
+            LocalDate extendedFeeExtensionEntryVoucherDate,
+            LocalDate extendedFeeExtensionBankVoucherSubmissionDate,
+            String extendedFeeExtensionPaymentStatus
     ) {
         this.codeDetailId = codeDetailId;
         this.shortCodeName = shortCodeName;
@@ -65,12 +66,12 @@ public class ShortCodeExtensionViewDTO {
         this.category = category;
         this.chanel = chanel;
         this.emailOfResponsiblePerson = emailOfResponsiblePerson;
-        this.applicationFeeExtensionDate = applicationFeeExtensionDate;
-        this.applicationFeeExtensionExpirationDate = applicationFeeExtensionExpirationDate;
-        this.applicationFeeExtendedFees = applicationFeeExtendedFees;
-        this.applicationFeeExtensionBankVoucherNo = applicationFeeExtensionBankVoucherNo;
-        this.applicationFeeExtensionEntryVoucherDate = applicationFeeExtensionEntryVoucherDate;
-        this.applicationFeeExtensionBankVoucherSubmissionDate = applicationFeeExtensionBankVoucherSubmissionDate;
-        this.applicationFeeExtensionPaymentStatus = applicationFeeExtensionPaymentStatus;
+        this.extendedFeeExtensionDate = extendedFeeExtensionDate;
+        this.extendedFeeExtensionExpirationDate = extendedFeeExtensionExpirationDate;
+        this.extendedFeeExtendedFees = extendedFeeExtendedFees;
+        this.extendedFeeExtensionBankVoucherNo = extendedFeeExtensionBankVoucherNo;
+        this.extendedFeeExtensionEntryVoucherDate = extendedFeeExtensionEntryVoucherDate;
+        this.extendedFeeExtensionBankVoucherSubmissionDate = extendedFeeExtensionBankVoucherSubmissionDate;
+        this.extendedFeeExtensionPaymentStatus = extendedFeeExtensionPaymentStatus;
     }
 }

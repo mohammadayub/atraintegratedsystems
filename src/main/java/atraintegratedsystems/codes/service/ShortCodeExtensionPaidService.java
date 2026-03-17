@@ -15,17 +15,29 @@ public class ShortCodeExtensionPaidService {
     @Autowired
     private ShortCodeExtendedFeesExtensionRepository extensionRepository;
 
-    // Bellow is For Paid Extension List
+    // For Paid Extension List
     public List<ShortCodeExtensionViewDTO> getPaidShortCodeExtensions() {
 
         List<ShortCodeExtensionViewDTO> list = extensionRepository.findPaidShortExtension();
         DateConverter converter = new DateConverter();
 
         for (ShortCodeExtensionViewDTO dto : list) {
-            dto.setApplicationFeeExtensionDateJalali(toJalali(dto.getApplicationFeeExtensionDate(), converter));
-            dto.setApplicationFeeExtensionExpirationDateJalali(toJalali(dto.getApplicationFeeExtensionExpirationDate(), converter));
-            dto.setApplicationFeeExtensionEntryVoucherDateJalali(toJalali(dto.getApplicationFeeExtensionEntryVoucherDate(), converter));
-            dto.setApplicationFeeExtensionBankVoucherSubmissionDateJalali(toJalali(dto.getApplicationFeeExtensionBankVoucherSubmissionDate(), converter));
+
+            dto.setExtendedFeeExtensionDateJalali(
+                    toJalali(dto.getExtendedFeeExtensionDate(), converter)
+            );
+
+            dto.setExtendedFeeExtensionExpirationDateJalali(
+                    toJalali(dto.getExtendedFeeExtensionExpirationDate(), converter)
+            );
+
+            dto.setExtendedFeeExtensionEntryVoucherDateJalali(
+                    toJalali(dto.getExtendedFeeExtensionEntryVoucherDate(), converter)
+            );
+
+            dto.setExtendedFeeExtensionBankVoucherSubmissionDateJalali(
+                    toJalali(dto.getExtendedFeeExtensionBankVoucherSubmissionDate(), converter)
+            );
         }
 
         return list;
@@ -33,6 +45,8 @@ public class ShortCodeExtensionPaidService {
 
     private String toJalali(LocalDate date, DateConverter converter) {
         if (date == null) return null;
-        return converter.gregorianToJalali(date.getYear(), date.getMonthValue(), date.getDayOfMonth()).toString();
+        return converter
+                .gregorianToJalali(date.getYear(), date.getMonthValue(), date.getDayOfMonth())
+                .toString();
     }
 }

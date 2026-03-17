@@ -10,9 +10,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class ShortCodeExtensionPaidController {
 
     @Autowired
- private ShortCodeExtensionPaidService extensionService;
-    // Bellow is Extension Paid List
-    @GetMapping("/codes/applicationfees/extensions/paid/list")
+    private ShortCodeExtensionPaidService extensionService;
+
+    // Paid Short Code Extensions List
+    @GetMapping("/codes/extended/extensions/paid/list")
     public String getPaidShortCodeExtensions(Model model) {
         model.addAttribute("extensions", extensionService.getPaidShortCodeExtensions());
         return "codes/standard/extension/shortcode/paid/short_extension_paid_list";

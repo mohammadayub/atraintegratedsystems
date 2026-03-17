@@ -34,7 +34,8 @@ public interface ShortCodeExtendedFeesExtensionRepository extends JpaRepository<
             ") " +
             "FROM ShortCodeDetail cd " +
             "JOIN cd.shortCode sc " +
-            "LEFT JOIN ShortCodeExtendedFeesExtension ext ON ext.shortCodeDetail.id = cd.id " +
+            "LEFT JOIN ShortCodeExtendedFeesExtension ext " +
+            "ON ext.shortCodeDetail.id = cd.id AND ext.extendedFeeExtensionPaymentStatus = 'PAID' " +
             "WHERE cd.applicationFeesStatus = 'PAID'")
     List<ShortCodeExtensionViewDTO> findPaidShortExtension();
 }
