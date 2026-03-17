@@ -12,7 +12,7 @@ import java.util.List;
 public interface ShortCodeExtendedFeesExtensionRepository extends JpaRepository<ShortCodeExtendedFeesExtension,Long> {
 
     List<ShortCodeExtendedFeesExtension>
-    findByApplicationFeeExtensionPaymentStatusIsNull();
+    findByExtendedFeeExtensionPaymentStatusIsNull();
 
     @Query("SELECT new atraintegratedsystems.codes.dto.ShortCodeExtensionViewDTO(" +
             "cd.id, " +
@@ -24,17 +24,17 @@ public interface ShortCodeExtendedFeesExtensionRepository extends JpaRepository<
             "cd.category, " +
             "cd.chanel, " +
             "cd.emailOfResponsiblePerson, " +
-            "ext.applicationFeeExtensionDate, " +
-            "ext.applicationFeeExtensionExpirationDate, " +
-            "ext.applicationFeeExtendedFees, " +
-            "ext.applicationFeeExtensionBankVoucherNo, " +
-            "ext.applicationFeeExtensionEntryVoucherDate, " +
-            "ext.applicationFeeExtensionBankVoucherSubmissionDate, " +
-            "ext.applicationFeeExtensionPaymentStatus" +
+            "ext.extendedFeeExtensionDate, " +
+            "ext.extendedFeeExtensionExpirationDate, " +
+            "ext.extendedFees, " +
+            "ext.extendedFeeExtensionBankVoucherNo, " +
+            "ext.extendedFeeExtensionEntryVoucherDate, " +
+            "ext.extendedFeeExtensionBankVoucherSubmissionDate, " +
+            "ext.extendedFeeExtensionPaymentStatus" +
             ") " +
             "FROM ShortCodeDetail cd " +
             "JOIN cd.shortCode sc " +
-            "LEFT JOIN ShortCodeApplicationFeesExtension ext ON ext.shortCodeDetail.id = cd.id " +
+            "LEFT JOIN ShortCodeExtendedFeesExtension ext ON ext.shortCodeDetail.id = cd.id " +
             "WHERE cd.applicationFeesStatus = 'PAID'")
     List<ShortCodeExtensionViewDTO> findPaidShortExtension();
 }

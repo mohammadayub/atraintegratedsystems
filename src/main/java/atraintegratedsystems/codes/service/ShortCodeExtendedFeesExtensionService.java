@@ -1,6 +1,6 @@
 package atraintegratedsystems.codes.service;
 
-import atraintegratedsystems.codes.dto.ShortCodeApplicationFeesExtensionDTO;
+import atraintegratedsystems.codes.dto.ShortCodeExtendedFeesExtensionDTO;
 import atraintegratedsystems.codes.model.ShortCodeExtendedFeesExtension;
 import atraintegratedsystems.codes.model.ShortCodeDetail;
 import atraintegratedsystems.codes.repository.ShortCodeDetailRepository;
@@ -36,7 +36,7 @@ public class ShortCodeExtendedFeesExtensionService {
                 .orElseThrow(() -> new RuntimeException("CodeDetail not found with id: " + id));
     }
 
-    public void saveExtension(Long codeDetailId, ShortCodeApplicationFeesExtensionDTO dto) {
+    public void saveExtension(Long codeDetailId, ShortCodeExtendedFeesExtensionDTO dto) {
 
         ShortCodeDetail codeDetail = getCodeDetailById(codeDetailId);
 
@@ -47,73 +47,73 @@ public class ShortCodeExtendedFeesExtensionService {
         // -------------------------------
         // 1️⃣ Extension Date
         // -------------------------------
-        if (dto.getApplicationFeeExtensionDateJalali() != null &&
-                !dto.getApplicationFeeExtensionDateJalali().isEmpty()) {
+        if (dto.getExtendedFeeExtensionDateJalali() != null &&
+                !dto.getExtendedFeeExtensionDateJalali().isEmpty()) {
 
-            String[] partsEntry = dto.getApplicationFeeExtensionDateJalali().split("-");
+            String[] partsEntry = dto.getExtendedFeeExtensionDateJalali().split("-");
             if (partsEntry.length == 3) {
                 int jYear = Integer.parseInt(partsEntry[0]);
                 int jMonth = Integer.parseInt(partsEntry[1]);
                 int jDay = Integer.parseInt(partsEntry[2]);
                 LocalDate enterAppExtendDate = converter.jalaliToGregorian(jYear, jMonth, jDay);
-                entity.setApplicationFeeExtensionDate(enterAppExtendDate);
+                entity.setExtendedFeeExtensionDate(enterAppExtendDate);
             }
         }
 
         // -------------------------------
         // 2️⃣ Expiration Date
         // -------------------------------
-        if (dto.getApplicationFeeExtensionExpirationDateJalali() != null &&
-                !dto.getApplicationFeeExtensionExpirationDateJalali().isEmpty()) {
+        if (dto.getExtendedFeeExtensionExpirationDateJalali() != null &&
+                !dto.getExtendedFeeExtensionExpirationDateJalali().isEmpty()) {
 
-            String[] partsExpiry = dto.getApplicationFeeExtensionExpirationDateJalali().split("-");
+            String[] partsExpiry = dto.getExtendedFeeExtensionExpirationDateJalali().split("-");
             if (partsExpiry.length == 3) {
                 int jExpiryYear = Integer.parseInt(partsExpiry[0]);
                 int jExpiryMonth = Integer.parseInt(partsExpiry[1]);
                 int jExpiryDay = Integer.parseInt(partsExpiry[2]);
                 LocalDate enterAppExtendExpirationDate = converter.jalaliToGregorian(jExpiryYear, jExpiryMonth, jExpiryDay);
-                entity.setApplicationFeeExtensionExpirationDate(enterAppExtendExpirationDate);
+                entity.setExtendedFeeExtensionExpirationDate(enterAppExtendExpirationDate);
             }
         }
 
         // -------------------------------
         // 3️⃣ Entry Voucher Date
         // -------------------------------
-        if (dto.getApplicationFeeExtensionEntryVoucherDateJalali() != null &&
-                !dto.getApplicationFeeExtensionEntryVoucherDateJalali().isEmpty()) {
+        if (dto.getExtendedFeeExtensionEntryVoucherDateJalali() != null &&
+                !dto.getExtendedFeeExtensionEntryVoucherDateJalali().isEmpty()) {
 
-            String[] partsEntryVoucherDate = dto.getApplicationFeeExtensionEntryVoucherDateJalali().split("-");
+            String[] partsEntryVoucherDate = dto.getExtendedFeeExtensionEntryVoucherDateJalali().split("-");
             if (partsEntryVoucherDate.length == 3) {
                 int jVoucherYear = Integer.parseInt(partsEntryVoucherDate[0]);
                 int jVoucherMonth = Integer.parseInt(partsEntryVoucherDate[1]);
                 int jVoucherDay = Integer.parseInt(partsEntryVoucherDate[2]);
                 LocalDate entryVoucherDate = converter.jalaliToGregorian(jVoucherYear, jVoucherMonth, jVoucherDay);
-                entity.setApplicationFeeExtensionEntryVoucherDate(entryVoucherDate);
+                entity.setExtendedFeeExtensionEntryVoucherDate(entryVoucherDate);
             }
         }
 
         // -------------------------------
         // 4️⃣ Bank Voucher Submission Date
         // -------------------------------
-        if (dto.getApplicationFeeExtensionBankVoucherSubmissionDateJalali() != null &&
-                !dto.getApplicationFeeExtensionBankVoucherSubmissionDateJalali().isEmpty()) {
+        if (dto.getExtendedFeeExtensionBankVoucherSubmissionDateJalali() != null &&
+                !dto.getExtendedFeeExtensionBankVoucherSubmissionDateJalali().isEmpty()) {
 
-            String[] partsSubmissionDate = dto.getApplicationFeeExtensionBankVoucherSubmissionDateJalali().split("-");
+            String[] partsSubmissionDate = dto.getExtendedFeeExtensionBankVoucherSubmissionDateJalali().split("-");
             if (partsSubmissionDate.length == 3) {
                 int jSubmissionYear = Integer.parseInt(partsSubmissionDate[0]);
                 int jSubmissionMonth = Integer.parseInt(partsSubmissionDate[1]);
                 int jSubmissionDay = Integer.parseInt(partsSubmissionDate[2]);
                 LocalDate submissionDate = converter.jalaliToGregorian(jSubmissionYear, jSubmissionMonth, jSubmissionDay);
-                entity.setApplicationFeeExtensionBankVoucherSubmissionDate(submissionDate);
+                entity.setExtendedFeeExtensionBankVoucherSubmissionDate(submissionDate);
             }
         }
 
         // -------------------------------
         // Other fields
         // -------------------------------
-        entity.setApplicationFeeExtendedFees(dto.getApplicationFeeExtendedFees());
-        entity.setApplicationFeeExtensionBankVoucherNo(dto.getApplicationFeeExtensionBankVoucherNo());
-        entity.setApplicationFeeExtensionPaymentStatus(dto.getApplicationFeeExtensionPaymentStatus());
+        entity.setExtendedFees(dto.getExtendedFees());
+        entity.setExtendedFeeExtensionBankVoucherNo(dto.getExtendedFeeExtensionBankVoucherNo());
+        entity.setExtendedFeeExtensionPaymentStatus(dto.getExtendedFeeExtensionPaymentStatus());
 
         // ✅ Automatic fields
         entity.setExtendStatus("EXTENDED");

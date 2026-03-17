@@ -2,23 +2,19 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{codes_layout :: page_head}">
     <meta charset="UTF-8">
-
     <div th:replace="styles :: data-tables-styles"></div>
     <div th:replace="styles :: common-css"></div>
     <div th:replace="styles :: commonfieldset-with-legend-border"></div>
-
     <title>Unpaid Application Fee Extensions</title>
 </head>
-
 <body>
-
 <nav th:replace="~{codes_layout :: page_navbar}"></nav>
 <div class="container-fluid"
      th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
 
     <fieldset>
         <legend>
-            Unpaid Application Fee Extensions
+            Unpaid Extended Fee Extensions
         </legend>
 
         <div class="table-container">
@@ -42,12 +38,12 @@
                 <tr th:each="ext, stat : ${extensions}">
 
                     <td th:text="${stat.count}"></td>
-                    <td th:text="${ext.applicationFeeExtensionDate}"></td>
-                    <td th:text="${ext.applicationFeeExtensionExpirationDate}"></td>
-                    <td th:text="${ext.applicationFeeExtendedFees}"></td>
-                    <td th:text="${ext.applicationFeeExtensionBankVoucherNo}"></td>
-                    <td th:text="${ext.applicationFeeExtensionEntryVoucherDate}"></td>
-                    <td th:text="${ext.applicationFeeExtensionBankVoucherSubmissionDate}"></td>
+                    <td th:text="${ext.extendedFeeExtensionDate}"></td>
+                    <td th:text="${ext.extendedFeeExtensionExpirationDate}"></td>
+                    <td th:text="${ext.extendedFees}"></td>
+                    <td th:text="${ext.extendedFeeExtensionBankVoucherNo}"></td>
+                    <td th:text="${ext.extendedFeeExtensionEntryVoucherDate}"></td>
+                    <td th:text="${ext.extendedFeeExtensionBankVoucherSubmissionDate}"></td>
 
                     <td>
                         <span class="badge bg-warning text-dark">
@@ -57,7 +53,7 @@
 
                     <!-- Pay -->
                     <td>
-                        <a th:href="@{/application-fee-extension/pay/{id}(id=${ext.id})}"
+                        <a th:href="@{/extended-fee-extension/pay/{id}(id=${ext.id})}"
                            class="btn btn-primary">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                  fill="currentColor" class="bi bi-credit-card" viewBox="0 0 16 16">

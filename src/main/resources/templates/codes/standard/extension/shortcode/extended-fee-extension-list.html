@@ -10,7 +10,6 @@
 </head>
 
 <body>
-<h1>This is Application Fees</h1>
 <nav th:replace="~{codes_layout :: page_navbar}"></nav>
 <div class="container-fluid"
      th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
@@ -53,13 +52,13 @@
           <td th:text="${row[7]}">Channel</td>
           <td th:text="${row[8]}">Email</td>
 
-          <!-- Action -->
-          <td class="text-center">
-            <a class="btn btn-warning btn-sm"
-               th:href="@{/codes/finance/code-extension/application-fee/create/{id}(id=${row[0]})}">
-              Extend
-            </a>
-          </td>
+            <!-- Action -->
+            <td class="text-center">
+                <a class="btn btn-warning btn-sm"
+                   th:href="@{/codes/extended/code-extension/extension-fee/create/{id}(id=${row[0]})}">
+                    Extend
+                </a>
+            </td>
 
         </tr>
         </tbody>

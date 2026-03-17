@@ -128,7 +128,7 @@
     <!-- Body -->
     <div class="p-4">
 
-    <form th:action="@{/application-fee-extension/pay}"
+    <form th:action="@{/extended-fee-extension/pay}"
           th:object="${extension}"
           method="post">
 
@@ -142,7 +142,7 @@
           <label>Extended Fee</label>
           <input type="text"
                  class="form-control"
-                 th:field="*{applicationFeeExtendedFees}" required>
+                 th:field="*{extendedFees}" required>
         </div>
 
         <!-- Bank Voucher No -->
@@ -150,7 +150,7 @@
           <label>Bank Voucher No</label>
           <input type="text"
                  class="form-control"
-                 th:field="*{applicationFeeExtensionBankVoucherNo}" required>
+                 th:field="*{extendedFeeExtensionBankVoucherNo}" required>
         </div>
 
         <!-- Entry Voucher Date -->
@@ -158,7 +158,7 @@
           <label>Entry Voucher Date</label>
           <input type="text"
                  class="form-control hijrishamsi"
-                 th:field="*{applicationFeeExtensionEntryVoucherDateJalali}" required>
+                 th:field="*{extendedFeeExtensionEntryVoucherDateJalali}" required>
         </div>
 
         <!-- Submission Date -->
@@ -166,7 +166,7 @@
           <label>Submission Date</label>
           <input type="text"
                  class="form-control hijrishamsi"
-                 th:field="*{applicationFeeExtensionBankVoucherSubmissionDateJalali}" required>
+                 th:field="*{extendedFeeExtensionBankVoucherSubmissionDateJalali}" required>
         </div>
 
       </div>

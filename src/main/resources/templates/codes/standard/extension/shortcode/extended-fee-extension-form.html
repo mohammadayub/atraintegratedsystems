@@ -133,7 +133,7 @@
             <p th:text="${errorMessage}"></p>
         </div>
 
-        <form th:action="@{/codes/finance/code-extension/application-fee/save/{id}(id=${codeDetail.id})}"
+        <form th:action="@{/codes/extended/code-extension/extension-fee/save/{id}(id=${codeDetail.id})}"
               th:object="${extensionDTO}"
               method="post">
 
@@ -145,7 +145,7 @@
                     <input type="text"
                            class="form-control hijrishamsi"
                            id="extensionDate"
-                           th:field="*{applicationFeeExtensionDateJalali}"
+                           th:field="*{extendedFeeExtensionDateJalali}"
                            placeholder="yyyy-mm-dd"
                            required>
                 </div>
@@ -155,7 +155,7 @@
                     <label>Expiration Date</label>
                     <input type="text"
                            class="form-control hijrishamsi"
-                           th:field="*{applicationFeeExtensionExpirationDateJalali}"
+                           th:field="*{extendedFeeExtensionExpirationDateJalali}"
                            placeholder="yyyy-mm-dd"
                            required>
                 </div>
@@ -166,7 +166,7 @@
                     <input type="text"
                            class="form-control"
                            id="extendedFees"
-                           th:field="*{applicationFeeExtendedFees}"
+                           th:field="*{extendedFees}"
                            readonly>
                 </div>
 
@@ -175,7 +175,7 @@
 
             <div class="form-footer mt-4">
 
-                <a th:href="@{/codes/finance/code-extension/application-fee/list}"
+                <a th:href="@{/codes/extended/code-extension/extension-fee/list}"
                    class="btn btn-secondary">
                     <i class="bi bi-arrow-left"></i>
                     Back

@@ -1,6 +1,6 @@
 package atraintegratedsystems.codes.service;
 
-import atraintegratedsystems.codes.dto.ShortCodeApplicationFeesExtensionDTO;
+import atraintegratedsystems.codes.dto.ShortCodeExtendedFeesExtensionDTO;
 import atraintegratedsystems.codes.model.ShortCodeExtendedFeesExtension;
 import atraintegratedsystems.codes.repository.ShortCodeExtendedFeesExtensionRepository;
 import atraintegratedsystems.utils.PersianCalendarUtils;
@@ -20,35 +20,35 @@ public class ShortCodeExtendedFeesFinanceExtensionService {
         this.repository = repository;
     }
 
-    public List<ShortCodeApplicationFeesExtensionDTO> getUnpaidExtensions() {
+    public List<ShortCodeExtendedFeesExtensionDTO> getUnpaidExtensions() {
         return repository
-                .findByApplicationFeeExtensionPaymentStatusIsNull()
+                .findByExtendedFeeExtensionPaymentStatusIsNull()
                 .stream()
                 .map(this::toDTO)
                 .collect(Collectors.toList());
     }
 
-    private ShortCodeApplicationFeesExtensionDTO toDTO(
+    private ShortCodeExtendedFeesExtensionDTO toDTO(
             ShortCodeExtendedFeesExtension entity) {
 
-        ShortCodeApplicationFeesExtensionDTO dto =
-                new ShortCodeApplicationFeesExtensionDTO();
+        ShortCodeExtendedFeesExtensionDTO dto =
+                new ShortCodeExtendedFeesExtensionDTO();
 
         dto.setId(entity.getId());
-        dto.setApplicationFeeExtensionDate(
-                entity.getApplicationFeeExtensionDate());
-        dto.setApplicationFeeExtensionExpirationDate(
-                entity.getApplicationFeeExtensionExpirationDate());
-        dto.setApplicationFeeExtendedFees(
-                entity.getApplicationFeeExtendedFees());
-        dto.setApplicationFeeExtensionBankVoucherNo(
-                entity.getApplicationFeeExtensionBankVoucherNo());
-        dto.setApplicationFeeExtensionEntryVoucherDate(
-                entity.getApplicationFeeExtensionEntryVoucherDate());
-        dto.setApplicationFeeExtensionBankVoucherSubmissionDate(
-                entity.getApplicationFeeExtensionBankVoucherSubmissionDate());
-        dto.setApplicationFeeExtensionPaymentStatus(
-                entity.getApplicationFeeExtensionPaymentStatus());
+        dto.setExtendedFeeExtensionDate(
+                entity.getExtendedFeeExtensionDate());
+        dto.setExtendedFeeExtensionExpirationDate(
+                entity.getExtendedFeeExtensionExpirationDate());
+        dto.setExtendedFees(
+                entity.getExtendedFees());
+        dto.setExtendedFeeExtensionBankVoucherNo(
+                entity.getExtendedFeeExtensionBankVoucherNo());
+        dto.setExtendedFeeExtensionEntryVoucherDate(
+                entity.getExtendedFeeExtensionEntryVoucherDate());
+        dto.setExtendedFeeExtensionBankVoucherSubmissionDate(
+                entity.getExtendedFeeExtensionBankVoucherSubmissionDate());
+        dto.setExtendedFeeExtensionPaymentStatus(
+                entity.getExtendedFeeExtensionPaymentStatus());
         dto.setExtendStatus(entity.getExtendStatus());
         dto.setExtendDate(entity.getExtendEntryDate());
 
@@ -56,28 +56,28 @@ public class ShortCodeExtendedFeesFinanceExtensionService {
     }
 
     /* ===== GET BY ID (FOR PAY FORM) ===== */
-    public ShortCodeApplicationFeesExtensionDTO getById(Long id) {
+    public ShortCodeExtendedFeesExtensionDTO getById(Long id) {
         ShortCodeExtendedFeesExtension entity =
                 repository.findById(id)
                         .orElseThrow(() -> new RuntimeException("Record not found"));
 
-        ShortCodeApplicationFeesExtensionDTO dto =
-                new ShortCodeApplicationFeesExtensionDTO();
+        ShortCodeExtendedFeesExtensionDTO dto =
+                new ShortCodeExtendedFeesExtensionDTO();
 
         dto.setId(entity.getId());
-        dto.setApplicationFeeExtendedFees(entity.getApplicationFeeExtendedFees());
-        dto.setApplicationFeeExtensionBankVoucherNo(
-                entity.getApplicationFeeExtensionBankVoucherNo());
-        dto.setApplicationFeeExtensionEntryVoucherDate(
-                entity.getApplicationFeeExtensionEntryVoucherDate());
-        dto.setApplicationFeeExtensionBankVoucherSubmissionDate(
-                entity.getApplicationFeeExtensionBankVoucherSubmissionDate());
+        dto.setExtendedFees(entity.getExtendedFees());
+        dto.setExtendedFeeExtensionBankVoucherNo(
+                entity.getExtendedFeeExtensionBankVoucherNo());
+        dto.setExtendedFeeExtensionEntryVoucherDate(
+                entity.getExtendedFeeExtensionEntryVoucherDate());
+        dto.setExtendedFeeExtensionBankVoucherSubmissionDate(
+                entity.getExtendedFeeExtensionBankVoucherSubmissionDate());
 
         return dto;
     }
 
     /* ===== UPDATE PAYMENT ONLY ===== */
-    public void updatePayment(ShortCodeApplicationFeesExtensionDTO dto) {
+    public void updatePayment(ShortCodeExtendedFeesExtensionDTO dto) {
 
         ShortCodeExtendedFeesExtension entity = repository.findById(dto.getId())
                 .orElseThrow(() -> new RuntimeException("Record not found with ID: " + dto.getId()));
@@ -85,15 +85,15 @@ public class ShortCodeExtendedFeesFinanceExtensionService {
         PersianCalendarUtils converter = new PersianCalendarUtils();
 
         /* ================= FEES ================= */
-        entity.setApplicationFeeExtendedFees(dto.getApplicationFeeExtendedFees());
-        entity.setApplicationFeeExtensionBankVoucherNo(dto.getApplicationFeeExtensionBankVoucherNo());
+        entity.setExtendedFees(dto.getExtendedFees());
+        entity.setExtendedFeeExtensionBankVoucherNo(dto.getExtendedFeeExtensionBankVoucherNo());
 
         /* ================= ENTRY VOUCHER DATE (JALALI → GREGORIAN) ================= */
-        if (dto.getApplicationFeeExtensionEntryVoucherDateJalali() != null &&
-                !dto.getApplicationFeeExtensionEntryVoucherDateJalali().trim().isEmpty()) {
+        if (dto.getExtendedFeeExtensionEntryVoucherDateJalali() != null &&
+                !dto.getExtendedFeeExtensionEntryVoucherDateJalali().trim().isEmpty()) {
 
             try {
-                String[] parts = dto.getApplicationFeeExtensionEntryVoucherDateJalali().split("-");
+                String[] parts = dto.getExtendedFeeExtensionEntryVoucherDateJalali().split("-");
 
                 if (parts.length == 3) {
                     int year = Integer.parseInt(parts[0]);
@@ -101,7 +101,7 @@ public class ShortCodeExtendedFeesFinanceExtensionService {
                     int day = Integer.parseInt(parts[2]);
 
                     LocalDate voucherDate = converter.jalaliToGregorian(year, month, day);
-                    entity.setApplicationFeeExtensionEntryVoucherDate(voucherDate);
+                    entity.setExtendedFeeExtensionEntryVoucherDate(voucherDate);
                 }
             } catch (Exception e) {
                 throw new RuntimeException("Invalid Entry Voucher Jalali Date format. Expected yyyy-MM-dd");
@@ -109,11 +109,11 @@ public class ShortCodeExtendedFeesFinanceExtensionService {
         }
 
         /* ================= SUBMISSION DATE (JALALI → GREGORIAN) ================= */
-        if (dto.getApplicationFeeExtensionBankVoucherSubmissionDateJalali() != null &&
-                !dto.getApplicationFeeExtensionBankVoucherSubmissionDateJalali().trim().isEmpty()) {
+        if (dto.getExtendedFeeExtensionBankVoucherSubmissionDateJalali() != null &&
+                !dto.getExtendedFeeExtensionBankVoucherSubmissionDateJalali().trim().isEmpty()) {
 
             try {
-                String[] parts = dto.getApplicationFeeExtensionBankVoucherSubmissionDateJalali().split("-");
+                String[] parts = dto.getExtendedFeeExtensionBankVoucherSubmissionDateJalali().split("-");
 
                 if (parts.length == 3) {
                     int year = Integer.parseInt(parts[0]);
@@ -121,7 +121,7 @@ public class ShortCodeExtendedFeesFinanceExtensionService {
                     int day = Integer.parseInt(parts[2]);
 
                     LocalDate submissionDate = converter.jalaliToGregorian(year, month, day);
-                    entity.setApplicationFeeExtensionBankVoucherSubmissionDate(submissionDate);
+                    entity.setExtendedFeeExtensionBankVoucherSubmissionDate(submissionDate);
                 }
             } catch (Exception e) {
                 throw new RuntimeException("Invalid Submission Jalali Date format. Expected yyyy-MM-dd");
@@ -129,7 +129,7 @@ public class ShortCodeExtendedFeesFinanceExtensionService {
         }
 
         /* ================= PAYMENT STATUS ================= */
-        entity.setApplicationFeeExtensionPaymentStatus("PAID");
+        entity.setExtendedFeeExtensionPaymentStatus("PAID");
 
         repository.save(entity);
     }

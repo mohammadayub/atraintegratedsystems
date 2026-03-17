@@ -1,6 +1,6 @@
 package atraintegratedsystems.codes.controller;
 
-import atraintegratedsystems.codes.dto.ShortCodeApplicationFeesExtensionDTO;
+import atraintegratedsystems.codes.dto.ShortCodeExtendedFeesExtensionDTO;
 import atraintegratedsystems.codes.service.ShortCodeExtendedFeesFinanceExtensionService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,30 +19,30 @@ public class ShortCodeExtendedFeesFinanceExtensionController {
         this.service = service;
     }
 
-    @GetMapping("/application-fee-extension/unpaid")
+    @GetMapping("/extended-fee-extension/unpaid")
     public String showUnpaidApplicationFeeExtensions(Model model) {
         model.addAttribute(
                 "extensions",
                 service.getUnpaidExtensions()
         );
-        return "codes/finance/shortcode/extension/shortcode/application-fee-extention-list";
+        return "codes/finance/shortcode/extension/shortcode/extended-fee-extension-list";
 
     }
 
     /* ===================== PAY FORM ===================== */
-    @GetMapping("/application-fee-extension/pay/{id}")
+    @GetMapping("/extended-fee-extension/pay/{id}")
     public String showPayForm(@PathVariable Long id, Model model) {
         model.addAttribute("extension", service.getById(id));
-        return "codes/finance/shortcode/extension/shortcode/application_fee_extension_pay";
+        return "codes/finance/shortcode/extension/shortcode/extended_fee_extension_pay";
     }
 
     /* ===================== SAVE PAYMENT ===================== */
-    @PostMapping("/application-fee-extension/pay")
+    @PostMapping("/extended-fee-extension/pay")
     public String savePayment(
             @ModelAttribute("extension")
-            ShortCodeApplicationFeesExtensionDTO dto) {
+            ShortCodeExtendedFeesExtensionDTO dto) {
 
         service.updatePayment(dto);
-        return "redirect:/application-fee-extension/unpaid";
+        return "redirect:/extended-fee-extension/unpaid";
     }
 }

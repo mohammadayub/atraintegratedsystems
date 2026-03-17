@@ -1,42 +1,37 @@
-package atraintegratedsystems.codes.model;
+package atraintegratedsystems.codes.dto;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.*;
 import java.time.LocalDate;
 
-@Entity
 @Data
-public class ShortCodeExtendedFeesExtension {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+@Getter
+@Setter
+public class ShortCodeExtendedFeesExtensionDTO {
     private Long id;
 
-    // Standard Department
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate extendedFeeExtensionDate;
+    private String extendedFeeExtensionDateJalali;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate extendedFeeExtensionExpirationDate;
-    @Column(name="extend_status")
-    private String extendStatus;
-    @Column(name="extend_Date")
-    private String extendEntryDate;
+    private String extendedFeeExtensionExpirationDateJalali;
 
-    // For Finance Departpemtn
     // Bellow is Application Fee Extension Fields
     private double extendedFees;
     private String extendedFeeExtensionBankVoucherNo;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate extendedFeeExtensionEntryVoucherDate;
+    private String extendedFeeExtensionEntryVoucherDateJalali;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate extendedFeeExtensionBankVoucherSubmissionDate;
+    private String extendedFeeExtensionBankVoucherSubmissionDateJalali;
     private String extendedFeeExtensionPaymentStatus;
 
+    private String extendStatus;
 
-
-    @ManyToOne
-    @JoinColumn(name = "code_detail_id")
-    private ShortCodeDetail shortCodeDetail;
-
+    private String extendDate;
 }
