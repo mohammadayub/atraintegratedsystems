@@ -2,7 +2,7 @@ package atraintegratedsystems.codes.controller;
 
 import atraintegratedsystems.codes.dto.ShortCodeApplicationFeesExtensionDTO;
 import atraintegratedsystems.codes.model.ShortCodeDetail;
-import atraintegratedsystems.codes.service.ShortCodeApplicationFeesExtensionService;
+import atraintegratedsystems.codes.service.ShortCodeExtendedFeesExtensionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/codes/finance/code-extension/application-fee")
-public class ShortCodeApplicationFeesExtensionController {
+public class ShortCodeExtendedFeesExtensionController {
 
     @Autowired
-    private ShortCodeApplicationFeesExtensionService extensionService;
+    private ShortCodeExtendedFeesExtensionService extensionService;
 
     // -------------------------------
     // LIST UNPAID EXTENSIONS

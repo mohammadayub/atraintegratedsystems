@@ -1,7 +1,7 @@
 package atraintegratedsystems.codes.repository;
 
 import atraintegratedsystems.codes.dto.ShortCodeExtensionViewDTO;
-import atraintegratedsystems.codes.model.ShortCodeApplicationFeesExtension;
+import atraintegratedsystems.codes.model.ShortCodeExtendedFeesExtension;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -9,9 +9,9 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface ShortCodeApplicationFeesExtensionRepository extends JpaRepository<ShortCodeApplicationFeesExtension,Long> {
+public interface ShortCodeExtendedFeesExtensionRepository extends JpaRepository<ShortCodeExtendedFeesExtension,Long> {
 
-    List<ShortCodeApplicationFeesExtension>
+    List<ShortCodeExtendedFeesExtension>
     findByApplicationFeeExtensionPaymentStatusIsNull();
 
     @Query("SELECT new atraintegratedsystems.codes.dto.ShortCodeExtensionViewDTO(" +

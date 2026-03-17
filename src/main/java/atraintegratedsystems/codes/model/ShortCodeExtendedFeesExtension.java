@@ -8,7 +8,7 @@ import java.time.LocalDate;
 
 @Entity
 @Data
-public class ShortCodeApplicationFeesExtension {
+public class ShortCodeExtendedFeesExtension {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;

@@ -1,12 +1,10 @@
 package atraintegratedsystems.codes.service;
 
 import atraintegratedsystems.codes.dto.ShortCodeApplicationFeesExtensionDTO;
-import atraintegratedsystems.codes.dto.ShortCodeExtensionViewDTO;
-import atraintegratedsystems.codes.model.ShortCodeApplicationFeesExtension;
+import atraintegratedsystems.codes.model.ShortCodeExtendedFeesExtension;
 import atraintegratedsystems.codes.model.ShortCodeDetail;
 import atraintegratedsystems.codes.repository.ShortCodeDetailRepository;
-import atraintegratedsystems.codes.repository.ShortCodeApplicationFeesExtensionRepository;
-import atraintegratedsystems.utils.DateConverter;
+import atraintegratedsystems.codes.repository.ShortCodeExtendedFeesExtensionRepository;
 import atraintegratedsystems.utils.PersianCalendarUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,13 +13,13 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Service
-public class ShortCodeApplicationFeesExtensionService {
+public class ShortCodeExtendedFeesExtensionService {
 
     @Autowired
     private ShortCodeDetailRepository shortCodeDetailRepository;
 
     @Autowired
-    private ShortCodeApplicationFeesExtensionRepository extensionRepository;
+    private ShortCodeExtendedFeesExtensionRepository extensionRepository;
 
     /* =========================
        LIST UNPAID EXTENSIONS
@@ -42,7 +40,7 @@ public class ShortCodeApplicationFeesExtensionService {
 
         ShortCodeDetail codeDetail = getCodeDetailById(codeDetailId);
 
-        ShortCodeApplicationFeesExtension entity = new ShortCodeApplicationFeesExtension();
+        ShortCodeExtendedFeesExtension entity = new ShortCodeExtendedFeesExtension();
 
         PersianCalendarUtils converter = new PersianCalendarUtils();
 

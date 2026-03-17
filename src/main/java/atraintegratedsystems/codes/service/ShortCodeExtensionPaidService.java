@@ -1,7 +1,7 @@
 package atraintegratedsystems.codes.service;
 
 import atraintegratedsystems.codes.dto.ShortCodeExtensionViewDTO;
-import atraintegratedsystems.codes.repository.ShortCodeApplicationFeesExtensionRepository;
+import atraintegratedsystems.codes.repository.ShortCodeExtendedFeesExtensionRepository;
 import atraintegratedsystems.utils.DateConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,7 +13,7 @@ import java.util.List;
 public class ShortCodeExtensionPaidService {
 
     @Autowired
-    private ShortCodeApplicationFeesExtensionRepository extensionRepository;
+    private ShortCodeExtendedFeesExtensionRepository extensionRepository;
 
     // Bellow is For Paid Extension List
     public List<ShortCodeExtensionViewDTO> getPaidShortCodeExtensions() {

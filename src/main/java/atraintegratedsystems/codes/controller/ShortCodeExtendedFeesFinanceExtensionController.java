@@ -1,7 +1,7 @@
 package atraintegratedsystems.codes.controller;
 
 import atraintegratedsystems.codes.dto.ShortCodeApplicationFeesExtensionDTO;
-import atraintegratedsystems.codes.service.ShortCodeApplicationFeesFinanceExtensionService;
+import atraintegratedsystems.codes.service.ShortCodeExtendedFeesFinanceExtensionService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
-public class ShortCodeApplicationFeesFinanceExtensionController {
+public class ShortCodeExtendedFeesFinanceExtensionController {
 
-    private final ShortCodeApplicationFeesFinanceExtensionService service;
+    private final ShortCodeExtendedFeesFinanceExtensionService service;
 
-    public ShortCodeApplicationFeesFinanceExtensionController(
-            ShortCodeApplicationFeesFinanceExtensionService service) {
+    public ShortCodeExtendedFeesFinanceExtensionController(
+            ShortCodeExtendedFeesFinanceExtensionService service) {
         this.service = service;
     }
 

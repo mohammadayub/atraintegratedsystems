@@ -1,10 +1,8 @@
 package atraintegratedsystems.codes.service;
 
 import atraintegratedsystems.codes.dto.ShortCodeApplicationFeesExtensionDTO;
-import atraintegratedsystems.codes.dto.ShortCodeExtensionViewDTO;
-import atraintegratedsystems.codes.model.ShortCodeApplicationFeesExtension;
-import atraintegratedsystems.codes.repository.ShortCodeApplicationFeesExtensionRepository;
-import atraintegratedsystems.utils.DateConverter;
+import atraintegratedsystems.codes.model.ShortCodeExtendedFeesExtension;
+import atraintegratedsystems.codes.repository.ShortCodeExtendedFeesExtensionRepository;
 import atraintegratedsystems.utils.PersianCalendarUtils;
 import org.springframework.stereotype.Service;
 
@@ -13,12 +11,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class ShortCodeApplicationFeesFinanceExtensionService {
+public class ShortCodeExtendedFeesFinanceExtensionService {
 
-    private final ShortCodeApplicationFeesExtensionRepository repository;
+    private final ShortCodeExtendedFeesExtensionRepository repository;
 
-    public ShortCodeApplicationFeesFinanceExtensionService(
-            ShortCodeApplicationFeesExtensionRepository repository) {
+    public ShortCodeExtendedFeesFinanceExtensionService(
+            ShortCodeExtendedFeesExtensionRepository repository) {
         this.repository = repository;
     }
 
@@ -31,7 +29,7 @@ public class ShortCodeApplicationFeesFinanceExtensionService {
     }
 
     private ShortCodeApplicationFeesExtensionDTO toDTO(
-            ShortCodeApplicationFeesExtension entity) {
+            ShortCodeExtendedFeesExtension entity) {
 
         ShortCodeApplicationFeesExtensionDTO dto =
                 new ShortCodeApplicationFeesExtensionDTO();
@@ -59,7 +57,7 @@ public class ShortCodeApplicationFeesFinanceExtensionService {
 
     /* ===== GET BY ID (FOR PAY FORM) ===== */
     public ShortCodeApplicationFeesExtensionDTO getById(Long id) {
-        ShortCodeApplicationFeesExtension entity =
+        ShortCodeExtendedFeesExtension entity =
                 repository.findById(id)
                         .orElseThrow(() -> new RuntimeException("Record not found"));
 
@@ -81,7 +79,7 @@ public class ShortCodeApplicationFeesFinanceExtensionService {
     /* ===== UPDATE PAYMENT ONLY ===== */
     public void updatePayment(ShortCodeApplicationFeesExtensionDTO dto) {
 
-        ShortCodeApplicationFeesExtension entity = repository.findById(dto.getId())
+        ShortCodeExtendedFeesExtension entity = repository.findById(dto.getId())
                 .orElseThrow(() -> new RuntimeException("Record not found with ID: " + dto.getId()));
 
         PersianCalendarUtils converter = new PersianCalendarUtils();
