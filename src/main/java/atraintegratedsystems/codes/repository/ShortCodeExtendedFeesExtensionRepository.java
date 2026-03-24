@@ -4,9 +4,11 @@ import atraintegratedsystems.codes.dto.ShortCodeExtensionViewDTO;
 import atraintegratedsystems.codes.model.ShortCodeExtendedFeesExtension;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface ShortCodeExtendedFeesExtensionRepository extends JpaRepository<ShortCodeExtendedFeesExtension,Long> {
@@ -38,4 +40,30 @@ public interface ShortCodeExtendedFeesExtensionRepository extends JpaRepository<
             "ON ext.shortCodeDetail.id = cd.id AND ext.extendedFeeExtensionPaymentStatus = 'PAID' " +
             "WHERE cd.applicationFeesStatus = 'PAID'")
     List<ShortCodeExtensionViewDTO> findPaidShortExtension();
+
+
+
+    @Query("SELECT new atraintegratedsystems.codes.dto.ShortCodeExtensionViewDTO(" +
+            "cd.id, sc.shortCodeName, cd.codeStatus, cd.sourceUsed, cd.location, " +
+            "cd.categoryType, cd.category, cd.chanel, cd.emailOfResponsiblePerson, " +
+            "ext.extendedFeeExtensionDate, ext.extendedFeeExtensionExpirationDate, " +
+            "ext.extendedFees, ext.extendedFeeExtensionBankVoucherNo, " +
+            "ext.extendedFeeExtensionEntryVoucherDate, ext.extendedFeeExtensionBankVoucherSubmissionDate, " +
+            "ext.extendedFeeExtensionPaymentStatus) " +
+            "FROM ShortCodeDetail cd " +
+            "JOIN cd.shortCode sc " +
+            "JOIN ShortCodeExtendedFeesExtension ext ON ext.shortCodeDetail.id = cd.id " +
+            "WHERE cd.id = :id AND ext.extendedFeeExtensionPaymentStatus = 'PAID' " +
+            "ORDER BY ext.extendedFeeExtensionDate DESC")
+    List<ShortCodeExtensionViewDTO> findPaidShortExtensionById(@Param("id") Long id);
+
+
+
+
+
+
+
+
 }
+
+

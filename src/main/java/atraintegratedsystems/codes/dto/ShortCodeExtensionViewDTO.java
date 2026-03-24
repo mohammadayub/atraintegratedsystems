@@ -26,7 +26,7 @@ public class ShortCodeExtensionViewDTO {
     private LocalDate extendedFeeExtensionExpirationDate;
     private String extendedFeeExtensionExpirationDateJalali;
 
-    private double extendedFeeExtendedFees;
+    private double extendedFees;
     private String extendedFeeExtensionBankVoucherNo;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -51,7 +51,7 @@ public class ShortCodeExtensionViewDTO {
             String emailOfResponsiblePerson,
             LocalDate extendedFeeExtensionDate,
             LocalDate extendedFeeExtensionExpirationDate,
-            double extendedFeeExtendedFees,
+            double extendedFees,
             String extendedFeeExtensionBankVoucherNo,
             LocalDate extendedFeeExtensionEntryVoucherDate,
             LocalDate extendedFeeExtensionBankVoucherSubmissionDate,
@@ -68,7 +68,7 @@ public class ShortCodeExtensionViewDTO {
         this.emailOfResponsiblePerson = emailOfResponsiblePerson;
         this.extendedFeeExtensionDate = extendedFeeExtensionDate;
         this.extendedFeeExtensionExpirationDate = extendedFeeExtensionExpirationDate;
-        this.extendedFeeExtendedFees = extendedFeeExtendedFees;
+        this.extendedFees = extendedFees;
         this.extendedFeeExtensionBankVoucherNo = extendedFeeExtensionBankVoucherNo;
         this.extendedFeeExtensionEntryVoucherDate = extendedFeeExtensionEntryVoucherDate;
         this.extendedFeeExtensionBankVoucherSubmissionDate = extendedFeeExtensionBankVoucherSubmissionDate;

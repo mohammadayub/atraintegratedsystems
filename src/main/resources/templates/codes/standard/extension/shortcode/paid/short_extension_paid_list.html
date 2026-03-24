@@ -44,6 +44,7 @@
                     <th>Extended Fee</th>
                     <th>Voucher No</th>
                     <th>Payment Status</th>
+                    <th>Action</th>
                 </tr>
                 </thead>
 
@@ -65,9 +66,16 @@
                     <td th:text="${ext.extendedFeeExtensionEntryVoucherDateJalali}"></td>
                     <td th:text="${ext.extendedFeeExtensionBankVoucherSubmissionDateJalali}"></td>
 
-                    <td th:text="${ext.extendedFeeExtendedFees}"></td>
+                    <td th:text="${ext.extendedFees}"></td>
                     <td th:text="${ext.extendedFeeExtensionBankVoucherNo}"></td>
                     <td th:text="${ext.extendedFeeExtensionPaymentStatus}"></td>
+                    <td>
+                        <a class="btn btn-success btn-sm"
+                           th:href="@{/codes/extended/extensions/print/{id}(id=${ext.codeDetailId})}"
+                           target="_blank">
+                            🖨 Print
+                        </a>
+                    </td>
 
                 </tr>
                 </tbody>

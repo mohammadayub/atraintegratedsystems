@@ -49,4 +49,24 @@ public class ShortCodeExtensionPaidService {
                 .gregorianToJalali(date.getYear(), date.getMonthValue(), date.getDayOfMonth())
                 .toString();
     }
+
+
+    public ShortCodeExtensionViewDTO getExtensionByCodeDetailId(Long id) {
+
+        ShortCodeExtensionViewDTO dto = extensionRepository
+                .findPaidShortExtensionById(id)
+                .stream()
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("Extension not found for id: " + id));
+
+        DateConverter converter = new DateConverter();
+
+        dto.setExtendedFeeExtensionDateJalali(toJalali(dto.getExtendedFeeExtensionDate(), converter));
+        dto.setExtendedFeeExtensionExpirationDateJalali(toJalali(dto.getExtendedFeeExtensionExpirationDate(), converter));
+        dto.setExtendedFeeExtensionEntryVoucherDateJalali(toJalali(dto.getExtendedFeeExtensionEntryVoucherDate(), converter));
+        dto.setExtendedFeeExtensionBankVoucherSubmissionDateJalali(toJalali(dto.getExtendedFeeExtensionBankVoucherSubmissionDate(), converter));
+
+        return dto;
+    }
+
 }

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Short Code Extension Print</title>
+
+    <style>
+
+        body{
+            font-family: Arial;
+            margin:40px;
+            direction: rtl;
+        }
+
+        .header{
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            margin-bottom:30px;
+        }
+
+        .header-center{
+            text-align:center;
+            line-height:1.8;
+        }
+
+        .header img{
+            max-height:90px;
+        }
+
+        table{
+            width:100%;
+            border-collapse: collapse;
+            margin-top:20px;
+        }
+
+        th,td{
+            border:1px solid #000;
+            padding:6px;
+            text-align:right;
+        }
+
+        .print-btn{
+            margin-top:30px;
+        }
+
+        @media print{
+            .no-print{
+                display:none;
+            }
+
+            body{
+                margin:10px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+<div style="border:1px solid black;">
+    <div style="margin:30px;">
+
+        <!-- HEADER -->
+        <div class="header">
+
+            <div>
+                <img th:src="@{/images/islami_emarat.png}">
+            </div>
+
+            <div class="header-center">
+                <b>
+                    امارت اسلامی افغانستان<br>
+                    وزارت مخابرات و تکنالوجی معلوماتی<br>
+                    اداره تنظیم خدمات مخابراتی افغانستان (اترا)<br>
+                    ریاست تحلیل و رقابت<br>
+                    آمریت ستندردها<br>
+                    Afghanistan Telecommunication Regulatory Authority<br>
+                    Standardization Department<br>
+                    فورمه تمدید شارت کود
+                </b>
+            </div>
+
+            <div style="text-align:center">
+                <img th:src="@{/images/atra_afghanistan.png}">
+            </div>
+
+        </div>
+
+        <!-- SERIAL -->
+        <p>مسلسل نمبر : <span th:text="${ext.codeDetailId}"></span></p>
+
+        <table>
+
+            <!-- COMPANY INFO -->
+            <tr>
+                <th style="text-align:center;">الف</th>
+                <th colspan="2" style="text-align:center;">معلومات شرکت</th>
+                <th>ملاحظات</th>
+            </tr>
+
+            <tr>
+                <th>1</th>
+                <th>نام شرکت</th>
+                <td th:text="${ext.sourceUsed}"></td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <th>2</th>
+                <th>ایمیل</th>
+                <td th:text="${ext.emailOfResponsiblePerson}"></td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <th>3</th>
+                <th>محل</th>
+                <td th:text="${ext.location}"></td>
+                <td></td>
+            </tr>
+
+            <!-- SHORT CODE INFO -->
+            <tr>
+                <th>ب</th>
+                <th>مشخصات شارت کود</th>
+                <td></td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <th>1</th>
+                <th>شماره شارت کود</th>
+                <td th:text="${ext.shortCodeName}"></td>
+                <td th:text="${ext.category}"></td>
+            </tr>
+
+            <tr>
+                <th>2</th>
+                <th>چینل</th>
+                <td th:text="${ext.chanel}"></td>
+                <td></td>
+            </tr>
+
+            <!-- FEES -->
+            <tr>
+                <th>ج</th>
+                <th colspan="2" style="text-align:center;">فیس و تاریخ</th>
+                <td></td>
+            </tr>
+
+            <tr>
+                <th>1</th>
+                <th>فیس تمدید</th>
+                <td th:text="${ext.extendedFees}"></td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <th>2</th>
+                <th>تاریخ تمدید</th>
+                <td th:text="${ext.extendedFeeExtensionDateJalali}"></td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <th>3</th>
+                <th>تاریخ انقضا</th>
+                <td th:text="${ext.extendedFeeExtensionExpirationDateJalali}"></td>
+                <td></td>
+            </tr>
+
+        </table>
+
+        <p><b> نمبر تماس آمریت ستندرد ها : 0202105968</b></p>
+
+        <!-- DESCRIPTION -->
+        <div>
+            <p>
+                شارت کود
+                (<span th:text="${ext.shortCodeName}"></span>)
+                برای شرکت
+                (<span th:text="${ext.sourceUsed}"></span>)
+                تمدید گردید.
+            </p>
+        </div>
+
+        <br>
+
+        <div>
+            <span>ترتیب کننده</span>
+            <span style="margin-right:150px;margin-left:150px;">تیم لیدر شماره ها</span>
+            <span>آمر ستندردها</span>
+        </div>
+
+        <!-- PRINT BUTTON -->
+        <div class="print-btn no-print" style="text-align:center; margin:20px 0;">
+            <button onclick="window.print()"
+                    style="
+        background-color:#2c3e50;
+        color:white;
+        padding:10px 28px;
+        font-size:15px;
+        font-weight:600;
+        border:none;
+        border-radius:8px;
+        cursor:pointer;
+        box-shadow:0 4px 10px rgba(0,0,0,0.15);
+        transition:all 0.2s ease;
+    "
+                    onmouseover="this.style.backgroundColor='#34495e'; this.style.transform='translateY(-2px)';"
+                    onmouseout="this.style.backgroundColor='#2c3e50'; this.style.transform='translateY(0)';"
+            >
+                🖨 Print
+            </button>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>
