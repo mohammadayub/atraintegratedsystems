@@ -57,13 +57,6 @@ public interface ShortCodeExtendedFeesExtensionRepository extends JpaRepository<
             "ORDER BY ext.extendedFeeExtensionDate DESC")
     List<ShortCodeExtensionViewDTO> findPaidShortExtensionById(@Param("id") Long id);
 
-
-
-
-
-
-
-
 }
 
 

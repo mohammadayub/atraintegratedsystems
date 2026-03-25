@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:lang="#{lang}">
+
+<head th:replace="~{codes_layout :: page_head}">
+    <title>SMS Identifier Extension List</title>
+
+    <!-- Include Styles -->
+    <div th:replace="styles :: data-tables-styles"></div>
+    <div th:replace="styles :: common-css"></div>
+    <div th:replace="styles :: commonfieldset-with-legend-border"></div>
+</head>
+
+<body>
+<nav th:replace="~{codes_layout :: page_navbar}"></nav>
+
+<div class="container-fluid"
+     th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+
+    <fieldset class="commonfieldset-with-legend-border">
+        <legend>SMS Identifier Extension Paid List</legend>
+
+        <div class="table-container">
+            <table class="slip table table-bordered table-striped table-hover"
+                   id="profileTable"
+                   style="width:100%">
+
+                <thead>
+                <tr class="bg-primary text-white">
+                    <th>#</th>
+                    <th>Code Name</th>
+                    <th>Company</th>
+                    <th>Mobile</th>
+                    <th>Email</th>
+                    <th>Assign Date</th>
+                    <th>Expire Date</th>
+                    <th>Extension Start</th>
+                    <th>Extension Expire</th>
+                    <th>Extended Fee</th>
+                    <th>Voucher No</th>
+                    <th>Payment Status</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr th:each="ext, iStat : ${extensions}">
+                    <td th:text="${iStat.count}">1</td>
+
+                    <td th:text="${ext.smsIdentifierCodeName}"></td>
+                    <td th:text="${ext.companyName}"></td>
+                    <td th:text="${ext.mobile}"></td>
+                    <td th:text="${ext.email}"></td>
+
+                    <td th:text="${ext.assigningDate}"></td>
+                    <td th:text="${ext.expirationDate}"></td>
+
+                    <td th:text="${ext.extensionStartDate}"></td>
+                    <td th:text="${ext.extentionExpirationDate}"></td>
+
+                    <td th:text="${ext.extendedFees}"></td>
+                    <td th:text="${ext.extensionBankVoucherNo}"></td>
+                    <td th:text="${ext.extensionPaymentStatus}"></td>
+
+                    <td>
+                        <a class="btn btn-success btn-sm"
+                           th:href="@{/sms/extensions/print/{id}(id=${ext.detailId})}"
+                           target="_blank">
+                            🖨 Print
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+
+            </table>
+        </div>
+    </fieldset>
+
+    <a th:href="@{/sms}"
+       class="btn btn-primary mt-3">
+        ← Back to Page
+    </a>
+
+</div>
+
+<!-- Scripts -->
+<div th:replace="scripts :: common-scripts"></div>
+<div th:replace="scripts :: data-tables-scripts"></div>
+<div th:replace="scripts :: common-datatable"></div>
+
+<div style="height:10vh;"></div>
+<footer th:replace="~{codes_layout :: page_footer}"></footer>
+
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+
+</body>
+</html>

@@ -132,6 +132,13 @@ public class RouteController {
         return "codes/finance/smsidentifier/home";
     }
 
+    @GetMapping("/codes/sms-identifier/standard/extension/home")
+    public String smsIdentifierStandardExtensionHome()
+    {
+
+        return "codes/smsidentifier/extension/home";
+    }
+
     // Bellow is For Under Working Module
     @GetMapping("/smsidentifier/under-working")
     public String codesHome()
