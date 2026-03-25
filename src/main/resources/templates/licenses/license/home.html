@@ -1,136 +1,172 @@
-<!doctype html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<!DOCTYPE html>
+<html lang="en"
+      th:lang="#{lang}"
+      th:dir="${#locale.language == 'ps' or #locale.language == 'prs' ? 'rtl' : 'ltr'}"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
 <head th:replace="~{layout :: page_head}">
-  <div th:replace="styles :: commonfieldset"></div>
-  <title>LMS</title>
-  <style>
-    h4 a {
-        color: #14438B;
-        font-size: 20px;
-    }
-  </style>
-  <div th:replace="styles :: ltr-to-rtl"></div>
+    <meta charset="UTF-8">
+    <title>LMS Dashboard</title>
+
+    <div th:replace="styles :: commonfieldset"></div>
+    <div th:replace="styles :: ltr-to-rtl"></div>
+
+    <style>
+        a h4 {
+            color: #14438B;
+            font-size: 20px;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .custom-card {
+            text-align: center;
+            padding: 20px;
+            border-radius: 12px;
+            transition: 0.3s ease;
+        }
+
+        .custom-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .custom-card img {
+            height: 80px;
+            width: 80px;
+        }
+
+        .back-btn svg {
+            width: 20px;
+            height: 20px;
+            margin-right: 5px;
+        }
+    </style>
 </head>
+
 <body>
+
 <nav th:replace="~{layout :: page_navbar}"></nav>
+
 <div class="container mt-5" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
-  <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN', 'ROLE_LICENSE', 'ROLE_LICENSE_PROFILE_ENTRY')">
-    <legend th:text="#{license_applicant_management_section}"></legend>
-    <div class="row g-4">
-      <div class="col-sm-4"  >
-        <div class="custom-card text-center p-3">
-          <a th:href="@{/licenses/license/registration/profile-entry/license_new_profile}">
-            <img th:src="@{/images/New_application.png}" alt="License Management System" class="img-fluid"></a>
-          <h4 class="license-link mt-2">
-            <a th:href="@{/licenses/license/registration/profile-entry/license_new_profile}" th:text="#{new_applicant}" style="font-size:20px;"></a>
-          </h4>
-        </div>
-      </div>
-      <!-- Card 2 -->
-      <div class="col-sm-4">
-        <div class="custom-card text-center p-3">
-          <a th:href="@{/licenses/license/registration/profile-entry/license_new_profile_list}">
-            <img th:src="@{/images/license_applicants_list.png}" alt="Finance Revenue Management System" class="img-fluid"></a>
-          <h4 class="license-link mt-2">
-            <a th:href="@{/licenses/license/registration/profile-entry/license_new_profile_list}" th:text="#{list_of_applicants}"   style="font-size:20px;"></a>
-          </h4>
-        </div>
-      </div>
-    </div>
-  </fieldset>
-  <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_LICENSE','ROLE_LICENSE_COMPLETION_PROFILE')">
-    <legend th:text="#{license_management_section}"></legend>
-    <div class="row g-4">
 
-      <div class="col-sm-4">
-        <div class="custom-card text-center p-3">
-          <a th:href="@{/licenses/license/registration/completion-profile/license_applicant_profile_list}">
-            <img th:src="@{/images/applicant.png}" alt="Finance Revenue Management System" class="img-fluid"></a>
-          <h4 class="license-link mt-2">
-            <a th:href="@{/licenses/license/registration/completion-profile/license_applicant_profile_list}" th:text="#{complete_profile}" style="font-size:20px;"></a>
-          </h4>
+    <!-- ================= LICENSE APPLICANT MANAGEMENT ================= -->
+    <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN', 'ROLE_LICENSE', 'ROLE_LICENSE_PROFILE_ENTRY')">
+        <legend th:text="#{license_applicant_management_section}">License Applicant Management</legend>
+        <div class="row g-4">
+            <div class="col-sm-4">
+                <div class="custom-card">
+                    <a th:href="@{/licenses/license/registration/profile-entry/license_new_profile}">
+                        <img th:src="@{/images/New_application.png}" alt="New Applicant">
+                        <h4 class="mt-2" th:text="#{new_applicant}">New Applicant</h4>
+                    </a>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="custom-card">
+                    <a th:href="@{/licenses/license/registration/profile-entry/license_new_profile_list}">
+                        <img th:src="@{/images/license_applicants_list.png}" alt="Applicants List">
+                        <h4 class="mt-2" th:text="#{list_of_applicants}">List of Applicants</h4>
+                    </a>
+                </div>
+            </div>
         </div>
-      </div>
+    </fieldset>
 
-      <div class="col-sm-4">
-        <div class="custom-card text-center p-3">
-          <a th:href="@{/licenses/license/registration/send-profile-board/license_applicant_profile_send_board_list}">
-            <img th:src="@{/images/send_to_board.png}" alt="LMS" class="img-fluid"></a>
-          <h4 class="license-link mt-2">
-            <a th:href="@{/licenses/license/registration/send-profile-board/license_applicant_profile_send_board_list}" th:text="#{send_to_board}" style="font-size:20px;"></a>
-          </h4>
+    <!-- ================= LICENSE MANAGEMENT ================= -->
+    <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_LICENSE','ROLE_LICENSE_COMPLETION_PROFILE')">
+        <legend th:text="#{license_management_section}">License Management</legend>
+        <div class="row g-4">
+            <div class="col-sm-4">
+                <div class="custom-card">
+                    <a th:href="@{/licenses/license/registration/completion-profile/license_applicant_profile_list}">
+                        <img th:src="@{/images/applicant.png}" alt="Complete Profile">
+                        <h4 class="mt-2" th:text="#{complete_profile}">Complete Profile</h4>
+                    </a>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="custom-card">
+                    <a th:href="@{/licenses/license/registration/send-profile-board/license_applicant_profile_send_board_list}">
+                        <img th:src="@{/images/send_to_board.png}" alt="Send to Board">
+                        <h4 class="mt-2" th:text="#{send_to_board}">Send to Board</h4>
+                    </a>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </fieldset>
-  <br>
-  <fieldset style="border: 2px solid #DCAF45; padding: 15px; border-radius: 8px; margin-bottom: 20px;" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_LICENSE_APPROVAL')">
-    <legend style="width: auto; font-size: 1.2rem; color: #14438B; padding: 0 10px; font-weight: bold;" th:text="#{license_approval_rejection_management_section}"></legend>
+    </fieldset>
 
-    <div class="row g-4">
-      <!-- Card 1 -->
-      <div class="col-sm-4">
-        <div class="custom-card text-center p-3">
-          <a th:href="@{/licenses/license/approval/license_applicants_approval_list}">
-            <img th:src="@{/images/licenseapproval.png}" alt="License Management System" class="img-fluid">
-          </a>
-          <h4 class="license-link mt-2">
-            <a th:href="@{/licenses/license/approval/license_applicants_approval_list}" th:text="#{application_approval}"  style="font-size:20px;"></a>
-          </h4>
+    <!-- ================= LICENSE APPROVAL/REJECTION ================= -->
+    <fieldset style="border: 2px solid #DCAF45; padding: 15px; border-radius: 8px; margin-bottom: 20px;"
+              sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_LICENSE_APPROVAL')">
+        <legend style="width:auto; font-size:1.2rem; color:#14438B; padding:0 10px; font-weight:bold;"
+                th:text="#{license_approval_rejection_management_section}">Approval/Rejection Management</legend>
+        <div class="row g-4">
+            <div class="col-sm-4">
+                <div class="custom-card">
+                    <a th:href="@{/licenses/license/approval/license_applicants_approval_list}">
+                        <img th:src="@{/images/licenseapproval.png}" alt="Application Approval">
+                        <h4 class="mt-2" th:text="#{application_approval}">Application Approval</h4>
+                    </a>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="custom-card">
+                    <a th:href="@{/licenses/license/rejection/license_applicants_rejection_list}">
+                        <img th:src="@{/images/rejection.png}" alt="Rejection List">
+                        <h4 class="mt-2" th:text="#{rejecttion}">Rejection</h4>
+                    </a>
+                </div>
+            </div>
         </div>
-      </div>
+    </fieldset>
 
-      <!-- Card 2 -->
-      <div class="col-sm-4">
-        <div class="custom-card text-center p-3">
-          <a th:href="@{/licenses/license/rejection/license_applicants_rejection_list}">
-            <img th:src="@{/images/rejection.png}" alt="Image Not Display" class="img-fluid">
-          </a>
-          <h4 class="license-link mt-2">
-            <a th:href="@{/licenses/license/rejection/license_applicants_rejection_list}" th:text="#{rejecttion}"  style="font-size:20px;"></a>
-          </h4>
+    <!-- ================= LICENSE EXTENSION ================= -->
+    <fieldset style="border: 2px solid #DCAF45; padding: 15px; border-radius: 8px; margin-bottom: 20px;"
+              sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_LICENSE','ROLE_LICENSE_COMPLETION_PROFILE')">
+        <legend style="width:auto; font-size:1.2rem; color:#14438B; padding:0 10px; font-weight:bold;"
+                th:text="#{license_extension_management_section}">License Extension</legend>
+        <div class="col-sm-4">
+            <div class="custom-card">
+                <a th:href="@{/licenses/license/extension/extension_home}">
+                    <img th:src="@{/images/finance_extension.png}" alt="License Extension">
+                    <h4 class="mt-2" th:text="#{license_fee_extension}">License Fees Extension</h4>
+                </a>
+            </div>
         </div>
-      </div>
-    </div>
-  </fieldset>
-  <br>
+    </fieldset>
 
-  <fieldset style="border: 2px solid #DCAF45; padding: 15px; border-radius: 8px; margin-bottom: 20px;" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_LICENSE','ROLE_LICENSE_COMPLETION_PROFILE')">
-    <legend style="width: auto; font-size: 1.2rem; color: #14438B; padding: 0 10px; font-weight: bold;" th:text="#{license_extension_management_section}"></legend>
-    <div class="col-sm-4">
-      <div class="custom-card text-center p-3" >
-        <a th:href="@{/licenses/license/extension/extension_home}">
-          <img th:src="@{/images/finance_extension.png}" alt="license Management System"></a>
-        <h4 class="license-link" style="margin-top: 12px;">
-          <a th:href="@{/licenses/license/extension/extension_home}" th:text="#{license_fee_extension}" style="font-size:20px;">License Fees Extension</a>
-        </h4>
-      </div>
-    </div>
-  </fieldset>
-  <br>
-  <fieldset style="border: 2px solid #DCAF45; padding: 15px; border-radius: 8px; margin-bottom: 20px;" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_LICENSE')">
-    <legend style="width: auto; font-size: 1.2rem; color: #14438B; padding: 0 10px; font-weight: bold;" th:text="#{license_certificate_management_section}"></legend>
-    <div class="col-sm-4">
-      <div class="custom-card text-center p-3">
-        <a th:href="@{#}">
-          <img th:src="@{/images/certificate.png}" alt="Codes Management System"></a>
-        <h4 class="license-link" style="margin-top: 12px;">
-          <a th:href="@{#}" th:text="#{license_certificate}"  style="font-size:20px;">Certificate Management</a>
-        </h4>
-      </div>
-    </div>
-  </fieldset>
-  <a th:href="@{/licenses/index}" class="btn btn-primary" style="margin-top:20px;">
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6" style="width:20px;height:20px;">
-      <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
-    </svg>
-    Back to Page</a>
+    <!-- ================= LICENSE CERTIFICATE ================= -->
+    <fieldset style="border: 2px solid #DCAF45; padding: 15px; border-radius: 8px; margin-bottom: 20px;"
+              sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_LICENSE')">
+        <legend style="width:auto; font-size:1.2rem; color:#14438B; padding:0 10px; font-weight:bold;"
+                th:text="#{license_certificate_management_section}">License Certificate</legend>
+        <div class="col-sm-4">
+            <div class="custom-card">
+                <a th:href="@{#}">
+                    <img th:src="@{/images/certificate.png}" alt="Certificate Management">
+                    <h4 class="mt-2" th:text="#{license_certificate}">Certificate Management</h4>
+                </a>
+            </div>
+        </div>
+    </fieldset>
+
+    <!-- ================= BACK BUTTON ================= -->
+    <a th:href="@{/licenses/index}" class="btn btn-primary back-btn mt-3">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
+        </svg>
+        Back to Page
+    </a>
+
 </div>
+
 <!-- Common scripts -->
 <div th:replace="scripts :: common-scripts"></div>
 
 <div style="height:10vh;"></div>
 <footer th:replace="~{layout :: page_footer}"></footer>
 <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+
 </body>
 </html>

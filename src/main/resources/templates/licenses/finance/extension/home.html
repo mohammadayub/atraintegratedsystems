@@ -1,64 +1,100 @@
-<!doctype html>
-<html lang="en" th:lang="#{lang}" th:dir="${#locale.language == 'ps' ? 'rtl' : 'ltr'}"
-      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<!DOCTYPE html>
+<html lang="en"
+      th:lang="#{lang}"
+      th:dir="${#locale.language == 'ps' or #locale.language == 'prs' ? 'rtl' : 'ltr'}"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
 <head th:replace="~{layout :: page_head}">
     <div th:replace="styles :: common-css"></div>
     <div th:replace="styles :: commonfieldset"></div>
-    <title>LMS</title>
+    <title>LMS - Fee Extensions</title>
+
     <style>
-        h4 a {
+        a h4 {
             color: #14438B;
             font-size: 20px;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .custom-card {
+            text-align: center;
+            padding: 20px;
+            border-radius: 12px;
+            transition: 0.3s ease;
+        }
+
+        .custom-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .custom-card img {
+            width: 80px;
+            height: 80px;
+        }
+
+        .back-btn svg {
+            width: 20px;
+            height: 20px;
+            margin-right: 5px;
         }
     </style>
 </head>
-<body>
-<nav th:replace="~{layout :: page_navbar}"></nav>
-<div class="container mt-5" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_FINANCE')" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
-    <fieldset sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_FINANCE') or hasRole('ROLE_LICENSE_ADMIN')">
-        <legend>Admin Fee Extension</legend>
 
-    <table class="table table-borderless">
-        <tr>
-            <td>
+<body>
+
+<nav th:replace="~{layout :: page_navbar}"></nav>
+
+<div class="container mt-5" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_FINANCE')"
+     th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+
+    <!-- ================= ADMIN FEE EXTENSION ================= -->
+    <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_FINANCE')">
+        <legend>Admin Fee Extension</legend>
+        <div class="row g-4">
+            <div class="col-sm-4">
                 <div class="custom-card">
                     <a th:href="@{/licenses/finance/extension/admin_fees_extension/license_admin_fees}">
-                        <img th:src="@{/images/adminFees.png}"></a>
-                    <h4 class="license-link" style="margin-top: 12px;">
-                        <a th:href="@{/licenses/finance/extension/admin_fees_extension/license_admin_fees}" style="font-size:20px;">License Admin Fee Extension</a>
-                    </h4>
-
+                        <img th:src="@{/images/adminFees.png}" alt="Admin Fee Extension">
+                        <h4 class="mt-2">License Admin Fee Extension</h4>
+                    </a>
                 </div>
-            </td>
-        </tr>
-    </table>
+            </div>
+        </div>
     </fieldset>
+
+    <!-- ================= DATABASE FEES EXTENSION ================= -->
     <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_FINANCE')">
         <legend>Database Fees Extension</legend>
-    <table class="table table-borderless">
-        <tr>
-            <td>
+        <div class="row g-4">
+            <div class="col-sm-4">
                 <div class="custom-card">
                     <a th:href="@{/licenses/finance/extension/database_fees_extension/license_database_fees}">
-                        <img th:src="@{/images/databaseMaintainanceCost.png}"></a>
-                    <h4 class="license-link" style="margin-top: 12px;">
-                        <a th:href="@{/licenses/finance/extension/database_fees_extension/license_database_fees}"  style="font-size:20px;">License Database Fees Extension</a>
-                    </h4>
-
+                        <img th:src="@{/images/databaseMaintainanceCost.png}" alt="Database Fees Extension">
+                        <h4 class="mt-2">License Database Fees Extension</h4>
+                    </a>
                 </div>
-            </td>
-        </tr>
-    </table>
+            </div>
+        </div>
     </fieldset>
-    <a th:href="@{/licenses/finance/home}" class="btn btn-primary" style="margin-top:20px;">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6" style="width:20px;height:20px;">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
+
+    <!-- ================= BACK BUTTON ================= -->
+    <a th:href="@{/licenses/finance/home}" class="btn btn-primary back-btn mt-3">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3"/>
         </svg>
-        Back to Page</a>
+        Back to Page
+    </a>
+
 </div>
+
+<!-- Common scripts -->
 <div th:replace="scripts :: common-scripts"></div>
+
 <div style="height:10vh;"></div>
 <footer th:replace="~{layout :: page_footer}"></footer>
 <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+
 </body>
 </html>

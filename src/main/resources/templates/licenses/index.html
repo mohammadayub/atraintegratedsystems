@@ -1,84 +1,119 @@
-<!doctype html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<!DOCTYPE html>
+<html lang="en"
+      th:lang="#{lang}"
+      th:dir="${#locale.language == 'ps' or #locale.language == 'prs' ? 'rtl' : 'ltr'}"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
 <head th:replace="~{layout :: page_head}">
     <meta charset="UTF-8">
-    <div th:replace="styles :: data-tables-styles"></div>
-    <!--    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">-->
-    <!--    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css">-->
-    <title>LMS - Report</title>
-    <!--    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">-->
-    <!--    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css">-->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <title>LMS Dashboard</title>
 
+    <div th:replace="styles :: commonfieldset"></div>
     <div th:replace="styles :: data-tables-styles"></div>
     <div th:replace="styles :: select2-styles"></div>
-    <div th:replace="styles :: commonfieldset"></div>
     <div th:replace="styles :: common-css"></div>
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+
     <style>
-        h4 a {
+        a h4 {
             color: #14438B;
             font-size: 20px;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .custom-card {
+            text-align: center;
+            padding: 20px;
+            border-radius: 12px;
+            transition: 0.3s ease;
+        }
+
+        .custom-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .custom-card img {
+            height: 80px;
+            width: 80px;
+        }
+
+        .back-btn svg {
+            width: 20px;
+            height: 20px;
+            margin-right: 5px;
         }
     </style>
 </head>
+
 <body>
+
 <nav th:replace="~{layout :: page_navbar}"></nav>
-<div class="container mt-5" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
-    <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_LICENSE','ROLE_MINISTRY','ROLE_LICENSE_COMPLETION_PROFILE','ROLE_LICENSE_APPROVAL','ROLE_LICENSE_PROFILE_ENTRY','ROLE_FINANCE')">
-        <legend th:text="#{license_section}"></legend>
-        <table class="table table-borderless">
+
+<div class="container mt-4">
+
+    <!-- ================= LICENSE MANAGEMENT ================= -->
+    <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_LICENSE','ROLE_LICENSE_COMPLETION_PROFILE','ROLE_LICENSE_APPROVAL','ROLE_LICENSE_PROFILE_ENTRY','ROLE_FINANCE')">
+        <legend th:text="#{license_section}">License Management Section</legend>
+
+        <table class="table table-borderless text-center">
             <tr>
                 <td>
                     <div class="custom-card" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_LICENSE','ROLE_LICENSE_COMPLETION_PROFILE','ROLE_LICENSE_APPROVAL','ROLE_LICENSE_PROFILE_ENTRY')">
                         <a th:href="@{/licenses/license/home}">
-                            <img th:src="@{/images/license_management.png}" alt="License Management System">
+                            <img th:src="@{/images/license_management.png}" alt="License Management">
+                            <h4 style="margin-top:12px;" th:text="#{lms}">License Management</h4>
                         </a>
-                        <h4 class="license-link" style="margin-top: 12px;">
-                            <a th:href="@{/licenses/license/home}" th:text="#{lms}"></a>
-                        </h4>
                     </div>
                 </td>
+
                 <td>
                     <div class="custom-card" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_FINANCE','ROLE_MINISTRY')">
                         <a th:href="@{/licenses/finance/home}">
-                            <img th:src="@{/images/finance.png}" class="rounded" style="width:100px;height:100px;" alt="Finance Management">
+                            <img th:src="@{/images/finance.png}" alt="Finance Management">
+                            <h4 style="margin-top:12px;" th:text="#{frms}">Finance Management</h4>
                         </a>
-                        <h4 class="license-link" style="margin-top: 12px;">
-                            <a th:href="@{/licenses/finance/home}" th:text="#{frms}"></a>
-                        </h4>
                     </div>
                 </td>
             </tr>
         </table>
     </fieldset>
+
+    <!-- ================= REPORTS ================= -->
     <fieldset style="border: 2px solid #DCAF45; padding: 15px; border-radius: 8px; margin-bottom: 20px;"
               sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_LICENSE')">
-        <legend style="width: auto; font-size: 1.2rem; color: #14438B; padding: 0 10px; font-weight: bold;" th:text="#{report_section}"></legend>
-        <table class="table table-borderless">
+        <legend style="width: auto; font-size: 1.2rem; color: #14438B; padding: 0 10px; font-weight: bold;" th:text="#{report_section}">Reports Section</legend>
+
+        <table class="table table-borderless text-center">
             <tr>
                 <td>
                     <div class="custom-card">
                         <a th:href="@{/licenses/license/report}">
                             <img th:src="@{/images/reports.png}" alt="Reports Section">
+                            <h4 style="margin-top:12px;" th:text="#{reports}">Reports</h4>
                         </a>
-                        <h4 class="license-link" style="margin-top: 12px;">
-                            <a th:href="@{/licenses/license/report}" th:text="#{reports}"></a>
-                        </h4>
                     </div>
                 </td>
             </tr>
         </table>
     </fieldset>
-    <a th:href="@{/}" class="btn btn-primary" style="margin-top:20px;">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6" style="width:20px;height:20px;">
+
+    <!-- ================= BACK BUTTON ================= -->
+    <a th:href="@{/}" class="btn btn-primary back-btn" style="margin-top:20px;">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
         </svg>
-        Back to Page</a>
+        Back to Page
+    </a>
+
 </div>
+
 <div th:replace="scripts :: common-scripts"></div>
 <div style="height:10vh;"></div>
 <footer th:replace="~{layout :: page_footer}"></footer>
 <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+
 </body>
 </html>

@@ -1,70 +1,104 @@
-<!doctype html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<!DOCTYPE html>
+<html lang="en"
+      th:lang="#{lang}"
+      th:dir="${#locale.language == 'ps' or #locale.language == 'prs' ? 'rtl' : 'ltr'}"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
 <head th:replace="~{layout :: page_head}">
-  <meta charset="UTF-8">
-  <div th:replace="styles :: data-tables-styles"></div>
-  <title>LMS - Report</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>LMS - Report</title>
 
-  <div th:replace="styles :: data-tables-styles"></div>
-  <div th:replace="styles :: select2-styles"></div>
-  <div th:replace="styles :: commonfieldset"></div>
-  <div th:replace="styles :: common-css"></div>
-  <style>
-    h4 a {
-        color: #14438B;
-        font-size: 20px;
-    }
-  </style>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <div th:replace="styles :: data-tables-styles"></div>
+    <div th:replace="styles :: select2-styles"></div>
+    <div th:replace="styles :: commonfieldset"></div>
+    <div th:replace="styles :: common-css"></div>
+
+    <style>
+        a h4 {
+            color: #14438B;
+            font-size: 20px;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .custom-card {
+            text-align: center;
+            padding: 20px;
+            border-radius: 12px;
+            transition: 0.3s ease;
+        }
+
+        .custom-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .custom-card img {
+            height: 80px;
+            width: 80px;
+        }
+
+        .back-btn svg {
+            width: 20px;
+            height: 20px;
+            margin-right: 5px;
+        }
+    </style>
 </head>
+
 <body>
+
 <nav th:replace="~{layout :: page_navbar}"></nav>
+
 <div class="container mt-5" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
-  <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_FINANCE','ROLE_MINISTRY')">
-    <legend th:text="#{license_revenue_section}">License Revenue Section</legend>
-  <table class="table table-borderless">
-    <tr>
-      <td>
-      <div class="custom-card">
-        <a th:href="@{/licenses/finance/license_finance}">
-          <img th:src="@{/images/finance_Home.png}" alt="Image Not Display"></a>
-        <h4 class="license-link" style="margin-top: 12px;">
-          <a th:href="@{/licenses/finance/license_finance}" th:text="#{license_revenue_management}"  style="font-size:20px;">License Revenue management</a>
-        </h4>
 
-      </div>
-      </td>
-    </tr>
-  </table>
-  </fieldset>
-  <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_FINANCE')">
-    <legend th:text="#{license_fees_extension_section}">License Fees Extension Section</legend>
-  <table class="table table-borderless">
-    <tr>
-      <td>
-        <div class="custom-card">
-          <a th:href="@{/licenses/finanace/extension/home}">
-            <img th:src="@{/images/license_finance_extension.png}" alt="Image Not Display"></a>
-          <h4 class="license-link" style="margin-top: 12px;">
-            <a th:href="@{/licenses/finanace/extension/home}"  style="font-size:20px;" th:text="#{license_extension_finance_management}">License Extension Finance management</a>
-          </h4>
-
+    <!-- ================= LICENSE REVENUE MANAGEMENT ================= -->
+    <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_FINANCE','ROLE_MINISTRY')">
+        <legend th:text="#{license_revenue_section}">License Revenue Section</legend>
+        <div class="row g-4">
+            <div class="col-sm-4">
+                <div class="custom-card">
+                    <a th:href="@{/licenses/finance/license_finance}">
+                        <img th:src="@{/images/finance_Home.png}" alt="License Revenue Management">
+                        <h4 class="mt-2" th:text="#{license_revenue_management}">License Revenue Management</h4>
+                    </a>
+                </div>
+            </div>
         </div>
-      </td>
-    </tr>
+    </fieldset>
 
-  </table>
-  </fieldset>
-  <a th:href="@{/}" class="btn btn-primary" style="margin-top:20px;">
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6" style="width:20px;height:20px;">
-      <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
-    </svg>
-    Back to Page</a>
+    <!-- ================= LICENSE FEES EXTENSION ================= -->
+    <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_FINANCE')">
+        <legend th:text="#{license_fees_extension_section}">License Fees Extension Section</legend>
+        <div class="row g-4">
+            <div class="col-sm-4">
+                <div class="custom-card">
+                    <a th:href="@{/licenses/finanace/extension/home}">
+                        <img th:src="@{/images/license_finance_extension.png}" alt="License Extension Finance Management">
+                        <h4 class="mt-2" th:text="#{license_extension_finance_management}">License Extension Finance Management</h4>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+
+    <!-- ================= BACK BUTTON ================= -->
+    <a th:href="@{/}" class="btn btn-primary back-btn mt-3">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
+        </svg>
+        Back to Page
+    </a>
+
 </div>
+
+<!-- Common scripts -->
 <div th:replace="scripts :: common-scripts"></div>
+
 <div style="height:10vh;"></div>
 <footer th:replace="~{layout :: page_footer}"></footer>
 <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+
 </body>
 </html>

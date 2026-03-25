@@ -1,94 +1,130 @@
-<!doctype html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<!DOCTYPE html>
+<html lang="en"
+      th:lang="#{lang}"
+      th:dir="${#locale.language == 'ps' or #locale.language == 'prs' ? 'rtl' : 'ltr'}"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
 <head th:replace="~{layout :: page_head}">
+    <meta charset="UTF-8">
+    <title>LMS - Fees & Tariffs</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <div th:replace="styles :: commonfieldset"></div>
-    <title>LMS</title>
+    <div th:replace="styles :: ltr-to-rtl"></div>
+
     <style>
-        h4 a {
+        a h4 {
             color: #14438B;
             font-size: 20px;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .custom-card {
+            text-align: center;
+            padding: 20px;
+            border-radius: 12px;
+            transition: 0.3s ease;
+        }
+
+        .custom-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .custom-card img {
+            width: 80px;
+            height: 80px;
+        }
+
+        .back-btn svg {
+            width: 20px;
+            height: 20px;
+            margin-right: 5px;
         }
     </style>
-    <div th:replace="styles :: ltr-to-rtl"></div>
 </head>
+
 <body>
+
 <nav th:replace="~{layout :: page_navbar}"></nav>
+
 <div class="container mt-5" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+
+    <!-- ================= FEES & TARIFFS ================= -->
     <fieldset>
         <legend th:text="#{fees_tariffs_section}">Fees & Tariffs Section</legend>
-    <table class="table table-borderless">
-        <tr style="border-bottom:1px solid darkgray;" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_FINANCE')">
-            <td class="text-center">
+        <div class="row g-4">
+
+            <!-- Application Fees -->
+            <div class="col-sm-4" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_FINANCE')">
                 <div class="custom-card">
                     <a th:href="@{/licenses/finance/license_finance/application_fees/license_application_fee_list}">
-                    <img th:src="@{/images/application_fees.png}" alt="License Management System"></a>
-                    <h4 class="license-link" style="margin-top: 12px;">
-                        <a th:href="@{/licenses/finance/license_finance/application_fees/license_application_fee_list}" th:text="#{Application_fees}"  style="font-size:20px;"></a>
-                    </h4>
+                        <img th:src="@{/images/application_fees.png}" alt="Application Fees">
+                        <h4 class="mt-2" th:text="#{Application_fees}">Application Fees</h4>
+                    </a>
                 </div>
-            </td>
-            </td>
-            <td class="text-center">
+            </div>
+
+            <!-- Administration Fees -->
+            <div class="col-sm-4" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_FINANCE')">
                 <div class="custom-card">
                     <a th:href="@{/licenses/finance/license_finance/administration_fees/license_administration_fee_list}">
-                        <img th:src="@{/images/AdministrationFees.png}" alt="License Management System"></a>
-                    <h4 class="license-link" style="margin-top: 12px;">
-                        <a th:href="@{/licenses/finance/license_finance/administration_fees/license_administration_fee_list}" th:text="#{administration_fees}"  style="font-size:20px;"></a>
-                    </h4>
+                        <img th:src="@{/images/AdministrationFees.png}" alt="Administration Fees">
+                        <h4 class="mt-2" th:text="#{administration_fees}">Administration Fees</h4>
+                    </a>
                 </div>
-            </td>
-        </tr>
-        <!--   This is Today changes  -->
-        <tr  style="border-bottom:1px solid darkgray;" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_FINANCE')">
+            </div>
 
-            <td class="text-center">
+            <!-- Database Fees -->
+            <div class="col-sm-4" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_FINANCE')">
                 <div class="custom-card">
-
                     <a th:href="@{/licenses/finance/license_finance/database_maintainance_fees/license_database_fee_list}">
-                        <img th:src="@{/images/database_maintainence_fees.png}"></a>
-                    <h4 class="license-link" style="margin-top: 12px;">
-                        <a th:href="@{/licenses/finance/license_finance/database_maintainance_fees/license_database_fee_list}" th:text="#{database_fees}"  style="font-size:20px;"></a>
-                    </h4>
-
+                        <img th:src="@{/images/database_maintainence_fees.png}" alt="Database Fees">
+                        <h4 class="mt-2" th:text="#{database_fees}">Database Fees</h4>
+                    </a>
                 </div>
-            </td>
+            </div>
 
-            <td class="text-center">
+            <!-- Guarantee Fees -->
+            <div class="col-sm-4" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_FINANCE')">
                 <div class="custom-card">
                     <a th:href="@{/licenses/finance/license_finance/guarantee_fees/license_guarantee_fee_list}">
-                        <img th:src="@{/images/guarantee_fees.png}" alt="Guarantee"></a>
-                    <h4 class="license-link" style="margin-top: 12px;">
-                        <a th:href="@{/licenses/finance/license_finance/guarantee_fees/license_guarantee_fee_list}" th:text="#{guarantee_fees}"  style="font-size:20px;"></a>
-                    </h4>
-
+                        <img th:src="@{/images/guarantee_fees.png}" alt="Guarantee Fees">
+                        <h4 class="mt-2" th:text="#{guarantee_fees}">Guarantee Fees</h4>
+                    </a>
                 </div>
-            </td>
-        </tr>
-        <tr style="border-bottom:1px solid darkgray;" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_MINISTRY')">
+            </div>
 
-            <td class="text-center">
-                <div class="custom-card" style="margin-top:-23px;">
+            <!-- MCIT Fees -->
+            <div class="col-sm-4" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_MINISTRY')">
+                <div class="custom-card">
                     <a th:href="@{/licenses/finance/mcit/license_fee_list}">
-                        <img th:src="@{/images/mcit.png}" alt="MCIT"></a>
-                    <h4 class="license-link" style="margin-top: 12px;">
-                        <a th:href="@{/licenses/finance/mcit/license_fee_list}" th:text="#{mcit}"  style="font-size:20px;"></a>
-                    </h4>
-
+                        <img th:src="@{/images/mcit.png}" alt="MCIT Fees">
+                        <h4 class="mt-2" th:text="#{mcit}">MCIT</h4>
+                    </a>
                 </div>
-            </td>
-        </tr>
-    </table>
+            </div>
+
+        </div>
     </fieldset>
-    <a th:href="@{/licenses/finance/home}" class="btn btn-primary" style="margin-top:20px;">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6" style="width:20px;height:20px;">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
+
+    <!-- ================= BACK BUTTON ================= -->
+    <a th:href="@{/licenses/finance/home}" class="btn btn-primary back-btn mt-3">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3"/>
         </svg>
-        Back to Page</a>
+        Back to Page
+    </a>
+
 </div>
 
+<!-- Common scripts -->
 <div th:replace="scripts :: common-scripts"></div>
+
 <div style="height:10vh;"></div>
 <footer th:replace="~{layout :: page_footer}"></footer>
 <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+
 </body>
 </html>
