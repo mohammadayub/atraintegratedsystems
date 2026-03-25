@@ -9,6 +9,7 @@
     <meta charset="UTF-8">
     <title>LMS Dashboard</title>
 
+    <div th:replace="styles :: common-css"></div>
     <div th:replace="styles :: commonfieldset"></div>
     <div th:replace="styles :: ltr-to-rtl"></div>
 
@@ -32,8 +33,8 @@
         }
 
         .custom-card img {
-            height: 80px;
             width: 80px;
+            height: 80px;
         }
 
         .back-btn svg {
@@ -51,7 +52,7 @@
 <div class="container mt-5" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
 
     <!-- ================= LICENSE APPLICANT MANAGEMENT ================= -->
-    <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN', 'ROLE_LICENSE', 'ROLE_LICENSE_PROFILE_ENTRY')">
+    <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_LICENSE','ROLE_LICENSE_PROFILE_ENTRY')">
         <legend th:text="#{license_applicant_management_section}">License Applicant Management</legend>
         <div class="row g-4">
             <div class="col-sm-4">
@@ -126,12 +127,14 @@
               sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_LICENSE','ROLE_LICENSE_COMPLETION_PROFILE')">
         <legend style="width:auto; font-size:1.2rem; color:#14438B; padding:0 10px; font-weight:bold;"
                 th:text="#{license_extension_management_section}">License Extension</legend>
-        <div class="col-sm-4">
-            <div class="custom-card">
-                <a th:href="@{/licenses/license/extension/extension_home}">
-                    <img th:src="@{/images/finance_extension.png}" alt="License Extension">
-                    <h4 class="mt-2" th:text="#{license_fee_extension}">License Fees Extension</h4>
-                </a>
+        <div class="row g-4">
+            <div class="col-sm-4">
+                <div class="custom-card">
+                    <a th:href="@{/licenses/license/extension/extension_home}">
+                        <img th:src="@{/images/finance_extension.png}" alt="License Extension">
+                        <h4 class="mt-2" th:text="#{license_fee_extension}">License Fees Extension</h4>
+                    </a>
+                </div>
             </div>
         </div>
     </fieldset>
@@ -141,12 +144,14 @@
               sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_LICENSE_ADMIN','ROLE_LICENSE')">
         <legend style="width:auto; font-size:1.2rem; color:#14438B; padding:0 10px; font-weight:bold;"
                 th:text="#{license_certificate_management_section}">License Certificate</legend>
-        <div class="col-sm-4">
-            <div class="custom-card">
-                <a th:href="@{#}">
-                    <img th:src="@{/images/certificate.png}" alt="Certificate Management">
-                    <h4 class="mt-2" th:text="#{license_certificate}">Certificate Management</h4>
-                </a>
+        <div class="row g-4">
+            <div class="col-sm-4">
+                <div class="custom-card">
+                    <a th:href="@{#}">
+                        <img th:src="@{/images/certificate.png}" alt="Certificate Management">
+                        <h4 class="mt-2" th:text="#{license_certificate}">Certificate Management</h4>
+                    </a>
+                </div>
             </div>
         </div>
     </fieldset>

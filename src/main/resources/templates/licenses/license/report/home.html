@@ -1,117 +1,130 @@
-<!doctype html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<!DOCTYPE html>
+<html lang="en"
+      th:lang="#{lang}"
+      th:dir="${#locale.language == 'ps' or #locale.language == 'prs' ? 'rtl' : 'ltr'}"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 
 <head th:replace="~{layout :: page_head}">
-  <meta charset="UTF-8">
-  <div th:replace="styles :: data-tables-styles"></div>
-  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
-  <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css">
-  <title>LMS - Report</title>
-  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
-  <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>LMS - Report</title>
 
-  <div th:replace="styles :: data-tables-styles"></div>
-  <div th:replace="styles :: select2-styles"></div>
-  <div th:replace="styles :: commonfieldset"></div>
-  <div th:replace="styles :: common-css"></div>
-  <style>
-    h4 a {
-        color: #14438B;
-        font-size: 20px;
-    }
-  </style>
+    <div th:replace="styles :: common-css"></div>
+    <div th:replace="styles :: commonfieldset"></div>
+    <div th:replace="styles :: data-tables-styles"></div>
+    <div th:replace="styles :: select2-styles"></div>
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+
+    <style>
+        .custom-card {
+            text-align: center;
+            padding: 20px;
+            border-radius: 12px;
+            transition: 0.3s ease;
+        }
+        .custom-card:hover {
+            transform: translateY(-5px);
+        }
+        .custom-card img {
+            width: 80px;
+            height: 80px;
+        }
+       a h4 {
+            color: #14438B;
+            font-size: 20px;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .back-btn svg {
+            width: 20px;
+            height: 20px;
+            margin-right: 5px;
+        }
+    </style>
 </head>
+
 <body>
 <nav th:replace="~{layout :: page_navbar}"></nav>
+
 <div class="container mt-5" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
-  <fieldset>
-    <legend th:text="#{general_report}"></legend>
-  <table class="table table-borderless">
-    <tr>
-      <td>
-        <div class="custom-card" >
-          <a th:href="@{/licenses/license/report/license_general_report}">
-            <img th:src="@{/images/license_report.png}" alt="Codes Management System"></a>
-          <h4 class="license-link" style="margin-top: 12px;">
-            <a th:href="@{/licenses/license/report/license_general_report}" th:text="#{license_reports}"></a>
-          </h4>
 
+    <!-- ================= GENERAL LICENSE REPORTS ================= -->
+    <fieldset>
+        <legend th:text="#{general_report}">General Report</legend>
+        <div class="row g-4">
+            <div class="col-sm-4">
+                <div class="custom-card">
+                    <a th:href="@{/licenses/license/report/license_general_report}">
+                        <img th:src="@{/images/license_report.png}" alt="License Report">
+                        <h4 th:text="#{license_reports}">License Reports</h4>
+                    </a>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="custom-card">
+                    <a th:href="@{/licenses/license/report/license_visualize_report}">
+                        <img th:src="@{/images/visualize_report.png}" alt="Visualize Report">
+                        <h4 th:text="#{visualize_report}">Visualize Report</h4>
+                    </a>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="custom-card">
+                    <a th:href="@{/licenses/license/report/license_process_followup_report}">
+                        <img th:src="@{/images/FlowProcessReport.png}" alt="Process Follow-up Report">
+                        <h4 th:text="#{process_follow_report}">Process Follow-up Report</h4>
+                    </a>
+                </div>
+            </div>
         </div>
-      </td>
-      <td>
-        <div class="custom-card" >
-          <!-- Report Link       licenses/license/report/license_general_report -->
-          <a th:href="@{/licenses/license/report/license_visualize_report}">
-            <img th:src="@{/images/visualize_report.png}" alt="Codes Management System"></a>
-          <h4 class="license-link" style="margin-top: 12px;">
-            <a th:href="@{/licenses/license/report/license_visualize_report}" th:text="#{visualize_report}"></a>
-          </h4>
+    </fieldset>
 
+    <!-- ================= GENERAL FINANCE REPORT ================= -->
+    <fieldset>
+        <legend th:text="#{general_finance_reports}">Finance Reports</legend>
+        <div class="row g-4">
+            <div class="col-sm-4">
+                <div class="custom-card">
+                    <a th:href="@{/finance/finance-report}">
+                        <img th:src="@{/images/finance_report.png}" alt="Finance Report">
+                        <h4 th:text="#{finance_report}">Finance Report</h4>
+                    </a>
+                </div>
+            </div>
         </div>
-      </td>
+    </fieldset>
 
-      <td>
-        <div class="custom-card" >
-          <!-- Report Link       licenses/license/report/license_general_report -->
-          <a th:href="@{/licenses/license/report/license_process_followup_report}">
-            <img th:src="@{/images/FlowProcessReport.png}" alt="Codes Management System"></a>
-          <h4 class="license-link" style="margin-top: 12px;">
-            <a th:href="@{/licenses/license/report/license_process_followup_report}" th:text="#{process_follow_report}"></a>
-          </h4>
-
+    <!-- ================= GENERAL LICENSE REPORT ================= -->
+    <fieldset>
+        <legend th:text="#{general_license_reports}">License Reports</legend>
+        <div class="row g-4">
+            <div class="col-sm-4">
+                <div class="custom-card">
+                    <a th:href="@{/license/license-report}">
+                        <img th:src="@{/images/license_Report_Icon.png}" alt="License Report">
+                        <h4 th:text="#{license_report}">License Report</h4>
+                    </a>
+                </div>
+            </div>
         </div>
-      </td>
-    </tr>
-  </table>
-  </fieldset>
-  <fieldset>
-    <legend th:text="#{general_finance_reports}"></legend>
-  <table class="table table-borderless">
-    <tr>
-      <td>
-      <div class="custom-card">
-<!-- Report Link       licenses/license/report/license_general_report -->
-        <a th:href="@{/finance/finance-report}">
-          <img th:src="@{/images/finance_report.png}" alt="LMS-finance"></a>
-        <h4 class="license-link" style="margin-top: 12px;">
-          <a th:href="@{/finance/finance-report}" th:text="#{finance_report}"></a>
-        </h4>
+    </fieldset>
 
-      </div>
-      </td>
-    </tr>
-  </table>
-  </fieldset>
+    <!-- ================= BACK BUTTON ================= -->
+    <a th:href="@{/licenses/index}" class="btn btn-primary back-btn mt-3">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
+        </svg>
+        Back to Page
+    </a>
 
-  <fieldset>
-    <legend th:text="#{general_license_reports}"></legend>
-    <table class="table table-borderless">
-      <tr>
-        <td>
-          <div class="custom-card">
-            <!-- Report Link       licenses/license/report/license_general_report -->
-            <a th:href="@{/license/license-report}">
-              <img th:src="@{/images/license_Report_Icon.png}"></a>
-            <h4 class="license-link" style="margin-top: 12px;">
-              <a th:href="@{/license/license-report}" th:text="#{license_report}"></a>
-            </h4>
-
-          </div>
-        </td>
-      </tr>
-    </table>
-  </fieldset>
-  <a th:href="@{/licenses/index}" class="btn btn-primary" style="margin-top:20px; margin-left:0px;">
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6" style="width:20px;height:20px;">
-      <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
-    </svg>
-    Back to Page</a>
 </div>
+
+<!-- Common scripts -->
 <div th:replace="scripts :: common-scripts"></div>
-
 <div style="height:10vh;"></div>
-
 <footer th:replace="~{layout :: page_footer}"></footer>
 <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
 </body>
