@@ -42,6 +42,9 @@
         .print-btn{
             margin-top:30px;
         }
+       th {
+             text-indent: 6px;
+          }
 
         @media print{
             .no-print{
@@ -57,17 +60,19 @@
 </head>
 
 <body>
-
+<div style="border:1px solid black;">
+    <div style="margin:30px;">
 <!-- HEADER -->
 <div class="header">
 
     <!-- Left Logo -->
     <div>
-        <img th:src="@{/images/islami_emarat.png}">
+        <img th:src="@{/images/EmarateIslamiLogoForCode.png}" width="130px" height="130px">
     </div>
 
     <!-- Center Text -->
     <div class="header-center">
+        <b>
         امارت اسلامی افغانستان<br>
         وزارت مخابرات و تکنالوجی معلوماتی<br>
         اداره تنظیم خدمات مخابراتی افغانستان (اترا)<br>
@@ -76,18 +81,19 @@
         Afghanistan Telecommunication Regulatory Authority<br>
         Standardization Department<br>
         فورمه ثبت و راجستریشن و توزیع SMS IDENTIFIER<br>
+        </b>
 
     </div>
 
     <!-- Right Logo -->
     <div style="text-align:center">
-        <img th:src="@{/images/atra_afghanistan.png}">
+        <img th:src="@{/images/AtraLogoForCode.png}" width="130px" height="130px">
     </div>
 
 </div>
 
 <!-- TABLE -->
-<p>مسلسل نمبر : <span th:text="${detail.id}"></span></p>
+<p>مسلسل نمبر : <span th:text="${detail.serialNumber}"></span></p>
 <table>
 
     <tr>
@@ -189,41 +195,50 @@
         <th>4</th>
         <th>تاریخ تخصیص شارت کود</th>
         <td th:text="${detail.assigningDateJalali}"></td>
+        <td></td>
+    </tr>
+    <tr>
+        <th>5</th>
+        <th>تاریخ انقضا شارت کود</th>
         <td th:text="${detail.expirationDateJalali}"></td>
+        <td></td>
     </tr>
 </table>
-
+        <p> <b> نمبر تماس آمریت ستندرد ها : 0202105968</b> </p>
+        <br>
 <div>
-    <p>اینجانب
+    <b>
+    اینجانب
     (<span th:text="${detail.responsiblePerson}"></span>)
     وظیفه
     (<span th:text="${detail.job}"></span>)
     نماینده
     (<span th:text="${detail.companyName}"></span>)
     تقاضا مینمایم تا شارت کود فوق الذکر را طبق مقررات برایم توزیع نماید.
-    </p>
-</div>
-<div>
-    <p>امضا و تاریخ درخواست کننده ..............</p>
-</div>
-<div>
-    <p>شارت کود
+    <br>
+    امضا و تاریخ درخواست کننده: ................
+    <br>شارت کود
     (<span th:text="${detail.smsIdentifierCodeName}"></span>)
      دربدل
      (<span th:text="${detail.applicationFees}"></span>)
      افغانی فیس درخواست یک مرتبه ، مبلغ
      (<span th:text="${detail.royaltyFees}"></span>)
      افغانی فیس حق الامتیاز یک مرتبه و فیس سالانه مبلغ
-    (<span>4000</span>)
+    (<span>5000</span>)
     افغانی برای مرجع درخواست کننده توزیع گردید.
-    </p>
+
+    </b>
 </div>
 
-<div>
+<div style="margin-top:30px;">
+    <b>
     <span>ترتیب کننده</span>
     <span style="margin-right:150px;margin-left:150px;">تیم لیدر شماره ها</span>
     <span>آمر ستندردها</span>
+    </b>
 </div>
+        <br>
+        <br>
 <!-- PRINT BUTTON -->
 
 <div class="print-btn no-print" style="text-align:center; margin:20px 0;">
@@ -246,6 +261,7 @@
         🖨 Print
     </button>
 </div>
-
+    </div>
+</div>
 </body>
 </html>

@@ -42,6 +42,9 @@
         .print-btn{
             margin-top:30px;
         }
+        th {
+             text-indent: 6px;
+          }
 
         @media print{
             .no-print{
@@ -65,7 +68,7 @@
 
     <!-- Left Logo -->
     <div>
-        <img th:src="@{/images/islami_emarat.png}">
+        <img th:src="@{/images/EmarateIslamiLogoForCode.png}" width="130px" height="130px">
     </div>
 
     <!-- Center Text -->
@@ -84,7 +87,7 @@
 
     <!-- Right Logo -->
     <div style="text-align:center">
-        <img th:src="@{/images/atra_afghanistan.png}">
+        <img th:src="@{/images/AtraLogoForCode.png}" width="130px" height="130px">
     </div>
 
 </div>
@@ -212,9 +215,10 @@
 </table>
 
        <p> <b> نمبر تماس آمریت ستندرد ها : 0202105968</b> </p>
+        <br>
 
 <div>
-    <p>
+       <b>
         اینجانب
         (<span th:text="${code.nameOfResponsiblePerson}"></span>)
         وظیفه
@@ -223,14 +227,12 @@
         (<span th:text="${code.sourceUsed}"></span>)
         تقاضا مینمایم تا شارت کود فوق الذکر طبق مقررات برایم تخصیص داده شود.
         <br>
-    </p>
-</div>
-<div>
-    <p>امضا و تاریخ درخواست کننده ..............</p>
-</div>
 
-<div>
-    <p>شارت کود
+
+    امضا و تاریخ درخواست کننده ..............
+
+    <br>
+    شارت کود
         (<span th:text="${code.shortCode.shortCodeName}"></span>)
         دربدل
         (<span th:text="${code.applicationFees}"></span>)
@@ -239,17 +241,17 @@
         افغانی فیس حق الامتیاز یک مرتبه و فیس سالانه مبلغ
         (<span>4000</span>)
         افغانی برای مرجع درخواست کننده توزیع گردید.
-    </p>
+       </b>
 </div>
 
 <br>
-
-<div>
+<div style="margin-top:10px;">
+    <b>
     <span>ترتیب کننده</span>
     <span style="margin-right:150px;margin-left:150px;">تیم لیدر شماره ها</span>
     <span>آمر ستندردها</span>
+    </b>
 </div>
-
 <!-- PRINT BUTTON -->
 
 <div class="print-btn no-print" style="text-align:center; margin:20px 0;">

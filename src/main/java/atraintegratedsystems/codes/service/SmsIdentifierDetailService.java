@@ -124,6 +124,7 @@ public class SmsIdentifierDetailService {
 
         e.setCompanyName(dto.getCompanyName());
         e.setCompanyNameInDari(dto.getCompanyNameInDari());
+        e.setSerialNumber(dto.getSerialNumber());
         e.setResponsiblePerson(dto.getResponsiblePerson());   // ✅ ADD
         e.setJob(dto.getJob());
         e.setEnid(dto.getEnid());
@@ -135,6 +136,7 @@ public class SmsIdentifierDetailService {
         e.setServiceType(dto.getServiceType());
         e.setMnosCompanyHost(dto.getMnosCompanyHost());
         e.setCodeCategory(dto.getCodeCategory());
+
 
 //        e.setAssigningDate(dto.getAssigningDate());
 
@@ -204,6 +206,7 @@ public class SmsIdentifierDetailService {
 
         dto.setId(e.getId());
         dto.setCompanyName(e.getCompanyName());
+        dto.setSerialNumber(e.getSerialNumber());
         dto.setResponsiblePerson(e.getResponsiblePerson());
         dto.setJob(e.getJob());
         dto.setEnid(e.getEnid());
@@ -217,6 +220,7 @@ public class SmsIdentifierDetailService {
         dto.setCodeCategory(e.getCodeCategory());
         dto.setApplicationFees(e.getApplicationFees());
         dto.setRoyaltyFees(e.getRoyaltyFees());
+
 
         if (e.getSmsIdentifierCode() != null) {
             dto.setSmsIdentifierCodeId(e.getSmsIdentifierCode().getId());
