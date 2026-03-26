@@ -26,7 +26,7 @@ public class SmsIdentifierExtensionDTO {
 
     // For Finance Departpemtn
     // Bellow is Application Fee Extension Fields
-    private double extendedFees;
+    private double extendedFees=4000;
     private String extensionBankVoucherNo;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate extensionEnteryVoucherDate;

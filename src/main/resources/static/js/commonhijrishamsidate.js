@@ -5,7 +5,8 @@ $('.hijrishamsi').persianDatepicker({
         calendar: {
             persian: {
                 locale: 'en',
-                leapYearMode: 'astronomical'
+                leapYearMode: 'algorithmic'
             }
         }
     });
+

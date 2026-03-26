@@ -92,7 +92,7 @@
 
 </div>
 
-<p>مسلسل نمبر : <span th:text="${code.id}"></span></p>
+<p>مسلسل نمبر : <span th:text="${code.serialNumber}"></span></p>
 
 <table>
 
@@ -105,7 +105,7 @@
     <tr>
         <th>1</th>
         <th>نام شرکت / متفاضی</th>
-        <td th:text="${code.sourceUsed}"></td>
+        <td th:text="${code.sourceUsedInDari}"></td>
         <td></td>
     </tr>
 
@@ -151,12 +151,12 @@
         <td th:text="${code.category}" ></td>
     </tr>
 
-    <tr>
-        <th>2</th>
-        <th>سریال نمبر</th>
-        <td th:text="${code.serialNumber}"></td>
-        <td></td>
-    </tr>
+<!--    <tr>-->
+<!--        <th>2</th>-->
+<!--        <th>سریال نمبر</th>-->
+<!--        <td th:text="${code.serialNumber}"></td>-->
+<!--        <td></td>-->
+<!--    </tr>-->
 
     <tr>
         <th>3</th>

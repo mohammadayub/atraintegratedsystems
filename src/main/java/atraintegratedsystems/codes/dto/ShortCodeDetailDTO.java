@@ -30,8 +30,10 @@ public class ShortCodeDetailDTO {
     private String job;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate assigningDate;
+    private String assigningDateJalali;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate expirationDate;
+    private String expirationDateJalali;
     private double applicationFees;
 
     // Short Code Rejection Section

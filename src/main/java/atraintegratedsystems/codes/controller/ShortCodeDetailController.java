@@ -10,6 +10,7 @@ import atraintegratedsystems.licenses.model.LicenseApplicant;
 import atraintegratedsystems.licenses.repository.LicenseApplicantRepository;
 import atraintegratedsystems.licenses.service.LicenseApplicantService;
 import atraintegratedsystems.utils.DateConverter;
+import atraintegratedsystems.utils.PersianCalendarUtils;
 import atraintegratedsystems.utils.SerialGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +19,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.Optional;
 
 @Controller
@@ -178,30 +180,83 @@ public class ShortCodeDetailController {
 
 
 
-        // =====================================================
-        // DATE CONVERSION
-        // =====================================================
-        DateConverter dc = new DateConverter();
+// DATE CONVERSION USING PersianCalendarUtils
+// =====================================================
+        PersianCalendarUtils converter = new PersianCalendarUtils();
 
-        if (dto.getAssigningDate() != null) {
-            codeDetail.setAssigningDate(
-                    dc.jalaliToGregorian(
-                            dto.getAssigningDate().getYear(),
-                            dto.getAssigningDate().getMonthValue(),
-                            dto.getAssigningDate().getDayOfMonth()
-                    )
-            );
+// ================= ENTRY VOUCHER DATE =================
+        if (dto.getAssigningDateJalali() != null &&
+                !dto.getAssigningDateJalali().trim().isEmpty()) {
+
+            String[] parts = dto.getAssigningDateJalali().trim().split("-");
+            if (parts.length == 3) {
+                try {
+                    int year = Integer.parseInt(parts[0]);
+                    int month = Integer.parseInt(parts[1]);
+                    int day = Integer.parseInt(parts[2]);
+
+                    // Convert Jalali to Gregorian
+                    LocalDate assigningDate = converter.jalaliToGregorian(year, month, day);
+                    codeDetail.setAssigningDate(assigningDate); // ✅ Save as LocalDate
+                } catch (NumberFormatException ex) {
+                    // Handle invalid number format
+                    System.err.println("Invalid Jalali date format: " + dto.getAssigningDateJalali());
+                } catch (IllegalArgumentException ex) {
+                    // Handle invalid Jalali date (like 31 in a 30-day month)
+                    System.err.println("Invalid Jalali date: " + dto.getAssigningDateJalali());
+                }
+            }
         }
 
-        if (dto.getExpirationDate() != null) {
-            codeDetail.setExpirationDate(
-                    dc.jalaliToGregorian(
-                            dto.getExpirationDate().getYear(),
-                            dto.getExpirationDate().getMonthValue(),
-                            dto.getExpirationDate().getDayOfMonth()
-                    )
-            );
+// ================= EXPIRATION DATE =================
+        if (dto.getExpirationDateJalali() != null &&
+                !dto.getExpirationDateJalali().trim().isEmpty()) {
+
+            String[] parts = dto.getExpirationDateJalali().trim().split("-");
+            if (parts.length == 3) {
+                try {
+                    int year = Integer.parseInt(parts[0]);
+                    int month = Integer.parseInt(parts[1]);
+                    int day = Integer.parseInt(parts[2]);
+
+                    // Convert Jalali to Gregorian
+                    LocalDate expirationDate = converter.jalaliToGregorian(year, month, day);
+                    codeDetail.setExpirationDate(expirationDate); // ✅ Save as LocalDate
+                } catch (NumberFormatException ex) {
+                    System.err.println("Invalid Jalali date format: " + dto.getExpirationDateJalali());
+                } catch (IllegalArgumentException ex) {
+                    System.err.println("Invalid Jalali date: " + dto.getExpirationDateJalali());
+                }
+            }
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
