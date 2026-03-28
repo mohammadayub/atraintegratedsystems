@@ -105,12 +105,12 @@
     <tr>
         <th>1</th>
         <th>نام شرکت متقاضي</th>
-        <td th:text="${detail.companyName}"></td>
+        <td th:text="${detail.companyNameInDari}"></td>
         <td></td>
     </tr>
     <tr>
         <th>2</th>
-        <th>تذکره</th>
+        <th>نمبر تذکره</th>
         <td th:text="${detail.enid}"></td>
         <td></td>
     </tr>
@@ -128,7 +128,7 @@
     </tr>
     <tr>
         <th>5</th>
-        <th>شماره تلیفون دیجیتل</th>
+        <th>شماره تیلفون دیجیتل</th>
         <td th:text="${detail.telephone}"></td>
         <td></td>
     </tr>
@@ -152,25 +152,25 @@
     </tr>
     <tr>
         <th>د</th>
-        <th>مشخصات کود</th>
+        <th>مشخصات SMS Identifier</th>
         <td></td>
         <td></td>
     </tr>
     <tr>
         <th>1</th>
-        <th>کتگوری شارت کود</th>
+        <th>کتگوری SMS Identifier</th>
         <td th:text="${detail.codeCategory}"></td>
         <td></td>
     </tr>
     <tr>
         <th>2</th>
-        <th>شماره کود</th>
+        <th>شماره SMS Identifier</th>
         <td th:text="${detail.smsIdentifierCodeName}"></td>
         <td></td>
     </tr>
     <tr>
         <th>ذ</th>
-        <th colspan="2" style="text-align:center;">فیس و تاریخ توزیع شارت کود</th>
+        <th colspan="2" style="text-align:center;">فیس و تاریخ توزیع SMS Identifier</th>
         <td></td>
     </tr>
     <tr>
@@ -181,7 +181,7 @@
     </tr>
     <tr>
         <th>2</th>
-        <th>فیس خق الامتیاز شارت کود یک مرتبه</th>
+        <th>فیس خق الامتیاز SMS Identifier یک مرتبه</th>
         <td th:text="${detail.royaltyFees}"></td>
         <td></td>
     </tr>
@@ -193,13 +193,13 @@
     </tr>
     <tr>
         <th>4</th>
-        <th>تاریخ تخصیص شارت کود</th>
+        <th>تاریخ تخصیص SMS Identifier</th>
         <td th:text="${detail.assigningDateJalali}"></td>
         <td></td>
     </tr>
     <tr>
         <th>5</th>
-        <th>تاریخ انقضا شارت کود</th>
+        <th>تاریخ انقضا SMS Identifier</th>
         <td th:text="${detail.expirationDateJalali}"></td>
         <td></td>
     </tr>
@@ -213,11 +213,11 @@
     وظیفه
     (<span th:text="${detail.job}"></span>)
     نماینده
-    (<span th:text="${detail.companyName}"></span>)
-    تقاضا مینمایم تا شارت کود فوق الذکر را طبق مقررات برایم توزیع نماید.
+    (<span th:text="${detail.companyNameInDari}"></span>)
+    تقاضا مینمایم تا SMS Identifier فوق الذکر را طبق مقررات برایم توزیع نماید.
     <br>
     امضا و تاریخ درخواست کننده: ................
-    <br>شارت کود
+    <br>SMS Identifier
     (<span th:text="${detail.smsIdentifierCodeName}"></span>)
      دربدل
      (<span th:text="${detail.applicationFees}"></span>)

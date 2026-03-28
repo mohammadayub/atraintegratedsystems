@@ -1,74 +1,78 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      th:lang="#{lang}">
+      th:lang="#{lang}"
+      th:dir="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'rtl' : 'ltr'">
 
-<head th:replace="~{codes_layout :: page_head}">
-    <title>SMS Identifier Extension List</title>
+<head>
+    <title>SMS Identifier Extension Paid List</title>
 
-    <!-- Include Styles -->
-    <div th:replace="styles :: data-tables-styles"></div>
-    <div th:replace="styles :: common-css"></div>
-    <div th:replace="styles :: commonfieldset-with-legend-border"></div>
+    <!-- Layout Head -->
+    <th:block th:replace="~{codes_layout :: page_head}"></th:block>
+
+    <!-- Styles -->
+    <th:block th:replace="styles :: data-tables-styles"></th:block>
+    <th:block th:replace="styles :: common-css"></th:block>
+    <th:block th:replace="styles :: commonfieldset-with-legend-border"></th:block>
 </head>
 
 <body>
-<nav th:replace="~{codes_layout :: page_navbar}"></nav>
 
-<div class="container-fluid"
+<!-- Navbar -->
+<th:block th:replace="~{codes_layout :: page_navbar}"></th:block>
+
+<div class="container-fluid mt-4"
      th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
 
     <fieldset class="commonfieldset-with-legend-border">
         <legend>SMS Identifier Extension Paid List</legend>
 
-        <div class="table-container">
-            <table class="slip table table-bordered table-striped table-hover"
-                   id="profileTable"
-                   style="width:100%">
+        <div class="table-responsive">
+            <table id="profileTable" class="table table-bordered table-striped table-hover w-100">
 
-                <thead>
-                <tr class="bg-primary text-white">
+                <thead class="bg-primary text-white">
+                <tr>
                     <th>#</th>
                     <th>Code Name</th>
                     <th>Company</th>
                     <th>Mobile</th>
-                    <th>Email</th>
-                    <th>Assign Date</th>
-                    <th>Expire Date</th>
-                    <th>Extension Start</th>
-                    <th>Extension Expire</th>
+                    <th>Start Date (Jalali)</th>
+                    <th>Expire Date (Jalali)</th>
                     <th>Extended Fee</th>
                     <th>Voucher No</th>
-                    <th>Payment Status</th>
+                    <th>Status</th>
                     <th>Action</th>
                 </tr>
                 </thead>
 
                 <tbody>
-                <tr th:each="ext, iStat : ${extensions}">
-                    <td th:text="${iStat.count}">1</td>
+                <tr th:each="ext, stat : ${extensions}">
 
-                    <td th:text="${ext.smsIdentifierCodeName}"></td>
-                    <td th:text="${ext.companyName}"></td>
-                    <td th:text="${ext.mobile}"></td>
-                    <td th:text="${ext.email}"></td>
+                    <td th:text="${stat.count}">1</td>
 
-                    <td th:text="${ext.assigningDate}"></td>
-                    <td th:text="${ext.expirationDate}"></td>
+                    <td th:text="${ext.smsIdentifierCodeName != null ? ext.smsIdentifierCodeName : '-'}"></td>
+                    <td th:text="${ext.companyName != null ? ext.companyName : '-'}"></td>
+                    <td th:text="${ext.mobile != null ? ext.mobile : '-'}"></td>
 
-                    <td th:text="${ext.extensionStartDate}"></td>
-                    <td th:text="${ext.extentionExpirationDate}"></td>
+                    <td th:text="${ext.extensionStartDateJalali != null ? ext.extensionStartDateJalali : '-'}"></td>
+                    <td th:text="${ext.extentionExpirationDateJalali != null ? ext.extentionExpirationDateJalali : '-'}"></td>
 
-                    <td th:text="${ext.extendedFees}"></td>
-                    <td th:text="${ext.extensionBankVoucherNo}"></td>
-                    <td th:text="${ext.extensionPaymentStatus}"></td>
+                    <td th:text="${ext.extendedFees + ' AFN'}"></td>
+                   <td th:text="${ext.extensionBankVoucherNo != null ? ext.extensionBankVoucherNo : '-'}"></td>
 
                     <td>
-                        <a class="btn btn-success btn-sm"
-                           th:href="@{/sms/extensions/print/{id}(id=${ext.detailId})}"
+                        <span th:text="${ext.extensionPaymentStatus != null ? ext.extensionPaymentStatus : 'UNKNOWN'}"
+                              th:classappend="${ext.extensionPaymentStatus == 'PAID'} ? 'badge bg-success' : 'badge bg-warning text-dark'">
+                        </span>
+                    </td>
+
+                    <td>
+                        <a th:href="@{/sms/extensions/print/{id}(id=${ext.detailId})}"
+                           class="btn btn-success btn-sm"
                            target="_blank">
                             🖨 Print
                         </a>
                     </td>
+
                 </tr>
                 </tbody>
 
@@ -76,22 +80,21 @@
         </div>
     </fieldset>
 
-    <a th:href="@{/sms}"
-       class="btn btn-primary mt-3">
-        ← Back to Page
-    </a>
+    <div class="mt-3">
+        <a th:href="@{/sms}" class="btn btn-primary">
+            ← Back
+        </a>
+    </div>
 
 </div>
 
 <!-- Scripts -->
-<div th:replace="scripts :: common-scripts"></div>
-<div th:replace="scripts :: data-tables-scripts"></div>
-<div th:replace="scripts :: common-datatable"></div>
+<th:block th:replace="scripts :: common-scripts"></th:block>
+<th:block th:replace="scripts :: data-tables-scripts"></th:block>
+<th:block th:replace="scripts :: common-datatable"></th:block>
 
-<div style="height:10vh;"></div>
-<footer th:replace="~{codes_layout :: page_footer}"></footer>
-
-<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+<!-- Footer -->
+<th:block th:replace="~{codes_layout :: page_footer}"></th:block>
 
 </body>
 </html>

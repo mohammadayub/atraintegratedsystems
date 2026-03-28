@@ -206,6 +206,7 @@ public class SmsIdentifierDetailService {
 
         dto.setId(e.getId());
         dto.setCompanyName(e.getCompanyName());
+        dto.setCompanyNameInDari(e.getCompanyNameInDari());
         dto.setSerialNumber(e.getSerialNumber());
         dto.setResponsiblePerson(e.getResponsiblePerson());
         dto.setJob(e.getJob());

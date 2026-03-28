@@ -5,13 +5,13 @@
 <head th:replace="~{codes_layout :: page_head}">
     <title>Short Code Extension Paid List</title>
 
-    <!-- Include Styles -->
     <div th:replace="styles :: data-tables-styles"></div>
     <div th:replace="styles :: common-css"></div>
     <div th:replace="styles :: commonfieldset-with-legend-border"></div>
 </head>
 
 <body>
+
 <nav th:replace="~{codes_layout :: page_navbar}"></nav>
 
 <div class="container-fluid"
@@ -21,54 +21,88 @@
         <legend>Short Code Extension Paid List</legend>
 
         <div class="table-container">
+
             <table class="slip table table-bordered table-striped table-hover"
                    id="profileTable"
                    style="width:100%">
 
+                <!-- ================= HEADER ================= -->
                 <thead>
                 <tr class="bg-primary text-white">
                     <th>#</th>
-                    <th>Code Detail ID</th>
+                    <th>ID</th>
                     <th>Short Code</th>
+                    <th>Serial</th>
                     <th>Status</th>
-                    <th>Source</th>
+                    <th>Company</th>
                     <th>Location</th>
-                    <th>Category Type</th>
                     <th>Category</th>
                     <th>Channel</th>
-                    <th>Email</th>
-                    <th>Extension Date (Jalali)</th>
-                    <th>Expiration Date (Jalali)</th>
-                    <th>Entry Voucher Date (Jalali)</th>
-                    <th>Bank Voucher Submission Date (Jalali)</th>
-                    <th>Extended Fee</th>
+                    <th>Responsible</th>
+                    <th>Mobile</th>
+                    <th>Assign Date</th>
+                    <th>Expire Date</th>
+                    <th>Ext Date</th>
+                    <th>Ext Expire</th>
+                    <th>Fee</th>
                     <th>Voucher No</th>
-                    <th>Payment Status</th>
+                    <th>Payment</th>
                     <th>Action</th>
                 </tr>
                 </thead>
 
+                <!-- ================= BODY ================= -->
                 <tbody>
+
                 <tr th:each="ext, iStat : ${extensions}">
+
                     <td th:text="${iStat.count}">1</td>
-                    <td th:text="${ext.codeDetailId}">ID</td>
-                    <td th:text="${ext.shortCodeName}">Short Code</td>
-                    <td th:text="${ext.codeStatus}">Status</td>
-                    <td th:text="${ext.sourceUsed}">Source</td>
-                    <td th:text="${ext.location}">Location</td>
-                    <td th:text="${ext.categoryType}">Category Type</td>
-                    <td th:text="${ext.category}">Category</td>
-                    <td th:text="${ext.chanel}">Channel</td>
-                    <td th:text="${ext.emailOfResponsiblePerson}">Email</td>
 
-                    <td th:text="${ext.extendedFeeExtensionDateJalali}"></td>
-                    <td th:text="${ext.extendedFeeExtensionExpirationDateJalali}"></td>
-                    <td th:text="${ext.extendedFeeExtensionEntryVoucherDateJalali}"></td>
-                    <td th:text="${ext.extendedFeeExtensionBankVoucherSubmissionDateJalali}"></td>
+                    <td th:text="${ext.codeDetailId} ?: '-'"></td>
 
-                    <td th:text="${ext.extendedFees}"></td>
-                    <td th:text="${ext.extendedFeeExtensionBankVoucherNo}"></td>
-                    <td th:text="${ext.extendedFeeExtensionPaymentStatus}"></td>
+                    <td th:text="${ext.shortCodeName} ?: '-'"></td>
+
+                    <td th:text="${ext.serialNumber} ?: '-'"></td>
+
+                    <td th:text="${ext.codeStatus} ?: '-'"></td>
+
+                    <td th:text="${ext.sourceUsed} ?: '-'"></td>
+
+                    <td th:text="${ext.location} ?: '-'"></td>
+
+                    <td th:text="${ext.category} ?: '-'"></td>
+
+                    <td th:text="${ext.chanel} ?: '-'"></td>
+
+                    <td th:text="${ext.nameOfResponsiblePerson} ?: '-'"></td>
+
+                    <td th:text="${ext.mobileNumberOfResponsiblePerson} ?: '-'"></td>
+
+                    <td th:text="${ext.assigningDateJalali} ?: '-'"></td>
+
+                    <td th:text="${ext.expirationDateJalali} ?: '-'"></td>
+
+                    <td th:text="${ext.extendedFeeExtensionDateJalali} ?: '-'"></td>
+
+                    <td th:text="${ext.extendedFeeExtensionExpirationDateJalali} ?: '-'"></td>
+
+                    <td th:text="${ext.extendedFees} ?: '0'"></td>
+
+                    <td th:text="${ext.extendedFeeExtensionBankVoucherNo} ?: '-'"></td>
+
+                    <td>
+                        <span class="badge bg-success"
+                              th:if="${ext.extendedFeeExtensionPaymentStatus == 'PAID'}">
+                            PAID
+                        </span>
+
+                        <span class="badge bg-warning"
+                              th:if="${ext.extendedFeeExtensionPaymentStatus != 'PAID'}">
+                            PENDING
+                        </span>
+                    </td>
+
+                    <!-- ACTION -->
                     <td>
                         <a class="btn btn-success btn-sm"
                            th:href="@{/codes/extended/extensions/print/{id}(id=${ext.codeDetailId})}"
@@ -78,25 +112,26 @@
                     </td>
 
                 </tr>
+
                 </tbody>
 
             </table>
+
         </div>
     </fieldset>
 
-    <a th:href="@{/codes}"
-       class="btn btn-primary mt-3">
+    <!-- BACK BUTTON -->
+    <a th:href="@{/codes}" class="btn btn-primary mt-3">
         ← Back to Page
     </a>
 
 </div>
 
-<!-- Scripts -->
+<!-- ================= SCRIPTS ================= -->
 <div th:replace="scripts :: common-scripts"></div>
 <div th:replace="scripts :: data-tables-scripts"></div>
 <div th:replace="scripts :: common-datatable"></div>
 
-<div style="height:10vh;"></div>
 <footer th:replace="~{codes_layout :: page_footer}"></footer>
 
 <script th:src="@{/js/bootstrap.bundle.min.js}"></script>

@@ -35,8 +35,12 @@
 
     th,td{
         border:1px solid #000;
-        padding:6px;
+        padding:2px;
         text-align:right;
+    }
+
+    th {
+        text-indent: 6px;
     }
 
     .print-btn{
@@ -57,17 +61,18 @@
 </head>
 
 <body>
-
 <div style="border:1px solid black;">
   <div style="margin:30px;">
 
     <!-- HEADER -->
     <div class="header">
 
+      <!-- Left Logo -->
       <div>
-        <img th:src="@{/images/islami_emarat.png}">
+        <img th:src="@{/images/EmarateIslamiLogoForCode.png}" width="130px" height="130px">
       </div>
 
+      <!-- Center Text -->
       <div class="header-center">
         <b>
           امارت اسلامی افغانستان<br>
@@ -77,52 +82,93 @@
           آمریت ستندردها<br>
           Afghanistan Telecommunication Regulatory Authority<br>
           Standardization Department<br>
-          فورمه تمدید SMS Identifier
+          فورمه تمدید SMS IDENTIFIER<br>
         </b>
       </div>
 
+      <!-- Right Logo -->
       <div style="text-align:center">
-        <img th:src="@{/images/atra_afghanistan.png}">
+        <img th:src="@{/images/AtraLogoForCode.png}" width="130px" height="130px">
       </div>
 
     </div>
 
     <!-- SERIAL -->
-    <p>مسلسل نمبر : <span th:text="${ext.detailId}"></span></p>
+    <p>
+      مسلسل نمبر :
+      <span th:text="${ext.serialNumber}"></span>
+    </p>
 
+    <!-- TABLE -->
     <table>
 
-      <!-- COMPANY INFO -->
+      <!-- COMPANY -->
       <tr>
         <th style="text-align:center;">الف</th>
-        <th colspan="2" style="text-align:center;">معلومات شرکت</th>
-        <th>ملاحظات</th>
+        <th colspan="2" style="text-align:center;"> شهرت متقاضي</th>
+        <th style="text-align:center;">ملاحظات</th>
       </tr>
 
       <tr>
         <th>1</th>
-        <th>نام شرکت</th>
+        <th>نام شرکت متقاضي</th>
         <td th:text="${ext.companyName}"></td>
         <td></td>
       </tr>
 
       <tr>
         <th>2</th>
-        <th>ایمیل</th>
-        <td th:text="${ext.email}"></td>
+        <th>نمبر تذکره</th>
+        <td th:text="${ext.enid}"></td>
         <td></td>
       </tr>
 
       <tr>
         <th>3</th>
-        <th>شماره تماس</th>
+        <th>آدرس دفتر</th>
+        <td th:text="${ext.companyAddress}"></td>
+        <td></td>
+      </tr>
+
+      <tr>
+        <th>4</th>
+        <th>شماره موبایل</th>
         <td th:text="${ext.mobile}"></td>
         <td></td>
       </tr>
 
-      <!-- CODE INFO -->
+      <tr>
+        <th>5</th>
+        <th>شماره تیلفون دیجیتل</th>
+        <td th:text="${ext.telephone}"></td>
+        <td></td>
+      </tr>
+
+      <tr>
+        <th>6</th>
+        <th>آدرس آیمیل</th>
+        <td th:text="${ext.email}"></td>
+        <td></td>
+      </tr>
+
+      <!-- SERVICE -->
       <tr>
         <th>ب</th>
+        <th>نوع خدمات</th>
+        <td th:text="${ext.serviceType}"></td>
+        <td></td>
+      </tr>
+
+      <tr>
+        <th>ج</th>
+        <th>شرکت های مخابراتی میزبان شارت کود</th>
+        <td th:text="${ext.mnosCompanyHost}"></td>
+        <td></td>
+      </tr>
+
+      <!-- IDENTIFIER -->
+      <tr>
+        <th>د</th>
         <th>مشخصات SMS Identifier</th>
         <td></td>
         <td></td>
@@ -130,15 +176,22 @@
 
       <tr>
         <th>1</th>
-        <th>نام کود</th>
+        <th>کتگوری SMS Identifier</th>
+        <td th:text="${ext.codeCategory}"></td>
+        <td></td>
+      </tr>
+
+      <tr>
+        <th>2</th>
+        <th>شماره SMS Identifier</th>
         <td th:text="${ext.smsIdentifierCodeName}"></td>
         <td></td>
       </tr>
 
-      <!-- FEES -->
+      <!-- FEES + EXTENSION -->
       <tr>
-        <th>ج</th>
-        <th colspan="2" style="text-align:center;">فیس و تاریخ</th>
+        <th>ذ</th>
+        <th colspan="2" style="text-align:center;">فیس و تاریخ تمدید</th>
         <td></td>
       </tr>
 
@@ -151,56 +204,74 @@
 
       <tr>
         <th>2</th>
-        <th>تاریخ شروع تمدید</th>
-        <td th:text="${ext.extensionStartDate}"></td>
+        <th>نمبر وچر بانک</th>
+        <td th:text="${ext.extensionBankVoucherNo}"></td>
         <td></td>
       </tr>
 
       <tr>
         <th>3</th>
-        <th>تاریخ انقضا</th>
-        <td th:text="${ext.extentionExpirationDate}"></td>
+        <th>تاریخ شروع تمدید</th>
+        <td th:text="${ext.extensionStartDateJalali}"></td>
+        <td></td>
+      </tr>
+
+      <tr>
+        <th>4</th>
+        <th>تاریخ ختم تمدید</th>
+        <td th:text="${ext.extentionExpirationDateJalali}"></td>
         <td></td>
       </tr>
 
     </table>
 
-    <p><b> نمبر تماس آمریت ستندرد ها : 0202105968</b></p>
-
-    <!-- DESCRIPTION -->
-    <div>
-      <p>
-        SMS Identifier
-        (<span th:text="${ext.smsIdentifierCodeName}"></span>)
-        برای شرکت
-        (<span th:text="${ext.companyName}"></span>)
-        تمدید گردید.
-      </p>
-    </div>
-
     <br>
-
+    <p> <b> نمبر تماس آمریت ستندرد ها : 0202105968</b> </p>
+    <br>
     <div>
-      <span>ترتیب کننده</span>
-      <span style="margin-right:150px;margin-left:150px;">تیم لیدر</span>
-      <span>آمر ستندردها</span>
+      <b>
+        اینجانب
+        (<span th:text="${ext.responsiblePerson}"></span>)
+        وظیفه
+        (<span th:text="${ext.job}"></span>)
+        نماینده
+        (<span th:text="${ext.companyNameInDari}"></span>)
+        تقاضا مینمایم تا SMS Identifier فوق الذکر را طبق مقررات برایم توزیع نماید.
+        <br>
+        امضا و تاریخ درخواست کننده: ................
+        <br><span>SMS Identifier</span>
+        (<span th:text="${ext.smsIdentifierCodeName}"></span>)
+        دربدل
+        ( 4000 )
+        افغانی فیس تمدید سالانه برای مرجع درخواست کننده تمدید شد.
+
+      </b>
     </div>
 
+    <div style="margin-top:30px;">
+      <b>
+        <span>ترتیب کننده</span>
+        <span style="margin-right:150px;margin-left:150px;">تیم لیدر شماره ها</span>
+        <span>آمر ستندردها</span>
+      </b>
+    </div>
+    <br>
+    <br>
     <!-- PRINT BUTTON -->
     <div class="print-btn no-print" style="text-align:center; margin:20px 0;">
       <button onclick="window.print()"
               style="
-        background-color:#2c3e50;
-        color:white;
-        padding:10px 28px;
-        font-size:15px;
-        font-weight:600;
-        border:none;
-        border-radius:8px;
-        cursor:pointer;
-        box-shadow:0 4px 10px rgba(0,0,0,0.15);
-        transition:all 0.2s ease;
-    "
+            background-color:#2c3e50;
+            color:white;
+            padding:10px 28px;
+            font-size:15px;
+            font-weight:600;
+            border:none;
+            border-radius:8px;
+            cursor:pointer;
+            box-shadow:0 4px 10px rgba(0,0,0,0.15);
+            transition:all 0.2s ease;
+        "
               onmouseover="this.style.backgroundColor='#34495e'; this.style.transform='translateY(-2px)';"
               onmouseout="this.style.backgroundColor='#2c3e50'; this.style.transform='translateY(0)';"
       >

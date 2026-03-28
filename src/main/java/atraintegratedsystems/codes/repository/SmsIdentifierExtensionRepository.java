@@ -5,73 +5,109 @@ import atraintegratedsystems.codes.model.SmsIdentifierExtension;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
 public interface SmsIdentifierExtensionRepository extends JpaRepository<SmsIdentifierExtension, Long> {
 
-    // ✅ Get all PAID extensions (like your example)
     @Query("SELECT new atraintegratedsystems.codes.dto.SmsIdentifierExtensionViewDTO(" +
             "d.id, " +
             "c.smsIdentifierCodeName, " +
+            "d.serialNumber, " +
             "d.companyName, " +
+            "d.companyNameInDari, " +
+            "d.enid, " +
+            "d.companyAddress, " +
+            "d.responsiblePerson, " +
+            "d.job, " +
             "d.mobile, " +
+            "d.telephone, " +
             "d.email, " +
-            "d.assigningDate, " +
-            "d.expirationDate, " +
-            "e.extensionStartDate, " +
-            "e.extentionExpirationDate, " +
+            "d.channel, " +
+            "d.serviceType, " +
+            "d.mnosCompanyHost, " +
+            "'Golden', " +
+
+            "d.assigningDate, '' , " +
+            "d.expirationDate, '' , " +
+
+            "d.applicationFees, " +
+            "d.applicationFeesBankVoucherNo, " +
+            "d.applicationFeesEnteryVoucherDate, '' , " +
+            "d.applicationFeesBankVoucherSubmissionDate, '' , " +
+            "d.applicationFeesPaymentStatus, " +
+
+            "d.royaltyFees, " +
+            "d.royaltyFeesBankVoucherNo, " +
+            "d.royaltyFeesEnteryVoucherDate, '' , " +
+            "d.royaltyFeesBankVoucherSubmissionDate, '' , " +
+            "d.royaltyFeesPaymentStatus, " +
+
+            "e.extensionStartDate, '' , " +
+            "e.extentionExpirationDate, '' , " +
+            "e.extendStatus, " +
+            "e.extendDate, " +
+
             "e.extendedFees, " +
             "e.extensionBankVoucherNo, " +
-            "e.extensionEnteryVoucherDate, " +
-            "e.extensionBankVoucherSubmissionDate, " +
-            "e.extensionPaymentStatus" +
-            ") " +
+            "e.extensionEnteryVoucherDate, '' , " +
+            "e.extensionBankVoucherSubmissionDate, '' , " +
+            "e.extensionPaymentStatus, " +
+            "e.extensionEnteryDate, " +
+            "e.extensionBy ) " +
+
             "FROM SmsIdentifierDetail d " +
             "JOIN d.smsIdentifierCode c " +
-            "LEFT JOIN SmsIdentifierExtension e " +
-            "ON e.smsIdentifierDetail.id = d.id " +
+            "JOIN d.extensions e " +
             "WHERE e.extensionPaymentStatus = 'PAID'")
     List<SmsIdentifierExtensionViewDTO> findAllPaidExtensions();
 
 
-    // ✅ Get ALL data (even if extension not exists)
     @Query("SELECT new atraintegratedsystems.codes.dto.SmsIdentifierExtensionViewDTO(" +
-            "d.id, c.smsIdentifierCodeName, d.companyName, d.mobile, d.email, " +
-            "d.assigningDate, d.expirationDate, " +
-            "e.extensionStartDate, e.extentionExpirationDate, e.extendedFees, " +
-            "e.extensionBankVoucherNo, e.extensionEnteryVoucherDate, " +
-            "e.extensionBankVoucherSubmissionDate, e.extensionPaymentStatus" +
-            ") " +
+            "d.id, c.smsIdentifierCodeName, d.serialNumber, d.companyName, d.companyNameInDari, " +
+            "d.enid, d.companyAddress, d.responsiblePerson, d.job, d.mobile, d.telephone, d.email, " +
+            "d.channel, d.serviceType, d.mnosCompanyHost, 'Golden', " +
+
+            "d.assigningDate, '' , d.expirationDate, '' , " +
+
+            "d.applicationFees, d.applicationFeesBankVoucherNo, d.applicationFeesEnteryVoucherDate, '' , " +
+            "d.applicationFeesBankVoucherSubmissionDate, '' , d.applicationFeesPaymentStatus, " +
+
+            "d.royaltyFees, d.royaltyFeesBankVoucherNo, d.royaltyFeesEnteryVoucherDate, '' , " +
+            "d.royaltyFeesBankVoucherSubmissionDate, '' , d.royaltyFeesPaymentStatus, " +
+
+            "e.extensionStartDate, '' , e.extentionExpirationDate, '' , e.extendStatus, e.extendDate, " +
+
+            "e.extendedFees, e.extensionBankVoucherNo, e.extensionEnteryVoucherDate, '' , " +
+            "e.extensionBankVoucherSubmissionDate, '' , e.extensionPaymentStatus, e.extensionEnteryDate, e.extensionBy ) " +
+
             "FROM SmsIdentifierDetail d " +
             "JOIN d.smsIdentifierCode c " +
-            "LEFT JOIN SmsIdentifierExtension e ON e.smsIdentifierDetail.id = d.id")
+            "LEFT JOIN d.extensions e")
     List<SmsIdentifierExtensionViewDTO> findAllWithExtensions();
 
-    // Bellow is For Printing
 
     @Query("SELECT new atraintegratedsystems.codes.dto.SmsIdentifierExtensionViewDTO(" +
-            "d.id, " +
-            "c.smsIdentifierCodeName, " +
-            "d.companyName, " +
-            "d.mobile, " +
-            "d.email, " +
-            "d.assigningDate, " +
-            "d.expirationDate, " +
-            "e.extensionStartDate, " +
-            "e.extentionExpirationDate, " +
-            "e.extendedFees, " +
-            "e.extensionBankVoucherNo, " +
-            "e.extensionEnteryVoucherDate, " +
-            "e.extensionBankVoucherSubmissionDate, " +
-            "e.extensionPaymentStatus" +
-            ") " +
+            "d.id, c.smsIdentifierCodeName, d.serialNumber, d.companyName, d.companyNameInDari, " +
+            "d.enid, d.companyAddress, d.responsiblePerson, d.job, d.mobile, d.telephone, d.email, " +
+            "d.channel, d.serviceType, d.mnosCompanyHost, 'Golden', " +
+
+            "d.assigningDate, '' , d.expirationDate, '' , " +
+
+            "d.applicationFees, d.applicationFeesBankVoucherNo, d.applicationFeesEnteryVoucherDate, '' , " +
+            "d.applicationFeesBankVoucherSubmissionDate, '' , d.applicationFeesPaymentStatus, " +
+
+            "d.royaltyFees, d.royaltyFeesBankVoucherNo, d.royaltyFeesEnteryVoucherDate, '' , " +
+            "d.royaltyFeesBankVoucherSubmissionDate, '' , d.royaltyFeesPaymentStatus, " +
+
+            "e.extensionStartDate, '' , e.extentionExpirationDate, '' , e.extendStatus, e.extendDate, " +
+
+            "e.extendedFees, e.extensionBankVoucherNo, e.extensionEnteryVoucherDate, '' , " +
+            "e.extensionBankVoucherSubmissionDate, '' , e.extensionPaymentStatus, e.extensionEnteryDate, e.extensionBy ) " +
+
             "FROM SmsIdentifierDetail d " +
             "JOIN d.smsIdentifierCode c " +
             "JOIN d.extensions e " +
             "WHERE d.id = :id")
     SmsIdentifierExtensionViewDTO findByDetailId(@Param("id") Long id);
-
 }

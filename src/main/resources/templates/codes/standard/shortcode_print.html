@@ -7,7 +7,6 @@
 
         body{
             font-family: Arial;
-            margin:40px;
             direction: rtl;
         }
 
@@ -49,10 +48,6 @@
         @media print{
             .no-print{
                 display:none;
-            }
-
-            body{
-                margin:10px;
             }
         }
 
@@ -139,8 +134,7 @@
 
     <tr>
         <th>ب</th>
-        <th>مشخصات شارت کود</th>
-        <td></td>
+        <th colspan="2" style="text-align:center;">مشخصات شارت کود</th>
         <td></td>
     </tr>
 
@@ -224,7 +218,7 @@
         وظیفه
         (<span th:text="${code.job}"></span>)
         نماینده شرکت
-        (<span th:text="${code.sourceUsed}"></span>)
+        (<span th:text="${code.sourceUsedInDari}"></span>)
         تقاضا مینمایم تا شارت کود فوق الذکر طبق مقررات برایم تخصیص داده شود.
         <br>
 
