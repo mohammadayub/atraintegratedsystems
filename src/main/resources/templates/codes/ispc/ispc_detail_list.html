@@ -44,7 +44,8 @@
                     <th>Assign Date</th>
                     <th>Expire Date</th>
                     <th>Rejection</th>
-                    <th>Action</th>
+                    <th>Edit</th>
+                    <th>Print</th>
 
                 </tr>
                 </thead>
@@ -91,8 +92,15 @@
                            class="btn btn-warning btn-sm">
                             Edit
                         </a>
-                    </td>
 
+                    <td>
+                    <!-- PRINT BUTTON -->
+                    <a th:href="@{/codes/ispc/details/print/{id}(id=${d.id})}"
+                       class="btn btn-success btn-sm"
+                       target="_blank">
+                        🖨 Print
+                    </a>
+                    </td>
                 </tr>
 
                 </tbody>

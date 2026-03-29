@@ -52,4 +52,13 @@ public class IspcCodeDetailController {
         service.delete(id);
         return "redirect:/codes/ispc/details";
     }
+
+    @GetMapping("/print/{id}")
+    public String printIspc(@PathVariable Long id, Model model) {
+
+        IspcDetailDTO dto =service.getById(id); // your service method
+        model.addAttribute("code", dto);
+
+        return "codes/ispc/ispc-print"; // Thymeleaf page name
+    }
 }

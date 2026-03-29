@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>ISPC Print</title>
+
+    <style>
+        body{
+            font-family: Arial;
+            direction: rtl;
+        }
+
+        .header{
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            margin-bottom:30px;
+        }
+
+        .header-center{
+            text-align:center;
+            line-height:1.8;
+            font-size:14px;
+        }
+
+        .header img{
+            max-height:90px;
+        }
+
+        table{
+            width:100%;
+            border-collapse: collapse;
+            margin-top:20px;
+        }
+
+        th,td{
+            border:1px solid #000;
+            padding:6px;
+            text-align:right;
+        }
+
+        th{
+            text-indent:6px;
+        }
+
+        .no-print{
+            margin-top:20px;
+            text-align:center;
+        }
+
+        @media print{
+            .no-print{
+                display:none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div style="border:1px solid black;">
+    <div style="margin:30px;">
+
+        <!-- HEADER -->
+        <div class="header">
+
+            <div>
+                <img th:src="@{/images/EmarateIslamiLogoForCode.png}">
+            </div>
+
+            <div class="header-center">
+                <b>
+                    امارت اسلامی افغانستان<br>
+                    وزارت مخابرات و تکنالوجی معلوماتی<br>
+                    اداره تنظیم خدمات مخابراتی افغانستان (اترا)<br>
+                    Standardization Department<br>
+                    ISPC Registration Form
+                </b>
+            </div>
+
+            <div>
+                <img th:src="@{/images/AtraLogoForCode.png}">
+            </div>
+
+        </div>
+
+        <p><b>مسلسل نمبر :</b> <span th:text="${code.serialNumber}"></span></p>
+
+        <table>
+
+            <tr>
+                <th style="text-align:center;">الف</th>
+                <th colspan="2" style="text-align:center;">معلومات شرکت</th>
+                <th>ملاحظات</th>
+            </tr>
+
+            <tr>
+                <th>1</th>
+                <th>نام شرکت</th>
+                <td th:text="${code.companyName}"></td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <th>2</th>
+                <th>ENID</th>
+                <td th:text="${code.enid}"></td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <th>3</th>
+                <th>آدرس</th>
+                <td th:text="${code.location}"></td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <th>4</th>
+                <th>موبایل</th>
+                <td th:text="${code.mobile}"></td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <th>5</th>
+                <th>ایمیل</th>
+                <td th:text="${code.email}"></td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <th>ب</th>
+                <th colspan="2" style="text-align:center;">ISPC معلومات</th>
+                <td></td>
+            </tr>
+
+            <tr>
+                <th>1</th>
+                <th>ISPC Number</th>
+                <td th:text="${code.ispcNumber}"></td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <th>2</th>
+                <th>Signaling Point</th>
+                <td th:text="${code.signalingPoint}"></td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <th>3</th>
+                <th>Assign Date</th>
+                <td th:text="${code.assigningDateJalali}"></td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <th>4</th>
+                <th>Expire Date</th>
+                <td th:text="${code.expirationDateJalali}"></td>
+                <td></td>
+            </tr>
+
+        </table>
+
+        <br>
+
+        <div>
+            <b>
+                مسئول: (<span th:text="${code.responsiblePerson}"></span>) <br>
+                وظیفه: (<span th:text="${code.job}"></span>)
+            </b>
+        </div>
+
+        <!-- PRINT BUTTON -->
+        <div class="no-print">
+            <button onclick="window.print()"
+                    style="
+            background:#2c3e50;
+            color:white;
+            padding:10px 25px;
+            border:none;
+            border-radius:6px;
+            cursor:pointer;
+        ">
+                🖨 Print
+            </button>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>

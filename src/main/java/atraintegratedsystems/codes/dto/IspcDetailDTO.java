@@ -8,7 +8,6 @@ import java.time.LocalDate;
 
 @Data
 public class IspcDetailDTO {
-
     private Long id;
     private String serialNumber;
     private String ispcNumber;
