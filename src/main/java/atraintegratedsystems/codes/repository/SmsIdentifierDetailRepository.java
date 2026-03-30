@@ -187,7 +187,8 @@ public interface SmsIdentifierDetailRepository extends JpaRepository<SmsIdentifi
                     "d.shortCodeRejectionStatus, " +
                     "d.shortCodeRejectionDate, " +
                     "c.id, " +
-                    "c.smsIdentifierCodeName" +
+                    "c.smsIdentifierCodeName, " +
+                    "d.remark" +
                     ") " +
                     "FROM SmsIdentifierDetail d " +
                     "JOIN d.smsIdentifierCode c " +
@@ -237,7 +238,8 @@ void rejectSmsIdentifier(
                     " d.shortCodeRejectionStatus, " +
                     " d.shortCodeRejectionDate, " +
                     " c.id, " +
-                    " c.smsIdentifierCodeName" +
+                    " c.smsIdentifierCodeName, " +
+                    " d.remark" +
                     ") " +
                     "FROM SmsIdentifierDetail d " +
                     "JOIN d.smsIdentifierCode c " +

@@ -65,6 +65,9 @@ public class SmsIdentifierDetail {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate shortCodeRejectionDate;
 
+    private String remark;
+
+
     // RelationShips
 
     @ManyToOne

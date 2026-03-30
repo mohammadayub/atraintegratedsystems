@@ -5,6 +5,7 @@ import atraintegratedsystems.codes.model.SmsIdentifierCode;
 import atraintegratedsystems.codes.model.SmsIdentifierDetail;
 import atraintegratedsystems.codes.repository.SmsIdentifierCodeRepository;
 import atraintegratedsystems.codes.repository.SmsIdentifierDetailRepository;
+import atraintegratedsystems.utils.DateConverter;
 import atraintegratedsystems.utils.PersianCalendarUtils;
 import atraintegratedsystems.utils.SerialGenerator;
 import atraintegratedsystems.utils.SerialGeneratorWithString;
@@ -99,7 +100,6 @@ public class SmsIdentifierDetailService {
                     .orElseThrow(() -> new RuntimeException("Code not found"));
 
             entity.setSmsIdentifierCode(newCode);
-
             newCode.setAssignStatus("Assign");
             codeRepo.save(newCode);
         }
@@ -206,6 +206,7 @@ public class SmsIdentifierDetailService {
 
         e.setShortCodeRejectionStatus(dto.getShortCodeRejectionStatus());
         e.setShortCodeRejectionDate(dto.getShortCodeRejectionDate());
+        e.setRemark(dto.getRemark());
 
 
 
@@ -237,20 +238,47 @@ public class SmsIdentifierDetailService {
             dto.setSmsIdentifierCodeName(e.getSmsIdentifierCode().getSmsIdentifierCodeName());
         }
 
-        // ✅ FIX: Convert Gregorian → Jalali
-        PersianCalendarUtils converter = new PersianCalendarUtils();
 
+
+        // ✅ FIX: Convert Gregorian → Jalali
+         DateConverter converter= new DateConverter();
         if (e.getAssigningDate() != null) {
+            var j = converter.gregorianToJalali(
+                    e.getAssigningDate().getYear(),
+                    e.getAssigningDate().getMonthValue(),
+                    e.getAssigningDate().getDayOfMonth()
+            );
+
             dto.setAssigningDateJalali(
-                    converter.gregorianToJalali(e.getAssigningDate()).toString()
+                    String.format("%04d-%02d-%02d",
+                            j.getYear(),
+                            j.getMonthPersian().getValue(),  // ✅ FIXED
+                            j.getDay()
+                    )
             );
         }
 
         if (e.getExpirationDate() != null) {
+            var j = converter.gregorianToJalali(
+                    e.getExpirationDate().getYear(),
+                    e.getExpirationDate().getMonthValue(),
+                    e.getExpirationDate().getDayOfMonth()
+            );
+
             dto.setExpirationDateJalali(
-                    converter.gregorianToJalali(e.getExpirationDate()).toString()
+                    String.format("%04d-%02d-%02d",
+                            j.getYear(),
+                            j.getMonthPersian().getValue(),  // ✅ FIXED
+                            j.getDay()
+                    )
             );
         }
+
+
+
+
+
+
 
         // Fees
         dto.setApplicationFees(e.getApplicationFees());
@@ -267,6 +295,7 @@ public class SmsIdentifierDetailService {
 
         dto.setShortCodeRejectionStatus(e.getShortCodeRejectionStatus());
         dto.setShortCodeRejectionDate(e.getShortCodeRejectionDate());
+        dto.setRemark(e.getRemark());
 
         return dto;
     }

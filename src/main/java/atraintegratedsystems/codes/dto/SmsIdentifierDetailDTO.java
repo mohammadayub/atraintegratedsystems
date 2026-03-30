@@ -58,11 +58,6 @@ public class SmsIdentifierDetailDTO {
     private LocalDate royaltyFeesBankVoucherSubmissionDate;
     private String royaltyFeesBankVoucherSubmissionDateJalali;
     private String royaltyFeesPaymentStatus;
-
-
-
-
-
     // Short Code Rejection Section
     private String shortCodeRejectionStatus;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -74,6 +69,9 @@ public class SmsIdentifierDetailDTO {
     private String smsIdentifierCodeName;
 
     private Long smsIdentifierSerialNumberId;
+
+    private String remark;
+
 
     public SmsIdentifierDetailDTO(
             long id,
@@ -102,7 +100,8 @@ public class SmsIdentifierDetailDTO {
             String shortCodeRejectionStatus,
             LocalDate shortCodeRejectionDate,
             long smsIdentifierCodeId,
-            String smsIdentifierCodeName
+            String smsIdentifierCodeName,
+            String remark
     ) {
         this.id = id;
         this.companyName = companyName;
@@ -131,7 +130,10 @@ public class SmsIdentifierDetailDTO {
         this.shortCodeRejectionDate = shortCodeRejectionDate;
         this.smsIdentifierCodeId = smsIdentifierCodeId;
         this.smsIdentifierCodeName = smsIdentifierCodeName;
+        this.remark=remark;
     }
+
+
 
 
 

@@ -33,10 +33,8 @@
                 <div class="col-md-3">
                     <label class="form-label">SMS Identifier Code</label>
                     <select class="form-control search-select"
-                            th:field="*{id}" required>
-
+                            th:field="*{smsIdentifierCodeId}" required>
                         <option value="">-- Select Code --</option>
-
                         <option th:each="c : ${codes}"
                                 th:value="${c.id}"
                                 th:text="${c.smsIdentifierCodeName}">
@@ -123,6 +121,12 @@
                     <input type="text" th:field="*{royaltyFees}" class="form-control" readonly>
                 </div>
 
+                <div class="col-md-3 form-group">
+                    <label >Remarks</label>
+                    <textarea  class="form-control"
+                               th:field="*{remark}" ></textarea>
+                </div>
+
             </div>
 
             <!-- BUTTONS -->
@@ -148,10 +152,9 @@
 <div th:replace="scripts :: persian-datepicker-scripts"></div>
 <div th:replace="scripts :: common-hijrishamsi-date"></div>
 <div th:replace="scripts :: select2-scripts"></div>
-
-
 <div style="height:10vh;"></div>
 <footer th:replace="~{codes_layout :: page_footer}"></footer>
+
 <script>
     $(document).ready(function () {
         $('.search-select').select2({
