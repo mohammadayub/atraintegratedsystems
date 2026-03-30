@@ -32,12 +32,16 @@
                 <!-- ROW 1 -->
                 <div class="col-md-3">
                     <label class="form-label">SMS Identifier Code</label>
-                    <select class="form-control search-select" th:field="*{smsIdentifierCodeId}" required>
+                    <select class="form-control search-select"
+                            th:field="*{id}" required>
+
                         <option value="">-- Select Code --</option>
+
                         <option th:each="c : ${codes}"
                                 th:value="${c.id}"
                                 th:text="${c.smsIdentifierCodeName}">
                         </option>
+
                     </select>
                 </div>
 
@@ -124,8 +128,8 @@
             <!-- BUTTONS -->
             <div class="row mt-4">
                 <div class="col-md-4 mx-auto d-flex justify-content-center gap-2">
-                    <button type="submit" class="btn btn-success">
-                        Save
+                    <button type="submit" class="btn btn-success"
+                            th:text="${detail.id == null ? 'Save' : 'Update'}">
                     </button>
                     &nbsp;&nbsp;
                     <a th:href="@{/codes/sms-identifier/home}" class="btn btn-secondary">

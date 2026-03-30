@@ -92,7 +92,17 @@ public class SmsIdentifierDetailService {
         SmsIdentifierDetail entity = detailRepo.findById(id)
                 .orElseThrow(() -> new RuntimeException("Record not found"));
 
+        // ✅ Handle SMS Identifier Code change
+        if (dto.getSmsIdentifierCodeId() != null) {
 
+            SmsIdentifierCode newCode = codeRepo.findById(dto.getSmsIdentifierCodeId())
+                    .orElseThrow(() -> new RuntimeException("Code not found"));
+
+            entity.setSmsIdentifierCode(newCode);
+
+            newCode.setAssignStatus("Assign");
+            codeRepo.save(newCode);
+        }
 
         mapToEntity(dto, entity);
 
@@ -202,6 +212,7 @@ public class SmsIdentifierDetailService {
     }
 
     private SmsIdentifierDetailDTO mapToDTO(SmsIdentifierDetail e) {
+
         SmsIdentifierDetailDTO dto = new SmsIdentifierDetailDTO();
 
         dto.setId(e.getId());
@@ -219,31 +230,29 @@ public class SmsIdentifierDetailService {
         dto.setServiceType(e.getServiceType());
         dto.setMnosCompanyHost(e.getMnosCompanyHost());
         dto.setCodeCategory(e.getCodeCategory());
-        dto.setApplicationFees(e.getApplicationFees());
-        dto.setRoyaltyFees(e.getRoyaltyFees());
 
-
+        // ✅ SMS Code
         if (e.getSmsIdentifierCode() != null) {
             dto.setSmsIdentifierCodeId(e.getSmsIdentifierCode().getId());
             dto.setSmsIdentifierCodeName(e.getSmsIdentifierCode().getSmsIdentifierCodeName());
         }
 
-//        dto.setAssigningDate(e.getAssigningDate());
+        // ✅ FIX: Convert Gregorian → Jalali
+        PersianCalendarUtils converter = new PersianCalendarUtils();
 
-        dto.setAssigningDateJalali(
-                e.getAssigningDateJalali() != null
-                        ? e.getAssigningDateJalali().toString()
-                        : null
-        );
+        if (e.getAssigningDate() != null) {
+            dto.setAssigningDateJalali(
+                    converter.gregorianToJalali(e.getAssigningDate()).toString()
+            );
+        }
 
-//        dto.setExpirationDate(e.getExpirationDate());
+        if (e.getExpirationDate() != null) {
+            dto.setExpirationDateJalali(
+                    converter.gregorianToJalali(e.getExpirationDate()).toString()
+            );
+        }
 
-        dto.setExpirationDateJalali(
-                e.getExpirationDateJalali() != null
-                        ? e.getExpirationDateJalali().toString()
-                        : null
-        );
-
+        // Fees
         dto.setApplicationFees(e.getApplicationFees());
         dto.setApplicationFeesBankVoucherNo(e.getApplicationFeesBankVoucherNo());
         dto.setApplicationFeesEnteryVoucherDate(e.getApplicationFeesEnteryVoucherDate());
@@ -258,10 +267,6 @@ public class SmsIdentifierDetailService {
 
         dto.setShortCodeRejectionStatus(e.getShortCodeRejectionStatus());
         dto.setShortCodeRejectionDate(e.getShortCodeRejectionDate());
-
-        dto.setSmsIdentifierCodeId(e.getSmsIdentifierCode().getId());
-
-
 
         return dto;
     }

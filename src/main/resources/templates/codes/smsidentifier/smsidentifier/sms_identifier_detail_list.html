@@ -8,6 +8,10 @@
     <div th:replace="styles :: common-css"></div>
     <div th:replace="styles :: commonfieldset-with-legend-border"></div>
     <div th:replace="styles :: persian-datepicker-styles"></div>
+
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 </head>
 
 <body>
@@ -37,6 +41,7 @@
                     <th>Service Type</th>
                     <th>Assign Date</th>
                     <th>Expiry Date</th>
+                    <th>Edit</th>
                     <th>Print</th>
                 </tr>
                 </thead>
@@ -53,10 +58,22 @@
                     <td th:text="${d.serviceType}"></td>
                     <td th:text="${d.getAssigningDateJalali()}"></td>
                     <td th:text="${d.getExpirationDateJalali()}"></td>
+
+                    <!-- ✅ EDIT BUTTON -->
+                    <td>
+                        <a th:href="@{/codes/sms-identifier-details/edit/{id}(id=${d.id})}"
+                           class="btn btn-warning btn-sm"
+                           title="Edit">
+                            <i class="fa fa-edit"></i>
+                        </a>
+                    </td>
+
+                    <!-- PRINT BUTTON -->
                     <td>
                         <a th:href="@{/codes/sms-identifier-details/print/{id}(id=${d.id})}"
-                           class="btn btn-info btn-sm">
-                            Print
+                           class="btn btn-info btn-sm"
+                           title="Print">
+                            <i class="fa fa-print"></i>
                         </a>
                     </td>
                 </tr>

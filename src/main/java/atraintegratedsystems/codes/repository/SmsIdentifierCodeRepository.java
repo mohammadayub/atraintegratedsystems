@@ -14,7 +14,8 @@ public interface SmsIdentifierCodeRepository extends JpaRepository<SmsIdentifier
 
     Optional<SmsIdentifierCode> findBySmsIdentifierCodeName(String smsIdentifierCodeName);
 
-    // ✅ Get all records where assignStatus IS NULL
-    List<SmsIdentifierCode> findByAssignStatusIsNullOrAssignStatusEquals(String status);
+
+//    // ✅ Get all records where assignStatus IS NULL
+//    List<SmsIdentifierCode> findByAssignStatusIsNullOrAssignStatusEquals(String status);
 
 }

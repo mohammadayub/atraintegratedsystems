@@ -30,10 +30,12 @@ public class SmsIdentifierDetailController {
     @GetMapping("/new")
     public String createForm(Model model) {
         model.addAttribute("detail", new SmsIdentifierDetailDTO());
-        model.addAttribute("codes", codeRepo.findByAssignStatusIsNullOrAssignStatusEquals(""));
+
+        model.addAttribute("codes", codeRepo.findAll());
+//                codeRepo.findByAssignStatusIsNullOrAssignStatusEquals(""));
+
         return "codes/smsidentifier/smsidentifier/sms_identifier_detail_form";
     }
-
 
 
     @PostMapping("/save")
@@ -48,8 +50,10 @@ public class SmsIdentifierDetailController {
         SmsIdentifierDetailDTO dto = detailService.findById(id);
 
         model.addAttribute("detail", dto);
-        model.addAttribute("codes", codeRepo.findByAssignStatusIsNullOrAssignStatusEquals(""));
-        
+
+        // ✅ FIX: include current selected code
+        model.addAttribute("codes",
+                codeRepo.findAll()); // simplest and safest
 
         return "codes/smsidentifier/smsidentifier/sms_identifier_detail_form";
     }
@@ -59,9 +63,12 @@ public class SmsIdentifierDetailController {
     @PostMapping("/update/{id}")
     public String update(@PathVariable Long id,
                          @ModelAttribute("detail") SmsIdentifierDetailDTO dto) {
+
         detailService.update(id, dto);
+
         return "redirect:/codes/sms-identifier-details/list";
     }
+
 
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable Long id) {
