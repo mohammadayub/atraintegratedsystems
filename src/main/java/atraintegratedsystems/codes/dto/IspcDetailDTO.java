@@ -13,6 +13,7 @@ public class IspcDetailDTO {
     private String ispcNumber;
     private String signalingPoint;
     private String companyName;
+    private String companyNameInDari;
     private String enid;
     private String location;
     private String companyAddress;
@@ -29,9 +30,10 @@ public class IspcDetailDTO {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate expirationDate;
     private String expirationDateJalali;
+    private String remark;
 
     // Registration Fees
-    private double registrationFees;
+    private double registrationFees=50000;
     private String registrationFeesBankVoucherNo;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -64,6 +66,7 @@ public class IspcDetailDTO {
     public IspcDetailDTO(
             Long id,
             String companyName,
+            String companyNameInDari,
             String enid,
             String companyAddress,
             String mobile,
@@ -71,6 +74,7 @@ public class IspcDetailDTO {
             String email,
             LocalDate assigningDate,
             LocalDate expirationDate,
+            String remark,
             double registrationFees,
             String registrationFeesBankVoucherNo,
             LocalDate registrationFeesEntryVoucherDate,
@@ -80,6 +84,7 @@ public class IspcDetailDTO {
     ) {
         this.id = id;
         this.companyName = companyName;
+        this.companyNameInDari=companyNameInDari;
         this.enid = enid;
         this.companyAddress = companyAddress;
         this.mobile = mobile;
@@ -87,6 +92,7 @@ public class IspcDetailDTO {
         this.email = email;
         this.assigningDate = assigningDate;
         this.expirationDate = expirationDate;
+        this.remark=remark;
         this.registrationFees = registrationFees;
         this.registrationFeesBankVoucherNo = registrationFeesBankVoucherNo;
         this.registrationFeesEntryVoucherDate = registrationFeesEntryVoucherDate;

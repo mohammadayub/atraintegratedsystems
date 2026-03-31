@@ -11,4 +11,5 @@ public class AtraintegratedsystemsApplication extends SpringBootServletInitializ
 		SpringApplication.run(AtraintegratedsystemsApplication.class, args);
 	}
 
+
 }

@@ -130,6 +130,7 @@ public class IspcDetailService {
             e.setSerialNumber(dto.getSerialNumber());
         }
         e.setCompanyName(dto.getCompanyName());
+        e.setCompanyNameInDari(dto.getCompanyNameInDari());
         e.setEnid(dto.getEnid());
         e.setLocation(dto.getLocation());
         e.setCompanyAddress(dto.getCompanyAddress());
@@ -141,6 +142,7 @@ public class IspcDetailService {
         e.setIspcNumber(dto.getIspcNumber());
         e.setSignalingPoint(dto.getSignalingPoint());
         e.setRegistrationFees(50000);
+        e.setRemark(dto.getRemark());
 
         PersianCalendarUtils converter = new PersianCalendarUtils();
 
@@ -188,6 +190,7 @@ public class IspcDetailService {
         dto.setId(e.getId());
         dto.setSerialNumber(e.getSerialNumber());
         dto.setCompanyName(e.getCompanyName());
+        dto.setCompanyNameInDari(e.getCompanyNameInDari());
         dto.setEnid(e.getEnid());
         dto.setLocation(e.getLocation());
         dto.setCompanyAddress(e.getCompanyAddress());
@@ -198,6 +201,7 @@ public class IspcDetailService {
         dto.setEmail(e.getEmail());
         dto.setIspcNumber(e.getIspcNumber());
         dto.setSignalingPoint(e.getSignalingPoint());
+        dto.setRemark(e.getRemark());
 
         if(e.getIspcCode()!=null){
             dto.setIspcCodeId(e.getIspcCode().getId());

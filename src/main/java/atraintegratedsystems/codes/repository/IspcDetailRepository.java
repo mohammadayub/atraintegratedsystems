@@ -83,6 +83,7 @@ public interface IspcDetailRepository extends JpaRepository<IspcDetail,Long> {
             "SELECT new atraintegratedsystems.codes.dto.IspcDetailDTO(" +
                     " d.id, " +
                     " d.companyName, " +
+                    " d.companyNameInDari, " +
                     " d.enid, " +
                     " d.companyAddress, " +
                     " d.mobile, " +
@@ -90,6 +91,7 @@ public interface IspcDetailRepository extends JpaRepository<IspcDetail,Long> {
                     " d.email, " +
                     " d.assigningDate, " +
                     " d.expirationDate, " +
+                    " d.remark, " +
                     " d.registrationFees, " +
                     " d.registrationFeesBankVoucherNo, " +
                     " d.registrationFeesEntryVoucherDate, " +

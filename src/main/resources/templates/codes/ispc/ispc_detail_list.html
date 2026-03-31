@@ -32,6 +32,7 @@
                     <th>#</th>
                     <th>ISPC Decimal code</th>
                     <th>Company Name</th>
+                    <th>Company Name In Dari</th>
                     <th>Serial Number</th>
                     <th>Mobile</th>
                     <th>Telephone</th>
@@ -43,6 +44,7 @@
                     <th>Responsible Person</th>
                     <th>Assign Date</th>
                     <th>Expire Date</th>
+                    <th>Remark</th>
                     <th>Rejection</th>
                     <th>Edit</th>
                     <th>Print</th>
@@ -58,6 +60,8 @@
                     <td th:text="${d.ispcCodeName}"></td>
 
                     <td th:text="${d.companyName}"></td>
+
+                    <td th:text="${d.companyNameInDari}"></td>
 
                     <td th:text="${d.serialNumber}"></td>
 
@@ -80,6 +84,7 @@
                     <td th:text="${d.assigningDateJalali}"></td>
 
                     <td th:text="${d.expirationDateJalali}"></td>
+                    <td th:text="${d.remark}"></td>
                     <td>
                         <a th:href="@{/codes/ispc/details/reject/{id}(id=${d.id})}"
                            class="btn btn-danger btn-sm">

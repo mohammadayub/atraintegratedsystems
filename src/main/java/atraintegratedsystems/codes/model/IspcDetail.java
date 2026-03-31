@@ -19,6 +19,7 @@ public class IspcDetail {
     private String ispcNumber;
     private String signalingPoint;
     private String companyName;
+    private String companyNameInDari;
     private String enid;
     private String location;
     private String companyAddress;
@@ -31,6 +32,7 @@ public class IspcDetail {
     private LocalDate assigningDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate expirationDate;
+    private String remark;
 
     // Fees Related Section
     // Registration Fees Related

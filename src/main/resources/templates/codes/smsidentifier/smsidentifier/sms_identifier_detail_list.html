@@ -13,7 +13,6 @@
 <body>
 
 <nav th:replace="~{codes_layout :: page_navbar}"></nav>
-
 <div class="container-fluid"
      th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
 
@@ -32,6 +31,7 @@
                     <th>#</th>
                     <th>SMS Code</th>
                     <th>Company Name</th>
+                    <th>Company Name In Dari</th>
                     <th>Serial Number</th>
                     <th>Mobile</th>
                     <th>Telephone</th>
@@ -42,6 +42,7 @@
                     <th>Responsible Person</th>
                     <th>Assign Date</th>
                     <th>Expire Date</th>
+                    <th>Remark</th>
                     <th>Edit</th>
                     <th>Delete</th>
                     <th>Print</th>
@@ -58,6 +59,8 @@
                     <td th:text="${d.smsIdentifierCodeName}"></td>
 
                     <td th:text="${d.companyName}"></td>
+
+                    <td th:text="${d.companyNameInDari}"></td>
 
                     <td th:text="${d.serialNumber}"></td>
 
@@ -78,6 +81,8 @@
                     <td th:text="${d.assigningDateJalali}"></td>
 
                     <td th:text="${d.expirationDateJalali}"></td>
+
+                    <td th:text="${d.remark}"></td>
 
                     <!-- EDIT -->
                     <td>

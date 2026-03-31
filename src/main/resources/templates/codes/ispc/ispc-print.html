@@ -63,22 +63,29 @@
         <!-- HEADER -->
         <div class="header">
 
+            <!-- Left Logo -->
             <div>
-                <img th:src="@{/images/EmarateIslamiLogoForCode.png}">
+                <img th:src="@{/images/EmarateIslamiLogoForCode.png}" width="130px" height="130px">
             </div>
 
+            <!-- Center Text -->
             <div class="header-center">
                 <b>
                     امارت اسلامی افغانستان<br>
                     وزارت مخابرات و تکنالوجی معلوماتی<br>
                     اداره تنظیم خدمات مخابراتی افغانستان (اترا)<br>
+                    ریاست تحلیل و رقابت<br>
+                    آمریت ستندردها<br>
+                    Afghanistan Telecommunication Regulatory Authority<br>
                     Standardization Department<br>
-                    ISPC Registration Form
+                    فورمه ثبت و راجستریشن و توزیع ISPC<br>
                 </b>
+
             </div>
 
-            <div>
-                <img th:src="@{/images/AtraLogoForCode.png}">
+            <!-- Right Logo -->
+            <div style="text-align:center">
+                <img th:src="@{/images/AtraLogoForCode.png}" width="130px" height="130px">
             </div>
 
         </div>
@@ -95,83 +102,120 @@
 
             <tr>
                 <th>1</th>
-                <th>نام شرکت</th>
-                <td th:text="${code.companyName}"></td>
+                <th>نام شرکت / متقاضی</th>
+                <td th:text="${code.companyNameInDari}"></td>
                 <td></td>
             </tr>
-
             <tr>
                 <th>2</th>
-                <th>ENID</th>
-                <td th:text="${code.enid}"></td>
+                <th>آدرس دفتر</th>
+                <td th:text="${code.companyAddress}"></td>
                 <td></td>
             </tr>
-
             <tr>
                 <th>3</th>
-                <th>آدرس</th>
+                <th>شماره تیلفون موبایل</th>
+                <td th:text="${code.mobile}"></td>
+                <td></td>
+            </tr>
+            <tr>
+                <th>4</th>
+                <th>شماره تیلفون دیجیتل</th>
+                <td th:text="${code.telephone}"></td>
+                <td></td>
+            </tr>
+            <tr>
+                <th>5</th>
+                <th>آدرس ایمیل</th>
+                <td th:text="${code.email}"></td>
+                <td></td>
+            </tr>
+            <tr>
+                <th>6</th>
+                <th>شماره ISPC</th>
+                <td th:text="${code.ispcNumber}"></td>
+                <td></td>
+            </tr>
+            <tr>
+                <th>7</th>
+                <th>UNIQUE NAME OF THE SIGNALING POINT</th>
+                <td th:text="${code.signalingPoint}"></td>
+                <td></td>
+            </tr>
+            <tr>
+                <th>8</th>
+                <th>موقعیت</th>
                 <td th:text="${code.location}"></td>
                 <td></td>
             </tr>
 
-            <tr>
-                <th>4</th>
-                <th>موبایل</th>
-                <td th:text="${code.mobile}"></td>
-                <td></td>
-            </tr>
-
-            <tr>
-                <th>5</th>
-                <th>ایمیل</th>
-                <td th:text="${code.email}"></td>
-                <td></td>
-            </tr>
 
             <tr>
                 <th>ب</th>
-                <th colspan="2" style="text-align:center;">ISPC معلومات</th>
+                <th colspan="2" style="text-align:center;">فیس و تاریخ یوزیع ISPC</th>
                 <td></td>
             </tr>
 
             <tr>
                 <th>1</th>
-                <th>ISPC Number</th>
-                <td th:text="${code.ispcNumber}"></td>
+                <th>فیس راجستریشن یک مرتبه</th>
+                <td th:text="${code.registrationFees}"></td>
                 <td></td>
             </tr>
-
             <tr>
                 <th>2</th>
-                <th>Signaling Point</th>
-                <td th:text="${code.signalingPoint}"></td>
+                <th>فیس سالانه ISPC</th>
+                <td>5000</td>
                 <td></td>
             </tr>
-
             <tr>
                 <th>3</th>
-                <th>Assign Date</th>
+                <th>تاریخ تخصیص ISPC</th>
                 <td th:text="${code.assigningDateJalali}"></td>
                 <td></td>
             </tr>
 
             <tr>
                 <th>4</th>
-                <th>Expire Date</th>
+                <th>تاریخ انقضا ISPC</th>
                 <td th:text="${code.expirationDateJalali}"></td>
-                <td></td>
+                <td th:text="${code.remark}"></td>
             </tr>
 
         </table>
-
+        <p> <b> نمبر تماس آمریت ستندرد ها : 0202105968</b> </p>
         <br>
-
         <div>
             <b>
-                مسئول: (<span th:text="${code.responsiblePerson}"></span>) <br>
-                وظیفه: (<span th:text="${code.job}"></span>)
+                اینجانب
+                (<span th:text="${code.responsiblePerson}"></span>)
+                وظیفه
+                (<span th:text="${code.job}"></span>)
+                نماینده
+                (<span th:text="${code.companyNameInDari}"></span>)
+                تقاضا مینمایم تا ISPC Code فوق الذکر را طبق مقررات برایم توزیع نماید.
+                <br>
+                امضا و تاریخ درخواست کننده: ................
+                <br>ISPC CODE
+                (<span th:text="${code.ispcCodeName}"></span>)
+                دربدل
+                (<span th:text="${code.registrationFees}"></span>)
+                افغانی فیس درخواست یک مرتبه و فیس سالانه مبلغ
+                (<span>5000</span>)
+                افغانی برای مرجع درخواست کننده توزیع گردید.
+
             </b>
         </div>
+
+        <div style="margin-top:30px;">
+            <b>
+                <span>ترتیب کننده</span>
+                <span style="margin-right:150px;margin-left:150px;">تیم لیدر شماره ها</span>
+                <span>آمر ستندردها</span>
+            </b>
+        </div>
+        <br>
+        <br>
 
         <!-- PRINT BUTTON -->
         <div class="no-print">
