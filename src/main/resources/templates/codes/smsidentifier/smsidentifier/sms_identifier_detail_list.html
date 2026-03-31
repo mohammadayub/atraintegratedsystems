@@ -8,10 +8,6 @@
     <div th:replace="styles :: common-css"></div>
     <div th:replace="styles :: commonfieldset-with-legend-border"></div>
     <div th:replace="styles :: persian-datepicker-styles"></div>
-
-    <!-- Font Awesome for icons -->
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 </head>
 
 <body>
@@ -25,65 +21,100 @@
         <legend>SMS Identifier Details</legend>
 
         <div class="table-container">
+
             <table class="slip table table-bordered table-striped"
                    id="profileTable"
                    style="width:100%">
 
                 <thead>
                 <tr class="bg-primary text-white">
+
                     <th>#</th>
-                    <th>smsIdentifierCodeName</th>
-                    <th>Company</th>
+                    <th>SMS Code</th>
+                    <th>Company Name</th>
                     <th>Serial Number</th>
-                    <th>Responsible Person</th>
-                    <th>Job</th>
+                    <th>Mobile</th>
+                    <th>Telephone</th>
+                    <th>Email</th>
                     <th>Channel</th>
                     <th>Service Type</th>
+                    <th>ENID</th>
+                    <th>Responsible Person</th>
                     <th>Assign Date</th>
-                    <th>Expiry Date</th>
+                    <th>Expire Date</th>
                     <th>Edit</th>
+                    <th>Delete</th>
                     <th>Print</th>
+
                 </tr>
                 </thead>
 
                 <tbody>
+
                 <tr th:each="d, iStat : ${details}">
-                    <td th:text="${iStat.count}">1</td>
+
+                    <td th:text="${iStat.count}"></td>
+
                     <td th:text="${d.smsIdentifierCodeName}"></td>
+
                     <td th:text="${d.companyName}"></td>
+
                     <td th:text="${d.serialNumber}"></td>
-                    <td th:text="${d.responsiblePerson}"></td>
-                    <td th:text="${d.job}"></td>
+
+                    <td th:text="${d.mobile}"></td>
+
+                    <td th:text="${d.telephone}"></td>
+
+                    <td th:text="${d.email}"></td>
+
                     <td th:text="${d.channel}"></td>
+
                     <td th:text="${d.serviceType}"></td>
+
+                    <td th:text="${d.enid}"></td>
+
+                    <td th:text="${d.responsiblePerson}"></td>
+
                     <td th:text="${d.assigningDateJalali}"></td>
+
                     <td th:text="${d.expirationDateJalali}"></td>
 
-                    <!-- ✅ EDIT BUTTON -->
+                    <!-- EDIT -->
                     <td>
-                        <a th:href="@{/codes/sms-identifier-details/edit/{id}(id=${d.id})}"
-                           class="btn btn-warning btn-sm"
-                           title="Edit">
-                            <i class="fa fa-edit"></i>
+                        <a th:href="@{/codes/sms-identifier/details/edit/{id}(id=${d.id})}"
+                           class="btn btn-warning btn-sm">
+                            Edit
                         </a>
                     </td>
 
-                    <!-- PRINT BUTTON -->
+                    <!-- DELETE -->
                     <td>
-                        <a th:href="@{/codes/sms-identifier-details/print/{id}(id=${d.id})}"
-                           class="btn btn-info btn-sm"
-                           title="Print">
-                            <i class="fa fa-print"></i>
+                        <a th:href="@{/codes/sms-identifier/details/delete/{id}(id=${d.id})}"
+                           class="btn btn-danger btn-sm"
+                           onclick="return confirm('Are you sure to delete?')">
+                            Delete
                         </a>
                     </td>
+
+                    <!-- PRINT -->
+                    <td>
+                        <a th:href="@{/codes/sms-identifier/details/print/{id}(id=${d.id})}"
+                           class="btn btn-success btn-sm"
+                           target="_blank">
+                            🖨 Print
+                        </a>
+                    </td>
+
                 </tr>
-                </tbody>
 
+                </tbody>
             </table>
+
         </div>
+
     </fieldset>
 
-    <a th:href="@{/codes/sms-identifier/home}"
+    <a th:href="@{/codes}"
        class="btn btn-primary mt-3">
         ← Back to Page
     </a>
@@ -91,6 +122,7 @@
 </div>
 
 <!-- Scripts -->
+
 <div th:replace="scripts :: common-scripts"></div>
 <div th:replace="scripts :: data-tables-scripts"></div>
 <div th:replace="scripts :: common-datatable"></div>
@@ -98,6 +130,7 @@
 <div th:replace="scripts :: common-hijrishamsi-date"></div>
 
 <div style="height:10vh;"></div>
+
 <footer th:replace="~{codes_layout :: page_footer}"></footer>
 
 <script th:src="@{/js/bootstrap.bundle.min.js}"></script>

@@ -30,23 +30,34 @@ public class IspcDetailService {
 
     public void save(IspcDetailDTO dto){
 
+        IspcDetail entity;
+
+        // ✅ HANDLE UPDATE
+        if(dto.getId() != null){
+            entity = detailRepository.findById(dto.getId())
+                    .orElseThrow(() -> new RuntimeException("Record not found"));
+        }else{
+            entity = new IspcDetail();
+        }
+
+        // ✅ GET CODE
         IspcCode code = codeRepository.findById(dto.getIspcCodeId())
                 .orElseThrow(() -> new RuntimeException("ISPC Code not found"));
 
-        IspcDetail entity = new IspcDetail();
+        // ✅ KEEP OLD SERIAL SAFE
+        String existingSerial = entity.getSerialNumber();
 
         mapToEntity(dto, entity);
 
+        entity.setIspcCode(code);
         code.setAssignStatus("Assign");
 
-        entity.setIspcCode(code);
+        /* ================= AUTO SERIAL (ONLY FOR NEW) ================= */
 
+        if(entity.getId() == null &&
+                (entity.getSerialNumber() == null || entity.getSerialNumber().trim().isEmpty())){
 
-        /* ================= AUTO SERIAL ================= */
-
-        SerialGeneratorWithString generator = new SerialGeneratorWithString();
-
-        if(entity.getSerialNumber() == null || entity.getSerialNumber().trim().isEmpty()){
+            SerialGeneratorWithString generator = new SerialGeneratorWithString();
 
             if(entity.getCompanyName() == null || entity.getExpirationDate() == null){
                 throw new IllegalArgumentException("Company Name and Expiration Date required");
@@ -61,6 +72,11 @@ public class IspcDetailService {
             );
 
             entity.setSerialNumber(serial);
+        }
+
+        // ✅ RESTORE SERIAL IF LOST DURING UPDATE
+        if(existingSerial != null && entity.getSerialNumber() == null){
+            entity.setSerialNumber(existingSerial);
         }
 
         detailRepository.save(entity);
@@ -110,6 +126,9 @@ public class IspcDetailService {
 
     private void mapToEntity(IspcDetailDTO dto, IspcDetail e){
 
+        if(dto.getSerialNumber() != null && !dto.getSerialNumber().trim().isEmpty()){
+            e.setSerialNumber(dto.getSerialNumber());
+        }
         e.setCompanyName(dto.getCompanyName());
         e.setEnid(dto.getEnid());
         e.setLocation(dto.getLocation());

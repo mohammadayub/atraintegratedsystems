@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head th:replace="~{codes_layout :: page_head}">
-    <title>SMS Identifier</title>
+    <title>SMS Identifier Detail</title>
+
     <div th:replace="styles :: persian-datepicker-styles"></div>
     <div th:replace="styles :: common-css"></div>
     <div th:replace="styles :: commonfieldset"></div>
@@ -9,32 +11,41 @@
 </head>
 
 <body>
+
 <nav th:replace="~{codes_layout :: page_navbar}"></nav>
 
 <div class="container-fluid mt-4"
      th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
 
+    <!-- ✅ SINGLE SAVE ENDPOINT -->
     <form th:action="${detail.id == null} ?
-            @{/codes/sms-identifier-details/save} :
-            @{/codes/sms-identifier-details/update/{id}(id=${detail.id})}"
+        @{/codes/sms-identifier/details/save} :
+        @{/codes/sms-identifier/details/update/{id}(id=${detail.id})}"
           th:object="${detail}"
           method="post">
 
+        <!-- ✅ IMPORTANT FOR UPDATE -->
+        <input type="hidden" th:field="*{id}"/>
+
         <fieldset style="border:2px solid #DCAF45;padding:15px;border-radius:8px;margin-bottom:20px;">
+
             <legend style="width:auto;font-size:1.2rem;color:#14438B;padding:0 10px;font-weight:bold;">
-                <span th:text="${detail.id == null ? 'Add SMS Identifier Detail' : 'Edit SMS Identifier Detail'}">
-                    SMS Identifier Detail
-                </span>
+                SMS Identifier Detail Form
             </legend>
 
             <div class="row g-3">
 
                 <!-- ROW 1 -->
+
                 <div class="col-md-3">
                     <label class="form-label">SMS Identifier Code</label>
+
                     <select class="form-control search-select"
-                            th:field="*{smsIdentifierCodeId}" required>
+                            th:field="*{smsIdentifierCodeId}"
+                            required>
+
                         <option value="">-- Select Code --</option>
+
                         <option th:each="c : ${codes}"
                                 th:value="${c.id}"
                                 th:text="${c.smsIdentifierCodeName}">
@@ -47,14 +58,19 @@
                     <label>Company Name</label>
                     <input type="text" th:field="*{companyName}" class="form-control">
                 </div>
+
                 <div class="col-md-3">
-                    <label>Company Name In Dari</label>
+                    <label>Company Name (Dari)</label>
                     <input type="text" th:field="*{companyNameInDari}" class="form-control">
                 </div>
+
                 <div class="col-md-3">
                     <label>Responsible Person</label>
                     <input type="text" th:field="*{responsiblePerson}" class="form-control">
                 </div>
+
+                <!-- ROW 2 -->
+
                 <div class="col-md-3">
                     <label>Job</label>
                     <input type="text" th:field="*{job}" class="form-control">
@@ -65,7 +81,6 @@
                     <input type="text" th:field="*{enid}" class="form-control">
                 </div>
 
-                <!-- ROW 2 -->
                 <div class="col-md-3">
                     <label>Mobile</label>
                     <input type="text" th:field="*{mobile}" class="form-control">
@@ -76,17 +91,18 @@
                     <input type="text" th:field="*{telephone}" class="form-control">
                 </div>
 
-                <div class="col-md-3">
-                    <label>Company Address</label>
-                    <input type="text" th:field="*{companyAddress}" class="form-control">
-                </div>
+                <!-- ROW 3 -->
 
                 <div class="col-md-3">
                     <label>Email</label>
                     <input type="email" th:field="*{email}" class="form-control">
                 </div>
 
-                <!-- ROW 3 -->
+                <div class="col-md-3">
+                    <label>Company Address</label>
+                    <input type="text" th:field="*{companyAddress}" class="form-control">
+                </div>
+
                 <div class="col-md-3">
                     <label>Channel</label>
                     <input type="text" th:field="*{channel}" class="form-control">
@@ -97,6 +113,8 @@
                     <input type="text" th:field="*{serviceType}" class="form-control">
                 </div>
 
+                <!-- ROW 4 -->
+
                 <div class="col-md-3">
                     <label>MNO Host</label>
                     <input type="text" th:field="*{mnosCompanyHost}" class="form-control">
@@ -104,63 +122,106 @@
 
                 <div class="col-md-3">
                     <label>Assigning Date</label>
-                    <input type="text" th:field="*{assigningDateJalali}" class="form-control hijrishamsi">
+                    <input type="text"
+                           th:field="*{assigningDateJalali}"
+                           class="form-control hijrishamsi">
                 </div>
 
-                <!-- ROW 4 -->
                 <div class="col-md-3">
                     <label>Expiration Date</label>
-                    <input type="text" th:field="*{expirationDateJalali}" class="form-control hijrishamsi">
-                </div>
-                <div class="col-md-3">
-                    <label>Application Fee</label>
-                    <input type="text" th:field="*{applicationFees}" class="form-control" readonly>
-                </div>
-                <div class="col-md-3">
-                    <label>Royalty Fee</label>
-                    <input type="text" th:field="*{royaltyFees}" class="form-control" readonly>
+                    <input type="text"
+                           th:field="*{expirationDateJalali}"
+                           class="form-control hijrishamsi">
                 </div>
 
-                <div class="col-md-3 form-group">
-                    <label >Remarks</label>
-                    <textarea  class="form-control"
-                               th:field="*{remark}" ></textarea>
+                <div class="col-md-3">
+                    <label>Application Fee</label>
+                    <input type="text"
+                           th:field="*{applicationFees}"
+                           class="form-control"
+                           readonly>
+                </div>
+
+                <!-- ROW 5 -->
+
+                <div class="col-md-3">
+                    <label>Royalty Fee</label>
+                    <input type="text"
+                           th:field="*{royaltyFees}"
+                           class="form-control"
+                           readonly>
+                </div>
+
+                <div class="col-md-6">
+                    <label>Remarks</label>
+                    <textarea class="form-control"
+                              th:field="*{remark}"></textarea>
                 </div>
 
             </div>
 
             <!-- BUTTONS -->
+
             <div class="row mt-4">
                 <div class="col-md-4 mx-auto d-flex justify-content-center gap-2">
-                    <button type="submit" class="btn btn-success"
-                            th:text="${detail.id == null ? 'Save' : 'Update'}">
+
+                    <button type="submit" class="btn btn-success">
+                        Save
                     </button>
+
                     &nbsp;&nbsp;
-                    <a th:href="@{/codes/sms-identifier/home}" class="btn btn-secondary">
+
+                    <a th:href="@{/codes/sms-identifier/details}" class="btn btn-secondary">
                         Back
                     </a>
+
                 </div>
             </div>
 
         </fieldset>
 
     </form>
+
 </div>
 
-<!-- Common scripts -->
+<!-- Scripts -->
+
 <div th:replace="scripts :: common-scripts"></div>
 <div th:replace="scripts :: persian-datepicker-scripts"></div>
-<div th:replace="scripts :: common-hijrishamsi-date"></div>
 <div th:replace="scripts :: select2-scripts"></div>
+
 <div style="height:10vh;"></div>
+
 <footer th:replace="~{codes_layout :: page_footer}"></footer>
 
 <script>
     $(document).ready(function () {
+
+        // Select2
         $('.search-select').select2({
             width: '100%'
         });
+
+        // ✅ FIXED Persian Datepicker (important for edit issue)
+        $('.hijrishamsi').persianDatepicker({
+            format: 'YYYY-MM-DD',
+            autoClose: true,
+            initialValue: true,
+            initialValueType: 'persian',
+            observer: true,
+            calendar: {
+                persian: {
+                    locale: 'en',
+                    leapYearMode: 'astronomical'
+                }
+            },
+            onShow: function () {
+                $('.persian-datepicker-container').appendTo('body');
+            }
+        });
+
     });
 </script>
+
 </body>
 </html>

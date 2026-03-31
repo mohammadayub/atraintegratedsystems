@@ -7,7 +7,6 @@ import atraintegratedsystems.codes.repository.SmsIdentifierCodeRepository;
 import atraintegratedsystems.codes.repository.SmsIdentifierDetailRepository;
 import atraintegratedsystems.utils.DateConverter;
 import atraintegratedsystems.utils.PersianCalendarUtils;
-import atraintegratedsystems.utils.SerialGenerator;
 import atraintegratedsystems.utils.SerialGeneratorWithString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,122 +19,128 @@ import java.util.stream.Collectors;
 public class SmsIdentifierDetailService {
 
     @Autowired
-    private SmsIdentifierDetailRepository detailRepo;
+    private SmsIdentifierDetailRepository detailRepository;
 
     @Autowired
-    private SmsIdentifierCodeRepository codeRepo;
-
-
+    private SmsIdentifierCodeRepository codeRepository;
 
     /* ================= CREATE ================= */
+
     public void save(SmsIdentifierDetailDTO dto) {
 
-        SmsIdentifierCode code = codeRepo.findById(dto.getSmsIdentifierCodeId())
+        SmsIdentifierDetail entity;
+
+        // ✅ CHECK IF UPDATE
+        if (dto.getId() != null) {
+            entity = detailRepository.findById(dto.getId())
+                    .orElseThrow(() -> new RuntimeException("Record not found"));
+        } else {
+            entity = new SmsIdentifierDetail();
+        }
+
+        SmsIdentifierCode code = codeRepository.findById(dto.getSmsIdentifierCodeId())
                 .orElseThrow(() -> new RuntimeException("SMS Identifier Code not found"));
 
-
-        SmsIdentifierDetail entity = new SmsIdentifierDetail();
         mapToEntity(dto, entity);
-        code.setAssignStatus("Assign");
+
         entity.setSmsIdentifierCode(code);
+        code.setAssignStatus("Assign");
 
+        /* ================= AUTO SERIAL (ONLY FOR NEW) ================= */
 
+        if (entity.getId() == null &&
+                (entity.getSerialNumber() == null || entity.getSerialNumber().trim().isEmpty())) {
 
-
-        //Serial Number Auto Generate//
-
-        SerialGeneratorWithString serialGenerator = new SerialGeneratorWithString();
-
-        if (entity.getSerialNumber() == null || entity.getSerialNumber().trim().isEmpty()) {
+            SerialGeneratorWithString generator = new SerialGeneratorWithString();
 
             if (entity.getCompanyName() == null || entity.getExpirationDate() == null) {
-                throw new IllegalArgumentException("Company Name and Expiration Date are required");
+                throw new IllegalArgumentException("Company Name and Expiration Date required");
             }
 
-            String smsCodeName = entity.getSmsIdentifierCode().getSmsIdentifierCodeName();
+            String codeName = entity.getSmsIdentifierCode().getSmsIdentifierCodeName();
 
-            String serial = serialGenerator.generateSerialNumber(
+            String serial = generator.generateSerialNumber(
                     entity.getCompanyName(),
                     entity.getExpirationDate(),
-                    smsCodeName
+                    codeName
             );
 
             entity.setSerialNumber(serial);
         }
 
-        ///  End  ///
-
-
-        detailRepo.save(entity);
-        codeRepo.save(code);
+        detailRepository.save(entity);
+        codeRepository.save(code);
     }
 
-
     /* ================= READ ALL ================= */
-    public List<SmsIdentifierDetailDTO> findAll() {
-        return detailRepo.findAll()
+
+    public List<SmsIdentifierDetailDTO> getAll() {
+        return detailRepository.findAll()
                 .stream()
                 .map(this::mapToDTO)
                 .collect(Collectors.toList());
     }
 
     /* ================= READ BY ID ================= */
-    public SmsIdentifierDetailDTO findById(Long id) {
+
+    public SmsIdentifierDetailDTO getById(Long id) {
         return mapToDTO(
-                detailRepo.findById(id)
+                detailRepository.findById(id)
                         .orElseThrow(() -> new RuntimeException("Record not found"))
         );
     }
 
     /* ================= UPDATE ================= */
+
     public void update(Long id, SmsIdentifierDetailDTO dto) {
 
-        SmsIdentifierDetail entity = detailRepo.findById(id)
+        SmsIdentifierDetail entity = detailRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Record not found"));
 
-        // ✅ Handle SMS Identifier Code change
         if (dto.getSmsIdentifierCodeId() != null) {
 
-            SmsIdentifierCode newCode = codeRepo.findById(dto.getSmsIdentifierCodeId())
+            SmsIdentifierCode code = codeRepository.findById(dto.getSmsIdentifierCodeId())
                     .orElseThrow(() -> new RuntimeException("Code not found"));
 
-            entity.setSmsIdentifierCode(newCode);
-            newCode.setAssignStatus("Assign");
-            codeRepo.save(newCode);
+            entity.setSmsIdentifierCode(code);
+            code.setAssignStatus("Assign");
+
+            codeRepository.save(code);
         }
 
         mapToEntity(dto, entity);
 
-        detailRepo.save(entity);
+        detailRepository.save(entity);
     }
 
-
     /* ================= DELETE ================= */
+
     public void delete(Long id) {
 
-        SmsIdentifierDetail detail = detailRepo.findById(id)
+        SmsIdentifierDetail detail = detailRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Record not found"));
 
         SmsIdentifierCode code = detail.getSmsIdentifierCode();
 
         if (code != null) {
             code.setAssignStatus("Unassign");
-            codeRepo.save(code);
+            codeRepository.save(code);
         }
 
-
-        detailRepo.delete(detail);
+        detailRepository.delete(detail);
     }
 
-
-    /* ================= MAPPERS ================= */
+    /* ================= ENTITY MAPPER ================= */
 
     private void mapToEntity(SmsIdentifierDetailDTO dto, SmsIdentifierDetail e) {
 
         e.setCompanyName(dto.getCompanyName());
         e.setCompanyNameInDari(dto.getCompanyNameInDari());
-        e.setSerialNumber(dto.getSerialNumber());
-        e.setResponsiblePerson(dto.getResponsiblePerson());   // ✅ ADD
+        // ✅ ONLY set serial if provided (for create or manual input)
+        if (dto.getSerialNumber() != null && !dto.getSerialNumber().trim().isEmpty()) {
+            e.setSerialNumber(dto.getSerialNumber());
+        }
+        e.setResponsiblePerson(dto.getResponsiblePerson());
         e.setJob(dto.getJob());
         e.setEnid(dto.getEnid());
         e.setCompanyAddress(dto.getCompanyAddress());
@@ -147,50 +152,37 @@ public class SmsIdentifierDetailService {
         e.setMnosCompanyHost(dto.getMnosCompanyHost());
         e.setCodeCategory(dto.getCodeCategory());
 
-
-//        e.setAssigningDate(dto.getAssigningDate());
-
-
         PersianCalendarUtils converter = new PersianCalendarUtils();
-        /* ================= ENTRY VOUCHER DATE ================= */
-        if (dto.getAssigningDateJalali() != null &&
-                !dto.getAssigningDateJalali().trim().isEmpty()) {
 
+        /* ================= Assigning Date ================= */
 
-                String[] parts = dto.getAssigningDateJalali().trim().split("-");
+        if (dto.getAssigningDateJalali() != null && !dto.getAssigningDateJalali().isEmpty()) {
 
-                if (parts.length == 3) {
-                    int year = Integer.parseInt(parts[0]);
-                    int month = Integer.parseInt(parts[1]);
-                    int day = Integer.parseInt(parts[2]);
+            String[] parts = dto.getAssigningDateJalali().split("-");
 
-                    LocalDate assigningDate = converter.jalaliToGregorian(year, month, day);
-                    e.setAssigningDate(assigningDate); // ✅ FIXED
-                }
+            int y = Integer.parseInt(parts[0]);
+            int m = Integer.parseInt(parts[1]);
+            int d = Integer.parseInt(parts[2]);
+
+            LocalDate date = converter.jalaliToGregorian(y, m, d);
+            e.setAssigningDate(date);
         }
 
+        /* ================= Expiration Date ================= */
 
+        if (dto.getExpirationDateJalali() != null && !dto.getExpirationDateJalali().isEmpty()) {
 
-//        e.setExpirationDate(dto.getExpirationDate());
+            String[] parts = dto.getExpirationDateJalali().split("-");
 
+            int y = Integer.parseInt(parts[0]);
+            int m = Integer.parseInt(parts[1]);
+            int d = Integer.parseInt(parts[2]);
 
-
-        /* ================= Expiry DATE ================= */
-        if (dto.getExpirationDateJalali() != null &&
-                !dto.getExpirationDateJalali().trim().isEmpty()) {
-
-
-            String[] part = dto.getExpirationDateJalali().trim().split("-");
-
-            if (part.length == 3) {
-                int eyear = Integer.parseInt(part[0]);
-                int emonth = Integer.parseInt(part[1]);
-                int eday = Integer.parseInt(part[2]);
-
-                LocalDate expDate = converter.jalaliToGregorian(eyear, emonth, eday);
-                e.setExpirationDate(expDate); // ✅ FIXED
-            }
+            LocalDate date = converter.jalaliToGregorian(y, m, d);
+            e.setExpirationDate(date);
         }
+
+        /* ================= FEES ================= */
 
         e.setApplicationFees(dto.getApplicationFees());
         e.setApplicationFeesBankVoucherNo(dto.getApplicationFeesBankVoucherNo());
@@ -207,10 +199,9 @@ public class SmsIdentifierDetailService {
         e.setShortCodeRejectionStatus(dto.getShortCodeRejectionStatus());
         e.setShortCodeRejectionDate(dto.getShortCodeRejectionDate());
         e.setRemark(dto.getRemark());
-
-
-
     }
+
+    /* ================= DTO MAPPER ================= */
 
     private SmsIdentifierDetailDTO mapToDTO(SmsIdentifierDetail e) {
 
@@ -232,18 +223,16 @@ public class SmsIdentifierDetailService {
         dto.setMnosCompanyHost(e.getMnosCompanyHost());
         dto.setCodeCategory(e.getCodeCategory());
 
-        // ✅ SMS Code
         if (e.getSmsIdentifierCode() != null) {
             dto.setSmsIdentifierCodeId(e.getSmsIdentifierCode().getId());
             dto.setSmsIdentifierCodeName(e.getSmsIdentifierCode().getSmsIdentifierCodeName());
         }
 
+        DateConverter converter = new DateConverter();
 
-
-        // ✅ FIX: Convert Gregorian → Jalali
-         DateConverter converter= new DateConverter();
+        /* Assigning Date */
         if (e.getAssigningDate() != null) {
-            var j = converter.gregorianToJalali(
+            var jd = converter.gregorianToJalali(
                     e.getAssigningDate().getYear(),
                     e.getAssigningDate().getMonthValue(),
                     e.getAssigningDate().getDayOfMonth()
@@ -251,15 +240,15 @@ public class SmsIdentifierDetailService {
 
             dto.setAssigningDateJalali(
                     String.format("%04d-%02d-%02d",
-                            j.getYear(),
-                            j.getMonthPersian().getValue(),  // ✅ FIXED
-                            j.getDay()
-                    )
+                            jd.getYear(),
+                            jd.getMonthPersian().getValue(),
+                            jd.getDay())
             );
         }
 
+        /* Expiration Date */
         if (e.getExpirationDate() != null) {
-            var j = converter.gregorianToJalali(
+            var jd = converter.gregorianToJalali(
                     e.getExpirationDate().getYear(),
                     e.getExpirationDate().getMonthValue(),
                     e.getExpirationDate().getDayOfMonth()
@@ -267,35 +256,11 @@ public class SmsIdentifierDetailService {
 
             dto.setExpirationDateJalali(
                     String.format("%04d-%02d-%02d",
-                            j.getYear(),
-                            j.getMonthPersian().getValue(),  // ✅ FIXED
-                            j.getDay()
-                    )
+                            jd.getYear(),
+                            jd.getMonthPersian().getValue(),
+                            jd.getDay())
             );
         }
-
-
-
-
-
-
-
-        // Fees
-        dto.setApplicationFees(e.getApplicationFees());
-        dto.setApplicationFeesBankVoucherNo(e.getApplicationFeesBankVoucherNo());
-        dto.setApplicationFeesEnteryVoucherDate(e.getApplicationFeesEnteryVoucherDate());
-        dto.setApplicationFeesBankVoucherSubmissionDate(e.getApplicationFeesBankVoucherSubmissionDate());
-        dto.setApplicationFeesPaymentStatus(e.getApplicationFeesPaymentStatus());
-
-        dto.setRoyaltyFees(e.getRoyaltyFees());
-        dto.setRoyaltyFeesBankVoucherNo(e.getRoyaltyFeesBankVoucherNo());
-        dto.setRoyaltyFeesEnteryVoucherDate(e.getRoyaltyFeesEnteryVoucherDate());
-        dto.setRoyaltyFeesBankVoucherSubmissionDate(e.getRoyaltyFeesBankVoucherSubmissionDate());
-        dto.setRoyaltyFeesPaymentStatus(e.getRoyaltyFeesPaymentStatus());
-
-        dto.setShortCodeRejectionStatus(e.getShortCodeRejectionStatus());
-        dto.setShortCodeRejectionDate(e.getShortCodeRejectionDate());
-        dto.setRemark(e.getRemark());
 
         return dto;
     }
