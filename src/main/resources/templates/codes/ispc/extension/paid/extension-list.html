@@ -42,8 +42,6 @@
                     <th>Responsible</th>
                     <th>Mobile</th>
                     <th>Email</th>
-                    <th>Assign Date</th>
-                    <th>Expire Date</th>
                     <th>Print</th>
 
                 </tr>
@@ -65,8 +63,6 @@
                     <td th:text="${e.mobile != null ? e.mobile : '-'}"></td>
                     <td th:text="${e.email != null ? e.email : '-'}"></td>
 
-                    <td th:text="${e.assigningDate != null ? e.assigningDate : '-'}"></td>
-                    <td th:text="${e.expirationDate != null ? e.expirationDate : '-'}"></td>
 
                     <td>
                     <a th:href="@{/codes/ispc/extensions/print/{id}(id=${e.id})}"
