@@ -182,4 +182,9 @@ public class RouteController {
 
         return "codes/finance/ispc/home";
     }
+    @GetMapping("/codes/ISPC/standard/extension/home")
+    public String ispcCodeExtensionHome()
+    {
+        return "codes/ispc/extension/paid/home";
+    }
 }

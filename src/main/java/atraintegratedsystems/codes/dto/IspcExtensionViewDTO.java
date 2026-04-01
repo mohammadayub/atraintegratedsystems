@@ -13,6 +13,7 @@ public class IspcExtensionViewDTO {
     private String serialNumber;
     private String signalingPoint;
     private String companyName;
+    private String companyNameInDari;
     private String enid;
     private String location;
     private String companyAddress;
@@ -35,6 +36,8 @@ public class IspcExtensionViewDTO {
     // Jalali fields (not part of JPQL constructor)
     private String extensionStartDateJalali;
     private String extentionExpirationDateJalali;
+    private String assigningDateJalali;
+    private String expirationDateJalali;
 
 
     public IspcExtensionViewDTO(
@@ -43,6 +46,7 @@ public class IspcExtensionViewDTO {
             String serialNumber,
             String signalingPoint,
             String companyName,
+            String companyNameInDari,
             String enid,
             String location,
             String companyAddress,
@@ -63,6 +67,7 @@ public class IspcExtensionViewDTO {
         this.serialNumber = serialNumber;
         this.signalingPoint = signalingPoint;
         this.companyName = companyName;
+        this.companyNameInDari=companyNameInDari;
         this.enid = enid;
         this.location = location;
         this.companyAddress = companyAddress;

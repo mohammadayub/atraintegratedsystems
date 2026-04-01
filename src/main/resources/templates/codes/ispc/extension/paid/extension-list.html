@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:lang="#{lang}"
+      th:dir="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'rtl' : 'ltr'">
+
+<head>
+    <title>ISPC Extension Paid List</title>
+
+    <!-- Layout Head -->
+    <th:block th:replace="~{codes_layout :: page_head}"></th:block>
+
+    <!-- Styles -->
+    <th:block th:replace="styles :: data-tables-styles"></th:block>
+    <th:block th:replace="styles :: common-css"></th:block>
+    <th:block th:replace="styles :: commonfieldset-with-legend-border"></th:block>
+</head>
+
+<body>
+
+<!-- Navbar -->
+<th:block th:replace="~{codes_layout :: page_navbar}"></th:block>
+
+<div class="container-fluid mt-4"
+     th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
+
+    <fieldset class="commonfieldset-with-legend-border">
+        <legend>ISPC Extension Paid List</legend>
+
+        <div class="table-responsive">
+            <table id="profileTable" class="table table-bordered table-striped table-hover w-100">
+
+                <thead class="bg-primary text-white">
+                <tr>
+                    <th>#</th>
+                    <th>ISPC Code</th>
+                    <th>Serial</th>
+                    <th>SP</th>
+                    <th>Company</th>
+                    <th>Company (Dari)</th>
+                    <th>ENID</th>
+                    <th>Location</th>
+                    <th>Responsible</th>
+                    <th>Mobile</th>
+                    <th>Email</th>
+                    <th>Assign Date</th>
+                    <th>Expire Date</th>
+                    <th>Print</th>
+
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr th:each="e, stat : ${extensions}">
+
+                    <td th:text="${stat.count}"></td>
+
+                    <td th:text="${e.ispcCodeName != null ? e.ispcCodeName : '-'}"></td>
+                    <td th:text="${e.serialNumber != null ? e.serialNumber : '-'}"></td>
+                    <td th:text="${e.signalingPoint != null ? e.signalingPoint : '-'}"></td>
+                    <td th:text="${e.companyName != null ? e.companyName : '-'}"></td>
+                    <td th:text="${e.companyNameInDari != null ? e.companyNameInDari : '-'}"></td>
+                    <td th:text="${e.enid != null ? e.enid : '-'}"></td>
+                    <td th:text="${e.location != null ? e.location : '-'}"></td>
+                    <td th:text="${e.responsiblePerson != null ? e.responsiblePerson : '-'}"></td>
+                    <td th:text="${e.mobile != null ? e.mobile : '-'}"></td>
+                    <td th:text="${e.email != null ? e.email : '-'}"></td>
+
+                    <td th:text="${e.assigningDate != null ? e.assigningDate : '-'}"></td>
+                    <td th:text="${e.expirationDate != null ? e.expirationDate : '-'}"></td>
+
+                    <td>
+                    <a th:href="@{/codes/ispc/extensions/print/{id}(id=${e.id})}"
+                       class="btn btn-success btn-sm"
+                       target="_blank">
+                        🖨 Print
+                    </a>
+                    </td>
+
+                </tr>
+
+                </tbody>
+
+            </table>
+        </div>
+    </fieldset>
+
+    <div class="mt-3">
+        <a th:href="@{/codes}" class="btn btn-primary">
+            ← Back
+        </a>
+    </div>
+
+</div>
+
+<!-- Scripts -->
+<th:block th:replace="scripts :: common-scripts"></th:block>
+<th:block th:replace="scripts :: data-tables-scripts"></th:block>
+<th:block th:replace="scripts :: common-datatable"></th:block>
+
+<!-- Footer -->
+<th:block th:replace="~{codes_layout :: page_footer}"></th:block>
+
+</body>
+</html>
