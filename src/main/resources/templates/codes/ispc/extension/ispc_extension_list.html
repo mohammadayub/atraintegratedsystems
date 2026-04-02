@@ -54,9 +54,9 @@
 
                     <!-- FIXED: only ONE td -->
                     <td>
-                        <a class="btn btn-sm btn-outline-primary"
+                        <a
                            th:href="@{/codes/ispc-extension/create/{id}(id=${item.id})}">
-                            Extend
+                            <img th:src="@{/images/codesExtension.png}" alt="extension" />
                         </a>
                     </td>
                 </tr>
@@ -65,7 +65,7 @@
             </table>
         </div>
     </fieldset>
-    <a th:href="@{/codes/sms-identifier/home}"
+    <a th:href="@{/codes/sms-identifier/standard/extension/home}"
        class="btn btn-primary mt-3">
         ← Back to Page
     </a>

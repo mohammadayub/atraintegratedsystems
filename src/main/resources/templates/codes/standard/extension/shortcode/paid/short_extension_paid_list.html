@@ -121,7 +121,8 @@
     </fieldset>
 
     <!-- BACK BUTTON -->
-    <a th:href="@{/codes}" class="btn btn-primary mt-3">
+    <a th:href="@{/codes/finance/extension/home}"
+       class="btn btn-primary mt-3">
         ← Back to Page
     </a>
 
@@ -132,6 +133,9 @@
 <div th:replace="scripts :: data-tables-scripts"></div>
 <div th:replace="scripts :: common-datatable"></div>
 
+<footer th:replace="~{codes_layout :: page_footer}"></footer>
+
+<div style="height:10vh;"></div>
 <footer th:replace="~{codes_layout :: page_footer}"></footer>
 
 <script th:src="@{/js/bootstrap.bundle.min.js}"></script>

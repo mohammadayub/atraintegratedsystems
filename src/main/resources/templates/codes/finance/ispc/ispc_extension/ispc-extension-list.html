@@ -55,9 +55,10 @@
                     <td th:text="${ext.extentionExpirationDateJalali}"></td>
                     <td th:text="${ext.extendStatus}"></td>
                     <td>
-                        <a class="btn btn-sm btn-primary"
+                        <a
                            th:href="@{/codes/ispc/finance-extension/edit/{id}(id=${ext.id})}">
-                            Extend
+                            <img th:src="@{/images/codesExtension.png}" alt="Application Fee" />
+
                         </a>
                     </td>
 
@@ -71,7 +72,7 @@
 
     </fieldset>
 
-    <a th:href="@{/codes/ispc/finance/home}"
+    <a th:href="@{/codes/ispc-code/finance/home}"
        class="btn btn-primary mt-3">
         ← Back to Page
     </a>

@@ -82,7 +82,7 @@ public class RouteController {
     //Codes Management Section
 
     @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_CODES_ADMIN')")
-    @GetMapping("/Codes")
+    @GetMapping("/codes")
     public String codes_home()
     {
         return "codes/index";

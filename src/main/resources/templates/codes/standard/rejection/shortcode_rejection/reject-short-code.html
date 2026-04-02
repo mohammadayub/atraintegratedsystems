@@ -1,62 +1,96 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{codes_layout :: page_head}">
+    <title>Reject Short Code</title>
+
+    <!-- Styles -->
+    <div th:replace="styles :: common-css"></div>
+    <div th:replace="styles :: commonfieldset"></div>
     <div th:replace="styles :: persian-datepicker-styles"></div>
     <div th:replace="styles :: select2-styles"></div>
-    <div th:replace="styles :: common-css"></div>
-    <title>Reject Short Code</title>
 </head>
 
 <body>
 
+<!-- Navbar -->
 <nav th:replace="~{codes_layout :: page_navbar}"></nav>
 
-<div class="container mt-4">
-    <fieldset>
-        <legend class="text-center">Reject Short Code</legend>
+<!-- Main Container -->
+<div class="container-fluid mt-4"
+     th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
 
-        <form th:action="@{/codes/standard/shortcodes_details/reject/{id}(id=${codeDetail.id})}"
-              method="post"
-              th:object="${dto}">
+    <!-- Form -->
+    <form th:action="@{/codes/standard/shortcodes_details/reject/{id}(id=${codeDetail.id})}"
+          method="post"
+          th:object="${dto}">
 
-            <div class="row mb-3">
+        <fieldset style="border:2px solid #DCAF45;padding:15px;border-radius:8px;margin-bottom:20px;">
+            <legend style="width:auto;font-size:1.2rem;color:#14438B;padding:0 10px;font-weight:bold;">
+                Reject Short Code
+            </legend>
 
-                <div class="col-md-6">
+            <div class="row g-3">
+
+                <!-- Rejection Status -->
+                <div class="col-md-4 form-group">
                     <label>Rejection Status</label>
                     <select class="form-control"
                             th:field="*{shortCodeRejectionStatus}" required>
-                        <option value="">-- Select --</option>
                         <option value="REJECTED">Rejected</option>
-                        <option value="CANCELLED">Cancelled</option>
                     </select>
                 </div>
-            </div>
 
-            <div class="row mb-3">
-                <div class="col-md-6">
+                <!-- Rejection Date -->
+                <div class="col-md-4 form-group">
                     <label>Rejection Date</label>
-                    <input type="date"
+                    <input type="text"
                            class="form-control hijrishamsi"
                            th:field="*{shortCodeRejectionDate}" required>
                 </div>
+
             </div>
 
-            <div class="text-end">
-                <button class="btn btn-danger">Reject Short Code</button>
-                <a th:href="@{/codes/standard/shortcodes_details/list}"
-                   class="btn btn-secondary">
-                    Cancel
-                </a>
+            <!-- Buttons -->
+            <div class="row mt-4">
+                <div class="col-md-4 mx-auto d-flex justify-content-center gap-2">
+
+                    <button type="submit" class="btn btn-danger">
+                        <i class="fas fa-times"></i>
+                        Reject Short Code
+                    </button>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+
+                    <a th:href="@{/codes/standard/shortcodes_details/list}"
+                       class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i>
+                        Cancel
+                    </a>
+
+                </div>
             </div>
 
-        </form>
-    </fieldset>
+        </fieldset>
+
+        <!-- Back Button -->
+        <a th:href="@{/codes/standard/shortcodes_details/list}"
+           class="btn btn-primary mt-3">
+            ← Back to Page
+        </a>
+
+    </form>
 </div>
+
+<!-- Scripts -->
 <div th:replace="scripts :: common-scripts"></div>
 <div th:replace="scripts :: persian-datepicker-scripts"></div>
 <div th:replace="scripts :: select2-scripts"></div>
 <div th:replace="scripts :: common-hijrishamsi-date"></div>
 
+<!-- Footer spacing -->
+<div style="height:10vh;"></div>
+
+<!-- Footer -->
 <footer th:replace="~{codes_layout :: page_footer}"></footer>
+
 </body>
 </html>

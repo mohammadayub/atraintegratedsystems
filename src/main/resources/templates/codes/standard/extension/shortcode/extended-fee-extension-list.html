@@ -15,7 +15,7 @@
      th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
 
   <fieldset>
-    <legend>Application Fee – Extended Records</legend>
+    <legend>Short Code – Extended Records</legend>
 
     <div class="table-container">
       <table class="slip table table-bordered table-striped"
@@ -54,9 +54,9 @@
 
             <!-- Action -->
             <td class="text-center">
-                <a class="btn btn-warning btn-sm"
+                <a
                    th:href="@{/codes/extended/code-extension/extension-fee/create/{id}(id=${row[0]})}">
-                    Extend
+                  <img th:src="@{/images/codesExtension.png}" alt="extension" />
                 </a>
             </td>
 
@@ -67,7 +67,7 @@
     </div>
   </fieldset>
 
-  <a th:href="@{/codes}"
+  <a th:href="@{/codes/finance/extension/home}"
      class="btn btn-primary mt-3">
     ← Back to Page
   </a>
