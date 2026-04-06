@@ -17,20 +17,31 @@
             font-weight: 600;
         }
 
-          .custom-card {
-              text-align: center;
-              padding: 20px;
-              border-radius: 12px;
-              transition: 0.3s ease;
-          }
+        .custom-card {
+            text-align: center;
+            padding: 20px;
+            border-radius: 12px;
+            transition: 0.3s ease;
+        }
 
-          .custom-card:hover {
-              transform: translateY(-5px);
-          }
+        .custom-card:hover {
+            transform: translateY(-5px);
+        }
 
-          .custom-card img {
-              height: 80px;
-          }
+        .custom-card img {
+            height: 80px;
+        }
+
+        /* ✅ COPY THIS FROM WORKING PAGE */
+        .label-rtl legend {
+            direction: rtl;
+            text-align: right;
+        }
+
+        .label-ltr legend {
+            direction: ltr;
+            text-align: left;
+        }
     </style>
 </head>
 
@@ -38,11 +49,11 @@
 
 <nav th:replace="~{codes_layout :: page_navbar}"></nav>
 
-<div class="container mt-4">
+<div class="container mt-4" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
 
     <!-- ================= SHORT CODES ================= -->
     <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_CODES_ADMIN')">
-        <legend>Short Codes Management Section</legend>
+        <legend th:text="#{shortCodesManagementSection}">Short Codes Management Section</legend>
 
         <table class="table table-borderless text-center">
             <tr>
@@ -50,7 +61,7 @@
                     <div class="custom-card">
                         <a th:href="@{/codes/standard/shortcodes/add}">
                             <img th:src="@{/images/shortCodes.png}" alt="Short Code">
-                            <h4 style="margin-top:12px;">Add Short Code</h4>
+                            <h4 style="margin-top:12px;" th:text="#{addShortCode}">Add Short Code</h4>
                         </a>
                     </div>
                 </td>
@@ -59,7 +70,7 @@
                     <div class="custom-card">
                         <a th:href="@{/codes/standard/shortcodes}">
                             <img th:src="@{/images/smsidentifiercode.png}" alt="Short Code List">
-                            <h4 style="margin-top:12px;">Short Code List</h4>
+                            <h4 style="margin-top:12px;" th:text="#{shortCodeList}">Short Code List</h4>
                         </a>
                     </div>
                 </td>
@@ -68,7 +79,7 @@
                     <div class="custom-card">
                         <a th:href="@{/codes/standard/shortcodes_details/add}">
                             <img th:src="@{/images/codeDetail.png}" alt="Code Detail">
-                            <h4 style="margin-top:12px;">Code Detail</h4>
+                            <h4 style="margin-top:12px;" th:text="#{codeDetails}">Code Detail</h4>
                         </a>
                     </div>
                 </td>
@@ -77,7 +88,7 @@
                     <div class="custom-card">
                         <a th:href="@{/codes/standard/shortcodes_details}">
                             <img th:src="@{/images/code_detail_list.png}" alt="Code Detail List">
-                            <h4 style="margin-top:12px;">Code Detail List</h4>
+                            <h4 style="margin-top:12px;" th:text="#{codeDetailList}">Code Detail List</h4>
                         </a>
                     </div>
                 </td>
@@ -87,7 +98,7 @@
 
     <!-- ================= EXTENSIONS ================= -->
     <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_CODES_ADMIN')">
-        <legend>Short Codes Extension Management</legend>
+        <legend th:text="#{shortCodeExtensionManagement}">Short Codes Extension Management</legend>
 
         <table class="table table-borderless text-center">
             <tr>
@@ -95,7 +106,7 @@
                     <div class="custom-card">
                         <a th:href="@{/codes/finance/extension/home}">
                             <img th:src="@{/images/serialNumber.png}" alt="Extension">
-                            <h4 style="margin-top:12px;">Codes Extension</h4>
+                            <h4 style="margin-top:12px;" th:text="#{codeExtension}">Codes Extension</h4>
                         </a>
                     </div>
                 </td>

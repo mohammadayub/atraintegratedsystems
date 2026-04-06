@@ -1,6 +1,7 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
 <head th:replace="~{codes_layout :: page_head}">
     <div th:replace="styles :: persian-datepicker-styles"></div>
     <div th:replace="styles :: select2-styles"></div>
@@ -9,6 +10,7 @@
 </head>
 
 <body>
+
 <nav th:replace="~{codes_layout :: page_navbar}"></nav>
 
 <div class="container-fluid mt-4"
@@ -21,16 +23,16 @@
 
         <fieldset style="border:2px solid #DCAF45;padding:15px;border-radius:8px;margin-bottom:20px;">
             <legend style="width:auto;font-size:1.2rem;color:#14438B;padding:0 10px;font-weight:bold;">
-                <span th:text="#{telecom_shortcode_details}">Telecom ShortCode Details</span>
+                <span th:text="#{telecomShortCodeDetails}">Telecom ShortCode Details</span>
             </legend>
 
             <div class="row g-3">
+
                 <input type="hidden" th:field="*{id}"/>
 
                 <!-- ROW 1 -->
-
                 <div class="col-md-3 form-group">
-                    <label>Short Code</label>
+                    <label th:text="#{shortCode}">Short Code</label>
                     <select class="form-control search-select" th:field="*{shortCodeId}">
                         <option value="">-- Select Short Code --</option>
                         <option th:each="sc : ${codes}"
@@ -41,41 +43,42 @@
                 </div>
 
                 <div class="col-md-3 form-group">
-                    <label th:text="#{license_applicants}">License Applicant</label>
+                    <label th:text="#{codeLicenseApplicant}">License Applicant</label>
                     <select class="form-control select2" th:field="*{licenseApplicantId}">
                         <option value="">None</option>
                         <option th:each="la : ${licenseApplicants}"
                                 th:value="${la.id}"
                                 th:text="${la.companyLicenseName + ' — ' +
-                #temporals.format(la.reqDate,'yyyy-MM-dd') +
-                ' — Validity: ' + la.validity +
-                ' — Admin Fee: ' + la.administrationFeePaymentStatus}">
+                                #temporals.format(la.reqDate,'yyyy-MM-dd') +
+                                ' — Validity: ' + la.validity +
+                                ' — Admin Fee: ' + la.administrationFeePaymentStatus}">
                         </option>
                     </select>
                 </div>
 
                 <!-- ROW 2 -->
                 <div class="col-md-3 form-group">
-                    <label th:text="#{source_used}">Source Used</label>
+                    <label th:text="#{sourceUsed}">Source Used</label>
                     <input type="text" class="form-control" th:field="*{sourceUsed}">
                 </div>
 
                 <div class="col-md-3 form-group">
-                    <label >Source Used in Dari</label>
+                    <label th:text="#{sourceUsedInDari}">Source Used in Dari</label>
                     <input type="text" class="form-control" th:field="*{sourceUsedInDari}">
                 </div>
 
                 <div class="col-md-3 form-group">
-                    <label th:text="#{location}">Location</label>
+                    <label th:text="#{codeLocation}">Location</label>
                     <input type="text" class="form-control" th:field="*{location}">
                 </div>
+
                 <div class="col-md-3 form-group">
-                    <label>Address</label>
+                    <label th:text="#{codeAddress}">Address</label>
                     <input type="text" class="form-control" th:field="*{address}">
                 </div>
 
                 <div class="col-md-3 form-group">
-                    <label th:text="#{channel}">Channel</label>
+                    <label th:text="#{codeChannel}">Channel</label>
                     <select class="form-control" th:field="*{chanel}">
                         <option value="IVR">IVR</option>
                         <option value="SMS">SMS</option>
@@ -85,13 +88,13 @@
                 </div>
 
                 <div class="col-md-3 form-group">
-                    <label th:text="#{services}">Services</label>
+                    <label th:text="#{service}">Services</label>
                     <textarea class="form-control" th:field="*{services}"></textarea>
                 </div>
 
                 <!-- ROW 3 -->
                 <div class="col-md-3 form-group">
-                    <label th:text="#{select_category_type}">Select Category Type</label>
+                    <label th:text="#{selectCategoryType}">Select Category Type</label>
                     <select class="form-control"
                             th:field="*{categoryType}"
                             id="categoryType"
@@ -107,7 +110,7 @@
                 </div>
 
                 <div class="col-md-3 form-group">
-                    <label th:text="#{select_category}">Select Category</label>
+                    <label th:text="#{selectCategory}">Select Category</label>
                     <select class="form-control"
                             th:field="*{category}"
                             id="category"
@@ -121,72 +124,69 @@
                     </select>
                 </div>
 
-
-
-
-
                 <div class="col-md-3 form-group">
-                    <label th:text="#{back_long_number}">Back Long Number</label>
+                    <label th:text="#{backLongNumber}">Back Long Number</label>
                     <input type="text" class="form-control" th:field="*{backLongNumber}">
                 </div>
 
                 <div class="col-md-3 form-group">
-                    <label th:text="#{full_name}">Full Name</label>
+                    <label th:text="#{fullName}">Full Name</label>
                     <input type="text" class="form-control" th:field="*{nameOfResponsiblePerson}">
                 </div>
+
                 <div class="col-md-3 form-group">
-                    <label>Job</label>
+                    <label th:text="#{job}">Job</label>
                     <input type="text" class="form-control" th:field="*{job}">
                 </div>
 
                 <!-- ROW 4 -->
                 <div class="col-md-3 form-group">
-                    <label th:text="#{id_card_number}">ID Card Number</label>
+                    <label th:text="#{tazkira}">ID Card Number</label>
                     <input type="text" class="form-control"
                            th:field="*{idCardNumberOfResponsiblePerson}">
                 </div>
 
                 <div class="col-md-3 form-group">
-                    <label th:text="#{mobile_number}">Mobile Number</label>
+                    <label th:text="#{mobileNumber}">Mobile Number</label>
                     <input type="text" class="form-control"
                            th:field="*{mobileNumberOfResponsiblePerson}">
                 </div>
 
                 <div class="col-md-3 form-group">
-                    <label th:text="#{email_address}">Email Address</label>
+                    <label th:text="#{codeEmail}">Email Address</label>
                     <input type="text" class="form-control"
                            th:field="*{emailOfResponsiblePerson}">
                 </div>
 
                 <div class="col-md-3 form-group">
-                    <label th:text="#{assigning_date}">Assigning Date</label>
+                    <label th:text="#{assingingDate}">Assigning Date</label>
                     <input type="text" class="form-control hijrishamsi"
                            th:field="*{assigningDateJalali}">
                 </div>
 
                 <!-- ROW 5 -->
                 <div class="col-md-3 form-group">
-                    <label th:text="#{expiry_date}">Expiry Date</label>
+                    <label th:text="#{expiryDate}">Expiry Date</label>
                     <input type="text" class="form-control hijrishamsi"
                            th:field="*{expirationDateJalali}">
                 </div>
 
                 <div class="col-md-3 form-group">
-                    <label th:text="#{application_fees}">Application Fees</label>
+                    <label th:text="#{applicationFee}">Application Fees</label>
                     <input type="number" class="form-control"
                            th:field="*{applicationFees}" readonly>
                 </div>
 
                 <div class="col-md-3 form-group">
-                    <label th:text="#{royality_fees}">Royalty Fees</label>
+                    <label th:text="#{royaltyFee}">Royalty Fees</label>
                     <input type="number" class="form-control"
                            th:field="*{royaltyFees}" readonly>
                 </div>
 
                 <div class="col-md-3 form-group">
-                    <label >Remarks</label>
-                    <textarea  class="form-control"
-                               th:field="*{remarks}" ></textarea>
+                    <label th:text="#{remark}">Remarks</label>
+                    <textarea class="form-control"
+                              th:field="*{remarks}"></textarea>
                 </div>
 
                 <input type="hidden" id="totalFees">
@@ -196,14 +196,18 @@
             <!-- BUTTONS -->
             <div class="row mt-4">
                 <div class="col-md-4 mx-auto d-flex justify-content-center gap-2">
+
                     <button type="submit" class="btn btn-primary">
                         <i class="fas fa-check"></i>
-                        <span th:text="#{add_record}">Add Record</span>
+                        <span th:text="#{addRecord}">Add Record</span>
                     </button>
-                    &nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+
                     <button type="reset" class="btn btn-info">
-                        <i class="fas fa-redo"></i> Reset
+                        <i class="fas fa-redo"></i>
+                        <span th:text="#{resetRecord}">Reset</span>
                     </button>
+
                 </div>
             </div>
 
@@ -217,12 +221,11 @@
 <div th:replace="scripts :: select2-scripts"></div>
 <div th:replace="scripts :: common-hijrishamsi-date"></div>
 
+<!-- YOUR JS (UNCHANGED) -->
 <script>
     function updateCategoryValues() {
         var categoryType = document.getElementById('categoryType').value;
         var categorySelect = document.getElementById('category');
-
-        // حفظ مقدار انتخاب شده
         var selectedValue = categorySelect.value;
 
         categorySelect.innerHTML = '';
@@ -238,12 +241,7 @@
             var opt = document.createElement('option');
             opt.value = c;
             opt.text = c;
-
-            // اگر مقدار قبلاً انتخاب شده بود دوباره انتخاب شود
-            if (c === selectedValue) {
-                opt.selected = true;
-            }
-
+            if (c === selectedValue) opt.selected = true;
             categorySelect.appendChild(opt);
         });
 
@@ -255,7 +253,6 @@
         var category = document.getElementById('category').value;
 
         var applicationFees = 0;
-        var registrationFees = 0;
         var royaltyFees = 0;
 
         if (categoryType === 'Technical01') {
@@ -289,7 +286,6 @@
 
         document.getElementById('applicationFees').value = applicationFees;
         document.getElementById('royaltyFees').value = royaltyFees;
-        document.getElementById('registrationFees').value = registrationFees;
     }
 
     document.addEventListener('DOMContentLoaded', function () {
@@ -298,7 +294,6 @@
 
     $(document).ready(function () {
         $('.search-select').select2();
-
     });
 </script>
 
@@ -306,5 +301,6 @@
 <footer th:replace="~{codes_layout :: page_footer}"></footer>
 
 <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+
 </body>
 </html>

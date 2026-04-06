@@ -21,6 +21,16 @@
             border-radius:15px;
             box-shadow:0 0 10px rgba(0,0,0,0.1);
         }
+        /* ✅ FIX RTL/LTR FOR LEGEND */
+        .label-rtl legend {
+            direction: rtl;
+            text-align: right;
+        }
+
+        .label-ltr legend {
+            direction: ltr;
+            text-align: left;
+        }
     </style>
 
 </head>
@@ -35,7 +45,7 @@
 
         <div class="card p-4">
 
-            <h3 class="text-center text-primary mb-4">
+            <h3 th:text="#{addShortCode}" class="text-center text-primary mb-4">
                 Add Short Code
             </h3>
 
@@ -45,7 +55,7 @@
 
                 <div class="mb-3">
 
-                    <label class="form-label">
+                    <label th:text="#{shortCode}" class="form-label">
                         Short Code
                     </label>
 
@@ -57,7 +67,7 @@
 
                 </div>
 
-                <button type="submit"
+                <button type="submit" th:text="#{codesSave}"
                         class="btn btn-primary w-100">
 
                     Save
@@ -74,7 +84,7 @@
 
             <div class="text-center mt-3">
 
-                <a th:href="@{/codes/standard/shortcodes/home}"
+                <a th:href="@{/codes/standard/shortcodes/home}" th:text="#{codesBack}"
                    class="btn btn-secondary">
 
                     Back

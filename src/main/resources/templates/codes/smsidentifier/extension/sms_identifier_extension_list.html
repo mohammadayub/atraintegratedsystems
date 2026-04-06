@@ -26,6 +26,7 @@
                 <thead>
                 <tr class="bg-primary text-white">
                     <th>ID</th>
+                    <th>SMS Identifier Code</th>
                     <th>Company Name</th>
                     <th>ENID</th>
                     <th>Company Address</th>
@@ -38,7 +39,6 @@
                     <th>Code Category</th>
                     <th>Assigning Date</th>
                     <th>Expiration Date</th>
-                    <th>SMS Identifier Code</th>
                     <th>Extension</th>
                 </tr>
                 </thead>
@@ -46,6 +46,7 @@
                 <tbody>
                 <tr th:each="item : ${smsIdentifierDetails}">
                     <td th:text="${item.id}"></td>
+                    <td th:text="${item.smsIdentifierCodeName}"></td>
                     <td th:text="${item.companyName}"></td>
                     <td th:text="${item.enid}"></td>
                     <td th:text="${item.companyAddress}"></td>
@@ -58,7 +59,7 @@
                     <td th:text="${item.codeCategory}"></td>
                     <td th:text="${item.assigningDate}"></td>
                     <td th:text="${item.expirationDate}"></td>
-                    <td th:text="${item.smsIdentifierCodeName}"></td>
+
 
                     <!-- FIXED: only ONE td -->
                     <td>

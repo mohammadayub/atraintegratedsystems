@@ -10,7 +10,6 @@
     <div th:replace="styles :: commonfieldset"></div>
 
     <style>
-        /* SAME STYLE AS LMS DASHBOARD */
         a h4 {
             color: #14438B;
             font-size: 20px;
@@ -32,6 +31,17 @@
         .custom-card img {
             height: 80px;
         }
+
+        /* ✅ FIX RTL/LTR FOR LEGEND */
+        .label-rtl legend {
+            direction: rtl;
+            text-align: right;
+        }
+
+        .label-ltr legend {
+            direction: ltr;
+            text-align: left;
+        }
     </style>
 </head>
 
@@ -39,11 +49,11 @@
 
 <nav th:replace="~{codes_layout :: page_navbar}"></nav>
 
-<div class="container mt-4">
+<div class="container mt-4" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
 
     <!-- ================= CODES MANAGEMENT ================= -->
-    <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_CODES_ADMIN')">
-        <legend>Codes Management Section</legend>
+    <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_CODES_ADMIN')" >
+        <legend th:text="#{codesManagementSection}">Codes Management Section</legend>
 
         <table class="table table-borderless text-center">
             <tr>
@@ -51,7 +61,7 @@
                     <div class="custom-card">
                         <a th:href="@{/codes/standard/shortcodes/home}">
                             <img th:src="@{/images/shortCodes.png}" alt="Short Code">
-                            <h4 style="margin-top:12px;">Short Code</h4>
+                            <h4 style="margin-top:12px;" th:text="#{shortCode}">Short Code</h4>
                         </a>
                     </div>
                 </td>
@@ -60,7 +70,7 @@
                     <div class="custom-card">
                         <a th:href="@{/codes/sms-identifier/home}">
                             <img th:src="@{/images/smsidentifiercode.png}" alt="SMS Identifier">
-                            <h4 style="margin-top:12px;">SMS Identifier Code</h4>
+                            <h4 style="margin-top:12px;" th:text="#{smsIdentifierCode}">SMS Identifier Code</h4>
                         </a>
                     </div>
                 </td>
@@ -69,7 +79,7 @@
                     <div class="custom-card">
                         <a th:href="@{/codes/ispc-code/home}">
                             <img th:src="@{/images/ispcCode.png}" alt="ISPC Code">
-                            <h4 style="margin-top:12px;">ISPC Code</h4>
+                            <h4 style="margin-top:12px;" th:text="#{ispcCode}">ISPC Code</h4>
                         </a>
                     </div>
                 </td>
@@ -80,7 +90,7 @@
 
     <!-- ================= FINANCE MANAGEMENT ================= -->
     <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_CODES_ADMIN')">
-        <legend>Codes Finance Management Section</legend>
+        <legend th:text="#{codesFinanceManagementSection}">Codes Finance Management Section</legend>
 
         <table class="table table-borderless text-center">
             <tr>
@@ -88,7 +98,7 @@
                     <div class="custom-card">
                         <a th:href="@{/codes/finance/home}">
                             <img th:src="@{/images/CodesFinance.png}" alt="Codes Finance">
-                            <h4 style="margin-top:12px;">Codes Finance</h4>
+                            <h4 style="margin-top:12px;" th:text="#{codesFinance}">Codes Finance</h4>
                         </a>
                     </div>
                 </td>
@@ -99,7 +109,7 @@
 
     <!-- ================= REPORTS ================= -->
     <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_CODES_ADMIN')">
-        <legend>Reports Management Section</legend>
+        <legend th:text="#{reportManagementSection}">Reports Management Section</legend>
 
         <table class="table table-borderless text-center">
             <tr>
@@ -107,7 +117,7 @@
                     <div class="custom-card">
                         <a th:href="@{/codes/report/home}">
                             <img th:src="@{/images/reportManagement.png}" alt="Reports">
-                            <h4 style="margin-top:12px;">Reports</h4>
+                            <h4 style="margin-top:12px;" th:text="#{codesReport}">Reports</h4>
                         </a>
                     </div>
                 </td>

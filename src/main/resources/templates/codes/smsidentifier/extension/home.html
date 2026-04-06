@@ -6,7 +6,7 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
 <head th:replace="~{codes_layout :: page_head}">
-    <title>LMS</title>
+    <title>AIS</title>
 
     <div th:replace="styles :: commonfieldset"></div>
 
@@ -39,11 +39,13 @@
 <body>
 
 <nav th:replace="~{codes_layout :: page_navbar}"></nav>
-<div class="container mt-4">
+<div class="container mt-4" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
 
     <!-- ================= EXTENSION MANAGEMENT ================= -->
     <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_CODES_ADMIN')">
-        <legend>Sms Identifier Extension Management Section</legend>
+        <legend th:text="#{smsIdentifierExtensionManagementSection}">
+            Sms Identifier Extension Management Section
+        </legend>
 
         <table class="table table-borderless text-center">
             <tr>
@@ -54,7 +56,8 @@
 
                         <a th:href="@{/codes/sms-identifiers/extension/list}">
                             <img th:src="@{/images/shortCodeFinance.png}" alt="Application Fee Extension">
-                            <h4 style="margin-top:12px;">
+                            <h4 style="margin-top:12px;"
+                                th:text="#{smsIdentifierExtension}">
                                 Sms Identifier Extension
                             </h4>
                         </a>
@@ -62,13 +65,15 @@
                     </div>
                 </td>
 
-
             </tr>
         </table>
     </fieldset>
+
     <!-- ================= PAID EXTENSION ================= -->
     <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_CODES_ADMIN')">
-        <legend>SMS Identifier Code Paid Extension</legend>
+        <legend th:text="#{smsIdentifierExtension}">
+            SMS Identifier Code Paid Extension
+        </legend>
 
         <table class="table table-borderless text-center">
             <tr>
@@ -79,7 +84,8 @@
 
                         <a th:href="@{/codes/sms-identifer/extensions/paid/list}">
                             <img th:src="@{/images/shortCodeFinance.png}" alt="Paid Application Fee Extension">
-                            <h4 style="margin-top:12px;">
+                            <h4 style="margin-top:12px;"
+                                th:text="#{paidExtendedFeeList}">
                                 Paid Extended Fee List
                             </h4>
                         </a>
@@ -87,13 +93,13 @@
                     </div>
                 </td>
 
-
             </tr>
         </table>
     </fieldset>
 
     <a th:href="@{/codes/sms-identifier/home}"
-       class="mt-2 btn btn-primary mt-3">
+       class="mt-2 btn btn-primary mt-3"
+       th:text="#{codesBack}">
         ← Back to Page
     </a>
 

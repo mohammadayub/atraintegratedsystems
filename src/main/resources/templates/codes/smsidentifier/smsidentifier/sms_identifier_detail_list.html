@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head th:replace="~{codes_layout :: page_head}">
-    <title>SMS Identifier Details</title>
+    <title th:text="#{smsIdentifierDetailList}">SMS Identifier Details</title>
 
     <div th:replace="styles :: data-tables-styles"></div>
     <div th:replace="styles :: common-css"></div>
@@ -17,7 +17,7 @@
      th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
 
     <fieldset>
-        <legend>SMS Identifier Details</legend>
+        <legend th:text="#{smsIdentifierDetailList}">SMS Identifier Details</legend>
 
         <div class="table-container">
 
@@ -29,23 +29,23 @@
                 <tr class="bg-primary text-white">
 
                     <th>#</th>
-                    <th>SMS Code</th>
-                    <th>Company Name</th>
-                    <th>Company Name In Dari</th>
-                    <th>Serial Number</th>
-                    <th>Mobile</th>
-                    <th>Telephone</th>
-                    <th>Email</th>
-                    <th>Channel</th>
-                    <th>Service Type</th>
+                    <th th:text="#{smsIdentifierCode}">SMS Code</th>
+                    <th th:text="#{companyName}">Company Name</th>
+                    <th th:text="#{companyNameInDari}">Company Name In Dari</th>
+                    <th th:text="#{serialNumber}">Serial Number</th>
+                    <th th:text="#{smsIdentifierMobile}">Mobile</th>
+                    <th th:text="#{smsIdentifierTelephone}">Telephone</th>
+                    <th th:text="#{codeEmail}">Email</th>
+                    <th th:text="#{smsIdentifierChannel}">Channel</th>
+                    <th th:text="#{smsIdentifierServiceType}">Service Type</th>
                     <th>ENID</th>
-                    <th>Responsible Person</th>
-                    <th>Assign Date</th>
-                    <th>Expire Date</th>
-                    <th>Remark</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
-                    <th>Print</th>
+                    <th th:text="#{responsiblePerson}">Responsible Person</th>
+                    <th th:text="#{assingingDate}">Assign Date</th>
+                    <th th:text="#{expirationDate}">Expire Date</th>
+                    <th th:text="#{remark}">Remark</th>
+                    <th th:text="#{codesAction}">Edit</th>
+                    <th th:text="#{codesDelete}">Delete</th>
+                    <th th:text="#{codesPrint}">Print</th>
 
                 </tr>
                 </thead>
@@ -90,7 +90,8 @@
                     <!-- EDIT -->
                     <td>
                         <a th:href="@{/codes/sms-identifier/details/edit/{id}(id=${d.id})}"
-                           class="btn btn-warning btn-sm">
+                           class="btn btn-warning btn-sm"
+                           th:text="#{codesUpdate}">
                             Edit
                         </a>
                     </td>
@@ -99,7 +100,8 @@
                     <td>
                         <a th:href="@{/codes/sms-identifier/details/delete/{id}(id=${d.id})}"
                            class="btn btn-danger btn-sm"
-                           onclick="return confirm('Are you sure to delete?')">
+                           onclick="return confirm('Are you sure to delete?')"
+                           th:text="#{codesDelete}">
                             Delete
                         </a>
                     </td>
@@ -108,7 +110,8 @@
                     <td>
                         <a th:href="@{/codes/sms-identifier/details/print/{id}(id=${d.id})}"
                            class="btn btn-success btn-sm"
-                           target="_blank">
+                           target="_blank"
+                           th:text="#{codesPrint}">
                             🖨 Print
                         </a>
                     </td>
@@ -123,7 +126,8 @@
     </fieldset>
 
     <a th:href="@{/codes/sms-identifier/home}"
-       class="btn btn-primary mt-3">
+       class="btn btn-primary mt-3"
+       th:text="#{codesBack}">
         ← Back to Page
     </a>
 

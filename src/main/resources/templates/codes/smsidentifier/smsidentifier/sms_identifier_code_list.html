@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{codes_layout :: page_head}">
-    <title>SMS Identifier</title>
+    <title th:text="#{smsIdentifierList}">SMS Identifier</title>
 
     <div th:replace="styles :: data-tables-styles"></div>
     <div th:replace="styles :: common-css"></div>
@@ -15,7 +15,7 @@
      th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
 
     <fieldset>
-        <legend>SMS Identifier Details</legend>
+        <legend th:text="#{smsIdentifierList}">SMS Identifier List</legend>
 
         <div class="table-container">
             <table class="slip table table-bordered table-striped"
@@ -24,30 +24,31 @@
 
                 <thead>
                 <tr class="bg-primary text-white">
-            <th>ID</th>
-            <th>Code</th>
-            <th>Status</th>
-            <th>Entered Date</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="c : ${codes}">
-            <td th:text="${c.id}"></td>
-            <td th:text="${c.smsIdentifierCodeName}"></td>
-            <td th:text="${#strings.isEmpty(c.assignStatus) ? 'Not Assign' : c.assignStatus}"></td>
+                    <th>ID</th>
+                    <th th:text="#{smsIdentifierCode}">Code</th>
+                    <th th:text="#{codesStatus}">Status</th>
+                </tr>
+                </thead>
 
+                <tbody>
+                <tr th:each="c : ${codes}">
+                    <td th:text="${c.id}"></td>
+                    <td th:text="${c.smsIdentifierCodeName}"></td>
+                    <td th:text="${#strings.isEmpty(c.assignStatus) ? 'Not Assign' : c.assignStatus}"></td>
+                </tr>
+                </tbody>
 
-            <td th:text="${c.enteredDate}"></td>
-        </tr>
-        </tbody>
-    </table>
+            </table>
         </div>
     </fieldset>
+
     <a th:href="@{/codes/sms-identifier/home}"
-       class="btn btn-primary mt-3">
+       class="btn btn-primary mt-3"
+       th:text="#{codesBack}">
         ← Back to Page
     </a>
 </div>
+
 <!-- Scripts -->
 <div th:replace="scripts :: common-scripts"></div>
 <div th:replace="scripts :: data-tables-scripts"></div>

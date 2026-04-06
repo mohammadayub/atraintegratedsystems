@@ -4,7 +4,7 @@
       th:dir="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'rtl' : 'ltr'">
 
 <head>
-    <title>SMS Identifier Extension Paid List</title>
+    <title th:text="#{paidExtendedFeeList}">SMS Identifier Extension Paid List</title>
 
     <!-- Layout Head -->
     <th:block th:replace="~{codes_layout :: page_head}"></th:block>
@@ -24,7 +24,7 @@
      th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
 
     <fieldset class="commonfieldset-with-legend-border">
-        <legend>SMS Identifier Extension Paid List</legend>
+        <legend th:text="#{paidExtendedFeeList}">SMS Identifier Extension Paid List</legend>
 
         <div class="table-responsive">
             <table id="profileTable" class="table table-bordered table-striped table-hover w-100">
@@ -32,15 +32,15 @@
                 <thead class="bg-primary text-white">
                 <tr>
                     <th>#</th>
-                    <th>Code Name</th>
-                    <th>Company</th>
-                    <th>Mobile</th>
-                    <th>Start Date (Jalali)</th>
-                    <th>Expire Date (Jalali)</th>
-                    <th>Extended Fee</th>
-                    <th>Voucher No</th>
-                    <th>Status</th>
-                    <th>Action</th>
+                    <th th:text="#{smsIdentifierCode}">Code Name</th>
+                    <th th:text="#{companyName}">Company</th>
+                    <th th:text="#{smsIdentifierMobile}">Mobile</th>
+                    <th th:text="#{smsIdentifierExtensionStartDate}">Start Date (Jalali)</th>
+                    <th th:text="#{smsIdentifierExtensionNewExpirationDate}">Expire Date (Jalali)</th>
+                    <th th:text="#{extendedFee}">Extended Fee</th>
+                    <th th:text="#{bankVoucherNumber}">Voucher No</th>
+                    <th th:text="#{codesStatus}">Status</th>
+                    <th th:text="#{codesAction}">Action</th>
                 </tr>
                 </thead>
 
@@ -57,7 +57,7 @@
                     <td th:text="${ext.extentionExpirationDateJalali != null ? ext.extentionExpirationDateJalali : '-'}"></td>
 
                     <td th:text="${ext.extendedFees + ' AFN'}"></td>
-                   <td th:text="${ext.extensionBankVoucherNo != null ? ext.extensionBankVoucherNo : '-'}"></td>
+                    <td th:text="${ext.extensionBankVoucherNo != null ? ext.extensionBankVoucherNo : '-'}"></td>
 
                     <td>
                         <span th:text="${ext.extensionPaymentStatus != null ? ext.extensionPaymentStatus : 'UNKNOWN'}"
@@ -68,7 +68,7 @@
                     <td>
                         <a th:href="@{/sms/extensions/print/{id}(id=${ext.detailId})}"
                            class="btn btn-success btn-sm"
-                           target="_blank">
+                           th:text="#{codesPrint}">
                             🖨 Print
                         </a>
                     </td>
@@ -82,7 +82,8 @@
 
     <div class="mt-3">
         <a th:href="@{/codes/sms-identifier/standard/extension/home}"
-           class="btn btn-primary mt-3">
+           class="btn btn-primary mt-3"
+           th:text="#{codesBack}">
             ← Back to Page
         </a>
     </div>

@@ -6,11 +6,10 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
 <head th:replace="~{codes_layout :: page_head}">
-    <title>LMS</title>
+    <title th:text="#{shortCodesExtensionManagementSection}">LMS</title>
 
     <div th:replace="styles :: commonfieldset"></div>
 
-    <!-- SAME LMS DASHBOARD STYLE -->
     <style>
         a h4 {
             color: #14438B;
@@ -33,67 +32,74 @@
         .custom-card img {
             height: 80px;
         }
+        /* ✅ COPY THIS FROM WORKING PAGE */
+        .label-rtl legend {
+            direction: rtl;
+            text-align: right;
+        }
+
+        .label-ltr legend {
+            direction: ltr;
+            text-align: left;
+        }
     </style>
 </head>
 
 <body>
 
 <nav th:replace="~{codes_layout :: page_navbar}"></nav>
-<div class="container mt-4">
+
+<div class="container mt-4" th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
 
     <!-- ================= EXTENSION MANAGEMENT ================= -->
     <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_CODES_ADMIN')">
-        <legend>Short Codes Extension Management Section</legend>
+        <legend th:text="#{shortCodesExtensionManagementSection}"></legend>
 
         <table class="table table-borderless text-center">
             <tr>
-
                 <td>
                     <div class="custom-card"
                          sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_CODES_ADMIN')">
 
                         <a th:href="@{/codes/extended/code-extension/extension-fee/list}">
                             <img th:src="@{/images/shortCodeFinance.png}" alt="Application Fee Extension">
-                            <h4 style="margin-top:12px;">
-                                Extended Fee Extension
+                            <h4 style="margin-top:12px;"
+                                th:text="#{extendedFeeExtension}">
                             </h4>
                         </a>
 
                     </div>
                 </td>
-
-
             </tr>
         </table>
     </fieldset>
+
     <!-- ================= PAID EXTENSION ================= -->
     <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_CODES_ADMIN')">
-        <legend>Short Codes Paid Extension</legend>
+        <legend th:text="#{shortCodePaidExtension}"></legend>
 
         <table class="table table-borderless text-center">
             <tr>
-
                 <td>
                     <div class="custom-card"
                          sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_CODES_ADMIN')">
 
                         <a th:href="@{/codes/extended/extensions/paid/list}">
                             <img th:src="@{/images/shortCodeFinance.png}" alt="Paid Application Fee Extension">
-                            <h4 style="margin-top:12px;">
-                                Paid Extended Fee List
+                            <h4 style="margin-top:12px;"
+                                th:text="#{paidExtendedFeeList}">
                             </h4>
                         </a>
 
                     </div>
                 </td>
-
-
             </tr>
         </table>
     </fieldset>
+
     <a th:href="@{/codes/standard/shortcodes/home}"
        class="mt-2 btn btn-primary mt-3">
-        ← Back to Page
+        ← <span th:text="#{codesBack}"></span>
     </a>
 
 </div>

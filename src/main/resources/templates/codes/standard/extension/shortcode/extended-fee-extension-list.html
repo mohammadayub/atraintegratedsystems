@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head th:replace="~{codes_layout :: page_head}">
-  <title>Application Fee Extended List</title>
+  <title th:text="#{extendedFeeExtension}">Application Fee Extended List</title>
 
   <div th:replace="styles :: data-tables-styles"></div>
   <div th:replace="styles :: common-css"></div>
@@ -11,11 +11,12 @@
 
 <body>
 <nav th:replace="~{codes_layout :: page_navbar}"></nav>
+
 <div class="container-fluid"
      th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
 
   <fieldset>
-    <legend>Short Code – Extended Records</legend>
+    <legend th:text="#{shortCodeExtendedRecords}"></legend>
 
     <div class="table-container">
       <table class="slip table table-bordered table-striped"
@@ -26,15 +27,15 @@
         <tr class="bg-primary text-white">
           <th>#</th>
           <th>Code Detail ID</th>
-          <th>Short Code</th>
-          <th>Status</th>
-          <th>Source</th>
-          <th>Location</th>
-          <th>Category Type</th>
-          <th>Category</th>
-          <th>Channel</th>
-          <th>Email</th>
-          <th>Extend</th>
+          <th th:text="#{shortCode}"></th>
+          <th th:text="#{codesStatus}"></th>
+          <th th:text="#{sourceUsed}"></th>
+          <th th:text="#{codeLocation}"></th>
+          <th th:text="#{selectCategoryType}"></th>
+          <th th:text="#{selectCategory}"></th>
+          <th th:text="#{codeChannel}"></th>
+          <th th:text="#{codeEmail}"></th>
+          <th th:text="#{extend}"></th>
         </tr>
         </thead>
 
@@ -52,13 +53,12 @@
           <td th:text="${row[7]}">Channel</td>
           <td th:text="${row[8]}">Email</td>
 
-            <!-- Action -->
-            <td class="text-center">
-                <a
-                   th:href="@{/codes/extended/code-extension/extension-fee/create/{id}(id=${row[0]})}">
-                  <img th:src="@{/images/codesExtension.png}" alt="extension" />
-                </a>
-            </td>
+          <!-- Action -->
+          <td class="text-center">
+            <a th:href="@{/codes/extended/code-extension/extension-fee/create/{id}(id=${row[0]})}">
+              <img th:src="@{/images/codesExtension.png}" alt="extension" />
+            </a>
+          </td>
 
         </tr>
         </tbody>
@@ -69,7 +69,7 @@
 
   <a th:href="@{/codes/finance/extension/home}"
      class="btn btn-primary mt-3">
-    ← Back to Page
+    ← <span th:text="#{codesBack}"></span>
   </a>
 
 </div>

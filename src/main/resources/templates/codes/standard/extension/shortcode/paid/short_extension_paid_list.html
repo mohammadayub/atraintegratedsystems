@@ -3,7 +3,7 @@
       th:lang="#{lang}">
 
 <head th:replace="~{codes_layout :: page_head}">
-    <title>Short Code Extension Paid List</title>
+    <title th:text="#{paidExtendedFeeList}">Short Code Extension Paid List</title>
 
     <div th:replace="styles :: data-tables-styles"></div>
     <div th:replace="styles :: common-css"></div>
@@ -18,7 +18,7 @@
      th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
 
     <fieldset class="commonfieldset-with-legend-border">
-        <legend>Short Code Extension Paid List</legend>
+        <legend th:text="#{paidExtendedFeeList}"></legend>
 
         <div class="table-container">
 
@@ -31,23 +31,23 @@
                 <tr class="bg-primary text-white">
                     <th>#</th>
                     <th>ID</th>
-                    <th>Short Code</th>
+                    <th th:text="#{shortCode}"></th>
                     <th>Serial</th>
-                    <th>Status</th>
-                    <th>Company</th>
-                    <th>Location</th>
-                    <th>Category</th>
-                    <th>Channel</th>
-                    <th>Responsible</th>
-                    <th>Mobile</th>
-                    <th>Assign Date</th>
-                    <th>Expire Date</th>
-                    <th>Ext Date</th>
-                    <th>Ext Expire</th>
-                    <th>Fee</th>
+                    <th th:text="#{codesStatus}"></th>
+                    <th th:text="#{sourceUsed}"></th>
+                    <th th:text="#{codeLocation}"></th>
+                    <th th:text="#{selectCategory}"></th>
+                    <th th:text="#{codeChannel}"></th>
+                    <th th:text="#{responsiblePerson}"></th>
+                    <th th:text="#{mobileNumber}"></th>
+                    <th th:text="#{assingingDate}"></th>
+                    <th th:text="#{expiryDate}"></th>
+                    <th th:text="#{extensionDate}"></th>
+                    <th th:text="#{expirationDate}"></th>
+                    <th th:text="#{extendedFee}"></th>
                     <th>Voucher No</th>
-                    <th>Payment</th>
-                    <th>Action</th>
+                    <th th:text="#{codesStatus}"></th>
+                    <th th:text="#{codesAction}"></th>
                 </tr>
                 </thead>
 
@@ -105,9 +105,8 @@
                     <!-- ACTION -->
                     <td>
                         <a class="btn btn-success btn-sm"
-                           th:href="@{/codes/extended/extensions/print/{id}(id=${ext.codeDetailId})}"
-                           target="_blank">
-                            🖨 Print
+                           th:href="@{/codes/extended/extensions/print/{id}(id=${ext.codeDetailId})}">
+                            🖨 <span th:text="#{codesPrint}"></span>
                         </a>
                     </td>
 
@@ -123,7 +122,7 @@
     <!-- BACK BUTTON -->
     <a th:href="@{/codes/finance/extension/home}"
        class="btn btn-primary mt-3">
-        ← Back to Page
+        ← <span th:text="#{codesBack}"></span>
     </a>
 
 </div>

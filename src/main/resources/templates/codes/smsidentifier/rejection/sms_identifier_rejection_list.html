@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{codes_layout :: page_head}">
-    <title>SMS Identifier Rejection</title>
+    <title th:text="#{smsIdentifierRejection}">SMS Identifier Rejection</title>
 
     <div th:replace="styles :: data-tables-styles"></div>
     <div th:replace="styles :: common-css"></div>
@@ -15,7 +15,7 @@
      th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
 
     <fieldset>
-        <legend>SMS Identifier Details</legend>
+        <legend th:text="#{smsIdentifierRejectionManagementSection}">SMS Identifier Details</legend>
 
         <div class="table-container">
             <table class="slip table table-bordered table-striped"
@@ -24,55 +24,61 @@
 
                 <thead>
                 <tr class="bg-primary text-white">
-        <th>ID</th>
-        <th>Company Name</th>
-        <th>ENID</th>
-        <th>Company Address</th>
-        <th>Mobile</th>
-        <th>Telephone</th>
-        <th>Email</th>
-        <th>Channel</th>
-        <th>Service Type</th>
-        <th>MNO Host</th>
-        <th>Code Category</th>
-        <th>Assigning Date</th>
-        <th>Expiration Date</th>
-        <th>SMS Identifier Code</th>
-        <th>Reject</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="item : ${smsIdentifierDetails}">
-        <td th:text="${item.id}"></td>
-        <td th:text="${item.companyName}"></td>
-        <td th:text="${item.enid}"></td>
-        <td th:text="${item.companyAddress}"></td>
-        <td th:text="${item.mobile}"></td>
-        <td th:text="${item.telephone}"></td>
-        <td th:text="${item.email}"></td>
-        <td th:text="${item.channel}"></td>
-        <td th:text="${item.serviceType}"></td>
-        <td th:text="${item.mnosCompanyHost}"></td>
-        <td th:text="${item.codeCategory}"></td>
-        <td th:text="${item.assigningDate}"></td>
-        <td th:text="${item.expirationDate}"></td>
-        <td th:text="${item.smsIdentifierCodeName}"></td>
-        <td>
-            <a th:href="@{/sms-identifiers/reject/{id}(id=${item.id})}" class="btn btn-danger btn-sm">
-                ❌
-            </a>
-        </td>
+                    <th>ID</th>
+                    <th th:text="#{companyName}">Company Name</th>
+                    <th>ENID</th>
+                    <th th:text="#{smsIdentifierCompanyAddress}">Company Address</th>
+                    <th th:text="#{smsIdentifierMobile}">Mobile</th>
+                    <th th:text="#{smsIdentifierTelephone}">Telephone</th>
+                    <th th:text="#{codeEmail}">Email</th>
+                    <th th:text="#{smsIdentifierChannel}">Channel</th>
+                    <th th:text="#{smsIdentifierServiceType}">Service Type</th>
+                    <th th:text="#{MNOHost}">MNO Host</th>
+                    <th th:text="#{selectCategory}">Code Category</th>
+                    <th th:text="#{assingingDate}">Assigning Date</th>
+                    <th th:text="#{expirationDate}">Expiration Date</th>
+                    <th th:text="#{smsIdentifierCode}">SMS Identifier Code</th>
+                    <th th:text="#{smsIdentifierRejection}">Reject</th>
+                </tr>
+                </thead>
 
-    </tr>
-    </tbody>
-</table>
+                <tbody>
+                <tr th:each="item : ${smsIdentifierDetails}">
+                    <td th:text="${item.id}"></td>
+                    <td th:text="${item.companyName}"></td>
+                    <td th:text="${item.enid}"></td>
+                    <td th:text="${item.companyAddress}"></td>
+                    <td th:text="${item.mobile}"></td>
+                    <td th:text="${item.telephone}"></td>
+                    <td th:text="${item.email}"></td>
+                    <td th:text="${item.channel}"></td>
+                    <td th:text="${item.serviceType}"></td>
+                    <td th:text="${item.mnosCompanyHost}"></td>
+                    <td th:text="${item.codeCategory}"></td>
+                    <td th:text="${item.assigningDate}"></td>
+                    <td th:text="${item.expirationDate}"></td>
+                    <td th:text="${item.smsIdentifierCodeName}"></td>
+
+                    <td>
+                        <a th:href="@{/sms-identifiers/reject/{id}(id=${item.id})}"
+                           class="btn btn-danger btn-sm">
+                            ❌
+                        </a>
+                    </td>
+
+                </tr>
+                </tbody>
+            </table>
         </div>
     </fieldset>
+
     <a th:href="@{/codes/sms-identifier/home}"
-       class="btn btn-primary mt-3">
+       class="btn btn-primary mt-3"
+       th:text="#{codesBack}">
         ← Back to Page
     </a>
-        </div>
+</div>
+
 <!-- Scripts -->
 <div th:replace="scripts :: common-scripts"></div>
 <div th:replace="scripts :: data-tables-scripts"></div>

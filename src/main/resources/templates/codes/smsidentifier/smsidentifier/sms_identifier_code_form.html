@@ -42,8 +42,7 @@
 <div class="container d-flex justify-content-center mt-4">
   <div class="col-sm-10 col-md-6 col-lg-4">
     <div class="card p-4">
-      <h3 class="text-center mb-4 text-primary"
-          th:text="${smsCode.id == null ? 'Add SMS Identifier Code' : 'Edit SMS Identifier Code'}">
+      <h3 class="text-center mb-4 text-primary" th:text="#{addSmsIdentifier}">
       </h3>
 
       <form th:action="${smsCode.id == null} ?
@@ -53,7 +52,7 @@
             method="post">
 
         <div class="form-group mb-3">
-          <label class="form-label">SMS Identifier Code</label>
+          <label class="form-label" th:text="#{addSMSIdentifierCode}">SMS Identifier Code</label>
           <input type="text"
                  class="form-control"
                  th:field="*{smsIdentifierCodeName}"
@@ -62,8 +61,8 @@
         </div>
 
         <div class="d-flex justify-content-between mt-4">
-          <button type="submit" class="btn btn-primary">Save</button>
-          <a th:href="@{/codes/sms-identifier/home}" class="btn btn-secondary">
+          <button type="submit" class="btn btn-primary" th:text="#{codesSave}">Save</button>
+          <a th:href="@{/codes/sms-identifier/home}" class="btn btn-secondary" th:text="#{codesBack}">
             ← Back to Page
           </a>
         </div>

@@ -3,13 +3,12 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 
 <head th:replace="~{codes_layout :: page_head}">
-    <title>Telecom Short Code Management System</title>
+    <title th:text="#{telecomShortCodesRegistrationManagement}">Telecom Short Code Management System</title>
     <meta charset="UTF-8">
-    <!-- Google Font -->
+
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap"/>
 
-    <!-- Custom Styles -->
     <div th:replace="styles :: data-tables-styles"></div>
 
     <style>
@@ -74,27 +73,25 @@
         }
 
         @media print {
+            @page {
+                size: auto;
+                margin: 10mm;
+            }
 
-    @page {
-        size: auto;   /* 👈 allows Portrait & Landscape */
-        margin: 10mm;
-    }
+            body {
+                width: auto !important;
+                overflow: visible !important;
+            }
 
-    body {
-        width: auto !important;
-        overflow: visible !important;
-    }
+            .container-fluid {
+                width: 100% !important;
+            }
 
-    .container-fluid {
-        width: 100% !important;
-    }
-
-    table {
-        width: 100% !important;
-        table-layout: auto;
-    }
-}
-
+            table {
+                width: 100% !important;
+                table-layout: auto;
+            }
+        }
     </style>
 
     <div th:replace="styles :: ltr-to-rtl"></div>
@@ -102,155 +99,118 @@
 
 <body>
 
-<!-- Navbar -->
 <nav th:replace="~{codes_layout :: page_navbar}"></nav>
-<!-- Main Content -->
+
 <div class="container-fluid"
      th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
 
     <fieldset class="mt-4">
-        <legend class="text-center mb-3">Telecom Short Codes Registrations Management</legend>
-
-        <!-- Action Buttons -->
+        <legend class="text-center mb-3" th:text="#{telecomShortCodesRegistrationManagement}"></legend>
 
         <div class="mb-3 text-end">
             <a class="btn btn-primary me-2"
                th:href="@{/codes/standard/shortcodes_details/add}">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                     fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
-                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5
-                             0 0 1 0 1h-3v3a.5.5
-                             0 0 1-1 0v-3h-3a.5.5
-                             0 0 1 0-1h3v-3A.5.5
-                             0 0 1 8 4"/>
-                </svg> Add Record
+                ➕ <span th:text="#{addRecord}"></span>
             </a>
 
             <button class="btn btn-success" onclick="printPage()">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                     fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                     stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                          d="M9 15 3 9m0 0 6-6M3 9h12a6 6
-                          0 0 1 0 12h-3"/>
-                </svg> Print
+                🖨 <span th:text="#{codesPrint}"></span>
             </button>
         </div>
 
-        <!-- Data Table -->
         <div class="table-container">
             <table id="example" class="table table-bordered table-hover text-center">
                 <thead>
                 <tr>
                     <th>ID#</th>
-                    <th>Short Code Name</th>
+                    <th th:text="#{shortCode}"></th>
                     <th>Serial Number</th>
-                    <th>Status</th>
-                    <th>Source Used</th>
-                    <th> Source Used(Dari)</th>
-                    <th>Location</th>
-                    <th>Address</th>
-                    <th>Channel</th>
-                    <th>Services</th>
-                    <th>Category</th>
-                    <th>Back-Long#</th>
-                    <th>Responsible Person</th>
-                    <th>Job</th>
+                    <th th:text="#{codesStatus}"></th>
+                    <th th:text="#{sourceUsed}"></th>
+                    <th th:text="#{sourceUsedInDari}"></th>
+                    <th th:text="#{codeLocation}"></th>
+                    <th th:text="#{codeAddress}"></th>
+                    <th th:text="#{codeChannel}"></th>
+                    <th th:text="#{service}"></th>
+                    <th th:text="#{selectCategory}"></th>
+                    <th th:text="#{backLongNumber}"></th>
+                    <th th:text="#{responsiblePerson}"></th>
+                    <th th:text="#{job}"></th>
                     <th>ID Card</th>
-                    <th>Mobile</th>
-                    <th>Email</th>
-                    <th>Assigning Date</th>
-                    <th>Expiration Date</th>
-                    <th>Application Fees</th>
-                    <th>Royalty Fees</th>
-                    <th>Payment Status</th>
-                    <th>Print</th>
-                    <th>Update</th>
-                    <th>Rejection</th>
+                    <th th:text="#{mobileNumber}"></th>
+                    <th th:text="#{codeEmail}"></th>
+                    <th th:text="#{assingingDate}"></th>
+                    <th th:text="#{expiryDate}"></th>
+                    <th th:text="#{applicationFee}"></th>
+                    <th th:text="#{royaltyFee}"></th>
+                    <th th:text="#{codesStatus}"></th>
+                    <th th:text="#{codesPrint}"></th>
+                    <th th:text="#{codesUpdate}"></th>
+                    <th th:text="#{codesRejection}"></th>
                 </tr>
                 </thead>
 
                 <tbody>
                 <tr th:each="codeDetail : ${data}">
-
                     <td th:text="${codeDetail.id}"></td>
-
                     <td th:text="${codeDetail.shortCodeName}"></td>
-
                     <td th:text="${codeDetail.serialNumber}"></td>
-
                     <td th:text="${codeDetail.codeStatus}"></td>
-
                     <td th:text="${codeDetail.sourceUsed}"></td>
-
                     <td th:text="${codeDetail.sourceUsedInDari}"></td>
-
                     <td th:text="${codeDetail.location}"></td>
-
                     <td th:text="${codeDetail.address}"></td>
-
                     <td th:text="${codeDetail.chanel}"></td>
 
                     <td th:text="${codeDetail.services}"
                         dir="auto"
-                        style="unicode-bidi: plaintext; text-align: start;">
-                    </td>
+                        style="unicode-bidi: plaintext; text-align: start;"></td>
 
                     <td th:text="${codeDetail.category}"></td>
-
                     <td th:text="${codeDetail.backLongNumber}"></td>
-
                     <td th:text="${codeDetail.responsiblePerson}"></td>
-
                     <td th:text="${codeDetail.job}"></td>
-
                     <td th:text="${codeDetail.idCard}"></td>
-
                     <td th:text="${codeDetail.mobile}"></td>
-
                     <td th:text="${codeDetail.email}"></td>
-
                     <td th:text="${codeDetail.assignDateJalali}"></td>
-
                     <td th:text="${codeDetail.ExpireDateJalali}"></td>
-
                     <td th:text="${codeDetail.applicationFees}"></td>
-
                     <td th:text="${codeDetail.royaltyFees}"></td>
-
                     <td th:text="${codeDetail.paymentStatus}"></td>
+
                     <td>
                         <a th:href="@{/codes/standard/shortcodes_details/print/{id}(id=${codeDetail.id})}"
                            class="btn btn-info btn-sm">
-                            🖨 Print
+                            🖨 <span th:text="#{codesPrint}"></span>
                         </a>
                     </td>
 
                     <td>
                         <a th:href="@{/codes/standard/shortcodes_details/update/{id}(id=${codeDetail.id})}"
-                           class="btn btn-warning btn-sm">✏</a>
+                           class="btn btn-warning btn-sm">
+                            <span th:text="#{codesUpdate}"></span>
+                        </a>
                     </td>
 
                     <td>
                         <a th:href="@{/codes/standard/shortcodes_details/reject/{id}(id=${codeDetail.id})}"
-                           class="btn btn-danger btn-sm">❌</a>
+                           class="btn btn-danger btn-sm">
+                            <span th:text="#{codesRejection}"></span>
+                        </a>
                     </td>
-
                 </tr>
                 </tbody>
-
             </table>
         </div>
+
         <a th:href="@{/codes/standard/shortcodes/home}"
            class="mt-2 btn btn-primary">
-
-            Back
-
+            <span th:text="#{codesBack}"></span>
         </a>
     </fieldset>
 </div>
 
-<!-- Scripts -->
 <div th:replace="scripts :: common-scripts"></div>
 <div th:replace="scripts :: data-tables-scripts"></div>
 
