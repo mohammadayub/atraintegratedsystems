@@ -1,37 +1,38 @@
 <!DOCTYPE html>
 <html lang="en"
       th:lang="#{lang}"
-      th:dir="${#locale.language == 'ps' or #locale.language == 'prs' ? 'rtl' : 'ltr'}"      xmlns:th="http://www.thymeleaf.org"
+      th:dir="${#locale.language == 'ps' or #locale.language == 'prs' ? 'rtl' : 'ltr'}"
+      xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
 <head th:replace="~{codes_layout :: page_head}">
-  <title>LMS</title>
-  <div th:replace="styles :: common-css"></div>
-  <div th:replace="styles :: commonfieldset"></div>
+    <title th:text="#{codesFinance}">LMS</title>
+    <div th:replace="styles :: common-css"></div>
+    <div th:replace="styles :: commonfieldset"></div>
 
-  <style>
-    a h4 {
-          color: #14438B;
-          font-size: 20px;
-          text-decoration: none;
-          font-weight: 600;
+    <style>
+        a h4 {
+              color: #14438B;
+              font-size: 20px;
+              text-decoration: none;
+              font-weight: 600;
+          }
+
+      .custom-card {
+          text-align: center;
+          padding: 20px;
+          border-radius: 12px;
+          transition: 0.3s ease;
       }
 
-  .custom-card {
-      text-align: center;
-      padding: 20px;
-      border-radius: 12px;
-      transition: 0.3s ease;
-  }
+      .custom-card:hover {
+          transform: translateY(-5px);
+      }
 
-  .custom-card:hover {
-      transform: translateY(-5px);
-  }
-
-  .custom-card img {
-      height: 80px;
-  }
-  </style>
+      .custom-card img {
+          height: 80px;
+      }
+    </style>
 </head>
 
 <body>
@@ -40,43 +41,42 @@
 
 <div class="container mt-4">
 
-  <!-- ================= SHORT CODES ================= -->
-  <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_CODES_ADMIN')">
-    <legend>Codes Finance Management Section</legend>
+    <!-- ================= SHORT CODES ================= -->
+    <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_CODES_ADMIN')">
+        <legend th:text="#{codesFinanceManagementSection}">Codes Finance Management Section</legend>
 
-    <table class="table table-borderless text-center">
-      <tr>
-        <td>
-          <div class="custom-card">
-            <a th:href="@{/codes/shortcode/finance/home}">
-              <img th:src="@{/images/shortCodes.png}" alt="Short Code">
-              <h4 style="margin-top:12px;">Short Code</h4>
-            </a>
-          </div>
-        </td>
+        <table class="table table-borderless text-center">
+            <tr>
+                <td>
+                    <div class="custom-card">
+                        <a th:href="@{/codes/shortcode/finance/home}">
+                            <img th:src="@{/images/shortCodes.png}" th:alt="#{shortCode}" alt="Short Code">
+                            <h4 style="margin-top:12px;" th:text="#{shortCode}">Short Code</h4>
+                        </a>
+                    </div>
+                </td>
 
+                <td>
+                    <div class="custom-card">
+                        <a th:href="@{/codes/smsidentifier/finance/home}">
+                            <img th:src="@{/images/codeDetail.png}" th:alt="#{smsIdentifierCode}" alt="Code Detail">
+                            <h4 style="margin-top:12px;" th:text="#{smsIdentifierCode}">SMS Identifier</h4>
+                        </a>
+                    </div>
+                </td>
 
-        <td>
-          <div class="custom-card">
-            <a th:href="@{/codes/smsidentifier/finance/home}">
-              <img th:src="@{/images/codeDetail.png}" alt="Code Detail">
-              <h4 style="margin-top:12px;">SMS Identifier</h4>
-            </a>
-          </div>
-        </td>
+                <td>
+                    <div class="custom-card">
+                        <a th:href="@{/codes/ispc-code/finance/home}">
+                            <img th:src="@{/images/smsidentifiercode.png}" th:alt="#{ispcCode}" alt="Short Code List">
+                            <h4 style="margin-top:12px;" th:text="#{ispcCode}">ISPC Code</h4>
+                        </a>
+                    </div>
+                </td>
 
-        <td>
-          <div class="custom-card">
-            <a th:href="@{/codes/ispc-code/finance/home}">
-              <img th:src="@{/images/smsidentifiercode.png}" alt="Short Code List">
-              <h4 style="margin-top:12px;">ISPC Code</h4>
-            </a>
-          </div>
-        </td>
-
-      </tr>
-    </table>
-  </fieldset>
+            </tr>
+        </table>
+    </fieldset>
 
 </div>
 

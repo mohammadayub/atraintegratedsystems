@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{codes_layout :: page_head}">
-    <title>SMS Identifier Extension</title>
+    <title th:text="#{smsIdentifierExtension}">SMS Identifier Extension</title>
 
     <div th:replace="styles :: data-tables-styles"></div>
     <div th:replace="styles :: common-css"></div>
@@ -16,7 +16,9 @@
      th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
 
     <fieldset>
-        <legend>SMS Identifier Code Extension List</legend>
+        <legend th:text="#{smsIdentifierExtensionManagementSection}">
+            SMS Identifier Code Extension List
+        </legend>
 
         <div class="table-container">
             <table class="slip table table-bordered table-striped"
@@ -26,20 +28,20 @@
                 <thead>
                 <tr class="bg-primary text-white">
                     <th>ID</th>
-                    <th>SMS Identifier Code</th>
-                    <th>Company Name</th>
-                    <th>ENID</th>
-                    <th>Company Address</th>
-                    <th>Mobile</th>
-                    <th>Telephone</th>
-                    <th>Email</th>
-                    <th>Channel</th>
-                    <th>Service Type</th>
-                    <th>MNO Host</th>
-                    <th>Code Category</th>
-                    <th>Assigning Date</th>
-                    <th>Expiration Date</th>
-                    <th>Extension</th>
+                    <th th:text="#{smsIdentifierCode}">SMS Identifier Code</th>
+                    <th th:text="#{companyName}">Company Name</th>
+                    <th th:text="#{tazkira}">ENID</th>
+                    <th th:text="#{smsIdentifierCompanyAddress}">Company Address</th>
+                    <th th:text="#{smsIdentifierMobile}">Mobile</th>
+                    <th th:text="#{smsIdentifierTelephone}">Telephone</th>
+                    <th th:text="#{ispcCodeEmail}">Email</th>
+                    <th th:text="#{smsIdentifierChannel}">Channel</th>
+                    <th th:text="#{smsIdentifierServiceType}">Service Type</th>
+                    <th th:text="#{MNOHost}">MNO Host</th>
+                    <th th:text="#{category}">Code Category</th>
+                    <th th:text="#{assingingDate}">Assigning Date</th>
+                    <th th:text="#{expiryDate}">Expiration Date</th>
+                    <th th:text="#{extension}">Extension</th>
                 </tr>
                 </thead>
 
@@ -60,12 +62,10 @@
                     <td th:text="${item.assigningDate}"></td>
                     <td th:text="${item.expirationDate}"></td>
 
-
-                    <!-- FIXED: only ONE td -->
                     <td>
-                        <a
-                           th:href="@{/sms-identifier-extension/create/{id}(id=${item.id})}">
-                            <img th:src="@{/images/codesExtension.png}" alt="extension" />
+                        <a th:href="@{/sms-identifier-extension/create/{id}(id=${item.id})}">
+                            <img th:src="@{/images/codesExtension.png}"
+                                 th:alt="#{extension}" />
                         </a>
                     </td>
                 </tr>
@@ -74,8 +74,10 @@
             </table>
         </div>
     </fieldset>
+
     <a th:href="@{/codes/sms-identifier/standard/extension/home}"
-       class="btn btn-primary mt-3">
+       class="btn btn-primary mt-3"
+       th:text="'← ' + #{codesBack}">
         ← Back to Page
     </a>
 </div>

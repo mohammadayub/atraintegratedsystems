@@ -4,7 +4,7 @@
       th:dir="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'rtl' : 'ltr'">
 
 <head>
-    <title>ISPC Extension Paid List</title>
+    <title th:text="#{ispcCodePaidExtension}">ISPC Extension Paid List</title>
 
     <!-- Layout Head -->
     <th:block th:replace="~{codes_layout :: page_head}"></th:block>
@@ -24,7 +24,7 @@
      th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
 
     <fieldset class="commonfieldset-with-legend-border">
-        <legend>ISPC Extension Paid List</legend>
+        <legend th:text="#{ispcCodePaidExtension}">ISPC Extension Paid List</legend>
 
         <div class="table-responsive">
             <table id="profileTable" class="table table-bordered table-striped table-hover w-100">
@@ -32,18 +32,17 @@
                 <thead class="bg-primary text-white">
                 <tr>
                     <th>#</th>
-                    <th>ISPC Code</th>
-                    <th>Serial</th>
-                    <th>SP</th>
-                    <th>Company</th>
-                    <th>Company (Dari)</th>
-                    <th>ENID</th>
-                    <th>Location</th>
-                    <th>Responsible</th>
-                    <th>Mobile</th>
-                    <th>Email</th>
-                    <th>Print</th>
-
+                    <th th:text="#{ispcCodeName}">ISPC Code</th>
+                    <th th:text="#{ispcNumber}">Serial</th>
+                    <th th:text="#{uniqueNameOfTheSignalingPoint}">Signaling Point</th>
+                    <th th:text="#{companyName}">Company</th>
+                    <th th:text="#{companyNameInDari}">Company (Dari)</th>
+                    <th th:text="#{tazkira}">ENID</th>
+                    <th th:text="#{codeLocation}">Location</th>
+                    <th th:text="#{ispcCodeResposiblePerson}">Responsible</th>
+                    <th th:text="#{mobileNumber}">Mobile</th>
+                    <th th:text="#{codeEmail}">Email</th>
+                    <th th:text="#{codesPrint}">Print</th>
                 </tr>
                 </thead>
 
@@ -63,12 +62,11 @@
                     <td th:text="${e.mobile != null ? e.mobile : '-'}"></td>
                     <td th:text="${e.email != null ? e.email : '-'}"></td>
 
-
                     <td>
-                    <a th:href="@{/codes/ispc/extensions/print/{id}(id=${e.id})}"
-                       class="btn btn-success btn-sm">
-                        🖨 Print
-                    </a>
+                        <a th:href="@{/codes/ispc/extensions/print/{id}(id=${e.id})}"
+                           class="btn btn-success btn-sm">
+                            🖨 <span th:text="#{codesPrint}">Print</span>
+                        </a>
                     </td>
 
                 </tr>
@@ -80,7 +78,9 @@
     </fieldset>
 
     <div class="mt-3">
-        <a th:href="@{/codes/ISPC/standard/extension/home}" class="btn btn-primary">
+        <a th:href="@{/codes/ISPC/standard/extension/home}"
+           class="btn btn-primary"
+           th:text="#{codesBack}">
             ← Back
         </a>
     </div>

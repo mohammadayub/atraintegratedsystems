@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head th:replace="~{codes_layout :: page_head}">
-    <title>ISPC Extension Finance Update</title>
+    <title th:text="#{ispcExtensionFinanceUpdate}">ISPC Extension Finance Update</title>
 
     <div th:replace="styles :: common-css"></div>
     <div th:replace="styles :: commonfieldset"></div>
@@ -22,7 +22,8 @@
 
         <fieldset style="border:2px solid #DCAF45;padding:15px;border-radius:8px;margin-bottom:20px;">
 
-            <legend style="width:auto;font-size:1.2rem;color:#14438B;padding:0 10px;font-weight:bold;">
+            <legend style="width:auto;font-size:1.2rem;color:#14438B;padding:0 10px;font-weight:bold;"
+                    th:text="#{ispcExtensionFinanceDepartment}">
                 ISPC Extension – Finance Department
             </legend>
 
@@ -31,7 +32,7 @@
                 <!-- ROW 1 -->
 
                 <div class="col-md-4 form-group">
-                    <label>Extension ID</label>
+                    <label th:text="#{id}">Extension ID</label>
                     <input type="text"
                            class="form-control"
                            th:field="*{id}"
@@ -39,7 +40,7 @@
                 </div>
 
                 <div class="col-md-4 form-group">
-                    <label>Extended Fees</label>
+                    <label th:text="#{extendedFee}">Extended Fees</label>
                     <input type="number"
                            class="form-control"
                            th:field="*{extendedFees}"
@@ -47,7 +48,7 @@
                 </div>
 
                 <div class="col-md-4 form-group">
-                    <label>Bank Voucher No</label>
+                    <label th:text="#{bankVoucherNumber}">Bank Voucher No</label>
                     <input type="text"
                            class="form-control"
                            th:field="*{extensionBankVoucherNo}"
@@ -57,7 +58,7 @@
                 <!-- ROW 2 -->
 
                 <div class="col-md-4 form-group">
-                    <label>Entry Voucher Date</label>
+                    <label th:text="#{entryVoucherDate}">Entry Voucher Date</label>
                     <input type="text"
                            class="form-control hijrishamsi"
                            th:field="*{extensionEnteryVoucherDateJalali}"
@@ -65,7 +66,7 @@
                 </div>
 
                 <div class="col-md-4 form-group">
-                    <label>Voucher Submission Date</label>
+                    <label th:text="#{voucherSubmissionDate}">Voucher Submission Date</label>
                     <input type="text"
                            class="form-control hijrishamsi"
                            th:field="*{extensionBankVoucherSubmissionDateJalali}"
@@ -81,14 +82,14 @@
 
                     <button type="submit" class="btn btn-primary">
                         <i class="fas fa-check"></i>
-                        Confirm Payment
+                        <span th:text="#{confirmPayment}">Confirm Payment</span>
                     </button>
 
                     &nbsp;&nbsp;&nbsp;&nbsp;
 
                     <button type="reset" class="btn btn-info">
                         <i class="fas fa-redo"></i>
-                        Reset
+                        <span th:text="#{resetRecord}">Reset</span>
                     </button>
 
                 </div>
@@ -97,7 +98,8 @@
         </fieldset>
 
         <a th:href="@{/codes/ispc/finance-extensions}"
-           class="btn btn-primary mt-3">
+           class="btn btn-primary mt-3"
+           th:text="#{codesBack}">
             ← Back to Page
         </a>
 

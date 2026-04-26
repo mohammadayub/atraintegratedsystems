@@ -6,7 +6,8 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
 <head th:replace="~{codes_layout :: page_head}">
-    <title>AIS</title>
+    <title th:text="#{ispcCodesManagementSection}">AIS</title>
+
     <div th:replace="styles :: common-css"></div>
     <div th:replace="styles :: commonfieldset"></div>
 
@@ -34,6 +35,7 @@
             height: 80px;
         }
     </style>
+
     <div th:replace="styles :: ltr-to-rtl"></div>
 </head>
 
@@ -44,9 +46,11 @@
 <!-- This is Main Page -->
 <div class="container mt-4">
 
-    <!-- ================= SHORT CODES ================= -->
+    <!-- ================= ISPC CODES ================= -->
     <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_CODES_ADMIN')">
-        <legend>ISPC Codes Management Section</legend>
+        <legend th:text="#{ispcCodesManagementSection}">
+            ISPC Codes Management Section
+        </legend>
 
         <table class="table table-borderless text-center">
             <tr>
@@ -54,8 +58,12 @@
                     <div class="custom-card"
                          sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_CODES_ADMIN')">
                         <a th:href="@{/codes/ispc/add}">
-                            <img th:src="@{/images/shortCodes.png}" alt="Add SMS Identifier">
-                            <h4 style="margin-top:12px;">Add ISPC Code</h4>
+                            <img th:src="@{/images/shortCodes.png}"
+                                 th:alt="#{addIspcCode}">
+                            <h4 style="margin-top:12px;"
+                                th:text="#{addIspcCode}">
+                                Add ISPC Code
+                            </h4>
                         </a>
                     </div>
                 </td>
@@ -64,8 +72,12 @@
                     <div class="custom-card"
                          sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_CODES_ADMIN')">
                         <a th:href="@{/codes/ispc/list}">
-                            <img th:src="@{/images/smsidentifiercode.png}" alt="SMS Identifier List">
-                            <h4 style="margin-top:12px;">ISPC Code List</h4>
+                            <img th:src="@{/images/smsidentifiercode.png}"
+                                 th:alt="#{ispcCodeList}">
+                            <h4 style="margin-top:12px;"
+                                th:text="#{ispcCodeList}">
+                                ISPC Code List
+                            </h4>
                         </a>
                     </div>
                 </td>
@@ -74,8 +86,12 @@
                     <div class="custom-card"
                          sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_CODES_ADMIN')">
                         <a th:href="@{/codes/ispc/details/create}">
-                            <img th:src="@{/images/codeDetail.png}" alt="SMS Identifier Detail">
-                            <h4 style="margin-top:12px;">ISPC Code Detail</h4>
+                            <img th:src="@{/images/codeDetail.png}"
+                                 th:alt="#{ispcCodeDetail}">
+                            <h4 style="margin-top:12px;"
+                                th:text="#{ispcCodeDetail}">
+                                ISPC Code Detail
+                            </h4>
                         </a>
                     </div>
                 </td>
@@ -84,8 +100,12 @@
                     <div class="custom-card"
                          sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_CODES_ADMIN')">
                         <a th:href="@{/codes/ispc/details}">
-                            <img th:src="@{/images/code_detail_list.png}" alt="SMS Identifier Detail List">
-                            <h4 style="margin-top:12px;">ISPC Code Detail List</h4>
+                            <img th:src="@{/images/code_detail_list.png}"
+                                 th:alt="#{ispcCodeDetailList}">
+                            <h4 style="margin-top:12px;"
+                                th:text="#{ispcCodeDetailList}">
+                                ISPC Code Detail List
+                            </h4>
                         </a>
                     </div>
                 </td>
@@ -95,7 +115,9 @@
 
     <!-- ================= REJECTION ================= -->
     <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_CODES_ADMIN')">
-        <legend>ISPC Code Rejection Management Section</legend>
+        <legend th:text="#{ispcCodeRejectionManagementSection}">
+            ISPC Code Rejection Management Section
+        </legend>
 
         <table class="table table-borderless text-center">
             <tr>
@@ -103,8 +125,12 @@
                     <div class="custom-card"
                          sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_CODES_ADMIN')">
                         <a th:href="@{/codes/ispc/details/rejected}">
-                            <img th:src="@{/images/rejectionList.png}" alt="Rejection List">
-                            <h4 style="margin-top:12px;">Rejected ISPC Codes List</h4>
+                            <img th:src="@{/images/rejectionList.png}"
+                                 th:alt="#{rejectedIspcCodesList}">
+                            <h4 style="margin-top:12px;"
+                                th:text="#{rejectedIspcCodesList}">
+                                Rejected ISPC Codes List
+                            </h4>
                         </a>
                     </div>
                 </td>
@@ -112,10 +138,11 @@
         </table>
     </fieldset>
 
-
     <!-- ================= EXTENSION ================= -->
     <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_CODES_ADMIN')">
-        <legend>ISPC Code Extension Management Section</legend>
+        <legend th:text="#{ispcCodeExtensionManagementSection}">
+            ISPC Code Extension Management Section
+        </legend>
 
         <table class="table table-borderless text-center">
             <tr>
@@ -123,8 +150,12 @@
                     <div class="custom-card"
                          sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_CODES_ADMIN')">
                         <a th:href="@{/codes/ISPC/standard/extension/home}">
-                            <img th:src="@{/images/serialNumber.png}" alt="Extension">
-                            <h4 style="margin-top:12px;">ISPC Code Extension</h4>
+                            <img th:src="@{/images/serialNumber.png}"
+                                 th:alt="#{ispcCodeExtension}">
+                            <h4 style="margin-top:12px;"
+                                th:text="#{ispcCodeExtension}">
+                                ISPC Code Extension
+                            </h4>
                         </a>
                     </div>
                 </td>

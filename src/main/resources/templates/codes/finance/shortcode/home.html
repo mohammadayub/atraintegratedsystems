@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en"
       th:lang="#{lang}"
-      th:dir="${#locale.language == 'ps' or #locale.language == 'prs' ? 'rtl' : 'ltr'}"      xmlns:th="http://www.thymeleaf.org"
+      th:dir="${#locale.language == 'ps' or #locale.language == 'prs' ? 'rtl' : 'ltr'}"
+      xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
 <head th:replace="~{codes_layout :: page_head}">
-    <title>LMS</title>
+    <title th:text="#{codesFinance}">LMS</title>
     <div th:replace="styles :: commonfieldset"></div>
 
     <!-- SAME LMS DASHBOARD STYLE -->
@@ -42,15 +43,15 @@
 
     <!-- ================= FINANCE ================= -->
     <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_CODES_ADMIN')">
-        <legend>Short Codes Finance Management Section</legend>
+        <legend th:text="#{shortCodeFinanceManagement}">Short Codes Finance Management Section</legend>
 
         <table class="table table-borderless text-center">
             <tr>
                 <td>
                     <div class="custom-card" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_CODES_ADMIN')">
                         <a th:href="@{/codes/finance/applicationFeelist}">
-                            <img th:src="@{/images/shortCodeFinance.png}" alt="Application Fee">
-                            <h4 style="margin-top:12px;">Application Fee</h4>
+                            <img th:src="@{/images/shortCodeFinance.png}" th:alt="#{shortCodeApplicationFee}" alt="Application Fee">
+                            <h4 style="margin-top:12px;" th:text="#{shortCodeApplicationFee}">Application Fee</h4>
                         </a>
                     </div>
                 </td>
@@ -58,8 +59,8 @@
                 <td>
                     <div class="custom-card" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_CODES_ADMIN')">
                         <a th:href="@{/codes/finance/royaltyFeelist}">
-                            <img th:src="@{/images/smsidentifiercode.png}" alt="Royalty Fee">
-                            <h4 style="margin-top:12px;">Royalty Fee</h4>
+                            <img th:src="@{/images/smsidentifiercode.png}" th:alt="#{shortCodeRoyaltyFee}" alt="Royalty Fee">
+                            <h4 style="margin-top:12px;" th:text="#{shortCodeRoyaltyFee}">Royalty Fee</h4>
                         </a>
                     </div>
                 </td>
@@ -69,15 +70,15 @@
 
     <!-- ================= EXTENSION ================= -->
     <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_CODES_ADMIN')">
-        <legend>Short Codes Extension Management Section</legend>
+        <legend th:text="#{shortCodesExtensionManagementSection}">Short Codes Extension Management Section</legend>
 
         <table class="table table-borderless text-center">
             <tr>
                 <td>
                     <div class="custom-card" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_CODES_ADMIN')">
                         <a th:href="@{/extended-fee-extension/unpaid}">
-                            <img th:src="@{/images/applicationFeesExtension.png}" alt="Application Fee Extension">
-                            <h4 style="margin-top:12px;">Extended Fee Extension</h4>
+                            <img th:src="@{/images/applicationFeesExtension.png}" th:alt="#{extendedFeeExtension}" alt="Application Fee Extension">
+                            <h4 style="margin-top:12px;" th:text="#{extendedFeeExtension}">Extended Fee Extension</h4>
                         </a>
                     </div>
                 </td>

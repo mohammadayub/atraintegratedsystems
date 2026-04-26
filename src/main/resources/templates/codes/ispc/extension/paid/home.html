@@ -6,11 +6,10 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
 <head th:replace="~{codes_layout :: page_head}">
-    <title>LMS</title>
+    <title th:text="#{ispcCodesManagementSection}">LMS</title>
 
     <div th:replace="styles :: commonfieldset"></div>
 
-    <!-- SAME LMS DASHBOARD STYLE -->
     <style>
         a h4 {
             color: #14438B;
@@ -43,7 +42,9 @@
 
     <!-- ================= EXTENSION MANAGEMENT ================= -->
     <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_CODES_ADMIN')">
-        <legend>ISPC Extension Management Section</legend>
+        <legend th:text="#{ispcCodeExtensionManagementSection}">
+            ISPC Extension Management Section
+        </legend>
 
         <table class="table table-borderless text-center">
             <tr>
@@ -54,7 +55,8 @@
 
                         <a th:href="@{/codes/ispc/extension/list}">
                             <img th:src="@{/images/shortCodeFinance.png}" alt="Application Fee Extension">
-                            <h4 style="margin-top:12px;">
+                            <h4 style="margin-top:12px;"
+                                th:text="#{ispcCodeExtension}">
                                 ISPC Extension
                             </h4>
                         </a>
@@ -62,13 +64,15 @@
                     </div>
                 </td>
 
-
             </tr>
         </table>
     </fieldset>
+
     <!-- ================= PAID EXTENSION ================= -->
     <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_CODES_ADMIN')">
-        <legend>ISPC Code Paid Extension</legend>
+        <legend th:text="#{ispcCodePaidExtension}">
+            ISPC Code Paid Extension
+        </legend>
 
         <table class="table table-borderless text-center">
             <tr>
@@ -79,7 +83,8 @@
 
                         <a th:href="@{/codes/ispc/extensions/paid-list}">
                             <img th:src="@{/images/shortCodeFinance.png}" alt="Paid Application Fee Extension">
-                            <h4 style="margin-top:12px;">
+                            <h4 style="margin-top:12px;"
+                                th:text="#{ispcCodePaidExtendedFeeList}">
                                 Paid Extended Fee List
                             </h4>
                         </a>
@@ -87,13 +92,13 @@
                     </div>
                 </td>
 
-
             </tr>
         </table>
     </fieldset>
 
     <a th:href="@{/codes/ispc-code/home}"
-       class="btn btn-primary mt-2">
+       class="btn btn-primary mt-2"
+       th:text="#{codesBack}">
         ← Back to Page
     </a>
 

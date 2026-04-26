@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{codes_layout :: page_head}">
-    <title>SMS Identifier Application Fee List</title>
+    <title th:text="#{smsIdentifierApplicationFee}">SMS Identifier Application Fee List</title>
 
     <div th:replace="styles :: data-tables-styles"></div>
     <div th:replace="styles :: common-css"></div>
@@ -17,7 +17,7 @@
      th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
 
     <fieldset>
-        <legend>Ispc Code Registration Fees List</legend>
+        <legend th:text="#{ispcCodeRegistrationFee}">Ispc Code Registration Fees List</legend>
 
         <div class="table-container">
             <table class="slip table table-bordered table-striped"
@@ -26,51 +26,58 @@
 
                 <thead>
                 <tr class="bg-primary text-white">
-            <th>#ID</th>
-            <th>Code Name</th>
-            <th>Company</th>
-            <th>ENID</th>
-            <th>Mobile</th>
-            <th>Email</th>
-            <th>Assign Date</th>
-            <th>Expire Date</th>
-            <th>Print Tariff</th>
-            <th>Confirm Payment</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="item, stat : ${list}">
-            <td th:text="${stat.count}"></td>
-            <td th:text="${item.ispcCodeName}"></td>
-            <td th:text="${item.companyName}"></td>
-            <td th:text="${item.enid}"></td>
-            <td th:text="${item.mobile}"></td>
-            <td th:text="${item.email}"></td>
-            <td th:text="${item.assigningDate}"></td>
-            <td th:text="${item.expirationDate}"></td>
-            <td>
-                <a class="btn btn-sm btn-secondary"
-                   th:href="@{/codes/sms-identifier-applicationfee/print-tariff/{id}(id=${item.id})}">
-                    Print Tariff
-                </a>
-            </td>
+                    <th th:text="#{id}">#ID</th>
+                    <th th:text="#{ispcCodeName}">Code Name</th>
+                    <th th:text="#{companyName}">Company</th>
+                    <th th:text="#{tazkira}">ENID</th>
+                    <th th:text="#{ispcCodeMobile}">Mobile</th>
+                    <th th:text="#{ispcCodeEmail}">Email</th>
+                    <th th:text="#{ispcCodeAssigningDate}">Assign Date</th>
+                    <th th:text="#{ispcCodeExpirationDate}">Expire Date</th>
+                    <th th:text="#{codesPrint}">Print Tariff</th>
+                    <th th:text="#{confirmPayment}">Confirm Payment</th>
+                </tr>
+                </thead>
 
-            <td>
-                <a class="btn btn-sm btn-primary"
-                   th:href="@{/codes/ispc-registrationfee/pay/{id}(id=${item.id})}">
-                    Pay
-                </a>
-            </td>
+                <tbody>
+                <tr th:each="item, stat : ${list}">
+                    <td th:text="${stat.count}"></td>
+                    <td th:text="${item.ispcCodeName}"></td>
+                    <td th:text="${item.companyName}"></td>
+                    <td th:text="${item.enid}"></td>
+                    <td th:text="${item.mobile}"></td>
+                    <td th:text="${item.email}"></td>
+                    <td th:text="${item.assigningDate}"></td>
+                    <td th:text="${item.expirationDate}"></td>
 
-        </tr>
-        </tbody>
-    </table>
+                    <td>
+                        <a class="btn btn-sm btn-secondary"
+                           th:href="@{/codes/sms-identifier-applicationfee/print-tariff/{id}(id=${item.id})}"
+                           th:text="#{codesPrint}">
+                            Print Tariff
+                        </a>
+                    </td>
+
+                    <td>
+                        <a class="btn btn-sm btn-primary"
+                           th:href="@{/codes/ispc-registrationfee/pay/{id}(id=${item.id})}"
+                           th:text="#{confirmPayment}">
+                            Pay
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+
+            </table>
         </div>
     </fieldset>
+
     <a th:href="@{/codes/ispc-code/finance/home}"
-       class="btn btn-primary mt-3">
+       class="btn btn-primary mt-3"
+       th:text="#{codesBack}">
         ← Back to Page
     </a>
+
 </div>
 
 <!-- Scripts -->

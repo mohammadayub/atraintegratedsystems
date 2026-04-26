@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{codes_layout :: page_head}">
-    <title>SMS Identifier Extension</title>
+    <title th:text="#{smsIdentifierExtensionManagementSection}">SMS Identifier Extension</title>
     <div th:replace="styles :: common-css"></div>
     <div th:replace="styles :: commonfieldset"></div>
     <div th:replace="styles :: persian-datepicker-styles"></div>
@@ -18,7 +18,8 @@
           method="post">
 
         <fieldset style="border:2px solid #DCAF45;padding:15px;border-radius:8px;margin-bottom:20px;">
-            <legend style="width:auto;font-size:1.2rem;color:#14438B;padding:0 10px;font-weight:bold;">
+            <legend style="width:auto;font-size:1.2rem;color:#14438B;padding:0 10px;font-weight:bold;"
+                    th:text="#{smsIdentifierExtensionStandardDepartment}">
                 SMS Identifier Extension – Standard Department
             </legend>
 
@@ -26,14 +27,15 @@
 
                 <!-- ROW 1 -->
                 <div class="col-md-4 form-group">
-                    <label>Extension Fee</label>
+                    <label th:text="#{extensionFee}">Extension Fee</label>
                     <input type="text"
                            class="form-control"
                            th:field="*{extendedFees}"
                            required readonly/>
                 </div>
+
                 <div class="col-md-4 form-group">
-                    <label>Extension Start Date</label>
+                    <label th:text="#{smsIdentifierExtensionStartDate}">Extension Start Date</label>
                     <input type="text"
                            class="form-control hijrishamsi"
                            th:field="*{extensionStartDateJalali}"
@@ -41,14 +43,12 @@
                 </div>
 
                 <div class="col-md-4 form-group">
-                    <label>New Expiration Date</label>
+                    <label th:text="#{smsIdentifierExtensionNewExpirationDate}">New Expiration Date</label>
                     <input type="text"
                            class="form-control hijrishamsi"
                            th:field="*{extentionExpirationDateJalali}"
                            required/>
                 </div>
-
-
 
             </div>
 
@@ -57,19 +57,22 @@
                 <div class="col-md-4 mx-auto d-flex justify-content-center gap-2">
                     <button type="submit" class="btn btn-primary">
                         <i class="fas fa-check"></i>
-                        Save Extension
+                        <span th:text="#{codesSave}">Save Extension</span>
                     </button>
                     &nbsp;&nbsp;&nbsp;&nbsp;
 
                     <button type="reset" class="btn btn-info">
-                        <i class="fas fa-redo"></i> Reset
+                        <i class="fas fa-redo"></i>
+                        <span th:text="#{resetRecord}">Reset</span>
                     </button>
                 </div>
             </div>
 
         </fieldset>
+
         <a th:href="@{/codes/sms-identifiers/extension/list}"
-           class="btn btn-primary mt-3">
+           class="btn btn-primary mt-3"
+           th:text="#{codesBack}">
             ← Back to Page
         </a>
 

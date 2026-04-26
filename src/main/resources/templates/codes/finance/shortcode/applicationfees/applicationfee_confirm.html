@@ -5,7 +5,7 @@
       th:dir="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'rtl' : 'ltr'">
 
 <head th:replace="~{codes_layout :: page_head}">
-    <title>Application Fee Confirmation</title>
+    <title th:text="#{applicationFeeConfirmation}">Application Fee Confirmation</title>
 
     <!-- Styles -->
     <div th:replace="styles :: data-tables-styles"></div>
@@ -23,19 +23,16 @@
             font-family: "Segoe UI", system-ui, sans-serif;
         }
 
-        /* Page wrapper */
         .page-container {
             max-width: 1100px;
         }
 
-        /* Card */
         .content-card {
             border-radius: 10px;
             border: 1px solid #e5e7eb;
             background: #ffffff;
         }
 
-        /* Header */
         .content-header {
             padding: 16px 20px;
             border-bottom: 1px solid #e5e7eb;
@@ -47,7 +44,6 @@
             gap: 8px;
         }
 
-        /* Section title */
         .section-title {
             font-size: 14px;
             font-weight: 600;
@@ -58,14 +54,12 @@
             gap: 6px;
         }
 
-        /* Labels */
         .form-label {
             font-size: 13px;
             font-weight: 600;
             color: #4b5563;
         }
 
-        /* Inputs */
         .form-control {
             height: 42px;
             font-size: 14px;
@@ -83,7 +77,6 @@
             font-weight: 600;
         }
 
-        /* Input group */
         .input-group-text {
             background-color: #f3f4f6;
             border: 1px solid #d1d5db;
@@ -98,7 +91,6 @@
             border-right: none;
         }
 
-        /* Footer */
         .form-footer {
             padding: 20px;
             border-top: 1px solid #e5e7eb;
@@ -107,7 +99,6 @@
             align-items: center;
         }
 
-        /* Buttons */
         .btn-primary {
             padding: 8px 28px;
             font-size: 14px;
@@ -134,7 +125,7 @@
         <!-- Header -->
         <div class="content-header">
             <i class="bi bi-receipt"></i>
-            Application Fee Confirmation
+            <span th:text="#{applicationFeeConfirmation}">Application Fee Confirmation</span>
         </div>
 
         <!-- Body -->
@@ -149,14 +140,14 @@
                 <div class="row g-4">
 
                     <div class="col-lg-2 col-md-4">
-                        <label class="form-label">Short Code</label>
+                        <label class="form-label" th:text="#{shortCode}">Short Code</label>
                         <input type="text"
                                class="form-control form-control-readonly"
                                th:value="*{shortCodeName}" readonly>
                     </div>
 
                     <div class="col-lg-3 col-md-6">
-                        <label class="form-label">Entry Voucher Date</label>
+                        <label class="form-label" th:text="#{entryVoucherDate}">Entry Voucher Date</label>
                         <div class="input-group">
                             <input type="text"
                                    th:field="*{applicationFeeEnterVoucherDateJalali}"
@@ -166,7 +157,7 @@
                     </div>
 
                     <div class="col-lg-3 col-md-6">
-                        <label class="form-label">Bank Voucher Number</label>
+                        <label class="form-label" th:text="#{bankVoucherNumber}">Bank Voucher Number</label>
                         <div class="input-group">
                             <input type="text"
                                    th:field="*{applicationFeebankVoucherNo}"
@@ -176,7 +167,7 @@
                     </div>
 
                     <div class="col-lg-3 col-md-6">
-                        <label class="form-label">Voucher Submission Date</label>
+                        <label class="form-label" th:text="#{voucherSubmissionDate}">Voucher Submission Date</label>
                         <div class="input-group">
                             <input type="text"
                                    th:field="*{applicationFeebankVoucherSubmissionDateJalali}"
@@ -193,11 +184,11 @@
                     <a th:href="@{/codes/finance/applicationFeelist}"
                        class="btn btn-secondary">
                         <i class="bi bi-arrow-left"></i>
-                        Back
+                        <span th:text="#{codesBack}">Back</span>
                     </a>
 
                     <button type="submit" class="btn btn-primary">
-                        Confirm Payment
+                        <span th:text="#{confirmPayment}">Confirm Payment</span>
                     </button>
 
                 </div>

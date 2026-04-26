@@ -5,15 +5,18 @@
     <div th:replace="styles :: data-tables-styles"></div>
     <div th:replace="styles :: common-css"></div>
     <div th:replace="styles :: commonfieldset-with-legend-border"></div>
-    <title>Unpaid Application Fee Extensions</title>
+
+    <title th:text="#{extendedFeeExtension}">Extension Fee list</title>
 </head>
 <body>
+
 <nav th:replace="~{codes_layout :: page_navbar}"></nav>
+
 <div class="container-fluid"
      th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
 
     <fieldset>
-        <legend>
+        <legend th:text="#{unpaidApplicationFeeList}">
             Unpaid Extended Fee Extensions
         </legend>
 
@@ -23,14 +26,14 @@
                 <thead>
                 <tr class="bg-primary">
                     <th>#</th>
-                    <th>Extension Date</th>
-                    <th>Expiration Date</th>
-                    <th>Extended Fee</th>
-                    <th>Voucher No</th>
-                    <th>Entry Voucher Date</th>
-                    <th>Submission Date</th>
-                    <th>Status</th>
-                    <th>Extend</th>
+                    <th th:text="#{extensionDate}">Extension Date</th>
+                    <th th:text="#{expirationDate}">Expiration Date</th>
+                    <th th:text="#{extendedFee}">Extended Fee</th>
+                    <th th:text="#{bankVoucherNumber}">Voucher No</th>
+                    <th th:text="#{entryVoucherDate}">Entry Voucher Date</th>
+                    <th th:text="#{submissionDate}">Submission Date</th>
+                    <th th:text="#{codesStatus}">Status</th>
+                    <th th:text="#{extend}">Extend</th>
                 </tr>
                 </thead>
 
@@ -46,7 +49,8 @@
                     <td th:text="${ext.extendedFeeExtensionBankVoucherSubmissionDate}"></td>
 
                     <td>
-                        <span class="badge bg-warning text-dark">
+                        <span class="badge bg-warning text-dark"
+                              th:text="#{unpaid}">
                             UNPAID
                         </span>
                     </td>
@@ -54,8 +58,7 @@
                     <!-- Pay -->
                     <td>
                         <a th:href="@{/extended-fee-extension/pay/{id}(id=${ext.id})}">
-
-                            <img th:src="@{/images/codesExtension.png}" alt="extension" />
+                            <img th:src="@{/images/codesExtension.png}" alt="extension"/>
                         </a>
                     </td>
                 </tr>
@@ -69,7 +72,7 @@
     <a th:href="@{/codes/shortcode/finance/home}"
        class="btn btn-primary"
        style="margin-top:20px;">
-        ← Back to Page
+        <span th:text="#{codesBack}">← Back to Page</span>
     </a>
 
 </div>
@@ -80,6 +83,7 @@
 <div th:replace="scripts :: common-datatable"></div>
 
 <div style="height:5vh;"></div>
+
 <footer th:replace="~{codes_layout :: page_footer}"></footer>
 
 </body>

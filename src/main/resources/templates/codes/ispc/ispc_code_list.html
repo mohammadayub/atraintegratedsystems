@@ -3,7 +3,7 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 
 <head th:replace="~{codes_layout :: page_head}">
-  <title>ISPC Code Management System</title>
+  <title th:text="#{ispcCodesManagementSection}">ISPC Code Management System</title>
 
   <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap"/>
@@ -77,14 +77,18 @@
      th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
 
   <fieldset class="mt-4">
-    <legend>ISPC Code List Allocation Table</legend>
+    <legend th:text="#{ispcCodeListAllocationTable}">
+      ISPC Code List Allocation Table
+    </legend>
 
     <div class="mb-3">
-      <a th:href="@{/ispc/add}" class="btn btn-primary">
+      <a th:href="@{/ispc/add}" class="btn btn-primary"
+         th:text="#{addIspcCode}">
         Add New
       </a>
 
-      <button class="btn btn-primary" onclick="printPage()">
+      <button class="btn btn-primary" onclick="printPage()"
+              th:text="#{codesPrint}">
         Print
       </button>
     </div>
@@ -123,7 +127,7 @@
             stroke-linejoin="round"
             d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3"/>
     </svg>
-    Back to Home
+    <span th:text="#{codesBack}">Back to Home</span>
   </a>
 
 </div>

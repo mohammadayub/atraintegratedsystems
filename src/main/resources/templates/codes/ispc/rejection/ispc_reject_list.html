@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head th:replace="~{codes_layout :: page_head}">
-    <title>ISPC Details</title>
+    <title th:text="#{ispcCodeRejectedList}">ISPC Details</title>
 
     <div th:replace="styles :: data-tables-styles"></div>
     <div th:replace="styles :: common-css"></div>
@@ -18,7 +18,7 @@
      th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
 
     <fieldset>
-        <legend>ISPC Code Rejected List</legend>
+        <legend th:text="#{ispcCodeRejectedList}">ISPC Code Rejected List</legend>
 
         <div class="table-container">
 
@@ -30,22 +30,21 @@
                 <tr class="bg-primary text-white">
 
                     <th>#</th>
-                    <th>ISPC Decimal code</th>
-                    <th>Company Name</th>
-                    <th>Serial Number</th>
-                    <th>Mobile</th>
-                    <th>Telephone</th>
-                    <th>Email</th>
-                    <th>Ispc Number</th>
-                    <th>Signaling Point</th>
-                    <th>Location</th>
-                    <th>ENID</th>
-                    <th>Responsible Person</th>
-                    <th>Assign Date</th>
-                    <th>Expire Date</th>
-                    <th>Reject Status</th>
-                    <th>Reject Date</th>
-
+                    <th th:text="#{ispcCode}">ISPC Decimal code</th>
+                    <th th:text="#{companyName}">Company Name</th>
+                    <th th:text="#{codeSerialNumber}">Serial Number</th>
+                    <th th:text="#{ispcCodeMobile}">Mobile</th>
+                    <th th:text="#{ispcCodeTelephone}">Telephone</th>
+                    <th th:text="#{ispcCodeEmail}">Email</th>
+                    <th th:text="#{ispcNumber}">Ispc Number</th>
+                    <th th:text="#{uniqueNameOfTheSignalingPoint}">Signaling Point</th>
+                    <th th:text="#{codeLocation}">Location</th>
+                    <th th:text="#{tazkira}">ENID</th>
+                    <th th:text="#{ispcCodeResposiblePerson}">Responsible Person</th>
+                    <th th:text="#{ispcCodeAssigningDate}">Assign Date</th>
+                    <th th:text="#{ispcCodeExpirationDate}">Expire Date</th>
+                    <th th:text="#{codesStatus}">Reject Status</th>
+                    <th th:text="#{codesRejectionDate}">Reject Date</th>
 
                 </tr>
                 </thead>
@@ -95,7 +94,8 @@
     </fieldset>
 
     <a th:href="@{/codes/ispc-code/home}"
-       class="btn btn-primary mt-3">
+       class="btn btn-primary mt-3"
+       th:text="#{codesBack}">
         ← Back to Page
     </a>
 

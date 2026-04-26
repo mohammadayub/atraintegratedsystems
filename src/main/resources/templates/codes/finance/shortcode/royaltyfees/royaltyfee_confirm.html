@@ -11,7 +11,7 @@
     <div th:replace="styles :: common-css"></div>
     <div th:replace="styles :: persian-datepicker-styles"></div>
 
-    <title>Royalty Fee Confirmation</title>
+    <title th:text="#{royaltyFeeConfirmation}">Royalty Fee Confirmation</title>
 
     <style>
         body {
@@ -19,19 +19,16 @@
             font-family: "Segoe UI", system-ui, sans-serif;
         }
 
-        /* Page wrapper */
         .page-container {
             max-width: 1100px;
         }
 
-        /* Card */
         .content-card {
             border-radius: 10px;
             border: 1px solid #e5e7eb;
             background: #ffffff;
         }
 
-        /* Header */
         .content-header {
             padding: 16px 20px;
             border-bottom: 1px solid #e5e7eb;
@@ -43,7 +40,6 @@
             gap: 8px;
         }
 
-        /* Section title */
         .section-title {
             font-size: 14px;
             font-weight: 600;
@@ -54,14 +50,12 @@
             gap: 6px;
         }
 
-        /* Labels */
         .form-label {
             font-size: 13px;
             font-weight: 600;
             color: #4b5563;
         }
 
-        /* Inputs */
         .form-control {
             height: 42px;
             font-size: 14px;
@@ -79,7 +73,6 @@
             font-weight: 600;
         }
 
-        /* Input group */
         .input-group-text {
             background-color: #f3f4f6;
             border: 1px solid #d1d5db;
@@ -94,7 +87,6 @@
             border-right: none;
         }
 
-        /* Footer */
         .form-footer {
             padding: 20px;
             border-top: 1px solid #e5e7eb;
@@ -103,7 +95,6 @@
             align-items: center;
         }
 
-        /* Buttons */
         .btn-primary {
             padding: 8px 28px;
             font-size: 14px;
@@ -126,85 +117,82 @@
 <div class="container-fluid mt-4"
      th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
 
-
     <div class="content-card">
 
         <!-- Header -->
         <div class="content-header">
             <i class="bi bi-receipt"></i>
-            Royalty Fee Confirmation
+            <span th:text="#{royaltyFeeConfirmation}">Royalty Fee Confirmation</span>
         </div>
 
         <!-- Body -->
         <div class="p-4">
 
+            <form th:action="@{/codes/royaltyfees/confirm/save}"
+                  th:object="${codeDetail}"
+                  method="post">
 
-        <form th:action="@{/codes/royaltyfees/confirm/save}"
-              th:object="${codeDetail}"
-              method="post">
+                <div class="row">
 
-            <div class="row">
+                    <!-- Hidden ID -->
+                    <input type="hidden" name="id" th:value="${codeDetail.id}"/>
 
-                <!-- Hidden ID -->
-                <input type="hidden" name="id" th:value="${codeDetail.id}"/>
+                    <!-- Short Code -->
+                    <div class="col-md-2 form-group">
+                        <label th:text="#{shortCode}">Short Code</label>
+                        <input type="text"
+                               class="form-control"
+                               th:value="*{shortCodeName}"
+                               readonly>
+                    </div>
 
-                <!-- Short Code -->
-                <div class="col-md-2 form-group">
-                    <label>Short Code</label>
-                    <input type="text"
-                           class="form-control"
-                           th:value="*{shortCodeName}"
-                           readonly>
+                    <!-- Royalty Fee Entry Voucher Date -->
+                    <div class="col-md-3 form-group">
+                        <label th:text="#{royaltyFeeEntryVoucherDate}">Royalty Fee Entry Voucher Date</label>
+                        <input type="text"
+                               th:field="*{royaltyFeeEnterVoucherDateJalali}"
+                               class="form-control hijrishamsi"
+                               required>
+                    </div>
+
+                    <!-- Bank Voucher Number -->
+                    <div class="col-md-3 form-group">
+                        <label th:text="#{royaltyFeeBankVoucherNumber}">Bank Voucher Number</label>
+                        <input type="text"
+                               th:field="*{royaltyFeebankVoucherNo}"
+                               class="form-control"
+                               required>
+                    </div>
+
+                    <!-- Bank Voucher Submission Date -->
+                    <div class="col-md-3 form-group">
+                        <label th:text="#{royaltyFeeBankVoucherSubmissionDate}">Bank Voucher Submission Date</label>
+                        <input type="text"
+                               th:field="*{royaltyFeeBankVoucherSubmissionDateJalali}"
+                               class="form-control hijrishamsi"
+                               required>
+                    </div>
+
                 </div>
 
-                <!-- Royalty Fee Entry Voucher Date -->
-                <div class="col-md-3 form-group">
-                    <label>Royalty Fee Entry Voucher Date</label>
-                    <input type="text"
-                           th:field="*{royaltyFeeEnterVoucherDateJalali}"
-                           class="form-control hijrishamsi"
-                           required>
+                <!-- Submit Button -->
+                <div class="form-footer mt-4">
+
+                    <a th:href="@{/codes/finance/royaltyFeelist}"
+                       class="btn btn-secondary">
+                        <i class="bi bi-arrow-left"></i>
+                        <span th:text="#{codesBack}">Back</span>
+                    </a>
+
+                    <button type="submit" class="btn btn-primary">
+                        <span th:text="#{confirmPayment}">Confirm Payment</span>
+                    </button>
+
                 </div>
 
-                <!-- Bank Voucher Number -->
-                <div class="col-md-3 form-group">
-                    <label>Bank Voucher Number</label>
-                    <input type="text"
-                           th:field="*{royaltyFeebankVoucherNo}"
-                           class="form-control"
-                           required>
-                </div>
-
-                <!-- Bank Voucher Submission Date -->
-                <div class="col-md-3 form-group">
-                    <label>Bank Voucher Submission Date</label>
-                    <input type="text"
-                           th:field="*{royaltyFeeBankVoucherSubmissionDateJalali}"
-                           class="form-control hijrishamsi"
-                           required>
-                </div>
-
-            </div>
-
-            <!-- Submit Button -->
-            <div class="form-footer mt-4">
-
-                <a th:href="@{/codes/finance/royaltyFeelist}"
-                   class="btn btn-secondary">
-                    <i class="bi bi-arrow-left"></i>
-                    Back
-                </a>
-
-                <button type="submit" class="btn btn-primary">
-                    Confirm Payment
-                </button>
-
-            </div>
-
-        </form>
+            </form>
         </div>
     </div>
-
 
 </div>
 

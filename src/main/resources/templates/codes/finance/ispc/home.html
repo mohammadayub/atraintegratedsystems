@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en"
       th:lang="#{lang}"
-      th:dir="${#locale.language == 'ps' or #locale.language == 'prs' ? 'rtl' : 'ltr'}"      xmlns:th="http://www.thymeleaf.org"
+      th:dir="${#locale.language == 'ps' or #locale.language == 'prs' ? 'rtl' : 'ltr'}"
+      xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
 <head th:replace="~{codes_layout :: page_head}">
-    <title>AIS</title>
+    <title th:text="#{codesFinanceManagementSection}">AIS</title>
     <div th:replace="styles :: commonfieldset"></div>
 
     <!-- SAME LMS DASHBOARD STYLE -->
@@ -42,15 +43,15 @@
 
     <!-- ================= FINANCE ================= -->
     <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_CODES_ADMIN')">
-        <legend>ISPC Code Finance Management Section</legend>
+        <legend th:text="#{codesFinanceManagementSection}">ISPC Code Finance Management Section</legend>
 
         <table class="table table-borderless text-center">
             <tr>
                 <td>
                     <div class="custom-card" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_CODES_ADMIN')">
                         <a th:href="@{/codes/ispc-registrationfee/unpaid/list}">
-                            <img th:src="@{/images/shortCodeFinance.png}" alt="Application Fee">
-                            <h4 style="margin-top:12px;">Registration Fee</h4>
+                            <img th:src="@{/images/shortCodeFinance.png}" th:alt="#{ispcCodeRegistrationFee}" alt="Application Fee">
+                            <h4 style="margin-top:12px;" th:text="#{ispcCodeRegistrationFee}">Registration Fee</h4>
                         </a>
                     </div>
                 </td>
@@ -60,15 +61,15 @@
 
     <!-- ================= EXTENSION ================= -->
     <fieldset sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_CODES_ADMIN')">
-        <legend>ISPC Code Extension Management Section</legend>
+        <legend th:text="#{ispcCodeExtensionManagementSection}">ISPC Code Extension Management Section</legend>
 
         <table class="table table-borderless text-center">
             <tr>
                 <td>
                     <div class="custom-card" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_CODES_ADMIN')">
                         <a th:href="@{/codes/ispc/finance-extensions}">
-                            <img th:src="@{/images/applicationFeesExtension.png}" alt="Extension">
-                            <h4 style="margin-top:12px;">ISPC Code Extension</h4>
+                            <img th:src="@{/images/applicationFeesExtension.png}" th:alt="#{ispcCodeExtension}" alt="Extension">
+                            <h4 style="margin-top:12px;" th:text="#{ispcCodeExtension}">ISPC Code Extension</h4>
                         </a>
                     </div>
                 </td>

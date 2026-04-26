@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head th:replace="~{codes_layout :: page_head}">
-    <title>ISPC Extension List</title>
+    <title th:text="#{ispcExtensionList}">ISPC Extension List</title>
 
     <div th:replace="styles :: data-tables-styles"></div>
     <div th:replace="styles :: common-css"></div>
@@ -18,7 +18,7 @@
      th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
 
     <fieldset>
-        <legend>ISPC Code Extension List</legend>
+        <legend th:text="#{ispcCodeExtension}">ISPC Code Extension List</legend>
 
         <div class="table-container">
 
@@ -29,15 +29,15 @@
                 <thead>
                 <tr class="bg-primary text-white">
 
-                    <th>#ID</th>
-                    <th>ISPC Code</th>
-                    <th>Serial Number</th>
-                    <th>Signaling Point</th>
-                    <th>Company</th>
-                    <th>Extension Start</th>
-                    <th>Extension Expire</th>
-                    <th>Status</th>
-                    <th>Extend</th>
+                    <th th:text="#{id}">#ID</th>
+                    <th th:text="#{ispcCode}">ISPC Code</th>
+                    <th th:text="#{codeSerialNumber}">Serial Number</th>
+                    <th th:text="#{uniqueNameOfTheSignalingPoint}">Signaling Point</th>
+                    <th th:text="#{companyName}">Company</th>
+                    <th th:text="#{smsIdentifierExtensionStartDate}">Extension Start</th>
+                    <th th:text="#{smsIdentifierExtensionNewExpirationDate}">Extension Expire</th>
+                    <th th:text="#{codesStatus}">Status</th>
+                    <th th:text="#{extend}">Extend</th>
 
                 </tr>
                 </thead>
@@ -54,11 +54,11 @@
                     <td th:text="${ext.extensionStartDateJalali}"></td>
                     <td th:text="${ext.extentionExpirationDateJalali}"></td>
                     <td th:text="${ext.extendStatus}"></td>
-                    <td>
-                        <a
-                           th:href="@{/codes/ispc/finance-extension/edit/{id}(id=${ext.id})}">
-                            <img th:src="@{/images/codesExtension.png}" alt="Application Fee" />
 
+                    <td>
+                        <a th:href="@{/codes/ispc/finance-extension/edit/{id}(id=${ext.id})}">
+                            <img th:src="@{/images/codesExtension.png}"
+                                 th:alt="#{extension}" />
                         </a>
                     </td>
 
@@ -73,7 +73,8 @@
     </fieldset>
 
     <a th:href="@{/codes/ispc-code/finance/home}"
-       class="btn btn-primary mt-3">
+       class="btn btn-primary mt-3"
+       th:text="#{codesBack}">
         ← Back to Page
     </a>
 

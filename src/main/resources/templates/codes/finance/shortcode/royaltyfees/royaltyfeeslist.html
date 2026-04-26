@@ -7,7 +7,7 @@
     <div th:replace="styles :: select2-styles"></div>
     <div th:replace="styles :: common-css"></div>
     <div th:replace="styles :: commonfieldset-with-legend-border"></div>
-    <title>Royalty Fee List</title>
+    <title th:text="#{royaltyFeeList}">Royalty Fee List</title>
 </head>
 
 <body>
@@ -17,7 +17,7 @@
      th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
 
     <fieldset>
-        <legend>
+        <legend th:text="#{unpaidRoyaltyFeeList}">
             Unpaid Royalty Fees List
         </legend>
 
@@ -27,16 +27,16 @@
                 <thead>
                 <tr class="bg-primary">
                     <th>ID</th>
-                    <th>Short Code</th>
-                    <th>Status</th>
-                    <th>Source</th>
-                    <th>Location</th>
-                    <th>Type</th>
-                    <th>Category</th>
-                    <th>Channel</th>
-                    <th>Email</th>
-                    <th th:text="#{mcit_license_prints_tariff}">Print</th>
-                    <th th:text="#{payment_confirmation}">Confirm</th>
+                    <th th:text="#{shortCode}">Short Code</th>
+                    <th th:text="#{codesStatus}">Status</th>
+                    <th th:text="#{sourceUsed}">Source</th>
+                    <th th:text="#{codeLocation}">Location</th>
+                    <th th:text="#{selectCategoryType}">Type</th>
+                    <th th:text="#{category}">Category</th>
+                    <th th:text="#{codeChannel}">Channel</th>
+                    <th th:text="#{codeEmail}">Email</th>
+                    <th th:text="#{codesPrint}">Print</th>
+                    <th th:text="#{paymentConfirmation}">Confirm</th>
                 </tr>
                 </thead>
 
@@ -79,7 +79,6 @@
 
                 </tr>
 
-
                 </tbody>
 
             </table>
@@ -88,7 +87,8 @@
 
     <a th:href="@{/codes/shortcode/finance/home}"
        class="btn btn-primary"
-       style="margin-top:20px;">
+       style="margin-top:20px;"
+       th:text="#{codesBack}">
         ← Back to Page
     </a>
 </div>

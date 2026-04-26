@@ -2,7 +2,7 @@
 
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{codes_layout :: page_head}">
-    <title>SMS Identifier Finance Extension</title>
+    <title th:text="#{smsIdentifierFinanceManagementSection}">SMS Identifier Finance Extension</title>
 
     <div th:replace="styles :: data-tables-styles"></div>
     <div th:replace="styles :: common-css"></div>
@@ -18,7 +18,9 @@
      th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
 
     <fieldset>
-        <legend>Finance Department — Extended SMS Identifier Codes</legend>
+        <legend th:text="#{smsIdentifierFinanceManagementSection}">
+            Finance Department — Extended SMS Identifier Codes
+        </legend>
 
         <div class="table-container">
             <table class="slip table table-bordered table-striped"
@@ -26,53 +28,54 @@
                    style="width:100%">
 
                 <thead>
-          <tr class="bg-primary text-white">
-            <th>Extension ID</th>
-            <th>Code</th>
-            <th>Company</th>
-            <th>ENID</th>
-            <th>Mobile</th>
-            <th>Email</th>
-            <th>Channel</th>
-            <th>Service</th>
-            <th>MNO Host</th>
-            <th>Category</th>
-            <th>Start Date</th>
-            <th>Expiration</th>
-            <th>Extension</th>
-        </tr>
-        </thead>
+                <tr class="bg-primary text-white">
+                    <th th:text="#{id}">Extension ID</th>
+                    <th th:text="#{smsIdentifierCode}">Code</th>
+                    <th th:text="#{companyName}">Company</th>
+                    <th th:text="#{tazkira}">ENID</th>
+                    <th th:text="#{smsIdentifierMobile}">Mobile</th>
+                    <th th:text="#{codeEmail}">Email</th>
+                    <th th:text="#{smsIdentifierChannel}">Channel</th>
+                    <th th:text="#{smsIdentifierServiceType}">Service</th>
+                    <th th:text="#{MNOHost}">MNO Host</th>
+                    <th th:text="#{category}">Category</th>
+                    <th th:text="#{smsIdentifierExtensionStartDate}">Start Date</th>
+                    <th th:text="#{smsIdentifierExtensionNewExpirationDate}">Expiration</th>
+                    <th th:text="#{extension}">Extension</th>
+                </tr>
+                </thead>
 
-        <tbody>
-        <tr th:each="e : ${extensions}">
-            <td th:text="${e.id}"></td>   <!-- EXTENSION ID -->
+                <tbody>
+                <tr th:each="e : ${extensions}">
+                    <td th:text="${e.id}"></td>   <!-- EXTENSION ID -->
 
-            <td th:text="${e.smsIdentifierCodeName}"></td>
-            <td th:text="${e.companyName}"></td>
-            <td th:text="${e.enid}"></td>
-            <td th:text="${e.mobile}"></td>
-            <td th:text="${e.email}"></td>
-            <td th:text="${e.channel}"></td>
-            <td th:text="${e.serviceType}"></td>
-            <td th:text="${e.mnosCompanyHost}"></td>
-            <td th:text="${e.codeCategory}"></td>
-            <td th:text="${e.extensionStartDate}"></td>
-            <td th:text="${e.extentionExpirationDate}"></td>
-            <td>
-                <a th:href="@{/codes/smsidentifier/finance/extensions/edit/{id}(id=${e.id})}">
-                    <img th:src="@{/images/codesExtension.png}" alt="extension" />
-                </a>
+                    <td th:text="${e.smsIdentifierCodeName}"></td>
+                    <td th:text="${e.companyName}"></td>
+                    <td th:text="${e.enid}"></td>
+                    <td th:text="${e.mobile}"></td>
+                    <td th:text="${e.email}"></td>
+                    <td th:text="${e.channel}"></td>
+                    <td th:text="${e.serviceType}"></td>
+                    <td th:text="${e.mnosCompanyHost}"></td>
+                    <td th:text="${e.codeCategory}"></td>
+                    <td th:text="${e.extensionStartDate}"></td>
+                    <td th:text="${e.extentionExpirationDate}"></td>
+                    <td>
+                        <a th:href="@{/codes/smsidentifier/finance/extensions/edit/{id}(id=${e.id})}">
+                            <img th:src="@{/images/codesExtension.png}" alt="extension" />
+                        </a>
+                    </td>
+                </tr>
 
-            </td>
-        </tr>
+                </tbody>
 
-        </tbody>
-
-    </table>
+            </table>
         </div>
     </fieldset>
+
     <a th:href="@{/codes/smsidentifier/finance/home}"
-       class="btn btn-primary mt-3">
+       class="btn btn-primary mt-3"
+       th:text="#{codesBack}">
         ← Back to Page
     </a>
 

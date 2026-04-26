@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{codes_layout :: page_head}">
-    <title>SMS Identifier Royalty Fees List</title>
+    <title th:text="#{smsIdentifierRoyaltyFeeList}">SMS Identifier Royalty Fees List</title>
 
     <div th:replace="styles :: data-tables-styles"></div>
     <div th:replace="styles :: common-css"></div>
@@ -16,7 +16,9 @@
      th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
 
     <fieldset>
-        <legend>Sms Identifier Royalty Fees List</legend>
+        <legend th:text="#{smsIdentifierRoyalty}">
+            Sms Identifier Royalty Fees List
+        </legend>
 
         <div class="table-container">
             <table class="slip table table-bordered table-striped"
@@ -24,56 +26,60 @@
                    style="width:100%">
 
                 <thead>
-            <tr class="bg-primary text-white">
-            <th>#</th>
-            <th>Code Name</th>
-            <th>Company</th>
-            <th>ENID</th>
-            <th>Mobile</th>
-            <th>Email</th>
-            <th>Channel</th>
-            <th>Service Type</th>
-            <th>Assign Date</th>
-            <th>Expire Date</th>
-            <th>Print Tariff</th>
-            <th>Cofirm Payment</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="item, stat : ${list}">
-            <td th:text="${stat.count}"></td>
-            <td th:text="${item.smsIdentifierCodeName}"></td>
-            <td th:text="${item.companyName}"></td>
-            <td th:text="${item.enid}"></td>
-            <td th:text="${item.mobile}"></td>
-            <td th:text="${item.email}"></td>
-            <td th:text="${item.channel}"></td>
-            <td th:text="${item.serviceType}"></td>
-            <td th:text="${item.assigningDate}"></td>
-            <td th:text="${item.expirationDate}"></td>
-            <td>
-                <a class="btn btn-sm btn-secondary"
-                   th:href="@{/codes/sms-identifier-royaltyfee/print-tariff/{id}(id=${item.id})}">
-                    Print Tariff
-                </a>
-            </td>
+                <tr class="bg-primary text-white">
+                    <th>#</th>
+                    <th th:text="#{smsIdentifierCode}">Code Name</th>
+                    <th th:text="#{companyName}">Company</th>
+                    <th th:text="#{tazkira}">ENID</th>
+                    <th th:text="#{mobileNumber}">Mobile</th>
+                    <th th:text="#{codeEmail}">Email</th>
+                    <th th:text="#{smsIdentifierChannel}">Channel</th>
+                    <th th:text="#{smsIdentifierServiceType}">Service Type</th>
+                    <th th:text="#{assingingDate}">Assign Date</th>
+                    <th th:text="#{expiryDate}">Expire Date</th>
+                    <th th:text="#{print}">Print Tariff</th>
+                    <th th:text="#{confirmPayment}">Confirm Payment</th>
+                </tr>
+                </thead>
 
-            <td>
-                <a class="btn btn-sm btn-primary"
-                   th:href="@{/codes/sms-identifier-royaltyfee/pay/{id}(id=${item.id})}">
-                    Pay
-                </a>
-            </td>
+                <tbody>
+                <tr th:each="item, stat : ${list}">
+                    <td th:text="${stat.count}"></td>
+                    <td th:text="${item.smsIdentifierCodeName}"></td>
+                    <td th:text="${item.companyName}"></td>
+                    <td th:text="${item.enid}"></td>
+                    <td th:text="${item.mobile}"></td>
+                    <td th:text="${item.email}"></td>
+                    <td th:text="${item.channel}"></td>
+                    <td th:text="${item.serviceType}"></td>
+                    <td th:text="${item.assigningDate}"></td>
+                    <td th:text="${item.expirationDate}"></td>
 
-        </tr>
-        </tbody>
-    </table>
+                    <td>
+                        <a class="btn btn-sm btn-secondary"
+                           th:href="@{/codes/sms-identifier-royaltyfee/print-tariff/{id}(id=${item.id})}">
+                            <span th:text="#{print}">Print Tariff</span>
+                        </a>
+                    </td>
+
+                    <td>
+                        <a class="btn btn-sm btn-primary"
+                           th:href="@{/codes/sms-identifier-royaltyfee/pay/{id}(id=${item.id})}">
+                            <span>Pay</span>
+                        </a>
+                    </td>
+
+                </tr>
+                </tbody>
+            </table>
         </div>
     </fieldset>
+
     <a th:href="@{/codes/smsidentifier/finance/home}"
        class="btn btn-primary mt-3">
-        ← Back to Page
+        <span th:text="#{codesBack}">← Back to Page</span>
     </a>
+
 </div>
 
 <!-- Scripts -->

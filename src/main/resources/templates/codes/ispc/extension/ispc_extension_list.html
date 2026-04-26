@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{codes_layout :: page_head}">
-    <title>SMS Identifier Extension</title>
+    <title th:text="#{smsIdentifierExtensionManagementSection}">SMS Identifier Extension</title>
 
     <div th:replace="styles :: data-tables-styles"></div>
     <div th:replace="styles :: common-css"></div>
@@ -16,7 +16,7 @@
      th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
 
     <fieldset>
-        <legend>SMS Identifier Code Extension List</legend>
+        <legend th:text="#{smsIdentifierExtensionManagementSection}">SMS Identifier Code Extension List</legend>
 
         <div class="table-container">
             <table class="slip table table-bordered table-striped"
@@ -26,16 +26,16 @@
                 <thead>
                 <tr class="bg-primary text-white">
                     <th>ID</th>
-                    <th>Company Name</th>
-                    <th>ENID</th>
-                    <th>Company Address</th>
-                    <th>Mobile</th>
-                    <th>Telephone</th>
-                    <th>Email</th>
-                    <th>Assigning Date</th>
-                    <th>Expiration Date</th>
-                    <th>SMS Identifier Code</th>
-                    <th>Extension</th>
+                    <th th:text="#{companyName}">Company Name</th>
+                    <th th:text="#{tazkira}">ENID</th>
+                    <th th:text="#{codeAddress}">Company Address</th>
+                    <th th:text="#{mobileNumber}">Mobile</th>
+                    <th th:text="#{smsIdentifierTelephone}">Telephone</th>
+                    <th th:text="#{codeEmail}">Email</th>
+                    <th th:text="#{assingingDate}">Assigning Date</th>
+                    <th th:text="#{expiryDate}">Expiration Date</th>
+                    <th th:text="#{smsIdentifierCode}">SMS Identifier Code</th>
+                    <th th:text="#{extension}">Extension</th>
                 </tr>
                 </thead>
 
@@ -54,9 +54,8 @@
 
                     <!-- FIXED: only ONE td -->
                     <td>
-                        <a
-                           th:href="@{/codes/ispc-extension/create/{id}(id=${item.id})}">
-                            <img th:src="@{/images/codesExtension.png}" alt="extension" />
+                        <a th:href="@{/codes/ispc-extension/create/{id}(id=${item.id})}">
+                            <img th:src="@{/images/codesExtension.png}" th:alt="#{extension}" alt="extension" />
                         </a>
                     </td>
                 </tr>
@@ -65,8 +64,10 @@
             </table>
         </div>
     </fieldset>
+
     <a th:href="@{/codes/ISPC/standard/extension/home}"
-       class="btn btn-primary mt-3">
+       class="btn btn-primary mt-3"
+       th:text="#{codesBack}">
         ← Back to Page
     </a>
 </div>

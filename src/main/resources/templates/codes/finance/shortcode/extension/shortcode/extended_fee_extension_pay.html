@@ -1,194 +1,190 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{codes_layout :: page_head}">
-  <meta charset="UTF-8">
+    <meta charset="UTF-8">
 
-  <div th:replace="styles :: common-css"></div>
-  <div th:replace="styles :: commonfieldset"></div>
-  <div th:replace="styles :: persian-datepicker-styles"></div>
-  <title>Pay Application Fee Extension</title>
-  <style>
-    body {
-        background-color: #f5f7fa;
-        font-family: "Segoe UI", system-ui, sans-serif;
-    }
+    <div th:replace="styles :: common-css"></div>
+    <div th:replace="styles :: commonfieldset"></div>
+    <div th:replace="styles :: persian-datepicker-styles"></div>
 
-    /* Page wrapper */
-    .page-container {
-        max-width: 1100px;
-    }
+    <title th:text="#{extensionFeeConfirmation}">Pay Application Fee Extension</title>
 
-    /* Card */
-    .content-card {
-        border-radius: 10px;
-        border: 1px solid #e5e7eb;
-        background: #ffffff;
-    }
+    <style>
+        body {
+            background-color: #f5f7fa;
+            font-family: "Segoe UI", system-ui, sans-serif;
+        }
 
-    /* Header */
-    .content-header {
-        padding: 16px 20px;
-        border-bottom: 1px solid #e5e7eb;
-        font-size: 15px;
-        font-weight: 600;
-        color: #1f2937;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-    }
+        .page-container {
+            max-width: 1100px;
+        }
 
-    /* Section title */
-    .section-title {
-        font-size: 14px;
-        font-weight: 600;
-        color: #374151;
-        margin-bottom: 18px;
-        display: flex;
-        align-items: center;
-        gap: 6px;
-    }
+        .content-card {
+            border-radius: 10px;
+            border: 1px solid #e5e7eb;
+            background: #ffffff;
+        }
 
-    /* Labels */
-    .form-label {
-        font-size: 13px;
-        font-weight: 600;
-        color: #4b5563;
-    }
+        .content-header {
+            padding: 16px 20px;
+            border-bottom: 1px solid #e5e7eb;
+            font-size: 15px;
+            font-weight: 600;
+            color: #1f2937;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
 
-    /* Inputs */
-    .form-control {
-        height: 42px;
-        font-size: 14px;
-        border-radius: 6px;
-        border: 1px solid #d1d5db;
-    }
+        .section-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
 
-    .form-control:focus {
-        border-color: #2563eb;
-        box-shadow: none;
-    }
+        .form-label {
+            font-size: 13px;
+            font-weight: 600;
+            color: #4b5563;
+        }
 
-    .form-control-readonly {
-        background-color: #f3f4f6;
-        font-weight: 600;
-    }
+        .form-control {
+            height: 42px;
+            font-size: 14px;
+            border-radius: 6px;
+            border: 1px solid #d1d5db;
+        }
 
-    /* Input group */
-    .input-group-text {
-        background-color: #f3f4f6;
-        border: 1px solid #d1d5db;
-        color: #6b7280;
-    }
+        .form-control:focus {
+            border-color: #2563eb;
+            box-shadow: none;
+        }
 
-    [dir="rtl"] .input-group-text {
-        border-left: none;
-    }
+        .form-control-readonly {
+            background-color: #f3f4f6;
+            font-weight: 600;
+        }
 
-    [dir="ltr"] .input-group-text {
-        border-right: none;
-    }
+        .input-group-text {
+            background-color: #f3f4f6;
+            border: 1px solid #d1d5db;
+            color: #6b7280;
+        }
 
-    /* Footer */
-    .form-footer {
-        padding: 20px;
-        border-top: 1px solid #e5e7eb;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
+        [dir="rtl"] .input-group-text {
+            border-left: none;
+        }
 
-    /* Buttons */
-    .btn-primary {
-        padding: 8px 28px;
-        font-size: 14px;
-        font-weight: 600;
-        border-radius: 6px;
-    }
+        [dir="ltr"] .input-group-text {
+            border-right: none;
+        }
 
-    .btn-secondary {
-        padding: 8px 20px;
-        font-size: 14px;
-        border-radius: 6px;
-    }
-  </style>
+        .form-footer {
+            padding: 20px;
+            border-top: 1px solid #e5e7eb;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .btn-primary {
+            padding: 8px 28px;
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: 6px;
+        }
+
+        .btn-secondary {
+            padding: 8px 20px;
+            font-size: 14px;
+            border-radius: 6px;
+        }
+    </style>
 </head>
+
 <body>
+
 <nav th:replace="~{codes_layout :: page_navbar}"></nav>
+
 <div class="container-fluid mt-4"
      th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
 
-  <div class="content-card">
+    <div class="content-card">
 
-    <!-- Header -->
-    <div class="content-header">
-      <i class="bi bi-receipt"></i>
-      Extension Fee Confirmation
+        <!-- Header -->
+        <div class="content-header">
+            <i class="bi bi-receipt"></i>
+            <span th:text="#{extensionFeeConfirmation}">Extension Fee Confirmation</span>
+        </div>
+
+        <!-- Body -->
+        <div class="p-4">
+
+            <form th:action="@{/extended-fee-extension/pay}"
+                  th:object="${extension}"
+                  method="post">
+
+                <!-- Hidden ID -->
+                <input type="hidden" th:field="*{id}"/>
+
+                <div class="row">
+
+                    <!-- Extended Fee -->
+                    <div class="col-md-3 form-group">
+                        <label th:text="#{extendedFee}">Extended Fee</label>
+                        <input type="text"
+                               class="form-control"
+                               th:field="*{extendedFees}" required>
+                    </div>
+
+                    <!-- Bank Voucher No -->
+                    <div class="col-md-3 form-group">
+                        <label th:text="#{bankVoucherNumber}">Bank Voucher No</label>
+                        <input type="text"
+                               class="form-control"
+                               th:field="*{extendedFeeExtensionBankVoucherNo}" required>
+                    </div>
+
+                    <!-- Entry Voucher Date -->
+                    <div class="col-md-3 form-group">
+                        <label th:text="#{entryVoucherDate}">Entry Voucher Date</label>
+                        <input type="text"
+                               class="form-control hijrishamsi"
+                               th:field="*{extendedFeeExtensionEntryVoucherDateJalali}" required>
+                    </div>
+
+                    <!-- Submission Date -->
+                    <div class="col-md-3 form-group">
+                        <label th:text="#{submissionDate}">Submission Date</label>
+                        <input type="text"
+                               class="form-control hijrishamsi"
+                               th:field="*{extendedFeeExtensionBankVoucherSubmissionDateJalali}" required>
+                    </div>
+
+                </div>
+
+                <!-- Buttons -->
+                <div class="form-footer mt-4">
+
+                    <a th:href="@{/extended-fee-extension/unpaid}"
+                       class="btn btn-secondary">
+                        <i class="bi bi-arrow-left"></i>
+                        <span th:text="#{codesBack}">Back</span>
+                    </a>
+
+                    <button type="submit" class="btn btn-primary">
+                        <span th:text="#{confirmPayment}">Confirm Payment</span>
+                    </button>
+
+                </div>
+
+            </form>
+        </div>
     </div>
-
-    <!-- Body -->
-    <div class="p-4">
-
-    <form th:action="@{/extended-fee-extension/pay}"
-          th:object="${extension}"
-          method="post">
-
-      <!-- Hidden ID -->
-      <input type="hidden" th:field="*{id}"/>
-
-      <div class="row">
-
-        <!-- Extended Fee -->
-        <div class="col-md-3 form-group">
-          <label>Extended Fee</label>
-          <input type="text"
-                 class="form-control"
-                 th:field="*{extendedFees}" required>
-        </div>
-
-        <!-- Bank Voucher No -->
-        <div class="col-md-3 form-group">
-          <label>Bank Voucher No</label>
-          <input type="text"
-                 class="form-control"
-                 th:field="*{extendedFeeExtensionBankVoucherNo}" required>
-        </div>
-
-        <!-- Entry Voucher Date -->
-        <div class="col-md-3 form-group">
-          <label>Entry Voucher Date</label>
-          <input type="text"
-                 class="form-control hijrishamsi"
-                 th:field="*{extendedFeeExtensionEntryVoucherDateJalali}" required>
-        </div>
-
-        <!-- Submission Date -->
-        <div class="col-md-3 form-group">
-          <label>Submission Date</label>
-          <input type="text"
-                 class="form-control hijrishamsi"
-                 th:field="*{extendedFeeExtensionBankVoucherSubmissionDateJalali}" required>
-        </div>
-
-      </div>
-
-      <!-- Buttons -->
-      <div class="form-footer mt-4">
-
-        <a th:href="@{/extended-fee-extension/unpaid}"
-           class="btn btn-secondary">
-          <i class="bi bi-arrow-left"></i>
-          Back
-        </a>
-
-        <button type="submit" class="btn btn-primary">
-          Confirm Payment
-        </button>
-
-      </div>
-
-    </form>
-    </div>
-  </div>
 
 </div>
 

@@ -7,7 +7,7 @@
     <div th:replace="styles :: select2-styles"></div>
     <div th:replace="styles :: common-css"></div>
     <div th:replace="styles :: commonfieldset-with-legend-border"></div>
-    <title>Application Fee List</title>
+    <title th:text="#{shortCodeApplicationFee}">Application Fee List</title>
 </head>
 
 <body>
@@ -17,7 +17,7 @@
      th:classappend="${#locale.language == 'ps' or #locale.language == 'prs'} ? 'label-rtl' : 'label-ltr'">
 
     <fieldset>
-        <legend>
+        <legend th:text="#{shortCodeApplicationFee}">
             Application Fees List
         </legend>
 
@@ -27,15 +27,15 @@
                 <thead>
                 <tr class="bg-primary">
                     <th>ID</th>
-                    <th>Status</th>
-                    <th>Source</th>
-                    <th>Location</th>
-                    <th>Type</th>
-                    <th>Category</th>
-                    <th>Channel</th>
-                    <th>Email</th>
-                    <th th:text="#{mcit_license_prints_tariff}">Print</th>
-                    <th th:text="#{payment_confirmation}">Confirm</th>
+                    <th th:text="#{codesStatus}">Status</th>
+                    <th th:text="#{sourceUsed}">Source</th>
+                    <th th:text="#{codeLocation}">Location</th>
+                    <th th:text="#{selectCategoryType}">Type</th>
+                    <th th:text="#{category}">Category</th>
+                    <th th:text="#{codeChannel}">Channel</th>
+                    <th th:text="#{codeEmail}">Email</th>
+                    <th th:text="#{codesPrint}">Print</th>
+                    <th th:text="#{paymentConfirmation}">Confirm</th>
                 </tr>
                 </thead>
 
@@ -67,7 +67,6 @@
 
                     <!-- Confirm -->
                     <td class="hide-print">
-
                         <a th:href="@{/codes/applicationfees/confirm/{id}(id=${row[0]})}" class="btn btn-primary">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bank" viewBox="0 0 16 16">
                                 <path d="m8 0 6.61 3h.89a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5H15v7a.5.5 0 0 1 .485.38l.5 2a.498.498 0 0 1-.485.62H.5a.498.498 0 0 1-.485-.62l.5-2A.5.5 0 0 1 1 13V6H.5a.5.5 0 0 1-.5-.5v-2A.5.5 0 0 1 .5 3h.89zM3.777 3h8.447L8 1zM2 6v7h1V6zm2 0v7h2.5V6zm3.5 0v7h1V6zm2 0v7H12V6zM13 6v7h1V6zm2-1V4H1v1zm-.39 9H1.39l-.25 1h13.72z"/>
@@ -85,7 +84,8 @@
 
     <a th:href="@{/codes/shortcode/finance/home}"
        class="btn btn-primary"
-       style="margin-top:20px;">
+       style="margin-top:20px;"
+       th:text="#{codesBack}">
         ← Back to Page
     </a>
 </div>
